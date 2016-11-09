@@ -8,8 +8,8 @@
 - [Coprocessor](#coprocessor)
 - [Key processes analysis](#key-processes-analysis)
 	- [Key-Value operation](#key-value-operation)
-	- [Membership Change](membership-change)
-	- [Split](split)
+	- [Membership Change](#membership-change)
+	- [Split](#split)
 
 
 # <span id="top">About TiKV<span>
@@ -18,7 +18,6 @@ TiKV (The pronunciation is: /'taɪkeɪvi:/ tai-K-V, etymology: titanium) is a di
 
 # Architecture
 ![TiKV_ Architecture](TiKV_ Architecture.png)
-
 * Placement Driver (PD): PD is the brain of the TiKV system which manages the metadata about Nodes, Stores, Regions mapping, and makes decisions for data placement and load balancing. PD periodically checks replication constraints to balance load and data automatically.
 
 * Node: A physical node in the cluster. Within each node, there are one or more Stores. Within each Store, there are many Regions.
@@ -136,7 +135,7 @@ In TiKV, Raft is used through [mio](https://github.com/carllerche/mio) as in the
 
 In the descriptions above, we covered how to use one Raft only. But in TiKV, we have multiple Raft groups. These Raft groups are independent to each other and therefore can be processed following the same approach. 
 
-In TiKV, each Raft group corresponds to a Region. At the very beginning, there is only one Region in TiKV which is in charge of the range (-inf, +inf). As more data comes in and the Region reaches its threshold (64 MB currently), the Region is split into two Regions. Because all the data in TiKV are sorted according to the key, it is very convenient to choose a Split Key to split the Region. See [Split](#heading=h.8mgz4jql143v) for the detailed splitting process.
+In TiKV, each Raft group corresponds to a Region. At the very beginning, there is only one Region in TiKV which is in charge of the range (-inf, +inf). As more data comes in and the Region reaches its threshold (64 MB currently), the Region is split into two Regions. Because all the data in TiKV are sorted according to the key, it is very convenient to choose a Split Key to split the Region. See [Split](#split) for the detailed splitting process.
 
 Of course, where there is Split, there is Merge. If there are very few data in two adjacent Regions, these two regions can merge to one big Region. Region Merge is in the TiKV roadmap but it is not implemented yet.
 
