@@ -3,7 +3,7 @@ layout: post
 title: A Deep Dive into TiDB
 excerpt: This document introduces how TiKV works as a Key-Value database.
 ---
-
+<span id="top"><span>
 
 # Table of Content
 - [About TiKV](#about-tikv)
@@ -18,13 +18,14 @@ excerpt: This document introduces how TiKV works as a Key-Value database.
 	- [Membership Change](#membership-change)
 	- [Split](#split)
 
-
-# <span id="top">About TiKV<span>
+# About TiKV
 
 TiKV (The pronunciation is: /'taɪkeɪvi:/ tai-K-V, etymology: titanium) is a distributed Key-Value database which is based on the design of Google Spanner and HBase, but it is much simpler without dependency on any distributed file system. 
 
 # Architecture
-![TiKV_ Architecture](TiKV_ Architecture.png)
+
+![]({{ site.baseurl }}/assets/img/TiKV_ Architecture.png)
+
 * Placement Driver (PD): PD is the brain of the TiKV system which manages the metadata about Nodes, Stores, Regions mapping, and makes decisions for data placement and load balancing. PD periodically checks replication constraints to balance load and data automatically.
 
 * Node: A physical node in the cluster. Within each node, there are one or more Stores. Within each Store, there are many Regions.
