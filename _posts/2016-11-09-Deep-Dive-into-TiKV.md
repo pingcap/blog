@@ -1,9 +1,9 @@
-
 ---
 layout: post
 title: A Deep Dive into TiDB
 excerpt: This document introduces how TiKV works as a Key-Value database.
 ---
+
 
 # Table of Content
 - [About TiKV](#about-tikv)
