@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A Deep Dive into TiDB
+title: A Deep Dive into TiKV
 excerpt: This document introduces how TiKV works as a Key-Value database.
 ---
 <span id="top"><span>
@@ -20,7 +20,7 @@ excerpt: This document introduces how TiKV works as a Key-Value database.
 
 # About TiKV
 
-TiKV (The pronunciation is: /'taɪkeɪvi:/ tai-K-V, etymology: titanium) is a distributed Key-Value database which is based on the design of Google Spanner and HBase, but it is much simpler without dependency on any distributed file system. 
+TiKV (The pronunciation is: /'taɪkeɪvi:/ tai-K-V, etymology: titanium) is a distributed Key-Value database which is based on the design of Google Spanner, F1, and HBase, but it is much simpler without dependency on any distributed file system. 
 
 # Architecture
 
