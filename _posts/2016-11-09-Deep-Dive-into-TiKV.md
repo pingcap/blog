@@ -1,10 +1,5 @@
 ---
 layout: post
-title: How we build TiDB
-excerpt: This is the speech Max Liu gave at Percona Live Open Source Database Conference 2016.
----
----
-layout: post
 title: A Deep Dive into TiDB
 excerpt: This document introduces how TiKV works as a Key-Value database.
 ---
