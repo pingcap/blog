@@ -81,7 +81,7 @@ See the following details about how to use Raft:
 
 1. Define its own storage and implement the Raft Storage trait. See the following Storage trait interface:
 
-    ```rust
+```rust
     // initial_state returns the information about HardState and ConfState in Storage
     fn initial_state(&self) -> Result<RaftState>;
     
@@ -99,7 +99,7 @@ See the following details about how to use Raft:
     
     // generate a current snapshot
     fn snapshot(&self) -> Result<Snapshot>;
-    ```
+```
 
 2. Create a raw node object and pass the corresponding configuration and customized storage instance to the object. About the configuration, we need to pay attention to `election_tick` and `heartbeat_tick`. Some of the Raft logics step by periodical ticks. For every Tick, the Leader will decide if the frequency of the heartbeat elapsing exceeds the frequency of the `heartbeat_tick`. If it does, the Leader will send heartbeats to the Followers and reset the elapse. For a Follower, if the frequency of the election elapsing exceeds the frequency of the `election_tick`, the Follower will initiate an election. 
 
