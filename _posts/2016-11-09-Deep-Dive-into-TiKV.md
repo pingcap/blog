@@ -38,9 +38,11 @@ TiKV (The pronunciation is: /'taɪkeɪvi:/ tai-K-V, etymology: titanium) is a di
 
 TiKV uses the [Protocol Buffer](https://developers.google.com/protocol-buffers/) protocol for interactions among different components. Because Rust doesn’t support [gRPC](http://www.grpc.io/) for the time being, we use our own protocol in the following format:
 
-> Message: Header + Payload 
-> 
-> Header: | 0xdaf4(2 bytes magic value) | 0x01(version 2 bytes) | msg\_len(4 bytes) | msg\_id(8 bytes) |
+```
+Message: Header + Payload 
+
+Header: | 0xdaf4(2 bytes magic value) | 0x01(version 2 bytes) | msg\_len(4 bytes) | msg\_id(8 bytes) |
+```
 
 
 The data of Protocol Buffer is stored in the Payload part of the message. At the Network level, we will first read the 16-byte Header. According to the message length (`msg_len`) information in the Header, we calculate the actual length of the message, and then read the corresponding data and decode it.
@@ -49,31 +51,21 @@ The interaction protocol of TiKV is in the  [`kvproto`](https://github.com/pingc
 
 About the protocol files in the `kvproto` project:
 
-1. `msgpb.proto`: All the protocol interactions are in the same message structure. When a message is received, we will handle the message according to its `MessageType`.
-
-2. `metapb.proto`: To define the public metadata for Store, Region, Peer, etc.
-
-3. `raftpb.proto`: For the internal use of Raft. It is ported from etcd and needs to be consistent with etcd.
-
-4. `raft_serverpb.proto`: For the interactions among the Raft nodes.
-
-5. `raft_cmdpb.proto`: The actual command executed when Raft applies.
-
-6. `pdpb.proto`: The protocol for the interaction between TiKV and PD.
-
-7. `kvrpcpb.proto`: The Key-Value protocol that supports transactions.
-
-8. `mvccpb.proto`: For internal Multi-Version Concurrency Control (MVCC).
-
-9. `coprocessor.proto`: To support the Push-Down operations.
+* `msgpb.proto`: All the protocol interactions are in the same message structure. When a message is received, we will handle the message according to its `MessageType`.
+* `metapb.proto`: To define the public metadata for Store, Region, Peer, etc.
+* `raftpb.proto`: For the internal use of Raft. It is ported from etcd and needs to be consistent with etcd.
+* `raft_serverpb.proto`: For the interactions among the Raft nodes.
+* `raft_cmdpb.proto`: The actual command executed when Raft applies.
+* `pdpb.proto`: The protocol for the interaction between TiKV and PD.
+* `kvrpcpb.proto`: The Key-Value protocol that supports transactions.
+* `mvccpb.proto`: For internal Multi-Version Concurrency Control (MVCC).
+* `coprocessor.proto`: To support the Push-Down operations.
 
 There are following ways for external applications to connect to TiKV:
 
-1. For the simple Key-Value features only, implement `raft_cmdpb.proto`.
-
-2. For the Transactional Key-Value features, implement `kvrpcpb.proto`.
-
-3. For the Push-Down features, implement `coprocessor.proto`. See [tipb](https://github.com/pingcap/tipb) for detailed push-down protocol.
+* For the simple Key-Value features only, implement `raft_cmdpb.proto`.
+* For the Transactional Key-Value features, implement `kvrpcpb.proto`.
+* For the Push-Down features, implement `coprocessor.proto`. See [tipb](https://github.com/pingcap/tipb) for detailed push-down protocol.
 
 [Back to the Top](#top)
 
@@ -87,49 +79,44 @@ The Raft implementation in TiKV can be used independently. You can apply it in y
 
 See the following details about how to use Raft:
 
-* Define its own storage and implement the Raft Storage trait. See the following Storage trait interface:
+1. Define its own storage and implement the Raft Storage trait. See the following Storage trait interface:
 
-> 	// initial_state returns the information about HardState and ConfState in Storage
-> 
-> fn initial_state(&self) -> Result<RaftState>;
-> 
-> // return the log entries in the [low, high] range
-> 
-> fn entries(&self, low: u64, high: u64, max_size: u64) -> Result<Vec<Entry>>;
-> 
-> // get the term of the log entry according to the corresponding log index
-> 
-> fn term(&self, idx: u64) -> Result<u64>;
-> 
-> 	// get the index from the first log entry at the current position
-> 
-> fn first_index(&self) -> Result<u64>;
-> 
-> 	// get the index from the last log entry at the current position
-> 
-> fn last_index(&self) -> Result<u64>;
-> 
-> 	// generate a current snapshot
-> 
-> fn snapshot(&self) -> Result<Snapshot>;
+    ```rust
+    // initial_state returns the information about HardState and ConfState in Storage
+    fn initial_state(&self) -> Result<RaftState>;
+    
+    // return the log entries in the [low, high] range
+    fn entries(&self, low: u64, high: u64, max_size: u64) -> Result<Vec<Entry>>;
+    
+    // get the term of the log entry according to the corresponding log index
+    fn term(&self, idx: u64) -> Result<u64>;
+    
+    // get the index from the first log entry at the current position
+    fn first_index(&self) -> Result<u64>;
+    
+    // get the index from the last log entry at the current position
+    fn last_index(&self) -> Result<u64>;
+    
+    // generate a current snapshot
+    fn snapshot(&self) -> Result<Snapshot>;
+    ```
 
-* Create a raw node object and pass the corresponding configuration and customized storage instance to the object. About the configuration, we need to pay attention to `election_tick` and `heartbeat_tick`. Some of the Raft logics step by periodical ticks. For every Tick, the Leader will decide if the frequency of the heartbeat elapsing exceeds the frequency of the `heartbeat_tick`. If it does, the Leader will send heartbeats to the Followers and reset the elapse. For a Follower, if the frequency of the election elapsing exceeds the frequency of the `election_tick`, the Follower will initiate an election. 
+2. Create a raw node object and pass the corresponding configuration and customized storage instance to the object. About the configuration, we need to pay attention to `election_tick` and `heartbeat_tick`. Some of the Raft logics step by periodical ticks. For every Tick, the Leader will decide if the frequency of the heartbeat elapsing exceeds the frequency of the `heartbeat_tick`. If it does, the Leader will send heartbeats to the Followers and reset the elapse. For a Follower, if the frequency of the election elapsing exceeds the frequency of the `election_tick`, the Follower will initiate an election. 
 
-* After a raw node is created, the tick interface of the raw node will be called periodically (like every 100ms) and drives the internal Raft Step function. 
+3. After a raw node is created, the tick interface of the raw node will be called periodically (like every 100ms) and drives the internal Raft Step function. 
 
-* If data is to be written by Raft, the Propose interface is called directly. The parameters of the Propose interface is an arbitrary binary data which means that Raft doesn’t care the exact data content that is replicated by it. It is completely up to the external logics as how to handle the data.
+4. If data is to be written by Raft, the Propose interface is called directly. The parameters of the Propose interface is an arbitrary binary data which means that Raft doesn’t care the exact data content that is replicated by it. It is completely up to the external logics as how to handle the data.
 
-* If it is to process the membership changes, the `propose_conf_change` interface of the raw node can be called to send a ConfChange object to add/remove a certain node.
+5. If it is to process the membership changes, the `propose_conf_change` interface of the raw node can be called to send a ConfChange object to add/remove a certain node.
 
-* After the functions in the raw node like Tick and Propose of the raw node are called, Raft will initiate a Ready state. Here are some details of the Ready state:
+6. After the functions in the raw node like Tick and Propose of the raw node are called, Raft will initiate a Ready state. Here are some details of the Ready state:
 
-There are three parts in the Ready state:
+    There are three parts in the Ready state:
 
-    * The part that needs to be stored in Raft storage, which are entries, hard state and snapshot.
+    + The part that needs to be stored in Raft storage, which are entries, hard state and snapshot.
+    + The part that needs to be sent to other Raft nodes, which are messages.
+    + The part that needs to be applied to other state machines, which are committed_entries.
 
-    * The part that needs to be sent to other Raft nodes, which are messages.
-
-    * The part that needs to be applied to other state machines, which are committed_entries.
 
 After handling the Ready status, the Advance function needs be called to inform Raft of the next Ready process.
 
@@ -281,7 +268,9 @@ At the very beginning, there is only one Region. As data grows, the Region needs
 
 Within TiKV, if a Region splits, there will be two new Regions, which we call them the Left Region and the Right Region. The Left Region will use all the IDs of the old Region. We can assume that the Region just changes its range. The Right Region will get a new ID through PD. Here is a simple example:
 
-> Region 1 [a, c) -> Region 1 [a, b) + Region 2 [b, c)
+```
+Region 1 [a, c) -> Region 1 [a, b) + Region 2 [b, c)
+```
 
 The original range of Region 1 is [a, c). After splitting at the b point, the Left Region is still Region 1 but the range is now [a, b). The Right Region is a new Region, Region 2, and its range is [b, c).
 
