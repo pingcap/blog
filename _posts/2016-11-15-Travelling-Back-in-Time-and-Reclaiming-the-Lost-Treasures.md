@@ -25,6 +25,7 @@ set @@tidb_snapshot = "2016-10-10 09:30:11.123"
 ```
 
 The name of the session variable is `tidb_snapshot` which is defined in TiDB. The value is a time string with precision of milliseconds. When this statement is executed, the data read by all the read requests issued from this client is at the set time and the write operation is not allowed because the history cannot be changed. If you want to exit the History Read mode and read the latest data, you can just execute the following `Set` statement:
+
 ```
 set @@tidb_snapshot = ""
 ```
