@@ -3,7 +3,8 @@ layout: post
 title: Travelling Back in Time and Reclaiming the Lost Treasures
 excerpt: This document introduces the History Read feature in TiDB.
 ---
-Travelling Back in Time and Reclaiming the Lost Treasures 
+
+# Travelling Back in Time and Reclaiming the Lost Treasures 
 
 -- About the History Read feature in TiDB
 
