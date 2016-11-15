@@ -5,8 +5,7 @@ excerpt: This document introduces the History Read feature in TiDB.
 ---
 
 # Travelling Back in Time and Reclaiming the Lost Treasures 
-
--- About the History Read feature in TiDB
+## -- About the History Read feature in TiDB
 
 Data is the core and is a matter of life and death for every business.  So ensuring the data safety is the top priority of every database. From a macro point of view, the safety of data is not only about whether a database is stable enough that no data is lost, but also about whether a sufficient and convenient solution is in place when data is lost because of the business or human errors, for example, to solve the anti-cheat problem in the game industry or to meet the audit requirements in the financing business. If a proper mechanism is enabled in the database level, it will reduce the workload and the complexity of business development significantly.
 
