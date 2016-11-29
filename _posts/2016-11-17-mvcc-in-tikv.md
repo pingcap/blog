@@ -118,6 +118,7 @@ All the  values of the CF are encoded as following:
 | --- | --- | --- | --- |
 | **key** | z{encoded_key}{start_ts(desc)} | z{encoded_key} | z{encoded_key}{commit_ts(desc)} |
 | **value** | {value} | {flag}{primary_key}{start_ts(varint)} | {flag}{start_ts(varint)} |
+
 Details can be found [here](https://github.com/pingcap/tikv/issues/1077).
 
 
