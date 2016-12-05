@@ -44,10 +44,9 @@ TiDB inherits the subquery strategy in SQL Server. It introduces the `Apply` ope
 
 The reason why subqueries are difficult to optimize is that a subquery cannot be executed as a logic operator like Projection or Join, which makes it difficult to find a generic algorithm for subquery transformation. So the first thing is to introduce a logic operation that can represent the subqueries: the `Apply` operator.
 The semantics of the `Apply` operator is:
-
-
-\\ R\ A^{\otimes}\ E = \bigcup\limits_{r\in R} ({r}\otimes E(r))
-
+$$ 
+R\ A^{\otimes}\ E = \bigcup\limits_{r\in R} ({r}\otimes E(r))
+$$
 
 where `E` represents a parameterized subquery. In every execution, the `Apply` operator gets a `r` record from the `R` relation and sends `r` to `E` as a parameter for the &#x2297; operation of `r` and `E(r)`. &#x2297; is different based on different query types, usually it’s `SemiJoin` `∃`. 
 
