@@ -46,7 +46,7 @@ The reason why subqueries are difficult to optimize is that a subquery cannot be
 The semantics of the `Apply` operator is:
 
 $$
-R\ A^{\otimes}\ E = \bigcup\limits_{r\in R} (\\{r\\}\otimes E(r))
+R\ A^{\otimes}\ E = \bigcup\limits_{r\in R} (\{r\}\otimes E(r))
 $$
 
 where `E` represents a parameterized subquery. In every execution, the `Apply` operator gets a `r` record from the `R` relation and sends `r` to `E` as a parameter for the &#x2297; operation of `r` and `E(r)`. &#x2297; is different based on different query types, usually it’s `SemiJoin` `∃`. 
