@@ -72,7 +72,7 @@ For the `EXISTS` subquery in the `SELECT` list, and the data that cannot pass th
 
 \\(
 \pi_C({SRC}\ A^{LOJ} \sigma\_\{SRC.id=TMP.id}\{TMP})
-\]
+\\)
 
 The C Projection is to transform NULL to false.
 
@@ -131,7 +131,7 @@ Because of the primary keys, according to rule (9), it can be transformed to the
 
 \\(
 \sigma\_{1000000<X}\ \mathcal{G}\_{C\\\_CUSTKEY\ ,X = SUM(0\\\_PRICE)}(CUSTOMER\ A^{LOJ}\ \sigma\_{0\\\_CUSTKEY=c\\\_CUSTKEY}ORDERS)
-\]
+\\)
 
 **Note:**
 
@@ -143,9 +143,9 @@ Because of the primary keys, according to rule (9), it can be transformed to the
 \\)
 
 Furthermore, based on the simplification of `OuterJoin`, the statement can be simplified to:
-\[
+\\(
 \sigma\_{1000000<X}\mathcal{G}\_{C\\\_CUSTKEY,X=SUM(0\\\_PRICE)}(CUSTOMER\ \Join\_{0\\\_CUSTKEY=C\\\_CUSTKEY}ORDERS)
-\]
+\\)
 
 Theoretically, the above 9 rules have resolved the correlation removal problem. But is correlation removal the best solution for all the scenarios? The answer is no. If the results of the SQL statement are small and the subquery can use the index, then the best solution is to use correlated execution. The decision about whether to use correlation removal also depends on statistics. When it comes to this point,  the regular optimizer is no longer applicable.  Only the optimizer with the Volcano or Cascade Style can take both the logic equivalence rules and the cost-based optimization into consideration. Therefore, a perfect solution for subquery depends on an excellent optimizer framework.
 
