@@ -44,9 +44,10 @@ TiDB inherits the subquery strategy in SQL Server. It introduces the `Apply` ope
 
 The reason why subqueries are difficult to optimize is that a subquery cannot be executed as a logic operator like Projection or Join, which makes it difficult to find a generic algorithm for subquery transformation. So the first thing is to introduce a logic operation that can represent the subqueries: the `Apply` operator.
 The semantics of the `Apply` operator is:
-$$ 
+
+\\( 
 R\ A^{\otimes}\ E = \bigcup\limits_{r\in R} ({r}\otimes E(r))
-$$
+\\)
 
 where `E` represents a parameterized subquery. In every execution, the `Apply` operator gets a `r` record from the `R` relation and sends `r` to `E` as a parameter for the &#x2297; operation of `r` and `E(r)`. &#x2297; is different based on different query types, usually it’s `SemiJoin` `∃`. 
 
@@ -63,30 +64,30 @@ the `Apply` operator representation is as follows:
 
 Because the operator above `Apply` is `Selection`, formally, it is:
 
-$$
+\\(
 \{SRC}\ A^\exists\ \sigma_\{SRC.id=TMP.id}\{TMP}
-$$
+\\)
 
 For the `EXISTS` subquery in the `SELECT` list, and the data that cannot pass through the `SRC.id=TMP.id equation`, the output should be false. So `OuterJoin` should be used:
 
-$$
+\\(
 \pi_C({SRC}\ A^{LOJ} \sigma\_\{SRC.id=TMP.id}\{TMP})
-$$
+\\)
 
 The C Projection is to transform NULL to false.
 
 ## Removing the correlation
 The introduction of the `Apply` operator enables us to remove the correlation of the subqueries. The two examples in the previous section can be transformed to:
 
-$$
+\\(
 \{SRC}\ \exists_{\sigma\_\{SRC.id = TMP.id}}\ \{TMP}
-$$
+\\)
 
 and
 
-$$
+\\(
 \{SRC}\ LOJ\_{\sigma\_\{SRC.id = TMP.id}}\ \{TMP}
-$$
+\\)
 
 Other rules to remove correlation can be formally represented as:
 
@@ -122,36 +123,39 @@ FROM ORDER WHERE O_CUSTKEY = C_CUSTKEY)
 
 The two “CUSTKEY”s are the primary keys. When the statement is transformed to `Apply`, it is represented as:
 
-$$
+\\(
 \sigma\_{1000000<X}(CUSTOMER\ A^\times\ \mathcal{G}^1\_{X=SUM(0\\\_PRICE)})(\sigma\_{0\\\_CUSTKEY=C\\\_CUSTKEY}ORDERS)
-$$
+\\)
 
 Because of the primary keys, according to rule (9), it can be transformed to the following: 
 
-$$
+\\(
 \sigma\_{1000000<X}\ \mathcal{G}\_{C\\\_CUSTKEY\ ,X = SUM(0\\\_PRICE)}(CUSTOMER\ A^{LOJ}\ \sigma\_{0\\\_CUSTKEY=c\\\_CUSTKEY}ORDERS)
-$$
+\\)
 
 **Note:**
 
 1. If there are no primary keys in `ORDERS`, the \\(\pi\\) operator should be added to allocate a unique key.
 2. Pay attention to the difference between rule (8) and rule (9). For the aggregation function (\\(\mathcal{G}^1\_F\\)) without the aggregation column, when the input is NULL, the output should be the default value of the `F` aggregation function. Therefore, the left `OuterJoin` should be used and a NULL record should be the output when the right table is NULL.  In this case, based on rule (2), `Apply` can be completely removed. The statement can be transformed to a SQL statement with join:
-$$
+
+\\(
 \sigma\_{1000000<X}\mathcal{G}\_{C\\\_CUSTKEY,X=SUM(0\\\_PRICE)}(CUSTOMER\ LOJ\_{0\\\_CUSTKEY=C\\\_CUSTKEY}ORDERS)
-$$
+\\)
+
 Furthermore, based on the simplification of `OuterJoin`, the statement can be simplified to:
-$$
+
+\\(
 \sigma\_{1000000<X}\mathcal{G}\_{C\\\_CUSTKEY,X=SUM(0\\\_PRICE)}(CUSTOMER\ \Join\_{0\\\_CUSTKEY=C\\\_CUSTKEY}ORDERS)
-$$
+\\)
 
 Theoretically, the above 9 rules have resolved the correlation removal problem. But is correlation removal the best solution for all the scenarios? The answer is no. If the results of the SQL statement are small and the subquery can use the index, then the best solution is to use correlated execution. The decision about whether to use correlation removal also depends on statistics. When it comes to this point,  the regular optimizer is no longer applicable.  Only the optimizer with the Volcano or Cascade Style can take both the logic equivalence rules and the cost-based optimization into consideration. Therefore, a perfect solution for subquery depends on an excellent optimizer framework.
 
 ## Aggregation and subquery
 In the previous section, the final statement is not completely optimized. The aggregation function above `OuterJoin` and `InnerJoin` can be pushed down. If `OutJoin` cannot be simplified, the formal representation of the push-down rule is:
 
-$$
+\\(
 \mathcal{G\_{A,F}}(S\ LOJ\_p\ R)=\pi\_C(S\ LOJ\_P(\mathcal{G}\_{A-attr(S),F}R))
-$$
+\\)
 
 The \\(\pi\_C\\) above `Join` is to convert NULL to the default value when the aggregation function accepts empty values. It is very common to use aggregation functions together with subqueries. The general solution is to use the formal representation of `Apply`, and remove the correlation based on the rules, then apply the push-down rules of the aggregation function for further optimization.
 		
