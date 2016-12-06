@@ -8,11 +8,6 @@ excerpt: Subquery optimization, especially rewriting the correlated subquery, is
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-
-
-# Subquery Optimization in TiDB
-
-
 ## Introducing subqueries
 Subquery is a query within another SQL query. A common subquery is embedded within the `FROM` clause, for example：
 
