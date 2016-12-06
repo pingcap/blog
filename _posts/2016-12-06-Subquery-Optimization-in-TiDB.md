@@ -154,6 +154,7 @@ In the previous section, the final statement is not completely optimized. The ag
 \\)
 
 The \\(\pi\_C\\) above `Join` is to convert NULL to the default value when the aggregation function accepts empty values. It is worth mentioning that the above formula can be applied only when the following three conditions are met:
+
 + All the columns that are related to `R` within the \\(\_p\\) predicate are there in the `Group by` column.
 + The key of the `S` relation is there in the `Group by` column.
 + The \\(\mathcal{G}\\) aggregation function only uses the column in `R`.
