@@ -42,7 +42,7 @@ TiDB inherits the subquery strategy in SQL Server. It introduces the `Apply` ope
 
 ## The `Apply` operator
 
-The reason why subqueries are difficult to optimize is that a subquery cannot be executed as a logic operator like Projection or Join, which makes it difficult to find a generic algorithm for subquery transformation. So the first thing is to introduce a logic operation that can represent the subqueries: the `Apply` operator.
+The reason why subqueries are difficult to optimize is that a subquery cannot be executed as a logic operator like Projection or Join, which makes it difficult to find a generic algorithm for subquery transformation. So the first thing is to introduce a logic operation that can represent the subqueries: the `Apply` operator, which is also called `d-Join`.
 The semantics of the `Apply` operator is:
 
 \\(
@@ -74,7 +74,7 @@ For the `EXISTS` subquery in the `SELECT` list, and the data that cannot pass th
 \pi_C({SRC}\ A^{LOJ} \sigma\_\{SRC.id=TMP.id}\{TMP})
 \\)
 
-The C Projection is to transform NULL to false.
+The C Projection is to transform NULL to false. But the more common practice is: If the output of the `Apply` operator is directly used by the query condition, it is converted to `SemiJoin`.
 
 ## Removing the correlation
 The introduction of the `Apply` operator enables us to remove the correlation of the subqueries. The two examples in the previous section can be transformed to:
@@ -109,7 +109,8 @@ Other rules to remove correlation can be formally represented as:
 
 \\(R\ A^\times\ (\mathcal{G}^1\_FE) = \mathcal{G}\_{A\bigcup \mathrm{attr}(R),F'} (R\ A^{LOJ}\ E) \\) (9)
 
-Based on the above rules, the correlation among all the SQL subqueries can be removed. Take the following SQL statement as an example:
+Based on the above rules, the correlation among all the SQL subqueries can be removed. But the (5), (6), and (7) rules are seldom used because the  the query cost is increased as a result of the rules about common expression.
+Take the following SQL statement as an example:
 
 ```
 SELECT C_CUSTKEY
@@ -143,11 +144,12 @@ Because of the primary keys, according to rule (9), it can be transformed to the
 \\)
 
 Furthermore, based on the simplification of `OuterJoin`, the statement can be simplified to:
+
 \\(
 \sigma\_{1000000<X}\mathcal{G}\_{C\\\_CUSTKEY,X=SUM(0\\\_PRICE)}(CUSTOMER\ \Join\_{0\\\_CUSTKEY=C\\\_CUSTKEY}ORDERS)
 \\)
 
-Theoretically, the above 9 rules have resolved the correlation removal problem. But is correlation removal the best solution for all the scenarios? The answer is no. If the results of the SQL statement are small and the subquery can use the index, then the best solution is to use correlated execution. The decision about whether to use correlation removal also depends on statistics. When it comes to this point,  the regular optimizer is no longer applicable.  Only the optimizer with the Volcano or Cascade Style can take both the logic equivalence rules and the cost-based optimization into consideration. Therefore, a perfect solution for subquery depends on an excellent optimizer framework.
+Theoretically, the above 9 rules have resolved the correlation removal problem. But is correlation removal the best solution for all the scenarios? The answer is no. If the results of the SQL statement are small and the subquery can use the index, then the best solution is to use correlated execution. The `Apply` operator can be optimized to `Segment Apply`, which is to sort the data of the outer table according to the correlated key. In this case, the keys that are within one group won't have to be executed multiple times. Of course, this is strongly related to the number of distinct values (NDV) of the correlated keys in the outer table. Therefore, the decision about whether to use correlation removal also depends on statistics. When it comes to this point,  the regular optimizer is no longer applicable.  Only the optimizer with the Volcano or Cascade Style can take both the logic equivalence rules and the cost-based optimization into consideration. Therefore, a perfect solution for subquery depends on an excellent optimizer framework.
 
 ## Aggregation and subquery
 In the previous section, the final statement is not completely optimized. The aggregation function above `OuterJoin` and `InnerJoin` can be pushed down. If `OutJoin` cannot be simplified, the formal representation of the push-down rule is:
@@ -156,9 +158,14 @@ In the previous section, the final statement is not completely optimized. The ag
 \mathcal{G\_{A,F}}(S\ LOJ\_p\ R)=\pi\_C(S\ LOJ\_P(\mathcal{G}\_{A-attr(S),F}R))
 \\)
 
-The \\(\pi\_C\\) above `Join` is to convert NULL to the default value when the aggregation function accepts empty values. It is very common to use aggregation functions together with subqueries. The general solution is to use the formal representation of `Apply`, and remove the correlation based on the rules, then apply the push-down rules of the aggregation function for further optimization.
+The \\(\pi\_C\\) above `Join` is to convert NULL to the default value when the aggregation function accepts empty values. It is worth mentioning that the above formula can be applied only when the following three conditions are met:
++ All the columns that are related to `R` within the \\(\_p\\) predicate are there in the `Group by` column.
++ The key of the `S` relation is there in the `Group by` column.
++ The \\(\mathcal{G}\\) aggregation function only uses the column in `R`.
+
+It is very common to use aggregation functions together with subqueries. The general solution is to use the formal representation of `Apply`, and remove the correlation based on the rules, then apply the push-down rules of the aggregation function for further optimization.
 		
 
-
-
-
+## References
+1. W. Yan and P.-A. Larson. “Eager aggregation and lazy aggregation”. In: Proc. Int. Conf. on Very Large Data Bases (VLDB) (1995), pp. 345–357. 
+2.  C. Galindo-Legaria and M. Joshi. “Orthogonal optimization of subqueries and aggregation”. In: Proc. of the ACM SIGMOD Conf. on Management of Data (2001), pp. 571–581.
