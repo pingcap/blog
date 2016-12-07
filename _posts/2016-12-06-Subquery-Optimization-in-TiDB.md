@@ -134,7 +134,7 @@ FROM ORDER WHERE O_CUSTKEY = C_CUSTKEY)
 The two “CUSTKEY”s are the primary keys. When the statement is transformed to `Apply`, it is represented as:
 
 \\[
-\sigma\_{1000000<X}(CUSTOMER\ A^\times\ \mathcal{G}^1\_{X=SUM(O\\\_PRICE)})(\sigma\_{O\\\_CUSTKEY=C\\\_CUSTKEY}ORDERS)
+\sigma\_{1000000<X}(CUSTOMER\ A^\times\ \mathcal{G}^1\_{X=SUM(O\\\_PRICE)}(\sigma\_{O\\\_CUSTKEY=C\\\_CUSTKEY}ORDERS))
 \\]
 
 Because of the primary keys, according to rule (9), it can be transformed to the following: 
