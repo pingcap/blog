@@ -140,7 +140,7 @@ The two “CUSTKEY”s are the primary keys. When the statement is transformed t
 Because of the primary keys, according to rule (9), it can be transformed to the following: 
 
 \\[
-\sigma\_{1000000<X}\ \mathcal{G}_{C\\\_CUSTKEY,X = SUM(0\\\_PRICE)}(CUSTOMER\ A^{LOJ}\ \sigma\_{O\\\_CUSTKEY=c\\\_CUSTKEY}ORDERS)
+\sigma\_{1000000<X}\ \mathcal{G}_{C\\\_CUSTKEY,X = SUM(0\\\_PRICE)}(CUSTOMER\ A^{LOJ}\ \sigma\_{O\\\_CUSTKEY=C\\\_CUSTKEY}ORDERS)
 \\]
 
 **Note:**
