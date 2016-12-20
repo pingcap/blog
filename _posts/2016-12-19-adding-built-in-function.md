@@ -55,7 +55,7 @@ To evaluate is to get the value of the function or the expression based on the i
 
 ### Example
 
-Take the [Pull Rest](https://github.com/pingcap/tidb/pull/2249) to add the `timediff()` function as an example:
+Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `timediff()` function as an example:
 
 1. Add an entry to the `tokenMap` in the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) file: 
 	
