@@ -36,35 +36,35 @@ To evaluate is to get the value of the function or the expression based on the i
 
 ### The procedure to add a built-in function
 
-1. Edit the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) and [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) files.
+\1. Edit the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) and [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) files.
 
-	1).  Add a rule to the `tokenMap` in the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) file and parse the function name to a token.
-  
-	2).  Add a rule to [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) and transfer the token sequence to an AST node.
-  
-	3).  Add a unit test case for parser in the [`parser_test.go`](https://github.com/pingcap/tidb/blob/master/parser/parser_test.go) file.
-  
-2. Add the evaluation function to the [`executor`](https://github.com/pingcap/tidb/tree/master/executor) directory.
+1).  Add a rule to the `tokenMap` in the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) file and parse the function name to a token.
 
-	1). Implement the function in the `evaluator/builtin_xx.go` file. 
+2).  Add a rule to [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) and transfer the token sequence to an AST node.
+
+3).  Add a unit test case for parser in the [`parser_test.go`](https://github.com/pingcap/tidb/blob/master/parser/parser_test.go) file.
+  
+\2. Add the evaluation function to the [`executor`](https://github.com/pingcap/tidb/tree/master/executor) directory.
+
+1). Implement the function in the `evaluator/builtin_xx.go` file. 
 	
-	**Note:** The functions in the [`executor`](https://github.com/pingcap/tidb/tree/master/executor) directory are categorized to several files. For example, `builtin_time.go` is a time-related function. The interface of the function is:
+**Note:** The functions in the [`executor`](https://github.com/pingcap/tidb/tree/master/executor) directory are categorized to several files. For example, `builtin_time.go` is a time-related function. The interface of the function is:
 		
-	```
-	type BuiltinFunc func([]types.Datum, context.Context) (types.Datum, error)
-	```
+```
+type BuiltinFunc func([]types.Datum, context.Context) (types.Datum, error)
+```
 	
-	2). Register the name and the implementation to [`builtin.Funcs`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go#L43).
+2). Register the name and the implementation to [`builtin.Funcs`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go#L43).
   
-3. Add the Type Inference information to the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file. Add the type of the returned result of the function to `handleFuncCallExpr()` in the the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file and make sure the result is consistent with the result in MySQL. See [MySQL Const](https://github.com/pingcap/tidb/blob/master/mysql/type.go#L17) for the complete list of the type definition.
-4. Add a unit test case for the function to the [evaluator](https://github.com/pingcap/tidb/tree/master/evaluator) directory.
-4. Run the `make dev` command and make sure all the test cases can pass.
+\3. Add the Type Inference information to the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file. Add the type of the returned result of the function to `handleFuncCallExpr()` in the the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file and make sure the result is consistent with the result in MySQL. See [MySQL Const](https://github.com/pingcap/tidb/blob/master/mysql/type.go#L17) for the complete list of the type definition.
+\4. Add a unit test case for the function to the [evaluator](https://github.com/pingcap/tidb/tree/master/evaluator) directory.
+\5. Run the `make dev` command and make sure all the test cases can pass.
 
 ### Example
 
 Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `timediff()` function as an example:
 
-1. Add an entry to the `tokenMap` in the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) file: 
+\1. Add an entry to the `tokenMap` in the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) file: 
 	
 ```	
 var tokenMap = map[string]int{
@@ -72,22 +72,22 @@ var tokenMap = map[string]int{
 }
 ```
 	
-	Here, a rule is defined: If the text is found to be `timediff`, it is converted to a token with the name `timediff`. 
-	
-	**Note:** SQL is case-insensitive, so the capital letters must be used in the `tokenMap`. 
-	
-	The text in `tokenMap` must be taken as a special token instead of an identifier. In the following parser rule, the token needs special processing as is shown in [`parser/parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y):
+Here, a rule is defined: If the text is found to be `timediff`, it is converted to a token with the name `timediff`. 
+
+**Note:** SQL is case-insensitive, so the capital letters must be used in the `tokenMap`. 
+
+The text in `tokenMap` must be taken as a special token instead of an identifier. In the following parser rule, the token needs special processing as is shown in [`parser/parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y):
 	
 ```
 %token	<ident>
 timediff	"TIMEDIFF"	
 ```
 	
-	Which means after the "timediff" token is obtained from the lexer, it is named "TIMEDIFF” and this name will be used for the following rule matching.
+Which means after the "timediff" token is obtained from the lexer, it is named "TIMEDIFF” and this name will be used for the following rule matching.
+
+The "timediff" here must correspond to the "timediff" of the value in `tokenMap`. When the `parser.y` file is generated to the `parser.go` file, "timediff" will get a token ID which is an INT.
 	
-	The "timediff" here must correspond to the "timediff" of the value in `tokenMap`. When the `parser.y` file is generated to the `parser.go` file, "timediff" will get a token ID which is an INT.
-	
-	Because "timediff" is not a keyword in MySQL, the rule is added to `FunctionCallNonKeyword` in the [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) file:
+Because "timediff" is not a keyword in MySQL, the rule is added to `FunctionCallNonKeyword` in the [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) file:
 	
 ```	
 |	"TIMEDIFF" '(' Expression ',' Expression ')'
@@ -99,27 +99,27 @@ timediff	"TIMEDIFF"
 	}		
 ```
 	
-	Here it means: If the token sequence matches the pattern, the tokens are specified as a new variable with the name: `FunctionCallNonKeyword` (The value of `FunctionCallNonKeyword` can be assigned by assigning values to the `$$` variable.), which is a node in AST and the type is `*ast.FuncCallExpr`. The value of the `FnName` member variable is the content of `$1`, which is the value of the first token in the rule.
+Here it means: If the token sequence matches the pattern, the tokens are specified as a new variable with the name: `FunctionCallNonKeyword` (The value of `FunctionCallNonKeyword` can be assigned by assigning values to the `$$` variable.), which is a node in AST and the type is `*ast.FuncCallExpr`. The value of the `FnName` member variable is the content of `$1`, which is the value of the first token in the rule.
 	
-	"timediff()” is successfully converted to an AST node. Its member variable, `FnName`, has recorded the function name, ”timediff”, for the following evaluation.
-	
-	**Note:** To use the value of a certain token in the rule, you can use the `$x` format in which `x` is the location of the token in the rule. In the above example, `$1` is `"TIMEDIFF"`，$2 is `’(’`, and $3 is `’)’`. The meaning of `$1.(string)` is to reference the value of the first token and to declare it to be a `string`.
+"timediff()” is successfully converted to an AST node. Its member variable, `FnName`, has recorded the function name, ”timediff”, for the following evaluation.
 
-2. Register the function in the `Funcs` table in the [`builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file:
+**Note:** To use the value of a certain token in the rule, you can use the `$x` format in which `x` is the location of the token in the rule. In the above example, `$1` is `"TIMEDIFF"`，$2 is `’(’`, and $3 is `’)’`. The meaning of `$1.(string)` is to reference the value of the first token and to declare it to be a `string`.
+
+\2. Register the function in the `Funcs` table in the [`builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file:
 
 ```
 ast.TimeDiff:         {builtinTimeDiff, 2, 2},	
 ```
 	
-	The arguments are explained as follows:
-	
-	+ `builtinTimediff`: The implementation of the `timediff` function is included in the `builtinTimediff` function.
-	+ `2`: The minimum number of the arguments of the function is `2`.
-	+ `2`: The maximum number of the arguments of the function is `2`. 
-	
-	**Note:** The number of the arguments will be checked to see if it's legal during the syntax parsing.
-	
-	The implementation of the function is in the the [`builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file. See the following for further details:
+The arguments are explained as follows:
+
++ `builtinTimediff`: The implementation of the `timediff` function is included in the `builtinTimediff` function.
++ `2`: The minimum number of the arguments of the function is `2`.
++ `2`: The maximum number of the arguments of the function is `2`. 
+
+**Note:** The number of the arguments will be checked to see if it's legal during the syntax parsing.
+
+The implementation of the function is in the the [`builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file. See the following for further details:
 	
 ```	
 func builtinTimeDiff(args []types.Datum, ctx context.Context) (d types.Datum, err error) {
@@ -140,7 +140,7 @@ func builtinTimeDiff(args []types.Datum, ctx context.Context) (d types.Datum, er
 }	
 ```
 	
-3. Add the Type Inference information:
+\3. Add the Type Inference information:
 
 ```	
 case "curtime", "current_time", "timediff":
@@ -148,7 +148,7 @@ case "curtime", "current_time", "timediff":
     tp.Decimal = v.getFsp(x)	    
 ```
 
-4. Add the unit test case:
+\4. Add the unit test case:
 
 ```	
 func (s *testEvaluatorSuite) TestTimeDiff(c *C) {
