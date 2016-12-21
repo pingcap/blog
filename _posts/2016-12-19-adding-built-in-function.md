@@ -36,7 +36,7 @@ To evaluate is to get the value of the function or the expression based on the i
 
 ### The procedure to add a built-in function
 
-/1. Edit the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) and [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) files.
+#### 1. Edit the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) and [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) files.
 
 1).  Add a rule to the `tokenMap` in the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) file and parse the function name to a token.
 
@@ -44,7 +44,7 @@ To evaluate is to get the value of the function or the expression based on the i
 
 3).  Add a unit test case for parser in the [`parser_test.go`](https://github.com/pingcap/tidb/blob/master/parser/parser_test.go) file.
   
-/2. Add the evaluation function to the [`executor`](https://github.com/pingcap/tidb/tree/master/executor) directory.
+#### 2. Add the evaluation function to the [`executor`](https://github.com/pingcap/tidb/tree/master/executor) directory.
 
 1). Implement the function in the `evaluator/builtin_xx.go` file. 
 	
@@ -56,15 +56,15 @@ type BuiltinFunc func([]types.Datum, context.Context) (types.Datum, error)
 	
 2). Register the name and the implementation to [`builtin.Funcs`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go#L43).
   
-/3. Add the Type Inference information to the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file. Add the type of the returned result of the function to `handleFuncCallExpr()` in the the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file and make sure the result is consistent with the result in MySQL. See [MySQL Const](https://github.com/pingcap/tidb/blob/master/mysql/type.go#L17) for the complete list of the type definition.
-/4. Add a unit test case for the function to the [evaluator](https://github.com/pingcap/tidb/tree/master/evaluator) directory.
-/5. Run the `make dev` command and make sure all the test cases can pass.
+#### 3. Add the Type Inference information to the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file. Add the type of the returned result of the function to `handleFuncCallExpr()` in the the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file and make sure the result is consistent with the result in MySQL. See [MySQL Const](https://github.com/pingcap/tidb/blob/master/mysql/type.go#L17) for the complete list of the type definition.
+#### 4. Add a unit test case for the function to the [evaluator](https://github.com/pingcap/tidb/tree/master/evaluator) directory.
+#### 5. Run the `make dev` command and make sure all the test cases can pass.
 
 ### Example
 
 Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `timediff()` function as an example:
 
-/1. Add an entry to the `tokenMap` in the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) file: 
+#### 1. Add an entry to the `tokenMap` in the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) file: 
 	
 ```	
 var tokenMap = map[string]int{
@@ -105,7 +105,7 @@ Here it means: If the token sequence matches the pattern, the tokens are specifi
 
 **Note:** To use the value of a certain token in the rule, you can use the `$x` format in which `x` is the location of the token in the rule. In the above example, `$1` is `"TIMEDIFF"`，$2 is `’(’`, and $3 is `’)’`. The meaning of `$1.(string)` is to reference the value of the first token and to declare it to be a `string`.
 
-/2. Register the function in the `Funcs` table in the [`builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file:
+#### 2. Register the function in the `Funcs` table in the [`builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file:
 
 ```
 ast.TimeDiff:         {builtinTimeDiff, 2, 2},	
@@ -140,7 +140,7 @@ func builtinTimeDiff(args []types.Datum, ctx context.Context) (d types.Datum, er
 }	
 ```
 	
-/3. Add the Type Inference information:
+#### 3. Add the Type Inference information:
 
 ```	
 case "curtime", "current_time", "timediff":
@@ -148,7 +148,7 @@ case "curtime", "current_time", "timediff":
     tp.Decimal = v.getFsp(x)	    
 ```
 
-/4. Add the unit test case:
+#### 4. Add the unit test case:
 
 ```	
 func (s *testEvaluatorSuite) TestTimeDiff(c *C) {
