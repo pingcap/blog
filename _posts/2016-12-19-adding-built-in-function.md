@@ -50,10 +50,9 @@ To evaluate is to get the value of the function or the expression based on the i
 	
 	**Note:** The functions in the [`executor`](https://github.com/pingcap/tidb/tree/master/executor) directory are categorized to several files. For example, `builtin_time.go` is a time-related function. The interface of the function is:
 		
-		```
-		type BuiltinFunc func([]types.Datum, context.Context) (types.Datum, error)
-
-		```
+	```
+	type BuiltinFunc func([]types.Datum, context.Context) (types.Datum, error)
+	```
 	
 	2). Register the name and the implementation to [`builtin.Funcs`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go#L43).
   
@@ -67,11 +66,11 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 
 1. Add an entry to the `tokenMap` in the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) file: 
 	
-	```	
-	var tokenMap = map[string]int{
-	"TIMEDIFF":            timediff,
-	}
-	```
+```	
+var tokenMap = map[string]int{
+"TIMEDIFF":            timediff,
+}
+```
 	
 	Here, a rule is defined: If the text is found to be `timediff`, it is converted to a token with the name `timediff`. 
 	
@@ -79,10 +78,10 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 	
 	The text in `tokenMap` must be taken as a special token instead of an identifier. In the following parser rule, the token needs special processing as is shown in [`parser/parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y):
 	
-	```
-	%token	<ident>
-	timediff	"TIMEDIFF"	
-	```
+```
+%token	<ident>
+timediff	"TIMEDIFF"	
+```
 	
 	Which means after the "timediff" token is obtained from the lexer, it is named "TIMEDIFF” and this name will be used for the following rule matching.
 	
@@ -90,15 +89,15 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 	
 	Because "timediff" is not a keyword in MySQL, the rule is added to `FunctionCallNonKeyword` in the [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) file:
 	
-	```	
-	|	"TIMEDIFF" '(' Expression ',' Expression ')'
-	 	{
-	 		$$ = &ast.FuncCallExpr{
-	 			FnName: model.NewCIStr($1),
-	 			Args: []ast.ExprNode{$3.(ast.ExprNode), $5.(ast.ExprNode)},
-			}
-		}		
-	```
+```	
+|	"TIMEDIFF" '(' Expression ',' Expression ')'
+	{
+		$$ = &ast.FuncCallExpr{
+			FnName: model.NewCIStr($1),
+			Args: []ast.ExprNode{$3.(ast.ExprNode), $5.(ast.ExprNode)},
+		}
+	}		
+```
 	
 	Here it means: If the token sequence matches the pattern, the tokens are specified as a new variable with the name: `FunctionCallNonKeyword` (The value of `FunctionCallNonKeyword` can be assigned by assigning values to the `$$` variable.), which is a node in AST and the type is `*ast.FuncCallExpr`. The value of the `FnName` member variable is the content of `$1`, which is the value of the first token in the rule.
 	
@@ -108,9 +107,9 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 
 2. Register the function in the `Funcs` table in the [`builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file:
 
-	```
-	ast.TimeDiff:         {builtinTimeDiff, 2, 2},	
-	```
+```
+ast.TimeDiff:         {builtinTimeDiff, 2, 2},	
+```
 	
 	The arguments are explained as follows:
 	
@@ -122,52 +121,52 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 	
 	The implementation of the function is in the the [`builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file. See the following for further details:
 	
-	```	
-	func builtinTimeDiff(args []types.Datum, ctx context.Context) (d types.Datum, err error) {
-		sc := ctx.GetSessionVars().StmtCtx
-		t1, err := convertToGoTime(sc, args[0])
-		if err != nil {
-			return d, errors.Trace(err)
-		}
-		t2, err := convertToGoTime(sc, args[1])
-		if err != nil {
-			return d, errors.Trace(err)
-		}
-		var t types.Duration
-		t.Duration = t1.Sub(t2)
-		t.Fsp = types.MaxFsp
-		d.SetMysqlDuration(t)
-		return d, nil
-	}	
-	```
+```	
+func builtinTimeDiff(args []types.Datum, ctx context.Context) (d types.Datum, err error) {
+	sc := ctx.GetSessionVars().StmtCtx
+	t1, err := convertToGoTime(sc, args[0])
+	if err != nil {
+		return d, errors.Trace(err)
+	}
+	t2, err := convertToGoTime(sc, args[1])
+	if err != nil {
+		return d, errors.Trace(err)
+	}
+	var t types.Duration
+	t.Duration = t1.Sub(t2)
+	t.Fsp = types.MaxFsp
+	d.SetMysqlDuration(t)
+	return d, nil
+}	
+```
 	
 3. Add the Type Inference information:
 
-	```	
-	case "curtime", "current_time", "timediff":
-	    tp = types.NewFieldType(mysql.TypeDuration)
-	    tp.Decimal = v.getFsp(x)	    
-	```
+```	
+case "curtime", "current_time", "timediff":
+    tp = types.NewFieldType(mysql.TypeDuration)
+    tp.Decimal = v.getFsp(x)	    
+```
 
 4. Add the unit test case:
 
-	```	
-	func (s *testEvaluatorSuite) TestTimeDiff(c *C) {
-		// Test cases from https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_timediff
-		tests := []struct {
-			t1        string
-			t2        string
-			expectStr string
-		}{
-			{"2000:01:01 00:00:00", "2000:01:01 00:00:00.000001", "-00:00:00.000001"},
-			{"2008-12-31 23:59:59.000001", "2008-12-30 01:01:01.000002", "46:58:57.999999"},
-		}
-		for _, test := range tests {
-			t1 := types.NewStringDatum(test.t1)
-			t2 := types.NewStringDatum(test.t2)
-			result, err := builtinTimeDiff([]types.Datum{t1, t2}, s.ctx)
-			c.Assert(err, IsNil)
-			c.Assert(result.GetMysqlDuration().String(), Equals, test.expectStr)
-		}
-	}	
-	```
+```	
+func (s *testEvaluatorSuite) TestTimeDiff(c *C) {
+	// Test cases from https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_timediff
+	tests := []struct {
+		t1        string
+		t2        string
+		expectStr string
+	}{
+		{"2000:01:01 00:00:00", "2000:01:01 00:00:00.000001", "-00:00:00.000001"},
+		{"2008-12-31 23:59:59.000001", "2008-12-30 01:01:01.000002", "46:58:57.999999"},
+	}
+	for _, test := range tests {
+		t1 := types.NewStringDatum(test.t1)
+		t2 := types.NewStringDatum(test.t2)
+		result, err := builtinTimeDiff([]types.Datum{t1, t2}, s.ctx)
+		c.Assert(err, IsNil)
+		c.Assert(result.GetMysqlDuration().String(), Equals, test.expectStr)
+	}
+}	
+```
