@@ -47,6 +47,7 @@ To evaluate is to get the value of the function or the expression based on the i
 2. Add the evaluation function to the [`executor`](https://github.com/pingcap/tidb/tree/master/executor) directory.
 
 	1). Implement the function in the `evaluator/builtin_xx.go` file. 
+	
 	**Note:** The functions in the [`executor`](https://github.com/pingcap/tidb/tree/master/executor) directory are categorized to several files. For example, `builtin_time.go` is a time-related function. The interface of the function is:
 		
 		```
@@ -65,20 +66,24 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 
 1. Add an entry to the `tokenMap` in the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) file: 
 	
-		```
-		var tokenMap = map[string]int{
-		"TIMEDIFF":            timediff,
-		}
-		```
+	```
+	
+	var tokenMap = map[string]int{
+	"TIMEDIFF":            timediff,
+	}
+	
+	```
 	Here, a rule is defined: If the text is found to be `timediff`, it is converted to a token with the name `timediff`. 
 	
-	** Note:** SQL is case-insensitive, so the capital letters must be used in the `tokenMap`. 
+	**Note:** SQL is case-insensitive, so the capital letters must be used in the `tokenMap`. 
 	
 	The text in `tokenMap` must be taken as a special token instead of an identifier. In the following parser rule, the token needs special processing as is shown in [`parser/parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y):
 	
 	```
+	
 	%token	<ident>
 	timediff	"TIMEDIFF"
+	
 	```
 	
 	Which means after the "timediff" token is obtained from the lexer, it is named "TIMEDIFF” and this name will be used for the following rule matching.
@@ -88,6 +93,7 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 	Because "timediff" is not a keyword in MySQL, the rule is added to `FunctionCallNonKeyword` in the [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) file:
 	
 	```
+	
 	|	"TIMEDIFF" '(' Expression ',' Expression ')'
 	 	{
 	 		$$ = &ast.FuncCallExpr{
@@ -95,6 +101,7 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 	 			Args: []ast.ExprNode{$3.(ast.ExprNode), $5.(ast.ExprNode)},
 			}
 		}
+		
 	```
 	
 	
@@ -107,7 +114,9 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 2. Register the function in the `Funcs` table in the [`builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file:
 
 	```
+	
 	ast.TimeDiff:         {builtinTimeDiff, 2, 2},
+	
 	```
 	The arguments are explained as follows:
 	
@@ -120,6 +129,7 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 	The implementation of the function is in the the [`builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file. See the following for further details:
 	
 	```
+	
 	func builtinTimeDiff(args []types.Datum, ctx context.Context) (d types.Datum, err error) {
 		sc := ctx.GetSessionVars().StmtCtx
 		t1, err := convertToGoTime(sc, args[0])
@@ -136,18 +146,22 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 		d.SetMysqlDuration(t)
 		return d, nil
 	}
+	
 	```
 3. Add the Type Inference information:
 
 	```
+	
 	case "curtime", "current_time", "timediff":
 	    tp = types.NewFieldType(mysql.TypeDuration)
 	    tp.Decimal = v.getFsp(x)
+	    
 	```
 
 4. Add the unit test case:
 
 	```
+	
 	func (s *testEvaluatorSuite) TestTimeDiff(c *C) {
 		// Test cases from https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_timediff
 		tests := []struct {
@@ -166,4 +180,5 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 			c.Assert(result.GetMysqlDuration().String(), Equals, test.expectStr)
 		}
 	}
+	
 	```
