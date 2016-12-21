@@ -1,3 +1,9 @@
+---
+layout: post
+title: Adding Built-in Functions
+excerpt: This document describes how to add built-in functions to TiDB.
+---
+
 This document describes how to add built-in functions to TiDB. 
 
 + [Background](#background)
