@@ -27,7 +27,7 @@ The process to parse the SQL statement to be structured is as follows:
 
 #### Evaluation
 
-To evaluate is to get the value of the function or the expression based on the input arguments and the runtime environment. The controlling logic is in the [`evaluator/evaluator.go`] (https://github.com/pingcap/tidb/blob/master/evaluator/evaluator.go) file. Most of the built-in functions are parsed to `FuncCallExpr`. The process to evaluate is as follows:
+To evaluate is to get the value of the function or the expression based on the input arguments and the runtime environment. The controlling logic is in the [`evaluator/evaluator.go`](https://github.com/pingcap/tidb/blob/master/evaluator/evaluator.go) file. Most of the built-in functions are parsed to `FuncCallExpr`. The process to evaluate is as follows:
 
 1. Convert `ast.FuncCallExpr` to `expression.ScalarFunction`.
 2. Call the `NewFunction()` method in the [`expression/scalar_function.go`](https://github.com/pingcap/tidb/blob/master/expression/scalar_function.go).
@@ -54,6 +54,7 @@ To evaluate is to get the value of the function or the expression based on the i
 		type BuiltinFunc func([]types.Datum, context.Context) (types.Datum, error)
 
 		```
+	
 	2). Register the name and the implementation to [`builtin.Funcs`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go#L43).
   
 3. Add the Type Inference information to the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file. Add the type of the returned result of the function to `handleFuncCallExpr()` in the the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file and make sure the result is consistent with the result in MySQL. See [MySQL Const](https://github.com/pingcap/tidb/blob/master/mysql/type.go#L17) for the complete list of the type definition.
@@ -66,13 +67,12 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 
 1. Add an entry to the `tokenMap` in the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) file: 
 	
-	```
-	
+	```	
 	var tokenMap = map[string]int{
 	"TIMEDIFF":            timediff,
 	}
-	
 	```
+	
 	Here, a rule is defined: If the text is found to be `timediff`, it is converted to a token with the name `timediff`. 
 	
 	**Note:** SQL is case-insensitive, so the capital letters must be used in the `tokenMap`. 
@@ -80,10 +80,8 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 	The text in `tokenMap` must be taken as a special token instead of an identifier. In the following parser rule, the token needs special processing as is shown in [`parser/parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y):
 	
 	```
-	
 	%token	<ident>
-	timediff	"TIMEDIFF"
-	
+	timediff	"TIMEDIFF"	
 	```
 	
 	Which means after the "timediff" token is obtained from the lexer, it is named "TIMEDIFF” and this name will be used for the following rule matching.
@@ -92,18 +90,15 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 	
 	Because "timediff" is not a keyword in MySQL, the rule is added to `FunctionCallNonKeyword` in the [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) file:
 	
-	```
-	
+	```	
 	|	"TIMEDIFF" '(' Expression ',' Expression ')'
 	 	{
 	 		$$ = &ast.FuncCallExpr{
 	 			FnName: model.NewCIStr($1),
 	 			Args: []ast.ExprNode{$3.(ast.ExprNode), $5.(ast.ExprNode)},
 			}
-		}
-		
+		}		
 	```
-	
 	
 	Here it means: If the token sequence matches the pattern, the tokens are specified as a new variable with the name: `FunctionCallNonKeyword` (The value of `FunctionCallNonKeyword` can be assigned by assigning values to the `$$` variable.), which is a node in AST and the type is `*ast.FuncCallExpr`. The value of the `FnName` member variable is the content of `$1`, which is the value of the first token in the rule.
 	
@@ -114,10 +109,9 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 2. Register the function in the `Funcs` table in the [`builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file:
 
 	```
-	
-	ast.TimeDiff:         {builtinTimeDiff, 2, 2},
-	
+	ast.TimeDiff:         {builtinTimeDiff, 2, 2},	
 	```
+	
 	The arguments are explained as follows:
 	
 	+ `builtinTimediff`: The implementation of the `timediff` function is included in the `builtinTimediff` function.
@@ -128,8 +122,7 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 	
 	The implementation of the function is in the the [`builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file. See the following for further details:
 	
-	```
-	
+	```	
 	func builtinTimeDiff(args []types.Datum, ctx context.Context) (d types.Datum, err error) {
 		sc := ctx.GetSessionVars().StmtCtx
 		t1, err := convertToGoTime(sc, args[0])
@@ -145,23 +138,20 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 		t.Fsp = types.MaxFsp
 		d.SetMysqlDuration(t)
 		return d, nil
-	}
-	
+	}	
 	```
+	
 3. Add the Type Inference information:
 
-	```
-	
+	```	
 	case "curtime", "current_time", "timediff":
 	    tp = types.NewFieldType(mysql.TypeDuration)
-	    tp.Decimal = v.getFsp(x)
-	    
+	    tp.Decimal = v.getFsp(x)	    
 	```
 
 4. Add the unit test case:
 
-	```
-	
+	```	
 	func (s *testEvaluatorSuite) TestTimeDiff(c *C) {
 		// Test cases from https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_timediff
 		tests := []struct {
@@ -179,6 +169,5 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `t
 			c.Assert(err, IsNil)
 			c.Assert(result.GetMysqlDuration().String(), Equals, test.expectStr)
 		}
-	}
-	
+	}	
 	```
