@@ -56,7 +56,9 @@ type BuiltinFunc func([]types.Datum, context.Context) (types.Datum, error)
 	
 2). Register the name and the implementation to [`builtin.Funcs`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go#L43).
   
-#### 3. Add the Type Inference information to the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file. Add the type of the returned result of the function to `handleFuncCallExpr()` in the the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file and make sure the result is consistent with the result in MySQL. See [MySQL Const](https://github.com/pingcap/tidb/blob/master/mysql/type.go#L17) for the complete list of the type definition.
+#### 3. Add the Type Inference information to the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file. 
+Add the type of the returned result of the function to `handleFuncCallExpr()` in the the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file and make sure the result is consistent with the result in MySQL. See [MySQL Const](https://github.com/pingcap/tidb/blob/master/mysql/type.go#L17) for the complete list of the type definition.
+
 #### 4. Add a unit test case for the function to the [evaluator](https://github.com/pingcap/tidb/tree/master/evaluator) directory.
 #### 5. Run the `make dev` command and make sure all the test cases can pass.
 
