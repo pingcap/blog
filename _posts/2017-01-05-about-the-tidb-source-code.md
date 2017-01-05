@@ -3,8 +3,11 @@ layout: post
 title: About the TiDB Source Code
 excerpt: The target audience of this document is the contributors in the TiDB community to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process. 
 ---
+
 The target audience of this document is the contributors in the TiDB community to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process. 
+
 ## Table of content
+
 + [System architecture](#system-architecture)
 + [Overview of the code structure](#overview-of-the-code-structure)
 + [The protocol layer](#the-protocol-layer)
