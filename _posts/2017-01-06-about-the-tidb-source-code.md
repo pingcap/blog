@@ -138,10 +138,10 @@ type Expression interface {
 
 The following lists the expressions that implement the interface:
 
-	+ Scalar Function: Scalar Function expressions
-	+ Aggregate Function: Aggregate Function expressions
-	+ Column: Column expressions
-	+ Const: Constant expressions
++ Scalar Function: Scalar Function expressions
++ Aggregate Function: Aggregate Function expressions
++ Column: Column expressions
++ Const: Constant expressions
 
 
 
