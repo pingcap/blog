@@ -46,6 +46,7 @@ See the following list for all the packages and their main functions:
 + [tidb](https://github.com/pingcap/tidb)
 	
 	This package can be considered to be the interface between the MySQL Protocol Layer and the SQL layer. There are three main files:
+
 	+ [`session.go`](https://github.com/pingcap/tidb/blob/master/session.go): Each session object corresponds to a connection of the MySQL client. The MySQL protocol layer manages the binding between the connection and the session. All the MySQL queries/commands are executed by calling the Session interface.
 	+ [`tidb.go`](https://github.com/pingcap/tidb/blob/master/tidb.go): This file includes some functions to be called by `session.go`.
 	+ [`bootstrap.go`](https://github.com/pingcap/tidb/blob/master/bootstrap.go): If a TiDB Server is started but the system is not yet initialized, the `bootstrap.go` file will initiate the system. See the following section for the detailed information.
@@ -69,18 +70,24 @@ type Executor interface {
 }
 ```
 	
-	All kinds of executors implement this interface. The executing engine in TiDB adopts the `Volcano` model where the executors interact with each other through the above 3 interfaces. Each executor only needs to access the data through the `Next` interface and the meta data through the `Schema` interface.
+All kinds of executors implement this interface. The executing engine in TiDB adopts the `Volcano` model where the executors interact with each other through the above 3 interfaces. Each executor only needs to access the data through the `Next` interface and the meta data through the `Schema` interface.
 
 + [plan](https://github.com/pingcap/tidb/tree/master/plan)
 
 	This is the core of the entire SQL layer. After a SQL statement is parsed to an abstract syntax tree (AST), the query plan is generated and optimized (including logical optimization and physical optimization) in this package. 
 
 	The following functions are also included in this package:
+	
 	+ [`validator.go`](https://github.com/pingcap/tidb/blob/master/plan/validator.go): Validates the AST.
+	
 	+ [`preprocess.go`](https://github.com/pingcap/tidb/blob/master/plan/preprocess.go): Currently, there is only `name resolve`.
+	
 	+ [`resolver.go`](https://github.com/pingcap/tidb/blob/master/plan/resolver.go): Parses the name. To parse and bind the identifier of database/table/column/alias to the corresponding column or Field.
+	
 	+ [`typeinferer.go`](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go): Infers the type of the result. For SQL statements, the type of the result does not need inference.
+	
 	+ [`logical_plan_builder.go`](https://github.com/pingcap/tidb/blob/master/plan/logical_plan_builder.go): Makes optimized logical query plans.
+	
 	+ [`physical_plan_builder.go`](https://github.com/pingcap/tidb/blob/master/plan/physical_plan_builder.go): Makes the physical query plans based on the logical plans.
 
 + [privilege](https://github.com/pingcap/tidb/tree/master/privilege)
@@ -129,17 +136,13 @@ type Expression interface {
 }
 ```
 
-	The following lists the expressions that implement the interface:
+The following lists the expressions that implement the interface:
 
-```
-Scalar Function: Scalar Function expressions
+	+ Scalar Function: Scalar Function expressions
+	+ Aggregate Function: Aggregate Function expressions
+	+ Column: Column expressions
+	+ Const: Constant expressions
 
-Aggregate Function: Aggregate Function expressions
-
-Column: Column expressions
-
-Const: Constant expressions
-```
 
 
 + [infoschema](https://github.com/pingcap/tidb/tree/master/infoschema)
@@ -256,6 +259,7 @@ The most important interfaces are included in the [plan.go](https://github.com/p
 + PhysicalPlan: the physical query plan which needs to be implemented by all the physical operator
 
 The entry point of the logical optimization is `planbuilder.build()`. The input is AST and the output is the logical query plan tree. And then perform logical optimization on this tree as follows:
+
 + Call the `PredicatePushDown`interface of `LogicalPlan` and push down the predicate as much as possible
 + Call the `PruneColumns` interface of `LogicalPlan` and cut the unnecessary columns
 + Call `aggPushDownSolver.aggPushDown` and push down the aggregate operation before `Join`
