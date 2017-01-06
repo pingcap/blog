@@ -216,6 +216,7 @@ For a single connection, the entry point method is the [dispatch](https://github
 The following sections are about how the TiDB SQL layer works and how a SQL statement changes from a piece of text to an execution result set. The introduction is focused on the SQL layer only and the Key-Value layer is not covered.
 
 Generally speaking, a SQL statement goes through the following process:
+
 Parse statement -> Validate statement -> Optimize statement -> Generate access plan -> Execute access plan
 
 The following diagram shows how TiDB processes a SQL statement:
@@ -225,7 +226,7 @@ The following diagram shows how TiDB processes a SQL statement:
 The entry point of the process is in the [`session.go`](https://github.com/pingcap/tidb/blob/master/session.go) file. TiDB-Server calls the `Session.Execute()` interface, inputs the SQL statement and implements `Session.Execute()`.
 
 1. First, call `Compile()` to parse the SQL statement using `tidb.Parse()` and get a list of `stmt` where each statement is an AST and each syntax unit is a Node of the AST. The structure is defined in the [ast](https://github.com/pingcap/tidb/tree/master/ast) package.
-2. After the AST is got, call the the `Compiler` in the [executor](https://github.com/pingcap/tidb/tree/master/executor) package. Input the AST and get `Compiler.Compile()`. During this process, the statement validation, query plan generation and optimizaion are all completed.
+2. After the AST is got, call the the `Compiler` in the [executor](https://github.com/pingcap/tidb/tree/master/executor) package. Input the AST and get `Compiler.Compile()`. During this process, the statement validation, query plan generation and optimization are all completed.
 3. In `Compiler.Compile()`, call `plan.Validate()` in [plan/validator.go](https://github.com/pingcap/tidb/blob/master/plan/validator.go) to validate the statement and then go to the `Preprocess` process. At the current stage, `Preprocess` has only finished name parsing and bound the column or alias name to the corresponding field. Take the "select c from t;" statement for an example, `Preprocess` binds the name `c` to the corresponding column in the table `t`. See [plan/resolver.go](https://github.com/pingcap/tidb/blob/master/plan/resolver.go) for the detailed implementation. After this, enter `optimizer.Optimize()`.
 4. In the `Optimize()` method, infer the result of each node in AST. Take the "select 1, 'xx', c from t;” statement as an example, for the select fields, the first field is "1" whose type is `Longlong`; the second field is "'xx'" whose field is `VarString`; the third field is "c" whose type is the type of column `c` in the table `t`. Note that besides the type information, the other information like charset also needs to be inferred. See [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) for the detailed implementation.
 5. After the type inference, use the `planBuilder.build()` method for logical optimization which is to do equivalent transformation and simplification for AST based on the algebraic operation. For example, "select c from t where c > 1+1*2;" can be equivalently transformed to "select c from t where c > 3;".
@@ -234,7 +235,7 @@ The entry point of the process is in the [`session.go`](https://github.com/pingc
 
 # The optimizer
 
-The optimizer is the core of the database and it determines how a statement is executed. The optimizer to a database is what a commander-in-chief to an army.  As we all know, the commander-in-chief's failure is the disaster of the entire army. The same applies to the optimizer and database. For the same statement, the running time varies significantly using different query plans. The research on the optimization is an active acadamic field. There is no limit on optimization and you can never overestimate the efforts and importance it takes.  
+The optimizer is the core of the database and it determines how a statement is executed. The optimizer to a database is what a commander-in-chief to an army.  As we all know, the commander-in-chief's failure is the disaster of the entire army. The same applies to the optimizer and database. For the same statement, the running time varies significantly using different query plans. The research on the optimization is an active academic field. There is no limit on optimization and you can never overestimate the efforts and importance it takes.  
 
 There are following types of optimization methods:
 
@@ -273,7 +274,7 @@ Starting from the root node, each node on the logical query plan tree is called 
 
 Although the optimizer is the core component, an excellent database cannot make it without an excellent executor. The executor is to a database is what brilliant soldiers to an army. No matter how good the commander-in-chief is, without good soldiers, the army can't win in the battlefield.
 
-Compared with MySQL, TiDB has two advantages: one is the massively parallel processing (MPP) framework which enables computing on multiple TiKV and TiDB nodes to improve the efficiency and speed as much as possible; the other one is that a single operator can compute paralle as much as possibl such as the operators like `Join`/ `Union`. TiDB starts several threads at the same time. The entire data computing process makes a pipeline and cut the waiting time of each operator as much as possible. This is why TiDB is better than MySQL when processing large amounts of data.
+Compared with MySQL, TiDB has two advantages: one is the massively parallel processing (MPP) framework which enables computing on multiple TiKV and TiDB nodes to improve the efficiency and speed as much as possible; the other one is that a single operator can compute parallel as much as possible such as the operators like `Join`/ `Union`. TiDB starts several threads at the same time. The entire data computing process makes a pipeline and cut the waiting time of each operator as much as possible. This is why TiDB is better than MySQL when processing large amounts of data.
 
 The most important interface is in the [executor.go](https://github.com/pingcap/tidb/blob/master/executor/executor.go) file:
 
