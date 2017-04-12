@@ -9,7 +9,7 @@ excerpt: This document is a use case that details the performance of MySQL and T
 
 ### MySQL, our first choice
 Considering the amount of data and for a simplified implementation, GAEA chose the highly-available MySQL RDS storage solution at the very beginning of designing GaeaAD. At that time, we mainly used SQL Syntax to implement the matching logic, including many join table queries and aggregation operations. The system worked well and responded within one minute with tens of millions of data.
-![image alt text](PNG
+PNG
 
 ### Look for new solutions
 However, with the growth of business, GaeaAD receives more than tens of millions of data per day and the amount multiplies during peak hours. Obviously, database has become a bottleneck. And at the moment, GAEA’s entire technical framework encounters three problems:
