@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Comparison between MySQL and TiDB with tens of millions of data per day
-excerpt: This is a document written by one of our clients ?????????
+excerpt: This document is a use case that details the performance of MySQL and TiDB with tens of millions of data per day.
 ---
 
 ## Table of content
