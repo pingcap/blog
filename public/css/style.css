@@ -1,4 +1,4 @@
-/* Reset */
+/* Style Reset */
 
 @font-face {
     font-family: "Lato Light";
@@ -22,8 +22,29 @@
 }
 
 @font-face {
+    font-family: "TitilliumWeb LightItalic";
+    src: url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-lightitalic-webfont.eot'), url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-lightitalic-webfont.ttf'), url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-lightitalic-webfont.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
     font-family: "TitilliumWeb";
     src: url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-regular-webfont.eot'), url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-regular-webfont.ttf'), url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-regular-webfont.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TitilliumWeb SemiBold";
+    src: url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-semibold-webfont.eot'), url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-semibold-webfont.ttf'), url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-semibold-webfont.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TitilliumWeb SemiBoldItalic";
+    src: url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-semibolditalic-webfont.eot'), url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-semibolditalic-webfont.ttf'), url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-semibolditalic-webfont.woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -74,7 +95,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-about h1 {
     margin-bottom: 1rem;
-    font-family: "TitilliumWeb";
+    font-family: "TitilliumWeb SemiBold";
     font-size: 3.2rem;
     letter-spacing: 2px;
 }
@@ -100,5 +121,33 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sidebar .copyright {
+	font-family: "TitilliumWeb LightItalic";
 	font-size: .8rem;
+}
+
+
+/* Container
+ *
+ * Align the contents of the site above the proper threshold with some margin-fu
+ * with a 25%-wide `.sidebar`.
+ */
+
+.content {
+  padding-top:    4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 48em) {
+  .content {
+    max-width: 42rem;
+    margin-left: 22rem;
+    margin-right: 2rem;
+  }
+}
+
+@media (min-width: 64em) {
+  .content {
+    margin-left: 23rem;
+    margin-right: 2rem;
+  }
 }
