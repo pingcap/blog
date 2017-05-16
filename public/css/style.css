@@ -59,23 +59,21 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "TitilliumWeb";
   font-weight: normal;
   line-height: 1.4;
-  // color: #222;
+  color: #142848;
   text-rendering: optimizeLegibility;
 }
 
 
 /*
  * Sidebar
- *
- * Flexible banner for housing site name, intro, and "footer" content. Starts
- * out above content in mobile and later moves to the side with wider viewports.
  */
 
 .sidebar {
     padding: 2rem 1rem;
-    // border-right: 2px solid #000;
-    // color: #333;
-    background-color: #113285;
+    /*border-right: 2px solid #000;*/
+    /*color: #333;*/
+    /*background-color: #113285;*/
+    background: #142848;
 }
 
 @media (min-width: 48em) {
@@ -101,13 +99,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sidebar-about a {
-	// color: #222;
+	/*color: #222;*/
 	text-decoration: none;
 }
 
 .sidebar-about .lead {
 	font-size: .8rem;
-	// color: #333;
+	/*color: #333;*/
 	font-family: "Lato Light";
 }
 
@@ -117,7 +115,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-nav a {
 	font-size: .8rem;
-	// color: #3a59f0;
+	/*color: #3A59F0;*/
 }
 
 .sidebar .copyright {
@@ -126,10 +124,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/* Container
- *
- * Align the contents of the site above the proper threshold with some margin-fu
- * with a 25%-wide `.sidebar`.
+/* 
+ * Content
  */
 
 .content {
@@ -147,8 +143,8 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (min-width: 64em) {
   .content {
-  	max-width: 58rem;
-    margin-left: 23rem;
+  	max-width: 60rem;
+    margin-left: 22rem;
     margin-right: 2rem;
   }
 }
@@ -158,11 +154,15 @@ h1, h2, h3, h4, h5, h6 {
 	color: #3a59f0;
 }
 
+.content .posts {
+  margin-bottom: 4.5rem;
+}
+
 .content .post {
 	position: relative;
 	margin-bottom: 2.5em;
 	padding-bottom: 2em;
-	border-bottom: 1px dotted #cdcdcd;
+	border-bottom: 1px dotted #CDCDCD;
 	font-family: "Lato Light";
 }
 
@@ -197,7 +197,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .content .post-divider {
 	width: 100%;
-	border-top: 1px solid #cdcdcd;
+	border-top: 1px solid #CDCDCD;
 	margin-top: 25px 0 20px;
 }
 
@@ -209,7 +209,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .content .post-date {
 	font-size: .8rem;
-	color: #6a737d;
+	color: #6A737D;
 	font-family: "Lato Light";
 }
 
@@ -219,4 +219,38 @@ h1, h2, h3, h4, h5, h6 {
 	font-size: 1rem;
 	line-height: 1.6;
 	color: #142848;
+}
+
+
+/*
+ * Related
+ */
+
+.related h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.related h3 {
+  font-size: 1.2rem;
+}
+
+.related-posts li small {
+  font-size: .8rem;
+  color: #6A737D;
+}
+
+
+/*
+ * Pagination
+ */
+
+.pagination {
+  max-width: 12rem;
+  margin: 0 auto;
+  line-height: 1.2;
+}
+
+.pagination .pagination-item {
+  padding: .5rem;
 }
