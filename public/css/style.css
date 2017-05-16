@@ -1,0 +1,104 @@
+/* Reset */
+
+@font-face {
+    font-family: "Lato Light";
+    src: url('https://download.pingcap.org/fonts/lato/lato-light-webfont.eot'), url('https://download.pingcap.org/fonts/lato/lato-light-webfont.ttf'), url('https://download.pingcap.org/fonts/lato/lato-light-webfont.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url('https://download.pingcap.org/fonts/lato/lato-regular-webfont.eot'), url('https://download.pingcap.org/fonts/lato/lato-regular-webfont.ttf'), url('https://download.pingcap.org/fonts/lato/lato-regular-webfont.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TitilliumWeb Light";
+    src: url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-light-webfont.eot'), url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-light-webfont.ttf'), url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-light-webfont.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TitilliumWeb";
+    src: url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-regular-webfont.eot'), url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-regular-webfont.ttf'), url('https://download.pingcap.org/fonts/titilliumweb/titilliumweb-regular-webfont.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: .5rem;
+  font-family: "TitilliumWeb";
+  font-weight: normal;
+  line-height: 1.4;
+  color: #222;
+  text-rendering: optimizeLegibility;
+}
+
+
+/*
+ * Sidebar
+ *
+ * Flexible banner for housing site name, intro, and "footer" content. Starts
+ * out above content in mobile and later moves to the side with wider viewports.
+ */
+
+.sidebar {
+    padding: 2rem 1rem;
+    // border-right: 2px solid #000;
+    color: #333;
+    background-color: #fff;
+}
+
+@media (min-width: 48em) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 20rem;
+        text-align: left;
+    }
+}
+
+.sidebar-about {
+    margin-bottom: 2.5rem;
+}
+
+.sidebar-about h1 {
+    margin-bottom: 1rem;
+    font-family: "TitilliumWeb";
+    font-size: 3.2rem;
+    letter-spacing: 2px;
+}
+
+.sidebar-about a {
+	color: #222;
+	text-decoration: none;
+}
+
+.sidebar-about .lead {
+	font-size: .8rem;
+	color: #333;
+	font-family: "Lato Light";
+}
+
+.sidebar-nav {
+	margin-bottom: 2.5rem;
+}
+
+.sidebar-nav a {
+	font-size: .8rem;
+	color: #3a59f0;
+}
+
+.sidebar .copyright {
+	font-size: .8rem;
+}
