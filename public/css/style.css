@@ -159,7 +159,46 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .content .post {
+	position: relative;
+	margin-bottom: 2.5em;
+	padding-bottom: 2em;
+	border-bottom: 1px dotted #cdcdcd;
+	font-family: "Lato Light";
+}
 
+.content .post:after {
+	content: ' ';
+	position: absolute;
+	bottom: -1px;
+	left: 0;
+	display: block;
+	width: 100%;
+	border-bottom: 3px solid #3A59F0;
+	-webkit-transform: scale(0);
+	   -moz-transform: scale(0);
+	    -ms-transform: scale(0);
+	     -o-transform: scale(0);
+	        transform: scale(0);
+	        transform-origin: left center;
+	        -webkit-transition: transform .3s;
+	           -moz-transition: transform .3s;
+	            -ms-transition: transform .3s;
+	             -o-transition: transform .3s;
+	                transition: transform .3s;
+}
+
+.content .post:hover:after{
+	-webkit-transform: scale(1);
+	   -moz-transform: scale(1);
+	    -ms-transform: scale(1);
+	     -o-transform: scale(1);
+	        transform: scale(1);
+}
+
+.content .post-divider {
+	width: 100%;
+	border-top: 1px solid #cdcdcd;
+	margin-top: 25px 0 20px;
 }
 
 .content .post-title,
