@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "TitilliumWeb";
   font-weight: normal;
   line-height: 1.4;
-  color: #222;
+  // color: #222;
   text-rendering: optimizeLegibility;
 }
 
@@ -74,8 +74,8 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar {
     padding: 2rem 1rem;
     // border-right: 2px solid #000;
-    color: #333;
-    background-color: #fff;
+    // color: #333;
+    background-color: #113285;
 }
 
 @media (min-width: 48em) {
@@ -101,13 +101,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sidebar-about a {
-	color: #222;
+	// color: #222;
 	text-decoration: none;
 }
 
 .sidebar-about .lead {
 	font-size: .8rem;
-	color: #333;
+	// color: #333;
 	font-family: "Lato Light";
 }
 
@@ -117,7 +117,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-nav a {
 	font-size: .8rem;
-	color: #3a59f0;
+	// color: #3a59f0;
 }
 
 .sidebar .copyright {
@@ -140,14 +140,44 @@ h1, h2, h3, h4, h5, h6 {
 @media (min-width: 48em) {
   .content {
     max-width: 42rem;
-    margin-left: 22rem;
+    margin-left: 20rem;
     margin-right: 2rem;
   }
 }
 
 @media (min-width: 64em) {
   .content {
+  	max-width: 58rem;
     margin-left: 23rem;
     margin-right: 2rem;
   }
+}
+
+.content a {
+	text-decoration: none;
+	color: #3a59f0;
+}
+
+.content .post {
+
+}
+
+.content .post-title,
+.content .post-title a {
+	font-size: 1.8rem;
+	color: #142848;
+}
+
+.content .post-date {
+	font-size: .8rem;
+	color: #6a737d;
+	font-family: "Lato Light";
+}
+
+.content .post p {
+	margin-bottom: 1.2rem;
+	font-family: "Lato Light";
+	font-size: 1rem;
+	line-height: 1.6;
+	color: #142848;
 }
