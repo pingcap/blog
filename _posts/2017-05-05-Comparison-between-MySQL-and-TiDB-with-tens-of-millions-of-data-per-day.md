@@ -50,7 +50,7 @@ The GaeaAD system works well for almost half a year since it has come online in 
 ![]({{ site.baseurl }}/assets/img/gaea 2.png)
 
 We replaced the highly-available MySQL RDS with the 3-node TiDB cluster. The average time needed for a single match reduces to about 30 seconds from over 2 minutes, and it even reaches to 10 seconds or so with the continuous optimization of TiDB’s engineers. In addition, we found that TiDB has superior advantages and outperforms MySQL especially when the data volume is large. We guess this owes to the existence of TiDB’s self-developed distributed SQL Optimizer. But when it comes to a small amount of data, this advantage is not that prominent because of the internal communication cost.
-![]({{ site.baseurl }}/assets/img/gaea 3.png)
+![]({{ site.baseurl }}/assets/img/gaea 3.jpg)
 (A comparison between the query time of TiDB and MySQL in cases of different amounts of data)
 
 1. TiDB supports automatic Sharding. The business side doesn’t need to split tables and TiDB no longer sets the Sharding key or partition table as a traditional database middleware product. Storage of the bottom layer automatically spreads across clusters according to the data distribution. The capacity and performance can be scaled horizontally through adding more nodes, greatly reducing the maintenance cost.
