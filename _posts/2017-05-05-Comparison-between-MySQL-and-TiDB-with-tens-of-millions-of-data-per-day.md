@@ -10,7 +10,7 @@ excerpt: This document is a use case that details the performance of MySQL and T
 + [MySQL, our first choice](#mysql-our-first-choice)
 + [Look for new solutions](#look-for-new-solutions)
 + [TiDB, give it a go](#tidb-give-it-a-go)
-+ [Feedbacks from TiDB](#feedbacks-from-tidb)
++ [Feedback from TiDB](#feedback-from-tidb)
 
 
 # Background
@@ -61,7 +61,7 @@ We replaced the highly-available MySQL RDS with the 3-node TiDB cluster. The ave
 
 Currently, we are replacing MongoDB with TiDB as MongoDB is not easy to use, expensive to maintain and its query manner is not as flexible as traditional SQL. MongoDB once served as our data storage system of the real-time computing business of the BI system in the storm cluster. We are also planning to migrate the business that requires high real-time performance, large storage capacity and long storage cycle to TiDB, which seems to be a suitable scenario.
 
-# Feedbacks from TiDB
+# Feedback from TiDB
 
 TiDB helps GAEA in the following aspects:
 1. TiDB supports many push-down expressions and makes full use of the computing resources of TiKV’s multiple instances and therefore, accelerates the computing speed. At the same time, TiDB filters as much unnecessary data as possible and reduces the network overhead.
