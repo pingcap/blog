@@ -336,28 +336,27 @@ Speak of Transaction, It&#39;s mainly a two-phase commit protocol with some prac
 Let&#39;s see an example: If Bob wants transfer 7 dollars to Joe.
 
 1. Initial state: Joe has 2 dollars in his account, Bob has 10 dollars.
-
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-10.png)
+	![]({{ site.baseurl }}/assets/img/how-we-build-tidb-10.png)
 
 2. The transfer transaction begins by locking Bob&#39;s account by writing the lock column. This lock is the primary for the transaction. The transaction also writes data at its start timestamp, 7.
 
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-11.png)
+	![]({{ site.baseurl }}/assets/img/how-we-build-tidb-11.png)
 
-3.The transaction now locks Joe&#39;s account and writes Joe&#39;s new balance. The lock is secondary for the transaction and contains a reference to the primary lock; So we can use this secondary lock to find the primary lock.
+3. The transaction now locks Joe&#39;s account and writes Joe&#39;s new balance. The lock is secondary for the transaction and contains a reference to the primary lock; So we can use this secondary lock to find the primary lock.
 
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-12.png)
+	![]({{ site.baseurl }}/assets/img/how-we-build-tidb-12.png)
 
 4. The transaction has now reached the commit point: it erases the primary lock and replaces it with a write record at a new timestamp (called the commit timestamp): 8. The write record contains a pointer to the timestamp where the data is stored. Future readers of the column &quot;bal&quot; in row &quot;Bob&quot; will see the value $3.
 
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-13.png)
+	![]({{ site.baseurl }}/assets/img/how-we-build-tidb-13.png)
 
 5. The transaction completes by adding write records and deleting locks at the secondary cells. In this case, there is only one secondary: Joe.
 
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-14.png)
+	![]({{ site.baseurl }}/assets/img/how-we-build-tidb-14.png)
 
-So this is how it looks like when the transaction is done.
+	So this is how it looks like when the transaction is done.
 
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-15.png)
+	![]({{ site.baseurl }}/assets/img/how-we-build-tidb-15.png)
 
 [Back to the top](#top)
 
