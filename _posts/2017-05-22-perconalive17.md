@@ -1,7 +1,9 @@
+---
+layout: post
+title: A Brief Introduction of TiDB
+---
 
 This is the speech Edward Huang gave at Percona Live - Open Source Database Conference 2017.
-
-# 
 
 <span id="top">The slides are [here](https://www.percona.com/live/17/sites/default/files/slides/A%20brief%20introduction%20of%20TiDB%20%28Percona%20Live%29.pdf).</span>
 
