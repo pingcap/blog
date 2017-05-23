@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Migration from MySQL to TiDB to handle tens of millions of data per day
-excerpt: This document is a use case that details the performance of MySQL and TiDB with tens of millions of data per day.
+title: Migration from MySQL to TiDB to handle tens of millions rows of data per day
+excerpt: This document is a use case that details the performance of MySQL and TiDB with tens of millions of rows of data per day.
 ---
 
-# TiDB use case: Migration from MySQL to TiDB to handle tens of millions of data per day
+# TiDB use case
 
 ## Table of content
 
@@ -21,24 +21,24 @@ excerpt: This document is a use case that details the performance of MySQL and T
 
 # MySQL, our first choice
 
-Considering the amount of data and for a simplified implementation, GAEA chose the highly-available MySQL RDS storage solution at the very beginning of designing GaeaAD. At that time, we mainly used SQL Syntax to implement the matching logic, including many join table queries and aggregation operations. The system worked well and responded within one minute with tens of millions of data.
+Considering the amount of data and for a simplified implementation, GAEA chose the highly-available MySQL RDS storage solution at the very beginning of designing GaeaAD. At that time, we mainly used SQL Syntax to implement the matching logic, including many join table queries and aggregation operations. The system worked well and responded within one minute with tens of millions of rows of data.
 ![]({{ site.baseurl }}/assets/img/gaea 1.png)
 
 # Look for new solutions
 
-However, with the growth of business, GaeaAD receives more than tens of millions of data per day and the amount multiplies during peak hours. Obviously, database has become a bottleneck. And at the moment, GAEA’s entire technical framework encounters three problems:
+However, with the growth of business, GaeaAD receives more than tens of millions of rows of data per day and the amount multiplies during peak hours. Obviously, database has become a bottleneck. And at the moment, GAEA’s entire technical framework encounters three problems:
 
-1. The time needed for a single match has increased to over 2 minutes from about 10 seconds. The slowest aggregation query, even takes 20 minutes to complete. This imposes a serious challenge on timeliness. What’s worse, one of the drawbacks of MySQL is the query time increases with the amount of data. Therefore, the larger the data, the slower the query.
+1. The time needed for a single match has increased to over 2 minutes from about 10 seconds. The slowest aggregation query, even takes 20 minutes to complete. This imposes a serious challenge on timeliness. What’s worse, one of the drawbacks of MySQL is the query time increases with the amount of data. Therefore, the larger the data volume, the slower the query.
 
-2. With the accumulation of historical data, the amount of data stored in a single table soon reaches a hundred million. At that time, the read/write capabilities of the single table are close to its limit.
+2. With the accumulation of historical data, the amount of data stored in a single table soon reaches a hundred million rows. At that time, the read/write capabilities of the single table are close to its limit.
 
-3. Due to the query performance mentioned above and the capacity limit of a standalone database, we have to delete data regularly. Thus,  it is not possible to query  the business data  from a long time ago.
+3. Due to the query performance mentioned above and the capacity limit of a standalone database, we have to delete data regularly. Thus, it is not possible to query the business data from a long time ago.
 
 According to the data volume growth, we thought that distributed database would be a good solution. Vertically and horizontally splitting business, the middleware solutions based on MySQL and some predominant NoSQL solutions were all taken into consideration.
 
-After a thorough assessment, we denied the solution of horizontally splitting business. Since the business logic contains lots of related queries and subqueries, it is impossible to achieve transparent compatibility if tables have been split. Besides, it is a core business system, we are not allowed to refactor it given the limited time and energy. The middleware solutions face similar problems with database sharding: even though it enables mass storage and real-time writing, it has a limited query flexibility. Moreover,  the maintenance cost of multiple MySQL instances requires a second thought.
+After a thorough assessment, we denied the solution of horizontally splitting business. Since the business logic contains lots of related queries and subqueries, it is impossible to achieve transparent compatibility if tables have been split. Besides, it is a core business system, we are not allowed to refactor it given the limited time and energy. The middleware solutions face similar problems with database sharding: even though it enables mass storage and real-time writing, it has a limited query flexibility. Moreover, the maintenance cost of multiple MySQL instances requires a second thought.
 
-Then we continued to analyze the second choice, NoSQL. Since this system needs to support the concurrent real-time writing and query  from the business-end, it is not suitable to use systems like Greenplum, Hive or SparkSQL, which are not designed for real-time writing. As for MongoDB, its document query access interface is a challenge for our business. Besides, we were not sure whether MongoDB could perform the efficient aggregate analysis under the condition of such a large amount of data.
+Then we continued to analyze the second choice, NoSQL. Since this system needs to support the concurrent real-time writing and query from the business-end, it is not suitable to use systems like Greenplum, Hive or SparkSQL, which are not designed for real-time writing. As for MongoDB, its document query access interface is a challenge for our business. Besides, we were not sure whether MongoDB could perform the efficient aggregate analysis under the condition of such a large amount of data.
 
 In conclusion, what we want is a database that is as easy to use as MySQL, eliminating the trouble of modifying any business, and it meets the needs of distributed storage and a high performance of complex query.
 
@@ -46,9 +46,9 @@ We studied many distributed database solutions in the community and came upon Ti
 
 # TiDB, give it a go
 
-In the process of test deployment, we used the Syncer tool, provided by TiDB, to deploy TiDB as a MySQL Slave to the MySQL master of the original business, testing the compatibility and stability of read/write. After a while, the system was proved to perform well in read/write so we decided to move the read request of the business layer to TiDB. Later, we also switch the write business  to the TiDB cluster, making the system online smoothly.
+In the process of test deployment, we used the Syncer tool, provided by TiDB, to deploy TiDB as a MySQL Slave to the MySQL master of the original business, testing the compatibility and stability of read/write. After a while, the system was proved to perform well in read/write so we decided to move the read request of the business layer to TiDB. Later, we also switch the write business to the TiDB cluster, making the system online smoothly.
 
-The GaeaAD system works well for almost half a year since it has come online in October, 2016. Based on the hands-on experience, we summarized the following benefits brought by TiDB:
+The GaeaAD system works well for more than half a year since it has come online in October, 2016. Based on the hands-on experience, we summarized the following benefits brought by TiDB:
 ![]({{ site.baseurl }}/assets/img/gaea 2.png)
 
 We replaced the highly-available MySQL RDS with the 3-node TiDB cluster. The average time needed for a single match reduces to about 30 seconds from over 2 minutes, and it even reaches to 10 seconds or so with the continuous optimization of TiDB’s engineers. In addition, we found that TiDB has superior advantages and outperforms MySQL especially when the data volume is large. We guess this owes to the existence of TiDB’s self-developed distributed SQL Optimizer. But when it comes to a small amount of data, this advantage is not that prominent because of the internal communication cost.
