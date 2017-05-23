@@ -1,6 +1,7 @@
 ---
 layout: post
 title: A Brief Introduction of TiDB
+excerpt: This is the speech Edward Huang gave at Percona Live Open Source Database Conference 2016.
 ---
 
 This is the speech Edward Huang gave at Percona Live - Open Source Database Conference 2017.
@@ -23,7 +24,10 @@ This is the speech Edward Huang gave at Percona Live - Open Source Database Conf
 - [Sysbench](#sysbench)
 - [Roadmap](#roadmap)
 
-## <span id=speaker>Speaker introduction</span>
+
+
+
+## <span id=speaker>Speaker Introduction</span>
 
 As one of the three co-founders of PingCAP, I feel honored that PingCAP was once again invited to the Percona Live Conference.
 
@@ -268,7 +272,7 @@ This is TiDB, SQL at Scale.
 
 [Back to the top](#top)
 
-##<span id="roadmap">Roadmap</span>
+## <span id="roadmap">Roadmap</span>
 
 The final section of my speech is our roadmap to the future:
 
