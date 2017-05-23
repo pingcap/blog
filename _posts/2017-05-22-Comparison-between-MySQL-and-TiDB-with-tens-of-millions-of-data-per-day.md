@@ -4,7 +4,7 @@ title: Migration from MySQL to TiDB to handle tens of millions of data per day
 excerpt: This document is a use case that details the performance of MySQL and TiDB with tens of millions of data per day.
 ---
 
-# TiDB use case: Migration from MySQL to TiDB to handle tens of millions of data per day
+# TiDB use case
 
 ## Table of content
 
