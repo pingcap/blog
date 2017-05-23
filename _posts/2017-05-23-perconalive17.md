@@ -27,7 +27,7 @@ This is the speech Edward Huang gave at Percona Live - Open Source Database Conf
 
 
 
-## <span id="speaker"> Speaker Introduction </span>
+## <span id="speaker"> Speaker introduction </span>
 
 As one of the three co-founders of PingCAP, I feel honored that PingCAP was once again invited to the Percona Live Conference.
 
@@ -45,7 +45,7 @@ So how to scale your relational database is a pain point of the entire industry.
 
 [Back to the top](#top)
 
-## <span id="goal">TiDB Project - Goal</span>
+## <span id="goal">TiDB goal</span>
 And there comes TiDB, when we were designing TiDB, we want to achieve the following goals:
 
 * Make sharding and data movement transparent to users so that developers can focus on application development.
@@ -80,7 +80,7 @@ These three components communicate with each other through gRPC.
 
 [Back to the top](#top)
 
-## <span id="stack">Storage Stack </span>
+## <span id="stack">Storage stack </span>
 
 Let’s dive deep into the storage stack of TiKV.
 
@@ -100,7 +100,7 @@ Region is a set of continuous key-value pairs in byte-order.
 
 [Back to the top](#top)
 
-## <span id="split">Safe Split</span>
+## <span id="split">Safe split</span>
 
 Let’s take a look at the diagram here: The data is split into a set of continuous key-value pairs which we name them from a to z. Region 1 stores "a" to “e”, Region 2 “f” to “j”, Region 3 “k” to “o”, etc. As region is a logical concept, all the regions in a physical node share the same rocksdb instance.
 
@@ -136,7 +136,7 @@ And finally, once the split-log is committed, all the replicas in the Raft group
 
 [Back to the top](#top)
 
-## <span id="scale">Scale Out</span>
+## <span id="scale">Scale out</span>
 
 We‘ve talked about split. Now let’s see how TiKV scales out. Our project is as scalable as NoSQL system, which means you can easily increase the capacity or balance the workload by adding more machines.
 
@@ -156,7 +156,7 @@ This is how TiKV scales out.
 
 [Back to the top](#top)
 
-## <span id="transaction">ACID Transaction</span>
+## <span id="transaction">ACID transaction</span>
 
 Our transaction model is inspired by Google’s Percolator. It’s mainly a decentralized 2-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign increasing timestamp for each transaction.
 
@@ -174,7 +174,7 @@ Distributed join will be covered later.
 
 [Back to the top](#top)
 
-## <span id="sql">TiDB SQL Layer Overview<span>
+## <span id="sql">TiDB SQL layer overview<span>
 
 ![]({{ site.baseurl }}/assets/img/image_8.png)
 
@@ -207,7 +207,7 @@ There are several advantages in this approach: First, there are more nodes invol
 
 [Back to the top](#top)
 
-## <span id="hashjoin">Distributed Join (HashJoin)</span>
+## <span id="hashjoin">Distributed join (HashJoin)</span>
 
 Now, let’s see a little more complex query: we have two tables, left and right. Now I write a simple join query, let’s see what happens behind a join.
 
@@ -221,7 +221,7 @@ TiDB’s SQL layer currently supports 3 kinds of distributed join type, hashjoin
 
 [Back to the top](#top)
 
-## <span id="tools">Tools Matter<span>
+## <span id="tools">Tools matter<span>
 
 To help users exploit the best part of TiDB, we have prepared the following tools: Syncer, TiDB-Binlog, Mydumper/MyLoader(loader).
 
@@ -239,7 +239,7 @@ For data migration, we don’t have our own tool. We use MyDumper / Loader for d
 
 [Back to the top](#top)
 
-## <span id="usecase">Use Cases</span>
+## <span id="usecase">Use cases</span>
 
 Currently, there are about 20 customers using our products in production environments and more than 200 PoC users contacting us or trying our products. 
 
