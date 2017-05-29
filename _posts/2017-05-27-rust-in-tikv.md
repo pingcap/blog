@@ -94,7 +94,7 @@ Although Rust has the above disadvantages, its advantages are attractive for us 
 
 Rust is thread safe, so there won’t be any data race problem. All the safety are guaranteed by compiler. So in most cases, when the compiling passes, we are sure that we can run the program safely.
 
-Rust has no GC expenses, so we won’t meet the "stop the world" problem. Calling C through FFI is very fast, so we don’t worry the performance reduction when calling the RocksDB API. At last, Rust has an official package manager, crate, we can find many libraries and use them directly.
+Rust has no GC expenses, so we won’t meet the "stop the world" problem. Calling C through FFI is very fast, so we don’t worry the performance reduction when calling the RocksDB API. At last, Rust has an official package manager, Cargo, we can find many libraries and use them directly.
 
 ### We made a hard but great decision: Use Rust!
 
