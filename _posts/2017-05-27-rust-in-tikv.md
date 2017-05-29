@@ -134,7 +134,7 @@ Here is an example of Multi-Raft.
 
 You can see that there are four TiKV nodes. Within each store, we have several regions. Region is the basic unit of data movement and is replicated by Raft. Each region is replicated to three nodes.  These three replicas of one Region make a Raft group.
 
-### <span id="scale">Scale Out</scale>
+### <span id="scale">Scale Out</span>
 
 #### Scale-out (initial state)
 
