@@ -7,7 +7,7 @@ permalink:        pretty
 
 # Setup
 title:            TiDB Blog
-tagline:          'TiDB blog'
+tagline:          'TiDB Blog'
 description:      'TiDB is a distributed SQL database. Inspired by the design of Google F1, TiDB supports the best features of both traditional RDBMS and NoSQL.'
 url:              http://github.io/pingcap/blog
 baseurl:          ""
@@ -24,4 +24,7 @@ version:          Beta20160730
 
 github:
   repo:           https://github.com/pingcap/tidb
+
+weekly:
+  url:            http://weekly.pingcap.com
 
