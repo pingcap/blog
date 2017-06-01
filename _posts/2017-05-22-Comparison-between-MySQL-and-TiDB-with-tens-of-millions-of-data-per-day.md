@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Migration from MySQL to TiDB to handle tens of millions rows of data per day
+title: Migration from MySQL to TiDB to handle tens of millions of rows of data per day
 excerpt: This document is a use case that details the performance of MySQL and TiDB with tens of millions of rows of data per day.
 ---
 
