@@ -1,7 +1,9 @@
 ---
-layout: post
 title: Rust in TiKV
-excerpt: This is the speech Tang Liu gave at the 1st Rust Meetup in Beijing on April 16, 2017.
+author: Tang Liu
+date: 2017-05-27
+summary: This is the speech Tang Liu gave at the 1st Rust Meetup in Beijing on April 16, 2017.
+tags: TiKV
 ---
 
 (Email: [tl@pingcap.com](mailto:tl@pingcap.com))

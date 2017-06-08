@@ -1,7 +1,9 @@
 ---
-layout: post
 title: Travelling Back in Time and Reclaiming the Lost Treasures
-excerpt: This document introduces the History Read feature in TiDB.
+author: ???
+date: 2016-11-15
+summary: This document introduces the History Read feature in TiDB.
+tags: TiDB
 ---
 
 ## -- About the History Read feature in TiDB

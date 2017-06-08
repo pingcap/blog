@@ -1,8 +1,11 @@
 ---
-layout: post
 title: A Deep Dive into TiKV
-excerpt: This document introduces how TiKV works as a Key-Value database.
+author: ???
+date: 2016-11-09
+summary: This document introduces how TiKV works as a Key-Value database.
+tags: TiKV
 ---
+
 <span id="top"><span>
 
 # Table of Content

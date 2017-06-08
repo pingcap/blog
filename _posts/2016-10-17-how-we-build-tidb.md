@@ -1,10 +1,12 @@
 ---
-layout: post
 title: How we build TiDB
-excerpt: This is the speech Max Liu gave at Percona Live Open Source Database Conference 2016.
+author: Max Liu
+date: 2016-10-17
+summary: This is the speech Max Liu gave at Percona Live Open Source Database Conference 2016.
+tags: TiDB
 ---
 
-<span id="top">This is the speech Max Liu gave at **Percona Live Open Source Database Conference 2016**. </span>
+<span id="top"><span>
 
 The slides are [here](https://www.percona.com/live/plam16/sessions/how-we-build-tidb).
 

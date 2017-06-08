@@ -1,7 +1,9 @@
 ---
-layout: post
 title: A Brief Introduction of TiDB
-excerpt: This is the speech Edward Huang gave at Percona Live Open Source Database Conference 2017.
+author: Edward Huang
+date: 2017-05-23
+summary: This is the speech Edward Huang gave at Percona Live Open Source Database Conference 2017.
+tags: TiDB
 ---
 
 This is the speech Edward Huang gave at Percona Live - Open Source Database Conference 2017.

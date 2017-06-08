@@ -1,8 +1,12 @@
 ---
-layout: post
 title: MVCC in TiKV
-excerpt: This document gives an overview of MVCC implementation in TiKV.
+author: ???
+date: 2016-11-17
+summary: This document gives an overview of MVCC implementation in TiKV.
+tags: TiKV
 ---
+
+
 # MVCC
 
 ## Introduction to concurrency control
