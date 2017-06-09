@@ -1,8 +1,5 @@
----
-layout: default
-title: Home
----
-
+<!-- 
+--- layout: default title: Home ---
 <div class="posts">
   {% for post in paginator.posts %}
   <div class="post">
@@ -34,4 +31,62 @@ title: Home
   {% else %}
     <span class="pagination-item newer">Newer</span>
   {% endif %}
+</div> -->
+
+<style type="text/css" media="screen">
+@font-face {
+    font-family: "Lato";
+    src: url('https://download.pingcap.com/fonts/lato/lato-regular-webfont.eot'), url('https://download.pingcap.com/fonts/lato/lato-regular-webfont.ttf'), url('https://download.pingcap.com/fonts/lato/lato-regular-webfont.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TitilliumWeb";
+    src: url('https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.eot'), url('https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.ttf'), url('https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+  font-family: "Lato", Monaco, Consolas, "Lucida Console", monospace;
+  font-size: 16px;
+  color: #303030;
+}
+
+.content {
+  padding: 30px;
+}
+
+.content .lead {
+  margin: 40px 0;
+  font-family: "TitilliumWeb";
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: #142848;
+}
+
+.content p {
+  margin: 10px 0;
+}
+
+.old {
+  margin: 0 10px;
+}
+
+.goto, .goto a {
+  color: #3a59f0;
+}
+</style>
+
+<div class="content">
+    <h1 class="lead">Sorry, we've changed that url. </h1>
+    <p>Redirecting <span class="old">pingcap.github.io/blog/</span> to </p>
+    <p class="goto"><a href="https://www.pingcap.com/bloglist">pingcap.com/bloglist</a>&nbsp;&nbsp;&nbsp;&nbsp;...</p>
 </div>
+
+<script language="javascript" type="text/javascript">
+  window.setTimeout(function() {
+      location.replace("https://www.pingcap.com/bloglist")
+  }, 2000);
+</script>
