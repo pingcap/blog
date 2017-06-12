@@ -1,6 +1,6 @@
 # TiDB blog
 
-- [Rust in TiKV](2017-05-27-tikv-in-rust.md)
+- [Rust in TiKV](2017-05-27-rust-in-tikv.md)
 - [Comparison between MySQL and TiDB with tens of millions of data per day](2017-05-22-Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day.md)
 - [About the TiDB Source Code](2017-01-06-about-the-tidb-source-code.md)
 - [Subquery Optimization in TiDB](2016-12-07-Subquery-Optimization-in-TiDB.md)
