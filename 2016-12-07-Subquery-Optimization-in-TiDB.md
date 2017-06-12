@@ -71,7 +71,7 @@ EXISTS(SELECT * FROM TMP WHERE TMP.id = SRC.id)
 ```
 the `Apply` operator representation is as follows:
 
-![]({{ site.baseurl }}/assets/img/apply1.png)
+![](meida/apply1.png)
 
 Because the operator above `Apply` is `Selection`, formally, it is:
 

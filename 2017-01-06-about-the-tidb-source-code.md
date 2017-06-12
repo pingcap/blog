@@ -20,7 +20,7 @@ The target audience of this document is the contributors in the TiDB community. 
 
 # System architecture
 
-![]({{ site.baseurl }}/assets/img/architecture.png)
+![](media/architecture.png)
 
 As is shown in the architecture diagram, the TiDB Server is between the Load Balancer (or Application) and the storage engine layer at the bottom. Within the TiDB server, there are three layers:
 
@@ -211,7 +211,7 @@ The main function of the protocol layer is to manage the client connections, par
 
 For a single connection, the entry point method is the [dispatch](https://github.com/pingcap/tidb/blob/master/server/conn.go#L350) of the `clientConn` class, where the protocol is parsed and different processing functions are called.
 
-![]({{ site.baseurl }}/assets/img/protocol_layer.png)
+![](media/protocol_layer.png)
 
 # The SQL layer
 
@@ -223,7 +223,7 @@ Parse statement -> Validate statement -> Optimize statement -> Generate access p
 
 The following diagram shows how TiDB processes a SQL statement:
 
-![]({{ site.baseurl }}/assets/img/process_flow.png)
+![](media/process_flow.png)
 
 The entry point of the process is in the [`session.go`](https://github.com/pingcap/tidb/blob/master/session.go) file. TiDB-Server calls the `Session.Execute()` interface, inputs the SQL statement and implements `Session.Execute()`.
 
@@ -329,7 +329,7 @@ type PartialResult interface {
  
 2. The second parameter is `SelectRequest`, which is constructed by the executor on the upper layer. It puts the computing logic, such as whether to sort or aggregate the expressions, in `req` which is a `Protobuf` structure, sends to the `Select` interface, and finally sends to the computing TiKV region server.
 
-![]({{ site.baseurl }}/assets/img/dist_sql_example.png)
+![](media/dist_sql_example.png)
 
 The distributed executor is mainly about distributing tasks and collecting results. The `Select` interface returns a data structure, which is called `SelectResult`. The structure can be considered to be an iterator. Because there are many region servers at the bottom layer, the results returned from each node is `PartialResult`. On top of these results is an encapsulated `SelectResult` which is an iterator of `PartialResult`. The next `PartialResult` can be obtained by using the `next` method.
 

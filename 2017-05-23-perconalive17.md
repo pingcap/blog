@@ -68,7 +68,7 @@ During the first section, I’ll talk about the technical overview of TiDB and T
 
 Below shows the TiDB architecture.
 
-![]({{ site.baseurl }}/assets/img/image_0.png)
+![](media/image_0.png)
 
 In this diagram, there are three components: the SQL layer, which is TiDB; the distributed storage layer, which is TiKV; and Placement Driver, aka PD.
 
@@ -98,7 +98,7 @@ Now we know that the actual data is stored in RocksDB. But how exactly is data o
 
 Region is a set of continuous key-value pairs in byte-order.
 
-![]({{ site.baseurl }}/assets/img/image_1.png)
+![](media/image_1.png)
 
 [Back to the top](#top)
 
@@ -116,7 +116,7 @@ For example, Region 1 from "a" to “e” is safely split into Region 1.1 “a�
 
 This explains how one Region is split, but how about its replicas on other nodes? Let me show you the process.
 
-![]({{ site.baseurl }}/assets/img/image_2.png)
+![](media/image_2.png)
 
 This is the initial state for Region 1. You can see there is a Raft group with three TiKV nodes. Region 1 on TiKV1 is the Leader and the other two replicas are the followers.
 
@@ -124,15 +124,15 @@ However, there comes a situation that there are too much data in Region 1 and it
 
 It’s easy if there is only one Region 1, but in this case, we have three replicas. How can all the replicas be split safely? The answer is also Raft. Let’s see how it works.
 
-![]({{ site.baseurl }}/assets/img/image_3.png)
+![](media/image_3.png)
 
 The split is initiated by the Leader, which means Region 1 is split to Region 1.1 and Region 1.2 firstly in the Leader as you can see from the diagram.
 
-![]({{ site.baseurl }}/assets/img/image_4.png)
+![](media/image_4.png)
 
 When the split-log is written to WAL in the Leader, it is replicated by Raft and sent to the followers. Then, the followers apply the split log, just like any other normal raft log.
 
-![]({{ site.baseurl }}/assets/img/image_5.png)
+![](media/image_5.png)
 
 And finally, once the split-log is committed, all the replicas in the Raft group are safely split into two regions on each TiKV node. There is no data lost in the process as the correctness of the split procedure is ensured by Raft.
 
@@ -142,7 +142,7 @@ And finally, once the split-log is committed, all the replicas in the Raft group
 
 We‘ve talked about split. Now let’s see how TiKV scales out. Our project is as scalable as NoSQL system, which means you can easily increase the capacity or balance the workload by adding more machines.
 
-![]({{ site.baseurl }}/assets/img/image_6.png)
+![](media/image_6.png)
 
 In this diagram, we have 4 physical nodes, namely Node A, Node B, Node C, and Node D. And we have 3 regions, Region 1, Region 2 and Region 3. We can see that there are 3 regions on Node A. Let’s say that Node A encountered a capacity problem, maybe disk is almost full.
 
@@ -150,7 +150,7 @@ To balance the data, we add a new node, Node E. The first step is to transfer th
 
 Step 2, TiKV adds a Replica of Region 1 to Node E. Therefore, Region 1 contains 4 replicas temporary.
 
-![]({{ site.baseurl }}/assets/img/image_7.png)
+![](media/image_7.png)
 
 The final step, TiKV removes the replica of Region One from Node A. Now the data is balanced and the cluster scales out from 4 nodes to 5 nodes. In the process of scale-out, this data movement will occur in different regions. The result of the scheduling is that the number of regions is as equal as possible in every physical node.
 
@@ -178,7 +178,7 @@ Distributed join will be covered later.
 
 ## <span id="sql">TiDB SQL layer overview<span>
 
-![]({{ site.baseurl }}/assets/img/image_8.png)
+![](media/image_8.png)
 
 This diagram shows the architecture of the SQL layer. Let’s take a look and see how the process works.
 
@@ -201,7 +201,7 @@ This is a very simple statement and it’s easy to make the logical plan and the
 The plan works well in a stand-alone database, but what happens in a distributed database that needs distributed computing in most cases? Let’s see the next slide to show how the SQL statement is executed in TiDB.
 
 
-![]({{ site.baseurl }}/assets/img/image_9.png)
+![](media/image_9.png)
 
 This is the physical plan of the SQL statement. The SQL layer and the storage layer, TiKV, work together. Some predicates and aggregators is pushed down to TiKV and then sent the partial result back to TiDB for final aggregation.
 
@@ -213,7 +213,7 @@ There are several advantages in this approach: First, there are more nodes invol
 
 Now, let’s see a little more complex query: we have two tables, left and right. Now I write a simple join query, let’s see what happens behind a join.
 
-![]({{ site.baseurl }}/assets/img/image_10.png)
+![](media/image_10.png)
 
 For this query, optimizer may choose hashjoin, because HashJoin performs well in processing small and medium sized data. We have implemented the operator and optimized it for parallel data processing, and make it streaming.
 
@@ -227,13 +227,13 @@ TiDB’s SQL layer currently supports 3 kinds of distributed join type, hashjoin
 
 To help users exploit the best part of TiDB, we have prepared the following tools: Syncer, TiDB-Binlog, Mydumper/MyLoader(loader).
 
-![]({{ site.baseurl }}/assets/img/image_11.png)
+![](media/image_11.png)
 
 Syncer is a tool to synchronize data from MySQL in real time.
 
 It is hook up as a MySQL replica: we have a MySQL master with binlog enabled and Syncer acts as a fake slave. At the very beginning, Syncer gets the position of the current binlog which is the initial synchronizing position. When new data is written into MySQL, Syncer obtains the binlog from the master, synchronizes the data to the Save Point in the disk, and then applies the rule filter to send data to either MySQL or TiDB cluster.
 
-![]({{ site.baseurl }}/assets/img/image_12.png)
+![](media/image_12.png)
 
 On the other hand, TiDB can output binlogs too. We build TiDB-binlog toolset to make it possible for 3rd party applications synchronize data from TiDB cluster. As TiDB-server is distributed, binlog pumper should be deployed in every TiDB-server instance and send it to a component we called ‘Cistern’. Cistern will sort the transactions by TransactionID (aka. timestamp) in a short period of time, and output as protobuf for downstream application.
 
@@ -245,11 +245,11 @@ For data migration, we don’t have our own tool. We use MyDumper / Loader for d
 
 Currently, there are about 20 customers using our products in production environments and more than 200 PoC users contacting us or trying our products. 
 
-![]({{ site.baseurl }}/assets/img/image_13.png)
+![](media/image_13.png)
 
 Let’s compare the query elapse between TiDB and MySQL. As you can see from the above diagram, for the ad-hoc OLAP with 8 queries, the time that MySQL takes is almost 4 times more than that of a 3-node TiDB.
 
-![]({{ site.baseurl }}/assets/img/image_14.png)
+![](media/image_14.png)
 
 Another customer is using TiDB as the drop-in replacement for MySQL for OLTP workload. You can see from the graph that the latency of 80% query is lower than 3ms and the average query latency is about 5 ms. Besides, it is quite stable.
 
@@ -258,13 +258,13 @@ Another customer is using TiDB as the drop-in replacement for MySQL for OLTP wor
 ## <span id="sysbench">Sysbench</span>
 Let’s see some Sysbench results for Read and Insert in the next few slides. Here are the details of the system that we are using.
 
-![]({{ site.baseurl }}/assets/img/image_15.png)
+![](media/image_15.png)
 
-![]({{ site.baseurl }}/assets/img/image_16.png)
+![](media/image_16.png)
 
 For Read, you can see that the more nodes, the higher the qps (Query per Second), and the lower the latency.
 
-![]({{ site.baseurl }}/assets/img/image_17.png)
+![](media/image_17.png)
 
 This diagram of Read qps shows the same result. The performance of read is improved significantly as the number of nodes grows.
 

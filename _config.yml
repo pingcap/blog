@@ -20,8 +20,6 @@ author:
 paginate:         5
 
 # Custom vars
-version:          Beta20160730
-
 github:
   repo:           https://github.com/pingcap/tidb
 
