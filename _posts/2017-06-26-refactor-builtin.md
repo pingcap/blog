@@ -1,5 +1,10 @@
-# Refactor Built-in Functions in TiDB
- 
+---
+layout: post
+title: Refactoring the Built-in Functions in TiDB
+excerpt: In order to accelerate expression evaluation, we recently refactored its framework. This tutorial will show you how to use the new computational framework to rewrite or add a built-in function in TiDB.
+---
+
+<span id=`top`> </span>
 In order to accelerate expression evaluation, we recently refactored its framework. This tutorial will show you how to use the new computational framework to rewrite or add a built-in function in TiDB.
 
 ## Table of Content
@@ -81,6 +86,8 @@ First, lets take a look at the [`expression/builtin_string.go`]
 	   	return int64(len([]byte(val))), false, nil
 	}
 	```
+
+[Back to the top](#top)
  
 #### <span id="move"> Refine the existing `TestLength()` method:</span>
 
@@ -132,7 +139,7 @@ Moving on to [`expression/builtin_string_test.go`](https://github.com/pingcap/ti
 	}
 	```
  
- 
+[Back to the top](#top) 
  
 #### <span id="final"> Test the implementation of `LENGTH` at the SQL level </span>
 
@@ -205,7 +212,9 @@ Therefore, before refactoring, the framework of expression evaluation needs to  
 Moreover, from the definition of the `Expression.eval ()` method, we can see tht when evaluating, we must **continually wrap and unwrap intermediate results through the Datum structure **, which also increases time and capacity cost.
  
 In order to solve these two problems, we refactored the expression evaluation framework.
- 
+
+[Back to the top](#top)
+
 ### <span id="after"> After refactoring...</span>
 
 The refactored framework has two advantages:
@@ -235,5 +244,5 @@ In this way, in the **executing phase**, for every `ScalarFunction`, it is guara
  
 - For a function signature, its return value type has been determined, so when defining, you need to combine it with the corresponding `baseXXBuiltinFunc` and implement the `evalXX ()` method. Note that XX should only be one of the six types listed above.
  
- 
+[Back to the top](#top)
  
