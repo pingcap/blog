@@ -207,7 +207,7 @@ The evaluate the `<` expression, take the types of the two parameters into accou
  
 Similarly, for the `CONCAT` expression in the expression tree above, the parameters should be converted to string type before evaluation. For the expression '+', the parameters should be converted to double before evaluation.
  
-Therefore, before refactoring, the framework of expression evaluation needs to  ** determine the data type of the parameter on each branch repeatedly** for every group of data involved. If the parameter type does not meet the evaluation rules of the expression, you need to convert it to the corresponding data type.
+Therefore, before refactoring, the framework of expression evaluation needs to  **determine the data type of the parameter on each branch repeatedly** for every group of data involved. If the parameter type does not meet the evaluation rules of the expression, you need to convert it to the corresponding data type.
 Moreover, from the definition of the `Expression.eval ()` method, we can see that when evaluating, we must **continually wrap and unwrap intermediate results through the Datum structure**, which also increases time and capacity cost.
  
 In order to solve these two problems, we refactored the expression evaluation framework.
