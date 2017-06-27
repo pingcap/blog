@@ -93,49 +93,49 @@ First, let's take a look at the [`expression/builtin_string.go`](https://github.
 Moving on to [`expression/builtin_string_test.go`](https://github.com/pingcap/tidb/blob/master/expression/builtin_string_test.go), let’s refine the existing `TestLength()` method:
  
 ```go
-	func (s *testEvaluatorSuite) TestLength(c *C) {
-	   	defer testleak.AfterTest(c)() // This line is used to monitor goroutine leak.
-	   	// You can use the following cases to test the `LENGTH` function
-	   	// Note: in addition to normal cases, it is best to add some abnormal cases, such as the input args is nil, or the function has different types of parameters.
-	   	cases := []struct {
-	          	args     interface{}
-	          	expected int64
-	          	isNil    bool
-	          	getErr   bool
-	   	}{
-	          	{"abc", 3, false, false},
-	          	{"你好", 6, false, false},
-	          	{1, 1, false, false},
-	          	...
-	   	}
-	   	for _, t := range cases {
-	          	f, err := newFunctionForTest(s.ctx, ast.Length, primitiveValsToConstants([]interface{}{t.args})...)
-	          	c.Assert(err, IsNil)
-	          	// The following lines test the return value type of the `LENGTH` function:
-	          	tp := f.GetType()
-	          	c.Assert(tp.Tp, Equals, mysql.TypeLonglong)
-	          	c.Assert(tp.Charset, Equals, charset.CharsetBin)
-	          	c.Assert(tp.Collate, Equals, charset.CollationBin)
-	          	c.Assert(tp.Flag, Equals, uint(mysql.BinaryFlag))
-	          	c.Assert(tp.Flen, Equals, 10)
-	          	// The following lines test the evaluation result of LENGTH function:
-	          	d, err := f.Eval(nil)
-	          	if t.getErr {
-	                 	c.Assert(err, NotNil)
-	          	} else {
-	                 	c.Assert(err, IsNil)
-	                 	if t.isNil {
-	                        	c.Assert(d.Kind(), Equals, types.KindNull)
-	                 	} else {
-	                        	c.Assert(d.GetInt64(), Equals, t.expected)
-	                 	}
-	          	}
-	   	}
-	   	// The following lines test whether the function has determinacy:
-	   	f, err := funcs[ast.Length].getFunction([]Expression{Zero}, s.ctx)
-	   	c.Assert(err, IsNil)
-	   	c.Assert(f.isDeterministic(), IsTrue)
-	}
+func (s *testEvaluatorSuite) TestLength(c *C) {
+   	defer testleak.AfterTest(c)() // This line is used to monitor goroutine leak.
+   	// You can use the following cases to test the `LENGTH` function
+   	// Note: in addition to normal cases, it is best to add some abnormal cases, such as the input args is nil, or the function has different types of parameters.
+   	cases := []struct {
+          	args     interface{}
+          	expected int64
+          	isNil    bool
+          	getErr   bool
+   	}{
+          	{"abc", 3, false, false},
+          	{"你好", 6, false, false},
+          	{1, 1, false, false},
+          	...
+   	}
+   	for _, t := range cases {
+          	f, err := newFunctionForTest(s.ctx, ast.Length, primitiveValsToConstants([]interface{}{t.args})...)
+          	c.Assert(err, IsNil)
+          	// The following lines test the return value type of the `LENGTH` function:
+          	tp := f.GetType()
+          	c.Assert(tp.Tp, Equals, mysql.TypeLonglong)
+          	c.Assert(tp.Charset, Equals, charset.CharsetBin)
+          	c.Assert(tp.Collate, Equals, charset.CollationBin)
+          	c.Assert(tp.Flag, Equals, uint(mysql.BinaryFlag))
+          	c.Assert(tp.Flen, Equals, 10)
+          	// The following lines test the evaluation result of LENGTH function:
+          	d, err := f.Eval(nil)
+          	if t.getErr {
+                 	c.Assert(err, NotNil)
+          	} else {
+                 	c.Assert(err, IsNil)
+                 	if t.isNil {
+                        	c.Assert(d.Kind(), Equals, types.KindNull)
+                 	} else {
+                        	c.Assert(d.GetInt64(), Equals, t.expected)
+                 	}
+          	}
+   	}
+   	// The following lines test whether the function has determinacy:
+   	f, err := funcs[ast.Length].getFunction([]Expression{Zero}, s.ctx)
+   	c.Assert(err, IsNil)
+   	c.Assert(f.isDeterministic(), IsTrue)
+}
 ```
  
 [Back to the top](#top) 
