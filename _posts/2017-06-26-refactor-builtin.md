@@ -20,7 +20,7 @@ In order to accelerate expression evaluation, we recently refactored its framewo
  
 ### <span id="overall"> The overall process </span>
  
-1. Select any function to your interest from the [expression](https://github.com/pingcap/xpression) directory, assuming the function is named XX.
+1. Select any function to your interest from the [expression](https://github.com/pingcap/tidb/tree/master/expression) directory, assuming the function is named XX.
  
 2. Override the `XXFunctionClass.getFunction()` method:
 
@@ -32,7 +32,7 @@ In order to accelerate expression evaluation, we recently refactored its framewo
 3. Implement the `evalYY()` method on all the function signatures corresponding to the built-in function. YY represents the return value type of the function signature.
  
 4. Add tests
-In the [expression](https://github.com/pingcap/xpression) directory, refine tests about the implementation of the given function in the `TestXX()` method.
+in the [expression](https://github.com/pingcap/tidb/tree/master/expression) directory, refine tests about the implementation of the given function in the `TestXX()` method.
 In the executor directory, add tests at the SQL level.
  
 5. Run `make dev` and ensure that all the test cases pass.
@@ -48,7 +48,7 @@ First, let's take a look at the [`expression/builtin_string.go`](https://github.
 
 	1). Infer the return value type of the `LEGNTH` function according to MySQL rules.
 	
-	2). Generate function signature based on the number & type of parameters, and return value type of the `LENGTH` function. Because the `LENGTH` function only has one number & type of parameters, and return value type, we don’t need to define a type for the new function signature. Instead, we modified the existing `builtinLengthSig`, so that it **combines with `baseIntBuiltinFunc`, which means that the return value type in the given function signature is int.**
+	2). Generate function signature based on the number & type of parameters, and return value type of the `LENGTH` function. Because the `LENGTH` function only has one number & type of parameters, and return value type, we don’t need to define a type for the new function signature. Instead, we modified the existing `builtinLengthSig`, so that it could be **composite with `baseIntBuiltinFunc`, which means that the return value type in the given function signature is int.**
  
 	```go
 	type builtinLengthSig struct {
@@ -58,8 +58,8 @@ First, let's take a look at the [`expression/builtin_string.go`](https://github.
 	 
 	//Infer the return value type of `LEGNTH` function according to MySQL rules
 	tp := types.NewFieldType(mysql.TypeLonglong)
-	   	    tp.Flen = 10
-	   	    types.SetBinChsClnFlag(tp)
+	tp.Flen = 10
+	types.SetBinChsClnFlag(tp)
 	 
 	//Generate function signature based on the number & type of parameters, and return value type. Note that after refactoring, instead of the `newBaseBuiltinFunc` method, the `newBaseBuiltinFuncWithTp` method is used here.
 	//In the `newBaseBuiltinFuncWithTp` function declaration, `args` represents the function's parameters, `tp` represents the return value type of the function, and `argsTp` represents the correct types of all parameters in the function signature.
@@ -92,7 +92,7 @@ First, let's take a look at the [`expression/builtin_string.go`](https://github.
 
 Moving on to [`expression/builtin_string_test.go`](https://github.com/pingcap/tidb/blob/master/expression/builtin_string_test.go), let’s refine the existing `TestLength()` method:
  
-	```go
+```go
 	func (s *testEvaluatorSuite) TestLength(c *C) {
 	   	defer testleak.AfterTest(c)() // This line is used to monitor goroutine leak.
 	   	// You can use the following cases to test the `LENGTH` function
@@ -136,7 +136,7 @@ Moving on to [`expression/builtin_string_test.go`](https://github.com/pingcap/ti
 	   	c.Assert(err, IsNil)
 	   	c.Assert(f.isDeterministic(), IsTrue)
 	}
-	```
+```
  
 [Back to the top](#top) 
  
@@ -144,24 +144,24 @@ Moving on to [`expression/builtin_string_test.go`](https://github.com/pingcap/ti
 
 Finally let’s look at [`executor/executor_test.go`](https://github.com/pingcap/tidb/blob/master/expression/evaluator_test.go) and test the implementation of `LENGTH` at the SQL level:
  
-	```go
-	// Tests for string built-in functions can be added in the following method:
-	func (s *testSuite) TestStringBuiltin(c *C) {
-	   	defer func() {
-	          	s.cleanEnv(c)
-	          	testleak.AfterTest(c)()
-	   	}()
-	   	tk := testkit.NewTestKit(c, s.store)
-	   	tk.MustExec("use test")
-	   	// for length
-	   	// It’s best that these tests can also cover different scenarios:
-	   	tk.MustExec("drop table if exists t")
-	   	tk.MustExec("create table t(a int, b double, c datetime, d time, e char(20), f bit(10))")
-	   	tk.MustExec(`insert into t values(1, 1.1, "2017-01-01 12:01:01", "12:01:01", "abcdef", 0b10101)`)
-	   	result := tk.MustQuery("select length(a), length(b), length(c), length(d), length(e), length(f), length(null) from t")
-	   	result.Check(testkit.Rows("1 3 19 8 6 2 <nil>"))
-	}
-	```
+```go
+// Tests for string built-in functions can be added in the following method:
+func (s *testSuite) TestStringBuiltin(c *C) {
+   	defer func() {
+          	s.cleanEnv(c)
+          	testleak.AfterTest(c)()
+   	}()
+   	tk := testkit.NewTestKit(c, s.store)
+   	tk.MustExec("use test")
+   	// for length
+   	// It’s best that these tests can also cover different scenarios:
+   	tk.MustExec("drop table if exists t")
+   	tk.MustExec("create table t(a int, b double, c datetime, d time, e char(20), f bit(10))")
+   	tk.MustExec(`insert into t values(1, 1.1, "2017-01-01 12:01:01", "12:01:01", "abcdef", 0b10101)`)
+   	result := tk.MustQuery("select length(a), length(b), length(c), length(d), length(e), length(f), length(null) from t")
+   	result.Check(testkit.Rows("1 3 19 8 6 2 <nil>"))
+}
+```
  
  
 ### <span id="before"> Before refactoring...</span>
@@ -208,7 +208,7 @@ The evaluate the `<` expression, take the types of the two parameters into accou
 Similarly, for the `CONCAT` expression in the expression tree above, the parameters should be converted to string type before evaluation. For the expression '+', the parameters should be converted to double before evaluation.
  
 Therefore, before refactoring, the framework of expression evaluation needs to  ** determine the data type of the parameter on each branch repeatedly** for every group of data involved. If the parameter type does not meet the evaluation rules of the expression, you need to convert it to the corresponding data type.
-Moreover, from the definition of the `Expression.eval ()` method, we can see that when evaluating, we must **continually wrap and unwrap intermediate results through the Datum structure **, which also increases time and capacity cost.
+Moreover, from the definition of the `Expression.eval ()` method, we can see that when evaluating, we must **continually wrap and unwrap intermediate results through the Datum structure**, which also increases time and capacity cost.
  
 In order to solve these two problems, we refactored the expression evaluation framework.
 
@@ -230,7 +230,7 @@ In this way, in the **executing phase**, for every `ScalarFunction`, it is guara
 ### <span id="app"> Appendix </span>
  
 - For a built-in function, multiple function signatures may be created to handle different scenarios, depending on the number & type of parameters, and the type of return value. For most built-in functions, each parameter type and return value type are determined, so only a function signature is needed.
-- For referring rules of more complicated return value type, you can refer to the implementation and test of the `CONCAT` function. You can use the `MySQLWorkbench` tool to run the query `select funcName (arg0, arg1, ...)` to observe the data type of the return value in MySQL's built-in functions when inputting different parameters.
+- For referring rules of more complicated return value type, you can refer to the implementation and test of the `CONCAT` function. You can use the `MySQLWorkbench` tool to run the query `select funcName (arg0, arg1, ...)` to observe the field type of the return value in MySQL's built-in functions when inputting different parameters.
 - In the evaluation process of TiDB expression, only the following six evaluation types (currently we are implementing the JSON type) are supported:
 	1. int (int64)
 	2. real (float64)
