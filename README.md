@@ -1,5 +1,5 @@
 # TiDB blog
-
+- [Refactoring the Built-in Functions in TiDB](_posts/2017-06-27-tikv-in-rust.md)
 - [Rust in TiKV](_posts/2017-05-27-tikv-in-rust.md)
 - [Comparison between MySQL and TiDB with tens of millions of data per day](_posts/2017-05-22-Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day.md)
 - [About the TiDB Source Code](_posts/2017-01-06-about-the-tidb-source-code.md)
