@@ -4,8 +4,6 @@ title: TiDB Internal (II) - Computing
 excerpt: This is the second one of three blogs to introduce TiDB internal.
 ---
 
-
-From Shen Li: shenli@pingcap.com
 <span id="top"> </span>
 
 ## TiDB Internal (II) - Computing
@@ -158,7 +156,7 @@ Apart from this, a specialized Key-Value stores the version of the current Schem
 
 The following diagram shows the entire architecture of TiDB:
 
-![]({{ site.baseurl }}/assets/img/tidbarchitecture.jpg)
+![]({{ site.baseurl }}/assets/img/tidbarchitecture.png)
 
 The main function of the TiKV Cluster is to serve as the Key-Value engine to store data, which is thoroughly introduced in the last column. This article focuses on the SQL layer, i.e. the TiDB Servers. Nodes of this layer are stateless, storing no data, and each of them is completely equivalent. TiDB Server is responsible for handling user requests and executing SQL operation logic.
 
@@ -179,7 +177,7 @@ As for the statement `Select count(*) from user where name="TiDB";`, we need to 
 
 See the following diagram for the process:
 
-![]({{ site.baseurl }}/assets/img/queryprocess.jpg)
+![]({{ site.baseurl }}/assets/img/queryprocess.png)
 
 This solution works though it still has the following drawbacks:
 
@@ -204,7 +202,7 @@ You can refer to [this article (in Chinese)](https://mp.weixin.qq.com/s?__biz=Mz
 ### <span id="sqlarch">Architecture of the SQL Layer</span>
 The previous sections introduce some functions of the SQL layer and I hope you have a basic idea about how to process the SQL statement. Actually, TiDB’s SQL Layer is much complicated and has lots of modules and layers. The following diagram lists all important modules and the call relation:
 
-![]({{ site.baseurl }}/assets/img/sqlarchitecture.jpg)
+![]({{ site.baseurl }}/assets/img/sqlarchitecture.png)
 
 The SQL requests will be sent directly or via a Load Balancer to tidb-server, which then parses the MySQL Protocol Packet for the request content. After that, it performs syntax parsing, makes and optimizes the query plan and executes the plan to access and process data. As all data is stored in the TiKV cluster. Tidb-server needs to interact with tikv-server for accessing data during the process. Finally, tidb-server needs to return the query result to users.
 
