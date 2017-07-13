@@ -1,7 +1,7 @@
 ---
 layout: post
 title: TiDB Internal (I) - Data Storage
-excerpt: This is the first one of three blogs of introducing TiDB internal.
+excerpt: This is the first one of three blogs to introduce TiDB internal.
 ---
 
 
