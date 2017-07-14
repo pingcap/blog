@@ -6,9 +6,6 @@ excerpt: This is the second one of three blogs to introduce TiDB internal.
 
 <span id="top"> </span>
 
-## TiDB Internal (II) - Computing
-
-
 From Shen Li: shenli@pingcap.com
 
 ## Table of Content
@@ -187,7 +184,7 @@ This solution works though it still has the following drawbacks:
 
 [Back to the top](#top)
 
-### <span id="dissql">Distributed SQL Operation</sql>
+### <span id="dissql">Distributed SQL Operation</span>
 
 It is simple to avoid the above drawbacks.
 
