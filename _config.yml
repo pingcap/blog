@@ -9,7 +9,7 @@ permalink:        pretty
 title:            TiDB Blog
 tagline:          'TiDB Blog'
 description:      'Inspired by Google Spanner/F1, PingCAP develops TiDB, an open source distributed Hybrid Transactional/Analytical Processing (HTAP) database.'
-url:              http://github.io/pingcap/blog
+url:              https://github.io/pingcap/blog
 baseurl:          ""
 siteurl:          https://www.pingcap.com
 excerpt_separator: "<!--more-->"
