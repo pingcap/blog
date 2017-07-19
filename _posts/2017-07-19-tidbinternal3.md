@@ -10,7 +10,7 @@ From Shen Li: shenli@pingcap.com
 
 <span id="top"> </span>
 
-###Table of Content
+### Table of Content
 
 + [Why scheduling](#why)
 + [The Requirements of Scheduling](#requirement)
