@@ -4,13 +4,11 @@ title: TiDB Internal (III) - Scheduling
 excerpt: This is the third one of three blogs to introduce TiDB internal.
 ---
 
-<span id="top"> </span>
+<span id="top"></span>
 
 From Shen Li: shenli@pingcap.com
 
-<span id="top"> </span>
-
-###Table of Content
+## Table of Content
 
 + [Why scheduling](#why)
 + [The Requirements of Scheduling](#requirement)
@@ -20,7 +18,7 @@ From Shen Li: shenli@pingcap.com
 + [The implementation of Scheduling](#implementation)
 + [Summary](#summary)
 
-### <span id="why">Why scheduling?</span>
+## <span id="why">Why scheduling?</span>
 From [the first blog of TiDB internal](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/), we know that TiKV cluster is the distributed KV storage engine of TiDB database. Data is replicated and managed in Regions and each Region has multiple Replicas distributed on different TiKV nodes. Among these replicas, Leader is in charge of read/write and Follower synchronizes the raft log sent by Leader. Now, please think about the following questions:
 
 + How to guarantee that multiple Replicas of the same Region are distributed on different nodes? Further, what happens if starting multiple TiKV instances on one machine?
@@ -36,7 +34,7 @@ It is easy to solve the above questions one by one, but once mixed up, it become
 
 [Back to the top](#top)
 
-### <span id="requirement">The Requirements of Scheduling</span>
+## <span id="requirement">The Requirements of Scheduling</span>
 
 I want to categorize and sort out the previously listed questions. In general, there are two types:
 
@@ -58,7 +56,7 @@ To meet these needs, we need to, first of all, collect enough information, such 
 
 [Back to the top](#top)
 
-### <span id="basic">The Basic Operations of Scheduling</span>
+## <span id="basic">The Basic Operations of Scheduling</span>
 
 The basic operations of schedule are the simplest. In other word, what we can do to meet the schedule policy. This is the essence of the whole scheduler.
 The previous scheduler requirements seem to be complicated, but can be generalized into 3 operations:
@@ -71,7 +69,7 @@ The Raft protocol happens to meet these requirements: the `AddReplica`, `RemoveR
 
 [Back to the top](#top)
 
-### <span id="collection">Information Collecting</span>
+## <span id="collection">Information Collecting</span>
 
 Schedule depends on the information gathering of the whole cluster. Simply put, we need to know the state of each TiKV node and each Region. TiKV cluster reports two kinds of information to PD:
 
@@ -94,7 +92,7 @@ Through these two kinds of heartbeats, PD gathers the information of the whole c
 
 [Back to the top](#top)
 
-### <span id="policy">The Policy of Scheduling</span>
+## <span id="policy">The Policy of Scheduling</span>
 
 After gathering information, PD needs some policies to draw up a concrete schedule plan.
 
@@ -140,13 +138,13 @@ As the data storage capacity of each replica is fixed, if we maintain the balanc
 	
 [Back to the top](#top)
 
-### <span id="implementation">The implementation of Scheduling</span>
+## <span id="implementation">The implementation of Scheduling</span>
 
 Now let’s see the schedule process.
 
 PD gets the detail data of the cluster by constantly gathering information through heartbeats of Store or Leader. Based on this information and the schedule policies, PD generates the operating sequence, and then checks whether there is an operation to be performed on this Region when receiving a heartbeat sent by the Region Leader. PD returns the upcoming operation to Region Leader through the reply message of the heartbeat and then monitors the execution result in the next heartbeat. These operations are just suggestions to Region Leader, which are not guaranteed to be executed. It is the Region Leader that decides to whether and when to execute according to its current state.
 
-### <span id="summary">Summary</span>
+## <span id="summary">Summary</span>
 
 This blog discloses information you might not find elsewhere. We hope that you’ve had a better understanding about what needs to be considered to build a distributed storage system for scheduling and how to decouple policies and implementation to support a more flexible expansion of policy.
 
