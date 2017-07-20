@@ -1,6 +1,10 @@
 # TiDB blog
-- [Refactoring the Built-in Functions in TiDB](_posts/2017-06-27-tikv-in-rust.md)
-- [Rust in TiKV](_posts/2017-05-27-tikv-in-rust.md)
+- [TiDB Internal (III) - Scheduling](_posts/2017-07-19-tidbinternal3.md)
+- [TiDB Internal (II) - Computing](_posts/2017-07-11-tidbinternal2.md)
+- [TiDB Internal (I) - Data Storage](_posts/2017-07-11-tidbinternal1.md)
+- [Refactoring the Built-in Functions in TiDB](_posts/2017-06-27-refactor-builtin.md)
+- [TiDB RC3 Release Notes](_posts/2017-06-20-rc3.md_)
+- [Rust in TiKV](_posts/2017-05-27-rust-in-tikv.md)
 - [Comparison between MySQL and TiDB with tens of millions of data per day](_posts/2017-05-22-Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day.md)
 - [About the TiDB Source Code](_posts/2017-01-06-about-the-tidb-source-code.md)
 - [Subquery Optimization in TiDB](_posts/2016-12-07-Subquery-Optimization-in-TiDB.md)
