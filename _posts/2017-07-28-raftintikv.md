@@ -4,8 +4,18 @@ title: TiKV Source Code deep dive - Raft in TiKV
 excerpt: TiKV uses the Raft algorithm to implement the strong consistency of data in a distributed environment. This blog introduces the details how Raft is implemented.
 ---
 
+(Email: tl@pingcap.com)
 
-**Architecture**
+<span id="top"> </span>
+
+## Table of content
++ [Architecture](#arch)
++ [Raft](#raft)
+	- [Storage](#storage)
+	- [Config](#config)
+	- [RawNode](#raw)
+
+## <span id="arch">Architecture</span>
 
 Below is TiKV’s overall architecture:
 
@@ -19,7 +29,9 @@ Below is TiKV’s overall architecture:
 
 **Region:** Region is the smallest unit of data movement and it refers to the actual data extent in Store. Each Region has multiple replicas, each of which is placed in different Stores and these replicas make up a Raft group.
 
-**Raft**
+[Back to the top](#top)
+
+## <span id="raft">Raft</span>
 
 TiKV uses the Raft algorithm to implement the strong consistency of data in a distributed environment. For detailed information about Raft, please refer to the paper [In Search of an Understandable Consensus Algorithm](https://web.stanford.edu/~ouster/cgi-bin/papers/raft-atc14) and [the official website](https://raft.github.io/). Simply put, Raft is a model of replication log + State Machine. We can only write through a Leader and the Leader will replicate the command to its Followers in the form of log. When the majority of nodes in the cluster receive this log, this log has been committed and can be applied into the State Machine.
 
@@ -37,12 +49,11 @@ Note that how TiKV and etcd process membership change is different from what is 
 
 The Raft library is independent and users can directly embed it into their applications. What they need to do is to process storage and message sending. This article will briefly introduce how to use Raft and you can find the code under the directory of TiKV source code [/src/raft](https://github.com/pingcap/tikv/tree/master/src/raft).
 
-### Storage
+### <span id="storage">Storage</span>
 
 First of all, we need to define our Storage, which is mainly used for storing relevant data of Raft. Below is the trait definition:
 
 ```
-
 pub trait Storage {
 
     fn initial_state(&self) -> Result<RaftState>;
@@ -58,7 +69,6 @@ pub trait Storage {
     fn snapshot(&self) -> Result<Snapshot>;
 
 }
-
 ```
 
 We need to implement our Storage trait and I’ll elaborate on the implication of each interface:
@@ -80,7 +90,6 @@ pub struct RaftState {
 `HardState` and `ConfState` is protobuf defined as follows:
 
 ```
-
 message HardState {
 
 	optional unit64 term    = 1;
@@ -119,12 +128,13 @@ When calling relevant logic of Raft from outside, users need to handle the persi
 
 Note that the above Storage interface is just for Raft. But actually we also use this Storage to store data like Raft log and so we need to provide other interfaces, such as `MemStorage` in Raft [storage.rs](https://github.com/pingcap/tikv/blob/master/src/raft/storage.rs) for testing. You can refer to `MemStorage` to implement your Storage.
 
-### Config
+[Back to the top](#top)
+
+### <span id="config">Config</span>
 
 Before using Raft, we need to know some relevant configuration of Raft. Below are the items that need extra attention in Config:
 
 ```
-
 pub struct Config {
 
 	pub id: u64,
@@ -140,7 +150,6 @@ pub struct Config {
 	pub max_inflight_msgs: usize,
 
 }
-
 ```
 
 `id`: The unique identification of the Raft node. Within a Raft cluster, `id` has to be unique. Inside TiKV, the global uniqueness of `id` is guaranteed through PD.
@@ -157,13 +166,14 @@ pub struct Config {
 
 Here is the detailed implication of tick: TiKV’s Raft is timing-driven. Assume that we call the Raft tick once every 100ms and when we call the tick times of `headtbeat_tick`, the Leader will send heartbeats to its Follower.
 
-### RawNode
+[Back to the top](#top)
+
+### <span id="raw">RawNode</span>
 
 We use Raft through RawNode and below is its constructor:
 
 ```
 pub fn new(config: &Config, sotre: T, peers: &[peer]) -> Result<RawNode<T>>
-
 ```
 
 We need to define Raft’s Config and then pass an implemented Storage. The `peers` parameter is just used for testing and it will not be passed. After creating the `RawNode` object, we can use Raft. Below are some functions that we pay attention to:
@@ -187,7 +197,6 @@ We need to define Raft’s Config and then pass an implemented Storage. The `pee
 As for `RawNode`, we should emphasize the `ready` concept and below is its definition:
 
 ```
-
 pub struct Ready  {
 
 	pub ss: Option<SoftState>,
@@ -203,7 +212,6 @@ pub struct Ready  {
 	pub messages: Vec<Message>,	
 
 }
-
 ```
 
 `ss`: If `SoftState` has changes, such as adding or deleting a node, `ss` will not be empty.
@@ -234,3 +242,4 @@ When the outside finds that a `RawNode` has been ready and gets `Ready`, it will
 
 7. Call `advance` to inform Raft that `ready` has been processed.
 
+[Back to the top](#top)
