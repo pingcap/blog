@@ -1,6 +1,6 @@
 # TiDB blog
 
-- [Raft in TiKV](_posts/2017-07-28raftintikv.md)
+- [Raft in TiKV](_posts/2017-07-28-raftintikv.md)
 - [TiDB Internal (III) - Scheduling](_posts/2017-07-19-tidbinternal3.md)
 - [TiDB Internal (II) - Computing](_posts/2017-07-11-tidbinternal2.md)
 - [TiDB Internal (I) - Data Storage](_posts/2017-07-11-tidbinternal1.md)
