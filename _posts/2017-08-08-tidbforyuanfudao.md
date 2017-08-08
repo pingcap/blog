@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: How TiDB tackles fast data growth and complex queries for yuanfudao.com
