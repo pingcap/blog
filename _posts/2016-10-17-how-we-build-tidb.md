@@ -226,7 +226,7 @@ About TiKV architecture: Let&#39;s take a look from the bottom.
 - MVCC, Multiversion concurrency control. I believe many of you are pretty familiar with MVCC. TiKV is a multi-versioned database. MVCC enables us to support lock-free reads and ACID transactions.
 - Transaction: The transaction model is inspired by Google&#39;s Percolator. It&#39;s mainly a two-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign monotone increasing timestamp for each transaction, so the conflicts can be detected.  I will cover the details later.
 - KV API: it&#39;s a set of programming interfaces and allows developers to put or get data.
-- Placement Driver: Placement driver is a very important part, and it helps to achieve geo-replication, horizontal scalability and consisten distributed transactions. It&#39;s kind-of the brain of the cluster.
+- Placement Driver: Placement driver is a very important part, and it helps to achieve geo-replication, horizontal scalability and consistent distributed transactions. It&#39;s kind-of the brain of the cluster.
 
 ![]({{ site.baseurl }}/assets/img/how-we-build-tidb-4.png)
 
@@ -521,7 +521,7 @@ In this section, I will introduce how we are testing the system.
 - The test cases come from community. There are a lots of test cases in MySQL drivers/connectors, ORMs and applications.
 - Fault injection is performed on both hardware and software to increase the test coverage.
 - About the network, we simulate the latency, failure, partition to detect if there are bugs in our database when the network is not reliable.
-- We use Jepsen and Namazu to for distributed testing.
+- We use Jepsen and Namazu for distributed testing.
 
 [Back to the top](#top)
 
