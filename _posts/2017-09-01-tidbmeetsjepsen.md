@@ -1,7 +1,7 @@
 ---
 layout: post
 title: When TiDB Meets Jepsen
-excerpt: What happends when TiDB meets Jepsen?
+excerpt: What happens when TiDB meets Jepsen?
 ---
 
 - [What is Jepsen?](#what-is-jepsen)
