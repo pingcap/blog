@@ -32,7 +32,7 @@ This is the first of our series of articles.
 
 ### <span id="storingdata">Storing data</span>
 
-![]({{ site.baseurl }}/assets/img/database.jpg)
+![]({{ site.baseurl }}/assets/img/database.png)
 
 I’d like to begin with the most fundamental function of a database -- storing data.
 There are lots of ways to store data and the easiest one is building a data structure in the memory to store data sent by users. For example, use an array to store data and add a new entry to the array when receiving a piece of data. This solution is simple, meets the basic needs and has good performance. But its drawback outweighs the advantages. The biggest problem is that as all data is stored in the memory, if the server stops or restarts, data would get lost.
@@ -114,7 +114,7 @@ Now let’s move to the second task. TiKV replicates data in Regions, which mean
 
 The following diagram shows the whole picture about Region and Raft group.
 
-![]({{ site.baseurl }}/assets/img/raft-region.png)
+ ![]({{ site.baseurl }}/assets/img/raft-region.png)
  
 As we distribute and replicate data in Regions, we have a distributed Key-Value system that, to some extent, has the capability of disaster recovery. You no longer need to worry about the capacity or the problem of data loss caused by disk failure. This is cool but not perfect. We need more functions.
 
