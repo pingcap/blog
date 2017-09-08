@@ -11,7 +11,7 @@ Let’s introduce some necessary knowledge about RocksDB first.
 
 RocksDB is a log structured database engine. All writes are append-only, and every write is assigned a globally increasing sequence number to distinguish it.
 
-Let’s use (key,sequence,entry_type) to denote an entry in RocksDB. If we put "a", “b”, and “c”, RocksDB will append three PUT entries to the disk: (a,1,PUT),(b,2,PUT),(c,3,PUT). If we put it in a table, it goes like this:
+Let’s use `(key,sequence,entry_type)` to denote an entry in RocksDB. If we put "a", “b”, and “c”, RocksDB will append three PUT entries to the disk: `(a,1,PUT),(b,2,PUT),(c,3,PUT)`. If we put it in a table, it goes like this:
 
 <table>
   <tr>
@@ -36,7 +36,7 @@ Let’s use (key,sequence,entry_type) to denote an entry in RocksDB. If we put "
   </tr>
 </table>
 
-If we delete "c", RocksDB will not erase the (c,3,PUT) entry in place, but append a DELETE entry: (c,4,DELETE) instead, so the table becomes:
+If we delete "c", RocksDB will not erase the `(c,3,PUT)` entry in place, but append a DELETE entry: `(c,4,DELETE)` instead, so the table becomes:
 
 <table>
   <tr>
@@ -66,7 +66,7 @@ If we delete "c", RocksDB will not erase the (c,3,PUT) entry in place, but appen
   </tr>
 </table>
 
-Then if we try to get "c", RocksDB will encounter entry (c,4,DELETE) first and return that “c” is not found.
+Then if we try to get "c", RocksDB will encounter entry `(c,4,DELETE)` first and return that “c” is not found.
 
 Of course, RocksDB cannot keep all the entries forever. It needs to compact and drop old entries when necessary. RocksDB organizes entries into SST (Sorted String Table) files, we can think of an SST as a big sorted array of key-value pairs in the disk, and SST files will be compacted into different levels later.
 
@@ -78,7 +78,7 @@ Well, that’s an overly simplified introduction to RocksDB, but enough to go on
 
 ## DeleteRange
 
-Now we know how to delete a key in RocksDB, but what if we want to delete a range of keys? For example, if we want to delete keys in a range [a,c), we can first scan keys in [a,c), which are "a" and “b” in the above example, and delete them one by one. The result of the above example will be:
+Now we know how to delete a key in RocksDB, but what if we want to delete a range of keys? For example, if we want to delete keys in a range `[a,c)`, we can first scan keys in `[a,c)`, which are "a" and “b” in the above example, and delete them one by one. The result of the above example will be:
 
 ```
 (a,1,PUT),(b,2,PUT),(c,3,PUT),(c,4,DELETE),(a,5,DELETE),(b,6,DELETE)
@@ -125,10 +125,9 @@ In the table, it looks like:
 That’s how we delete a range in TiKV now, for example, to drop a table or destroy a replica. It’s easy, but has two drawbacks:
 
 1. A replica can contain a lot of keys, it’s costly to scan them all
-
 2. Deleting all keys appends a lot of delete entries. So as you can see, deleting data can result in more data temporarily (before compaction), and more IO amplification.
 
-Let’s see how the DeleteRange feature from RocksDB comes to rescue. In the above example, instead of scanning range [a,c) and delete "a" and “b” separately, we just append a DeleteRange entry ([a,c),5,DELETE_RANGE), which results in:
+Let’s see how the DeleteRange feature from RocksDB comes to rescue. In the above example, instead of scanning range `[a,c)` and delete "a" and “b” separately, we just append a DeleteRange entry `([a,c),5,DELETE_RANGE)`, which results in:
 
 ```
 (a,1,PUT),(b,2,PUT),(c,3,PUT),(c,4,DELETE),([a,c),5,DELETE_RANGE)
@@ -233,9 +232,7 @@ RocksDB plays a significant role in TiKV, thanks for the support from the RocksD
 ### Lessons learned:
 
 1. Protect your crime scene well. Some bugs are hard to reproduce, so seize every opportunity.
-
 2. Collect more evidence before diving into the details. It’s inefficient to hunt with no clear direction. What’s worse is that it’s easy to go too deep in a wrong direction.
-
 3. It’s important to test new features (especially those with high risks) carefully under different conditions, some bugs rarely happen but can be destructive. Time tries truth.
 
 
