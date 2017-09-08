@@ -4,7 +4,7 @@ title: Futures and gRPC in Rust
 excerpt: This is the speech Tang Liu gave at Bay Area Rust Meetup August 2017.
 ---
 
-This is the speech Tang Liu gave at Bay Area Rust Meetup August 2017. [See the video](https://air.mozilla.org/bay-area-rust-meetup-august-2017/). 
+This is the speech Tang Liu (tl@pingcap.com) gave at the Bay Area Rust Meetup August 2017. [See the video](https://air.mozilla.org/bay-area-rust-meetup-august-2017/). 
 
 <!-- TOC -->
 
@@ -52,15 +52,15 @@ So this is what I am going to talk about today. I will first discuss Async brief
 
 ## Async Programming
 
+Let’s begin. About Async.
+
 ### Why not Sync?
 
-Let’s begin. About Async. 
-
-The first thing is why not sync. As we all know, the sync programming is easier. If the load of your service is low, using sync may be better. You just need to start some threads to handle the concurrence. 
+The first thing is why not Sync. As we all know, the Sync programming is easier. If the load of your service is low, using Sync may be better. You just need to start some threads to handle the concurrence. 
 
 ![]({{ site.baseurl }}/assets/img/why-not-sync.png)
 
-But if we want to support a high performance service, such as a database, sync is not enough. Sync I/O can block the execution, which reduces the performance. Although we can use threads, thread is heavy and wastes system resources. What’s more, frequent thread switching is inefficient and causes the performance to reduce seriously.
+But if we want to support a high performance service, such as a database, Sync is not enough. Sync I/O can block the execution, which reduces the performance. Although we can use threads, thread is heavy and wastes system resources. What’s more, frequent thread switching is inefficient and causes the performance to reduce seriously.
 
 ### Why Async?
 
@@ -83,13 +83,13 @@ do_async_foo() {
 })
 ```
 
-Sometimes, we have to use the callback mechanism to handle the I/O or other asynchronous notifications, and may sink into the callback hell, like this, oh, so many callbacks.
+Sometimes, we have to use the callback mechanism to handle the I/O or other asynchronous notifications, and may sink into the callback hell, like this. Oh, so many callbacks.
 
 #### Coroutine Makes it Easy
 
 ![]({{ site.baseurl }}/assets/img/coroutine-makes-it-easy.png)
 
-Of course, if we have to write code like this, it might drive us crazy. Luckily, we have at least two ways to bypass it. First it is the coroutine. 
+Of course, if we have to write code like this, it might drive us crazy. Luckily, we have at least two ways to bypass it. First, it is the coroutine. 
 
 Coroutine is a lightweight thread which is supported in many languages. Like the boost coroutine library, WebChat libco library in C plus plus, yield and greenlet in Python, and of course, goroutine in Go. 
 
@@ -144,7 +144,7 @@ We must implement the poll for our customized future. The poll can return `NotRe
 
 **Future Example**
 
-Here are some very simple future examples. For the `ok` future, wait will return `Ready`, the result is `1`; for the `empty` future, the poll will return `NotReady`.
+Here are some very simple future examples. For the `ok` future, `wait` will return `Ready`, the result is `1`; for the `empty` future, `poll` will return `NotReady`.
 
 ```rust
 let f = ok::<u32, u32>(1);
@@ -167,11 +167,11 @@ let (_, next) = f1.select(f2).wait().ok().unwrap();
 assert_eq!(next.wait().unwrap(), 2);
 ```
 
-For example, we can use the `ok` future plus map combinator, the end result is `2`. We can use `select` to wait for two futures, if either future is ready, the `select` future is finished and returns the result plus a next future to be resolved later. 
+For example, we can use the `ok` future plus map combinator, and the end result is `2`. We can use `select` to wait for two futures. If either future is ready, the `select` future is finished and returns the result plus a next future to be resolved later. 
 
 ### Synchronization
 
-The future library supplies two synchronization channels. One-shot is for SPSC and channel is for MPSC, both can be used for communication cross threads. 
+The future library provides two synchronization channels. One-shot is for SPSC and channel is for MPSC. Both can be used for communication cross threads. 
 
 ![]({{ site.baseurl }}/assets/img/synchronization.png)
 
@@ -190,7 +190,7 @@ pub trait Stream {
 }
 ```
 
-If the poll of the stream returns Ready Some, it means you can still get the next value of the stream. If Ready None is returned, it means the stream is finished and you can never poll the stream again.
+If the poll of the stream returns `Ready Some`, it means you can still get the next value of the stream. If `Ready None` is returned, it means the stream is finished and you can never poll the stream again.
 
 ### Sink
 
@@ -232,11 +232,11 @@ That’s all about the Rust futures for today.
 
 Now let’s talk about gRPC. 
 
-If you want to develop a service, the first thing you need to decide is how the client communicates with your service. You may implement your own protocol and RPC, although it is efficient, it is not common. You may also use RESTful API based on HTTP protocol directly, but if you care about high performance and need to provide many APIs, it is not convenient.
+If you want to develop a service, the first thing you need to decide is how the client communicates with your service. You may implement your own protocol and RPC. Although it is efficient, it is not common. You may also use RESTful API based on HTTP protocol directly, but if you care about high performance and need to provide many APIs, it is not convenient.
 
 ### Why gRPC?
 
-Now, many users choose gRPC, a widely used RPC framework developed by Google. The gRPC is supported by many languages, users can communicate with your service with their favorite languages easily. The gRPC uses protocol buffer for serializing and de-serializing the binary data efficiently. The gRPC has rich interfaces, you can use unary, client streaming, server streaming and duplex streaming for your own case. The gRPC is based on HTTP/2, so you can get many benefits, for example, you can use SSL of HTTP/2 for data encryption. 
+Now, many users choose gRPC, a widely used RPC framework developed by Google. The gRPC is supported by many languages. Users can communicate with your service with their favorite languages easily. The gRPC uses protocol buffer for serializing and de-serializing the binary data efficiently. The gRPC has rich interfaces, and you can use unary, client streaming, server streaming and duplex streaming for your own case. The gRPC is based on HTTP/2, so you can get many benefits. For example, you can use SSL of HTTP/2 for data encryption. 
 
 ### HTTP/2
 
@@ -244,7 +244,7 @@ The gRPC is based on HTTP/2. Unlike HTTP/1, which uses a text protocol, HTTP/2 i
 
 In HTTP/1, if we send a request, we must wait for the response and then send the next request again on the same connection. This is not efficient. But HTTP/2 uses stream to support multiplexing in one connection. 
 
-HTTP/2 also supports priority, so we can serve the important request first. HTTP/2 supports control flow, we can control how and when to send data if possible. HTTP/2 uses HPACK to compress the HTTP header, to reduce the network transferred size. 
+HTTP/2 also supports priority, so we can serve the important request first. HTTP/2 supports control flow. We can control how and when to send data if possible. HTTP/2 uses HPACK to compress the HTTP header, to reduce the network transferred size. 
 
 ### gRPC based on HTTP/2
 
@@ -254,7 +254,7 @@ That’s a brief introduction of gRPC. Let’s go on.
 
 ## Combine Futures and gRPC
 
-There are many gRPC implementations in different languages. Unfortunately, no one available for Rust in production. But we really want to use gRPC in TiKV, so we decide to implement it by ourselves. 
+There are many gRPC implementations in different languages. Unfortunately, no one is available for Rust in production. But we really want to use gRPC in TiKV, so we decide to implement it by ourselves. 
 
 ### C gRPC Keywords
 
@@ -278,7 +278,7 @@ Here is a pseudo flow for client unary when we use C API.
 - **Poll** completion queue to perform the call and return the event contains a **tag**
 - Use tag to do something...
 
-First, we create the completion queue, then create a channel with the client and server. Then we create a call from the channel, and start a batch of operations of the call with an associated tag. We poll the completion queue and get the event if the call is finished, then we get the associated tag from the event and do something.
+First, we create the completion queue, then create a channel with the client and server. Then we create a call from the channel, and start a batch of operations of the call with an associated tag. We poll the completion queue and get the event if the call is finished. Then we get the associated tag from the event and do something.
 
 As you can see, the flow is asynchronous, so we can use future to wrap gRPC C API and support an ergonomic API for outside use.
 
@@ -317,6 +317,7 @@ For client streaming, client sends many requests and receives a single response,
 ![]({{ site.baseurl }}/assets/img/client-streaming.png)
 
 Client:
+
 ```rust
 let (sink, future) = client_streaming(service, method);
 sink = sink.send(request).wait().unwrap();
@@ -328,6 +329,7 @@ let response = future.wait();
 So for the client side, we return a sink plus a future, and use sink to send a request, and use future to wait for the response.
 
 Server Handler:
+
 ```rust
 fn on_client_streaming(context, request_stream, response_sink) {
 	context.spawn(||{
@@ -366,11 +368,11 @@ fn on_server_streaming(context, request, response_sink) {
 }
 ```
 
-So for the client side, we return a stream to recv the response, and for the server side, we use a sink to send the response back.
+So for the client side, we return a stream to recv the response. And for the server side, we use a sink to send the response back.
 
 ### Duplex Streaming
 
-For duplex streaming, client and server can both send many requests and responses.
+For duplex streaming, both the client and server can send many requests and responses.
 
 ![]({{ site.baseurl }}/assets/img/duplex-streaming.png)
 
@@ -393,7 +395,7 @@ fn on_duplex_streaming(context, request_stream, response_sink) {
 }
 ```
 
-So for the client side, we return a sink plus stream, and for the server side, we also use a stream and a sink.
+So for the client side, we return a sink plus stream. And for the server side, we also use a stream and a sink.
 
 ## Unary Future Implementation
 
@@ -468,9 +470,10 @@ Using future to support gRPC is very efficient. We have done many benchmarks. Yo
 
 Now we have already used gRPC in TiKV in production for a long time. It works well. If you want to try it, please check github.com/pingcap/grpc-rs. You can also use cargo to install grpcio.
 
-**We’re hiring!** (Beijing / Shanghai / Guangzhou / Bay area)
+**We’re hiring!** (Beijing / Shanghai / Guangzhou / Bay area)  
+Email: tl@pingcap.com
 
-That’s all. Thank you very much.
+That's all. Thank you very much.
 
 
 
