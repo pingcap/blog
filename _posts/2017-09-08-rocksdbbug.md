@@ -6,7 +6,7 @@ excerpt: Data was corrupted. A cluster panicked. The crime scene was compromised
 
 <span id="top"></span>
 
-Data was corrupted. A cluster panicked. The crime scene was compromised. What happened? Detective Huang went all lengths to locate the criminal and solved it once and for all.
+Data was corrupted. A cluster panicked. The crime scene was compromised. What happened? Detective Huang (huachao@pingcap.com) went all lengths to locate the criminal and solved it once and for all.
 
 ## Background
 As a distributed open source HTAP database, [TiDB](https://github.com/pingcap/tidb) uses [TiKV](https://github.com/pingcap/tikv) as its storage engine. Inside TiKV, we use RocksDB as the local storage. RocksDB is a great project. It's mature, fast, tunable, and widely used in very large scale production environments. We have been working very closely with the RocksDB team. Recently, we found a bug in the DeleteRange feature in RocksDB.
