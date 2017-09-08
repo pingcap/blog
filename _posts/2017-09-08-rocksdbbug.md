@@ -1,13 +1,15 @@
 ---
 layout: post
-title: How We Track Down a DeleteRange BUG in RocksDB
-excerpt: Data was being lost. A cluster panicked. The crime scene was compromised. What happened? Detective Huang went all lengths to locate the criminal and nailed it once and for all.
+title: How we Hunted a Data Corruption bug in RocksDB
+excerpt: Data was corrupted. A cluster panicked. The crime scene was compromised. What happened? Detective Huang went all lengths to locate the criminal and nailed it once and for all.
 ---
 
 <span id="top"></span>
-## Background
 
-Let’s introduce some necessary knowledge about RocksDB first.
+## Background
+As a distributed open source HTAP database, [TiDB](https://github.com/pingcap/tidb) uses [TiKV](https://github.com/pingcap/tikv) as its storage engine. Inside TiKV, we use RocksDB as the local storage. RocksDB is a great project. It's mature, fast, tunable, and widely used in very large scale production environments. We have been working very closely with the RocksDB team. Recently, we found a bug in the DeleteRange feature in RocksDB.
+
+Before we begin, let’s introduce some basic knowledge about RocksDB first.
 
 RocksDB is a log structured database engine. All writes are append-only, and every write is assigned a globally increasing sequence number to distinguish it.
 
