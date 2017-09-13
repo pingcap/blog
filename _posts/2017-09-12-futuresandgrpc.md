@@ -113,7 +113,7 @@ You can wait the future to be finished, and multiple futures can be combined int
 
 So what about futures in Rust?  
 
-In Rust, future has already been supported by Alex. Thanks, Alex!  
+In Rust, future has already been supported by [Alex](https://github.com/alexcrichton). Thanks, Alex!  
 
 Based on the Rust trait, the future is zero cost, which means that you don’t need to do extra heap allocation or dynamic dispatch. Future is easy to use, you can combine many futures into a chain, and use the combinator like an Iterator API.   
 
@@ -469,8 +469,5 @@ Using future to support gRPC is very efficient. We have done many benchmarks. Yo
 ## Misc
 
 Now we have already used gRPC in TiKV in production for a long time. It works well. If you want to try it, please check github.com/pingcap/grpc-rs. You can also use cargo to install grpcio.
-
-**We’re hiring!** (Beijing / Shanghai / Guangzhou / Bay area)  
-Email: tl@pingcap.com
 
 That's all. Thank you very much.
