@@ -303,7 +303,7 @@ Server Handler:
 fn on_unary(context, request, response_sink) {
 	context.spawn(|| {
 		// do something with request
-		response_sink,send(response)
+		response_sink.send(response)
 	});
 }
 ```
