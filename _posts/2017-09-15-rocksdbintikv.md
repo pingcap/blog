@@ -4,22 +4,25 @@ title: RocksDB in TiKV
 excerpt: This is the speech Tang Liu gave at the RocksDB meetup on August 28, 2017.
 ---
 
-This is the speech Tang Liu gave at the [RocksDB meetup](https://www.meetup.com/RocksDB/events/242226234/) on August 28, 2017.
 <span id="top"><span>
+
+This is the speech Tang Liu gave at the [RocksDB meetup](https://www.meetup.com/RocksDB/events/242226234/) on August 28, 2017.
+
 <!-- TOC -->
 
 - [Speaker Introduction](#speaker-introduction)
 - [Agenda](#agenda)
 - [Why did we choose RocksDB?](#why-did-we-choose-rocksdb)
-- [TiKV Architecture](#tikv-architecture)
-- [Region](#region)
-- [Raft](#raft)
-- [InsertWithHint](#insertwithhint)
-- [Prefix Iterator](#prefix-iterator)
-- [Table Property for Region Split Check](#table-property-for-region-split-check)
-- [Table Property for GC Check](#table-property-for-gc-check)
-- [Ingest the SST File](#ingest-the-sst-file)
-- [Others](#others)
+- [How are we using RocksDB?](#how-are-we-using-rocksdb)
+    - [TiKV Architecture](#tikv-architecture)
+    - [Region](#region)
+    - [Raft](#raft)
+    - [InsertWithHint](#insertwithhint)
+    - [Prefix Iterator](#prefix-iterator)
+    - [Table Property for Region Split Check](#table-property-for-region-split-check)
+    - [Table Property for GC Check](#table-property-for-gc-check)
+    - [Ingest the SST File](#ingest-the-sst-file)
+    - [Others](#others)
 - [How are we contributing?](#how-are-we-contributing)
 - [Future Plans](#future-plans)
 
@@ -61,7 +64,9 @@ OK, let’s begin. Why did we decided to use RocksDB instead of LevelDB, WiredTi
 
 [Back to the top](#top)
 
-## TiKV Architecture
+## How are we using RocksDB?
+
+### TiKV Architecture
 
 After we decided to use RocksDB, the next question is how to use it in TiKV. Let me start with the TiKV architecture briefly.
 
@@ -69,13 +74,13 @@ After we decided to use RocksDB, the next question is how to use it in TiKV. Let
 
 First of all, all data in a TiKV node shares two RocksDB instances. One is for data, and the other is for Raft log. 
 
-## Region
+### Region
 
 Region is a logical concept: it covers a range of data. Each region has several replicas, residing on multiple machines. All these replicas form a Raft group.
 
 ![Region]({{ site.baseurl }}/assets/img/tikvarchiregion.png)
 
-## Raft
+### Raft
 
 TiKV uses the [Raft consensus algorithm](https://raft.github.io/) to replicate data, so for every write request, we will first write the request to the Raft log, after the log is committed, we will apply the Raft log and write the data. 
 
@@ -83,7 +88,7 @@ TiKV uses the [Raft consensus algorithm](https://raft.github.io/) to replicate d
 
 The key format for our Raft log saved in RocksDB is: region ID plus log ID, the log ID is monotonically increased. 
 
-## InsertWithHint
+### InsertWithHint
 
 ![InsertWithHint]({{ site.baseurl }}/assets/img/InsertWithHint.png)
 
@@ -95,13 +100,13 @@ The version is embedded in the key as a suffix, and used for ACID transaction su
 
 [Back to the top](#top)
 
-## Prefix Iterator
+### Prefix Iterator
 
 ![Prefix Iterator]({{ site.baseurl }}/assets/img/prefixiterator.png)
 
 As you can see, we save the key with a timestamp suffix, but can only seek the key without the timestamp, so we set a prefix extractor and enable the memtable bloom filter, which helps us improve the read performance by ten percent at least. 
 
-## Table Property for Region Split Check
+### Table Property for Region Split Check
 
 ![Table Property for Region Split Check]({{ site.baseurl }}/assets/img/splitcheck.png)
 
@@ -113,7 +118,7 @@ Scanning a region has a high I/O cost, so now, we use table properties instead. 
 
 Although the final calculated total size is approximate, it is more effective, we can avoid the useless scan to reduce the I/O cost.
 
-## Table Property for GC Check
+### Table Property for GC Check
 
 ![Table Property for GC Check]({{ site.baseurl }}/assets/img/tablecheck.png)
 
@@ -127,7 +132,7 @@ For example, if we find the minimal timestamp in the table property is bigger th
 
 [Back to the top](#top)
 
-## Ingest the SST File
+### Ingest the SST File
 
 ![Ingest the SST File]({{ site.baseurl }}/assets/img/ingest.png)
 
@@ -135,7 +140,7 @@ And in our previous implementation, if we wanted to do bulk load, we must scan a
 
 As you can see, this flow is very slow and can cause high pressure in RocksDB. So now, we use the `IngestFile` feature instead. At first, we scan the key-values and save them to an SST file, then we ingest the SST file directly. 
 
-## Others
+### Others
 
 ![Others]({{ site.baseurl }}/assets/img/others.png)
 
