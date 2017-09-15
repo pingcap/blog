@@ -5,6 +5,26 @@ excerpt: This is the speech Tang Liu gave at the RocksDB meetup on August 28, 20
 ---
 
 This is the speech Tang Liu gave at the [RocksDB meetup](https://www.meetup.com/RocksDB/events/242226234/) on August 28, 2017.
+<span id="top"><span>
+<!-- TOC -->
+
+- [RocksDB in TiKV](#rocksdb-in-tikv)
+    - [Speaker Introduction](#speaker-introduction)
+    - [Agenda](#agenda)
+    - [Why did we choose RocksDB?](#why-did-we-choose-rocksdb)
+    - [TiKV Architecture](#tikv-architecture)
+    - [Region](#region)
+    - [Raft](#raft)
+    - [InsertWithHint](#insertwithhint)
+    - [Prefix Iterator](#prefix-iterator)
+    - [Table Property for Region Split Check](#table-property-for-region-split-check)
+    - [Table Property for GC Check](#table-property-for-gc-check)
+    - [Ingest the SST File](#ingest-the-sst-file)
+    - [Others](#others)
+    - [How are we contributing?](#how-are-we-contributing)
+    - [Future Plans](#future-plans)
+
+<!-- /TOC -->
 
 # RocksDB in TiKV
 
@@ -42,6 +62,8 @@ OK, let’s begin. Why did we decided to use RocksDB instead of LevelDB, WiredTi
 
 * What’s more, RocksDB has an very active community. If we have questions, we can easily ask for help. Many RocksDB team members and us are even WeChat (a very popular IM tool in China) friends, we can talk to each other directly.
 
+[Back to the top](#top)
+
 ## TiKV Architecture
 
 After we decided to use RocksDB, the next question is how to use it in TiKV. Let me start with the TiKV architecture briefly.
@@ -74,6 +96,8 @@ We will append every new Raft log to the region. For example, we first append lo
 
 The version is embedded in the key as a suffix, and used for ACID transaction support. But transaction management is not our topic today, so I just skip it.
 
+[Back to the top](#top)
+
 ## Prefix Iterator
 
 ![Prefix Iterator]({{ site.baseurl }}/assets/img/prefixiterator.png)
@@ -103,6 +127,8 @@ However, since we only need to do GC before a specified safe point, and most key
 So we create an MVCC property collector to collect the version information, including the maximum and minimum timestamp, the row number and version number. Then every time before scanning a range, we can check these properties to see if we can skip the GC procedure or not. 
 
 For example, if we find the minimal timestamp in the table property is bigger than the safe point, we can immediately skip scanning the range. 
+
+[Back to the top](#top)
 
 ## Ingest the SST File
 
@@ -146,3 +172,4 @@ In the future, we are planning DeleteRange API, which is a very useful for us. B
 
 And we will try to use BLOB DB when it’s stable. On the other hand, we will also try different memtable types to speed up the insert performance, and use partitioned indexes and filters for SATA disks. 
 
+[Back to the top](#top)
