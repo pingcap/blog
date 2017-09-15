@@ -8,25 +8,22 @@ This is the speech Tang Liu gave at the [RocksDB meetup](https://www.meetup.com/
 <span id="top"><span>
 <!-- TOC -->
 
-- [RocksDB in TiKV](#rocksdb-in-tikv)
-    - [Speaker Introduction](#speaker-introduction)
-    - [Agenda](#agenda)
-    - [Why did we choose RocksDB?](#why-did-we-choose-rocksdb)
-    - [TiKV Architecture](#tikv-architecture)
-    - [Region](#region)
-    - [Raft](#raft)
-    - [InsertWithHint](#insertwithhint)
-    - [Prefix Iterator](#prefix-iterator)
-    - [Table Property for Region Split Check](#table-property-for-region-split-check)
-    - [Table Property for GC Check](#table-property-for-gc-check)
-    - [Ingest the SST File](#ingest-the-sst-file)
-    - [Others](#others)
-    - [How are we contributing?](#how-are-we-contributing)
-    - [Future Plans](#future-plans)
+- [Speaker Introduction](#speaker-introduction)
+- [Agenda](#agenda)
+- [Why did we choose RocksDB?](#why-did-we-choose-rocksdb)
+- [TiKV Architecture](#tikv-architecture)
+- [Region](#region)
+- [Raft](#raft)
+- [InsertWithHint](#insertwithhint)
+- [Prefix Iterator](#prefix-iterator)
+- [Table Property for Region Split Check](#table-property-for-region-split-check)
+- [Table Property for GC Check](#table-property-for-gc-check)
+- [Ingest the SST File](#ingest-the-sst-file)
+- [Others](#others)
+- [How are we contributing?](#how-are-we-contributing)
+- [Future Plans](#future-plans)
 
 <!-- /TOC -->
-
-# RocksDB in TiKV
 
 ## Speaker Introduction
 
