@@ -51,8 +51,8 @@ Last week, we landed [63 PRs](https://github.com/pingcap/tidb/pulls?utf8=%E2%9C%
 ## Weekly update in TiSpark
 
 ## Fixed
-* Fix the [Region client] error in handling for store no match and leader switch (https://github.com/pingcap/tikv-client-lib-java/pull/105)
-* Fix an issue in [PD Client] leader switch (https://github.com/pingcap/tikv-client-lib-java/pull/107)
+* Fix the [Region client](https://github.com/pingcap/tikv-client-lib-java/pull/105) error in handling for store no match and leader switch.
+* Fix an issue in [PD Client](https://github.com/pingcap/tikv-client-lib-java/pull/107) leader switch.
 
 ## Weekly update in TiKV
 
