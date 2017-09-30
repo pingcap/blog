@@ -1,541 +1,293 @@
 ---
 layout: post
-title: How we build TiDB
-excerpt: This is the speech Max Liu gave at Percona Live Open Source Database Conference 2016.
+title: A Deep Dive into TiKV
+excerpt: This document introduces how TiKV works as a Key-Value database.
 ---
+<span id="top"><span>
 
-<span id="top">This is the speech Max Liu gave at **Percona Live Open Source Database Conference 2016**. </span>
+# Table of Content
+- [About TiKV](#about-tikv)
+- [Architecture](#architecture)
+- [Protocol](#protocol)
+- [Raft](#raft)
+- [Placement Driver (PD)](#placement-driver)
+- [Transaction](#transaction)
+- [Coprocessor](#coprocessor)
+- [Key processes analysis](#key-processes-analysis)
+	- [Key-Value operation](#key-value-operation)
+	- [Membership Change](#membership-change)
+	- [Split](#split)
 
-The slides are [here](https://www.percona.com/live/plam16/sessions/how-we-build-tidb).
+# About TiKV
 
+TiKV (The pronunciation is: /'ta?ke?vi:/ tai-K-V, etymology: titanium) is a distributed Key-Value database which is based on the design of Google Spanner, F1, and HBase, but it is much simpler without dependency on any distributed file system. 
 
-+ [Speaker introduction](#1)
-+ [Why another database?](#2)
-+ [What to build?](#3)
-+ [How to design?](#4)
-	+ [The principles or the philosophy](#5)
-		+ [Disaster recovery](#6)
-		+ [Easy to use](#7)
-		+ [The community and ecosystem](#8)
-	+ [Loose coupling ? the logical architecture](#9)
-	+ [The alternatives](#10)
-+ [How to develop](#11)
-	+ [The architecture](#12)
-	+ [TiKV core technologies](#13)
-		+ [TiKV software stack](#14)
-		+ [Placement Driver](#15)
-		+ [Raft](#16)
-		+ [MVCC](#17)
-		+ [Transaction](#18)
-	+ [TiDB core technologies](#19)
-		+ [Mapping table data to Key-Value store](#20)
-		+ [Predicate push-down](#21)
-		+ [Schema changes](#22)
-+ [How to test?](#23)
-+ [The future plan](#24)
+# Architecture
 
-## <span id="1">Speaker introduction</span>
+![]({{ site.baseurl }}/assets/img/TiKV_ Architecture.png)
 
-First, about me. I am an infrastructure engineer and I am also the CEO of PingCAP. Currently, my team and I are working on two open source projects: TiDB and TiKV. Ti is short for Titanium, which is a chemical element known for its corrosion resistance and it is widely used in high-end technologies.
+* Placement Driver (PD): PD is the brain of the TiKV system which manages the metadata about Nodes, Stores, Regions mapping, and makes decisions for data placement and load balancing. PD periodically checks replication constraints to balance load and data automatically.
 
-So today we will cover the following topics:
+* Node: A physical node in the cluster. Within each node, there are one or more Stores. Within each Store, there are many Regions.
 
-- Why another database?
-- What kind of database we want to build?
-- How to design such a database, including the principles, the architecture, and design decisions?
-- How to develop such a database, including the architecture and the core technologies for TiKV and TiDB?
-- How to test the database to ensure the quality and stability?
+* Store: There is a RocksDB within each Store and it stores data in local disks.
 
-[Back to the top](#top)
+* Region: Region is the basic unit of Key-Value data movement and corresponds to a data range in a Store. Each Region is replicated to multiple Nodes. These multiple replicas form a Raft group. A replica of a Region is called a Peer.
 
-## <span id="2">Why another database</span>
+# Protocol
 
-Before we start, let&#39;s go back to the very beginning and ask yourself a question: Why another database. We all know that there are many databases, such as the traditional Relational database and NoSQL. So why another one?
+TiKV uses the [Protocol Buffer](https://developers.google.com/protocol-buffers/) protocol for interactions among different components. Because Rust doesn?t support [gRPC](http://www.grpc.io/) for the time being, we use our own protocol in the following format:
 
-- Relational databases like MySQL, Oracle, PostgreSQL, etcetera: they are very difficult to scale. Even though we have sharding solutions, YouTube/vitess, MySQL proxy, but none of them supports distributed transactions and cross-node join.
-- NoSQL like HBase, MongoDB, and Cassandra: They scale well, but they don&#39;t support SQL and consistent transactions.
-- NewSQL, represented by Google Spanner and F1, which is as scalable as NoSQL systems and it maintains the ACID transactions. That&#39;s exactly what we need. Inspired by Spanner and F1, we are making a NewSQL database. Of course, it&#39;s open source.
+```
+Message: Header + Payload 
 
-[Back to the top](#top)
+Header: | 0xdaf4(2 bytes magic value) | 0x01(version 2 bytes) | msg\_len(4 bytes) | msg\_id(8 bytes) |
+```
 
-## <span id="3">What to build?</span>
 
-So we are building a NewSQL database with the following features:
+The data of Protocol Buffer is stored in the Payload part of the message. At the Network level, we will first read the 16-byte Header. According to the message length (`msg_len`) information in the Header, we calculate the actual length of the message, and then read the corresponding data and decode it.
 
-- First of all, it supports SQL. We have been using SQL for decades and many of our applications are using SQL. We cannot just give it up.
-- Second, it must be very easy to scale. You can easily increase the capacity or balance the load by adding more machines.
-- Third, it supports ACID transaction, which is one of the key features of relational database. With a strong consistency guarantee, developers can write correct logic with less code.
-- Last, it is highly available in case of machine failures or even downtime of an entire data center. And it can recover automatically.
+The interaction protocol of TiKV is in the  [`kvproto`](https://github.com/pingcap/kvproto) project and the protocol to support push-down is in the [`tipb`](https://github.com/pingcap/tipb) project. Here, let?s focused on the `kvproto` project only. 
 
-In short, we want to build a distributed, consistent, scalable, SQL Database. We name it TiDB.
+About the protocol files in the `kvproto` project:
 
-[Back to the top](#top)
+* `msgpb.proto`: All the protocol interactions are in the same message structure. When a message is received, we will handle the message according to its `MessageType`.
+* `metapb.proto`: To define the public metadata for Store, Region, Peer, etc.
+* `raftpb.proto`: For the internal use of Raft. It is ported from etcd and needs to be consistent with etcd.
+* `raft_serverpb.proto`: For the interactions among the Raft nodes.
+* `raft_cmdpb.proto`: The actual command executed when Raft applies.
+* `pdpb.proto`: The protocol for the interaction between TiKV and PD.
+* `kvrpcpb.proto`: The Key-Value protocol that supports transactions.
+* `mvccpb.proto`: For internal Multi-Version Concurrency Control (MVCC).
+* `coprocessor.proto`: To support the Push-Down operations.
 
-## <span id="4">How to design?</span>
+There are following ways for external applications to connect to TiKV:
 
-Now we have a clear picture of what kind of database we want to build, the next step is how, how to design it, how to develop it and how to test it. In the next few slides, I am going to talk about how to design TiDB.
+* For the simple Key-Value features only, implement `raft_cmdpb.proto`.
+* For the Transactional Key-Value features, implement `kvrpcpb.proto`.
+* For the Push-Down features, implement `coprocessor.proto`. See [tipb](https://github.com/pingcap/tipb) for detailed push-down protocol.
 
-In this section, I will introduce how we design TiDB, including the principles, the architecture and design decisions.
+[Back to the Top](#top)
 
-[Back to the top](#top)
+# Raft
 
-## <span id="5">The principles or the philosophy</span>
+TiKV uses the Raft algorithm to ensure the data consistency in the distributed systems. For more information, see [https://raft.github.io/](https://raft.github.io/).
 
-Before we design, we have several principles or philosophy in mind:
+The Raft in TiKV is completely migrated from etcd. We chose etcd Raft because it is very simple to implement, very easy to migrate and it is production proven.
 
-- TiDB must be user-oriented.
-  - It must ensure that no data is ever lost and the system can automatically recover from machine failures or even downtime of the entire datacenters.
-  - It should be easy to use.
-  - It should be cross-platform and can run on any environment, no matter it&#39;s on premise, cloud or container.
-  - As an open source project, we are dedicated to being an important part of the big community through our active engagement, contribution and collaboration.
-- We need TiDB to be easy to maintain so we chose the loose coupling approach. We design the database to be highly layered with a SQL layer and a Key-Value layer. If there is a bug in SQL layer, we can just update the SQL layer.
-- The alternatives: Although our project is inspired by Google Spanner and F1, we are different from those projects. When we design TiDB and TiKV, we have our own practices and decisions in choosing different technologies.
+The Raft implementation in TiKV can be used independently. You can apply it in your project directly.
 
-[Back to the top](#top)
+See the following details about how to use Raft:
 
-### <span id="6">Disaster recovery</span>
+1. Define its own storage and implement the Raft Storage trait. See the following Storage trait interface:
 
-The first and foremost design principle is to build a database where no data is lost. To ensure the safety of the data, we found that multiple replicas are just not enough and we still need to keep Binlog in both the SQL layer and the Key-Value layer. And of course, we must make sure that we always have a backup in case the entire cluster crashes.
+```rust
+    // initial_state returns the information about HardState and ConfState in Storage
+    fn initial_state(&self) -> Result<RaftState>;
+    
+    // return the log entries in the [low, high] range
+    fn entries(&self, low: u64, high: u64, max_size: u64) -> Result<Vec<Entry>>;
+    
+    // get the term of the log entry according to the corresponding log index
+    fn term(&self, idx: u64) -> Result<u64>;
+    
+    // get the index from the first log entry at the current position
+    fn first_index(&self) -> Result<u64>;
+    
+    // get the index from the last log entry at the current position
+    fn last_index(&self) -> Result<u64>;
+    
+    // generate a current snapshot
+    fn snapshot(&self) -> Result<Snapshot>;
+```
 
-[Back to the top](#top)
+2. Create a raw node object and pass the corresponding configuration and customized storage instance to the object. About the configuration, we need to pay attention to `election_tick` and `heartbeat_tick`. Some of the Raft logics step by periodical ticks. For every Tick, the Leader will decide if the frequency of the heartbeat elapsing exceeds the frequency of the `heartbeat_tick`. If it does, the Leader will send heartbeats to the Followers and reset the elapse. For a Follower, if the frequency of the election elapsing exceeds the frequency of the `election_tick`, the Follower will initiate an election. 
 
-### <span id="7">Easy to use</span>
+3. After a raw node is created, the tick interface of the raw node will be called periodically (like every 100ms) and drives the internal Raft Step function. 
 
-The second design principle is about the usability. After years of struggling among different workarounds and trade-offs, we are fully aware of the pain points of the users. So when it comes to us to design a database, we are going to make it easy to use and there should be no scary sharding keys, no partition, no explicit handmade local index or global index, and making scale transparent to the users.
+4. If data is to be written by Raft, the Propose interface is called directly. The parameters of the Propose interface is an arbitrary binary data which means that Raft doesn?t care the exact data content that is replicated by it. It is completely up to the external logics as how to handle the data.
 
-[Back to the top](#top)
+5. If it is to process the membership changes, the `propose_conf_change` interface of the raw node can be called to send a ConfChange object to add/remove a certain node.
 
-### Cross-platform
+6. After the functions in the raw node like Tick and Propose of the raw node are called, Raft will initiate a Ready state. Here are some details of the Ready state:
 
-The database we are building also needs to be cross-platform. The database can run on the on premise devices. Here is a picture of TiDB running on a Raspberry Pi cluster with 20 nodes.
+    There are three parts in the Ready state:
 
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-1.png)
+    + The part that needs to be stored in Raft storage, which are entries, hard state and snapshot.
+    + The part that needs to be sent to other Raft nodes, which are messages.
+    + The part that needs to be applied to other state machines, which are committed_entries.
 
-It can also support the popular containers such as Docker. And we are making it work with Kubernetes. Of course, it can be run on any cloud platform, whether it&#39;s public, private or hybrid.
 
-[Back to the top](#top)
+After handling the Ready status, the Advance function needs be called to inform Raft of the next Ready process.
 
-### <span id="8">The community and ecosystem</span>
+In TiKV, Raft is used through [mio](https://github.com/carllerche/mio) as in the following process:
 
-The next design principle is about the community and ecosystem. We want to stand on the shoulders of the giants instead of creating something new and scary. TiDB supports MySQL protocol and is compatible with most of the MySQL drivers (ODBC, JDBC) and SQL syntax, MySQL clients and ORM, and the following MySQL management tools and bench tools.
+1. Register a base Raft tick timer (usually 100ms). Every time the timer timeouts, the Tick of the raw node is called and the timer is re-registered.
 
-[Back to the top](#top)
+2. Receive the external commands through the notify function in mio and call the Propose or the `propose_conf_change` interface.
 
-#### etcd
+3. Decide if a Raft is ready in the mio tick callback (**Note:** The mio tick is called at the end of each event loop, which is different from the Raft tick.). If it is ready,  proceed with the Ready process.
 
-etcd is a great project. In our Key-Value store, TiKV, which I will dive deep into later, we have been working with the etcd team very closely. We share the Raft implementation, and we do code reviews on Raft module for each other.
+In the descriptions above, we covered how to use one Raft only. But in TiKV, we have multiple Raft groups. These Raft groups are independent to each other and therefore can be processed following the same approach. 
 
-[Back to the top](#top)
+In TiKV, each Raft group corresponds to a Region. At the very beginning, there is only one Region in TiKV which is in charge of the range (-inf, +inf). As more data comes in and the Region reaches its threshold (64 MB currently), the Region is split into two Regions. Because all the data in TiKV are sorted according to the key, it is very convenient to choose a Split Key to split the Region. See [Split](#split) for the detailed splitting process.
 
-#### RocksDB
+Of course, where there is Split, there is Merge. If there are very few data in two adjacent Regions, these two regions can merge to one big Region. Region Merge is in the TiKV roadmap but it is not implemented yet.
 
-RocksDB is also a great project. It&#39;s mature, fast, tunable, and widely used in very large scale production environments, especially in facebook . TiKV uses RocksDB as it&#39;s local storage. While we were testing it in our system, we found some bugs. The RocksDB team fixed those bugs very quickly.
+[Back to the Top](#top)
 
-[Back to the top](#top)
+# Placement Driver
 
-#### Namazu
+Placement Driver (PD) is in charge of the managing and scheduling of the whole TiKV cluster. It is a central service and we have to ensure that it is highly available and stable.
 
-A few months ago, we need a tool to simulate slow, unstable disk, and the team member found Namazu. But at that time, Namazu didn&#39;t support hooking fsync. When the team member raised this request to their team, they responded immediately and implement the feature in just a few hours and they are very open to implement other features as well. We are deeply impressed by their responsiveness and their efficiency.
+The first issue to be resolved is the single point of failure of PD. Our solution is to start multiple PD servers. These servers elect a Leader through the election mechanism in etcd and the leader provides services to the outside. If the leader is down, there will be another election to elect a new leader to provide services.
 
-[Back to the top](#top)
+The second issue is the consistency of the data stored in PD. If one PD is down, how to ensure that the new elected PD has the consistent data? This is also resolved by putting PD data in etcd. Because etcd is a distributed consistent Key-Value store, it helps us ensure the consistency of the data stored in it. When the new PD is started, it only needs to load data from etcd.
 
-#### Rust community
+At first, we used the independent external etcd service, but now we have embedded PD in etcd, which means, PD itself is an etcd. The embedment makes it simpler to deploy because there is one service less. The embedment also makes it more convenient for PD and etcd to customize and therefore improve the performance. 
 
-The Rust community is amazing. Besides the good developing experience of using Rust, we also build the Prometheus driver in Rust to collect the metrics.
+The current functions of PD are as follows:
 
-We are so glad to be a part of this great family. So many thanks to the Rust team, gRPC, Prometheus and Grafana.
+1. The Timestamp Oracle (TSO) service: to provide the globally unique timestamp for TiDB to implement distributed transactions.
 
-[Back to the top](#top)
+2. The generation of the globally unique ID: to enable TiKV to generate the unique IDs for new Regions and Stores.
 
-#### Spark connector
+3. TiKV cluster auto-balance: In TiKV, the basic data movement unit is Region, so the PD auto-balance is to balance Region automatically. There are two ways to trigger the scheduling of a Region:
 
-We are using the Spark connector in TiDB. TiDB is great for small or medium queries and Spark is better for complex queries with lots of data. We believe we can learn a lot from the Spark community too, and of course we would like to contribute as much as possible.
+    1). The heartbeat triggering: Regions report the current state to PD periodically. If PD finds that there are not enough or too much replicas in one Region, PD informs this Region to initiate membership change.
 
-So overall, we&#39;d like to be a part of the big open source community and would like to engage, contribute and collaborate to build great things together.
+    2). The regular triggering: PD checks if the whole system needs scheduling on a regular bases. If PD finds out that there is not enough space on a certain Store or that there are too many leader Regions on a certain Store and the load is too high, PD will select a Region from the Store and move the replicas to another Store.
+    
+[Back to the Top](#top)
 
-[Back to the top](#top)
+# Transaction
 
-## <span id="9">Loose coupling ? the logical architecture</span>
+The transaction model in TiKV is inspired by [Google Percolator](http://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/36726.pdf) and [Themis from Xiaomi](https://github.com/XiaoMi/themis) with the following optimizations:
 
-This diagram shows the logical architecture of the database.
+1. For a system that is similar to Percolator, there needs to be a globally unique time service, which is called Timestamp Oracle (TSO), to allocate a monotonic increasing timestamp. The functions of TSO are provided in PD in TiKV. The generation of TSO in PD is purely memory operations and stores the TSO information in etcd on a regular base to ensure that TSO is still  monotonic increasing even after PD restarts.
 
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-2.png)
+2. Compared with Percolator where the information such as Lock is stored by adding extra column to a specific row, TiKV uses a column family (CF) in RocksDB to handle all the information related to Lock. For massive data, there aren?t many row Locks for simultaneous transactions. So the Lock processing speed can be improved significantly by placing it in an extra and optimized CF.
 
-As I mentioned earlier about our design principle, we are adopting the loose coupling approach. From the diagram, we can see that it is highly-layered. We have TiDB to work as the MySQL server, and TiKV to work as the distributed Key-Value layer. Inside TiDB, we have the MySQL Server layer and the SQL layer. Inside TiKV, we have transaction, MVCC, Raft, and the Local Key-Value Storage, RocksDB.
+3. Another advantage about using an extra CF is that we can easily clean up the remaining Locks. If the Lock of a row is acquired by a transaction but is not cleaned up because of crashed threads or other reasons, and there are no more following-up transactions to visit this Lock, the Lock is left behind. We can easily discover and clean up these Locks by scanning the CF.
 
-For TiKV, we are using Raft to ensure the data consistency and the horizontal scalability. Raft is a consensus algorithm that equals to Paxos in fault-tolerance and performance. Our implementation is ported from etcd, which is widely used, very well tested and highly stable. I will cover the technical details later.
+The implementation of the distributed transaction depends on the TSO service and the client that encapsulates corresponding transactional algorithm which is implemented in TiDB. The monotonic increasing timestamp can set the time series for concurrent transactions and the external clients can act as a coordinator to resolve the conflicts and unexpected terminations of the transactions.
 
-From the architecture, you can also see that we don&#39;t have a distributed file system. We are using RocksDB as the local store.
+Let?s see how a transaction is executed:
 
-[Back to the top](#top)
+1. The transaction starts. When the transaction starts, the client must obtain the current timestamp (startTS) from TSO. Because TSO guarantees the monotonic increasing of the timestamp, startTS can be used to identify the time series of the transaction.
 
-## <span id="10">The alternatives</span>
+2. The transaction is in progress. During a transaction, all the read operations must carry `startTS` while they send RPC requests to TiKV and TiKV uses MVCC to make sure to return the data that is written before `startTS`. For the write operations, TiKV uses optimistic concurrency control which means the actual data is cached on the clients rather than written to the servers assuming that the current transaction doesn?t affect other transactions.  
 
-In the next few slides, I am going to talk about design decisions about using the alternative technologies compared with Spanner and F1, as well as the pros and cons of these alternatives.
+3. The transaction commits. TiKV uses a 2-phase commit algorithm. Its difference from the common 2-phase commit is that there is no independent transaction manager. The commit state of a transaction is identified by the commit state of the `PrimaryKey` which is selected from one of the to-be-committed keys.
 
-[Back to the top](#top)
+    1). During the `Prewrite` phase, the client submits the data that is to be written to multiple TiKV servers. When the data is stored in a server, the server sets the corresponding Key as Locked and records the the PrimaryKey of the transaction. If there is any writing conflict on any of the nodes, the transaction aborts and rolls back.
 
-#### Atomic clocks / GPS clocks VS TimeStamp Allocator
+    2). When `Prewrite` finishes, a new timestamp is obtained from TSO and is set as commitTS.
 
-If you&#39;ve read the Spanner paper, you might know that Spanner has TrueTime API, which uses the atomic clocks and GPS receivers to keep the time consistent between different data centers.
+    3). During the Commit phase, requests are sent to the TiKV servers with `PrimaryKey`. The process of how TiKV handles commit is to clean up the Locks from the PrimaryKey phase and write corresponding commit records with commitTS. When the `PrimaryKey` commit finishes, the transaction is committed. The Locks that remain on other Keys can get the commit state and the corresponding commitTS by retrieving the state of the `Primarykey`. But in order to reduce the cost of cleaning up Locks afterwards, the practical practice is to submit all the Keys that are involved in the transaction asynchronously on the backend.
+    
+[Back to the Top](#top)
 
-The first alternative technology we chose is to replace the TrueTime API with the TimeStamp Allocator. It goes without any doubt that time is important and that Real time is vital in distributed systems. But can we get real time? What about clock drift?
+# Coprocessor 
 
-The sad truth is that we can&#39;t get real time precisely because of clock drift, even if we use GPS or Atomic Clocks.
+Similar to HBase, TiKV provides the Coprocessor support. But for the time being, Coprocessor cannot be dynamically loaded, it has to be statically compiled to the code. 
 
-In TiDB, we don&#39;t have Atomic clocks and GPS clocks. We are using the Timestamp Allocator introduced in Percolator, a paper published by Google in 2006.
+Currently, the Coprocessor in TiKV is mainly used in two situations, Split and push-down, both to serve TiDB.
 
-The pros of using the Timestamp Allocator are its easy implementation and no dependency on any hardware. The disadvantage lies in that if there are multiple datacenters, especially if these DCs are geologically distributed, the latency is really high.
+1. For Split, before the Region split requests are truly proposed, the split key needs to be checked if it is legal. For example, for a Row in TiDB, there are many versions of it in TiKV, such as V1, V2, and V3, V3 being the latest version. Assuming that V2 is the selected split key, then the data of the Row might be split to two different Regions, which means the data in the Row cannot be handled atomically. Therefore, the Split Coprocessor will adjust the split key to V1. In this way, the data in this Row is still in the same Region during the splitting. 
 
-[Back to the top](#top)
+2. For push-down, the Coprocessor is used to improve the performance of TiDB. For some operations like select count(*), there is no need for TiDB to get data from row to row first and then count. The quicker way is that TiDB pushes down these operations to the corresponding TiKV nodes, the TiKV nodes do the computing and then TiDB consolidates the final results.
 
-#### Distributed file system VS RocksDB
+Let?s take an example of `select count(*) from t1` to show how a complete push-down process works:
 
-Spanner uses Colossus File System, the successor to the Google File System (GFS), as its distributed file system. But in TiKV, we don&#39;t depend on any distributed file system. We use RocksDB. RocksDB is an embeddable persistent key-value store for fast storage. The primary design point for RocksDB is its great performance for server workloads. It&#39;s easy for tuning Read, Write and Space Amplification. The pros lie in that it&#39;s very simple, very fast and easy to tune. However, it&#39;s not easy to work with Kubernetes properly.
+1. After TiDB parses the SQL statement, based on the range of the t1 table, TiDB finds out that all the data of t1 are in Region 1 and Region 2 on TiKV, so TiDB sends the push-down commands to Region 1 and Region 2.
 
-[Back to the top](#top)
+2. After Region 1 and Region 2 receive the push-down commands, they get a snapshot of their data separately by using the Raft process. 
 
-#### Paxos VS Raft
+3. Region 1 and Region 2 traverse their snapshots to get the corresponding data and and calculate `count()`. 
 
-The next choice we have made is to use the Raft consensus algorithm instead of Paxos. The key features of Raft are: Strong leader, leader election and membership changes. Our Raft implementation is ported from etcd. The pros are that it&#39;s easy to understand and implement, widely used and very well tested. As for Cons, I didn&#39;t see any real cons.
+4. Each Region returns the result of `count()` to TiDB and TiDB consolidates and outputs the total result.
 
-[Back to the top](#top)
+[Back to the Top](#top)
 
-#### C++ VS Go &amp; Rust
+# Key processes analysis
 
-As for the programming languages, we are using Go for TiDB and Rust for TiKV. We chose Go because it&#39;s very good for fast development and concurrency, and Rust for high quality and performance. As for the Cons, there are not as many third-party libraries.
+## Key-Value operation
 
-That&#39;s all about how we design TiDB. I have introduced the principles, the architecture, and design decisions about using the alternative technologies. The next step is to develop TiDB.
+When a request of Get or Put is sent to TiKV, how does TiKV process it?
 
-[Back to the top](#top)
+As mentioned earlier, TiKV provides features such as simple Key-Value, transactional Key-Value and push-down. But no matter it?s transactional Key-Value or push-down, it will be transformed to simple Key-Value operations in TiKV. Therefore, let?s take an example of simple Key-Value operations to show how TiKV processes a request. As for how TiKV implements transaction Key-Value and push-down support, let?s cover that later.
 
-## <span id="11">How to develop</span>
+Let?s take `Put` as an example to show how a complete Key-Value process works:
 
-In this section, I will introduce the architecture and the core technologies for TiKV and TiDB.
+1. The client sends a `Put` command to TiKV, such as `put k1 v1`. First, the client gets the Region ID for the k1 key and the leader of the Region peers from PD. Second, the client sends the Put request to the corresponding TiKV node.
 
-[Back to the top](#top)
+2. After the TiKV server receives the request, it notifies the internal RaftStore thread through the mio channel and takes a callback function with it.
 
-## <span id="12">The architecture</span>
+3. When the `RaftStore` thread receives the request, first it checks if the request is legal including if the request is a legal epoch. If the request is legal and the peer is the Leader of the Region, the RaftStore thread encodes the request to be a binary array, calls Propose and begins the Raft process.
 
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-3.png)
+4. At the stage of handle ready, the newly generated entry will be first appended to the Raft log and sent to other followers at the same time.
 
-About TiKV architecture: Let&#39;s take a look from the bottom.
+5. When the majority of the nodes of the Region have appended the entry to the log, the entry is committed. In the following Ready process, the entry can be obtained from the `committed_entries`, then decoded and the corresponding command can be executed. This is how the `put k1 v1` command is executed in RocksDB.
 
-- The bottom layer, RocksDB.
-- The next layer, Raft KV, it&#39;s a distributed layer.
-- MVCC, Multiversion concurrency control. I believe many of you are pretty familiar with MVCC. TiKV is a multi-versioned database. MVCC enables us to support lock-free reads and ACID transactions.
-- Transaction: The transaction model is inspired by Google&#39;s Percolator. It&#39;s mainly a two-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign monotone increasing timestamp for each transaction, so the conflicts can be detected.  I will cover the details later.
-- KV API: it&#39;s a set of programming interfaces and allows developers to put or get data.
-- Placement Driver: Placement driver is a very important part, and it helps to achieve geo-replication, horizontal scalability and consistent distributed transactions. It&#39;s kind-of the brain of the cluster.
+6. When the entry log is applied by the leader, the callback of the entry will be called and return the response to the client.
 
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-4.png)
+The same process also applies to Get, which means all the requests are not processed until they are replicated to the majority of the nodes by Raft. Of course, this is also to ensure the data linearizability in distributed systems.
 
-About the TiDB architecture:
+Of course, we will optimize the reading requests for better performance in the following aspects:
 
-- MySQL clients: The top layer is a set of MySQL clients. These clients send requests to the next layer. You can still use any MySQL driver that you are already familiar with.
-- Load Balancer: This is an optional layer. Such as HAProxy or LVS.
-- TiDB Server: It&#39;s stateless, and a client may connect to any TiDB server. Within the TiDB server, the top layer is MySQL Protocol, it provides MySQL protocol support; the next layer is SQL optimizer, which is used to translate MySQL requests to TiDB SQL plan.
-- The bottom layer is KV API and Distributed SQL API. If the lower level storage engine supports coprocessor, TiDB SQL Layer will use DistSQL API, which is much more efficient than KV API. TiDB supports pluggable storage engines. We recommend TiKV as the default storage engine.
+1. Introduce lease into the Leader. Within the lease, we can assume that the Leader is valid so that the Leader can provide the read service directly and there will be no need to go through Raft replicated log.
 
-[Back to the top](#top)
+2. The Follower provides the read service.
 
-## <span id="13">TiKV core technologies</span>
+These optimizations are mentioned in the Raft paper and they have been supported by etcd. We will introduce them into TiKV as well in the future.
 
-Let&#39;s take a look at the TiKV core technologies.
+[Back to the Top](#top)
 
-We build TiKV to be a distributed key-value layer to store data.
+## Membership Change
 
-[Back to the top](#top)
+To ensure the data safety, there are multiple replicas on different stores. Each replica is another replica?s Peer. If there aren?t enough replicas for a certain Region, we will add new replicas; on the contrary, if the numbers of the replicas for a certain Region exceeds the threshold, we will remove some replicas.
 
-### <span id="14"> TiKV software stack</span>
+In TiKV, the change of the Region replicas are completed by the Raft Membership Change. But how and when a Region changes its membership is scheduled by PD. Let?s take adding a Replica as an example to show how the whole process works:
 
-Let&#39;s take a look at the software stack.
+1. A Region sends heartbeats to PD regularly. The heartbeats include the relative information about this Region, such as the information of the peers.
 
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-5.png)
+2. When PD receives the heartbeats, it will check if the number of the replicas of this Region is consistent with the setup. Assuming there are only two replicas in this Region but it?s three replicas in the setup, PD will find an appropriate Store and return the ChangePeer command to the Region.
 
- First, we can see that there is a client connecting to TiKV. We also have several nodes. And within each node, we have stores, one per physical disk. Within each store, we have many regions. Region is the basic unit of data movement and is replicated by Raft. Each region is replicated to several nodes.  A Raft group consists of the replicas of one Region. And region is more like a logical concept, in a single store, many regions may share the same Rocksdb instance.
- 
-[Back to the top](#top)
+3. After the Region receives the ChangePeer command, if it finds it necessary to add replica to another Store, it will submit a ChangePeer request through the Raft process. When the log is applied, the new peer information will be updated in the Region meta and then the Membership Change completes. 
 
-### <span id="15">Placement Driver</span>
+It should be noted that even if the Membership Change completes, it only means that the Replica information is added to the meta by the Region. Later if the Leader finds that if there is no data in the new Follower, it will send snapshot to it.
 
-About Placement Driver, this concept comes from the original paper of Google Spanner. It provides the God&#39;s view of the entire cluster. It has the following responsibilities:
+It should also be noted that the Membership Change implementation in TiKV and etcd is different from what?s in the Raft paper. In the Raft paper, if a new peer is added, it is added to the Region meta at the Propose command. But to simplify, TiKV and etcd don?t add the peer information to the Region meta until the log is applied.
 
-- Stores the metadata: Clients have cache of the placement information of each region.
-- Maintains the replication constraint, 3 replicas by default.
-- Handles the data movement to balance the workload automatically.  When placement driver notices that the load is too high, it will rebalance the data or transfer the leadership by using Raft
+[Back to the Top](#top)
 
-And thanks to Raft, within itself, Placement Driver is a cluster too and it is also highly available.
+## Split
 
-[Back to the top](#top)
+At the very beginning, there is only one Region. As data grows, the Region needs to be split. 
 
-### <span id="16">Raft</span>
+Within TiKV, if a Region splits, there will be two new Regions, which we call them the Left Region and the Right Region. The Left Region will use all the IDs of the old Region. We can assume that the Region just changes its range. The Right Region will get a new ID through PD. Here is a simple example:
 
-In TiKV, we use the Raft for scaling and replication. We have multiple Raft groups. Workload is distributed among multiple regions. There could be millions of regions in one big cluster. Once a region is too large, it will be split into two smaller regions, just like cell division.
+```
+Region 1 [a, c) -> Region 1 [a, b) + Region 2 [b, c)
+```
 
-In the next few slides, I will show you the scaling-out process.
+The original range of Region 1 is [a, c). After splitting at the b point, the Left Region is still Region 1 but the range is now [a, b). The Right Region is a new Region, Region 2, and its range is [b, c).
 
-[Back to the top](#top)
+Assuming the base size of Region 1 is 64MB. A complete spit process is as follows:
 
-#### Scale-out
+1. In a given period of time, if the accumulated size of the data in Region 1 exceeds the threshold (8MB for example), Region 1 notifies the split checker to check Region 1.
 
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-6.png)
+2. The split checker scans Region 1 sequentially. When it finds that the accumulated size of a certain key exceeds 64MB, it will keep a record of this key and make it the split key. Meanwhile, the split checker continues scanning and if it finds that the accumulated size of a certain key exceeds the threshold (96 MB for example), it considers this Region could split and notifies the RaftStore thread.
 
-In this diagram, we have 4 nodes, namely Node A, Node B, Node C, and Node D. And we have 3 regions, Region 1, Region 2 and Region 3. We can see that there are 3 regions on Node A.
+3. When the RaftStore thread receives the message, it sends the AskSplit command to PD and requests PD to assign a new ID for the newly generated PD, Region 2, for example.
 
-To balance the data, we add a new node, Node E. The first step we do is to transfer the leadership from the replica of Region 1 on Node A to the replica on Node B.
+4. When the ID is generated in PD, an Admin SplitRequest will be generated and sent to the RaftSore thread.
 
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-7.png)
+5. Before RaftStore proposes the Admin SplitRequest, the Coprocessor will pre-process the command and decide if the split key is appropriate. If the split key is not appropriate, the Coprocessor will adjust the split key to an appropriate one.
 
-Step 2, we add a Replica of Region 1 to Node E.
+6. The Split request is submitted through the Raft process and then applied. For TiKV, the splitting of a Region is to change the range of the original Region and then create another Region. All these changes involves only the change of the Region meta, the real data under the hood is not moved, so it is very fast for Region to split in TiKV.
 
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-8.png)
+7. When the Splitting completes, TiKV sends the latest information about the Left Region and Right Region to PD.
 
-Step 3, remove the replica of Region 1 from Node A.
-
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-9.png)
-
-Now the data is balanced and the cluster scales out from 4 nodes to 5 nodes.
-
-This is how TiKV scales out. Let&#39;s see how it handles auto-failover.
-
-[Back to the top](#top)
-
-### <span id="17">MVCC</span>
-
-- Each transaction sees a snapshot of the database at the beginning time of this transaction. Any changes made by this transaction will not be seen by other transactions until the transaction is committed.
-- Data is tagged with versions in the following format: Key\_version: value.
-- MVCC also ensures Lock-free snapshot reads.
-
-[Back to the top](#top)
-
-### <span id="18">Transaction</span>
-
-These are Transaction APIs. As a programmer, I want to write code like this:
-
-txn := store.Begin() // start a transaction
-
-txn.Set([]byte(&quot;key1&quot;), []byte(&quot;value1&quot;))
-
-txn.Set([]byte(&quot;key2&quot;), []byte(&quot;value2&quot;))
-
-err = txn.Commit() // commit transaction
-
-if err != nil {
-
-txn.Rollback()
-
-}
-
-Speak of Transaction, It&#39;s mainly a two-phase commit protocol with some practical optimizations. In the transaction model, there are 3 column families, namely, cf:lock, cf:write and cf:data.
-
-- cf: lock:  An uncommitted transaction is writing this cell and contains the location/pointer of primary lock. For each transaction, we choose a primary lock to indicate the state of the transaction.
-- cf: write: It stores the commit timestamp of the data
-- cf: data: Stores the data itself
-
-Let&#39;s see an example: If Bob wants transfer 7 dollars to Joe.
-
-1. Initial state: Joe has 2 dollars in his account, Bob has 10 dollars.
-	![]({{ site.baseurl }}/assets/img/how-we-build-tidb-10.png)
-
-2. The transfer transaction begins by locking Bob&#39;s account by writing the lock column. This lock is the primary for the transaction. The transaction also writes data at its start timestamp, 7.
-
-	![]({{ site.baseurl }}/assets/img/how-we-build-tidb-11.png)
-
-3. The transaction now locks Joe&#39;s account and writes Joe&#39;s new balance. The lock is secondary for the transaction and contains a reference to the primary lock; So we can use this secondary lock to find the primary lock.
-
-	![]({{ site.baseurl }}/assets/img/how-we-build-tidb-12.png)
-
-4. The transaction has now reached the commit point: it erases the primary lock and replaces it with a write record at a new timestamp (called the commit timestamp): 8. The write record contains a pointer to the timestamp where the data is stored. Future readers of the column &quot;bal&quot; in row &quot;Bob&quot; will see the value $3.
-
-	![]({{ site.baseurl }}/assets/img/how-we-build-tidb-13.png)
-
-5. The transaction completes by adding write records and deleting locks at the secondary cells. In this case, there is only one secondary: Joe.
-
-	![]({{ site.baseurl }}/assets/img/how-we-build-tidb-14.png)
-
-	So this is how it looks like when the transaction is done.
-
-	![]({{ site.baseurl }}/assets/img/how-we-build-tidb-15.png)
-
-[Back to the top](#top)
-
-## <span id="19">TiDB core technologies</span>
-
-That&#39;s it about the TiKV core technologies. Let&#39;s move on to TiDB.
-
-TiDB has a protocol layer that is compatible with MySQL. And it will do the following things:
-
-- Mapping table data to Key-Value store to connect to the key-value storage engine.
-- Predicate push-down, to accelerate queries
-- Online DDL
-
-[Back to the top](#top)
-
-### <span id="20">Mapping table data to Key-Value store</span>
-
-Let&#39;s use an example to show how a SQL table is mapped to Key-Value pairs.
-
-If we have a simple user table in database. It has 2 rows and 3 columns: user id, name and email. And user id is the primary key.
-
-INSERT INTO user VALUES (1, &quot;bob&quot;, &quot;huang@pingcap.com&quot;);
-
-INSERT INTO user VALUES (2, &quot;tom&quot;, &quot;tom@pingcap.com&quot;);
-
-If we map this table to key-value pairs, it should be put in the following way.
-
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-16.png)
-
-Of course, TiDB supports secondary index. It&#39;s a global index. TiDB puts data and index updates into the same transaction, so all the indexes in TiDB are transactional and fully consistent. And it&#39;s transparent to the users.
-
-Indexes are just key-value pairs that the values point to the row key. After we create indexes for the user name, the key-value storage looks like this:
-
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-17.png)
-
-The key of the index consists of two parts: the name and the user id as the suffix. So here &quot;bob&quot; is the name, and 1 is the user id, and the value points to the row key.
-
-[Back to the top](#top)
-
-### <span id="21">Predicate push-down</span>
-
-For some operations like count some columns in a table, TiDB pushes down these operations to the corresponding TiKV nodes, the TiKV nodes do the computing and then TiDB merges the final results. This diagram shows the process of a simple predicate push-down.
-
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-18.png)
-
-[Back to the top](#top)
-
-### <span id="22">Schema changes</span>
-
-This slide is about schema changes. Why online schema change is a must-have feature? It&#39;s because we need the full data availability all the time and minimal performance impact so that the ops people can have a good-night&#39;s sleep.
-
-[Back to the top](#top)
-
-#### Something the same as Google F1
-
-The main features of TiDB that impact schema changes are:
-
-- Distributed
-  - An instance of TiDB consists of many individual TiDB servers
-- Relational schema
-  -  Each TiDB server has a copy of a relational schema that describes tables, columns, indexes, and constraints.
-  - Any modification to the schema requires a distributed schema change to update all servers.
-- Shared data storage
-  - All TiDB servers in all datacenters have access to all data stored in TiKV.
-  - There is no partitioning of data among TiDB servers.
-- No global membership
-  - Because TiDB servers are stateless, there is no need for TiDB to implement a global membership protocol.This means there is no reliable mechanism to determine currently running TiDB servers, and explicit global synchronization is not possible.
-
-[Back to the top](#top)
-
-#### Something different from Google F1
-
-But TiDB is also different from Google F1 at the following aspects:
-
-- TiDB speaks MySQL protocol
-- The statements inside of a single transaction cannot cross different TiDB servers
-
-[Back to the top](#top)
-
-#### One more thing before schema change
-
-One more thing before schema change. Let&#39;s take a look at the big picture of SQL in TiDB:
-
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-19.png)
-
-Here is an overview of a TiDB instance during a schema change:
-
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-20.png)
-
-[Back to the top](#top)
-
-#### Schema change: Adding index
-
-So let&#39;s see how the schema changes when it comes to adding an index.
-
-Servers using different schema versions may corrupt the database if we are not careful.
-
-Consider a schema change from schema S1 to schema S2 that adds index I on table T. Assume two different servers, M1 and M2, execute the following sequence of operations:
-
-1. Server M2, using schema S2, inserts a new row r to table T. Because S2 contains index I, server M2 also adds a new index entry corresponding to r to the key?value store.
-
-2. Server M1, using schema S1, deletes r. Because S1 does not contain I, M1 removes r from the key?value store but fails to remove the corresponding index entry in I.
-
-The second delete corrupts the database. For example, an index-only scan would return incorrect results that include column values for the deleted row r.
-
-[Back to the top](#top)
-
-#### Schema states
-
-Basically schema changes is a multiple state multiple phase protocol. There are two states which we consider to be non-intermediate: absent and public.
-
-There are two internal, intermediate states: delete-only and write-only
-
-Delete-only: A delete-only table, column, or index cannot have their key?value pairs read by user transactions and
-
-1. If E is a table or column, it can be modified only by the delete operations.
-
-2. If E is an index, it is modified only by the delete and update operations. Moreover, the update operations can delete key?value pairs corresponding to updated index keys, but they cannot create any new one.
-
-For the write-only state, it is defined for columns and indexes as follows:
-
-A write-only column or index can have their key?value pairs modified by the insert, delete, and update operations, but none of their pairs can be read by user transactions.
-
-[Back to the top](#top)
-
-#### Schema change flow: Add index
-
-There are 4 steps to add an index.
-
-Step 1, we mark the state to delete-only, wait for one schema lease, after all of the TiDB servers reach the same state, we move to
-
-Step 2, mark the state as write-only, wait for one schema lease,
-
-Step 3, mark the state as Fill Index and we start a mapreduce job to fill the index. After finishing the index filling job, we wait for one schema lease,
-
-then Step 4,  switch to the final state where all of the new queries can use the newly added index.
-
-[Back to the top](#top)
-
-#### TiDB: status of Adding index (delete-only)
-
-Here is one of the screenshots for adding an index.
-
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-21.png)
-
-We can use any MySQL client to query the status of the online DDL job. Just simply run the &quot;show status&quot; statement and we can see that the current state is &quot;delete-only&quot; as I highlighted and that the action is &quot;add index&quot;. There is some other information such as who is doing the DDL job, the state of the current job and the current schema version.
-
-[Back to the top](#top)
-
-#### TiDB: status of Adding index (add index)
-
-This screenshot shows that the current state is &quot;write reorganization&quot; as I highlighted.
-
-![]({{ site.baseurl }}/assets/img/how-we-build-tidb-22.png)
-
-[Back to the top](#top)
-
-## <span id="23">How to test?</span>
-
-In this section, I will introduce how we are testing the system.
-
-- The test cases come from community. There are a lots of test cases in MySQL drivers/connectors, ORMs and applications.
-- Fault injection is performed on both hardware and software to increase the test coverage.
-- About the network, we simulate the latency, failure, partition to detect if there are bugs in our database when the network is not reliable.
-- We use Jepsen and Namazu for distributed testing.
-
-[Back to the top](#top)
-
-## <span id="24">The future plan</span>
-
-Here is our future plan:
-
-- We are planning to use GPS and Atomic clocks in the future.
-- We are improving our query optimizer to get better and faster query results.
-- We will improve the compatibility with MySQL.
-- The supports for the JSON and document storage types are also on our roadmap.
-- We are planning to support pushing down more aggregation and built-in functions.
-- In the future, we will replace the customized RPC implementation with gRPC.
-
-So that&#39;s all. Thank you! Any Questions?
-
-[Back to the top](#top)
+[Back to the Top](#top)
