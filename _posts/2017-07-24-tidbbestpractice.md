@@ -76,7 +76,7 @@ PD will automatically balance the load of the cluster according to the state of 
 
 ### <span id="sql">SQL on Key-Value</span>
 
-TiDB automatically maps the SQL structure into Key-Value structure. For more information, please refer to Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/). Simply put, TiDB has done two things:
+TiDB automatically maps the SQL structure into Key-Value structure. For more information, please refer to [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/). Simply put, TiDB has done two things:
 
 + A row of data is mapped to a Key-Value pair. Key is prefixed with TableID and suffixed with row ID.
 
