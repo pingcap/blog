@@ -12,7 +12,7 @@ In the current database landscape, infrastructure engineers often have to use on
 
 *"Two and a half years ago, Edward, Dylan and I started this journey to build a new database for an old problem that has long plagued the infrastructure software industry. Today, we are proud to announce that this database, TiDB, is production ready,"* said Max Liu, co-founder and CEO of PingCAP. *“Abraham Lincoln once said, ‘the best way to predict the future is to create it.’ The future we predicted 771 days ago we now have created, because of the hard work and dedication of not just every member of our team, but also every contributor, user, and partner in our open source community. Today, we celebrate and pay gratitude to the power of the open source spirit. Tomorrow, we will continue to create the future we believe in.”*
 
-TiDB has already been deployed in production in more than 30 companies in the APAC region, including fast-growing Internet companies like [Mobike](https://en.wikipedia.org/wiki/Mobike), [Gaea Mobile](http://www.gaea.com/en/), and [YOUZU](http://www.yoozoo.com/aboutEn). The use cases span multiple industries from online marketplace and gaming, to fintech, media, and travel. 
+TiDB has already been deployed in production in more than 30 companies in the APAC region, including fast-growing Internet companies like [Mobike](https://en.wikipedia.org/wiki/Mobike), [Gaea](http://www.gaea.com/en/), and [YOUZU](http://www.yoozoo.com/aboutEn). The use cases span multiple industries from online marketplace and gaming, to fintech, media, and travel. 
 
 ### TiDB features
 
