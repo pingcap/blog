@@ -4,8 +4,6 @@ title: PingCAP Launches TiDB 1.0
 excerpt: TiDB is compatible with MySQL, strong consistent and highly available.
 ---
 
-# TiDB 1.0 GA announcement
-
 ## PingCAP Launches TiDB 1.0, A Scalable Hybrid Database Solution
 
 October 16, 2017 - PingCAP Inc., a cutting-edge distributed database technology company, officially announces the release of [TiDB](https://github.com/pingcap/tidb) 1.0. TiDB is an open source distributed Hybrid Transactional/Analytical Processing (HTAP) database that empowers businesses to meet both workloads with a single database. 
