@@ -1,4 +1,4 @@
-](media](media](media](media](media](media](media](media](media](media](media](media](media](media](media](media](media](media](media](media](media](media---
+---
 date: 2016-10-17T00:00:00Z
 excerpt: This is the speech Max Liu gave at Percona Live Open Source Database Conference
   2016.
