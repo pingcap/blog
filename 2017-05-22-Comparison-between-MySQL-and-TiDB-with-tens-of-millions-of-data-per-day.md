@@ -4,7 +4,6 @@ excerpt: This document is a use case that details the performance of MySQL and T
   with tens of millions of rows of data per day.
 title: Migration from MySQL to TiDB to handle tens of millions of rows of data per
   day
-url: /2017/05/22/Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day/
 ---
 
 # TiDB use case

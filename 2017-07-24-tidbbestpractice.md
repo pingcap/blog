@@ -4,7 +4,6 @@ excerpt: This article summarizes some best practices in using TiDB, mainly inclu
   SQL usage, OLAP/OLTP optimization techniques and especially TiDB’s exclusive optimization
   switches.
 title: TiDB Best Practices
-url: /2017/07/24/tidbbestpractice/
 ---
 
 <span id="top"></span>

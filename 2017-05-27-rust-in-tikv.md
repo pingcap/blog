@@ -3,7 +3,6 @@ date: 2017-05-27T00:00:00Z
 excerpt: This is the speech Tang Liu gave at the 1st Rust Meetup in Beijing on April
   16, 2017.
 title: Rust in TiKV
-url: /2017/05/27/rust-in-tikv/
 ---
 
 (Email: [tl@pingcap.com](mailto:tl@pingcap.com))

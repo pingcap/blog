@@ -2,7 +2,6 @@
 date: 2017-10-17T00:00:00Z
 excerpt: TiDB is compatible with MySQL, strong consistent and highly available.
 title: PingCAP Launches TiDB 1.0
-url: /2017/10/17/announcement/
 ---
 
 ## PingCAP Launches TiDB 1.0, A Scalable Hybrid Database Solution

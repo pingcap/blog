@@ -2,7 +2,6 @@
 date: 2017-09-15T00:00:00Z
 excerpt: This is the speech Tang Liu gave at the RocksDB meetup on August 28, 2017.
 title: RocksDB in TiKV
-url: /2017/09/15/rocksdbintikv/
 ---
 
 <span id="top"><span>

@@ -2,7 +2,6 @@
 date: 2017-09-12T00:00:00Z
 excerpt: This is the speech Tang Liu gave at Bay Area Rust Meetup August 2017.
 title: Futures and gRPC in Rust
-url: /2017/09/12/futuresandgrpc/
 ---
 
 This is the speech Tang Liu (tl@pingcap.com) gave at the Bay Area Rust Meetup August 2017. [See the video](https://air.mozilla.org/bay-area-rust-meetup-august-2017/). 

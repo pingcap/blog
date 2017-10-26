@@ -4,7 +4,6 @@ excerpt: In order to accelerate expression evaluation, we recently refactored it
   framework. This tutorial will show you how to use the new computational framework
   to rewrite or add a built-in function in TiDB.
 title: Refactoring the Built-in Functions in TiDB
-url: /2017/06/27/refactor-builtin/
 ---
 
 <span id="top"> </span>

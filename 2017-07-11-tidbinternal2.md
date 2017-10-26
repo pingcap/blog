@@ -2,7 +2,6 @@
 date: 2017-07-11T00:00:00Z
 excerpt: This is the second one of three blogs to introduce TiDB internal.
 title: TiDB Internal (II) - Computing
-url: /2017/07/11/tidbinternal2/
 ---
 
 <span id="top"> </span>

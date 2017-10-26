@@ -2,7 +2,6 @@
 date: 2016-12-19T00:00:00Z
 excerpt: This document describes how to add built-in functions to TiDB.
 title: Adding Built-in Functions
-url: /2016/12/19/adding-built-in-function/
 ---
 
 This document describes how to add built-in functions to TiDB. 

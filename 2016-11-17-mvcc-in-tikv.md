@@ -2,7 +2,6 @@
 date: 2016-11-17T00:00:00Z
 excerpt: This document gives an overview of MVCC implementation in TiKV.
 title: MVCC in TiKV
-url: /2016/11/17/mvcc-in-tikv/
 ---
 
 # MVCC

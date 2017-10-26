@@ -9,7 +9,6 @@ excerpt: Subquery optimization, especially rewriting the correlated subquery, is
   This article is focused on introducing the correlated subquery optimization methods
   in TiDB.
 title: Subquery Optimization in TiDB
-url: /2016/12/07/Subquery-Optimization-in-TiDB/
 ---
 
 <script type="text/x-mathjax-config">

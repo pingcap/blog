@@ -2,7 +2,6 @@
 date: 2017-09-01T00:00:00Z
 excerpt: What happens when TiDB meets Jepsen?
 title: When TiDB Meets Jepsen
-url: /2017/09/01/tidbmeetsjepsen/
 ---
 
 - [What is Jepsen?](#what-is-jepsen)

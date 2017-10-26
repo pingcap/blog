@@ -2,7 +2,6 @@
 date: 2017-07-11T00:00:00Z
 excerpt: This is the first one of three blogs to introduce TiDB internal.
 title: TiDB Internal (I) - Data Storage
-url: /2017/07/11/tidbinternal1/
 ---
 
 From Shen Li: shenli@pingcap.com

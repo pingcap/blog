@@ -3,7 +3,6 @@ date: 2017-08-15T00:00:00Z
 excerpt: The goal of TiKV is to support 100 TB+ data and it is impossible for one
   Raft group to make it, we need to use multiple Raft groups, which is called Multi-raft.
 title: The Design and Implementation of Multi-raft
-url: /2017/08/15/multi-raft/
 ---
 
 (Email: tl@pingcap.com)

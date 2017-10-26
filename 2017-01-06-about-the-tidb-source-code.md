@@ -4,7 +4,6 @@ excerpt: The target audience of this document is the contributors in the TiDB co
   The document aims to help them understand the TiDB project. It covers the system
   architecture, the code structure, and the execution process.
 title: About the TiDB Source Code
-url: /2017/01/06/about-the-tidb-source-code/
 ---
 
 The target audience of this document is the contributors in the TiDB community. The document aims to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process.

@@ -4,7 +4,6 @@ excerpt: Data was corrupted. A cluster panicked. The crime scene was compromised
   What happened? Detective Huang went all lengths to locate the criminal and solved
   it once and for all.
 title: How we Hunted a Data Corruption bug in RocksDB
-url: /2017/09/08/rocksdbbug/
 ---
 
 <span id="top"></span>

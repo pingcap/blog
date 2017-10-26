@@ -2,7 +2,6 @@
 date: 2017-07-20T00:00:00Z
 excerpt: This is the third one of three blogs to introduce TiDB internal.
 title: TiDB Internal (III) - Scheduling
-url: /2017/07/20/tidbinternal3/
 ---
 
 <span id="top"></span>
