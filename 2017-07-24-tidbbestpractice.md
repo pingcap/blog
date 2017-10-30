@@ -1,16 +1,16 @@
 ---
-date: 2017-07-24T00:00:00Z
-excerpt: This article summarizes some best practices in using TiDB, mainly including
-  SQL usage, OLAP/OLTP optimization techniques and especially TiDB’s exclusive optimization
-  switches.
 title: TiDB Best Practices
+author: ['Li SHEN']
+date: 2017-07-24
+summary: This article summarizes some best practices in using TiDB, mainly including SQL usage, OLAP/OLTP optimization techniques and especially TiDB's exclusive optimization switches.
+tags: ['TiDB']
 ---
 
 <span id="top"></span>
 
-From Shen Li: shenli@pingcap.com
+From Li SHEN: shenli@pingcap.com
 
-See the following blogs ([Data Storage](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/), [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/), [Scheduling](https://pingcap.github.io/blog/2017/07/20/tidbinternal3/)) for TiDB’s principles.
+See the following blogs ([Data Storage](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/), [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/), [Scheduling](https://pingcap.github.io/blog/2017/07/20/tidbinternal3/)) for TiDB's principles.
 
 ## Table of Content
 + [Preface](#preface)
