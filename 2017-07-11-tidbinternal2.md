@@ -1,7 +1,9 @@
 ---
-date: 2017-07-11T00:00:00Z
-excerpt: This is the second one of three blogs to introduce TiDB internal.
 title: TiDB Internal (II) - Computing
+author: ['Li SHEN']
+date: 2017-07-11
+summary: This is the second one of three blogs to introduce TiDB internal.
+tags: ['TiDB', 'computing']
 ---
 
 <span id="top"> </span>
