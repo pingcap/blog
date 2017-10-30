@@ -8,7 +8,7 @@ tags: ['TiDB', 'computing']
 
 <span id="top"> </span>
 
-From Shen Li: shenli@pingcap.com
+From Li SHEN: shenli@pingcap.com
 
 ## Table of Content
 
