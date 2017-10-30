@@ -1,9 +1,8 @@
 ---
-date: 2017-05-22T00:00:00Z
-excerpt: This document is a use case that details the performance of MySQL and TiDB
-  with tens of millions of rows of data per day.
-title: Migration from MySQL to TiDB to handle tens of millions of rows of data per
-  day
+title: Migration from MySQL to TiDB to handle tens of millions of rows of data per day
+date: 2017-05-22
+summary: This document is a use case that details the performance of MySQL and TiDB with tens of millions of rows of data per day.
+tags: ['TiDB', 'migration']
 ---
 
 # TiDB use case
