@@ -1,10 +1,12 @@
 ---
-date: 2017-07-11T00:00:00Z
-excerpt: This is the first one of three blogs to introduce TiDB internal.
 title: TiDB Internal (I) - Data Storage
+author: ['Li SHEN']
+date: 2017-07-11
+summary: This is the first one of three blogs to introduce TiDB internal.
+tags: ['TiDB', 'storage']
 ---
 
-From Shen Li: shenli@pingcap.com
+From Li SHEN: shenli@pingcap.com
 <span id="top"> </span>
 ## Table of Content
 
