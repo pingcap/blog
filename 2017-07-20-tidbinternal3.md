@@ -1,12 +1,14 @@
 ---
-date: 2017-07-20T00:00:00Z
-excerpt: This is the third one of three blogs to introduce TiDB internal.
 title: TiDB Internal (III) - Scheduling
+author: ['Li SHEN']
+date: 2017-07-20
+summary: This is the third one of three blogs to introduce TiDB internal.
+tags: ['TiDB', 'scheduling']
 ---
 
 <span id="top"></span>
 
-From Shen Li: shenli@pingcap.com
+From Li SHEN: shenli@pingcap.com
 
 ## Table of Content
 
