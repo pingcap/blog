@@ -1,7 +1,9 @@
 ---
-date: 2017-09-01T00:00:00Z
-excerpt: What happens when TiDB meets Jepsen?
 title: When TiDB Meets Jepsen
+author: ['Peng XU']
+date: 2017-09-01
+summary: What happens when TiDB meets Jepsen?
+tags: ['TiDB']
 ---
 
 - [What is Jepsen?](#what-is-jepsen)
