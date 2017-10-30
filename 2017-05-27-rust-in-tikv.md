@@ -1,9 +1,12 @@
 ---
-date: 2017-05-27T00:00:00Z
-excerpt: This is the speech Tang Liu gave at the 1st Rust Meetup in Beijing on April
-  16, 2017.
 title: Rust in TiKV
+author: ['Siddon Tang']
+date: 2017-05-27
+summary: This is the speech Siddon Tang gave at the 1st Rust Meetup in Beijing on April 16, 2017.
+tags: ['TiKV', 'Rust', 'speech']
 ---
+
+This is the speech Siddon Tang gave at the 1st Rust Meetup in Beijing on April 16, 2017.
 
 (Email: [tl@pingcap.com](mailto:tl@pingcap.com))
 
@@ -28,7 +31,7 @@ title: Rust in TiKV
 
 Hello everyone, today I will talk about how we use Rust in [TiKV](https://github.com/pingcap/tikv).
 
-Before we begin, let me introduce myself. My name is TangLiu, the Chief Architect of PingCAP. Before I joined PingCAP, I had worked at Kingsoft and Tencent. I love open source and have developed some projects like LedisDB, go-mysql, etc…
+Before we begin, let me introduce myself. My name is Siddon Tang, the Chief Architect of PingCAP. Before I joined PingCAP, I had worked at Kingsoft and Tencent. I love open source and have developed some projects like LedisDB, go-mysql, etc…
 
 At first, I will explain the reason why we chose Rust to develop TiKV, then show you the architecture of TiKV briefly and the key technologies. In the end, I will introduce what we plan to do in the future.
 
