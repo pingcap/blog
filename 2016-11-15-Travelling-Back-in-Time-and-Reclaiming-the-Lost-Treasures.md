@@ -1,8 +1,9 @@
 ---
 title: Travelling Back in Time and Reclaiming the Lost Treasures
+author: ['Ewan Chou']
 date: 2016-11-15
 summary: This document introduces the History Read feature in TiDB.
-tags: TiDB MVCC
+tags: ['TiDB', 'MVCC']
 ---
 
 ## About the History Read feature in TiDB
