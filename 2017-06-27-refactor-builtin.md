@@ -1,9 +1,9 @@
 ---
-date: 2017-06-27T00:00:00Z
-excerpt: In order to accelerate expression evaluation, we recently refactored its
-  framework. This tutorial will show you how to use the new computational framework
-  to rewrite or add a built-in function in TiDB.
 title: Refactoring the Built-in Functions in TiDB
+author: ['Huaiyu XU']
+date: 2017-06-27
+summary: In order to accelerate expression evaluation, we recently refactored its framework. This tutorial will show you how to use the new computational framework to rewrite or add a built-in function in TiDB.
+tags: ['TiDB', 'functions']
 ---
 
 <span id="top"> </span>
