@@ -1,9 +1,9 @@
 ---
-date: 2017-09-08T00:00:00Z
-excerpt: Data was corrupted. A cluster panicked. The crime scene was compromised.
-  What happened? Detective Huang went all lengths to locate the criminal and solved
-  it once and for all.
 title: How we Hunted a Data Corruption bug in RocksDB
+author: ['Huachao HUANG']
+date: 2017-09-08
+summary: Data was corrupted. A cluster panicked. The crime scene was compromised. What happened? Detective Huang went all lengths to locate the criminal and solved it once and for all.
+tags: ['TiKV']
 ---
 
 <span id="top"></span>
