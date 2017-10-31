@@ -1,12 +1,14 @@
 ---
-date: 2017-09-15T00:00:00Z
-excerpt: This is the speech Tang Liu gave at the RocksDB meetup on August 28, 2017.
 title: RocksDB in TiKV
+author: ['Siddon Tang']
+date: 2017-09-15
+summary: This is the speech Siddon Tang gave at the RocksDB meetup on August 28, 2017.
+tags: ['TiKV']
 ---
 
 <span id="top"><span>
 
-This is the speech Tang Liu gave at the [RocksDB meetup](https://www.meetup.com/RocksDB/events/242226234/) on August 28, 2017.
+This is the speech Siddon Tang gave at the [RocksDB meetup](https://www.meetup.com/RocksDB/events/242226234/) on August 28, 2017.
 
 <!-- TOC -->
 
@@ -32,7 +34,7 @@ This is the speech Tang Liu gave at the [RocksDB meetup](https://www.meetup.com/
 
 Hi every one,  thanks for having me here, the RocksDB team. 
 
-Today, I will talk about how we use [RocksDB](https://github.com/facebook/rocksdb) in [TiKV](https://github.com/pingcap/tikv). Before we start, I will introduce myself briefly. My name is Tang Liu, chief engineer of PingCAP. Now I am working on [TiDB](https://github.com/pingcap/tidb), the next generation SQL database; and [TiKV](https://github.com/pingcap/tikv),  a distributed transactional key-value store. I am an open source lover and I have developed some open source projects like LedisDB (BTW, the backend engine is also RocksDB), go-mysql, go-mysql-elasticsearch, etc…
+Today, I will talk about how we use [RocksDB](https://github.com/facebook/rocksdb) in [TiKV](https://github.com/pingcap/tikv). Before we start, I will introduce myself briefly. My name is Siddon Tang, chief engineer of PingCAP. Now I am working on [TiDB](https://github.com/pingcap/tidb), the next generation SQL database; and [TiKV](https://github.com/pingcap/tikv),  a distributed transactional key-value store. I am an open source lover and I have developed some open source projects like LedisDB (BTW, the backend engine is also RocksDB), go-mysql, go-mysql-elasticsearch, etc…
 
 ## Agenda
 
