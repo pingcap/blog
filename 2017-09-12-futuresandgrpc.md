@@ -1,7 +1,9 @@
 ---
-date: 2017-09-12T00:00:00Z
-excerpt: This is the speech Tang Liu gave at Bay Area Rust Meetup August 2017.
 title: Futures and gRPC in Rust
+author: ['Siddon Tang']
+date: 2017-09-12
+summary: This is the speech Siddon Tang gave at Bay Area Rust Meetup August 2017.
+tags: ['TiKV', 'Rust']
 ---
 
 This is the speech Tang Liu (tl@pingcap.com) gave at the Bay Area Rust Meetup August 2017. [See the video](https://air.mozilla.org/bay-area-rust-meetup-august-2017/). 
@@ -46,7 +48,7 @@ This is the speech Tang Liu (tl@pingcap.com) gave at the Bay Area Rust Meetup Au
 
 Hi everyone! I am very glad to join the meetup here. Thanks, the Rust team.
 
-Today I will talk about the Futures and gRPC in Rust. Before we start, let me introduce myself briefly. My name is Tang Liu, and siddontang on Github, chief engineer at PingCAP. I have been working on the next generation SQL database, [TiDB](https://github.com/pingcap/tidb), and a distributed key-value store, [TiKV](https://github.com/pingcap/tikv). By the way, TiKV is also written in Rust. I’m also an open source lover, and have some open source projects, such as LedisDB, go-mysql, go-mysql-elasticsearch, rust-prometheus, etc.
+Today I will talk about the Futures and gRPC in Rust. Before we start, let me introduce myself briefly. My name is Siddon Tang, and siddontang on Github, chief engineer at PingCAP. I have been working on the next generation SQL database, [TiDB](https://github.com/pingcap/tidb), and a distributed key-value store, [TiKV](https://github.com/pingcap/tikv). By the way, TiKV is also written in Rust. I’m also an open source lover, and have some open source projects, such as LedisDB, go-mysql, go-mysql-elasticsearch, rust-prometheus, etc.
 
 Today, I will first discuss Async briefly, then I will introduce Futures in Rust. Of course, you guys here are very familiar with them, so I will just go through it quickly. Then I will talk about gRPC, and in the end, I will show you how we use futures to wrap the gRPC in Rust.
 
