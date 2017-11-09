@@ -213,7 +213,7 @@ There are lots of items in the monitoring system, the majority of which are for 
 
 In addition to monitoring, you can also view the system logs. The three components of TiDB, `tidb-server`, `tikv-server` and `pd-server`, each has a `--log-file` parameter. If this parameter has been configured when initiating, logs will be stored in the file configured by the parameter and Log files are automatically archived on a daily basis. If the ` --log-file` parameter has not been configured, log will be output to stderr.
 
-###<span id="doc">Documentation</span>
+### <span id="doc">Documentation</span>
 
 TiDB has a large number of official documents either in[ Chinese](https://github.com/pingcap/docs-cn/blob/master/sql/tidb-specific.md) or[ English](https://github.com/pingcap/docs-cn/blob/master/sql/tidb-specific.md). You can also search the issue list for a solution.
 
