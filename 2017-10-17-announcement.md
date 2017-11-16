@@ -47,7 +47,8 @@ Evolve TiDB schemas as your requirement changes. You can add new columns and ind
 
 ### For more information:
 
-TiDB internal: 
+TiDB internal:
+
 - [Data Storage](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/)
 - [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/)
 - [Scheduling](https://pingcap.github.io/blog/2017/07/20/tidbinternal3/)
