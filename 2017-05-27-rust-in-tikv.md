@@ -3,7 +3,7 @@ title: Rust in TiKV
 author: ['Siddon Tang']
 date: 2017-05-27
 summary: This is the speech Siddon Tang gave at the 1st Rust Meetup in Beijing on April 16, 2017.
-tags: ['TiKV', 'Rust', 'speech']
+tags: ['TiKV', 'Rust', 'presentations']
 ---
 
 This is the speech Siddon Tang gave at the 1st Rust Meetup in Beijing on April 16, 2017.
