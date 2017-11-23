@@ -75,7 +75,7 @@ Any durable storage engine stores data on disk and TiKV is no exception. But TiK
 Finding an effective, reliable and local storage solution is the important first step of this complex project. Now we are facing with a more difficult thing: how to secure the intactness and correctness of data when a single machine fails? 
 A good way is to replicate data to multiple machines. Then, when one machine crashes, we have replicas on other machines. But it is noted that the replicate solution should be reliable, effective and can deal with the situation of an invalid replica. 
 It sounds difficult but Raft makes it possible. 
-Raft is a consensus algorithm and an equivalent to Paxos while Raft is easier to understand. Those who are interested in Raft can refer to this paper for more details. I want to point out that the Raft paper only presents a basic solution and the performance would be bad if strictly follow the paper. We have made numerous optimizations to implement Raft and for more detail, please refer to this paper written by our Chief Architect, Tang Liu.
+Raft is a consensus algorithm and an equivalent to Paxos while Raft is easier to understand. Those who are interested in Raft can refer to [this paper](https://raft.github.io/raft.pdf) for more details. I want to point out that the Raft paper only presents a basic solution and the performance would be bad if strictly follow the paper. We have made numerous optimizations to implement Raft and for more detail, please refer to [this blog (currently in Chinese)] (https://pingcap.com/blog-cn/optimizing-raft-in-tikv/) written by our Chief Architect, Tang Liu.
 
 Raft is a consensus algorithm and offers three important functions:
 
@@ -151,7 +151,7 @@ With MVCC, the Key array in TiKV looks like this:
 ~~ 	……
 ```
 
-It is noted that as for multiple versions of a Key, we put the bigger number first (you can review the Key-Value section in which I mentioned that Key is an ordered array). In this way, when a user gets the Value by Key + <Version>, he can construct the Key of MVCC with Key and Version, which is Key-<Version>. Then he can directly Seek(Key-Version) and locate the first position that is greater than or equal to this Key-Version. For more detail, see MVCC in TiKV.
+It is noted that as for multiple versions of a Key, we put the bigger number first (you can review the Key-Value section in which I mentioned that Key is an ordered array). In this way, when a user gets the Value by Key + <Version>, he can construct the Key of MVCC with Key and Version, which is Key-<Version>. Then he can directly Seek(Key-Version) and locate the first position that is greater than or equal to this Key-Version. For more detail, see [MVCC in TiKV](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/).
 
 [Back to the top](#top)
  
