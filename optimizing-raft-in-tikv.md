@@ -6,8 +6,6 @@ summary: Paxos or Raft is frequently used to ensure data consistency in the dist
 tags: ['Raft', 'TiKV']
 ---
 
-# A TiKV Source Code Walkthrough – Raft Optimization
-
 Paxos or [Raft](https://raft.github.io/) is frequently used to ensure data consistency in the distributed databases. But Paxos is known for its complexity and is rather difficult to understand while Raft is very simple. Therefore, a lot of emerging databases tend to use Raft as the consensus algorithm at its bottom layer. [TiKV](https://github.com/pingcap/tikv) is no exception.
 
 Simple as Raft is, its performance is not ideal if we follow exactly the way introduced in the Paper. Therefore, optimizations are essential. This blog introduces how we optimize Raft to ensure its performance in TiKV. It presumes that the audience is very familiar with Raft algorithm and don’t need much explanation. (If not, please see [Raft in TiKV](https://pingcap.com/blog/2017-07-28-raftintikv/)).
