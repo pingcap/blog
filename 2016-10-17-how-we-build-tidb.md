@@ -4,8 +4,7 @@ author: ['Max Liu']
 date: 2016-10-17
 summary: This is the speech Max Liu gave at Percona Live Open Source Database Conference 2016.
 tags: ['TiDB']
-aliases:
-  - "/2016/10/17/how/we/build/tidb"
+aliases: ['/blog/2016/10/17/how-we-build-tidb/']
 ---
 
 <span id="top">This is the speech Max Liu gave at **Percona Live Open Source Database Conference 2016**. </span>
