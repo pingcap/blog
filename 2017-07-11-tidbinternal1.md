@@ -4,6 +4,7 @@ author: ['Li SHEN']
 date: 2017-07-11
 summary: This is the first one of three blogs to introduce TiDB internal.
 tags: ['TiDB', 'storage']
+aliases: ['/blog/2017/07/11/tidbinternal1/']
 ---
 
 From Li SHEN: shenli@pingcap.com

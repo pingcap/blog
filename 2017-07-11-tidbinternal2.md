@@ -4,6 +4,7 @@ author: ['Li SHEN']
 date: 2017-07-11
 summary: This is the second one of three blogs to introduce TiDB internal.
 tags: ['TiDB', 'computing']
+aliases: ['/blog/2017/07/11/tidbinternal2/']
 ---
 
 <span id="top"> </span>
