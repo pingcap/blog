@@ -4,6 +4,7 @@ author: ['Peng XU']
 date: 2017-09-01
 summary: What happens when TiDB meets Jepsen?
 tags: ['TiDB']
+aliases: ['/blog/2017/09/01/tidbmeetsjepsen/']
 ---
 
 - [What is Jepsen?](#what-is-jepsen)

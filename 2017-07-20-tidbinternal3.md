@@ -4,6 +4,7 @@ author: ['Li SHEN']
 date: 2017-07-20
 summary: This is the third one of three blogs to introduce TiDB internal.
 tags: ['TiDB', 'scheduling']
+aliases: ['/blog/2017/07/20/tidbinternal3/']
 ---
 
 <span id="top"></span>
