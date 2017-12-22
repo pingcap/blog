@@ -1,11 +1,10 @@
 ---
+title: Tick or Tock? Keeping Time and Order in Distributed Databases
 author: ['Siddon Tang']
 date: 2017-12-22
 summary: At re:Invent 2017, Amazon Web Services (AWS) announced Amazon Time Sync Service which is a highly accurate and reliable time reference that is natively accessible from Amazon EC2 instances. It is much like the Google TrueTime which was published in 2012. Why do Google and AWS both want to make efforts to provide global time service? Is there any inspiration for building distributed database? This topic is important to think about.
 tags: ['TiDB', ‘time synchronization', 'TiKV']
 ---
-
-# Tick or Tock? Keeping Time and Order in Distributed Databases
 
 ![Time and Order in Distributed System](media/Time_and_Order_in_Distributed_System.png)
 
@@ -31,7 +30,7 @@ We usually use "happened before"(`hb` or `->`) to describe the relationship of t
 
 If we have only one process, determining the order is easy, because all the events can only happen in the process in sequence. However, in a distributed system, things become more complex. The events may happen in different places, and it becomes hard to determine the order of all the events.
 
-At first, we may consider using wall time, but the time is not the same in all the processes--one process may run faster, and the other process may walk slower. So we can’t use the time directly to check the order of the events. Luckily, we have other ways to do it.
+At first, we may consider using wall time, but the time is not the same in all the processes -- one process may run faster, and the other process may walk slower. So we can’t use the time directly to check the order of the events. Luckily, we have other ways to do it.
 
 ## Logical clock
 
