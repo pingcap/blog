@@ -12,7 +12,7 @@ tags: ['TiDB', ‘time synchronization', 'TiKV']
 
 At re:Invent 2017, Amazon Web Services (AWS) announced [Amazon Time Sync Service](https://aws.amazon.com/about-aws/whats-new/2017/11/introducing-the-amazon-time-sync-service/), a highly accurate and reliable time reference that is natively accessible from Amazon EC2 instances. It is much like the Google [TrueTime](https://static.googleusercontent.com/media/research.google.com/zh-CN//archive/spanner-osdi2012.pdf) published in 2012. Why do Google and AWS both want to make efforts to provide global time service? Is there any inspiration for building distributed database? This topic is important to think about.
 
-Time synchronization remains a hard nut to crack in distributed systems, especially for distributed databases such as [TiDB](https://github.com/pingcap/tidb) where time is used to confirm the order of the transaction to guarantee ACID feature. 
+Time synchronization remains a hard nut to crack in distributed systems, especially for distributed databases such as [TiDB](https://github.com/pingcap/tidb) where time is used to confirm the order of the transaction to guarantee the ACID compliance. 
 
 In this post, I will introduce the existing solutions to tackle the time synchronization issue in distributed systems, as well as their pros and cons. I will also share why we chose to use the timestamp oracle (TSO) from [Google Percolator](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36726.pdf) in TiDB.  
 
@@ -58,11 +58,11 @@ Using this can easily determine the order of events. For example, assuming we ha
 
 4. `P2` receives the message and increases the counter to `4` then executes event `B` with counter `5`.
 
-We use `C(A)` and `C(B)` as the counter value of the events, if event `A` and `B` happen in one process, and `A` happens before `B`, we can know that `C(A) < C(B)`. If `A` and `B` happened in different processes, we can also know `C(A) < C(B)` based on the message, so if A happens before B, we can infer `C(A) < C(B)`. But if `C(A) < C(B)`,  it doesn’t necessarily mean that A happens before B. 
+We use `C(A)` and `C(B)` as the counter value of the events, if events `A` and `B` happen in one process, and `A` happens before `B`, we can know that `C(A) < C(B)`. If `A` and `B` happen in different processes, we can also know `C(A) < C(B)` based on the message, so if A happens before B, we can infer `C(A) < C(B)`. But if `C(A) < C(B)`,  it doesn’t necessarily mean that A happens before B. 
 
 If the two events are not causally related (no communication between the processes), we can’t determine the order of the events. We can use [vector clock](http://zoo.cs.yale.edu/classes/cs426/2012/lab/bib/fidge88timestamps.pdf) to fix this. But whether it’s logical clock or vector clock, they both have a disadvantage: we can’t know what time the event happens because both of the two clocks merely record the order of the events instead of the time.
 
-To get the chronological order of the events, we have to go back to square one and use real time., But we can’t depend on Network Time Protocol (NTP) directly because it has some errors and the time is not accurate, so what should we do?
+To get the chronological order of the events, we have to go back to square one and use real time. But we can’t depend on Network Time Protocol (NTP) directly because it has some errors and the time is not accurate, so what should we do?
 
 ## TrueTime 
 
@@ -110,7 +110,7 @@ Based on NTP, HLC can only read time from NTP, but it won’t change it. HLC con
 
 * `c`: the logical clock
 
- To compare the order of two events, we can first check their `l` time, if equal, we can check `c` time, so for any two events `e` and `f`, if `e` happened before `f`, we can know `(l.e, c.e) < (l.f, c.f)`.
+ To compare the order of two events, we can first check their `l` time, if equal, we can check `c` time, for any two events `e` and `f`, if `e` happened before `f`, we can know `(l.e, c.e) < (l.f, c.f)`.
 
 The HLC algorithm for node `j`:
 
@@ -150,7 +150,7 @@ But what can we do if the NTP is not working as expected? Start panicking? Or ju
 
 ![](media/Timestamp_Oracle.png)
 
-As a distributed relational database, [TiDB](https://github.com/pingcap/tidb) supports cross-instance transactions by using an optimized two-phase commit protocol (2PC) from [Google Percolator](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36726.pdf). In the practical implementation, we adopt a centralized control service - [Placement Driver (PD)](https://github.com/pingcap/pd) - to allocate the monotonically increasing timestamps, same as Percolator which uses a timestamp oracle (TSO) service to do so. We decided to use TSO from the beginning and use PD to allocate the timestamp. The main reason is that it is very easy to implement a correct and high-performance TSO service.
+As a distributed relational database, [TiDB](https://github.com/pingcap/tidb) supports cross-instance transactions by using an optimized two-phase commit protocol (2PC) from [Google Percolator](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36726.pdf). In the practical implementation, we adopt a centralized control service -- [Placement Driver (PD)](https://github.com/pingcap/pd) -- to allocate the monotonically increasing timestamps, same as Percolator which uses a timestamp oracle (TSO) service to do so. We decide to use TSO from the beginning and use PD to allocate the timestamp. The main reason is that it is very easy to implement a correct and high-performance TSO service.
 
 Using TSO to allocate timestamp is simple, but it has the following disadvantages:
 
@@ -158,7 +158,9 @@ Using TSO to allocate timestamp is simple, but it has the following disadvantage
 
 2. Network latency
 
-For problem 1,  we embed [etcd](https://github.com/coreos/etcd) and use the [Raft](https://raft.github.io/) consensus algorithm to make the service highly available and consistent. For problem 2, because we have no way to break the law of physics, the network latency cannot be avoided.
+For problem 1,  we embed [etcd](https://github.com/coreos/etcd) and use the [Raft](https://raft.github.io/) consensus algorithm to make the service highly available and consistent.
+
+For problem 2, because we have no way to break the law of physics, the network latency cannot be avoided.
 
 There might be some concern that the network latency might impact performance. This concern is valid, but it depends on the user’s specific deployment scenario: 
 
