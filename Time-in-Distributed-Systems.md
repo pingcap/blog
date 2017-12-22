@@ -10,7 +10,7 @@ tags: ['TiDB', ‘time synchronization', 'TiKV']
 
 ## Preface
 
-At re:Invent 2017, Amazon Web Services (AWS) announced [Amazon Time Sync Service](https://aws.amazon.com/about-aws/whats-new/2017/11/introducing-the-amazon-time-sync-service/) which is a highly accurate and reliable time reference that is natively accessible from Amazon EC2 instances. It is much like the Google [TrueTime](https://static.googleusercontent.com/media/research.google.com/zh-CN//archive/spanner-osdi2012.pdf) which was published in 2012. Why do Google and AWS both want to make efforts to provide global time service? Is there any inspiration for building distributed database? This topic is important to think about.
+At re:Invent 2017, Amazon Web Services (AWS) announced [Amazon Time Sync Service](https://aws.amazon.com/about-aws/whats-new/2017/11/introducing-the-amazon-time-sync-service/), a highly accurate and reliable time reference that is natively accessible from Amazon EC2 instances. It is much like the Google [TrueTime](https://static.googleusercontent.com/media/research.google.com/zh-CN//archive/spanner-osdi2012.pdf) published in 2012. Why do Google and AWS both want to make efforts to provide global time service? Is there any inspiration for building distributed database? This topic is important to think about.
 
 Time synchronization remains a hard nut to crack in distributed systems, especially for distributed databases such as [TiDB](https://github.com/pingcap/tidb) where time is used to confirm the order of the transaction to guarantee ACID feature. 
 
