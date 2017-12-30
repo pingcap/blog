@@ -7,7 +7,7 @@ tags: ['PingCAP', 'TiDB']
 
 **In open source, we trust!**
 
-2017 has witnessed the growth of PingCAP, from Beijing to Silicon Valley, and the evolution of TiDB, from RC1 to the 1.0 release, and then to the 1.0.5 release. As our CEO max said in the [TiDB 1.0 announcement](https://www.pingcap.com/blog/2017-10-17-announcement/), "*because of the hard work and dedication of not just every member of our team, but also every contributor, user, and partner in our open source community.*"  
+2017 has witnessed the growth of PingCAP, from Beijing to Silicon Valley, and the evolution of TiDB, from RC1 to the 1.0 release, and then to the 1.0.5 release. As our CEO Max said in the [TiDB 1.0 announcement](https://www.pingcap.com/blog/2017-10-17-announcement/), "*because of the hard work and dedication of not just every member of our team, but also every contributor, user, and partner in our open source community.*"  
 
 As 2017 draws to a close, let’s take a look back upon the highlights that shape PingCAP and TiDB:
 
