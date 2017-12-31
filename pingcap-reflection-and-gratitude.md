@@ -26,7 +26,7 @@ As 2017 draws to a close, let’s take a look back upon the highlights that shap
 
 ## Cloud
 
-- A cloud-native HTAP Database on Ucloud and Tencent Cloud
+- A cloud-native HTAP Database on UCloud and Tencent Cloud
 
 ## Product
 
