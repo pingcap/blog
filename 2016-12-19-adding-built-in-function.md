@@ -2,7 +2,7 @@
 title: Adding Built-in Functions
 date: 2016-12-19
 summary: This document describes how to add built-in functions to TiDB.
-tags: ['TiDB', 'functions']
+tags: ['TiDB', 'Implementation Design']
 aliases: ['/blog/2016/12/19/adding-built-in-function/']
 ---
 
