@@ -159,7 +159,7 @@ PD gets the detail data of the cluster by constantly gathering information throu
 This blog discloses information you might not find elsewhere. We hope that you’ve had a better understanding about what needs to be considered to build a distributed storage system for scheduling and how to decouple policies and implementation to support a more flexible expansion of policy.
 
 
-We hope these three blogs ([Data Storage](https://pingcap.github.io/blog/2017/07/11/tidbinternal1), [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2), and [Scheduling](https://pingcap.github.io/blog/2017/07/11/tidbinternal3)) can help you understand the basic concepts and implementation principles of TiDB. In the future, more blogs about TiDB from code to architecture are on their way!
+We hope these three blogs ([Data Storage](https://pingcap.github.io/blog/2017/07/11/tidbinternal1), [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2), and [Scheduling](https://pingcap.github.io/blog/2017/07/20/tidbinternal3)) can help you understand the basic concepts and implementation principles of TiDB. In the future, more blogs about TiDB from code to architecture are on their way!
 
 [Back to the top](#top)
 
