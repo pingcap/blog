@@ -5,6 +5,24 @@ summary: On January 20th, 2018, more than 200 coders, hackers, and techies strea
 tags: ['TiDB','DevCon','roadmap']
 ---
 
+
+On January 20th, 2018, a chilly Saturday in the middle of the winter, more than 200 coders, hackers, and techies streamed into Garage Café, a chic coffee shop in the heart of Beijing’s techhub, Zhongguancun. They weren’t there to get coffee. They weren’t there to stay warm. They were there to be part of TiDB DevCon 2018, a technology party for the developers, by the developers.
+
+![Attendees-signing-in](media/attendees-signing-in.png)
+
+*TiDB DevCon 2018 attendees signing-in on the event banner*
+
+![Audience](media/a-packed-audience.png)
+
+*A packed audience at TiDB DevCon 2018*
+
+At this party, the team behind TiDB announced exciting news, shared the project’s latest development, and unveiled the future plans of the TiDB project. Here are some important news and highlights:
+
+![Max Liu](media/max-liu-talk.png)
+
+*PingCAP co-founder and CEO, Max Liu, giving the opening address at TiDB DevCon 2018*
+
+
 <!-- TOC -->
 
 - [Team](#team)
@@ -25,24 +43,6 @@ tags: ['TiDB','DevCon','roadmap']
 - [2018 Roadmap](#2018-roadmap)
 
 <!-- /TOC -->
-
-
-
-On January 20th, 2018, a chilly Saturday in the middle of the winter, more than 200 coders, hackers, and techies streamed into Garage Café, a chic coffee shop in the heart of Beijing’s techhub, Zhongguancun. They weren’t there to get coffee. They weren’t there to stay warm. They were there to be part of TiDB DevCon 2018, a technology party for the developers, by the developers.
-
-![Attendees-signing-in](media/attendees-signing-in.png)
-
-*TiDB DevCon 2018 attendees signing-in on the event banner*
-
-![Audience](media/a-packed-audience.png)
-
-*A packed audience at TiDB DevCon 2018*
-
-At this party, the team behind TiDB announced exciting news, shared the project’s latest development, and unveiled the future plans of the TiDB project. Here are some important news and highlights:
-
-![Max Liu](media/max-liu-talk.png)
-
-*PingCAP co-founder and CEO, Max Liu, giving the opening address at TiDB DevCon 2018*
 
 ## Team
 
