@@ -86,7 +86,7 @@ All kinds of executors implement this interface. The executing engine in TiDB ad
 	
 	+ [`resolver.go`](https://github.com/pingcap/tidb/blob/master/plan/resolver.go): Parses the name. To parse and bind the identifier of database/table/column/alias to the corresponding column or Field.
 	
-	+ [`typeinferer.go`](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go): Infers the type of the result. For SQL statements, the type of the result does not need inference.
+	+ `typeinferer.go`: Infers the type of the result. For SQL statements, the type of the result does not need inference.
 	
 	+ [`logical_plan_builder.go`](https://github.com/pingcap/tidb/blob/master/plan/logical_plan_builder.go): Makes optimized logical query plans.
 	
