@@ -155,7 +155,7 @@ If there is a Unique Key and if the business end can ensure that there is no con
 
 `SET @@session.tidb_skip_constraint_check=1;`
 
-In order to improve the write performance, you can tune TiKV’s parameters as stated in[ this document](https://github.com/pingcap/docs/blob/master/op-guide/tune-TiKV.md).
+In order to improve the write performance, you can tune TiKV’s parameters as stated in [this document](https://github.com/pingcap/docs/blob/master/op-guide/tune-tikv.md).
 
 Please pay extra attention to this parameter:
 
