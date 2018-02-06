@@ -539,6 +539,6 @@ Here is our future plan:
 - We are planning to support pushing down more aggregation and built-in functions.
 - In the future, we will replace the customized RPC implementation with gRPC.
 
-So that&#39;s all. Thank you! Any Questions?
+So that&#39;s all. Thank you! Any questions?
 
 [Back to the top](#top)
