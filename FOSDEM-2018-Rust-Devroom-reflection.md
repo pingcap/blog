@@ -5,8 +5,6 @@ summary: At the crack of dawn on February 1, I landed in Brussels, Belgium, for 
 tags: ['TiKV','Rust','FOSDEM']
 ---
 
-Bringing TiKV to Rust Devroom at FOSDEM 2018
-
 At the crack of dawn on February 1, I landed in Brussels, Belgium, for the first time in my life. The goal of my trip wasn’t to taste the local cuisine, tour world-famous museums, or grab a pint of the local brew (though I ended up doing all those things anyway). It was to deliver a talk three days later at "FOSDEM 2018 Rust Devroom" about our experience at PingCAP using Rust to build [TiKV](https://github.com/pingcap/tikv), a distributed transactional Key-Value storage engine. 
 
 [FOSDEM 2018 Rust Devroom](https://fosdem.org/2018/schedule/track/rust/) is the 1st edition of a dedicated Rust venue co-located with [FOSDEM 2018](https://fosdem.org/2018/). It was, by all accounts, *very* popular; at least a few hundred people visited the Rust Devroom, where my talk was supposed to be held. Because the room could only hold about 120 people, people had to line up to get into talks. When I showed up for my event, there was already a long line snaking through the hallway. I lined up with everyone else and almost didn’t get into my own talk!
