@@ -1,5 +1,6 @@
 ---
 title: Bringing TiKV to Rust Devroom at FOSDEM 2018
+author: Tang Liu (Siddon)
 date: 2018-02-15
 summary: At the crack of dawn on February 1, I landed in Brussels, Belgium, for the first time in my life. The goal of my trip wasn’t to taste the local cuisine, tour world-famous museums, or grab a pint of the local brew. It was to deliver a talk three days later at FOSDEM 2018 Rust Devroom about our experience at PingCAP using Rust to build TiKV, a distributed transactional Key-Value storage engine.
 tags: ['TiKV','Rust','FOSDEM']
