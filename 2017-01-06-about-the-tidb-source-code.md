@@ -175,11 +175,11 @@ The following lists the expressions that implement the interface:
 	
 	The error system for TiDB. For more information, see [Detailed specification](https://docs.google.com/a/pingcap.com/document/d/1L7th17VTZCOeb4RfFqgs9cya6yORKqWcjB2fYqckOFU/edit?usp=sharing) (Currently in Chinese).
 
-+ [context](https://github.com/pingcap/tidb/tree/master/context)
++ context
 	
 	The `context` interface. `Session` is the implementation of the `context` interface. The reason that we have an interface is to avoid the circular dependencies. All the state information of `session` can be accessed using this interface.
 
-+ [inspectkv](https://github.com/pingcap/tidb/tree/master/inspectkv)
++ inspectkv
 	
 	The auxiliary check package for TiDB SQL data and Key-Value storage. In the future, it will be used to access TiKV from the external and will be re-defined and developed.
 

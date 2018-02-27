@@ -208,7 +208,7 @@ If the business scenario needs both OLTP and OLAP, you can send the TP request a
 
 ### <span id="log">Monitoring and Log</span>
 
-TiDB uses[ Grafana+Prometheus to monitor the system state](https://github.com/pingcap/docs/blob/master/op-guide/monitoring-tidb.md). The monitoring system is automatically deployed and configured if using TiDB-Ansible.
+TiDB uses[ Grafana+Prometheus to monitor the system state](https://github.com/pingcap/docs/blob/master/op-guide/monitor-overview.md). The monitoring system is automatically deployed and configured if using TiDB-Ansible.
 
 There are lots of items in the monitoring system, the majority of which are for TiDB developers. There is no need to understand these items but for an in-depth knowledge of the source code. We’ve picked out some items that are related to business or to the state of system key components in a separate panel for users.
 
