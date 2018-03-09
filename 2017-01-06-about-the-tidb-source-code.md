@@ -80,11 +80,11 @@ All kinds of executors implement this interface. The executing engine in TiDB ad
 
 	The following functions are also included in this package:
 	
-	+ [`validator.go`](https://github.com/pingcap/tidb/blob/master/plan/validator.go): Validates the AST.
+	+ `validator.go`: Validates the AST.
 	
 	+ [`preprocess.go`](https://github.com/pingcap/tidb/blob/master/plan/preprocess.go): Currently, there is only `name resolve`.
 	
-	+ [`resolver.go`](https://github.com/pingcap/tidb/blob/master/plan/resolver.go): Parses the name. To parse and bind the identifier of database/table/column/alias to the corresponding column or Field.
+	+ `resolver.go`: Parses the name. To parse and bind the identifier of database/table/column/alias to the corresponding column or Field.
 	
 	+ `typeinferer.go`: Infers the type of the result. For SQL statements, the type of the result does not need inference.
 	
@@ -229,8 +229,8 @@ The entry point of the process is in the [`session.go`](https://github.com/pingc
 
 1. First, call `Compile()` to parse the SQL statement using `tidb.Parse()` and get a list of `stmt` where each statement is an AST and each syntax unit is a Node of the AST. The structure is defined in the [ast](https://github.com/pingcap/tidb/tree/master/ast) package.
 2. After the AST is got, call the the `Compiler` in the [executor](https://github.com/pingcap/tidb/tree/master/executor) package. Input the AST and get `Compiler.Compile()`. During this process, the statement validation, query plan generation and optimization are all completed.
-3. In `Compiler.Compile()`, call `plan.Validate()` in [plan/validator.go](https://github.com/pingcap/tidb/blob/master/plan/validator.go) to validate the statement and then go to the `Preprocess` process. At the current stage, `Preprocess` has only finished name parsing and bound the column or alias name to the corresponding field. Take the "select c from t;" statement for an example, `Preprocess` binds the name `c` to the corresponding column in the table `t`. See [plan/resolver.go](https://github.com/pingcap/tidb/blob/master/plan/resolver.go) for the detailed implementation. After this, enter `optimizer.Optimize()`.
-4. In the `Optimize()` method, infer the result of each node in AST. Take the "select 1, 'xx', c from t;” statement as an example, for the select fields, the first field is "1" whose type is `Longlong`; the second field is "'xx'" whose field is `VarString`; the third field is "c" whose type is the type of column `c` in the table `t`. Note that besides the type information, the other information like charset also needs to be inferred. See [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) for the detailed implementation.
+3. In `Compiler.Compile()`, call `plan.Validate()` in plan/validator.go to validate the statement and then go to the `Preprocess` process. At the current stage, `Preprocess` has only finished name parsing and bound the column or alias name to the corresponding field. Take the "select c from t;" statement for an example, `Preprocess` binds the name `c` to the corresponding column in the table `t`. See plan/resolver.go for the detailed implementation. After this, enter `optimizer.Optimize()`.
+4. In the `Optimize()` method, infer the result of each node in AST. Take the "select 1, 'xx', c from t;” statement as an example, for the select fields, the first field is "1" whose type is `Longlong`; the second field is "'xx'" whose field is `VarString`; the third field is "c" whose type is the type of column `c` in the table `t`. Note that besides the type information, the other information like charset also needs to be inferred. See plan/typeinferer.go for the detailed implementation.
 5. After the type inference, use the `planBuilder.build()` method for logical optimization which is to do equivalent transformation and simplification for AST based on the algebraic operation. For example, "select c from t where c > 1+1*2;" can be equivalently transformed to "select c from t where c > 3;".
 4. After the logical optimization, the next step is physical optimization. The process involves generating query plan tree and transforming the tree according to the index, rules and the cost model to reduce the cost of the query process. The entry point is in the `doOptimize()` method in the [plan/optimizer.go ](https://github.com/pingcap/tidb/blob/master/plan/optimizer.go) file.
 5. When the query plan is generated, it will be transformed to the executor. Use the `Exec` interface to get the `RecordSet` object and call the `Next()` method to get the query result.
