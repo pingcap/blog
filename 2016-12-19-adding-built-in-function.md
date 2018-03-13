@@ -36,8 +36,8 @@ The following procedure describes how to add a built-in function.
 
     ```
     func (b *builtinSHA2Sig) eval(row []types.Datum) (d types.Datum, err error) {
-return d, errFunctionNotExists.GenByArgs("SHA2")
-}
+    return d, errFunctionNotExists.GenByArgs("SHA2")
+    }
     ```
 
 2. Implement the function signature. 
