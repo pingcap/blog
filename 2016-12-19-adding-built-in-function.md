@@ -1,7 +1,7 @@
 ---
 title: Adding Built-in Functions
 date: 2016-12-19
-summary: This document describes how to add built-in functions to TiDB.
+summary: TiDB code is updated and the procedure of adding built-in functions is greatly simplified. This document describes how to add built-in functions to TiDB.
 tags: ['TiDB', 'Implementation Design']
 aliases: ['/blog/2016/12/19/adding-built-in-function/']
 ---
@@ -16,162 +16,126 @@ This document describes how to add built-in functions to TiDB.
 
 How is the SQL statement executed in TiDB?
 
-The SQL statement is parsed to an abstract syntax tree (AST) by the parser first and then uses the optimizer to generate an execution plan. The plan can then be executed to get the result. This process involves how to access the data in the table, and how to filter, calculate, sort, aggregate, and distinct the data, etc. For a built-in function, the most important part is to parse and to evaluate. See the following two sections for further details:
+The SQL statement is parsed to an abstract syntax tree (AST) by the parser first and then uses Query Optimizer to generate an execution plan. The plan can then be executed to get the result. This process involves how to access the data in the table, and how to filter, calculate, sort, aggregate, and distinct the data, etc. For a built-in function, the most important part is to parse and to evaluate. 
 
-#### Parse
-The code for syntax parsing is in the [parser](https://github.com/pingcap/tidb/tree/master/parser) directory and mainly involves the two files: [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) and [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y). In the TiDB project, run the `make parser` command to use `goyacc` to convert the `parser.y` file to the `parser.go` file. The code in the `parser.go` file can be called by other `go` code for parsing.
+For parsing, it is redundant work because you should know how to write YACC commands and how to modify TiDB syntax parser. But we have finished this work for you and syntax parsing of most built-in functions is done. 
 
-The process to parse the SQL statement to be structured is as follows:
+As for evaluation, it should be finished in the TiDB expression evaluation framework. Each built-in function is considered as an expression indicated by `ScalarFunction` and obtains the corresponding function type and function signature through the function name and parameters to evaluate. 
 
-1. Use Scanner to segment the text to tokens. Each token has a name and value. The name is used to match the pre-defined rules in `parser.y` in the parser. 
-2. When the rules are being matched, tokens are obtained continuously from the Scanner. If a rule is completely matched, the token that is matched will be replaced by a new variable. Meanwhile, after each rule is matched, the value in the token can be used to construct the node of subtree in AST. 
-3. The general format of a built-in function is: `name(args)`. Scanner needs to recognize all the elements of the function, including the name, the parenthesis, and the arguments. The pre-defined rule to be matched in the parser constructs a node in AST. The node contains the arguments and the method for evaluation of the function for the following evaluation.
-
-#### Evaluation
-
-To evaluate is to get the value of the function or the expression based on the input arguments and the runtime environment. The controlling logic is in the [`evaluator/evaluator.go`](https://github.com/pingcap/tidb/blob/master/evaluator/evaluator.go) file. Most of the built-in functions are parsed to `FuncCallExpr`. The process to evaluate is as follows:
-
-1. Convert `ast.FuncCallExpr` to `expression.ScalarFunction`.
-2. Call the `NewFunction()` method in the [`expression/scalar_function.go`](https://github.com/pingcap/tidb/blob/master/expression/scalar_function.go).
-3. Use `FnName` to find the corresponding function in the `builtin.Funcs` table which is in the [`evaluator/builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file.
-4. Call the evaluation function when evaluating `ScalarFunction`.
+The procedure discussed above is complicated for users who are not familiar with TiDB. We have finished syntax parsing and function signature confirmation of most unimplemented functions. But implementation is left empty. In other words, locating and completing the  empty implementation makes a Pull Request (PR).
 
 ### The procedure to add a built-in function
 
-#### 1. Edit the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) and [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) files.
+The following procedure describes how to add a built-in function.
 
-1).  Add a rule to the `tokenMap` in the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) file and parse the function name to a token.
+1. Locate the unimplemented function.
 
-2).  Add a rule to [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) and transfer the token sequence to an AST node.
+    1) Search for `errFunctionNotExists` in the `expression` directory of TiDB source code. You can find all the unimplemented functions.
 
-3).  Add a unit test case for parser in the [`parser_test.go`](https://github.com/pingcap/tidb/blob/master/parser/parser_test.go) file.
-  
-#### 2. Add the evaluation function to the [`executor`](https://github.com/pingcap/tidb/tree/master/executor) directory.
+    2) Choose a function you are interested in. Take the SHA2 function as an example:
 
-1). Implement the function in the `evaluator/builtin_xx.go` file. 
-	
-**Note:** The functions in the [`executor`](https://github.com/pingcap/tidb/tree/master/executor) directory are categorized to several files. For example, `builtin_time.go` is a time-related function. The interface of the function is:
-		
-```
-type BuiltinFunc func([]types.Datum, context.Context) (types.Datum, error)
-```
-	
-2). Register the name and the implementation to [`builtin.Funcs`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go#L43).
-  
-#### 3. Add the Type Inference information to the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file. 
-Add the type of the returned result of the function to `handleFuncCallExpr()` in the the [plan/typeinferer.go](https://github.com/pingcap/tidb/blob/master/plan/typeinferer.go) file and make sure the result is consistent with the result in MySQL. See [MySQL Const](https://github.com/pingcap/tidb/blob/master/mysql/type.go#L17) for the complete list of the type definition.
+    ```
+    func (b *builtinSHA2Sig) eval(row []types.Datum) (d types.Datum, err error) {
+return d, errFunctionNotExists.GenByArgs("SHA2")
+}
+    ```
 
-#### 4. Add a unit test case for the function to the [evaluator](https://github.com/pingcap/tidb/tree/master/evaluator) directory.
+2. Implement the function signature. 
 
-#### 5. Run the `make dev` command and make sure all the test cases can pass.
+    This step is to implement `eval`. For the function features, see MySQL documentation. For the specific implementation method, see the method of implemented functions. 
+
+3. Add the type inference information to the `typeinferer` file.
+
+    Add the type of the returned result of the function to `handleFuncCallExpr()` in the the `plan/typeinferer.go` file and make sure the result is consistent with the result in MySQL. See [MySQL Const](https://github.com/pingcap/tidb/blob/master/mysql/type.go#L17) for the complete list of the type definition.
+
+    **Note:** For most fuctions, you need to input the type of the returned result and obtain the length of the returned result.
+
+4. Add a unit test case.
+
+    Add a unit test case for the function to the `expression` directory. Add a unit test case of `typeinferer` to the `plan/typeinferer_test.go` file. 
+
+5. Run the `make dev` command and make sure all the test cases can pass.
 
 ### Example
 
-Take the [Pull Request](https://github.com/pingcap/tidb/pull/2249) to add the `timediff()` function as an example:
+Take the [Pull Request](https://github.com/pingcap/tidb/pull/2781/files) to add the `SHA1()` function as an example:
 
-#### 1. Add an entry to the `tokenMap` in the [`misc.go`](https://github.com/pingcap/tidb/blob/master/parser/misc.go) file: 
-	
-```	
-var tokenMap = map[string]int{
-"TIMEDIFF":            timediff,
-}
-```
-	
-Here, a rule is defined: If the text is found to be `timediff`, it is converted to a token with the name `timediff`. 
+1. Open the `expression/builtin_encryption.go` file and complete the evaluation of `SHA1()`.
 
-**Note:** SQL is case-insensitive, so the capital letters must be used in the `tokenMap`. 
+    ```
+    func (b *builtinSHA1Sig) eval(row []types.Datum) (d types.Datum, err error) {
+        // Evaluate the arguments. In most cases, you do not need to make any modification.
+        args, err := b.evalArgs(row)
+        if err != nil {
+            return types.Datum{}, errors.Trace(err)
+        }
+        // See MySQL documentation for the meaning of each argument.
+        // SHA/SHA1 function only accept 1 parameter
+        arg := args[0]
+        if arg.IsNull() {
+            return d, nil
+        }
+        // The type of the argument value is changed. See "util/types/datum.go" for the function implementation.    
+        bin, err := arg.ToBytes()
+        if err != nil {
+            return d, errors.Trace(err)
+        }
+        hasher := sha1.New()
+        hasher.Write(bin)
+        data := fmt.Sprintf("%x", hasher.Sum(nil))
+        // Set the return value.
+        d.SetString(data)
+        return d, nil
+    }
+    ```
+    
+2. Add a unit test case for the function implementation. See `expression/builtin_encryption_test.go`:
 
-The text in `tokenMap` must be taken as a special token instead of an identifier. In the following parser rule, the token needs special processing as is shown in [`parser/parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y):
-	
-```
-%token	<ident>
-timediff	"TIMEDIFF"	
-```
-	
-Which means after the "timediff" token is obtained from the lexer, it is named "TIMEDIFF” and this name will be used for the following rule matching.
+    ```
+    var shaCases = []struct {
+        origin interface{}
+        crypt  string
+     }{
+        {"test", "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3"},
+        {"c4pt0r", "034923dcabf099fc4c8917c0ab91ffcd4c2578a6"},
+        {"pingcap", "73bf9ef43a44f42e2ea2894d62f0917af149a006"},
+        {"foobar", "8843d7f92416211de9ebb963ff4ce28125932878"},
+        {1024, "128351137a9c47206c4507dcf2e6fbeeca3a9079"},
+        {123.45, "22f8b438ad7e89300b51d88684f3f0b9fa1d7a32"},
+     }
 
-The "timediff" here must correspond to the "timediff" of the value in `tokenMap`. When the `parser.y` file is generated to the `parser.go` file, "timediff" will get a token ID which is an INT.
-	
-Because "timediff" is not a keyword in MySQL, the rule is added to `FunctionCallNonKeyword` in the [`parser.y`](https://github.com/pingcap/tidb/blob/master/parser/parser.y) file:
-	
-```	
-|	"TIMEDIFF" '(' Expression ',' Expression ')'
-	{
-		$$ = &ast.FuncCallExpr{
-			FnName: model.NewCIStr($1),
-			Args: []ast.ExprNode{$3.(ast.ExprNode), $5.(ast.ExprNode)},
-		}
-	}		
-```
-	
-Here it means: If the token sequence matches the pattern, the tokens are specified as a new variable with the name: `FunctionCallNonKeyword` (The value of `FunctionCallNonKeyword` can be assigned by assigning values to the `$$` variable.), which is a node in AST and the type is `*ast.FuncCallExpr`. The value of the `FnName` member variable is the content of `$1`, which is the value of the first token in the rule.
-	
-"timediff()” is successfully converted to an AST node. Its member variable, `FnName`, has recorded the function name, ”timediff”, for the following evaluation.
+     func (s *testEvaluatorSuite) TestShaEncrypt(c *C) {
+        defer testleak.AfterTest(c)() // The tool for monitoring goroutine leak. You can just copy it.
+        fc := funcs[ast.SHA]
+        for _, test := range shaCases {
+            in := types.NewDatum(test.origin)
+            f, _ := fc.getFunction(datumsToConstants([]types.Datum{in}), s.ctx)
+            crypt, err := f.eval(nil)
+            c.Assert(err, IsNil)
+            res, err := crypt.ToString()
+            c.Assert(err, IsNil)
+            c.Assert(res, Equals, test.crypt)
+        }
+        // test NULL input for sha
+        var argNull types.Datum
+        f, _ := fc.getFunction(datumsToConstants([]types.Datum{argNull}), s.ctx)
+        crypt, err := f.eval(nil)
+        c.Assert(err, IsNil)
+        c.Assert(crypt.IsNull(), IsTrue)
+    }
+    * Note: Besides conventional cases, you had better add some exceptional cases in which, for example, the input value is "nil" or the arguments of various types. 
+    ```
+    
+3. Add the type inference information and the test case. See `plan/typeinferer.go` and `plan/typeinferer_test.go`:
 
-**Note:** To use the value of a certain token in the rule, you can use the `$x` format in which `x` is the location of the token in the rule. In the above example, `$1` is `"TIMEDIFF"`，$2 is `’(’`, and $3 is `’)’`. The meaning of `$1.(string)` is to reference the value of the first token and to declare it to be a `string`.
-
-#### 2. Register the function in the `Funcs` table in the [`builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file:
-
-```
-ast.TimeDiff:         {builtinTimeDiff, 2, 2},	
-```
-	
-The arguments are explained as follows:
-
-+ `builtinTimediff`: The implementation of the `timediff` function is included in the `builtinTimediff` function.
-+ `2`: The minimum number of the arguments of the function is `2`.
-+ `2`: The maximum number of the arguments of the function is `2`. 
-
-**Note:** The number of the arguments will be checked to see if it's legal during the syntax parsing.
-
-The implementation of the function is in the the [`builtin.go`](https://github.com/pingcap/tidb/blob/master/evaluator/builtin.go) file. See the following for further details:
-	
-```	
-func builtinTimeDiff(args []types.Datum, ctx context.Context) (d types.Datum, err error) {
-	sc := ctx.GetSessionVars().StmtCtx
-	t1, err := convertToGoTime(sc, args[0])
-	if err != nil {
-		return d, errors.Trace(err)
-	}
-	t2, err := convertToGoTime(sc, args[1])
-	if err != nil {
-		return d, errors.Trace(err)
-	}
-	var t types.Duration
-	t.Duration = t1.Sub(t2)
-	t.Fsp = types.MaxFsp
-	d.SetMysqlDuration(t)
-	return d, nil
-}	
-```
-	
-#### 3. Add the Type Inference information:
-
-```	
-case "curtime", "current_time", "timediff":
-    tp = types.NewFieldType(mysql.TypeDuration)
-    tp.Decimal = v.getFsp(x)	    
-```
-
-#### 4. Add the unit test case:
-
-```	
-func (s *testEvaluatorSuite) TestTimeDiff(c *C) {
-	// Test cases from https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_timediff
-	tests := []struct {
-		t1        string
-		t2        string
-		expectStr string
-	}{
-		{"2000:01:01 00:00:00", "2000:01:01 00:00:00.000001", "-00:00:00.000001"},
-		{"2008-12-31 23:59:59.000001", "2008-12-30 01:01:01.000002", "46:58:57.999999"},
-	}
-	for _, test := range tests {
-		t1 := types.NewStringDatum(test.t1)
-		t2 := types.NewStringDatum(test.t2)
-		result, err := builtinTimeDiff([]types.Datum{t1, t2}, s.ctx)
-		c.Assert(err, IsNil)
-		c.Assert(result.GetMysqlDuration().String(), Equals, test.expectStr)
-	}
-}	
-```
+    ```
+    case ast.SHA, ast.SHA1:
+        tp = types.NewFieldType(mysql.TypeVarString)
+        chs = v.defaultCharset
+        tp.Flen = 40
+    ``` 
+    
+    ```
+        {`sha1(123)`, mysql.TypeVarString, "utf8"},
+        {`sha(123)`, mysql.TypeVarString, "utf8"},
+    ```
