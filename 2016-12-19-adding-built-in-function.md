@@ -123,10 +123,10 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2781/files) to add 
         c.Assert(err, IsNil)
         c.Assert(crypt.IsNull(), IsTrue)
     }
-    * Note: Besides conventional cases, you had better add some exceptional cases in which, for example, the input value is "nil" or the arguments of various types.
     ```
-
     
+    > ** Note:** Besides conventional cases, you had better add some exceptional cases in which, for example, the input value is "nil" or the arguments of various types.
+      
 3. Add the type inference information and the test case. See `plan/typeinferer.go` and `plan/typeinferer_test.go`:
 
     ```
