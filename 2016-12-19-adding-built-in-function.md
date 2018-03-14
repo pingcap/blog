@@ -30,15 +30,15 @@ The following procedure describes how to add a built-in function.
 
 1. Locate the unimplemented function.
 
-    1) Search for `errFunctionNotExists` in the `expression` directory of TiDB source code. You can find all the unimplemented functions.
+    1. Search for `errFunctionNotExists` in the `expression` directory of TiDB source code. You can find all the unimplemented functions.
 
-    2) Choose a function you are interested in. Take the SHA2 function as an example:
+    2. Choose a function you are interested in. Take the SHA2 function as an example:
 
-```
-func (b *builtinSHA2Sig) eval(row []types.Datum) (d types.Datum, err error) {
-return d, errFunctionNotExists.GenByArgs("SHA2")
-}
-```
+        ```
+        func (b *builtinSHA2Sig) eval(row []types.Datum) (d types.Datum, err error) {
+        return d, errFunctionNotExists.GenByArgs("SHA2")
+        }
+        ```
 
 2. Implement the function signature. 
 
@@ -123,8 +123,9 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2781/files) to add 
         c.Assert(err, IsNil)
         c.Assert(crypt.IsNull(), IsTrue)
     }
-    * Note: Besides conventional cases, you had better add some exceptional cases in which, for example, the input value is "nil" or the arguments of various types. 
-     ```
+    * Note: Besides conventional cases, you had better add some exceptional cases in which, for example, the input value is "nil" or the arguments of various types.
+    ```
+
     
 3. Add the type inference information and the test case. See `plan/typeinferer.go` and `plan/typeinferer_test.go`:
 
