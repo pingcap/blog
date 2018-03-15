@@ -50,7 +50,7 @@ TiKV’s Raft mainly migrates etcd Raft and supports all functions of Raft, incl
 
 Note that how TiKV and etcd process membership change is different from what is in the Raft paper. TiKV’s membership change will take effect only when the log is applied. The main purpose is for a simple implementation. But it will be risky if we only have two nodes. Since we have to remove one node from inside and if a Follower has not received the log entry of `ConfChange`, the Leader will go down and be unrecoverable, then the whole cluster will be down. Therefore, it is recommended that users deploy 3 or more odd number of nodes.
 
-The Raft library is independent and users can directly embed it into their applications. What they need to do is to process storage and message sending. This article will briefly introduce how to use Raft and you can find the code under the directory of TiKV source code [/src/raft](https://github.com/pingcap/tikv/tree/master/src/raft).
+The Raft library is independent and users can directly embed it into their applications. What they need to do is to process storage and message sending. This article will briefly introduce how to use Raft and you can find the code under the directory of TiKV source code /src/raft.
 
 ### <span id="storage">Storage</span>
 
@@ -129,7 +129,7 @@ When calling relevant logic of Raft from outside, users need to handle the persi
 
 `snapshot`: Get a snapshot of the current Storage. Sometimes, the amount of the current Storage is large and it takes time to create a snapshot. Then we have to asynchronously create it in another thread, so that the current Raft thread will not be clocked. At this time, the system can return `SnapshotTemporarilyUnavailable` error so that Raft will know snapshot is being prepared and will try again after a while. 
 
-Note that the above Storage interface is just for Raft. But actually we also use this Storage to store data like Raft log and so we need to provide other interfaces, such as `MemStorage` in Raft [storage.rs](https://github.com/pingcap/tikv/blob/master/src/raft/storage.rs) for testing. You can refer to `MemStorage` to implement your Storage.
+Note that the above Storage interface is just for Raft. But actually we also use this Storage to store data like Raft log and so we need to provide other interfaces, such as `MemStorage` in Raft storage.rs for testing. You can refer to `MemStorage` to implement your Storage.
 
 [Back to the top](#top)
 
