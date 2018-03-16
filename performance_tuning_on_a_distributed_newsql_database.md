@@ -120,7 +120,7 @@ I hope this article helps you get a good sense of some common bottleneck scenari
 
 Many of our customers, from e-commerce marketplace and gaming, to fintech, media, and travel, are already applying these tuning techniques in-production to get the full benefits of TiDB’s design, architecture, and optimizations. We look forward to sharing their use cases and experiences in the near future. 
 
-*Illustration by [**Amanda Limardi**](https://www.behance.net/amandalimadff4)*
+Illustration by [**Amanda Limardi**](https://www.behance.net/amandalimadff4)
 
 *Reprinted with permission. © IDG Communications, Inc., 2018. All rights reserved. https://www.infoworld.com/article/3258810/sql/tidb-performance-tuning-a-distributed-newsql-database.html*
 
