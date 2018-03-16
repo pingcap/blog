@@ -14,7 +14,7 @@ Doing performance tuning on distributed systems is no joking matter. It’s much
 
 [TiDB](http://bit.ly/tidb_repo_publication) is an open source hybrid transactional/analytical processing (HTAP) NewSQL database. One TiDB cluster has several TiDB servers, several TiKV servers , and a group of Placement Drivers (PD) (usually 3 or 5 nodes). The TiDB server is a stateless SQL layer, the TiKV server is the Key-Value storage layer, and PD is a manager component with god view that is responsible for storing metadata and conduct load balancing. Below is the architecture of a TiDB cluster, and you can find more details on each component in the official [TiDB documentation](https://github.com/pingcap/docs).
 
-<img src='media/tidb_architecture.jpg' align='left'alt=‘TiDB Architecture’/>
+<img src='media/tidb_architecture.jpg' align='left' alt=‘TiDB Architecture’/>
 
 *TiDB Architecture*
 
@@ -38,7 +38,7 @@ There are three key processes at play in processing this statement: transforming
 
 Unlike other database systems, TiDB only stores KV pairs in order to provide infinite horizontal scalability with strong consistency. So how do we implement high-level concepts, such as database, table, and index? In TiDB, each table has an associated global unique number called "table-id." The keys of all the data in a particular table, including records and indexes, all begin with the 8 bytes table-id. Each index has a table scope unique number called “index-id.” The following two lines show the encoding rules of record keys and index keys.
 
-<img src='media/from_sql_to_kv_pairs.jpg' align='left'alt=‘From SQL to KV pairs’/>
+<img src='media/from_sql_to_kv_pairs.jpg' align='left' alt=‘From SQL to KV pairs’/>
 
 *Encoding rules of record keys and index keys*
 
