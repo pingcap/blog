@@ -39,7 +39,7 @@ There are three key processes at play in processing this statement: transforming
 Unlike other database systems, TiDB only stores KV pairs in order to provide infinite horizontal scalability with strong consistency. So how do we implement high-level concepts, such as database, table, and index? In TiDB, each table has an associated global unique number called "table-id." The keys of all the data in a particular table, including records and indexes, all begin with the 8 bytes table-id. Each index has a table scope unique number called “index-id.” The following two lines show the encoding rules of record keys and index keys.
 
 <img src='media/from_sql_to_kv_pairs.jpg' align='left' alt=‘From SQL to KV pairs’/>
-
+<br/>
 *Encoding rules of record keys and index keys*
 
 #### The Concept of Region
