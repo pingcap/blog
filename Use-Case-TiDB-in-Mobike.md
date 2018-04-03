@@ -5,8 +5,8 @@ summary: TiDB has been using the TiDB database in the production environment sin
 tags: ['TiDB','Use Case','Mobike']
 ---
 
-**Industry:** Ridesharing
-
+**Industry:** Ridesharing 
+                 
 **Data Growth Rate:** ~30TB per day
 
 **Author:** Chengjie Ding and Ming Hu (Infrastructure Platform Engineers at Mobike)
@@ -60,6 +60,8 @@ The TiDB ecosystem also has a wealth of other enterprise-level tools, such as th
 The success rate of locking and unlocking a smart bike is one of the key metrics for Mobike, because failure to lock/unlock will cause bad user experience and even user attrition. To deliver a smooth experience, we need constant insights on the lock/unlock success rate based on regions, application versions, terminals, users, and bikes to locate the bikes with issues. Each time users lock or unlock bikes, usually during rush hours, massive log information of the bike is being generated. This data volume is estimated to be tens of billions of rows per year.
 
 We deploy TiDB to directly help support the system behind the success rate of locking and unlocking, which fulfills all the above requirements. See the following diagram for how TiDB is integrated in our system:
+
+![A real-time data analysis system with TiDB and TiSpark](media/success_rate_of_locking_and_unlocking_integration.png)
 
 With TiDB, alert is sent to the administrators when the system detects a success rate drop of locking and unlocking within minutes. We can quickly find a single failed ride and the associated user and bike from the database, which allow us to locate the faulty bike quickly.
 
