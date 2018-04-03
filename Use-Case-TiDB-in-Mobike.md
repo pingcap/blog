@@ -5,8 +5,10 @@ summary: TiDB has been using the TiDB database in the production environment sin
 tags: ['TiDB','Use Case','Mobike']
 ---
 
-**Industry:** Ridesharing                  
+**Industry:** Ridesharing
+
 **Data Growth Rate:** ~30TB per day
+
 **Author:** Chengjie Ding and Ming Hu (Infrastructure Platform Engineers at Mobike)
 
 [Mobike](https://www.crunchbase.com/organization/mobike) is the world’s first and largest dockless bike-sharing provider, serving over 200 million users in 200 cities across the world, operating over 9 million smart bikes. It’s an affordable and convenient way of transportation for short urban trips, with a patented bike design with a smart lock system and a mobile app. We handle more than 30 million rides for our users every single day.
