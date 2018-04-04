@@ -162,3 +162,5 @@ Our close cooperation with the PingCAP team and interaction with TiDB’s open-s
 
 In the future, we plan to continue working closely with PingCAP to strengthen the management tools we are developing, implement TiDB even deeper into our infrastructure, and apply TiDB more widely inside Mobike.
 
+Another Use Case:
+[The Hybrid Database Capturing Perishable Insights at Yiguo](https://www.datanami.com/2018/02/22/hybrid-database-capturing-perishable-insights-yiguo/)
