@@ -47,9 +47,9 @@ See the following list for all the packages and their main functions:
 	
 	This package can be considered to be the interface between the MySQL Protocol Layer and the SQL layer. There are three main files:
 
-	+ [`session.go`](https://github.com/pingcap/tidb/blob/master/session.go): Each session object corresponds to a connection of the MySQL client. The MySQL protocol layer manages the binding between the connection and the session. All the MySQL queries/commands are executed by calling the Session interface.
-	+ [`tidb.go`](https://github.com/pingcap/tidb/blob/master/tidb.go): This file includes some functions to be called by `session.go`.
-	+ [`bootstrap.go`](https://github.com/pingcap/tidb/blob/master/bootstrap.go): If a TiDB Server is started but the system is not yet initialized, the `bootstrap.go` file will initiate the system. See the following section for the detailed information.
+	+ [`session.go`](https://github.com/pingcap/tidb/blob/master/session/session.go): Each session object corresponds to a connection of the MySQL client. The MySQL protocol layer manages the binding between the connection and the session. All the MySQL queries/commands are executed by calling the Session interface.
+	+ [`tidb.go`](https://github.com/pingcap/tidb/blob/master/session/tidb.go): This file includes some functions to be called by `session.go`.
+	+ [`bootstrap.go`](https://github.com/pingcap/tidb/blob/master/session/bootstrap.go): If a TiDB Server is started but the system is not yet initialized, the `bootstrap.go` file will initiate the system. See the following section for the detailed information.
 
 + [docs](https://github.com/pingcap/tidb/tree/master/docs)
 
@@ -223,7 +223,7 @@ The following diagram shows how TiDB processes a SQL statement:
 
 ![]({{ site.baseurl }}/assets/img/process_flow.png)
 
-The entry point of the process is in the [`session.go`](https://github.com/pingcap/tidb/blob/master/session.go) file. TiDB-Server calls the `Session.Execute()` interface, inputs the SQL statement and implements `Session.Execute()`.
+The entry point of the process is in the [`session.go`](https://github.com/pingcap/tidb/blob/master/session/session.go) file. TiDB-Server calls the `Session.Execute()` interface, inputs the SQL statement and implements `Session.Execute()`.
 
 1. First, call `Compile()` to parse the SQL statement using `tidb.Parse()` and get a list of `stmt` where each statement is an AST and each syntax unit is a Node of the AST. The structure is defined in the [ast](https://github.com/pingcap/tidb/tree/master/ast) package.
 2. After the AST is got, call the the `Compiler` in the [executor](https://github.com/pingcap/tidb/tree/master/executor) package. Input the AST and get `Compiler.Compile()`. During this process, the statement validation, query plan generation and optimization are all completed.
