@@ -54,7 +54,7 @@ TiDB internal:
 - [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/)
 - [Scheduling](https://pingcap.github.io/blog/2017/07/20/tidbinternal3/)
 
-[Release Notes](https://pingcap.com/doc-rn)
+[Release Notes](https://pingcap.com/docs/releases/ga/)
 
 [Best Practice](https://pingcap.github.io/blog/2017/07/24/tidbbestpractice/)
 
