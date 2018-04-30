@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.0 is Ready - Faster, Smarter, and Battle-Tested
-author: Shen Li
+author: ['Shen Li']
 date: 2018-04-29
 summary: TiDB 2.0 is released! We absorbed insights and feedbacks from our customers, listened to requests and issues from our community, and reflected internally on our ultimate vision of building a distributed hybrid transactional and analytical processing database that scales itself, heals itself, and lives in the cloud. 
 tags: ['TiDB', 'Release']
