@@ -6,6 +6,8 @@ summary: TiDB 2.0 is released! We absorbed insights and feedbacks from our custo
 tags: ['TiDB','Release']
 ---
 
+TiDB 2.0 is released!
+
 ![TiDB 2.0 is released](media/tidb-2-0-announcement.jpg)
 
 When we [launched](https://pingcap.com/blog/2017-10-17-announcement/#pingcap-launches-tidb-1-0-a-scalable-hybrid-database-solution) TiDB 1.0 last October, we were excited but also a bit nervous. After working on TiDB heads-down, non-stop for more than two years, even with the support of a [large (and growing)](https://github.com/pingcap) open-source community, we weren’t sure how the world would receive what we’ve built. What we saw during the following six months was nothing short of overwhelming. More than 200 companies have deployed [TiDB](http://bit.ly/tidb_repo_publication) in their production environments. These companies come from a wide range of industries from e-commerce and food delivery, to fintech, media, gaming, and travel. (You can see an always-incomplete and constantly-updated list of adopters [here](http://bit.ly/adopters_list).)
