@@ -6,7 +6,7 @@ summary: TiDB 2.0 is released! We absorbed insights and feedbacks from our custo
 tags: ['TiDB', 'Release']
 ---
 
-TiDB 2.0 is Ready!
+TiDB 2.0 is Ready! TiDB is an open-source distributed scalable Hybrid Transactional and Analytical Processing (HTAP) database. It features infinite horizontal scalability, strong consistency, and high availability. TiDB is MySQL compatible and serves as a one-stop data warehouse for both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workload.
 
 ![TiDB 2.0 is released](media/tidb-2-0-announcement.jpg)
 
