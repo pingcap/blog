@@ -17,7 +17,7 @@ But this kind of situation cannot be avoided completely. To err is human. For ev
 
 What can do you when things like this happen? The only thing you know is that the data is faulted. But what is the correct data? You have no idea. It would be great if you could go back in time and find the lost data.
 
-The History Read feature of TiDB supports reading the history versions and is specially tailored for this requirement and scenario. All the data before the faulted version can be accessed and therefore the damage can be minimized.
+The History Read feature of [TiDB](https://github.com/pingcap/tidb) supports reading the history versions and is specially tailored for this requirement and scenario. All the data before the faulted version can be accessed and therefore the damage can be minimized.
 
 ### How to use the History Read feature?
 
@@ -53,7 +53,7 @@ Compared with the similar features of other databases, the History Read feature 
 
 **Note:** The implementation in this document is a simplified version and does not involve the distributed transactions. The implementation in TiDB is more complex than this. We will provide the detailed implementation of the transaction model later. Stay tuned!
 
-TiDB is on top of TiKV. The storage engine at the bottom level for TiKV is RocksDB where data is stored in Key-Value pairs. A row in a table in the SQL layer needs to be encoded twice to get the final Key in RocksDB:
+TiDB is on top of [TiKV](https://github.com/pingcap/tikv). The storage engine at the bottom level for TiKV is RocksDB where data is stored in Key-Value pairs. A row in a table in the SQL layer needs to be encoded twice to get the final Key in RocksDB:
 
 -  The Key after the first-pass encoding includes table ID and record ID. Using this Key can locate this specific row.
 
