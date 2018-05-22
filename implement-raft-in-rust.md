@@ -140,9 +140,9 @@ Now that you have created a Raft node, the next step is to drive and run the Raf
         }
     ...
     }
-  ```
+    ```
 
-    In the above example, we use a channel to receive the `propose` and `step` messages. We only propose the request ID to the Raft log. In your own practice, you can embed the ID in your request and propose the encoded binary request data. 
+In the above example, we use a channel to receive the `propose` and `step` messages. We only propose the request ID to the Raft log. In your own practice, you can embed the ID in your request and propose the encoded binary request data. 
 
 ### Step 3: Process the `Ready` State
 
