@@ -94,41 +94,55 @@ Now that you have created a Raft node, the next step is to drive and run the Raf
 
 1. You need a timer to run the Raft node regularly. See the following example for using Rust channel `recv_timeout`:
 
-  ```rust
-  let mut t = Instant::now();  let mut timeout = Duration::from_millis(100);  loop {      match receiver.recv_timeout(timeout) {          Ok(...) => (),          Err(RecvTimeoutError::Timeout) => (),          Err(RecvTimeoutError::Disconnected) => return,      }
-      let d = t.elaspsed();      if d >= timeout {          t = Instant::now();
-          timeout = Duration::from_millis(100);          // We drive Raft every 100ms.          r.tick();      } else {
-          timeout -= d;
-      }  }
-  ```
-  As is shown in the above example, the Raft node is driven to run every 100 ms set by the `tick` function.
+    ```rust
+    let mut t = Instant::now();
+    let mut timeout = Duration::from_millis(100);
+
+    loop {
+        match receiver.recv_timeout(timeout) {
+            Ok(...) => (),
+            Err(RecvTimeoutError::Timeout) => (),
+            Err(RecvTimeoutError::Disconnected) => return,
+        }
+        let d = t.elaspsed();
+        if d >= timeout {
+            t = Instant::now();
+            timeout = Duration::from_millis(100);
+            // We drive Raft every 100ms.
+            r.tick();
+        } else {
+            timeout -= d;
+        }
+    }
+    ```
+    As is shown in the above example, the Raft node is driven to run every 100 ms set by the `tick` function.
 
 2. Use the `propose` function to drive the Raft node when the client sends a request to the Raft server. You can call `propose` to add the request to the Raft log explicitly.
 
-  In most cases, the client needs to wait for a response for the request. For example, if the client writes a value to a key and wants to know whether the write succeeds or not, but the write flow is asynchronous in Raft, so the write log entry must be replicated to other followers, then committed and at last applied to the state machine, so here we need a way to notify the client after the write is finished. 
+    In most cases, the client needs to wait for a response for the request. For example, if the client writes a value to a key and wants to know whether the write succeeds or not, but the write flow is asynchronous in Raft, so the write log entry must be replicated to other followers, then committed and at last applied to the state machine, so here we need a way to notify the client after the write is finished. 
   
-  One simple way is to use a unique ID for the client request, and save the associated callback function in a hash map. When the log entry is applied, we can get the ID from the decoded entry, call the corresponding callback, and notify the client. 
+    One simple way is to use a unique ID for the client request, and save the associated callback function in a hash map. When the log entry is applied, we can get the ID from the decoded entry, call the corresponding callback, and notify the client. 
 
 3. You can call the `step` function when you receive the Raft messages from other nodes. 
 
-  Here is a simple example to use `propose` and `step`:
+    Here is a simple example to use `propose` and `step`:
 
-  ```rust
-  let mut cbs = HashMap::new();
-  loop {
-      match receiver.recv_timeout(d) {
-          Ok(Msg::Propose { id, callback }) => {
-              cbs.insert(id, callback);
-              r.propose(vec![id], false).unwrap();
-          }
-          Ok(Msg::Raft(m)) => r.step(m).unwrap(),
-          ...
-      }
-  ...
-  }
+    ```rust
+    let mut cbs = HashMap::new();
+    loop {
+        match receiver.recv_timeout(d) {
+            Ok(Msg::Propose { id, callback }) => {
+                cbs.insert(id, callback);
+                r.propose(vec![id], false).unwrap();
+            }
+            Ok(Msg::Raft(m)) => r.step(m).unwrap(),
+            ...
+        }
+    ...
+    }
   ```
 
-  In the above example, we use a channel to receive the `propose` and `step` messages. We only propose the request ID to the Raft log. In your own practice, you can embed the ID in your request and propose the encoded binary request data. 
+    In the above example, we use a channel to receive the `propose` and `step` messages. We only propose the request ID to the Raft log. In your own practice, you can embed the ID in your request and propose the encoded binary request data. 
 
 ### Step 3: Process the `Ready` State
 
@@ -154,5 +168,4 @@ As a distributed transactional key-value database that is strongly consistent, T
 
 If you are interested in Raft and Rust, and want to build your own consistent service using [raft-rs](https://github.com/pingcap/tidb), please let me know (tl@pingcap.com). I would be thrilled to hear from you!
 
-*Illustration by **[Amanda Limard*i](https://www.behance.net/amandalimadff4)
-
+*Illustration by [**Amanda Limardi**](https://www.behance.net/amandalimadff4)*
