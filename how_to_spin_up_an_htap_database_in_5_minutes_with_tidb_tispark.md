@@ -220,7 +220,7 @@ Now let’s launch TiSpark, the last missing piece of our hybrid database puzzle
 
 Now, let’s go back to the MySQL tab or window, make some changes to our tables, and see if the changes show up on the TiSpark side.
 
-1. In the MySQL client, try this UPDATE:
+1. In the MySQL client, try this `UPDATE`:
 
 	```sql
 	update nation set n_nationkey=444 where n_name="CANADA";
