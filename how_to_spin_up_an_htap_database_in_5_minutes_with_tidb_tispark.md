@@ -1,5 +1,5 @@
 ---
-title: How To Spin Up an HTAP Database in 5 Minutes with TiDB + TiSpark
+title: How To Spin Up an HTAP Database in 5 Minutes with TiDB and TiSpark
 author: ['Queeny Jin']
 date: 2018-06-08
 summary: In this 5-minute tutorial for beginners, we will show you how to spin up a standard TiDB cluster using Docker Compose on your local computer, so you can get a taste of its hybrid power, before using it for work or your own project in production.
