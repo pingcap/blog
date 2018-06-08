@@ -72,7 +72,7 @@ To check if your deployment is successful:
 
 ![Grafana display of TiKV metrics](media/grafana_display_of_tikv_metrics.png)
 
-<center> *Grafana display of TiKV metrics* </center>
+<center> Grafana display of TiKV metrics </center>
 
 * Now go to TiDB-vision at [http://localhost:8010](http://localhost:8010) (TiDB-vision is a cluster visualization tool we built in-house to see data transfer and load-balancing inside your cluster).
 
@@ -82,7 +82,7 @@ To check if your deployment is successful:
 
 ![TiDB-vision](media/tidb_vision.png)
 
-<center> *TiDB-vision* </center>
+<center> TiDB-vision </center>
 
 # Test TiDB Compatibility with MySQL
 
@@ -113,7 +113,7 @@ Server version: 5.7.10-TiDB-v2.0.0-rc.4-31
 ```
 ![TiDB Compatibility with MySQL](media/test_tidb_compatibility_with_mysql.png)
 
-<center> *The Compatibility of TiDB with MySQL* </center>
+<center> The Compatibility of TiDB with MySQL </center>
 
 
 # Let’s get some data!
