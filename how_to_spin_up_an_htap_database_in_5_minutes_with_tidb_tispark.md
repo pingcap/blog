@@ -14,11 +14,11 @@ In this 5-minute tutorial, we will show you how to spin up a standard TiDB clust
 
 Ready? Let’s get started!
 
-# Setting Up:
+# Setting Up
 
 Before we start deploying TiDB, we’ll need a few things first: `Brew`, `wget`, Docker, and MySQL. If you don’t have them installed already, here are the instructions to get them.
 
-1. To install `Brew`, go [here](https://brew.sh/) .
+1. To install `Brew`, go [here](https://brew.sh/).
 
 2. To install `wget`, use the command below in your Terminal: 
 
@@ -84,7 +84,7 @@ To check if your deployment is successful:
 
 <center> TiDB-vision </center>
 
-# Test TiDB Compatibility with MySQL
+# Test TiDB compatibility with MySQL
 
 As we mentioned, TiDB is MySQL compatible, which you can essentially use TiDB as MySQL slaves with instant horizontal scalability. That’s how many innovative tech companies, like [Mobike](https://www.pingcap.com/blog/Use-Case-TiDB-in-Mobike/), use TiDB.
 
@@ -220,7 +220,7 @@ Now let’s launch TiSpark, the last missing piece of our hybrid database puzzle
 
 Now, let’s go back to the MySQL tab or window, make some changes to our tables, and see if the changes show up on the TiSpark side.
 
-1. In MySQL client, try this UPDATE:
+1. In the MySQL client, try this UPDATE:
 
 	```sql
 	update nation set n_nationkey=444 where n_name="CANADA";
@@ -233,7 +233,7 @@ Now, let’s go back to the MySQL tab or window, make some changes to our tables
 	select * from nation;
 	```
 
-3. Now go to the TiSpark Terminal window, see if you see the same update made:
+3. Now go to the TiSpark Terminal window, and see if you can see the same update:
 
 	```sql
 	spark.sql("select * from nation").show(30);
@@ -247,6 +247,6 @@ You can see that both the MySQL and TiSpark clients return the same results -- f
 
 # Summary
 
-With this simple deployment of TiDB on your local machine, you now have a functioning hybrid transactional and analytical processing (HTAP) database. You can continue to make changes to the data in your MySQL client (simulating transactional workloads) and analyze the data with those changes in TiSpark (simulating real-time analytics).
+With this simple deployment of TiDB on your local machine, you now have a functioning Hybrid Transactional and Analytical processing (HTAP) database. You can continue to make changes to the data in your MySQL client (simulating transactional workloads) and analyze the data with those changes in TiSpark (simulating real-time analytics).
 
 Of course, launching TiDB on your local machine is purely for experimental purposes. If you are interested in trying out TiDB for your production environment, send us a note: [info@pingcap.com](mailto:info@pingcap.com) or reach out on [our website](https://www.pingcap.com/en/). We’d be happy to help you!
