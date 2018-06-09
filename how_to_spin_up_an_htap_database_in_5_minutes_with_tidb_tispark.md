@@ -16,30 +16,35 @@ Ready? Let’s get started!
 
 # Setting Up
 
-Before we start deploying TiDB, we’ll need a few things first: `Brew`, `wget`, Docker, and MySQL. If you don’t have them installed already, here are the instructions to get them.
+Before we start deploying TiDB, we’ll need a few things first: `brew`, `wget`, Git, Docker, and a MySQL client. If you don’t have them installed already, here are the instructions to get them.
 
-1. To install `Brew`, go [here](https://brew.sh/).
+1. To install `brew`, go [here](https://brew.sh/).
 
 2. To install `wget`, use the command below in your Terminal: 
 
     ```bash
     brew install wget --with-libressl
-
     ```
 
-3. Install Docker: [https://www.docker.com/community-edition](https://www.docker.com/community-edition).
+3. To install Git, use the command below in your Terminal: 
 
-4. Install MySQL: [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/).
+    ```bash
+    brew install git
+    ```
+
+4. Install Docker: [https://www.docker.com/community-edition](https://www.docker.com/community-edition).
+
+5. Install a MySQL client: [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/).
 
 # Spin up a TiDB cluster
 
-Assuming you’ve installed Docker on your laptop without a hitch, let’s deploy TiDB.
+Now that Docker is set up, let's deploy TiDB!
 
 1. Clone TiDB Docker Compose onto your laptop:
 
-	```bash
-	git clone https://github.com/pingcap/tidb-docker-compose
-	```
+    ```bash
+    git clone https://github.com/pingcap/tidb-docker-compose
+    ```
 
 2. Change your directory to `tidb-docker-compose`:
 
@@ -50,8 +55,7 @@ Assuming you’ve installed Docker on your laptop without a hitch, let’s deplo
 3. Deploy TiDB on your laptop:
 
     ```bash
-	docker-compose up -d
-
+    docker-compose up -d
     ```
 
 You can see messages in your terminal launching the default components of a TiDB cluster: 1 TiDB instance, 3 TiKV instances, 3 Placement Driver (PD) instances, Prometheus, Grafana, 2 TiSpark instances (one master, one slave), and a TiDB-Vision instance. 
@@ -74,7 +78,7 @@ To check if your deployment is successful:
 
 <center> Grafana display of TiKV metrics </center>
 
-* Now go to TiDB-vision at [http://localhost:8010](http://localhost:8010) (TiDB-vision is a cluster visualization tool we built in-house to see data transfer and load-balancing inside your cluster).
+* Now go to TiDB-vision at [http://localhost:8010](http://localhost:8010) (TiDB-vision is a cluster visualization tool to see data transfer and load-balancing inside your cluster).
 
     * You can see a ring of 3 [TiKV](http://bit.ly/tikv_repo_publication) nodes. TiKV applies the Raft consensus protocol to provide strong consistency and high availability. Light grey blocks are empty spaces, dark grey blocks are Raft followers, and dark green blocks are Raft leaders. If you see flashing green bands, that represent communications between TiKV nodes.
 
@@ -86,7 +90,7 @@ To check if your deployment is successful:
 
 # Test TiDB compatibility with MySQL
 
-As we mentioned, TiDB is MySQL compatible, which you can essentially use TiDB as MySQL slaves with instant horizontal scalability. That’s how many innovative tech companies, like [Mobike](https://www.pingcap.com/blog/Use-Case-TiDB-in-Mobike/), use TiDB.
+As we mentioned, TiDB is MySQL compatible. You can use TiDB as MySQL slaves with instant horizontal scalability. That’s how many innovative tech companies, like [Mobike](https://www.pingcap.com/blog/Use-Case-TiDB-in-Mobike/), use TiDB.
 
 To test out this MySQL compatibility:
 
@@ -94,16 +98,15 @@ To test out this MySQL compatibility:
 
 2. Add MySQL to the path (if you haven’t already):
 
-	```bash
-	export PATH=${PATH}:/usr/local/mysql/bin
-
-	```
+    ```bash
+    export PATH=${PATH}:/usr/local/mysql/bin
+    ```
 
 3. Launch a MySQL client that connects to TiDB:
 
-	```sql
-	mysql -h 127.0.0.1 -P 4000  -u root
-	```
+    ```sql
+    mysql -h 127.0.0.1 -P 4000  -u root
+    ```
 
 **Result:** You will see the following message, which shows that TiDB is indeed connected to your MySQL instance:
 
@@ -123,52 +126,46 @@ Now we will grab some sample data that we can play around with.
 
 1. Open a new Terminal tab or window and download the `tispark-sample-data.tar.gz` file.
 
-	```bash
-	wget http://download.pingcap.org/tispark-sample-data.tar.gz
-	```
+    ```bash
+    wget http://download.pingcap.org/tispark-sample-data.tar.gz
+    ```
 
 2. Unzip the sample file:
 
-	```bash
-	tar zxvf tispark-sample-data.tar.gz
-	```
+    ```bash
+    tar zxvf tispark-sample-data.tar.gz
+    ```
 
-3. Change your directory to `tispark-sample-data`:
-
-	```bash
-	cd tispark-sample-data
-	```
-
-4. Inject the sample test data from sample data folder to MySQL:
+3. Inject the sample test data from sample data folder to MySQL:
 	
-	```sql
-	mysql --local-infile=1 -u root -h 127.0.0.1 -P 4000 < dss.ddl 
-	```
-	This will take a few seconds.
+    ```bash
+    mysql --local-infile=1 -u root -h 127.0.0.1 -P 4000 < tispark-sample-data/dss.ddl
+    ```
+    This will take a few seconds.
 
-5. Go back to your MySQL client window or tab, and see what’s in there: 
+4. Go back to your MySQL client window or tab, and see what’s in there: 
 
-	```sql
-	show databases;
-	```
+    ```sql
+    SHOW DATABASES;
+    ```
 
-	**Result:** You can see the `TPCH_001` database on the list. That’s the sample data we just ported over.
+    **Result:** You can see the `TPCH_001` database on the list. That’s the sample data we just ported over.
 
 	![Imported data](media/imported_data.png)
 
-	Now let’s go into `TPCH_001`:
+    Now let’s go into `TPCH_001`:
 
 	```sql
-	use tpch_001;
-	show tables;
+	USE TPCH_001;
+	SHOW TABLES;
 	```
 
-	**Result:** You can see all the tables in `TPCH_001`, like `NATION`, `ORDERS`, etc.
+    **Result:** You can see all the tables in `TPCH_001`, like `NATION`, `ORDERS`, etc.
 
-6. Let’s see what’s in the `NATION` table:
+5. Let’s see what’s in the `NATION` table:
 
     ```sql
-    select * from NATION;
+    SELECT * from NATION;
     ```
 
 **Result:** You’ll see a list of countries with some keys and comments. 
@@ -183,65 +180,61 @@ Now let’s launch TiSpark, the last missing piece of our hybrid database puzzle
 
 2. Launch Spark within TiDB with the following command:
 
-	```bash
-	docker-compose exec tispark-master  /opt/spark-2.1.1-bin-hadoop2.7/bin/spark-shell
-
-	```
+    ```bash
+    docker-compose exec tispark-master  /opt/spark-2.1.1-bin-hadoop2.7/bin/spark-shell
+    ```
 	
-	This will take a few minutes.
-	
-	**Result:** Now you can Spark!
-	
-	![Now you can Spark](media/now_you_can_spark.png)          
+    This will take a few minutes.
+    **Result:** Now you can Spark!
+    ![Now you can Spark](media/now_you_can_spark.png)          
 
 3. Use the following three commands, one by one, to bind TiSpark to this Spark instance and map to the database `TPCH_001`, the same sample data that’s available in our MySQL instance:
 
-	```bash
-	import org.apache.spark.sql.TiContext
-	val ti = new TiContext(spark)
-	ti.tidbMapDatabase("TPCH_001")
-	```
+    ```bash
+    import org.apache.spark.sql.TiContext
+    val ti = new TiContext(spark)
+    ti.tidbMapDatabase("TPCH_001")
+    ```
 
-	It looks something like this:
-
-	![Bind TiSpark to this Spark instance](media/bind_tispark_to_this_spark_instance.png)
+    It looks something like this:
+    ![Bind TiSpark to this Spark instance](media/bind_tispark_to_this_spark_instance.png)
 
 4. Now, let’s see what’s in the `NATION` table (should be the same as what we saw on our MySQL client):
-
-	```sql
-	spark.sql("select * from nation").show(30);
-	```
+    
+    ```java
+    spark.sql("select * from nation").show(30);
+    ```
 	
-	**Result:**
-	
-	![What’s in the NATION table in Spark](media/whats_in_the_nation_table_in_spark.png)
+    **Result:**
+    
+    ![What’s in the NATION table in Spark](media/whats_in_the_nation_table_in_spark.png)
 	
 # Let’s get hybrid!
 
 Now, let’s go back to the MySQL tab or window, make some changes to our tables, and see if the changes show up on the TiSpark side.
 
 1. In the MySQL client, try this `UPDATE`:
-
-	```sql
-	update nation set n_nationkey=444 where n_name="CANADA";
-	select * from nation;
-	```
+    
+    ```sql
+    UPDATE nation set n_nationkey=444 where n_name="CANADA";
+    SELECT * FROM NATION;
+    ```
 
 2. Then see if the update worked:
 
-	```sql
-	select * from nation;
-	```
+    ```sql
+    SELECT * from NATION;
+    ```
 
 3. Now go to the TiSpark Terminal window, and see if you can see the same update:
 
-	```sql
-	spark.sql("select * from nation").show(30);
-	```
-	
-	**Result:** The `UPDATE` you made on the MySQL side shows up immediately in TiSpark!
-	
-	![The same result is showing on both the MySQL client and TiSpark Client](media/the_same_result_is_showing_on_both_the_mysql_client_and_tispark_client.png)
+    ```java
+    spark.sql("select * from nation").show(30);
+    ```
+    
+    **Result:** The `UPDATE` you made on the MySQL side shows up immediately in TiSpark!
+    
+    ![The same result is showing on both the MySQL client and TiSpark Client](media/the_same_result_is_showing_on_both_the_mysql_client_and_tispark_client.png)
 
 You can see that both the MySQL and TiSpark clients return the same results -- fresh data for you to do analytics on right away. Voila!
 
