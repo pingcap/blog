@@ -165,7 +165,7 @@ Now we will grab some sample data that we can play around with.
 5. Let’s see what’s in the `NATION` table:
 
     ```sql
-    SELECT * from NATION;
+    SELECT * FROM NATION;
     ```
 
 **Result:** You’ll see a list of countries with some keys and comments. 
@@ -216,14 +216,14 @@ Now, let’s go back to the MySQL tab or window, make some changes to our tables
 1. In the MySQL client, try this `UPDATE`:
     
     ```sql
-    UPDATE nation set n_nationkey=444 where n_name="CANADA";
+    UPDATE NATION SET N_NATIONKEY=444 WHERE N_NAME="CANADA";
     SELECT * FROM NATION;
     ```
 
 2. Then see if the update worked:
 
     ```sql
-    SELECT * from NATION;
+    SELECT * FROM NATION;
     ```
 
 3. Now go to the TiSpark Terminal window, and see if you can see the same update:
