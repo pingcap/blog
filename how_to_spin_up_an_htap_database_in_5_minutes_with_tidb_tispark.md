@@ -34,7 +34,11 @@ Before we start deploying TiDB, we’ll need a few things first: `brew`, `wget`,
 
 4. Install Docker: [https://www.docker.com/community-edition](https://www.docker.com/community-edition).
 
-5. Install a MySQL client: [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/).
+5. Install a MySQL client
+
+    ```bash
+    brew install mysql-client
+    ```
 
 # Spin up a TiDB cluster
 
