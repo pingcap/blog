@@ -50,13 +50,14 @@ Now that Docker is set up, let's deploy TiDB!
     git clone https://github.com/pingcap/tidb-docker-compose
     ```
 
-2. Change your directory to `tidb-docker-compose`:
+2. Optionally, you can use `docker-compose pull` to get the latest Docker images.
+3. Change your directory to `tidb-docker-compose`:
 
     ```bash
     cd tidb-docker-compose
     ```
 
-3. Deploy TiDB on your laptop:
+4. Deploy TiDB on your laptop:
 
     ```bash
     docker-compose up -d
