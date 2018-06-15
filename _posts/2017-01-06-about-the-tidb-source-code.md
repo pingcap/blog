@@ -88,7 +88,7 @@ All kinds of executors implement this interface. The executing engine in TiDB ad
 	
 	+ [`logical_plan_builder.go`](https://github.com/pingcap/tidb/blob/master/plan/logical_plan_builder.go): Makes optimized logical query plans.
 	
-	+ [`physical_plan_builder.go`](https://github.com/pingcap/tidb/blob/master/plan/physical_plan_builder.go): Makes the physical query plans based on the logical plans.
+	+ [`physical_plan_builder.go`](https://github.com/pingcap/tidb/blob/12c87929b8444571b9e84d2c0d5b85303d27da64/plan/physical_plan_builder.go): Makes the physical query plans based on the logical plans.
 
 + [privilege](https://github.com/pingcap/tidb/tree/master/privilege)
 
