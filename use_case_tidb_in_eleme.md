@@ -97,7 +97,7 @@ MySQL is our main database solution at Ele.me for archiving. To archive a large 
 
 **Pain Point 2**: Scaling the storage capacity horizontally was difficult. MySQL does not scale easily, and we keep on adding large disks but run out of room quickly. We had to constantly create new archive clusters, posing risks to our applications that need access to the archive from time to time. 
 
-**Pain Point Three**: It was time-consuming to resynchronize data after a failure recovery. Although the archive cluster was highly available, recovering from a master switch from unexpected downtime took a long time because of the nature of a master-slave architecture. 
+**Pain Point 3**: It was time-consuming to resynchronize data after a failure recovery. Although the archive cluster was highly available, recovering from a master switch from unexpected downtime took a long time because of the nature of a master-slave architecture. 
 
 Thankfully, TiDB has the right features and design to provide online DDL, simple horizontal scalability, and Raft-based auto-recovery and self-healing, to help us solve all three pain points. 
 
