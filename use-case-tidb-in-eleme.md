@@ -25,7 +25,7 @@ Before choosing TiDB/TiKV, we carefully evaluated other options -- [TokuDB](http
 
 * MySQL Cluster and Percona XtraDB Cluster are scalable but only in their computing capability, not storage capacity. DDL for big tables also remains a tough task.
 
-* Column-oriented databases like [Cassandra](https://en.wikipedia.org/wiki/Cassandra) and Vertica support elastic scalability of both computing and storage with safe and fast DDL, but they are non-relational databases and do not support distributed transactions. All of our existing MySQL-based applications must be transformed to be compatible with them, which creates a lot of work. 
+* Column-oriented databases like [Cassandra](https://en.wikipedia.org/wiki/Cassandra) and Vertica support elastic scalability of both computing and storage with safe and fast DDL, but Cassandra is a non-relational database and does not support distributed transactions while Vertica is not designed for OLTP workloads. All of our existing MySQL-based applications must be transformed to be compatible with them, which creates a lot of work. 
 
 * HBase has the same advantages and disadvantages of column-oriented databases. In addition, its operation and maintenance costs is too high for our archive job.
 
