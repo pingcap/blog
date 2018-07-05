@@ -85,7 +85,7 @@ In the second half of 2017, we deployed TiKV as Ele.me’s main key-value storag
 
 ## Use Case 2: TiDB As Archive 
 
-As our business continues to grow, so does our data volume, which constantly consumes more physical resources like disks and CPUs and affecting performance. 
+As our business continues to grow, so does our data volume, which constantly consumes more physical resources like disks and CPUs and affects performance. 
 
 To fix this, we often archive data on a regular basis from online services to offline storage. Some of our online services only need data from the last three weeks or three months. 
 

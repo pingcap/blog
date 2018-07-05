@@ -65,7 +65,7 @@ We deploy TiDB to directly help support the system behind the success rate of lo
 
 With TiDB, alert is sent to the administrators when the system detects a success rate drop of locking and unlocking within minutes. We can quickly find a single failed ride and the associated user and bike from the database, which allow us to locate the faulty bike quickly.
 
-## **Case 2: Real-Time Data Analysis**
+### **Case 2: Real-Time Data Analysis**
 
 As our data volume continues to grow exponentially, we need accessible and accurate real-time data analysis to keep our competitive edge vis-a-vis other bikesharing platforms. Before we implemented TiDB, we had several dozens MySQL clusters, some of which are sharded databases, while others are standalone instances. But MySQL was not designed for processing complicated queries against massive datasets, which made real-time data analysis all the more challenging.
 
@@ -83,7 +83,7 @@ The following diagram depicts our implementation of a real-time data analysis sy
 
 Currently, our TiDB cluster holds several dozen nodes with multiple TBs of data. Benefiting from the high available architecture of TiDB, our system is stable and can achieve horizontal scalability simply by adding more x86 servers, all the while providing real-time data analytics capabilities no matter how quickly our datasets grow.
 
-## **Case 3: OLTP for the Mobike Store**
+### **Case 3: OLTP for the Mobike Store**
 
 Mobike Store is an online shopping platform for users to purchase items using Mobike coins--an innovative loyalty reward program that gained wide popularity among our riders. Users can collect these Mobike coins in various ways, based on their riding history, frequency, and particular behaviors.  
 
@@ -98,7 +98,7 @@ Based on our internal test results, TiDB is well-suited to support Mobike Storeâ
 
 Since we deployed TiDB, the data size for OLTP in Mobike Store has reached tens of billions of rows and operation has been smooth, with timely and professional support from the PingCAP team.
 
-## Case 4: The Log Collection Database
+### **Case 4: The Log Collection Database**
 
 To enable instant insights for real-time decision-making, Mobike keeps and analyzes logs from all kinds of data sources, such as parking histories and notifications when bikes are successfully unlocked. Because of this large log data volume, we care a lot about a databaseâ€™s scalability, as well as cross-database analysis capacity.
 
