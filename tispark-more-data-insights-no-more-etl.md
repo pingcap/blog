@@ -22,7 +22,7 @@ To make this possible, PingCAP and its open source contributors built [TiDB](htt
 
 ## So How Does TiSpark Work? 
 
-TiSpark leverages the power and popularity of Apache [Spark](https://en.wikipedia.org/wiki/Apache_Spark) with TiKV to enhance TiDB's OLAP capabilities. Spark is a unified analytics engine that supports many big data use cases with a nice SQL interface (aka Spark SQL). TiDB from its very first day was built to be a relational SQL database with horizontal scalability; currently it's compatible with MySQL.  While TiDB has a complex and powerful optimizer and coprocessor architecture to support ad-hoc OLAP queries using MySQL, it's even better to leverage a feature-rich engine like Spark to complete the missing piece in the HTAP puzzle. Thus, TiSpark was born.
+TiSpark leverages the power and popularity of Apache [Spark](https://en.wikipedia.org/wiki/Apache_Spark) with TiKV to enhance TiDB's OLAP capabilities. Spark is a unified analytics engine that supports many big data use cases with a nice SQL interface (aka Spark SQL). TiDB from its very first day was built to be a relational SQL database with horizontal scalability; currently it's compatible with MySQL. While TiDB has a complex and powerful optimizer and coprocessor architecture to support ad-hoc OLAP queries using MySQL, it's even better to leverage a feature-rich engine like Spark to complete the missing piece in the HTAP puzzle. Thus, TiSpark was born.
 
 TiSpark is a connector that supports the following features:
 
@@ -47,7 +47,7 @@ For TiSpark to leverage these features inside TiKV, it makes use of Spark's exte
 
 ![ExperimentalMethods](media/experimental-methods.png)
 
-These extension points expose SQL compiler's optimization and planning details, thus allowing developers to configure the internal behaviors of almost every aspect of SQL compilation. They are at the core of TiSpark’s power. Now, we can inject our own rules and do extra work to push down more computations, such as predicates, aggregation pushdown, and Top-N pushdown (LIMIT clause with ORDER BY).
+These extension points expose SQL compiler's optimization and planning details, thus allowing developers to configure the internal behaviors of almost every aspect of SQL compilation. They are at the core of TiSpark's power. Now, we can inject our own rules and do extra work to push down more computations, such as predicates, aggregation pushdown, and Top-N pushdown (LIMIT clause with ORDER BY).
 
 ## TiSpark in Action
 
@@ -100,9 +100,9 @@ Another optimization we've implemented is aggregation pushdown. TiSpark will rew
 
 Because TiDB as a whole is a distributed NewSQL database, storing data sizes that are far larger than what can be stored in a single machine, it's natural to layer a distributed compute engine like Spark on top of it. Without TiSpark, you would need do things the old way: do a daily dump of all your data into a Hadoop/Hive cluster or another data warehouse before you can analyze it--a situation many of our customers like [Mobike](https://www.pingcap.com/blog/Use-Case-TiDB-in-Mobike/) avoided by adopting TiDB with TiSpark. If you want to run queries on “fresh” data, not stale ones that are at least one day old, then TiSpark shines. Plus, you no longer need to manage and maintain any ETL pipelines, saving your team lots of time, resources, and headaches.
 
-## What’s Next?
+## What's Next?
 
-Although we released TiSpark 1.0 not that long ago, we are already busy working on new features. Here is a list of the important features we’d like to build in 2018:
+Although we released TiSpark 1.0 not that long ago, we are already busy working on new features. Here is a list of the important features we'd like to build in 2018:
 
 - Compatibility with Spark 2.3 (right now TiSpark supports 2.1)
 - Batch Write Support (writing directly in TiKV native format)
