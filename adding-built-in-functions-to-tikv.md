@@ -25,7 +25,7 @@ Here’s an illustration on how a statement like `select count(*) from t where a
 
 After TiKV receives these subtask expressions, the following steps are performed in a loop:
 
-1. Obtain the complete data of the next row， parse and decode the data record based on the requested columns. 
+1. Obtain the complete data of the next row, parse and decode the data record based on the requested columns. 
 
 2. Use the predicate specified in the `where` clause to filter data.
 
