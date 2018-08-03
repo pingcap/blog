@@ -174,7 +174,7 @@ To implement the same function in Rust for TiKV, it should be:
 
 When TiKV receives a pushdown request, it checks all the expressions first including the number of the expression arguments.  
 
-In TiDB, there is a strict limit for the number of arguments in each built-in function. For the number of arguments, see [`builtin.go`]([https://github.com/pingcap/tidb/blob/master/expression/builtin.go](https://github.com/pingcap/tidb/blob/master/expression/builtin.go)) in TiDB.
+In TiDB, there is a strict limit for the number of arguments in each built-in function. For the number of arguments, see [`builtin.go`](https://github.com/pingcap/tidb/blob/master/expression/builtin.go) in TiDB.
 
 To add argument check:
 
