@@ -178,19 +178,19 @@ In TiDB, there is a strict limit for the number of arguments in each built-in fu
 
 To add argument check:
 
-1. Go to [`scalar_function.rs`]([https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/scalar_function.rs](https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/scalar_function.rs)) in TiKV and find the `check_args` function of `ScalarFunc`. 
+1. Go to [`scalar_function.rs`](https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/scalar_function.rs) in TiKV and find the `check_args` function of `ScalarFunc`. 
 
 2. Add the check for the number of the expression arguments as the implemented signatures do.
 
 ### Step 6: Add pushdown support
 
-TiKV calls the `eval` function to evaluate a row of data and the `eval` function executes the sub-function based on the returned value type. This operation is done in [`scalar_function.rs`]([https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/scalar_function.rs](https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/scalar_function.rs)) by `dispatch_call`.
+TiKV calls the `eval` function to evaluate a row of data and the `eval` function executes the sub-function based on the returned value type. This operation is done in [`scalar_function.rs`](https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/scalar_function.rs) by `dispatch_call`.
 
 For our example function, `MultiplyIntUnsigned`, the final return value type is `Int`, so `INT_CALLS` can be found in `dispatch_call`. Then take the code of other signatures in `INT_CALLS` as reference and add `MultiplyIntUnsigned => multiply_int_unsigned`. It indicates that when the function signature `MultiplyIntUnsigned` is being parsed, the implemented function `multiply_int_unsigned` will be called. The pushdown logic of `MultiplyIntUnsigned` is now implemented.
 
 ### Step 7: Add at least one test
 
-1. Go to `[builtin_arithmetic.rs](https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/builtin_arithmetic.rs)` where the `multiply_int_unsigned` function resides.
+1. Go to [`builtin_arithmetic.rs`](https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/builtin_arithmetic.rs) where the `multiply_int_unsigned` function resides.
 
 2. Add the unit test for the function signature in the `test` module which is at the end of `[builtin_arithmetic.rs](https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/builtin_arithmetic.rs)`. Make sure that the unit test covers all the code which is added above. You can see the related test code in TiDB for reference.
 
