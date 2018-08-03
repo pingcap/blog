@@ -43,15 +43,15 @@ Go to the [`push down scalar functions` issue page]([https://github.com/pingcap/
 
 ### Step 2: Find the logic of corresponding implementation in TiDB
 
-Search the related `builtinXXXSig` (XXX is the function signature you want to implement) in the [`expression`]([https://github.com/pingcap/tidb/tree/master/expression](https://github.com/pingcap/tidb/tree/master/expression)) directory of TiDB.
+Search the related `builtinXXXSig` (XXX is the function signature you want to implement) in the [`expression`](https://github.com/pingcap/tidb/tree/master/expression)) directory of TiDB.
 
-Take [`MultiplyIntUnsigned`]([https://github.com/pingcap/tikv/pull/3277](https://github.com/pingcap/tikv/pull/3277)) as an example, which we will use throughout this guide, you can find the corresponding function signature (`builtinArithmeticMultiplyIntUnsignedSig`) and its [implementation]([https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532](https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532)).
+Take [`MultiplyIntUnsigned`](https://github.com/pingcap/tikv/pull/3277) as an example, which we will use throughout this guide, you can find the corresponding function signature (`builtinArithmeticMultiplyIntUnsignedSig`) and its [implementation]([https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532](https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532)).
 
 ### Step 3: Define the function
 
 1. The name of the file where the built-in function exists in TiKV should correspond to the same name in TiDB. 
 
-    For example, since all the pushdown files in the [`expression`]([https://github.com/pingcap/tidb/tree/master/expression](https://github.com/pingcap/tidb/tree/master/expression)) directory in TiDB are named `builtin_XXX`, in TiKV the corresponding file name should be `builtin_XXX.rs`. In this example, the current function is in the [builtin_arithmetic.go](https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532) file in TiDB, so the function should be placed in [builtin_arithmetic.rs](https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/builtin_arithmetic.rs) in TiKV.
+    For example, since all the pushdown files in the [`expression`](https://github.com/pingcap/tidb/tree/master/expression) directory in TiDB are named `builtin_XXX`, in TiKV the corresponding file name should be `builtin_XXX.rs`. In this example, the current function is in the [builtin_arithmetic.go](https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532) file in TiDB, so the function should be placed in [builtin_arithmetic.rs](https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/builtin_arithmetic.rs) in TiKV.
 
     **Note:** If the corresponding file in TiKV does not exist, you need to create a new file in the corresponding directory with the same name as in TiDB.
 
