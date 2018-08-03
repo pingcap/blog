@@ -298,7 +298,7 @@ Run `make expression` and ensure that all the test cases can pass the test.
 
 ### Step 9: File a PR for TiKV
 
-After you finish the above steps, you can file a PR for TiKV! After we merge, you are now a honored TiKV contributor! See our [Contribution Guide]([https://github.com/pingcap/tidb/blob/master/CONTRIBUTING.md](https://github.com/pingcap/tidb/blob/master/CONTRIBUTING.md)) for a more comprehensive run-down of becoming a contributor.
+After you finish the above steps, you can file a PR for TiKV! After we merge, you are now a honored TiKV contributor! See our [Contribution Guide](https://github.com/pingcap/tidb/blob/master/CONTRIBUTING.md) for a more comprehensive run-down of becoming a contributor.
 
 ### Wrapping Up
 
