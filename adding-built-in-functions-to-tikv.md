@@ -11,7 +11,7 @@ This guide is intended to show how you can land your first Pull Request (PR) in 
 
 What powers this experience is [TiKV](https://github.com/pingcap/tikv), a distributed transactional key-value store (all built in Rust!), which is now deployed in more than 200 companies in production, see the [constantly-updated list of adopters](https://www.pingcap.com/docs/adopters). One key reason why TiDB can process complex SQL queries so quickly is a Coprocessor API layer between TiDB and TiKV, which takes advantage of the distributed nature of a distributed database to "push down" partial queries in parallel, where partial results are generated and reassembled for the client. This is a key differentiator between TiDB and other distributed databases. 
 
-So far, TiDB can only push down some simple expressions to TiKV to be processed, e.g. fetching the value in a column and doing comparison or arithmetic operations on simple data structures. To get more juice out of distributed computing resources, we need to include more expressions to push down. The first type is MySQL built-in functions. How do we accomplish that in short order? That’s where *you*--our intrepid systems hacker, Rust lover, and distributed system geek--come in!
+So far, TiDB can only push down some simple expressions to TiKV to be processed, e.g. fetching the value in a column and doing comparison or arithmetic operations on simple data structures. To get more juice out of distributed computing resources, we need to include more expressions to push down. The first type is MySQL built-in functions. How do we accomplish that in short order? That’s where *you* -- our intrepid systems hacker, Rust lover, and distributed system geek -- Fcome in!
 
 So follow along this guide to contribute a built-in MySQL function to TiKV in Rust in 30 minutes. And when you do, you will receive some special gifts from us reserved just for our beloved contributors, as a small token of our gratitude. Let’s get started!
 
@@ -192,7 +192,7 @@ For our example function, `MultiplyIntUnsigned`, the final return value type is 
 
 1. Go to [`builtin_arithmetic.rs`](https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/builtin_arithmetic.rs) where the `multiply_int_unsigned` function resides.
 
-2. Add the unit test for the function signature in the `test` module which is at the end of `[builtin_arithmetic.rs](https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/builtin_arithmetic.rs)`. Make sure that the unit test covers all the code which is added above. You can see the related test code in TiDB for reference.
+2. Add the unit test for the function signature in the `test` module which is at the end of [`builtin_arithmetic.rs`](https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/builtin_arithmetic.rs). Make sure that the unit test covers all the code which is added above. You can see the related test code in TiDB for reference.
 
 For this example, the test code implemented in TiKV is as follows:
 
