@@ -39,13 +39,13 @@ Now that you have an overview of how Coprocessor in TiDB/TiKV works, here’s ho
 
 ### Step 1: Select a function for pushdown
 
-Go to the [`push down scalar functions` issue page]([https://github.com/pingcap/tikv/issues/3275](https://github.com/pingcap/tikv/issues/3275)), choose a function you like from the unimplemented function signature list, then tell us so we can create an issue and assign it to you to prevent duplication of work.
+Go to the [`push down scalar functions` issue page](https://github.com/pingcap/tikv/issues/3275), choose a function you like from the unimplemented function signature list, then tell us so we can create an issue and assign it to you to prevent duplication of work.
 
 ### Step 2: Find the logic of corresponding implementation in TiDB
 
-Search the related `builtinXXXSig` (XXX is the function signature you want to implement) in the [`expression`](https://github.com/pingcap/tidb/tree/master/expression)) directory of TiDB.
+Search the related `builtinXXXSig` (XXX is the function signature you want to implement) in the [`expression`](https://github.com/pingcap/tidb/tree/master/expression) directory of TiDB.
 
-Take [`MultiplyIntUnsigned`](https://github.com/pingcap/tikv/pull/3277) as an example, which we will use throughout this guide, you can find the corresponding function signature (`builtinArithmeticMultiplyIntUnsignedSig`) and its [implementation]([https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532](https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532)).
+Take [`MultiplyIntUnsigned`](https://github.com/pingcap/tikv/pull/3277) as an example, which we will use throughout this guide, you can find the corresponding function signature (`builtinArithmeticMultiplyIntUnsignedSig`) and its [implementation](https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532).
 
 ### Step 3: Define the function
 
