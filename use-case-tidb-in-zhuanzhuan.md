@@ -132,7 +132,7 @@ In the process of migrating the messaging application from MySQL to TiDB, we did
 
     As there is no performance issue in MySQL, the application hasn’t made any optimization. But when we used this scenario to test TiDB, we found that the database output a large number of retry logs. The reason? TiDB’s use of optimistic locking. Dozens of seconds of request latency occurred in the application, and lots of requests in the queue were discarded. The problem was finally solved when we optimized the application by filtering out the requests using the default value. We’ve learned that in 2.0 RC 5, adjusting `retry_limit` is another effective method to solve this problem.
 
-2. With the operational experience they had from using MySQL,r our DBA staff performed the Truncate operation to a table whose size is around 1TB. At first, the database worked well, but a few minutes later, the system timed out, and the load of TiKV became higher. The PingCAP team found out that the operation had triggered a bug that caused Region to be recycled too frequently. That bug was fixed in TiDB 2.0.
+2. With the operational experience they had from using MySQL, our DBA staff performed the Truncate operation to a table whose size is around 1TB. At first, the database worked well, but a few minutes later, the system timed out, and the load of TiKV became higher. The PingCAP team found out that the operation had triggered a bug that caused Region to be recycled too frequently. That bug was fixed in TiDB 2.0.
 
 ## Conclusion
 
