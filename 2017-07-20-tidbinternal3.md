@@ -80,7 +80,8 @@ The Raft protocol happens to meet these requirements: the `AddReplica`, `RemoveR
 Schedule depends on the information gathering of the whole cluster. Simply put, we need to know the state of each TiKV node and each Region. TiKV cluster reports two kinds of information to PD:
 
 + Each TiKV node regularly reports the overall information of nodes to PD
-There are heartbeats between TiKV Store and PD. On the one hand, PD checks whether each Store is active or if there are newly-added Stores through heartbeats. On the other hand, heartbeats carry the state information of this Store, mainly including:
+
+	There are heartbeats between TiKV Store and PD. On the one hand, PD checks whether each Store is active or if there are newly-added Stores through heartbeats. On the other hand, heartbeats carry the state information of this Store, mainly including:
 	 
 	- total disk capacity
 	- free disk capacity
@@ -91,12 +92,13 @@ There are heartbeats between TiKV Store and PD. On the one hand, PD checks wheth
 	- label information (Label is a series of Tags that has hierarchical relationship)
 
 + Leader of each Raft Group reports to PD regularly
-Leader of each Raft Group and PD are connected with heartbeats, which report the state of this Region, including:
+
+	Leader of each Raft Group and PD are connected with heartbeats, which report the state of this Region, including:
  
-	 - the position of Leader
-	 - the position of Followers
-	 - the number of offline Replicas
-	 - data reading/writing speed
+	- the position of Leader
+	- the position of Followers
+	- the number of offline Replicas
+	- data reading/writing speed
 
 Through these two kinds of heartbeats, PD gathers the information of the whole cluster and then makes decisions. What’s more, PD makes more accurate decisions by getting extra information through the management interface. For example, when the heartbeat of a Store is interrupted, PD has no idea whether it is temporarily or permanently. PD can only waits for a period of time (30 minutes by default); if there is still no heartbeat, PD considers that the Store has been offline and it needs to move all Regions on the Store away. However, if an Operations staff manually offline a machine, he needs to tell PD through its management interface that the Store is unavailable. In this case, PD will immediately move all Regions on the Store away.
 
