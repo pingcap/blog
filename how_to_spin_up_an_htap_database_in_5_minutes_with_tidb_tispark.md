@@ -8,37 +8,56 @@ tags: ['TiDB', 'TiSpark', 'HTAP', 'Tutorial']
 
 [TiDB](http://bit.ly/tidb_repo_publication) is an open-source distributed Hybrid Transactional and Analytical Processing (HTAP) database built by PingCAP, powering companies to do real-time data analytics on live transactional data in the same data warehouse -- no more ETL, no more T+1, no more delays. More than 200 companies are now using TiDB in production. Its 2.0 version was launched in late April 2018 (read about it in [this blog post](http://bit.ly/tidb_2_0)).
 
-In this 5-minute tutorial, we will show you how to spin up a standard TiDB cluster using Docker Compose on your local computer, so you can get a taste of its hybrid power, before using it for work or your own project in production. A standard TiDB cluster includes TiDB (MySQL compatible stateless SQL layer), [TiKV](http://bit.ly/tikv_repo_publication) (a distributed transactional key-value store where the data is stored), and [TiSpark](https://github.com/pingcap/tispark) (an Apache Spark plug-in that powers complex analytical queries within the TiDB ecosystem). 
-
-> NOTE: This guide is for Mac users; we will release a guide for Linux and Windows users soon!
+In this 5-minute tutorial, we will show you how to spin up a standard TiDB cluster using Docker Compose on your local computer, so you can get a taste of its hybrid power, before using it for work or your own project in production. A standard TiDB cluster includes TiDB (MySQL compatible stateless SQL layer), [TiKV](http://bit.ly/tikv_repo_publication) (a distributed transactional key-value store where the data is stored), and [TiSpark](https://github.com/pingcap/tispark) (an Apache Spark plug-in that powers complex analytical queries within the TiDB ecosystem).
 
 Ready? Let’s get started!
 
 # Setting Up
 
-Before we start deploying TiDB, we’ll need a few things first: `brew`, `wget`, Git, Docker, and a MySQL client. If you don’t have them installed already, here are the instructions to get them.
+Before we start deploying TiDB, we’ll need a few things first: `wget`, Git, Docker, and a MySQL client. If you don’t have them installed already, here are the instructions to get them.
 
-1. To install `brew`, go [here](https://brew.sh/).
+The 3-section display effect starts from here.
 
-2. To install `wget`, use the command below in your Terminal: 
-
-    ```bash
-    brew install wget --with-libressl
-    ```
-
-3. To install Git, use the command below in your Terminal: 
-
-    ```bash
-    brew install git
-    ```
-
-4. Install Docker: [https://www.docker.com/community-edition](https://www.docker.com/community-edition).
-
-5. Install a MySQL client
-
-    ```bash
-    brew install mysql-client
-    ```
+<main class="tabs">
+    <input id="tabMacOS" type="radio" name="tabs" checked>
+    <label for="tabMacOS">MacOS</label>
+    <input id="tabLinux" type="radio" name="tabs">
+    <label for="tabLinux">Linux</label>
+    <section id="macOSContent">
+        <ol>
+            <li><p>To install <code>brew</code>, go <a href="https://brew.sh/">here</a>.</p></li>
+            <li><p>To install <code>wget</code>, use the command below in your Terminal:</p>
+            <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install wget --with-libressl</code></pre></div></li>
+            <li><p>To install Git, use the command below in your Terminal:</p>
+            <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install git</code></pre></div></li>
+            <li><p>Install Docker: <a href="https://www.docker.com/community-edition">https://www.docker.com/community-edition</a>.</p></li>
+            <li><p>Install a MySQL client</p>
+            <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install mysql-client</code></pre></div></li>
+        </ol>
+    </section>
+    <section id="linuxContent">
+        <ol>
+            <li>
+                <p>To install <code>wget</code>, Git, and MySQL, use the command below in your Terminal:</p>
+                <ul>
+                    <li><p>For CentOS/Fedora:</p>
+                    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum install wget git mysql</code></pre></div>
+                    </li>
+                    <li><p>For Ubuntu/Debian:</p>
+                    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt install wget git mysql-client</code></pre></div>
+                    </li>
+                </ul>
+            <li>
+                <p>To install Docker, go <a href="https://docs.docker.com/install/">here.</a></p>
+                <p>After Docker is installed, use the following command to start it and add the current user to the Docker user group:</p>
+                <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl start docker    # start docker daemo</code></pre></div>
+                <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo usermod -aG docker $(whoami)   # add the current user to the Docker user group, so you can run docker without sudo</code></pre></div>
+                <p>You need to log out and back in for this to take effect. Then use the following command to verify that Docker is running normally:</p>
+                <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker info</code></pre></div>
+            </li>
+        </ol>
+    </section>
+</main>
 
 # Spin up a TiDB cluster
 
