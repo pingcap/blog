@@ -20,7 +20,7 @@ The 3-section display effect starts from here.
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-<style>
+<style type="text/css">
 .tabs {
   min-width: 320px;
   max-width: 100%;
