@@ -22,109 +22,70 @@ The 3-section display effect starts from here.
 
 <style
   type="text/css">
-.tabs {
-  min-width: 320px;
-  max-width: 100%;
-  margin: 2em auto;
-  background: #fff;
+.tabs {min-width:320px;max-width:100%;margin:2em auto;background:#fff;}
+
+.tabs section {display:none;padding:20px 0;border-top:#ddd;}
+
+.tabs input {display:none;}
+
+.tabs label {display:inline-block;margin:0 0 -1px;padding:15px 25px;font-weight:600;text-align:center;color:#bbb;
+border:1px solid transparent;}
+
+.tabs label::before {font-family:fontawesome;font-weight:normal;margin-right:10px;}
+
+.tabs label[for*='MacOS']::before {content:'\f179';}
+
+.tabs label[for*='Linux']::before {content:'\f17c';}
+
+.tabs label[for*='Windows']::before {content:'\f17a';
 }
 
-.tabs section {
-  display: none;
-  padding: 20px 0;
-  border-top: 1px solid #ddd;
-}
+.tabs label:hover {color:#888;cursor:pointer;}
 
-.tabs input {
-  display: none;
-}
+.tabs input:checked + label {color:#555;border:1px solid #ddd;border-top:2px solid #3d6cb9;border-bottom:1px solid #fff;}
 
-.tabs label {
-  display: inline-block;
-  margin: 0 0 -1px;
-  padding: 15px 25px;
-  font-weight: 600;
-  text-align: center;
-  color: #bbb;
-  border: 1px solid transparent;
-}
-
-.tabs label::before {
-  font-family: fontawesome;
-  font-weight: normal;
-  margin-right: 10px;
-}
-
-.tabs label[for*='MacOS']::before {
-  content: '\f179';
-}
-
-.tabs label[for*='Linux']::before {
-  content: '\f17c';
-}
-
-.tabs label[for*='Windows']::before {
-  content: '\f17a';
-}
-
-.tabs label:hover {
-  color: #888;
-  cursor: pointer;
-}
-
-.tabs input:checked + label {
-  color: #555;
-  border: 1px solid #ddd;
-  border-top: 2px solid #3d6cb9;
-  border-bottom: 1px solid #fff;
-}
-
-.tabs #tabMacOS:checked ~ #macOSContent,
-.tabs #tabLinux:checked ~ #linuxContent,
-.tabs #tabWindows:checked ~ #windowsContent {
-  display: block;
-}
+.tabs #tabMacOS:checked ~ #macOSContent,.tabs #tabLinux:checked ~ #linuxContent,.tabs #tabWindows:checked ~ #windowsContent {display:block;}
 </style>
 
 <main class="tabs">
-    <input id="tabMacOS" type="radio" name="tabs" checked>
-    <label for="tabMacOS">MacOS</label>
-    <input id="tabLinux" type="radio" name="tabs">
-    <label for="tabLinux">Linux</label>
-    <section id="macOSContent">
-        <ol>
-            <li><p>To install <code>brew</code>, go <a href="https://brew.sh/">here</a>.</p></li>
-            <li><p>To install <code>wget</code>, use the command below in your Terminal:</p>
-            <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install wget --with-libressl</code></pre></div></li>
-            <li><p>To install Git, use the command below in your Terminal:</p>
-            <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install git</code></pre></div></li>
-            <li><p>Install Docker: <a href="https://www.docker.com/community-edition">https://www.docker.com/community-edition</a>.</p></li>
-            <li><p>Install a MySQL client</p>
-            <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install mysql-client</code></pre></div></li>
-        </ol>
-    </section>
-    <section id="linuxContent">
-        <ol>
-            <li>
-                <p>To install <code>wget</code>, Git, and MySQL, use the command below in your Terminal:</p>
-                <ul>
-                    <li><p>For CentOS/Fedora:</p>
-                    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum install wget git mysql</code></pre></div>
-                    </li>
-                    <li><p>For Ubuntu/Debian:</p>
-                    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt install wget git mysql-client</code></pre></div>
-                    </li>
-                </ul>
-            <li>
-                <p>To install Docker, go <a href="https://docs.docker.com/install/">here.</a></p>
-                <p>After Docker is installed, use the following command to start it and add the current user to the Docker user group:</p>
-                <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl start docker    # start docker daemo</code></pre></div>
-                <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo usermod -aG docker $(whoami)   # add the current user to the Docker user group, so you can run docker without sudo</code></pre></div>
-                <p>You need to log out and back in for this to take effect. Then use the following command to verify that Docker is running normally:</p>
-                <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker info</code></pre></div>
-            </li>
-        </ol>
-    </section>
+  <input id="tabMacOS" type="radio" name="tabs" checked>
+  <label for="tabMacOS">MacOS</label>
+  <input id="tabLinux" type="radio" name="tabs">
+  <label for="tabLinux">Linux</label>
+  <section id="macOSContent">
+    <ol>
+      <li><p>To install <code>brew</code>, go <a href="https://brew.sh/">here</a>.</p></li>
+      <li><p>To install <code>wget</code>, use the command below in your Terminal:</p>
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install wget --with-libressl</code></pre></div></li>
+      <li><p>To install Git, use the command below in your Terminal:</p>
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install git</code></pre></div></li>
+      <li><p>Install Docker: <a href="https://www.docker.com/community-edition">https://www.docker.com/community-edition</a>.</p></li>
+      <li><p>Install a MySQL client</p>
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install mysql-client</code></pre></div></li>
+    </ol>
+  </section>
+  <section id="linuxContent">
+    <ol>
+      <li>
+        <p>To install <code>wget</code>, Git, and MySQL, use the command below in your Terminal:</p>
+        <ul>
+          <li><p>For CentOS/Fedora:</p>
+            <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum install wget git mysql</code></pre></div>
+          </li>
+          <li><p>For Ubuntu/Debian:</p>
+            <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt install wget git mysql-client</code></pre></div>
+          </li>
+        </ul>
+      <li>
+        <p>To install Docker, go <a href="https://docs.docker.com/install/">here.</a></p>
+        <p>After Docker is installed, use the following command to start it and add the current user to the Docker user group:</p>
+        <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl start docker    # start docker daemo</code></pre></div>
+        <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo usermod -aG docker $(whoami)   # add the current user to the Docker user group, so you can run docker without sudo</code></pre></div>
+        <p>You need to log out and back in for this to take effect. Then use the following command to verify that Docker is running normally:</p>
+        <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker info</code></pre></div>
+      </li>
+    </ol>
+  </section>
 </main>
 
 # Spin up a TiDB cluster
