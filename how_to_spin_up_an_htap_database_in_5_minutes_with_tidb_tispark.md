@@ -18,41 +18,13 @@ Before we start deploying TiDB, we’ll need a few things first: `wget`, Git, Do
 
 The 3-section display effect starts from here.
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-
-<style
-  type="text/css">
-.tabs {min-width:320px;max-width:100%;margin:2em auto;background:#fff;}
-
-.tabs section {display:none;padding:20px 0;border-top:#ddd;}
-
-.tabs input {display:none;}
-
-.tabs label {display:inline-block;margin:0 0 -1px;padding:15px 25px;font-weight:600;text-align:center;color:#bbb;
-border:1px solid transparent;}
-
-.tabs label::before {font-family:fontawesome;font-weight:normal;margin-right:10px;}
-
-.tabs label[for*='MacOS']::before {content:'\f179';}
-
-.tabs label[for*='Linux']::before {content:'\f17c';}
-
-.tabs label[for*='Windows']::before {content:'\f17a';
-}
-
-.tabs label:hover {color:#888;cursor:pointer;}
-
-.tabs input:checked + label {color:#555;border:1px solid #ddd;border-top:2px solid #3d6cb9;border-bottom:1px solid #fff;}
-
-.tabs #tabMacOS:checked ~ #macOSContent,.tabs #tabLinux:checked ~ #linuxContent,.tabs #tabWindows:checked ~ #windowsContent {display:block;}
-</style>
-
 <main class="tabs">
   <input id="tabMacOS" type="radio" name="tabs" checked>
   <label for="tabMacOS">MacOS</label>
   <input id="tabLinux" type="radio" name="tabs">
   <label for="tabLinux">Linux</label>
   <section id="macOSContent">
+    <h3>MacOS Setting Up</h3>
     <ol>
       <li><p>To install <code>brew</code>, go <a href="https://brew.sh/">here</a>.</p></li>
       <li><p>To install <code>wget</code>, use the command below in your Terminal:</p>
@@ -65,6 +37,7 @@ border:1px solid transparent;}
     </ol>
   </section>
   <section id="linuxContent">
+    <h3>Linux Setting Up</h3>
     <ol>
       <li>
         <p>To install <code>wget</code>, Git, and MySQL, use the command below in your Terminal:</p>
