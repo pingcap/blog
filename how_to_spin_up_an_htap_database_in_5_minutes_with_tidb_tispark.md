@@ -16,8 +16,6 @@ Ready? Let’s get started!
 
 Before we start deploying TiDB, we’ll need a few things first: `wget`, Git, Docker, and a MySQL client. If you don’t have them installed already, here are the instructions to get them.
 
-The 3-section display effect starts from here.
-
 <main class="tabs">
   <input id="tabMacOS" type="radio" name="tabs" checked>
   <label for="tabMacOS">MacOS</label>
