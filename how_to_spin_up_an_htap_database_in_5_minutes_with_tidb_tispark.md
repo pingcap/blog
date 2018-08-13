@@ -18,11 +18,11 @@ Before we start deploying TiDB, we’ll need a few things first: `wget`, Git, Do
 
 <main class="tabs">
   <input id="tabMacOS" type="radio" name="tabs" checked>
-  <label for="tabMacOS">MacOS</label>
+  <label for="tabMacOS">macOS</label>
   <input id="tabLinux" type="radio" name="tabs">
   <label for="tabLinux">Linux</label>
   <section id="macOSContent">
-    <h3>MacOS Setting Up</h3>
+    <h3>macOS Setting Up</h3>
     <ol>
       <li><p>To install <code>brew</code>, go <a href="https://brew.sh/">here</a>.</p></li>
       <li><p>To install <code>wget</code>, use the command below in your Terminal:</p>
@@ -30,7 +30,7 @@ Before we start deploying TiDB, we’ll need a few things first: `wget`, Git, Do
       <li><p>To install Git, use the command below in your Terminal:</p>
       <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install git</code></pre></div></li>
       <li><p>Install Docker: <a href="https://www.docker.com/community-edition">https://www.docker.com/community-edition</a>.</p></li>
-      <li><p>Install a MySQL client</p>
+      <li><p>Install a MySQL client:</p>
       <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install mysql-client</code></pre></div></li>
     </ol>
   </section>
