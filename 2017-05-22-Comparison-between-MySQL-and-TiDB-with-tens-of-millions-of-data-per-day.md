@@ -2,11 +2,9 @@
 title: Migration from MySQL to TiDB to handle tens of millions of rows of data per day
 date: 2017-05-22
 summary: This document is a use case that details the performance of MySQL and TiDB with tens of millions of rows of data per day.
-tags: ['TiDB', 'migration']
+tags: ['TiDB', 'MySQL Scalability']
 aliases: ['/blog/2017/05/22/Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day/', '/blog/2017/05/22/comparison-between-mysql-and-tidb-with-tens-of-millions-of-data-per-day/']
 ---
-
-# TiDB use case
 
 ## Table of content
 
@@ -16,17 +14,16 @@ aliases: ['/blog/2017/05/22/Comparison-between-MySQL-and-TiDB-with-tens-of-milli
 + [TiDB, give it a go](#tidb-give-it-a-go)
 + [Feedbacks from TiDB](#feedbacks-from-tidb)
 
-
-# Background
+## Background
 
 [GAEA](http://www.gaea.com/en/) is a mobile gaming provider and aims to develop high-quality games for international players. GAEA uses its GaeaAD system to support the cross-platform real-time advertising system. GaeaAD performs a real-time match between the advertising data and the information reported by the game SDK. In other words, GaeaAD conducts a real-time analysis based on the data of the advertisements on different advertising channels and the amount of players brought by the corresponding channels, with the purpose of displaying and optimizing the conversion effects of advertising within minutes.
 
-# MySQL, our first choice
+## MySQL, our first choice
 
 Considering the amount of data and for a simplified implementation, GAEA chose the highly-available MySQL RDS storage solution at the very beginning of designing GaeaAD. At that time, we mainly used SQL Syntax to implement the matching logic, including many join table queries and aggregation operations. The system worked well and responded within one minute with tens of millions of rows of data.
 ![](media/gaea 1.png)
 
-# Look for new solutions
+## Look for new solutions
 
 However, with the growth of business, GaeaAD receives more than tens of millions of rows of data per day and the amount multiplies during peak hours. Obviously, database has become a bottleneck. And at the moment, GAEA’s entire technical framework encounters three problems:
 
@@ -46,7 +43,7 @@ In conclusion, what we want is a database that is as easy to use as MySQL, elimi
 
 We studied many distributed database solutions in the community and came upon TiDB. As the protocol layer of TiDB is compatible with MySQL and it supports complex query, we can power our applications without changing a single line of code. Besides, there is hardly any migration cost.
 
-# TiDB, give it a go
+## TiDB, give it a go
 
 In the process of test deployment, we used the Syncer tool, provided by TiDB, to deploy TiDB as a MySQL Slave to the MySQL master of the original business, testing the compatibility and stability of read/write. After a while, the system was proved to perform well in read/write so we decided to move the read request of the business layer to TiDB. Later, we also switch the write business to the TiDB cluster, making the system online smoothly.
 
@@ -65,7 +62,7 @@ We replaced the highly-available MySQL RDS with the 3-node TiDB cluster. The ave
 
 Currently, we are replacing MongoDB with TiDB as MongoDB is not easy to use, expensive to maintain and its query manner is not as flexible as traditional SQL. MongoDB once served as our data storage system of the real-time computing business of the BI system in the storm cluster. We are also planning to migrate the business that requires high real-time performance, large storage capacity and long storage cycle to TiDB, which seems to be a suitable scenario.
 
-# Feedbacks from TiDB
+## Feedbacks from TiDB
 
 TiDB helps GAEA in the following aspects:
 1. TiDB supports many push-down expressions and makes full use of the computing resources of TiKV’s multiple instances and therefore, accelerates the computing speed. At the same time, TiDB filters as much unnecessary data as possible and reduces the network overhead.
@@ -74,5 +71,6 @@ TiDB helps GAEA in the following aspects:
 
 3. TiDB reads data in a linear way and has optimized the IndexScan operator, shortening the startup time of the whole process.
 
-**About the author**
+**About the author:**
+
 LIU Xuan, the senior development engineer of GAEA’s data platform, is responsible for the real-time data business and the data flow field. Graduated from College of Computer Science and Electronic Engineering of Hunan University, LIU was Baidu’s senior operation & maintenance engineer and was responsible for the database creating and maintenance of Search Service Group (SSG).

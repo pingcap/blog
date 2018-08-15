@@ -3,7 +3,7 @@ title: Futures and gRPC in Rust
 author: ['Siddon Tang']
 date: 2017-09-12
 summary: This is the speech Siddon Tang gave at Bay Area Rust Meetup August 2017.
-tags: ['TiKV', 'Rust']
+tags: ['TiKV', 'Rust', 'Engineering']
 aliases: ['/blog/2017/09/12/futuresandgrpc/']
 ---
 

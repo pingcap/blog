@@ -3,7 +3,7 @@ title: RocksDB in TiKV
 author: ['Siddon Tang']
 date: 2017-09-15
 summary: This is the speech Siddon Tang gave at the RocksDB meetup on August 28, 2017.
-tags: ['TiKV']
+tags: ['TiKV', 'Engineering', 'Rust']
 aliases: ['/blog/2017/09/15/rocksdbintikv/']
 ---
 

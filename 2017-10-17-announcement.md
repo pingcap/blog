@@ -2,7 +2,7 @@
 title: PingCAP Launches TiDB 1.0
 date: 2017-10-17
 summary: TiDB is compatible with MySQL, strong consistent and highly available.
-tags: ['TiDB']
+tags: ['TiDB', 'Product', 'Golang']
 aliases: ['/blog/2017/10/17/announcement/']
 ---
 

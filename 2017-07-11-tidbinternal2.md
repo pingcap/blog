@@ -3,7 +3,7 @@ title: TiDB Internal (II) - Computing
 author: ['Li SHEN']
 date: 2017-07-11
 summary: This is the second one of three blogs to introduce TiDB internal.
-tags: ['TiDB', 'computing']
+tags: ['TiDB', 'Golang', 'Engineering']
 aliases: ['/blog/2017/07/11/tidbinternal2/']
 ---
 
@@ -20,7 +20,6 @@ From Li SHEN: shenli@pingcap.com
 + [Distributed SQL Operation](#dissql)
 + [Architecture of the SQL Layer](#sqlarch)
 + [Summary](#summary)
-
 
 My [last blog](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/) introduces the way that TiDB stores data, which is also the basic concepts of TiKV. In this article, I’ll elaborate on how TiDB uses the bottom layer Key-Value to store data, maps the relational model to the Key-Value model and performs SQL computing.
 

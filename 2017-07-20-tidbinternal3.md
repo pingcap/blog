@@ -3,7 +3,7 @@ title: TiDB Internal (III) - Scheduling
 author: ['Li SHEN']
 date: 2017-07-20
 summary: This is the third one of three blogs to introduce TiDB internal.
-tags: ['TiDB', 'scheduling']
+tags: ['TiDB', 'Golang', 'Engineering']
 aliases: ['/blog/2017/07/20/tidbinternal3/']
 ---
 
@@ -22,6 +22,7 @@ From Li SHEN: shenli@pingcap.com
 + [Summary](#summary)
 
 ## <span id="why">Why scheduling?</span>
+
 From [the first blog of TiDB internal](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/), we know that TiKV cluster is the distributed KV storage engine of TiDB database. Data is replicated and managed in Regions and each Region has multiple Replicas distributed on different TiKV nodes. Among these replicas, Leader is in charge of read/write and Follower synchronizes the raft log sent by Leader. Now, please think about the following questions:
 
 + How to guarantee that multiple Replicas of the same Region are distributed on different nodes? Further, what happens if starting multiple TiKV instances on one machine?

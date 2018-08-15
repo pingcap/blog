@@ -3,7 +3,7 @@ title: TiDB Internal (I) - Data Storage
 author: ['Li SHEN']
 date: 2017-07-11
 summary: This is the first one of three blogs to introduce TiDB internal.
-tags: ['TiDB', 'storage']
+tags: ['TiDB', 'TiKV', 'Engineering', 'Golang', 'Rust']
 aliases: ['/blog/2017/07/11/tidbinternal1/']
 ---
 
@@ -22,6 +22,7 @@ From Li SHEN: shenli@pingcap.com
 + [Miscellaneous](#misc)
 
 ### <span id="foreword">Foreword:</span>
+
 Database, operating system and compiler are known as the three big systems and regarded as the footstone of the whole computer software. Among them, database supports the businesses and is closer to the application layer. After decades of development, progress keeps emerging in this field.
 
 Many people must have used databases of different kinds, but few have the experience of developing one, especially a distributed database. Knowing the principle and detail of implementing a database helps to advance one’s skill level, which is good for building other systems, and is also helpful to make better use of database.

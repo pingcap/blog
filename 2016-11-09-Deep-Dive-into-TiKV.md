@@ -2,7 +2,7 @@
 title: A Deep Dive into TiKV
 date: 2016-11-09
 summary: This document introduces how TiKV works as a Key-Value database.
-tags: ['TiKV']
+tags: ['TiKV', 'Engineering', 'Rust']
 aliases: ['/blog/2016/11/09/Deep-Dive-into-TiKV/', '/blog/2016/11/09/deep-dive-into-tikv/']
 ---
 

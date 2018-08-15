@@ -2,14 +2,12 @@
 title: Ele.me? TiDB At Your Service
 date: 2018-06-29
 summary: With a fast-growing business comes soaring data size, which has placed tremendous pressure on Ele.me’s backend system, especially the database. How to tackle the challenges that come with mounting data has been a nightmare until we found TiDB, a MySQL compatible distributed hybrid transactional and analytical processing (HTAP) database, and its distributed key-value storage engine TiKV, both built and supported by PingCAP. Finally, we can harness the power of our data and not be intimidated by it.
-tags: ['TiDB','Use Case','Ele.me']
+tags: ['TiDB', 'Success Story']
 ---
-
 
 **Industry:** Food Delivery
 
-**Authors:** Yanzhao Zhang (Senior Database Engineer at Ele.me) and Dongming Chen (Senior Infrastructure Engineer at Ele.me) 
-
+**Authors:** Yanzhao Zhang (Senior Database Engineer at Ele.me) and Dongming Chen (Senior Infrastructure Engineer at Ele.me)
 
 [Ele.me](https://en.wikipedia.org/wiki/Ele.me), which means "Are you hungry?" in Chinese, is [the largest online food delivery ](http://www.xinhuanet.com/english/2017-08/25/c_136555409.htm)[platform](http://www.xinhuanet.com/english/2017-08/25/c_136555409.htm) in China. Our platform allows users to order all kinds of food and beverages and get their takeout delivered within 30 minutes. Currently, with 3 million scooter-riding delivery staff, Ele.me is serving 260 million customers and 1.3 million vendors in over 2,000 cities in China. In April 2018, [Ele.me was acquired by Alibaba for $9.5 billion USD](https://www.forbes.com/sites/ywang/2018/04/03/chinese-e-commerce-giant-alibaba-acquires-ele-me-in-9-5b-deal/#d263169357c3).
 
