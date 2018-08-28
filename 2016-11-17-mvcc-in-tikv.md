@@ -17,7 +17,7 @@ Though serializablity is a great concept, it is hard to implement efficiently. A
 
 ## MVCC in TiKV
 
-Let's dive into `TiKV`'s MVCC implementation, located at [src/storage](https://github.com/pingcap/tikv/tree/master/src/storage).
+Let's dive into `TiKV`'s MVCC implementation, located at [src/storage](https://github.com/tikv/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/mod.rs).
 
 ### Timestamp Oracle(TSO)
 
@@ -25,7 +25,7 @@ Since `TiKV` is a distributed storage system, it needs a globally unique time se
 
 ### Storage
 
-To dive into the Transaction part in `TiKV`, [src/storage](https://github.com/pingcap/tikv/blob/master/src/storage/mod.rs) is a good beginning, which implements the entries. `Storage` is a struct that actually receives the get/Scan commands.
+To dive into the Transaction part in `TiKV`, [src/storage](https://github.com/tikv/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage) is a good beginning, which implements the entries. `Storage` is a struct that actually receives the get/Scan commands.
 
 ```rust
 pub struct Storage {
@@ -82,7 +82,7 @@ This `start` function helps to explain how a storage runs.
 Then the following functions like `async_get` and `async_batch_get` will send the corresponding commands to the channel, which can be got by the scheduler to execute asynchronously.
 
 All right, the MVCC protocol calling is exactly implemented in [Scheduler](https://github.com/pingcap/tikv/blob/master/src/storage/txn/scheduler.rs#L763).
-The storage receives commands from clients and sends commands as messages to the scheduler. Then the scheduler will process the command or [call corresponding asynchronous function](https://github.com/pingcap/tikv/blob/master/src/storage/txn/scheduler.rs#L643). There are two types of operations, reading and writing. Reading is implemented in [MvccReader](https://github.com/pingcap/tikv/blob/master/src/storage/mvcc/reader.rs#L20), which is easy to understand. Writing part is the core of MVCC implementation.
+The storage receives commands from clients and sends commands as messages to the scheduler. Then the scheduler will process the command or [call corresponding asynchronous function](https://github.com/pingcap/tikv/blob/master/src/storage/txn/scheduler.rs#L643). There are two types of operations, reading and writing. Reading is implemented in [MvccReader](https://github.com/tikv/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/mvcc/reader.rs#L20), which is easy to understand. Writing part is the core of MVCC implementation.
 
 ### MVCC
 
