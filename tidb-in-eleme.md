@@ -3,6 +3,8 @@ title: Ele.me? TiDB At Your Service
 date: 2018-06-29
 summary: With a fast-growing business comes soaring data size, which has placed tremendous pressure on Ele.me’s backend system, especially the database. How to tackle the challenges that come with mounting data has been a nightmare until we found TiDB, a MySQL compatible distributed hybrid transactional and analytical processing (HTAP) database, and its distributed key-value storage engine TiKV, both built and supported by PingCAP. Finally, we can harness the power of our data and not be intimidated by it.
 tags: ['TiDB', 'Success Story']
+url: /success-stories/tidb-in-eleme/
+aliases: ['blog/use-case-tidb-in-eleme/']
 ---
 
 **Industry:** Food Delivery
