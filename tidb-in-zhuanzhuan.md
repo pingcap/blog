@@ -3,6 +3,8 @@ title: Managing the Surging Data Volume of a Fast-Growing Marketplace with TiDB
 date: 2018-08-07
 summary: With our fast-growing business, the surging data volume posed a serious challenge to our backend system and put the operations team under great pressure. How to tackle these challenges became a thorny problem until we found TiDB, a MySQL compatible distributed hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Finally, we do not have to worry about scaling databases and can focus on building better applications for our users.
 tags: ['TiDB','Success Story']
+url: /success-stories/tidb-in-zhuanzhuan/
+aliases: ['/blog/use-case-tidb-in-zhuanzhuan']
 ---
 
 **Industry:** E-commerce

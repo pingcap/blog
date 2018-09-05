@@ -1,9 +1,10 @@
 ---
 title: How TiDB tackles fast data growth and complex queries for yuanfudao.com
 date: 2017-08-08
-summary: This document is a use case details the reasons why yuanfudao.com chose TiDB as its backend database solution to tackle their fast data growth and complex queries.
+summary: This document is a case study that details the reasons why yuanfudao.com chose TiDB as its backend database solution to tackle their fast data growth and complex queries.
 tags: ['TiDB', 'Success Story']
-aliases: ['/blog/2017/08/08/tidbforyuanfudao/']
+url: /success-stories/tidb-in-yuanfudao/
+aliases: ['/blog/2017/08/08/tidbforyuanfudao/', '/blog/2017-08-08-tidbforyuanfudao/']
 ---
 
 Yuanfudao.com is an online tutoring service targeting the K-12 educational segment in China with the largest number of elementary and secondary school student users. It owns three applications, Yuantiku (猿题库), the online question bank, Xiaoyuansouti (小猿搜题), the application for question search by taking pictures, and yuanfudao.com, an online tutoring service.
