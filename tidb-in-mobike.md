@@ -81,9 +81,7 @@ Instead with TiDB, real-time data synchronization can be performed from multiple
 
 The following diagram depicts our implementation of a real-time data analysis system with TiDB and TiSpark. Powered by this system, we can easily perform all kinds of analytical tasks any time we want, which would be impossible to do with Hadoop.
 
-<div align=center>
 ![A real-time data analysis system with TiDB and TiSpark](https://upload-images.jianshu.io/upload_images/4193138-73dd6c669e9e0815.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-</div>
 
 Currently, our TiDB cluster holds several dozen nodes with multiple TBs of data. Benefiting from the high available architecture of TiDB, our system is stable and can achieve horizontal scalability simply by adding more x86 servers, all the while providing real-time data analytics capabilities no matter how quickly our datasets grow.
 
