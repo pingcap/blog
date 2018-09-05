@@ -63,7 +63,7 @@ The success rate of locking and unlocking a smart bike is one of the key metrics
 
 We deploy TiDB to directly help support the system behind the success rate of locking and unlocking, which fulfills all the above requirements. See the following diagram for how TiDB is integrated in our system:
 
-![A real-time data analysis system with TiDB and TiSpark](media/success_rate_of_locking_and_unlocking_integration.png)
+![A real-time data analysis system with TiDB and TiSpark](https://upload-images.jianshu.io/upload_images/4193138-9b9d9a744ff78351.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 With TiDB, alert is sent to the administrators when the system detects a success rate drop of locking and unlocking within minutes. We can quickly find a single failed ride and the associated user and bike from the database, which allow us to locate the faulty bike quickly.
 
@@ -81,7 +81,7 @@ Instead with TiDB, real-time data synchronization can be performed from multiple
 
 The following diagram depicts our implementation of a real-time data analysis system with TiDB and TiSpark. Powered by this system, we can easily perform all kinds of analytical tasks any time we want, which would be impossible to do with Hadoop.
 
-![A real-time data analysis system with TiDB and TiSpark](media/a_real_time_data_analysis_system_with_tidb_and_tispark.png)
+<div align=center>![A real-time data analysis system with TiDB and TiSpark](https://upload-images.jianshu.io/upload_images/4193138-73dd6c669e9e0815.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</div>
 
 Currently, our TiDB cluster holds several dozen nodes with multiple TBs of data. Benefiting from the high available architecture of TiDB, our system is stable and can achieve horizontal scalability simply by adding more x86 servers, all the while providing real-time data analytics capabilities no matter how quickly our datasets grow.
 
@@ -116,7 +116,7 @@ With TiDB, all these issues become easy to address:
 - Placing all these interconnected services in our TiDB cluster makes it easy to access any data of certain types and from certain periods for analysis;
 - Using TiSpark, we can run complex analytical queries on data in the TiDB cluster directly. This way, we can easily achieve real-time data analysis with just one database solution, with no need to perform ETL.
 
-![The Log Collection Database](media/the_log_collection_database.png)
+![The Log Collection Database](https://upload-images.jianshu.io/upload_images/4193138-c72bb69ca24dd845.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## Issues and Optimizations
 

@@ -77,7 +77,7 @@ The following table outlines the difference between MySQL sharding solutions and
 
 TiDB cluster consists of three components: TiDB Server, TiKV Server, and PD Server.
 
-![](media/tidbarchi.png)
+![](https://upload-images.jianshu.io/upload_images/4193138-876b2eed4debd71f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 (the overall architecture of TiDB)
 
