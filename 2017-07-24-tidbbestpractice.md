@@ -133,9 +133,9 @@ The following two conditions don’t have the problem of two accesses:
 
 	Index cannot only be used to filter data, but also to sort data. Firstly, get row IDs according to the index order. Then return the row content according to the return order of row IDs. In this way, the return results are ordered according to the index column. I’ve mentioned that the model of scanning index and getting Row is parallel + Pipeline. If Row is returned according to the index order, a high concurrency between two queries will not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [tidb\_index\_serial\_scan\_concurrency](https://github.com/pingcap/docs/blob/master/sql/tidb-specific.md#tidb_index_serial_scan_concurrency) variable.
 
-+ Inverted index
++ Reverse index scan
 
-	Currently, TiDB supports the inverted Scan to index, but the speed is 5 times slower than the sequential scan. Thus, it is not recommended.
+	As in MySQL 5.7, all indexes in TiDB are in ascending order. TiDB supports the ability to read an ascending index in reverse order, at a performance overhead of about 23%. Earlier versions of TiDB had a higher performance penalty, and thus reverse index scans were not recommended.
 
 [Back to the top](#top)
 
