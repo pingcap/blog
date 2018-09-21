@@ -142,7 +142,7 @@ We added mapping relations between the TableID and NameSpace, as well as NameSpa
 
 ### **Optimization 3: Management Tool**
 
-To manage the NameSpace, we developed a specific management tool. Fortunately, TiDB was designed flexibly enough, so to accomplish this optimization,  we just need to call the related API to get the TableID by the table name via the original TiDB interface. We added a [HTTP interface](https://github.com/pingcap/pd/blob/master/tools/pd-ctl/pdctl/command/table_namespace_command.go) to the command directory of [pd-ctl](https://github.com/pingcap/pd/tree/master/tools/pd-ctl), the PD command line management tool, to manage and verify the relations between Table Name and Table ID.
+To manage the NameSpace, we developed a specific management tool. Fortunately, TiDB was designed flexibly enough, so to accomplish this optimization,  we just need to call the related API to get the TableID by the table name via the original TiDB interface. We added an [HTTP interface](https://github.com/pingcap/pd/blob/master/tools/pd-ctl/pdctl/command/table_namespace_command.go) to the command directory of [pd-ctl](https://github.com/pingcap/pd/tree/master/tools/pd-ctl), the PD command line management tool, to manage and verify the relations between Table Name and Table ID.
 
 ## Conclusion
 
