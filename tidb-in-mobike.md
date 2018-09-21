@@ -142,17 +142,13 @@ We added mapping relations between the TableID and NameSpace, as well as NameSpa
 
 ### **Optimization 3: Management Tool**
 
-To manage the NameSpace, we developed a specific management tool. Fortunately, TiDB was designed flexibly enough, so to accomplish this optimization,  we just need to call the related API to get the TableID by the table name via the original TiDB interface. We added a [HTTP interface](https://github.com/pingcap/pd/blob/master/pdctl/command/table_namespace_command.go) to the command directory of [pd-ctl](https://github.com/pingcap/pd/tools/pd-ctl), the PD command line management tool, to manage and verify the relations between Table Name and Table ID.
+To manage the NameSpace, we developed a specific management tool. Fortunately, TiDB was designed flexibly enough, so to accomplish this optimization,  we just need to call the related API to get the TableID by the table name via the original TiDB interface. We added a [HTTP interface](https://github.com/pingcap/pd/blob/master/tools/pd-ctl/pdctl/command/table_namespace_command.go) to the command directory of [pd-ctl](https://github.com/pingcap/pd/tree/master/tools/pd-ctl), the PD command line management tool, to manage and verify the relations between Table Name and Table ID.
 
 ## Conclusion
-
- 
 
 It has been one year since we deployed TiDB in our production environment. In the past year, the number of our users has increased nearly ten times and the daily riding data has grown dozens of times. Thanks to the online scalability of TiDB, we have successfully scaled our infrastructure. We can finally focus on the development and optimization of Mobike applications to deliver amazing experiences for our user, without worrying about sharding rules for MySQL. This is extremely valuable for a fast-growing startup, like us, giving us a head-start in a competitive environment.
 
 The main benefits of TiDB include:
-
- 
 
 -  	**Flexible scalability.** Its scalability rivals that of NoSQL database. When the data size and the access traffic are on the rise, it can improve the system service support capability through horizontal scaling, while holding response latency stable.
 - 	**Usability.** TiDB is compatible with MySQL protocols, so it’s an easy drop-in solution that allow us to avoid sharding. Its interface is user-friendly, so our technicians can easily perform operations and backend administrations.
