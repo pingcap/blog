@@ -1,8 +1,7 @@
 ---
 title: Launching TiDB Academy
 author: ['Morgan']
-date: 2018-10-17
-summary: Today, we are excited to launch TiDB Academy, a series of technical training courses and certifications on TiDB and distributed databases in general, taught by our senior technical team. 
+date: 2018-10-16
 tags: ['TiDB Academy']
 ---
 
