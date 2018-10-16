@@ -6,7 +6,7 @@ summary: Today, we are excited to launch TiDB Academy, a series of technical tra
 tags: ['TiDB', 'Academy']
 ---
 
-**Author**: Morgan Tocker, Senior Product and Community Manager
+Author: Morgan Tocker, Senior Product and Community Manager
 
 ![TiDB Academy](media/tidb-academy.jpg)
 
