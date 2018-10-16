@@ -9,8 +9,8 @@ tags: ['TiDB', 'Academy']
 **Author**: Morgan Tocker, Senior Product and Community Manager
 
 ![TiDB Academy](media/tidb-academy.jpg)
-<center>TiDB Academy</center>
 
+<center>TiDB Academy</center>
 
 Today, we are excited to launch [TiDB Academy](https://pingcap.com/tidb-academy/), a series of technical training courses and certifications on TiDB and distributed databases in general, taught by our senior technical team. At PingCAP, we firmly believe it's our responsibility to deliver transparency and share knowledge to our customers and community, not just handing you a mysterious "black box" to use. As the world of database technology moves toward a cloud-native, NewSQL direction, learning how to properly use distributed databases like TiDB will become increasingly important and valuable for IT professionals; that's why we built TiDB Academy.
 
@@ -26,4 +26,4 @@ As a teaser, you will learn (among many other topics):
 
 * Online DDL: how TiDB's DDL algorithm and implementation makes online schema change a breeze.
 
-	If you have any questions about this first course, or the [TiDB Academy](https://pingcap.com/tidb-academy/) in general, you can reach our teaching staff anytime: [academy@pingcap.com](mailto:academy@pingcap.com). Happy learning!
+If you have any questions about this first course, or the [TiDB Academy](https://pingcap.com/tidb-academy/) in general, you can reach our teaching staff anytime: [academy@pingcap.com](mailto:academy@pingcap.com). Happy learning!
