@@ -15,6 +15,14 @@ draft: true
 - tags -
   - format: list(array)  **['tag-1', 'tag-2']**
 
+## For SEO and social media share
+
+- image: /images/pingcap-opengraph.jpg
+> This is used to show the thumbnail shown in the social media platform.
+
+- summary: PingCAP is focused on developing distributed NewSQL and is the team building TiDB, an open-source distributed NewSQL database.
+> This is for the discription shown in the social media platform.
+
 ```
 ---
 title: Blog Title
