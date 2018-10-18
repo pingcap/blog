@@ -1,5 +1,6 @@
 ---
 title: Blitzscaling the Largest Dockless Bikesharing Platform with TiDB’s Help
+author: ['Chengjie Ding', 'Ming Hu']
 date: 2018-04-03
 summary: Mobike has been using the TiDB database in the production environment since early 2017. Now they have deployed TiDB in multiple clusters with close to 100 nodes, handling dozens of TBs of data for different application scenarios. This post will provide a deep dive on why Mobike chose TiDB over MySQL and its sharding solutions by illustrating how TiDB solves their pain points.
 tags: ['TiDB','Success Story']
@@ -11,7 +12,7 @@ aliases: ['/blog/Use-Case-TiDB-in-Mobike/']
                  
 **Data Growth Rate:** ~30TB per day
 
-**Author:** Chengjie Ding and Ming Hu (Infrastructure Platform Engineers at Mobike)
+**Authors:** Chengjie Ding and Ming Hu (Infrastructure Platform Engineers at Mobike)
 
 [Mobike](https://www.crunchbase.com/organization/mobike) is the world’s first and largest dockless bike-sharing provider, serving over 200 million users in 200 cities across the world, operating over 9 million smart bikes. It’s an affordable and convenient way of transportation for short urban trips, with a patented bike design with a smart lock system and a mobile app. We handle more than 30 million rides for our users every single day.
 
