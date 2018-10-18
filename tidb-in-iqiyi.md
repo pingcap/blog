@@ -1,5 +1,6 @@
 ---
 title: 'Always Fun, Always On: How TiDB Helps iQiyi Deliver Streaming Videos to Its 421 Million Monthly Users'
+author: ['Boshuai Zhu']
 date: 2018-10-18
 summary: As our business grew exponentially, we were overwhelmed trying to handle the mounting data until we found TiDB, a MySQL-compatible NewSQL hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Now we no longer worry about data volume and can bring high-quality entertainment services to our users with more confidence than before. 
 tags: ['TiDB','Success Story']
@@ -8,7 +9,7 @@ url: /success-stories/tidb-in-iqiyi/
 
 **Industry:** Media and Entertainment
 
-**Authors:** Boshuai Zhu (Senior Infrastructure Engineer at iQiyi)
+**Author:** Boshuai Zhu (Senior Infrastructure Engineer at iQiyi)
 
 [iQiyi](https://en.wikipedia.org/wiki/IQiyi), formerly Qiyi, is the Netflix of China: the country’s [largest online video-on-demand platform](https://www.thewrap.com/paramount-signs-licensing-deal-with-chinas-largest-online-video-platform-iqiyi/). With “Always Fun, Always Fine” as our brand’s motto, we are committed to providing users with high-resolution, authentic media content including movies, TV dramas, variety shows, documentaries, animations and travel programs. By the end of 2017, our [monthly active users on mobile devices reached 421 million and daily active users hit 126 million](https://variety.com/2018/digital/asia/china-iqiyi-expands-nickelodeon-deal-1202900418/); at the end of June 2018, [the number of our subscribers jumped to 66 million](https://variety.com/2018/digital/asia/china-iqiyi-expands-nickelodeon-deal-1202900418/). On March 29, 2018, our company IPO’ed on the NASDAQ and raised $2.25 billion.
 
