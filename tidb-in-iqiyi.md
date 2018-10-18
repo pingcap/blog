@@ -135,7 +135,7 @@ In the incremental synchronization process, we used Syncer, which aggregated dat
 
 The [Syncer](https://www.pingcap.com/docs/tools/syncer/) architecture is as follows:
 
-![Figure 5: Syncer architecture](https://download.pingcap.com/images/success-stories/syncer-architecture.png)
+![Figure 5: Syncer architecture](https://download.pingcap.com/images/success-stories/syncer-architecture-in-iqiyi.png)
 <center> *Figure 5: Syncer architecture* </center>
 
 However, Syncer currently cannot display real-time delay information in Grafana. This is a drawback for the applications that are sensitive to synchronization delay. The good news is that PingCAP is working on this issue, and they have refactored Syncer to automatically deal with the primary key conflict of table partition. With Syncer and TiDB, users can quickly synchronize data from multiple MySQL clusters in real time.       
@@ -151,8 +151,7 @@ For these requirements, TiDB has the corresponding solutions:
 
 To ensure high availability during the data migration process, we used Drainer to synchronize the data in the TiDB cluster with the MySQL cluster. Drainer supports reverse synchronization by specifying the starting timestamp.
 
-![Figure 6: Deploying TiDB in multiple data centers](https://download.pingcap.com/images/success-stories/deploying-tidb-in-multiple-data-centers.png)
-
+![Figure 6: Deploying TiDB in multiple data centers](https://download.pingcap.com/images/success-stories/deploying-tidb-in-multiple-data-centers.png) 
 <center> *Figure 6: Deploying TiDB in multiple data centers* </center>
 
 Throughout the process, the PingCAP team offered us timely and expert-level help. They helped us locate the issue and gave us constructive suggestions. We really appreciate their patience and dedicated support!
