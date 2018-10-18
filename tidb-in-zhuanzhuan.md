@@ -3,6 +3,8 @@ title: Managing the Surging Data Volume of a Fast-Growing Marketplace with TiDB
 date: 2018-08-07
 summary: With our fast-growing business, the surging data volume posed a serious challenge to our backend system and put the operations team under great pressure. How to tackle these challenges became a thorny problem until we found TiDB, a MySQL compatible distributed hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Finally, we do not have to worry about scaling databases and can focus on building better applications for our users.
 tags: ['TiDB','Success Story']
+url: /success-stories/tidb-in-zhuanzhuan/
+aliases: ['/blog/use-case-tidb-in-zhuanzhuan']
 ---
 
 **Industry:** E-commerce
@@ -15,7 +17,7 @@ While growth is always a good thing, we soon became concerned that the surging d
 
 Currently, we have deployed TiDB in multiple clusters for the messaging and risk management applications. These TiDB clusters hold several dozens of TBs of data with excellent and stable performance. In this post, we will elaborate on our pain points, why we chose TiDB, our practice in production, and our future plans with TiDB.
 
-![TiDB Cluster Architecture at Zhuan Zhuan](media/tidb-cluster-architecture-at-zhuan-zhuan.png)
+![TiDB Cluster Architecture at Zhuan Zhuan](https://download.pingcap.com/images/success-stories/tidb-cluster-architecture-at-zhuan-zhuan.png)
 <center> *TiDB Cluster Architecture at Zhuan Zhuan* </center>
 
 ## Our Pain Points
@@ -49,7 +51,7 @@ For the stress testing, we simulated various application scenarios using testing
 
 In this stress testing, we used six physical servers in total, three of which were CPU-intensive for starting the TiDB server and the Placement Driver (PD). The others were IO/CPU-intensive PCIe servers for starting the TiKV server. The sysbench-1.0.11 was used to test the response time (95th percent) of a 200GB TiDB cluster in different scenarios:
 
-![Response time under different scenarios](media/response-time.png)
+![Response time under different scenarios](https://download.pingcap.com/images/success-stories/response-time.png)
 
 This is what we found:
 
@@ -104,23 +106,23 @@ We have been thrilled with the results of our migration from MySQL to TiDB. Here
 
 In TiDB, the number of queue requests of the application module largely remains stable; in MySQL, that number tended to fluctuate.
 
-![The number of wait queue in MySQL](media/the-number-of-wait-queue-in-mysql.png)
+![The number of wait queue in MySQL](https://download.pingcap.com/images/success-stories/the-number-of-wait-queue-in-mysql.png)
 
-![The number of wait queue in TiDB](media/the-number-of-wait-queue-in-tidb.png)
+![The number of wait queue in TiDB](https://download.pingcap.com/images/success-stories/the-number-of-wait-queue-in-tidb.png)
 
 #### Request Latency
 
 When using TiDB, the overall response latency is quite stable and not affected by the traffic peak of the application. In terms of scalability, we can increase the system throughput by seamlessly scaling the instances of  TiDB and TiKV. Those features are not available in MySQL.
 
-![Request-execution time of MySQL](media/request-execution-time-of-mysql.png)
+![Request-execution time of MySQL](https://download.pingcap.com/images/success-stories/request-execution-time-of-mysql.png)
 
-![Request-execution time of TiDB](media/request-execution-time-of-tidb.png)
+![Request-execution time of TiDB](https://download.pingcap.com/images/success-stories/request-execution-time-of-tidb.png)
 
 #### Application Delay and the Number of Errors
 
-![Application delay](media/application-delay.png)
+![Application delay](https://download.pingcap.com/images/success-stories/application-delay.png)
 
-![The number of errors](media/the-number-of-errors.png)
+![The number of errors](https://download.pingcap.com/images/success-stories/the-number-of-errors.png)
 
 Since we adopted TiDB, the service interface of the application logic layer hasn’t fluctuated, and the time that it consumes has remained consistent—in stark contrast to how things were with MySQL. Plus, there are no discards. Most of the errors that the chart above shows are caused by the discarded requests that emerged when the service queues built up in the data access layer.
 

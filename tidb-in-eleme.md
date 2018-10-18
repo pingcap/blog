@@ -3,6 +3,8 @@ title: Ele.me? TiDB At Your Service
 date: 2018-06-29
 summary: With a fast-growing business comes soaring data size, which has placed tremendous pressure on Ele.me’s backend system, especially the database. How to tackle the challenges that come with mounting data has been a nightmare until we found TiDB, a MySQL compatible distributed hybrid transactional and analytical processing (HTAP) database, and its distributed key-value storage engine TiKV, both built and supported by PingCAP. Finally, we can harness the power of our data and not be intimidated by it.
 tags: ['TiDB', 'Success Story']
+url: /success-stories/tidb-in-eleme/
+aliases: ['/blog/use-case-tidb-in-eleme/']
 ---
 
 **Industry:** Food Delivery
@@ -33,7 +35,7 @@ Before choosing TiDB/TiKV, we carefully evaluated other options -- [TokuDB](http
 
 TiDB and TiKV support fast online DDL, horizontal scalability, and high availability by applying the [Raft](https://raft.github.io/) consensus protocol. It is also compatible with MySQL. TiDB presents a layered, modular architecture and allows us to use different components flexibly to meet our needs. Additionally, TiDB has an active open source community (more than 16,000 Github stars total), which gives us a lot of confidence in its pace of development, bug fixes, and future features.
 
- ![TiDB HTAP Architecture](media/tidb-htap-architecture.png)
+ ![TiDB HTAP Architecture](https://download.pingcap.com/images/success-stories/tidb-htap-architecture.png)
 <center> *TiDB Architecture* </center>
 
 ## Use Case 1: Unifying Data Storage in TiKV
@@ -52,17 +54,17 @@ Most of our data is in key-value structure. Before using TiKV, our data was scat
 
 TiKV, as a standalone component of the TiDB platform, meets all of our criteria, and can serve as a building block for other client protocols. We’ve been using Redis and wanted to keep using it with TiKV.
 
-![Redis on TiKV](media/redis-on-tikv.png)
+![Redis on TiKV](https://download.pingcap.com/images/success-stories/redis-on-tikv.png)
 <center> *Redis on TiKV* </center>
 
 In this architecture, the upper layer translates the Redis protocol, while the TiKV layer implements distributed system features, including horizontal scalability, high availability and strong consistency using data partition, the Raft protocol, [MVCC](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/) and distributed transaction.
 
-![TiKV Architecture](media/tikv-raft-architecture.png)
+![TiKV Architecture](https://download.pingcap.com/images/success-stories/tikv-raft-architecture.png)
 <center> *TiKV Architecture* </center>
 
 With these components working together, we were able to build our own Redis proxy on top of TiKV, so we can tap into its power while keeping the interface we like to use best.
 
-![Ele.me’s Redis Layer](media/eleme-redis.png)
+![Ele.me’s Redis Layer](https://download.pingcap.com/images/success-stories/eleme-redis.png)
 <center>*Ele.me’s Redis Layer*</center>
 
 We built the `ekvproxy` service, where we wrapped the TiKV SDK to parse the Redis protocol and transformed it to communicate with TiKV. Extensions like `compression` and `traffic control` were implemented on this foundation. Our team can now use the official Redis client to access our key-value service backed by TiKV without changing their workflow or behavior.
@@ -111,22 +113,22 @@ After confirming that TiDB met our test requirement, we did not migrate all the 
 
 As shown in the following diagram, Syncer can work as a MySQL slave node to access and parse Binlog in the master and then be applied to TiDB after matching the filter rules. Syncer supports breakpoint resume. It can start multiple Syncer instances to synchronize data from one data source to various targets respectively based on different filter rules. It also supports synchronizing data from multiple data sources to the same target. We chose two high-loaded MySQL archive clusters as the data source and used Syncer to synchronize hundreds of GBs of data during nightly archiving to the TiDB cluster in real time. Our synchronization work lasted about one week without any issues.
 
-![Syncer Architecture](media/syncer-architecture.png)
+![Syncer Architecture](https://download.pingcap.com/images/success-stories/syncer-architecture.png)
 <center>*Syncer Architecture*</center>
 
 #### Deployment Scale and Design
 
 Around 45 percent of our data archiving workload has been migrated to TiDB and running smoothly. The current archive policy is shown in the diagram below:
 
-![Ele.me Archive Policy](media/eleme-archive-policy.png)
+![Ele.me Archive Policy](https://download.pingcap.com/images/success-stories/eleme-archive-policy.png)
 <center>*Ele.me Archive Policy*</center>
 
 The following two diagrams show the deployment policy and the monitor alert architecture of the TiDB cluster, respectively:
 
-![Deployment Policy of the TiDB Cluster](media/deployment-policy-of-the-tidb-luster.png)
+![Deployment Policy of the TiDB Cluster](https://download.pingcap.com/images/success-stories/deployment-policy-of-the-tidb-cluster.png)
 <center>*Deployment Policy of the TiDB Cluster*</center>
 
-![Monitor Alert Architecture of the TiDB Cluster](media/monitor-alert-architecture-of-the-tidb-cluster.png)
+![Monitor Alert Architecture of the TiDB Cluster](https://download.pingcap.com/images/success-stories/monitor-alert-architecture-of-the-tidb-cluster.png)
 <center>*Monitor Alert Architecture of the TiDB Cluster*</center>
 
 Currently, the archive workload in TiDB has approximately 100 source clusters, dozens of databases, and more than one hundred tables. The data on the whole platform increases by hundreds of millions of lines every day on average, and the daily incremental data reaches hundreds of GBs.

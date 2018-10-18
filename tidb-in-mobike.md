@@ -3,6 +3,8 @@ title: Blitzscaling the Largest Dockless Bikesharing Platform with TiDB’s Help
 date: 2018-04-03
 summary: Mobike has been using the TiDB database in the production environment since early 2017. Now they have deployed TiDB in multiple clusters with close to 100 nodes, handling dozens of TBs of data for different application scenarios. This post will provide a deep dive on why Mobike chose TiDB over MySQL and its sharding solutions by illustrating how TiDB solves their pain points.
 tags: ['TiDB','Success Story']
+url: /success-stories/tidb-in-mobike/
+aliases: ['/blog/Use-Case-TiDB-in-Mobike/']
 ---
 
 **Industry:** Ridesharing 
@@ -61,7 +63,7 @@ The success rate of locking and unlocking a smart bike is one of the key metrics
 
 We deploy TiDB to directly help support the system behind the success rate of locking and unlocking, which fulfills all the above requirements. See the following diagram for how TiDB is integrated in our system:
 
-![A real-time data analysis system with TiDB and TiSpark](media/success_rate_of_locking_and_unlocking_integration.png)
+![A real-time data analysis system with TiDB and TiSpark](https://download.pingcap.com/images/success-stories/success_rate_of_locking_and_unlocking_integration.png)
 
 With TiDB, alert is sent to the administrators when the system detects a success rate drop of locking and unlocking within minutes. We can quickly find a single failed ride and the associated user and bike from the database, which allow us to locate the faulty bike quickly.
 
@@ -79,7 +81,7 @@ Instead with TiDB, real-time data synchronization can be performed from multiple
 
 The following diagram depicts our implementation of a real-time data analysis system with TiDB and TiSpark. Powered by this system, we can easily perform all kinds of analytical tasks any time we want, which would be impossible to do with Hadoop.
 
-![A real-time data analysis system with TiDB and TiSpark](media/a_real_time_data_analysis_system_with_tidb_and_tispark.png)
+![A real-time data analysis system with TiDB and TiSpark](https://download.pingcap.com/images/success-stories/a_real_time_data_analysis_system_with_tidb_and_tispark.png)
 
 Currently, our TiDB cluster holds several dozen nodes with multiple TBs of data. Benefiting from the high available architecture of TiDB, our system is stable and can achieve horizontal scalability simply by adding more x86 servers, all the while providing real-time data analytics capabilities no matter how quickly our datasets grow.
 
@@ -114,13 +116,11 @@ With TiDB, all these issues become easy to address:
 - Placing all these interconnected services in our TiDB cluster makes it easy to access any data of certain types and from certain periods for analysis;
 - Using TiSpark, we can run complex analytical queries on data in the TiDB cluster directly. This way, we can easily achieve real-time data analysis with just one database solution, with no need to perform ETL.
 
-![The Log Collection Database](media/the_log_collection_database.png)
+![The Log Collection Database](https://download.pingcap.com/images/success-stories/the_log_collection_database.png)
 
 ## Issues and Optimizations
 
 While TiDB is a great product, there were some issues and challenges when using it to fit in with our complex use cases. Thankfully, the technical support and development team at PingCAP was always available and helpful. In this section, I will cover the major challenges we encountered (and since conquered) together and some of the optimizations we made.
-
- 
 
 As noted in the post, [TiDB Internal (I) - Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1/), TiKV is essentially a huge, ordered Key-Value Map. Data is stored and distributed in Regions. Each Region contains a continuous range of data. If one Region contains data from several tables or multiple hot Regions co-exist on one machine, a resource bottleneck emerges, hence the problem of resource isolation.
 
@@ -142,17 +142,13 @@ We added mapping relations between the TableID and NameSpace, as well as NameSpa
 
 ### **Optimization 3: Management Tool**
 
-To manage the NameSpace, we developed a specific management tool. Fortunately, TiDB was designed flexibly enough, so to accomplish this optimization,  we just need to call the related API to get the TableID by the table name via the original TiDB interface. We added a [HTTP interface](https://github.com/pingcap/pd/blob/master/pdctl/command/table_namespace_command.go) to the command directory of [pd-ctl](https://github.com/pingcap/pd/tree/master/pdctl), the PD command line management tool, to manage and verify the relations between Table Name and Table ID.
+To manage the NameSpace, we developed a specific management tool. Fortunately, TiDB was designed flexibly enough, so to accomplish this optimization,  we just need to call the related API to get the TableID by the table name via the original TiDB interface. We added an [HTTP interface](https://github.com/pingcap/pd/blob/master/tools/pd-ctl/pdctl/command/table_namespace_command.go) to the command directory of [pd-ctl](https://github.com/pingcap/pd/tree/master/tools/pd-ctl), the PD command line management tool, to manage and verify the relations between Table Name and Table ID.
 
 ## Conclusion
-
- 
 
 It has been one year since we deployed TiDB in our production environment. In the past year, the number of our users has increased nearly ten times and the daily riding data has grown dozens of times. Thanks to the online scalability of TiDB, we have successfully scaled our infrastructure. We can finally focus on the development and optimization of Mobike applications to deliver amazing experiences for our user, without worrying about sharding rules for MySQL. This is extremely valuable for a fast-growing startup, like us, giving us a head-start in a competitive environment.
 
 The main benefits of TiDB include:
-
- 
 
 -  	**Flexible scalability.** Its scalability rivals that of NoSQL database. When the data size and the access traffic are on the rise, it can improve the system service support capability through horizontal scaling, while holding response latency stable.
 - 	**Usability.** TiDB is compatible with MySQL protocols, so it’s an easy drop-in solution that allow us to avoid sharding. Its interface is user-friendly, so our technicians can easily perform operations and backend administrations.

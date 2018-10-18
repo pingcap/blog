@@ -74,23 +74,23 @@ type Executor interface {
 	
 All kinds of executors implement this interface. The executing engine in TiDB adopts the `Volcano` model where the executors interact with each other through the above 3 interfaces. Each executor only needs to access the data through the `Next` interface and the meta data through the `Schema` interface.
 
-+ [plan](https://github.com/pingcap/tidb/tree/master/plan)
++ [plan](https://github.com/pingcap/tidb/tree/rc2.3/plan)
 
 	This is the core of the entire SQL layer. After a SQL statement is parsed to an abstract syntax tree (AST), the query plan is generated and optimized (including logical optimization and physical optimization) in this package. 
 
 	The following functions are also included in this package:
 	
-	+ `validator.go`: Validates the AST.
+	+ [`validator.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/validator.go): Validates the AST.
 	
-	+ [`preprocess.go`](https://github.com/pingcap/tidb/blob/master/plan/preprocess.go): Currently, there is only `name resolve`.
+	+ [`preprocess.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/preprocess.go): Currently, there is only `name resolve`.
 	
-	+ `resolver.go`: Parses the name. To parse and bind the identifier of database/table/column/alias to the corresponding column or Field.
+	+ [`resolver.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/resolver.go)`: Parses the name. To parse and bind the identifier of database/table/column/alias to the corresponding column or Field.
 	
-	+ `typeinferer.go`: Infers the type of the result. For SQL statements, the type of the result does not need inference.
+	+ [`typeinferer.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/typeinferer.go): Infers the type of the result. For SQL statements, the type of the result does not need inference.
 	
-	+ [`logical_plan_builder.go`](https://github.com/pingcap/tidb/blob/master/plan/logical_plan_builder.go): Makes optimized logical query plans.
+	+ [`logical_plan_builder.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/logical_plan_builder.go): Makes optimized logical query plans.
 	
-	+ [`physical_plan_builder.go`](https://github.com/pingcap/tidb/blob/12c87929b8444571b9e84d2c0d5b85303d27da64/plan/physical_plan_builder.go): Makes the physical query plans based on the logical plans.
+	+ [`physical_plan_builder.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/physical_plan_builder.go): Makes the physical query plans based on the logical plans.
 
 + [privilege](https://github.com/pingcap/tidb/tree/master/privilege)
 
@@ -243,7 +243,7 @@ There are following types of optimization methods:
 
 + Rule based optimizer: optimize a plan by using a set of rules to determine the execution plan for a given query. 
 	
-	This type of optimizer is easy to implement. It only takes some frequently used rules and it works well for most of the common queries. But you cannot choose the best solution based on the true data scenario. Take the "select * from t where c1 = 10 and c2 > 100" statement as an example, when selecting index, if you only follow the rules, you must use the index in `c1` for the query. But if all the values of `c1` in `t` are `10`, it will be a bad query plan.If there is information about how the data is distributed in the table, it will help choose a better plan. 
+	This type of optimizer is easy to implement. It only takes some frequently used rules and it works well for most of the common queries. But you cannot choose the best solution based on the true data scenario. Take the "select * from t where c1 = 10 and c2 > 100" statement as an example, when selecting index, if you only follow the rules, you must use the index in `c1` for the query. But if all the values of `c1` in `t` are `10`, it will be a bad query plan. If there is information about how the data is distributed in the table, it will help choose a better plan. 
 
 + Cost based optimizer: optimize a plan by calculating the query cost
 	
@@ -253,9 +253,9 @@ There are following types of optimization methods:
 	
 	This type of optimizer is seldom used, especially in OLTP databases. 
 
-The codes for the TiDB optimizer is included in the [plan](https://github.com/pingcap/tidb/tree/master/plan) package. The package is mainly to transform an AST to a query plan tree. The nodes of the tree are different types of logical operator and physical operator. All sorts of optimization towards the query plan are all based on the methods of calling the root node, optimizing all the related nodes recursively, then transforming and trimming each node on the tree.
+The codes for the TiDB optimizer is included in the [plan](https://github.com/pingcap/tidb/tree/rc2.3/plan) package. The package is mainly to transform an AST to a query plan tree. The nodes of the tree are different types of logical operator and physical operator. All sorts of optimization towards the query plan are all based on the methods of calling the root node, optimizing all the related nodes recursively, then transforming and trimming each node on the tree.
 
-The most important interfaces are included in the [plan.go](https://github.com/pingcap/tidb/blob/master/plan/plan.go) file, including:
+The most important interfaces are included in the [plan.go](https://github.com/pingcap/tidb/blob/rc2.3/plan/plan.go) file, including:
 
 + Plan: the interface to all the query plans 
 + LogicalPlan: the logical query plan which needs to be implemented by all the logical operator
