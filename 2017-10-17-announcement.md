@@ -60,4 +60,4 @@ TiDB internal:
 
 [Documents](https://pingcap.com/docs)
 
-[Weekly Update](http://weekly.pingcap.com/)
+[Weekly Update](https://pingcap.com/weekly/)

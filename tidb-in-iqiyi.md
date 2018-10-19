@@ -69,7 +69,7 @@ The Risk Monitoring Center was the first iQiyi project to use TiDB online in the
 
 1. To ensure the absolute data safety, we designed a plan B for the TiDB cluster: We replaced the InnoDB in MySQL with TokuDB for its write capability. Then we deployed MySQL with TokuDB as the slave for the TiDB cluster and synchronize the data in the TiDB cluster with TiDB-Binlog. Although this was not optimal because the MySQL with TokuDB solution cannot handle the data growth in the peak time, we designed this to be the disaster recovery plan regardless of the delay.
 2. Deployed an internally developed load balancer on the front end to make full use of the computing capability of multiple TiDB nodes and guarantee the high availability of the TiDB nodes.
-3. Deployed [Prometheus](https://en.wikipedia.org/wiki/Prometheus) and [Grafana](https://en.wikipedia.org/wiki/Grafana) to monitor the TiDB cluster status. Connected Grafana to our internal alert platform to instantly inform the operations team of the alert information via short messages and emails.
+3. Deployed [Prometheus](https://en.wikipedia.org/wiki/Prometheus) and [Grafana](https://www.crunchbase.com/organization/raintank#section-overview) to monitor the TiDB cluster status. Connected Grafana to our internal alert platform to instantly inform the operations team of the alert information via short messages and emails.
 
 #### Issues and Solutions
 
