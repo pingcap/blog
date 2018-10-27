@@ -46,7 +46,7 @@ The following procedure describes how to add a built-in function.
 
 3. Add the type inference information to the `typeinferer` file.
 
-    Add the type of the returned result of the function to `handleFuncCallExpr()` in the the `plan/typeinferer.go` file and make sure the result is consistent with the result in MySQL. See [MySQL Const](https://github.com/pingcap/tidb/blob/master/mysql/type.go#L17) for the complete list of the type definition.
+    Add the type of the returned result of the function to `handleFuncCallExpr()` in the the `plan/typeinferer.go` file and make sure the result is consistent with the result in MySQL. See [MySQL Const](https://github.com/pingcap/tidb/blob/rc2.3/mysql/type.go#L17) for the complete list of the type definition.
 
     **Note:** For most fuctions, you need to input the type of the returned result and obtain the length of the returned result.
 

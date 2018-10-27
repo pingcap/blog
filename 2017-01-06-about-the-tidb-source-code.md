@@ -114,11 +114,11 @@ All kinds of executors implement this interface. The executing engine in TiDB ad
 
 	The implementation of the MySQL Protocol which is to parse the protocol and to pass the command/query.
 
-+ [ast](https://github.com/pingcap/tidb/tree/master/ast)
++ [ast](https://github.com/pingcap/tidb/tree/rc2.3/ast)
 
-	The SQL statement will be parsed to be an abstract syntax tree. The data structure is defined in the [ast](https://github.com/pingcap/tidb/tree/master/ast) directory. Each node must implement the `visitor` interface and call the `Accept` method in the node to traverse the tree.
+	The SQL statement will be parsed to be an abstract syntax tree. The data structure is defined in the [ast](https://github.com/pingcap/tidb/tree/rc2.3/ast) directory. Each node must implement the `visitor` interface and call the `Accept` method in the node to traverse the tree.
 
-	If new syntax support is needed, besides adding the rule to [parser](https://github.com/pingcap/tidb/tree/master/parser), you also need to add the data structure to this directory.
+	If new syntax support is needed, besides adding the rule to [parser](https://github.com/pingcap/tidb/tree/rc2.3/parser), you also need to add the data structure to this directory.
 
 + [ddl](https://github.com/pingcap/tidb/tree/master/ddl)
 
@@ -155,13 +155,13 @@ The following lists the expressions that implement the interface:
 
 	Key-Value related interface definition and some of the implementations, including `Retriever / Mutator / Transaction / Snapshot / Storage / Iterator`, etc. A unified abstraction of the underlying Key-Value storages.
 
-+ [model](https://github.com/pingcap/tidb/tree/master/model)
++ [model](https://github.com/pingcap/tidb/tree/rc2.3/model)
 
 	The DDL / DML related data structure supported by TiDB, including `DBInfo / TableInfo / ColumnInfo / IndexInfo`, etc.
 
 + [parser](https://github.com/pingcap/tidb/tree/master/parser)
 
-	The syntax parsing module, including lexical analysis ([lexer.go](https://github.com/pingcap/tidb/blob/master/parser/lexer.go)) and syntax analysis ([parser.y](https://github.com/pingcap/tidb/blob/master/parser/parser.y)). The main interface to the external is `Parse ()` which is to parse the SQL text into AST.
+	The syntax parsing module, including lexical analysis ([lexer.go](https://github.com/pingcap/tidb/blob/rc2.3/parser/lexer.go)) and syntax analysis ([parser.y](https://github.com/pingcap/tidb/blob/rc2.3/parser/parser.y)). The main interface to the external is `Parse ()` which is to parse the SQL text into AST.
 
 + [store](https://github.com/pingcap/tidb/tree/master/store)
 
@@ -187,7 +187,7 @@ The following lists the expressions that implement the interface:
 	
 	The definition of the metadata related constants and common functions for TiDB. In [meta/autoid](https://github.com/pingcap/tidb/tree/master/meta/autoid), an API is defined for ID auto-increment within a globally unique session. The meta information depends on this tool.
 
-+ [mysql](https://github.com/pingcap/tidb/tree/master/mysql)
++ [mysql](https://github.com/pingcap/tidb/tree/rc2.3/mysql)
 	
 	MySQL related constant definitions.
 
@@ -232,7 +232,7 @@ The entry point of the process is in the [`session.go`](https://github.com/pingc
 3. In `Compiler.Compile()`, call `plan.Validate()` in plan/validator.go to validate the statement and then go to the `Preprocess` process. At the current stage, `Preprocess` has only finished name parsing and bound the column or alias name to the corresponding field. Take the "select c from t;" statement for an example, `Preprocess` binds the name `c` to the corresponding column in the table `t`. See plan/resolver.go for the detailed implementation. After this, enter `optimizer.Optimize()`.
 4. In the `Optimize()` method, infer the result of each node in AST. Take the "select 1, 'xx', c from t;” statement as an example, for the select fields, the first field is "1" whose type is `Longlong`; the second field is "'xx'" whose field is `VarString`; the third field is "c" whose type is the type of column `c` in the table `t`. Note that besides the type information, the other information like charset also needs to be inferred. See plan/typeinferer.go for the detailed implementation.
 5. After the type inference, use the `planBuilder.build()` method for logical optimization which is to do equivalent transformation and simplification for AST based on the algebraic operation. For example, "select c from t where c > 1+1*2;" can be equivalently transformed to "select c from t where c > 3;".
-4. After the logical optimization, the next step is physical optimization. The process involves generating query plan tree and transforming the tree according to the index, rules and the cost model to reduce the cost of the query process. The entry point is in the `doOptimize()` method in the [plan/optimizer.go ](https://github.com/pingcap/tidb/blob/master/plan/optimizer.go) file.
+4. After the logical optimization, the next step is physical optimization. The process involves generating query plan tree and transforming the tree according to the index, rules and the cost model to reduce the cost of the query process. The entry point is in the `doOptimize()` method in the [plan/optimizer.go ](https://github.com/pingcap/tidb/blob/rc2.3/plan/optimizer.go) file.
 5. When the query plan is generated, it will be transformed to the executor. Use the `Exec` interface to get the `RecordSet` object and call the `Next()` method to get the query result.
 
 # The optimizer
