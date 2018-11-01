@@ -22,7 +22,7 @@ The TiDB Cloud offerings we are launching today have two options:
 
 ## Key Features 
 
-- **Always Online:** With TiDB Cloud, your database is always online, 24\/7, with no need to schedule downtime for maintenance. While online, it supports rolling upgrades, online DDL, cluster resizing, and automatic data rebalancing with hotspots removal.
+- **Always Online:** With TiDB Cloud, your database is always online, 24 / 7, with no need to schedule downtime for maintenance. While online, it supports rolling upgrades, online DDL, cluster resizing, and automatic data rebalancing with hotspots removal.
 
 - **Flexible Scaling:** TiDB has a cloud-native architectural design, where the stateless computing resources (TiDB, TiSpark) and the stateful storage layer (TiKV) are loosely coupled and can be scaled out (or in) depending on your use case and workloads. Thus, in TiDB Cloud, you have the ultimate pay-per-usage control over your database resources.
 
