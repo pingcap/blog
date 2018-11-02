@@ -159,7 +159,7 @@ The following lists the expressions that implement the interface:
 
 	The DDL / DML related data structure supported by TiDB, including `DBInfo / TableInfo / ColumnInfo / IndexInfo`, etc.
 
-+ [parser](https://github.com/pingcap/tidb/tree/master/parser)
++ [parser](https://github.com/pingcap/tidb/tree/source-code/parser)
 
 	The syntax parsing module, including lexical analysis ([lexer.go](https://github.com/pingcap/tidb/blob/rc2.3/parser/lexer.go)) and syntax analysis ([parser.y](https://github.com/pingcap/tidb/blob/rc2.3/parser/parser.y)). The main interface to the external is `Parse ()` which is to parse the SQL text into AST.
 
@@ -227,7 +227,7 @@ The following diagram shows how TiDB processes a SQL statement:
 
 The entry point of the process is in the [`session.go`](https://github.com/pingcap/tidb/blob/master/session/session.go) file. TiDB-Server calls the `Session.Execute()` interface, inputs the SQL statement and implements `Session.Execute()`.
 
-1. First, call `Compile()` to parse the SQL statement using `tidb.Parse()` and get a list of `stmt` where each statement is an AST and each syntax unit is a Node of the AST. The structure is defined in the [ast](https://github.com/pingcap/tidb/tree/master/ast) package.
+1. First, call `Compile()` to parse the SQL statement using `tidb.Parse()` and get a list of `stmt` where each statement is an AST and each syntax unit is a Node of the AST. The structure is defined in the [ast](https://github.com/pingcap/tidb/tree/source-code/ast) package.
 2. After the AST is got, call the the `Compiler` in the [executor](https://github.com/pingcap/tidb/tree/master/executor) package. Input the AST and get `Compiler.Compile()`. During this process, the statement validation, query plan generation and optimization are all completed.
 3. In `Compiler.Compile()`, call `plan.Validate()` in plan/validator.go to validate the statement and then go to the `Preprocess` process. At the current stage, `Preprocess` has only finished name parsing and bound the column or alias name to the corresponding field. Take the "select c from t;" statement for an example, `Preprocess` binds the name `c` to the corresponding column in the table `t`. See plan/resolver.go for the detailed implementation. After this, enter `optimizer.Optimize()`.
 4. In the `Optimize()` method, infer the result of each node in AST. Take the "select 1, 'xx', c from t;” statement as an example, for the select fields, the first field is "1" whose type is `Longlong`; the second field is "'xx'" whose field is `VarString`; the third field is "c" whose type is the type of column `c` in the table `t`. Note that besides the type information, the other information like charset also needs to be inferred. See plan/typeinferer.go for the detailed implementation.
