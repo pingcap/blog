@@ -64,7 +64,7 @@ The success rate of locking and unlocking a smart bike is one of the key metrics
 
 We deploy TiDB to directly help support the system behind the success rate of locking and unlocking, which fulfills all the above requirements. See the following diagram for how TiDB is integrated in our system:
 
-![A real-time data analysis system with TiDB and TiSpark](https://download.pingcap.com/images/success-stories/success_rate_of_locking_and_unlocking_integration.png)
+![A real-time data analysis system with TiDB and TiSpark](media/success_rate_of_locking_and_unlocking_integration.png)
 
 With TiDB, alert is sent to the administrators when the system detects a success rate drop of locking and unlocking within minutes. We can quickly find a single failed ride and the associated user and bike from the database, which allow us to locate the faulty bike quickly.
 
@@ -82,9 +82,9 @@ Instead with TiDB, real-time data synchronization can be performed from multiple
 
 The following diagram depicts our implementation of a real-time data analysis system with TiDB and TiSpark. Powered by this system, we can easily perform all kinds of analytical tasks any time we want, which would be impossible to do with Hadoop.
 
-![A real-time data analysis system with TiDB and TiSpark](https://download.pingcap.com/images/success-stories/a_real_time_data_analysis_system_with_tidb_and_tispark.png)
+![A real-time data analysis system with TiDB and TiSpark](media/a_real_time_data_analysis_system_with_tidb_and_tispark.png)
 
-Currently, our TiDB cluster holds several dozen nodes with multiple TBs of data. Benefiting from the high available architecture of TiDB, our system is stable and can achieve horizontal scalability simply by adding more x86 servers, all the while providing real-time data analytics capabilities no matter how quickly our datasets grow.
+Currently, our TiDB cluster holds several dozen nodes with multiple TBs of data. Benefiting from the high available architecture of TiDB, our system is stable and can achieve horizontal scalability simply by adding more x86 servers, all the while procaviding real-time data analytics capabilities no matter how quickly our datasets grow.
 
 ### **Case 3: OLTP for the Mobike Store**
 
