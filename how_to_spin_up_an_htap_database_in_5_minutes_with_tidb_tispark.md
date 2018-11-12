@@ -19,12 +19,12 @@ Before we start deploying TiDB, we’ll need a few things first: `wget`, Git, Do
 <main class="tabs">
   <input id="tabMacOS" type="radio" name="tabs" value="macOSContent" checked>
   <label for="tabMacOS">
-   <span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png" class="label__logo"></img></span>
+   <span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png" width="20"></img></span>
     <span class="label__title">macOS</span>
   </label>
   <input id="tabLinux" type="radio" name="tabs" value="linuxContent">
   <label for="tabLinux">
-    <span><img src="https://cdn4.iconfinder.com/data/icons/proglyphs-free/512/Linux_-_Tux-512.png" class="label__logo"></img></span>
+    <span><img src="https://cdn4.iconfinder.com/data/icons/proglyphs-free/512/Linux_-_Tux-512.png" width="20"></img></span>
     <span class="label__title">Linux</span>
   </label>
   <section id="macOSContent">
