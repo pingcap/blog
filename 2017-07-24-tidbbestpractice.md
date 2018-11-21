@@ -216,7 +216,7 @@ In addition to monitoring, you can also view the system logs. The three componen
 
 ### <span id="doc">Documentation</span>
 
-TiDB has a large number of official documents either in[ Chinese](https://github.com/pingcap/docs-cn/blob/master/sql/tidb-specific.md) or[ English](https://github.com/pingcap/docs-cn/blob/master/sql/tidb-specific.md). You can also search the issue list for a solution.
+TiDB has a large number of official documents either in[ Chinese](https://www.pingcap.com/docs-cn/) or[ English](https://www.pingcap.com/docs/). You can also search the issue list for a solution.
 
 If you have met an issue, you can start from the [FAQ](https://github.com/pingcap/docs/blob/master/FAQ.md) and [Troubleshooting](https://github.com/pingcap/docs/blob/master/trouble-shooting.md) sections. If the issue is not documented, please [file an issue](https://github.com/pingcap/tidb/issues/new).
 
