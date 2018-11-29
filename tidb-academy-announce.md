@@ -4,6 +4,7 @@ author: ['Morgan Tocker']
 date: 2018-10-16
 summary: Today, we are excited to launch TiDB Academy, a series of technical training courses and certifications on TiDB and distributed databases in general, taught by our senior technical team. 
 tags: ['TiDB Academy']
+categories: ['Open Source Community']
 ---
 
 **Author**: Morgan Tocker, Senior Product and Community Manager

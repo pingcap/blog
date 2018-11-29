@@ -5,6 +5,7 @@ date: 2017-07-24
 summary: This article summarizes some best practices in using TiDB, mainly including SQL usage, OLAP/OLTP optimization techniques and especially TiDB's exclusive optimization switches.
 tags: ['TiDB', 'Engineering', 'Golang']
 aliases: ['/blog/2017/07/24/tidbbestpractice/']
+categories: ['Engineering']
 ---
 
 <span id="top"></span>
@@ -14,22 +15,23 @@ From Li SHEN: shenli@pingcap.com
 See the following blogs ([Data Storage](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/), [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/), [Scheduling](https://pingcap.github.io/blog/2017/07/20/tidbinternal3/)) for TiDB's principles.
 
 ## Table of Content
-+ [Preface](#preface)
-+ [Basic Concepts](#basic)
-	- [Raft](#raft)
-	- [Distributed Transactions](#dist)
-	- [Data Sharding](#sharding)
-	- [Load Balancing](#load)
-	- [SQL on KV](#sql)
-	- [Secondary Indexes](#second)
-+ [Scenarios and Practices](#practice)
-	- [Deployment](#deploy)
-	- [Importing Data](#importing)
-	- [Write](#write)
-	- [Query](#query)
-	- [Monitoring and Log](#log)
-	- [Documentation](#doc)
-	- [Best Scenarios for TiDB](#scenario)
+- [Table of Content](#table-of-content)
+- [Preface](#preface)
+- [Basic Concepts](#basic-concepts)
+  - [Raft](#raft)
+  - [Distributed Transactions](#distributed-transactions)
+  - [ Data Sharding](#data-sharding)
+  - [ Load Balancing ](#load-balancing)
+  - [SQL on Key-Value](#sql-on-key-value)
+  - [ Secondary Indexes ](#secondary-indexes)
+- [ Scenarios and Practices ](#scenarios-and-practices)
+  - [ Deployment](#deployment)
+  - [Importing Data](#importing-data)
+  - [Write](#write)
+  - [Query](#query)
+  - [Monitoring and Log](#monitoring-and-log)
+  - [Documentation](#documentation)
+  - [Best Scenarios for TiDB](#best-scenarios-for-tidb)
 
 ## <span id="preface">Preface</span>
 

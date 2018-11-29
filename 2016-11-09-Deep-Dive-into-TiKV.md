@@ -4,22 +4,24 @@ date: 2016-11-09
 summary: This document introduces how TiKV works as a Key-Value database.
 tags: ['TiKV', 'Engineering', 'Rust']
 aliases: ['/blog/2016/11/09/Deep-Dive-into-TiKV/', '/blog/2016/11/09/deep-dive-into-tikv/']
+categories: ['Engineering']
 ---
 
 <span id="top"><span>
 
 # Table of Content
+- [Table of Content](#table-of-content)
 - [About TiKV](#about-tikv)
 - [Architecture](#architecture)
 - [Protocol](#protocol)
 - [Raft](#raft)
-- [Placement Driver (PD)](#placement-driver)
+- [Placement Driver](#placement-driver)
 - [Transaction](#transaction)
 - [Coprocessor](#coprocessor)
 - [Key processes analysis](#key-processes-analysis)
-	- [Key-Value operation](#key-value-operation)
-	- [Membership Change](#membership-change)
-	- [Split](#split)
+  - [Key-Value operation](#key-value-operation)
+  - [Membership Change](#membership-change)
+  - [Split](#split)
 
 # About TiKV
 

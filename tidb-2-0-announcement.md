@@ -4,6 +4,7 @@ author: ['Shen Li']
 date: 2018-04-29
 summary: TiDB 2.0 is released! We absorbed insights and feedbacks from our customers, listened to requests and issues from our community, and reflected internally on our ultimate vision of building a distributed hybrid transactional and analytical processing database that scales itself, heals itself, and lives in the cloud. 
 tags: ['TiDB', 'Product', 'Golang']
+categories: ['Open Source Community']
 ---
 
 TiDB 2.0 is Ready! TiDB is an open-source distributed scalable Hybrid Transactional and Analytical Processing (HTAP) database. It is designed to provide infinite horizontal scalability, strong consistency, and high availability. TiDB is MySQL compatible and serves as a one-stop data warehouse for both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workload.

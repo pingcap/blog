@@ -4,15 +4,17 @@ date: 2017-05-22
 summary: This document is a use case that details the performance of MySQL and TiDB with tens of millions of rows of data per day.
 tags: ['TiDB', 'MySQL Scalability']
 aliases: ['/blog/2017/05/22/Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day/', '/blog/2017/05/22/comparison-between-mysql-and-tidb-with-tens-of-millions-of-data-per-day/']
+categories: ['MySQL Scalability']
 ---
 
 ## Table of content
 
-+ [Background](#background)
-+ [MySQL, our first choice](#mysql-our-first-choice)
-+ [Look for new solutions](#look-for-new-solutions)
-+ [TiDB, give it a go](#tidb-give-it-a-go)
-+ [Feedbacks from TiDB](#feedbacks-from-tidb)
+- [Table of content](#table-of-content)
+- [Background](#background)
+- [MySQL, our first choice](#mysql--our-first-choice)
+- [Look for new solutions](#look-for-new-solutions)
+- [TiDB, give it a go](#tidb--give-it-a-go)
+- [Feedbacks from TiDB](#feedbacks-from-tidb)
 
 ## Background
 
