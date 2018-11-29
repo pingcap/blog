@@ -6,6 +6,7 @@ summary: Mobike has been using the TiDB database in the production environment s
 tags: ['TiDB','Success Story']
 url: /success-stories/tidb-in-mobike/
 aliases: ['/blog/Use-Case-TiDB-in-Mobike/']
+categories: ['Open Source Community']
 ---
 
 **Industry:** Ridesharing 

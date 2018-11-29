@@ -5,6 +5,7 @@ date: 2017-07-24
 summary: This article summarizes some best practices in using TiDB, mainly including SQL usage, OLAP/OLTP optimization techniques and especially TiDB's exclusive optimization switches.
 tags: ['TiDB', 'Engineering', 'Golang']
 aliases: ['/blog/2017/07/24/tidbbestpractice/']
+categories: ['Engineering']
 ---
 
 <span id="top"></span>
@@ -14,22 +15,23 @@ From Li SHEN: shenli@pingcap.com
 See the following blogs ([Data Storage](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/), [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/), [Scheduling](https://pingcap.github.io/blog/2017/07/20/tidbinternal3/)) for TiDB's principles.
 
 ## Table of Content
-+ [Preface](#preface)
-+ [Basic Concepts](#basic)
-	- [Raft](#raft)
-	- [Distributed Transactions](#dist)
-	- [Data Sharding](#sharding)
-	- [Load Balancing](#load)
-	- [SQL on KV](#sql)
-	- [Secondary Indexes](#second)
-+ [Scenarios and Practices](#practice)
-	- [Deployment](#deploy)
-	- [Importing Data](#importing)
-	- [Write](#write)
-	- [Query](#query)
-	- [Monitoring and Log](#log)
-	- [Documentation](#doc)
-	- [Best Scenarios for TiDB](#scenario)
+- [Table of Content](#table-of-content)
+- [Preface](#preface)
+- [Basic Concepts](#basic-concepts)
+  - [Raft](#raft)
+  - [Distributed Transactions](#distributed-transactions)
+  - [ Data Sharding](#data-sharding)
+  - [ Load Balancing ](#load-balancing)
+  - [SQL on Key-Value](#sql-on-key-value)
+  - [ Secondary Indexes ](#secondary-indexes)
+- [ Scenarios and Practices ](#scenarios-and-practices)
+  - [ Deployment](#deployment)
+  - [Importing Data](#importing-data)
+  - [Write](#write)
+  - [Query](#query)
+  - [Monitoring and Log](#monitoring-and-log)
+  - [Documentation](#documentation)
+  - [Best Scenarios for TiDB](#best-scenarios-for-tidb)
 
 ## <span id="preface">Preface</span>
 
@@ -122,16 +124,16 @@ The following two conditions don’t have the problem of two accesses:
 
 	As data is distributed across many Regions, TiDB makes query concurrently. But the concurrency by default is not high in case it consumes lots of system resources. Besides, as for the OLTP query, it doesn’t involve a large amount of data and the low concurrency is enough. But for the OLAP Query, the concurrency is high and TiDB modifies the query concurrency through System Variable.
 
-	- [tidb\_distsql\_scan\_concurrency](https://github.com/pingcap/docs/blob/master/sql/tidb-specific.md#tidb_distsql_scan_concurrency): 
+	- [tidb\_distsql\_scan\_concurrency](https://www.pingcap.com/docs/sql/tidb-specific/#tidb_distsql_scan_concurrency): 
 	The concurrency of scanning data, including scanning the Table and index data.
-	- [tidb\_index\_lookup\_size](https://github.com/pingcap/docs/blob/master/sql/tidb-specific.md#tidb_index_lookup_size): 
+	- [tidb\_index\_lookup\_size](https://www.pingcap.com/docs/sql/tidb-specific/#tidb_index_lookup_size): 
 	If it needs to access the index to get row IDs before accessing Table data, it uses a batch of row IDs as a single request to access Table data. This parameter can set the size of Batch. The larger Batch increases latency while the smaller one may lead to more queries. The proper size of this parameter is related to the amount of data that the query involves. Generally, no modification is required.
 
-	- [ tidb\_index\_lookup\_concurrency](https://github.com/pingcap/docs/blob/master/sql/tidb-specific.md#tidb_index_lookup_concurrency): If it needs to access the index to get row IDs before accessing Table data, the concurrency of getting data through row IDs every time is modified through this parameter.
+	- [ tidb\_index\_lookup\_concurrency](https://www.pingcap.com/docs/sql/tidb-specific/#tidb_index_lookup_concurrency): If it needs to access the index to get row IDs before accessing Table data, the concurrency of getting data through row IDs every time is modified through this parameter.
 
 + Ensure the order of results through index
 
-	Index cannot only be used to filter data, but also to sort data. Firstly, get row IDs according to the index order. Then return the row content according to the return order of row IDs. In this way, the return results are ordered according to the index column. I’ve mentioned that the model of scanning index and getting Row is parallel + Pipeline. If Row is returned according to the index order, a high concurrency between two queries will not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [tidb\_index\_serial\_scan\_concurrency](https://github.com/pingcap/docs/blob/master/sql/tidb-specific.md#tidb_index_serial_scan_concurrency) variable.
+	Index cannot only be used to filter data, but also to sort data. Firstly, get row IDs according to the index order. Then return the row content according to the return order of row IDs. In this way, the return results are ordered according to the index column. I’ve mentioned that the model of scanning index and getting Row is parallel + Pipeline. If Row is returned according to the index order, a high concurrency between two queries will not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [tidb\_index\_serial\_scan\_concurrency](https://www.pingcap.com/docs/sql/tidb-specific/#tidb_index_serial_scan_concurrency) variable.
 
 + Reverse index scan
 
@@ -145,9 +147,9 @@ In the last section, we discussed some basic implementation mechanisms of TiDB a
 
 ### <span id="deploy"> Deployment</span>
 
-Please read[ Deployment Recommendations](https://github.com/pingcap/docs/blob/master/op-guide/recommendation.md) before deployment.
+Please read [Software and Hardware Requirements](https://www.pingcap.com/docs/op-guide/recommendation/) before deployment.
 
-It is recommended to deploy the TiDB cluster through [TiDB-Ansible](https://pingcap.com/doc-ansible-deployment). This tool can deploy, stop, destroy, and update the whole cluster, which is quite convenient.
+It is recommended to deploy the TiDB cluster through [TiDB-Ansible](https://pingcap.com/docs/op-guide/ansible-deployment/). This tool can deploy, stop, destroy, and update the whole cluster, which is quite convenient.
 
 ### <span id="importing">Importing Data</span>
 
@@ -155,7 +157,7 @@ If there is a Unique Key and if the business end can ensure that there is no con
 
 `SET @@session.tidb_skip_constraint_check=1;`
 
-In order to improve the write performance, you can tune TiKV’s parameters as stated in [this document](https://github.com/pingcap/docs/blob/master/op-guide/tune-tikv.md).
+In order to improve the write performance, you can tune TiKV’s parameters as stated in [this document](https://www.pingcap.com/docs/op-guide/tune-tikv/).
 
 Please pay extra attention to this parameter:
 
@@ -198,7 +200,7 @@ This pseudocode means to split huge chunks of data into small ones and then dele
 
 ### <span id="query">Query</span>
 
-For query requirements and specific statements, please refer to[ this article](https://github.com/pingcap/docs/blob/master/sql/tidb-specific.md).
+For query requirements and specific statements, please refer to[ this article](https://www.pingcap.com/docs/sql/tidb-specific/).
 
 You can control the concurrency of SQL execution through the `SET` statement and the selection of the `Join` operator through `Hint`.
 
@@ -208,7 +210,7 @@ If the business scenario needs both OLTP and OLAP, you can send the TP request a
 
 ### <span id="log">Monitoring and Log</span>
 
-TiDB uses[ Grafana+Prometheus to monitor the system state](https://github.com/pingcap/docs/blob/master/op-guide/monitor-overview.md). The monitoring system is automatically deployed and configured if using TiDB-Ansible.
+TiDB uses[ Grafana+Prometheus to monitor the system state](https://www.pingcap.com/docs/op-guide/monitor-overview/). The monitoring system is automatically deployed and configured if using TiDB-Ansible.
 
 There are lots of items in the monitoring system, the majority of which are for TiDB developers. There is no need to understand these items but for an in-depth knowledge of the source code. We’ve picked out some items that are related to business or to the state of system key components in a separate panel for users.
 
@@ -216,11 +218,11 @@ In addition to monitoring, you can also view the system logs. The three componen
 
 ### <span id="doc">Documentation</span>
 
-TiDB has a large number of official documents either in[ Chinese](https://github.com/pingcap/docs-cn/blob/master/sql/tidb-specific.md) or[ English](https://github.com/pingcap/docs-cn/blob/master/sql/tidb-specific.md). You can also search the issue list for a solution.
+TiDB has a large number of official documents either in[ Chinese](https://www.pingcap.com/docs-cn/) or[ English](https://www.pingcap.com/docs/). You can also search the issue list for a solution.
 
-If you have met an issue, you can start from the [FAQ](https://github.com/pingcap/docs/blob/master/FAQ.md) and [Troubleshooting](https://github.com/pingcap/docs/blob/master/trouble-shooting.md) sections. If the issue is not documented, please [file an issue](https://github.com/pingcap/tidb/issues/new).
+If you have met an issue, you can start from the [FAQ](https://www.pingcap.com/docs/FAQ/) and [Troubleshooting](https://www.pingcap.com/docs/trouble-shooting/) sections. If the issue is not documented, please [file an issue](https://github.com/pingcap/tidb/issues/new).
 
-For more information, see [our website](www.pingcap.com) and our [Technical Blog](https://pingcap.github.io/blog/).
+For more information, see [our website](www.pingcap.com) and our [Technical Blog](https://www.pingcap.com/blog/).
 
 ### <span id="scenario">Best Scenarios for TiDB</span>
 

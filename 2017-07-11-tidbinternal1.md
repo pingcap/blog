@@ -5,21 +5,23 @@ date: 2017-07-11
 summary: This is the first one of three blogs to introduce TiDB internal.
 tags: ['TiDB', 'TiKV', 'Engineering', 'Golang', 'Rust']
 aliases: ['/blog/2017/07/11/tidbinternal1/']
+categories: ['Engineering']
 ---
 
 From Li SHEN: shenli@pingcap.com
 <span id="top"> </span>
 ## Table of Content
 
-+ [Foreword](#foreword)
-+ [Storing data](#storingdata)
-+ [Key-Value](#kv)
-+ [RocksDB](#rocksdb)
-+ [Raft](#raft)
-+ [Region](#region)
-+ [MVCC](#mvcc)
-+ [Transaction](#transaction)
-+ [Miscellaneous](#misc)
+- [Table of Content](#table-of-content)
+  - [Foreword:](#foreword)
+  - [Storing data](#storing-data)
+    - [Key-Value](#key-value)
+    - [RocksDB](#rocksdb)
+    - [Raft](#raft)
+    - [Region](#region)
+    - [MVCC](#mvcc)
+    - [Transaction](#transaction)
+    - [Miscellaneous](#miscellaneous)
 
 ### <span id="foreword">Foreword:</span>
 
