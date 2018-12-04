@@ -102,7 +102,7 @@ At PingCAP, we don’t just love building database, we love building tools as we
 
 - [TiDB Lightning](https://pingcap.com/docs/tools/lightning/overview-architecture/): makes importing data from a different database to TiDB very fast (currently around 100GB per hour on production-grade hardware). This tool is commonly used to facilitate initial migration to TiDB. 
 - [TiDB Binlog](https://pingcap.com/docs/tools/tidb-binlog-cluster/): supports downstream data synchronization, to either a TiDB cluster, MySQL slaves, or another data warehouse. This tool is often used to create hot backups as well. 
-- [TiDB DM (Data Migration)](https://pingcap.com/docs/tools/tidb-binlog-cluster/): provides full data migration and binlog replication from MySQL and MariaDB to a TiDB cluster, including merging sharded tables and data transformation during a migration process to avoid conflicts. 
+- [TiDB DM (Data Migration)](https://pingcap.com/docs/tools/data-migration-overview/): provides full data migration and binlog replication from MySQL and MariaDB to a TiDB cluster, including merging sharded tables and data transformation during a migration process to avoid conflicts. 
 
 With these three tools in hand, you can easily migrate in and out of TiDB from your existing database, which reduces the amount of work and worry you might have when testing, evaluating, and eventually adopting TiDB for your production environment. 
 
