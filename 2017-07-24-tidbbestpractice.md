@@ -172,7 +172,7 @@ sync-log = true
 
 As mentioned before, TiDB limits the size of a single transaction in the Key-Value layer. As for the SQL layer, a row of data is mapped to a Key-Value entry. For each additional index, there will be one more Key-Value entries. So the limits mirrored in the SQL layer are:
 
-+ Each row of data is less than 60MB
++ Each row of data is less than 6MB
 + The total number of rows * (1+ the number of indexes) is less than 300,000 rows
 + The total data of a single commit is less than 100MB
 
