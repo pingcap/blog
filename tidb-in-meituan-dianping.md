@@ -159,10 +159,11 @@ At present, MySQL is used with [Hive](https://en.wikipedia.org/wiki/Apache_Hive)
 - Data migration from Hive to TiDB and from TiDB to Hive.
 
     - It is easy to migrate data from Hive to TiDB, since TiDB is highly compatible with MySQL. The Insert statement needs no modification; we just need to adjust it slightly.
+    
     - For data migration from TiDB to Hive, using [TiDB-Binlog](https://github.com/pingcap/docs/blob/master/tools/tidb-binlog.md) (Pump + Drainer), an enterprise tool developed by PingCAP, is a good solution. Drainer can export data to Kafka, MySQL, and TiDB. We are currently considering the schema of using Drainer to output data to Kafka in order to synchronize data from TiDB to Hive, as shown in the diagram below. 
 
-![Synchronization Data from TiDB to Hive](media/synchronization-data-from-tidb-to-hive.png)
-<center> *Synchronization Data from TiDB to Hive* </center>
+        ![Synchronization Data from TiDB to Hive](media/synchronization-data-from-tidb-to-hive.png)
+        <center> *Synchronization Data from TiDB to Hive* </center>
 
 ### Issues and Solutions
 
@@ -240,10 +241,10 @@ In the long term, we will build a mightier ecosystem together with PingCAP. Here
 
     Based on the original computing engine of TiDB Server, PingCAP engineers have built [TiSpark](https://github.com/pingcap/tispark), a thin layer for running Apache Spark on top of TiDB/TiKV to answer complex OLAP queries. This addition makes the TiDB platform a complete [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)) database. This architecture has drastically decreased the data replicas of core services in the company’s data cycle, which saves costs and improves the cost-effectiveness of OLAP applications. We plan to migrate some analytical query systems with real-time or near real-time requirements to TiDB.
 
-![TiDB Platform Architecture](media/tidb-platform-architecture.png)
-<center> *TiDB Platform Architecture* </center>
+    ![TiDB Platform Architecture](media/tidb-platform-architecture.png)
+    <center> *TiDB Platform Architecture* </center>
 
-- Follow-on physical backup policy and multi-write across data centers
+- **Follow-on physical backup policy and multi-write across data centers**
 
     We will adopt TiDB in more application scenarios like physical backup and multiwrite across data centers. 
 
