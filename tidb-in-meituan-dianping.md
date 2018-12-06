@@ -108,7 +108,7 @@ There are many product lines in Meituan-Dianping. The services all have huge vol
 
 Meituan-Dianping currently uses the Mt-Falcon platform (a customized distributed monitoring system inspired by [Open-Falcon](https://github.com/open-falcon)) for monitoring and alert. Various plugins have been configured in Mt-Falcon to customize monitoring multiple components, and with [Puppet](https://en.wikipedia.org/wiki/Puppet_(software)) deployed, the privileges of different users and the issue of different files can be recognized. This way, machine installation and privilege control will be established as long as we complete the plugin scripts and the necessary files.
 
-![Monitoring Architecture](meida/monitoring-architecture.png)
+![Monitoring Architecture](media/monitoring-architecture.png)
 <center> *Monitoring Architecture* </center>
 
 #### Monitoring Architecture
