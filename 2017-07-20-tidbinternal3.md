@@ -5,6 +5,8 @@ date: 2017-07-20
 summary: This is the third one of three blogs to introduce TiDB internal.
 tags: ['TiDB', 'Golang', 'Engineering']
 aliases: ['/blog/2017/07/20/tidbinternal3/']
+image: /images/blog-article/p15.jpg
+categories: ['Engineering']
 ---
 
 <span id="top"></span>
@@ -13,13 +15,14 @@ From Li SHEN: shenli@pingcap.com
 
 ## Table of Content
 
-+ [Why scheduling](#why)
-+ [The Requirements of Scheduling](#requirement)
-+ [The Basic Operations of Scheduling](#basic)
-+ [Information Collecting](#collection)
-+ [The Policy of Scheduling](#policy)
-+ [The implementation of Scheduling](#implementation)
-+ [Summary](#summary)
+- [Table of Content](#table-of-content)
+- [Why scheduling?](#why-scheduling)
+- [The Requirements of Scheduling](#the-requirements-of-scheduling)
+- [The Basic Operations of Scheduling](#the-basic-operations-of-scheduling)
+- [Information Collecting](#information-collecting)
+- [The Policy of Scheduling](#the-policy-of-scheduling)
+- [The implementation of Scheduling](#the-implementation-of-scheduling)
+- [Summary](#summary)
 
 ## <span id="why">Why scheduling?</span>
 

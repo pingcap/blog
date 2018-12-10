@@ -5,6 +5,8 @@ date: 2017-05-27
 summary: This is the speech Siddon Tang gave at the 1st Rust Meetup in Beijing on April 16, 2017.
 tags: ['TiKV', 'Rust', 'Engineering']
 aliases: ['/blog/2017/05/27/rust-in-tikv/']
+image: /images/blog-article/p11.jpg
+categories: ['Engineering']
 ---
 
 This is the speech Siddon Tang gave at the 1st Rust Meetup in Beijing on April 16, 2017.

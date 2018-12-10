@@ -5,6 +5,8 @@ date: 2017-09-08
 summary: Data was corrupted. A cluster panicked. The crime scene was compromised. What happened? Detective Huang went all lengths to locate the criminal and solved it once and for all.
 tags: ['TiKV', 'Rust', 'Engineering']
 aliases: ['/blog/2017/09/08/rocksdbbug/']
+image: /images/blog-article/p20.jpg
+categories: ['Engineering']
 ---
 
 <span id="top"></span>

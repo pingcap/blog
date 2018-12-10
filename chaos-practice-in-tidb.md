@@ -4,6 +4,8 @@ author: ['Siddon Tang']
 date: 2018-04-14
 summary: As an open source distributed NewSQL Hybrid Transactional/Analytical Processing (HTAP) database, TiDB contains the most important asset of our customers--their data. One of the fundamental and foremost requirements of our system is to be fault-tolerant. But how do you ensure fault tolerance in a distributed database? This article covers the top fault injection tools and techniques in Chaos Engineering, as well as how to execute Chaos practices in TiDB.
 tags: ['TiDB', 'Engineering', 'Golang']
+image: /images/blog-article/p28.jpg
+categories: ['Engineering']
 ---
 
 ## What is Chaos?

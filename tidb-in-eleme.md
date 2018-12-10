@@ -6,6 +6,7 @@ summary: With a fast-growing business comes soaring data size, which has placed 
 tags: ['TiDB', 'Success Story']
 url: /success-stories/tidb-in-eleme/
 aliases: ['/blog/use-case-tidb-in-eleme/']
+image: /images/blog-article/p43.jpg
 ---
 
 **Industry:** Food Delivery

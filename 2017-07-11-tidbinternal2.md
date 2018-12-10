@@ -5,6 +5,8 @@ date: 2017-07-11
 summary: This is the second one of three blogs to introduce TiDB internal.
 tags: ['TiDB', 'Golang', 'Engineering']
 aliases: ['/blog/2017/07/11/tidbinternal2/']
+image: /images/blog-article/p14.jpg
+categories: ['Engineering']
 ---
 
 <span id="top"> </span>
@@ -13,13 +15,14 @@ From Li SHEN: shenli@pingcap.com
 
 ## Table of Content
 
-+ [Mapping the Relational Model to the Key-Value Model](#map)
-+ [Metadata Management](#meta)
-+ [Architecture of SQL on Key-Value](#sqlonkv)
-+ [SQL Computing](#sqlcompute)
-+ [Distributed SQL Operation](#dissql)
-+ [Architecture of the SQL Layer](#sqlarch)
-+ [Summary](#summary)
+- [Table of Content](#table-of-content)
+  - [Mapping the Relational Model to the Key-Value Model](#mapping-the-relational-model-to-the-key-value-model)
+  - [Metadata Management](#metadata-management)
+  - [Architecture of SQL on Key-Value](#architecture-of-sql-on-key-value)
+  - [SQL Computing](#sql-computing)
+  - [Distributed SQL Operation](#distributed-sql-operation)
+  - [Architecture of the SQL Layer](#architecture-of-the-sql-layer)
+  - [Summary](#summary)
 
 My [last blog](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/) introduces the way that TiDB stores data, which is also the basic concepts of TiKV. In this article, I’ll elaborate on how TiDB uses the bottom layer Key-Value to store data, maps the relational model to the Key-Value model and performs SQL computing.
 

@@ -4,6 +4,8 @@ date: 2018-08-30
 summary: TiDB recently added its 200th contributor. As CEO and co-founder of PingCAP who began building TiDB three years ago, I would like to thank the entire TiDB community for helping us reach this important milestone!
 author: ['Max Liu']
 tags: ['TiDB','Community']
+image: /images/blog-article/p41.jpg
+categories: ['Open Source Community']
 ---
 
 Dear TiDB Contributors:

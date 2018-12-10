@@ -5,20 +5,23 @@ date: 2017-06-27
 summary: In order to accelerate expression evaluation, we recently refactored its framework. This tutorial will show you how to use the new computational framework to rewrite or add a built-in function in TiDB.
 tags: ['TiDB', 'Golang', 'Engineering']
 aliases: ['/blog/2017/06/27/refactor-builtin/']
+image: /images/blog-article/p12.jpg
+categories: ['Engineering']
 ---
 
 <span id="top"> </span>
 In order to accelerate expression evaluation, we recently refactored its framework. This tutorial will show you how to use the new computational framework to rewrite or add a built-in function in TiDB.
 
 ## Table of Content
-+ [The overall process](#overall)
-+ [Example](#example)
-	- [Take a look at `builtin_string.go`](#first)
-	- [Refine the existing `TestLength()` method](#move)
-	- [Test the implementation of `LENGTH` at the SQL level ](#final)
-+ [Before refactoring...](#before)
-+ [After refactoring...](#after)
-+ [Appendix](#app)
+- [Table of Content](#table-of-content)
+  - [ The overall process ](#the-overall-process)
+  - [Example:](#example)
+    - [ Take a look at `expression/builtin_string.go`：](#take-a-look-at-expression-builtin-stringgo)
+    - [ Refine the existing `TestLength()` method:](#refine-the-existing-testlength-method)
+    - [ Test the implementation of `LENGTH` at the SQL level ](#test-the-implementation-of-length-at-the-sql-level)
+  - [ Before refactoring...](#before-refactoring)
+  - [ After refactoring...](#after-refactoring)
+  - [ Appendix ](#appendix)
 
  
 ### <span id="overall"> The overall process </span>
