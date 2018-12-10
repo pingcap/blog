@@ -5,7 +5,7 @@ summary: This document is a case study that details the reasons why yuanfudao.co
 tags: ['TiDB', 'Success Story']
 url: /success-stories/tidb-in-yuanfudao/
 aliases: ['/blog/2017/08/08/tidbforyuanfudao/', '/blog/2017-08-08-tidbforyuanfudao/']
-image: /images/blog-article/p48.jpg
+image: /images/blog-article/p41.jpg
 ---
 
 Yuanfudao.com is an online tutoring service targeting the K-12 educational segment in China with the largest number of elementary and secondary school student users. It owns three applications, Yuantiku (猿题库), the online question bank, Xiaoyuansouti (小猿搜题), the application for question search by taking pictures, and yuanfudao.com, an online tutoring service.
