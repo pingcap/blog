@@ -6,7 +6,7 @@ summary: With our fast-growing business, the surging data volume posed a serious
 tags: ['TiDB','Success Story']
 url: /success-stories/tidb-in-zhuanzhuan/
 aliases: ['/blog/use-case-tidb-in-zhuanzhuan']
-image: /images/blog-article/p47.jpg
+image: /images/blog-article/p52.jpg
 ---
 
 **Industry:** E-commerce
