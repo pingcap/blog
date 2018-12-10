@@ -4,7 +4,7 @@ date: 2017-10-17
 summary: TiDB is compatible with MySQL, strong consistent and highly available.
 tags: ['TiDB', 'Product', 'Golang']
 aliases: ['/blog/2017/10/17/announcement/']
-categories: ['Open Source Community']
+image: /images/blog-article/p25.jpg
 ---
 
 ## PingCAP Launches TiDB 1.0, A Scalable Hybrid Database Solution

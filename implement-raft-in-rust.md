@@ -4,6 +4,7 @@ author: ['Siddon Tang']
 date: 2018-05-22
 summary: As an open-source distributed scalable HTAP database, TiDB uses the Raft Consensus Algorithm in its distributed transactional key-value storage engine, TiKV, to ensure data consistency, auto-failover, and fault tolerance. TiDB has thus far been used by more than 200 companies in their production environments in a wide range of industries, from e-commerce and food delivery, to fintech, media, gaming, and travel. 
 tags: ['TiDB', 'Rust', 'Raft', 'Engineering']
+image: /images/blog-article/p31.jpg
 categories: ['Engineering']
 ---
 
@@ -13,7 +14,7 @@ Consensus is one of the most important challenges in designing and building dist
 
 Ever since the Raft Consensus Algorithm was created by Diego Ongaro and John Ousterhout, it has gained wide popularity in [many organizations](https://raft.github.io/#implementations), who are using it to develop consistent distributed services with high availability. For example, [CoreOS](https://coreos.com/) uses it to build [etcd](https://github.com/coreos/etcd), a popular key-value store which helps users save critical data. [HashiCorp](https://www.hashicorp.com/) uses it to build [Consul](https://www.consul.io/), which helps make service discovery and configuration easy. 
 
-When we began to build TiKV, we researched and investigated many Raft implementations. We eventually decided to go with etcd’s Raft implementation and built our own [Raft](https://github.com/pingcap/raft-rs) using [Rust](https://www.rust-lang.org/en-US/), a systems programming language that runs blazing fast, prevents segfaults, and guarantees thread safety. Although etcd’s Raft implementation is written in Go, it has a simple API with no specific Go feature, thus can be easily ported to Rust. 
+When we began to build TiKV, we researched and investigated many Raft implementations. We eventually decided to go with etcd’s Raft implementation and built our own [Raft](https://github.com/pingcap/raft-rs) using [Rust](https://www.rust-lang.org/), a systems programming language that runs blazing fast, prevents segfaults, and guarantees thread safety. Although etcd’s Raft implementation is written in Go, it has a simple API with no specific Go feature, thus can be easily ported to Rust. 
 
 Since TiKV was open sourced on April 1, 2016, its Raft module has been running stably in many companies’ production environment. So we decided to abstract the Raft module away as an independent library and released it as a crate, [raft-rs](https://github.com/pingcap/raft-rs), to help the Rust community create their own consistent services using this easy to understand consensus algorithm. In the following sections, I will introduce what is raft-rs and how to use it.
 

@@ -3,7 +3,7 @@ title: Announcing TiDB Cloud, Managed as a Service and in the Marketplace
 date: 2018-11-01
 summary: This post announces that TiDB Cloud is now available for public preview.
 tags: ['TiDB', 'Product']
-categories: ['Open Source Community']
+image: /images/blog-article/p26.jpg
 ---
 
 ![TiDB Cloud](media/tidb-cloud.png)

@@ -5,6 +5,7 @@ date: 2017-07-24
 summary: This article summarizes some best practices in using TiDB, mainly including SQL usage, OLAP/OLTP optimization techniques and especially TiDB's exclusive optimization switches.
 tags: ['TiDB', 'Engineering', 'Golang']
 aliases: ['/blog/2017/07/24/tidbbestpractice/']
+image: /images/blog-article/p16.jpg
 categories: ['Engineering']
 ---
 
@@ -172,13 +173,13 @@ sync-log = true
 
 ### <span id="write">Write</span>
 
-As mentioned before, TiDB limits the size of a single transaction in the Key-Value layer. As for the SQL layer, a row of data is mapped to a Key-Value entry. For each additional index, there will be one more Key-Value entries. So the limits mirrored in the SQL layer are:
+As mentioned before, TiDB limits the size of a single transaction in the Key-Value layer. As for the SQL layer, a row of data is mapped to a Key-Value entry. For each additional index, there will be one more Key-Value entries. So the limits mirrored in the SQL layer for a single transaction are:
 
-+ Each row of data is less than 60MB
-+ The total number of rows * (1+ the number of indexes) is less than 300,000 rows
++ Each row of data is less than 6MB
++ The total number of rows * (1 + the number of indexes) is less than 300,000
 + The total data of a single commit is less than 100MB
 
-Note that either the size limit or the number of rows limit need to consider the overhead of TiDB encoding and the extra transaction Key. It is recommended that the number of rows of each transaction is less than 10,000; otherwise, the limit might be exceeded or the performance is bad.
+> **Note:** Either the size limit or the number of rows limit needs to consider the overhead of TiDB encoding and the extra transaction Key. **It is recommended that the number of rows of each transaction is less than 200 and the data size of a single row is less than 100KB**; otherwise, the performance is bad.
 
 When deleting a large amount of data, it is recommended to use `Delete * from t where xx limit 5000;`. It deletes through the loop and use `Affected Rows == 0` as a condition to end the loop, so as not to exceed the limit of transaction size. If the amount of data that needs to be deleted at a time is large, this loop method will get slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags will remain in a short period (then all will be Garbage Collected) and influence the following `Delete` statement. If possible, it is recommended to refine the `Where` condition. Assume that you need to delete all data on 2017-05-26, you can:
 

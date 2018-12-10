@@ -4,8 +4,8 @@ author: ['Ed Huang']
 date: 2018-08-17
 summary: Since PingCAP started building TiDB, it has encountered countless challenges, pitfalls, and critical design choices. Over the past three years, the PingCAP team has answered many questions from the users. Ed Huang, the CTO of PingCAP, has summarized these questions into “9 why’s” that every engineer may ask when looking at a distributed database and gives his answers to these questions in this post to help make decision-making of engineers a bit easier.
 tags: ['TiDB', 'Engineering']
+image: /images/blog-article/p1.jpg
 categories: ['Engineering']
-image: https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ed86b965826826e3dd08bb3b33726543&auto=format&fit=crop&w=2207&q=80
 ---
 
 When I first started building [TiDB](http://bit.ly/tidb_repo_publication) with my co-founders, we encountered countless challenges, pitfalls, and critical design choices that could have made or broken the project. To build an enterprise-grade distributed database like TiDB from scratch, we have to constantly make difficult decisions that balance the speed of development with long-term considerations for our customers and our team. 

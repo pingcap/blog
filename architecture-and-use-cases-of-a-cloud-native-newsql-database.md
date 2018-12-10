@@ -4,6 +4,7 @@ author: ['Kevin Xu']
 date: 2018-11-02
 summary: This post provides a macro-level overview of TiDB and is the main reference content for readers to orient and dig deeper into other TiDB subjects.
 tags: ['Cloud native', 'HTAP', 'MySQL', 'Kubernetes', 'Operator', 'Spark', 'multi cloud', 'hybrid cloud']
+image: /images/blog-article/p27.jpg
 categories: ['HTAP']
 ---
 

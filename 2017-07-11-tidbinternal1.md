@@ -5,6 +5,7 @@ date: 2017-07-11
 summary: This is the first one of three blogs to introduce TiDB internal.
 tags: ['TiDB', 'TiKV', 'Engineering', 'Golang', 'Rust']
 aliases: ['/blog/2017/07/11/tidbinternal1/']
+image: /images/blog-article/p13.jpg
 categories: ['Engineering']
 ---
 

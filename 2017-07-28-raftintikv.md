@@ -5,6 +5,7 @@ date: 2017-07-28
 summary: TiKV uses the Raft algorithm to implement the strong consistency of data in a distributed environment. This blog introduces the details how Raft is implemented.
 tags: ['TiKV', 'Engineering', 'Rust', 'Raft']
 aliases: ['/blog/2017/07/28/raftintikv/']
+image: /images/blog-article/p17.jpg
 categories: ['Engineering']
 ---
 

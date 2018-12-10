@@ -4,6 +4,7 @@ author: ['Queeny Jin']
 date: 2018-06-08
 summary: In this 5-minute tutorial for beginners, we will show you how to spin up a standard TiDB cluster using Docker Compose on your local computer, so you can get a taste of its hybrid power, before using it for work or your own project in production.
 tags: ['TiDB', 'TiSpark', 'HTAP', 'Golang']
+image: /images/blog-article/p30.jpg
 categories: ['HTAP']
 ---
 

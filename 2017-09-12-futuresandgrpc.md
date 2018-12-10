@@ -5,6 +5,7 @@ date: 2017-09-12
 summary: This is the speech Siddon Tang gave at Bay Area Rust Meetup August 2017.
 tags: ['TiKV', 'Rust', 'Engineering']
 aliases: ['/blog/2017/09/12/futuresandgrpc/']
+image: /images/blog-article/p21.jpg
 categories: ['Engineering']
 ---
 
