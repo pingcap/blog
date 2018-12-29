@@ -54,7 +54,7 @@ Data can be stored either in rows or in columns, both have their advantages and 
 TiDB supports both the Primary Index and Secondary Index. The function of Index is for faster query, higher query performance, and the Constraints. There are two forms of query:
 
 + Point query, which uses equivalent conditions such as Primary Key or Unique Key for a query, e.g. `select name from user where id=1;`, locating a certain row of data through index. 
-+ Range query, e.g. `select name from user where age > 30 and age < 35;`, querying the data that the age is between 20 and 30 through `idxAge`. 
++ Range query, e.g. `select name from user where age > 30 and age < 35;`, querying the data that the age is between 30 and 35 through `idxAge`. 
 There are two types of Indexes: Unique Index and Non-unique Index, both of which are supported by TiDB.
 
 After analyzing the characteristics of the data to be stored, let’s move on to what we need to do to manipulate the data, including the Insert/Update/Delete/Select statements.
