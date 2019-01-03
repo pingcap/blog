@@ -5,7 +5,7 @@ date: 2017-09-12
 summary: This is the speech Siddon Tang gave at Bay Area Rust Meetup August 2017.
 tags: ['TiKV', 'Rust', 'Engineering']
 aliases: ['/blog/2017/09/12/futuresandgrpc/']
-category: ['Engineering']
+categories: ['Engineering']
 ---
 
 This is the speech Tang Liu (tl@pingcap.com) gave at the Bay Area Rust Meetup August 2017. [See the video](https://air.mozilla.org/bay-area-rust-meetup-august-2017/). 
