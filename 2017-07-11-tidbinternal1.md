@@ -5,7 +5,7 @@ date: 2017-07-11
 summary: This is the first one of three blogs to introduce TiDB internal.
 tags: ['TiDB', 'TiKV', 'Engineering', 'Golang', 'Rust']
 aliases: ['/blog/2017/07/11/tidbinternal1/']
-category: ['Engineering']
+categories: ['Engineering']
 ---
 
 From Li SHEN: shenli@pingcap.com

@@ -5,7 +5,7 @@ date: 2017-05-23
 summary: This is the speech Edward Huang gave at Percona Live Open Source Database Conference 2017.
 tags: ['TiDB', 'Engineering', 'Golang']
 aliases: ['/blog/2017/05/23/perconalive17/']
-category: ['Engineering']
+categories: ['Engineering']
 ---
 
 This is the speech Edward Huang gave at Percona Live - Open Source Database Conference 2017.

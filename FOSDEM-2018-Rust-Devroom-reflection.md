@@ -4,7 +4,7 @@ author: ['Tang Liu']
 date: 2018-02-15
 summary: At the crack of dawn on February 1, I landed in Brussels, Belgium, for the first time in my life. The goal of my trip wasn’t to taste the local cuisine, tour world-famous museums, or grab a pint of the local brew. It was to deliver a talk three days later at FOSDEM 2018 Rust Devroom about our experience at PingCAP using Rust to build TiKV, a distributed transactional Key-Value storage engine.
 tags: ['TiKV', 'Rust', 'Community']
-category: ['Community']
+categories: ['Open Source Community']
 ---
 
 At the crack of dawn on February 1, I landed in Brussels, Belgium, for the first time in my life. The goal of my trip wasn’t to taste the local cuisine, tour world-famous museums, or grab a pint of the local brew (though I ended up doing all those things anyway). It was to deliver a talk three days later at "FOSDEM 2018 Rust Devroom" about our experience at PingCAP using Rust to build [TiKV](https://github.com/pingcap/tikv), a distributed transactional Key-Value storage engine.

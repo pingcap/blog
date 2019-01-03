@@ -4,7 +4,7 @@ author: ['Siddon Tang']
 date: 2018-05-22
 summary: As an open-source distributed scalable HTAP database, TiDB uses the Raft Consensus Algorithm in its distributed transactional key-value storage engine, TiKV, to ensure data consistency, auto-failover, and fault tolerance. TiDB has thus far been used by more than 200 companies in their production environments in a wide range of industries, from e-commerce and food delivery, to fintech, media, gaming, and travel. 
 tags: ['TiDB', 'Rust', 'Raft', 'Engineering']
-category: ['Engineering']
+categories: ['Engineering']
 ---
 
 ![Implement Raft in Rust](media/implement-raft-in-rust.jpg)

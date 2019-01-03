@@ -5,7 +5,7 @@ date: 2017-09-01
 summary: What happens when TiDB meets Jepsen?
 tags: ['TiDB', 'Engineering', 'Golang']
 aliases: ['/blog/2017/09/01/tidbmeetsjepsen/']
-category: ['Engineering']
+categories: ['Engineering']
 ---
 
 - [What is Jepsen?](#what-is-jepsen)

@@ -5,7 +5,7 @@ date: 2017-07-20
 summary: This is the third one of three blogs to introduce TiDB internal.
 tags: ['TiDB', 'Golang', 'Engineering']
 aliases: ['/blog/2017/07/20/tidbinternal3/']
-category: ['Engineering']
+categories: ['Engineering']
 ---
 
 <span id="top"></span>
