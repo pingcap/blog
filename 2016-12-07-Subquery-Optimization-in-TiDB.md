@@ -5,8 +5,7 @@ date: 2016-12-07
 summary: Subquery optimization, especially rewriting the correlated subquery, is a very difficult part in SQL query optimization. To be compatible with MySQL, TiDB enables users to write subqueries anywhere they want. For those subqueries that are not correlated, which are also called uncorrelated subqueries, TiDB evaluates in advance; for those correlated subqueries, TiDB removes the correlations as much as possible. For example, TiDB can rewrite a correlated subquery to `SemiJoin`. This article is focused on introducing the correlated subquery optimization methods in TiDB.
 tags: ['TiDB', 'Engineering', 'Golang']
 aliases: ['/blog/2016/12/07/Subquery-Optimization-in-TiDB/', '/blog/2016/12/07/subquery-optimization-in-tidb/']
-image: /images/blog-article/p6.jpg
-categories: ['Engineering']
+category: ['Engineering']
 ---
 
 <script type="text/x-mathjax-config">

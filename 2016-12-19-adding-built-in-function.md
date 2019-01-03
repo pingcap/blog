@@ -4,8 +4,7 @@ date: 2016-12-19
 summary: TiDB code is updated and the procedure of adding built-in functions is greatly simplified. This document describes how to add built-in functions to TiDB.
 tags: ['TiDB', 'Engineering', 'Golang']
 aliases: ['/blog/2016/12/19/adding-built-in-function/']
-image: /images/blog-article/p7.jpg
-categories: ['Engineering']
+category: ['Engineering']
 ---
 
 This document describes how to add built-in functions to TiDB.

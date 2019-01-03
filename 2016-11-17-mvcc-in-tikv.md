@@ -5,8 +5,7 @@ date: 2016-11-17
 summary: This document gives an overview of MVCC implementation in TiKV.
 tags: ['TiKV', 'Engineering', 'Rust']
 aliases: ['/blog/2016/11/17/mvcc-in-tikv/']
-image: /images/blog-article/p5.jpg
-categories: ['Engineering']
+category: ['Engineering']
 ---
 
 ## Introduction to concurrency control

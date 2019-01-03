@@ -4,8 +4,7 @@ author: ['Siddon Tang']
 date: 2018-11-14
 summary: This post discusses Raft Log Read, `ReadIndex` Read, and Lease Read, and why TiKV adopts the Lease Read approach.
 tags: ['TiKV', 'Engineering']
-image: /images/blog-article/p32.jpg
-categories: ['Engineering']
+category: ['Engineering']
 ---
 
 TiKV, an open source distributed transactional key-value store (also a Cloud Native Computing Foundation member project), uses the [Raft](https://raft.github.io/) consensus algorithm to ensure strong data consistency and high availability. Raft bears many similarities to other consensus algorithms like Paxos in its ability to ensure fault-tolerance and its performance implementations, but generally easier to understand and implement. While our team has written extensively on how Raft is used in TiKV (some examples: [Raft in TiKV](https://www.pingcap.com/blog/2017-07-28-raftintikv/), [the Design and Implementation of Multi-raft](https://www.pingcap.com/blog/2017-08-15-multi-raft/), [Raft Optimization](https://www.pingcap.com/blog/optimizing-raft-in-tikv/)), one topic we haven’t discussed is when stale read happens due to a brain split within a Raft group, and the old Raft leader is not aware that a new leader is elected, what should we do? This post discusses three different approaches to this problem: Raft Log Read, `ReadIndex` Read, and Lease Read, and why TiKV adopts the Lease Read approach. 

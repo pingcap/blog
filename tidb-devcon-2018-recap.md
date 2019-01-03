@@ -3,8 +3,7 @@ title: TiDB DevCon 2018 Recap - News, Latest Development, and Roadmap
 date: 2018-01-25
 summary: On January 20th, 2018, more than 200 coders, hackers, and techies streamed into Garage Café, a chic coffee shop in the heart of Beijing’s techhub, Zhongguancun. They were there to be part of TiDB DevCon 2018, a technology party for the developers, by the developers!
 tags: ['TiDB', 'Community', 'Golang']
-image: /images/blog-article/p42.jpg
-categories: ['Open Source Community']
+category: ['Open Source Community']
 ---
 
 On January 20th, 2018, a chilly Saturday in the middle of the winter, more than 200 coders, hackers, and techies streamed into Garage Café, a chic coffee shop in the heart of Beijing’s techhub, Zhongguancun. They weren’t there to get coffee. They weren’t there to stay warm. They were there to be part of TiDB DevCon 2018, a technology party for the developers, by the developers.
@@ -62,7 +61,7 @@ The team behind TiDB, PingCAP, grew from 35 members in 2016 to almost 90 members
     
 ## Partners
 
-Designed to be a cloud-native HTAP database, TiDB has been fully integrated and available on [UCloud](https://www.ucloud.cn/site/product/cloudtidb.html) and [Tencent Cloud](https://cloud.tencent.com/product/tidb). Close partnerships with other public cloud vendors will be announced soon. Stay tuned!
+Designed to be a cloud-native HTAP database, TiDB has been fully integrated and available on [UCloud](https://www.ucloud.cn/) and [Tencent Cloud](https://cloud.tencent.com/product/tidb). Close partnerships with other public cloud vendors will be announced soon. Stay tuned!
 
 Some of TiDB’s largest customers, [Mobike](https://www.crunchbase.com/organization/mobike), [Toutiao](https://www.crunchbase.com/organization/toutiao), [SpeedyCloud](https://www.crunchbase.com/organization/speedycloud), [Qunar.com](https://www.crunchbase.com/organization/qunar-com), [Ele.me](https://www.crunchbase.com/organization/ele-me), also shared their use cases and best practices:
 
