@@ -5,6 +5,7 @@ date: 2016-10-17
 summary: This is the speech Max Liu gave at Percona Live Open Source Database Conference 2016.
 tags: ['TiDB', 'Engineering', 'Golang']
 aliases: ['/blog/2016/10/17/how-we-build-tidb/']
+category: ['Engineering']
 ---
 
 <span id="top">This is the speech Max Liu gave at **Percona Live Open Source Database Conference 2016**. </span>

@@ -5,25 +5,27 @@ date: 2017-05-23
 summary: This is the speech Edward Huang gave at Percona Live Open Source Database Conference 2017.
 tags: ['TiDB', 'Engineering', 'Golang']
 aliases: ['/blog/2017/05/23/perconalive17/']
+category: ['Engineering']
 ---
 
 This is the speech Edward Huang gave at Percona Live - Open Source Database Conference 2017.
 
 <span id="top">The slides are [here](https://www.percona.com/live/17/sites/default/files/slides/A%20brief%20introduction%20of%20TiDB%20%28Percona%20Live%29.pdf).</span>
 
-- [Speaker introduction](#speaker)
-- [What would you do when…](#what)
-- [TiDB Project - Goal](#goal)
-- [Sofware Stack](#stack)
-- [Safe Split](#split)
-- [Scale Out](#scale)
-- [ACID Transaction](#transaction)
-- [Distributed SQL](#distsql)
-- [TiDB SQL Layer Overview](#sql)
-- [What Happens behind a query](#query)
-- [Distributed Join (HashJoin)](#hashjoin)
-- [Tools Matter](#tools)
-- [Use Cases](#usecase)
+- [ Speaker introduction ](#speaker-introduction)
+- [What would you do when…](#what-would-you-do-when)
+- [TiDB goal](#tidb-goal)
+- [Architecture](#architecture)
+- [Storage stack ](#storage-stack)
+- [Safe split](#safe-split)
+- [Scale out](#scale-out)
+- [ACID transaction](#acid-transaction)
+- [<span id="distsql">Distributed SQL<span>](#span-iddistsqldistributed-sqlspan)
+- [<span id="sql">TiDB SQL layer overview<span>](#span-idsqltidb-sql-layer-overviewspan)
+- [<span id="query">What Happens behind a query<span>](#span-idquerywhat-happens-behind-a-queryspan)
+- [Distributed join (HashJoin)](#distributed-join-hashjoin)
+- [<span id="tools">Tools matter<span>](#span-idtoolstools-matterspan)
+- [Use cases](#use-cases)
 - [Sysbench](#sysbench)
 - [Roadmap](#roadmap)
 

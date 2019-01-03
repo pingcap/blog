@@ -5,15 +5,16 @@ date: 2017-09-01
 summary: What happens when TiDB meets Jepsen?
 tags: ['TiDB', 'Engineering', 'Golang']
 aliases: ['/blog/2017/09/01/tidbmeetsjepsen/']
+category: ['Engineering']
 ---
 
 - [What is Jepsen?](#what-is-jepsen)
 - [How does Jepsen work?](#how-does-jepsen-work)
-    - [DB](#db)
-    - [Client](#client)
-    - [Checker](#checker)
-    - [Nemesis](#nemesis)
-    - [Generator](#generator)
+  - [DB](#db)
+  - [Client](#client)
+  - [Checker](#checker)
+  - [Nemesis](#nemesis)
+  - [Generator](#generator)
 - [Jepsen tests that TiDB goes through](#jepsen-tests-that-tidb-goes-through)
     - [The `Bank` Test](#the-bank-test)
     - [The `Set` Test](#the-set-test)

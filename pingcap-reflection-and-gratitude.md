@@ -3,6 +3,7 @@ title: 2017 Reflection and Gratitude
 date: 2017-12-30
 summary: Thank you all, our beloved contributors, customers, and partners, for an amazing 2017! Hello, 2018!
 tags: ['TiDB', 'Community', 'Product']
+category: ['Community']
 ---
 
 **In open source, we trust!**

@@ -5,6 +5,7 @@ date: 2017-09-15
 summary: This is the speech Siddon Tang gave at the RocksDB meetup on August 28, 2017.
 tags: ['TiKV', 'Engineering', 'Rust']
 aliases: ['/blog/2017/09/15/rocksdbintikv/']
+category: ['Engineering']
 ---
 
 <span id="top"><span>
@@ -17,15 +18,15 @@ This is the speech Siddon Tang gave at the [RocksDB meetup](https://www.meetup.c
 - [Agenda](#agenda)
 - [Why did we choose RocksDB?](#why-did-we-choose-rocksdb)
 - [How are we using RocksDB?](#how-are-we-using-rocksdb)
-    - [TiKV Architecture](#tikv-architecture)
-    - [Region](#region)
-    - [Raft](#raft)
-    - [InsertWithHint](#insertwithhint)
-    - [Prefix Iterator](#prefix-iterator)
-    - [Table Property for Region Split Check](#table-property-for-region-split-check)
-    - [Table Property for GC Check](#table-property-for-gc-check)
-    - [Ingest the SST File](#ingest-the-sst-file)
-    - [Others](#others)
+  - [TiKV Architecture](#tikv-architecture)
+  - [Region](#region)
+  - [Raft](#raft)
+  - [InsertWithHint](#insertwithhint)
+  - [Prefix Iterator](#prefix-iterator)
+  - [Table Property for Region Split Check](#table-property-for-region-split-check)
+  - [Table Property for GC Check](#table-property-for-gc-check)
+  - [Ingest the SST File](#ingest-the-sst-file)
+  - [Others](#others)
 - [How are we contributing?](#how-are-we-contributing)
 - [Future Plans](#future-plans)
 

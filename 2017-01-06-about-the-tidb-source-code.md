@@ -4,19 +4,20 @@ date: 2017-01-06
 summary: The target audience of this document is the contributors in the TiDB community. The document aims to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process.
 tags: ['TiDB', 'Engineering', 'Golang']
 aliases: ['/blog/2017/01/06/about-the-tidb-source-code/']
+category: ['Engineering']
 ---
 
 The target audience of this document is the contributors in the TiDB community. The document aims to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process.
 
 ## Table of content
 
-+ [System architecture](#system-architecture)
-+ [Overview of the code structure](#overview-of-the-code-structure)
-+ [The protocol layer](#the-protocol-layer)
-+ [The SQL layer](#the-sql-layer)
-+ [The optimizer](#the-optimizer)
-+ [The executor](#the-executor)
-+ [The distributed executor](#the-distributed-executor)
+- [System architecture](#system-architecture)
+- [Overview of the code structure](#overview-of-the-code-structure)
+- [The protocol layer](#the-protocol-layer)
+- [The SQL layer](#the-sql-layer)
+- [The optimizer](#the-optimizer)
+- [The executor](#the-executor)
+- [The distributed executor](#the-distributed-executor)
 
 # System architecture
 

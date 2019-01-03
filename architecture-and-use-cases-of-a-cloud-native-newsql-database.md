@@ -4,6 +4,7 @@ author: ['Kevin Xu']
 date: 2018-11-02
 summary: This post provides a macro-level overview of TiDB and is the main reference content for readers to orient and dig deeper into other TiDB subjects.
 tags: ['Cloud native', 'HTAP', 'MySQL', 'Kubernetes', 'Operator', 'Spark', 'multi cloud', 'hybrid cloud']
+category: ['HTAP']
 ---
 
 TiDB is an open source cloud-native distributed database that handles hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) workloads--a member of the NewSQL class of databases that’s reinventing how a relational database can be designed, built, and deployed at massive scale. ("Ti" for those of you wondering stands for "Titanium".) Since PingCAP started building TiDB just three and a half years ago, it has become one of the fastest-growing databases in the world, supported by a strong, vibrant community (at time of writing: 15,000+ GitHub stars, 200+ contributors, 7200+ commits, 2000+ forks). TiDB was recently recognized by InfoWorld’s Bossie Awards 2018, as one of the [best open source software projects](https://www.infoworld.com/article/3306454/big-data/the-best-open-source-software-for-data-storage-and-analytics.html?nsdr=true#slide10) in the data storage and analytics space. 
