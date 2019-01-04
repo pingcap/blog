@@ -4,6 +4,7 @@ author: ['Siddon Tang']
 date: 2017-12-22
 summary: At re:Invent 2017, Amazon Web Services (AWS) announced Amazon Time Sync Service which is a highly accurate and reliable time reference that is natively accessible from Amazon EC2 instances. It is much like the Google TrueTime which was published in 2012. Why do Google and AWS both want to make efforts to provide global time service? Is there any inspiration for building distributed database? This topic is important to think about.
 tags: ['TiDB', 'TiKV', 'Engineering', 'Golang', 'Rust']
+categories: ['Engineering']
 ---
 
 ![Time and Order in Distributed System](media/Time_and_Order_in_Distributed_System.png)

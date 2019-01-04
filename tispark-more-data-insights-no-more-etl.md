@@ -4,6 +4,7 @@ author: ['Shawn Ma']
 date: 2018-07-10
 summary: The motivation behind building TiSpark was to enable real-time analytics on TiDB without the delay and challenges of ETL. Extract, transform, and load (ETL)--a process to extract data from operational databases, transform that data, then load it into a database designed to supporting analytics--has been one of the most complex, tedious, error-prone, and therefore disliked tasks for many data engineers. However, it was a necessary evil to make data useful, because there hasn’t been good solutions on the market to render ETL obsolete--until now.
 tags: ['TiDB', 'TiSpark', 'HTAP', 'Product', 'Golang']
+categories: ['HTAP']
 ---
 
 **Author**: Shawn Ma is a Tech Lead at PingCAP in the OLAP team. Previously, he was Tech Lead at Netease and Quantcast. He received his Masters in Computer Science from University of California--Irvine.
