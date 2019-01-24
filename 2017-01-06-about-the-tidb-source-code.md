@@ -172,7 +172,7 @@ The following lists the expressions that implement the interface:
 
 	For more information about the KV and store, see [How to Plug in a New Storage Engine](https://github.com/ngaut/builddatabase/blob/master/tidb/storage.md) (Currently in Chinese).
 
-+ [terror](https://github.com/pingcap/tidb/tree/master/terror)
++ [terror](https://github.com/pingcap/parser/tree/master/terror)
 	
 	The error system for TiDB. For more information, see [Detailed specification](https://docs.google.com/a/pingcap.com/document/d/1L7th17VTZCOeb4RfFqgs9cya6yORKqWcjB2fYqckOFU/edit?usp=sharing) (Currently in Chinese).
 
