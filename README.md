@@ -14,6 +14,9 @@ draft: true
 - summary
 - tags -
   - format: list(array)  **['tag-1', 'tag-2']**
+- categories
+  - format: list(array) **['category']**
+  - category values: Engineering, HTAP, MySQL Scalability, Open Source Community
 
 ## For SEO and social media share
 
@@ -30,5 +33,6 @@ author: ['Author']
 date: yyyy-mm-dd
 summary: Blog Summary
 tags: ['Tag1', 'Tag2']
+categories: ['category']
 ---
 ```
