@@ -2,12 +2,13 @@
 title: "TiDB Tools (III): TiDB-DM Architecture Design and Implementation Principles"
 author: ['Xuecheng Zhang']
 date: 2019-02-01
-summary: Lightning is an open source TiDB ecosystem tool that supports high speed full-import of a large SQL dump into a TiDB cluster. This post introduces its architecture and future improvements on the roadmap.
+summary: TiDB-DM is an integrated data transfer and replication management platform that supports full data migration or incremental data replication from MySQL or MariaDB instances into a TiDB cluster. This post introduces its architecture design and implementation principles.
 tags: ['TiDB', 'Engineering']
 categories: ['Engineering']
 ---
 
 TiDB-DM (Data Migration) is an integrated data transfer and replication management platform that supports full data migration or incremental data replication from MySQL or MariaDB instances into a TiDB cluster.
+
 A common real-life use case is using TiDB-DM to connect sharded MySQL or MariaDB to TiDB, treating TiDB almost as a slave, then run analytical workloads on this TiDB cluster to fulfill real-time reporting needs. TiDM-DM provides good support if you need to manage multiple data replication tasks at the same time or need to merge multiple MySQL/MariaDB instances into a single TiDB cluster.
 
 ## Architecture design
@@ -60,7 +61,7 @@ In each DM-worker node, dumper, loader, relay, syncer (binlog replication) and o
     1. Relay is used as a slave of the upstream MySQL to fetch the binlog that is persisted in the local storage as the relay log. 
     2. Syncer reads and parses the relay log to build SQL statements, and then replicates these SQL statements to the downstream TiDB. 
 
-This process is similar to the master-slave replication in MySQL. But the main difference is in DM, the persisted relay log in the local storage can be used simultaneously by multiple syncer units of different subtasks, which avoids multiple tasks’ repeatedly fetching the binlog from the upstream MySQL.
+This process is similar to the master-slave replication in MySQL. But the main difference is in TiDB-DM, the persisted relay log in the local storage can be used simultaneously by multiple syncer units of different subtasks, which avoids multiple tasks’ repeatedly fetching the binlog from the upstream MySQL.
 
 ### Concurrency model
 
@@ -258,7 +259,7 @@ But when DM-worker coordinates the replication among sharding groups within a DM
 - When DM-worker receives the DDL of  `table_1`, it can not pause the replication and must continue parsing binlog to get the DDL of the following `table_2`, namely continuing parsing from `t2` to `t3`. 
 - During the period of binlog parsing from `t2` to `t3`, the DML of `schema V2` of `table_1` cannot be replicated to downstream until sharding DDL is replicated and successfully executed. 
 
-In DM, a simplified replication process of sharding DDL within the TiDB-DM worker is as described below:
+In TiDB-DM, a simplified replication process of sharding DDL within the TiDB-DM worker is as described below:
 
 1. When receiving the DDL statement for `table_1` at `t1`, the DM-worker records the DDL information and the current position of the binlog.
 2. Resume parsing the binlog between `t2` and `t3`.
@@ -284,7 +285,7 @@ As you can see, TiDB-DM mostly uses a two-level sharding group for coordination 
 
 ### Data replication filtering
 
-During data replication, sometimes it is not necessary to replicate all upstream data to downstream. This is a scenario where we could use certain rules to filter out the unwanted part of the data. In DM, we support two replication filters that apply to different levels.
+During data replication, sometimes it is not necessary to replicate all upstream data to downstream. This is a scenario where we could use certain rules to filter out the unwanted part of the data. In TiDB-DM, we support two replication filters that apply to different levels.
 
 #### Black and white table lists
 
