@@ -26,7 +26,7 @@ I stuck around mostly in the MySQL DevRoom to deepen my learning from the previo
 
 If you missed Morgan's presentation, here's the recording.
 
-<iframe width="640" height="564" src="https://player.vimeo.com/video/315525849" frameborder="0" allowFullScreen mozallowfullscreen webkitAllowFullScreen></iframe>
+<iframe width="640" src="https://player.vimeo.com/video/315525849" frameborder="0" allowFullScreen mozallowfullscreen webkitAllowFullScreen></iframe>
 
 ## Day 2 - Rust DevRoom
 
@@ -34,11 +34,11 @@ The second day of FOSDEM was less snowy, but no less crowded. The Rust DevRoom w
 
 Our first talk was a joint presentation by Ana Hobden and Jay Lee, two of our database engineers, in front of a jam-packed room of almost 200 Rustaceans. The talk shared ideas and advice on improving development posture in Rust based on their work building [TiKV](https://github.com/tikv/tikv), the distributed transactional key-value store that we started building with Rust almost three years ago. If you missed their talk, here's the recording.
 
-<iframe width="640" height="564" src="https://player.vimeo.com/video/315526372" frameborder="0" allowFullScreen mozallowfullscreen webkitAllowFullScreen></iframe>
+<iframe width="640" src="https://player.vimeo.com/video/315526372" frameborder="0" allowFullScreen mozallowfullscreen webkitAllowFullScreen></iframe>
 
 Our second talk was by Wish Shi, another one of our database engineers, who introduced a [Rust implementation of Prometheus](https://github.com/pingcap/rust-prometheus), which our team maintains. Prometheus is a popular open-source monitoring system used by us and hundreds of other organizations. We also maintain other Rust crates for [gRPC](https://github.com/pingcap/grpc-rs), the [Raft](https://github.com/pingcap/raft-rs) consensus algorithm, and one that does [failure injection](https://github.com/pingcap/fail-rs), in addition to TiKV. If you missed Wish's talk, here's the recording.    	 
 
-<iframe width="640" height="564" src="https://player.vimeo.com/video/315527475" frameborder="0" allowFullScreen mozallowfullscreen webkitAllowFullScreen></iframe>
+<iframe width="640" height="300" src="https://player.vimeo.com/video/315527475" frameborder="0" allowFullScreen mozallowfullscreen webkitAllowFullScreen></iframe>
 
 ## Post-FOSDEM -- Cologne, Germany
 
