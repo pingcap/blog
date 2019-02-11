@@ -15,7 +15,7 @@ Our FOSDEM activities got started early with the [pre-FOSDEM MySQL community day
 
 A full day of technical presentations was followed by a festive community dinner, an annual pre-FOSDEM tradition, where attendees continue their technical (and non-technical) discussion over (16 kinds of) Belgian beers. I had the enviable job of "bartending" the event, which meant pouring beers in the proper Belgian way for a room of people who were both MySQL experts and beer aficionados.
 
-![Me pouring Belgian beers at the MySQL community dinner](media/me-pouring-belgian-beers-at-the-mysql-community-dinner.png)
+<div align="center">![Me pouring Belgian beers at the MySQL community dinner](media/me-pouring-belgian-beers-at-the-mysql-community-dinner.png)</div>
 <center> *Me pouring Belgian beers at the MySQL community dinner* </center> 
 
 ## Day 1 - MySQL DevRoom
@@ -26,7 +26,7 @@ I stuck around mostly in the MySQL DevRoom to deepen my learning from the previo
 
 If you missed Morgan's presentation, here's the recording.
 
-<iframe width="640" height="400" src="https://player.vimeo.com/video/315525849" frameborder="0" allowFullScreen mozallowfullscreen webkitAllowFullScreen></iframe>
+<div align="center"><iframe width="640" height="400" src="https://player.vimeo.com/video/315525849" frameborder="0" allowFullScreen mozallowfullscreen webkitAllowFullScreen></iframe></div>
 
 ## Day 2 - Rust DevRoom
 
@@ -34,11 +34,11 @@ The second day of FOSDEM was less snowy, but no less crowded. The Rust DevRoom w
 
 Our first talk was a joint presentation by Ana Hobden and Jay Lee, two of our database engineers, in front of a jam-packed room of almost 200 Rustaceans. The talk shared ideas and advice on improving development posture in Rust based on their work building [TiKV](https://github.com/tikv/tikv), the distributed transactional key-value store that we started building with Rust almost three years ago. If you missed their talk, here's the recording.
 
-<iframe width="640" height="400" src="https://player.vimeo.com/video/315526372" frameborder="0" allowFullScreen mozallowfullscreen webkitAllowFullScreen></iframe>
+<div align="center"><iframe width="640" height="400" src="https://player.vimeo.com/video/315526372" frameborder="0" allowFullScreen mozallowfullscreen webkitAllowFullScreen></iframe></div>
 
 Our second talk was by Wish Shi, another one of our database engineers, who introduced a [Rust implementation of Prometheus](https://github.com/pingcap/rust-prometheus), which our team maintains. Prometheus is a popular open-source monitoring system used by us and hundreds of other organizations. We also maintain other Rust crates for [gRPC](https://github.com/pingcap/grpc-rs), the [Raft](https://github.com/pingcap/raft-rs) consensus algorithm, and one that does [failure injection](https://github.com/pingcap/fail-rs), in addition to TiKV. If you missed Wish's talk, here's the recording.    	 
 
-<iframe width="640" height="400" src="https://player.vimeo.com/video/315527475" frameborder="0" allowFullScreen mozallowfullscreen webkitAllowFullScreen></iframe>
+<div align="center"><iframe width="640" height="400" src="https://player.vimeo.com/video/315527475" frameborder="0" allowFullScreen mozallowfullscreen webkitAllowFullScreen></iframe></div>
 
 ## Post-FOSDEM -- Cologne, Germany
 
@@ -46,7 +46,7 @@ Brussels wasn't our only stop. Reaching local communities is part of our global 
 
 After my talk, over pizza and more beer (German beer this time), I learned about the lively local tech scene -- a sizable insurance technology community, enterprise companies like Giant Swarm, and fellow open-source database company ArangoDB. It was also awesome to see big TiDB user, [Mobike](https://www.pingcap.com/success-stories/tidb-in-mobike/), on every busy street corner of Cologne.
 
-![Mobike on the streets of Cologne, Germany](media/mobike-on-the-streets-of-cologne-germany.png)
+<div align="center">![Mobike on the streets of Cologne, Germany](media/mobike-on-the-streets-of-cologne-germany.png)</div>
 <center> *Mobike on the streets of Cologne, Germany* </center> 
 
 TiDB's presence truly global. You just have to go local to see it.
