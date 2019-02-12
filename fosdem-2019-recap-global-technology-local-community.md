@@ -30,7 +30,7 @@ If you missed Morgan's presentation, here's the recording.
 
 ## Day 2 - Rust DevRoom
 
-The second day of FOSDEM was less snowy, but no less crowded. The Rust DevRoom was especially so given the growing popularity the programming language. As one of the largest production Rust users, our team had a lot of learning to share with the community, and the organizers were generous in giving us two presentation slots.
+The second day of FOSDEM was less snowy, but no less crowded. The Rust DevRoom was especially so given the growing popularity of the programming language. As one of the largest production Rust users, our team had a lot of learning to share with the community, and the organizers were generous in giving us two presentation slots.
 
 Our first talk was a joint presentation by Ana Hobden and Jay Lee, two of our database engineers, in front of a jam-packed room of almost 200 Rustaceans. The talk shared ideas and advice on improving development posture in Rust based on their work building [TiKV](https://github.com/tikv/tikv), the distributed transactional key-value store that we started building with Rust almost three years ago. If you missed their talk, here's the recording.
 
@@ -49,4 +49,4 @@ After my talk, over pizza and more beer (German beer this time), I learned about
 ![Mobike on the streets of Cologne, Germany](media/mobike-on-the-streets-of-cologne-germany.png)
 <center> *Mobike on the streets of Cologne, Germany* </center> 
 
-TiDB's presence truly global. You just have to go local to see it.
+TiDB's presence is truly global. You just have to go local to see it.
