@@ -74,7 +74,7 @@ This `start` function helps to explain how a storage runs.
 
 ### Engine
 
-[Engine](https://github.com/pingcap/tikv/blob/master/src/storage/engine/mod.rs#L44) is the trait which describes the actual database used in storage system, which is implemented in [raftkv](https://github.com/pingcap/tikv/blob/master/src/storage/engine/raftkv.rs#L91) and [Enginerocksdb](https://github.com/pingcap/tikv/blob/master/src/storage/engine/rocksdb.rs#L66).
+[Engine](https://github.com/pingcap/tikv/blob/master/src/storage/engine/mod.rs#L44) is the trait which describes the actual database used in storage system, which is implemented in [raftkv](https://github.com/pingcap/tikv/blob/master/src/storage/engine/raftkv.rs#L91) and [Enginerocksdb](https://github.com/tikv/tikv/blob/master/src/storage/engine/rocksdb_engine.rs#L240).
 
 ### StorageHandle
 
