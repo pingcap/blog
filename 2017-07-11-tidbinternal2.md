@@ -137,9 +137,9 @@ t10_r3 --> ["PD", "Manager", 30]
 In addition to Primary Key, this table also has an Index. Assume that the ID of Index is 1, its data is:
 
 ```
-t10_1_10_1 --> null
-t10_1_20_2 --> null
-t10_1_30_3 --> null
+t10_i1_10_1 --> null
+t10_i1_20_2 --> null
+t10_i1_30_3 --> null
 ```
 
 The previous encoding rules help you to understand the above example. We hope that you can realize the reason why we chose this mapping solution and the purpose of doing so.
