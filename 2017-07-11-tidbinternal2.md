@@ -81,11 +81,11 @@ TiDB allocates a `TableID` to each table, an `IndexID` to each index, and a `Row
 Each row of data is encoded into a Key-Value pair according to the following rule:
 
 ```
-Key: tablePrefix_tableID_rowSeperator_rowID
+Key: tablePrefix_tableID_recordPrefixSep_rowID
 Value: [col1, col2, col3, col4]
 ```
 
-The `tablePrefix`/`rowSeperator` of the Key are specific string constants and used to differentiate other data in the Key-Value space.
+The `tablePrefix`/`recordPrefixSep` of the Key are specific string constants and used to differentiate other data in the Key-Value space.
 Index data is encoded into a Key-Value pair according to the following rule:
 Key: tablePrefix_idxPrefix_tableID_indexID_indexColumnsValue
 Value: rowID
