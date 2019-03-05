@@ -81,24 +81,25 @@ TiDB allocates a `TableID` to each table, an `IndexID` to each index, and a `Row
 Each row of data is encoded into a Key-Value pair according to the following rule:
 
 ```
-Key: tablePrefix_rowPrefix_tableID_rowID
+Key: tablePrefix_tableID_rowSeperator_rowID
 Value: [col1, col2, col3, col4]
 ```
 
-The `tablePrefix`/`rowPrefix` of the Key are specific string constants and used to differentiate other data in the Key-Value space.
+The `tablePrefix`/`rowSeperator` of the Key are specific string constants and used to differentiate other data in the Key-Value space.
 Index data is encoded into a Key-Value pair according to the following rule:
 Key: tablePrefix_idxPrefix_tableID_indexID_indexColumnsValue
 Value: rowID
 
-The above encoding rule applies to Unique Index while it cannot create a unique Key for Non-unique Index. The reason is that the `tablePrefix_idxPrefix_tableID_indexID_` of an Index is the same. It’s possible that the `ColumnsValue of` multiple rows is also the same. Therefore, we’ve made some changes to encode the Non-unique Index:
+The above encoding rule applies to Unique Index while it cannot create a unique Key for Non-unique Index. The reason is that the `tablePrefix_tableID_indexSeperator_` of an Index is the same. It’s possible that the `ColumnsValue of` multiple rows is also the same. Therefore, we’ve made some changes to encode the Non-unique Index:
 
 ```
-Key: tablePrefix_idxPrefix_tableID_indexID_ColumnsValue_rowID
-Value：null
+Key: tablePrefix_tableID_indexSeperator_indexedColumnsValue
+Value: null
 ```
 
 In this way, the unique Key of each row of data can be created.
 In the above rules, all `xxPrefix` of the Keys are string constants with the function of differentiating the namespace to avoid the conflict between different types of data.
+
 ```
 var(
    	tablePrefix     = []byte{'t'}
@@ -106,6 +107,7 @@ var(
    	indexPrefixSep  = []byte("_i")
 )
 ```
+
 Note that the Key encoding solution of either Row or Index has the same prefix. Specifically speaking, all Rows in a Table has the same prefix, so does data of Index. These data with the same prefix is arranged together in the Key space of TiKV. In other words, we just need to carefully design the encoding solution of the suffix, ensuing the comparison relation remains unchanged, then Row or Index data can be stored in TiKV orderly. The solution of maintaining the relation unchanged before and after encoding is called `Memcomparable`. As for any type of value, the comparison result of two objects before encoding is consistent with that of the byte array after encoding (Note: both Key and Value of TiKV are the primitive byte array). For more detailed information, please refer to the [codec package](https://github.com/pingcap/tidb/tree/master/util/codec) of TiDB. When adopting this encoding solution, all Row data of a table will be arranged in the Key space of TiKV according to the RowID order. So will the data of a certain Index, according to the ColumnValue order of Index.
 
 [Back to the top](#top)
@@ -127,17 +129,19 @@ Up to now, we’ve already covered how to map Table onto Key-Value. Here is one 
 First, each row of data will be mapped as a Key-Value pair. As this table has an Int Primary Key, the value of RowID is the value of this Primary Key. Assume that the TableID of this table is 10, its Row data is:
 
 ```
-t_r_10_1  --> ["TiDB", "SQL Layer", 10]
-t_r_10_2 --> ["TiKV", "KV Engine", 20]
-t_r_10_3 --> ["PD", "Manager", 30]
+t10_r1 --> ["TiDB", "SQL Layer", 10]
+t10_r2 --> ["TiKV", "KV Engine", 20]
+t10_r3 --> ["PD", "Manager", 30]
 ```
 
 In addition to Primary Key, this table also has an Index. Assume that the ID of Index is 1, its data is:
+
 ```
-t_i_10_1_10_1 —> null
-t_i_10_1_20_2 --> null
-t_i_10_1_30_3 --> null
+t10_1_10_1 --> null
+t10_1_20_2 --> null
+t10_1_30_3 --> null
 ```
+
 The previous encoding rules help you to understand the above example. We hope that you can realize the reason why we chose this mapping solution and the purpose of doing so.
 
 [Back to the top](#top)
