@@ -87,10 +87,13 @@ Value: [col1, col2, col3, col4]
 
 The `tablePrefix`/`recordPrefixSep` of the Key are specific string constants and used to differentiate other data in the Key-Value space.
 Index data is encoded into a Key-Value pair according to the following rule:
-Key: tablePrefix_idxPrefix_tableID_indexID_indexColumnsValue
-Value: rowID
 
-The above encoding rule applies to Unique Index while it cannot create a unique Key for Non-unique Index. The reason is that the `tablePrefix_tableID_indexPrefixSep__indexID` of an Index is the same. It’s possible that the `ColumnsValue of` multiple rows is also the same. Therefore, we’ve made some changes to encode the Non-unique Index:
+```
+Key: tablePrefix_tableID_indexPrefixSep_indexID_indexedColumnsValue
+Value: rowID
+```
+
+The above encoding rule applies to Unique Index while it cannot create a unique Key for Non-unique Index. The reason is that the `tablePrefix_tableID_indexPrefixSep_indexID` of an Index is the same. It’s possible that the `ColumnsValue of` multiple rows is also the same. Therefore, we’ve made some changes to encode the Non-unique Index:
 
 ```
 Key: tablePrefix_tableID_indexPrefixSep_indexID_indexedColumnsValue
