@@ -96,7 +96,7 @@ Value: rowID
 The above encoding rule applies to Unique Index while it cannot create a unique Key for Non-unique Index. The reason is that the `tablePrefix_tableID_indexPrefixSep_indexID` of an Index is the same. It’s possible that the `ColumnsValue of` multiple rows is also the same. Therefore, we’ve made some changes to encode the Non-unique Index:
 
 ```
-Key: tablePrefix_tableID_indexPrefixSep_indexID_indexedColumnsValue
+Key: tablePrefix_tableID_indexPrefixSep_indexID_indexedColumnsValue_rowID
 Value: null
 ```
 
