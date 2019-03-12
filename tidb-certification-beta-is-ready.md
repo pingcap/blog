@@ -7,6 +7,8 @@ tags: ['MySQL Scalability', 'HTAP', 'Open Source Community', 'TiDB Academy']
 categories: ['Open Source Community']
 ---
 
+![TiDB Academy](media/tidb-academy-logo.png)
+
 Last November, we [launched TiDB Academy](https://pingcap.com/blog/tidb-academy-announce/), a series of online, self-paced technical training courses on TiDB and distributed database concepts in general. The first course is called "Distributed Database with TiDB for MySQL DBAs", taught by me! 
 
 Since we launched, hundreds of people have signed up from around the world to take the course and are looking to officially certify their new knowledge and skills.
