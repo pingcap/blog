@@ -1,9 +1,9 @@
 ---
 title: TiDB Internal (III) - Scheduling
-author: ['Li SHEN']
+author: ['Li Shen']
 date: 2017-07-20
 summary: This is the third one of three blogs to introduce TiDB internal.
-tags: ['TiDB', 'Golang', 'Engineering']
+tags: ['TiDB', 'Golang', 'Engineering', 'MySQL Scalability', 'HTAP']
 aliases: ['/blog/2017/07/20/tidbinternal3/']
 categories: ['Engineering']
 ---
