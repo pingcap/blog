@@ -3,8 +3,8 @@ title: "TiDB 3.0 Beta: Stability at Scale"
 author: ['Li Shen']
 date: 2019-01-24
 summary: This post introduces the key new features of TiDB 3.0 Beta.
-tags: ['TiDB', 'Product', 'MySQL Scalability', 'HTAP', 'Open Source Community']
-categories: ['Engineering']
+tags: ['TiDB', 'MySQL Scalability', 'HTAP', 'Open Source Community']
+categories: ['MySQL Scalability']
 ---
 
 Author: Li Shen, VP of Engineering at PingCAP
