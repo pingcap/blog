@@ -3,8 +3,8 @@ title: "TiDB Tools (II): Introducing TiDB Lightning"
 author: ['Kenny Chan']
 date: 2019-01-30
 summary: Lightning is an open source TiDB ecosystem tool that supports high speed full-import of a large SQL dump into a TiDB cluster. This post introduces its architecture and future improvements on the roadmap.
-tags: ['TiDB', 'Engineering']
-categories: ['Engineering']
+tags: ['TiDB', 'Engineering', 'MySQL Scalability']
+categories: ['MySQL Scalability']
 ---
 
 [Lightning](https://github.com/pingcap/tidb-lightning) is an open source TiDB ecosystem tool that supports high speed full-import of a large SQL dump into a TiDB cluster. It is much faster than the traditional “execute each SQL statement” way of importing, at least tripling the import speed to about 250 GB per hour. 
