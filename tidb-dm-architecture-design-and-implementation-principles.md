@@ -3,8 +3,8 @@ title: "TiDB Tools (III): TiDB-DM Architecture Design and Implementation Princip
 author: ['Xuecheng Zhang']
 date: 2019-02-01
 summary: TiDB-DM is an integrated data transfer and replication management platform that supports full data migration or incremental data replication from MySQL or MariaDB instances into a TiDB cluster. This post introduces its architecture design and implementation principles.
-tags: ['TiDB', 'Engineering']
-categories: ['Engineering']
+tags: ['TiDB', 'Engineering', 'MySQL Scalability']
+categories: ['MySQL Scalability']
 ---
 
 TiDB-DM (Data Migration) is an integrated data transfer and replication management platform that supports full data migration or incremental data replication from MySQL or MariaDB instances into a TiDB cluster.
