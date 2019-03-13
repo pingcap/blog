@@ -3,7 +3,7 @@ title: When TiDB Meets Jepsen
 author: ['Peng XU']
 date: 2017-09-01
 summary: What happens when TiDB meets Jepsen?
-tags: ['TiDB', 'Engineering', 'Golang']
+tags: ['TiDB', 'Engineering', 'Golang', 'MySQL Scalability', 'HTAP']
 aliases: ['/blog/2017/09/01/tidbmeetsjepsen/']
 categories: ['Engineering']
 ---
