@@ -4,6 +4,7 @@ author: ['Yinggang Zhao', 'Kun Li', 'Changjun Piao']
 date: 2018-12-06
 summary: As our business grew quickly, we were overwhelmed trying to tackle the mounting data until we found TiDB, a MySQL-compatible NewSQL hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Now we can harness our data with more confidence than ever before and provide better services for our users to enjoy a better life. 
 tags: ['TiDB','Success Story']
+categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-meituan-dianping/
 ---
 
