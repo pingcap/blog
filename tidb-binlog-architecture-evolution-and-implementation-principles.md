@@ -3,8 +3,8 @@ title: "TiDB Tools (I): TiDB-Binlog Architecture Evolution and Implementation Pr
 author: ['Xiang Wang']
 date: 2019-01-29
 summary: TiDB-Binlog is a tool used to collect the logical changes made to a TiDB cluster and provide incremental backup and replication. This post introduces its architecture evolution and implementation principles.
-tags: ['TiDB', 'Engineering']
-categories: ['Engineering']
+tags: ['TiDB', 'Engineering', 'MySQL Scalability']
+categories: ['MySQL Scalability']
 ---
 
 TiDB-Binlog is a tool used to collect the logical changes made to a TiDB cluster and provide incremental backup and replication.
