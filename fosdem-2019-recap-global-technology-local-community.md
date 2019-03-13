@@ -3,7 +3,7 @@ title: 'FOSDEM 2019 Recap: Global Technology, Local Community'
 author: ['Kevin Xu']
 date: 2019-02-12
 summary: In this post, Kevin Xu shares the PingCAP team's experience and activities at FOSDEM 2019, including three talks they delivered at the conference -- the first one about TiDB and its architecture, horizontal scalability and MySQL compatibility, the second about improving development posture in Rust based on the work building TiKV, and the last about Rust implementation of Prometheus.
-tags: ['TiKV', 'Rust', 'TiDB', 'Community']
+tags: ['TiKV', 'Rust', 'TiDB', 'MySQL Scalability', 'HTAP', 'Open Source Community']
 categories: ['Open Source Community']
 ---
 
