@@ -78,7 +78,7 @@ This `start` function in the example above explains how the storage struct runs.
 
 ### StorageHandle
 
-`StorageHandle` is the struct that handles commands received from `sendch`. The IO is processed by [`mio`](https://github.com/carllerche/mio).
+`StorageHandle` is the struct that handles commands received from `sendch`. The I/O is processed by [`mio`](https://github.com/carllerche/mio).
 
 Then functions like `async_get` and `async_batch_get` in the `storage` struct will send the corresponding commands to the channel, which can be obtained by the scheduler to execute asynchronously.
 
@@ -89,14 +89,14 @@ The storage receives commands from clients and sends commands as messages to the
 
 #### Column family
 
-Compared with Percolator where the information such as Lock is stored by adding extra column to a specific row, TiKV uses a column family (CF) in RocksDB to handle all the information related to Lock. To be specific, TiKV stores the Key-Values, Locks and Writes information in `CF_DEFAULT`, `CF_LOCK`, `CF_WRITE`.
+Compared with Percolator where the information such as Lock is stored by adding an extra column to a specific row, TiKV uses a column family (CF) in RocksDB to handle all the information related to Lock. To be specific, TiKV stores the Key-Values, Locks and Writes information in `CF_DEFAULT`, `CF_LOCK`, and `CF_WRITE`.
 
 All the values of the CF are encoded as following:
 
-|  | default | lock | write |
+| Default | Lock | Write |
 | --- | --- | --- | --- |
-| **key** | z{encoded_key}{start_ts(desc)} | z{encoded_key} | z{encoded_key}{commit_ts(desc)} |
-| **value** | {value} | {flag}{primary_key}{start_ts(varint)} | {flag}{start_ts(varint)} |
+| **Key** | z{encoded_key}{start_ts(desc)} | z{encoded_key} | z{encoded_key}{commit_ts(desc)} |
+| **Value** | {value} | {flag}{primary_key}{start_ts(varint)} | {flag}{start_ts(varint)} |
 
 More details can be found [here](https://github.com/pingcap/tikv/issues/1077).
 
@@ -108,7 +108,7 @@ Here comes the core of the transaction model for TiKV, which is MVCC powered by 
 
   1. The transaction starts. The client obtains the current timestamp (`startTS`) from TSO.
   2. Select one row as the primary row, the others as the secondary rows.
-  3. Check [whether there is other locks on this row](https://github.com/pingcap/tikv/blob/master/src/storage/mvcc/txn.rs#L71) or whether there are some commits located after `startTS`. These two situations will lead to conflicts. If either happens, the commit fails and [rollback](https://github.com/pingcap/tikv/blob/master/src/storage/mvcc/txn.rs#L115) will be called.
+  3. Check [whether there is another lock on this row](https://github.com/pingcap/tikv/blob/master/src/storage/mvcc/txn.rs#L71) or whether there are any commits located after `startTS`. These two situations will lead to conflicts. If either happens, the commit fails and [rollback](https://github.com/pingcap/tikv/blob/master/src/storage/mvcc/txn.rs#L115) will be called.
   4. [Lock the primary row](https://github.com/pingcap/tikv/blob/master/src/storage/mvcc/txn.rs#L80).
   5. Repeat the steps above on secondary rows.
 
@@ -122,5 +122,5 @@ Here comes the core of the transaction model for TiKV, which is MVCC powered by 
 
 #### Garbage collector
 
-It is easy to predict that there will be more and more MVCC versions if there is no [Garbage Collector](https://github.com/pingcap/tikv/blob/master/src/storage/mvcc/txn.rs#L143) to remove the invalid versions. But we cannot simply remove all the versions before a safe point, for there may be only one version for a key, which must be kept. In TiKV, if there is any `Put` or `Delete` records before the safe point, then all the latter writes can be deleted, otherwise only `Delete`, `Rollback` and `Lock` will be deleted.
+It is easy to predict that there will be more and more MVCC versions if there is no [Garbage Collector](https://github.com/pingcap/tikv/blob/master/src/storage/mvcc/txn.rs#L143) to remove the invalid versions. But we cannot simply remove all the versions before a safe point, for there may be only one version for a key, which must be kept. In TiKV, if there is any `Put` or `Delete` records before the safe point, then all the latter writes can be deleted; otherwise only `Delete`, `Rollback` and `Lock` will be deleted.
 
