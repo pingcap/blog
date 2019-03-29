@@ -22,7 +22,7 @@ Let's dive into `TiKV`'s MVCC implementation, which is located at [src/storage](
 
 ### Timestamp Oracle(TSO)
 
-Since `TiKV` is a distributed storage system, it needs a globally unique time service, called `Timestamp Oracle`(TSO), to allocate a monotonic increasing timestamp. Similar to TrueTime API` from Google's [Spanner](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf), this service is implemented in Placement Driver (PD) in TiKV. Every `TS` represents a monotonic increasing timestamp.
+Since `TiKV` is a distributed storage system, it needs a globally unique time service, called `Timestamp Oracle`(TSO), to allocate a monotonic increasing timestamp. Similar to the TrueTime API from Google's [Spanner](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf), this service is implemented in Placement Driver (PD) in TiKV. Every `TS` represents a monotonic increasing timestamp.
 
 ### Storage
 
