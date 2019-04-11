@@ -76,41 +76,44 @@ As part of our evaluation of TiDB, we performed some stress testing to verify wh
 
 ### Objects and Results
 
+Standard stress testing for the `SELECT` statement:
+
 | Threads | QPS | Latency (avg/.95/max) |
 | :----- | :----- | :----- |
-| 8 | 12650.81 | 0.63/0.90/15.62 |
-| 16 | 21956.21 | 0.73/1.50/15.71 |
-| 32 | 31534.8 | 1.01/2.61/25.16 |
-| 64 | 38217 | 1.67/5.37/49.80 |
-| 128 | 39943.05 | 3.20/8.43/58.60 |
-| 256 | 40920.64 | 6.25/13.70/95.13 |
-<center> *Standard stress testing for the SELECT statement* </center>
+| 8 | 12650.81 | 0.63 / 0.90 / 15.62 |
+| 16 | 21956.21 | 0.73 / 1.50 / 15.71 |
+| 32 | 31534.8 | 1.01 / 2.61 / 25.16 |
+| 64 | 38217 | 1.67 / 5.37 / 49.80 |
+| 128 | 39943.05 | 3.20 / 8.43 / 58.60 |
+| 256 | 40920.64 | 6.25 / 13.70 / 95.13 |
 
 ![Standard stress testing for the SELECT statement](media/standard-stress-testing-for-the-select-statement.png)
 <center> *Figure 3: Standard stress testing for the SELECT statement* </center>
 
+Standard stress testing for OLTP workloads:
+
 | Threads | TPS | QPS | Latency (avg/.95/max) |
 | :----- | :----- | :----- | :----- |
-| 8 | 428.9 | 8578.09 | 18.65/21.89/116.06 |
-| 16 | 731.67 | 14633.35 | 21.86/25.28/120.59 |
-| 32 | 1006.43 | 20128.59 | 31.79/38.25/334.92 |
-| 64 | 1155.44 | 23108.9 | 55.38/71.83/367.53 |
-| 128 | 1121.55 | 22431 | 114.12/161.51/459.03 |
-| 256 | 941.26 | 18825.1 | 271.94/369.77/572.88 |
-<center> *Standard stress testing for OLTP workloads* </center>
+| 8 | 428.9 | 8578.09 | 18.65 / 21.89 / 116.06 |
+| 16 | 731.67 | 14633.35 | 21.86 / 25.28 / 120.59 |
+| 32 | 1006.43 | 20128.59 | 31.79 / 38.25 / 334.92 |
+| 64 | 1155.44 | 23108.9 | 55.38 / 71.83 / 367.53 |
+| 128 | 1121.55 | 22431 | 114.12 / 161.51 / 459.03 |
+| 256 | 941.26 | 18825.1 | 271.94 / 369.77 / 572.88 |
 
 ![Standard stress testing for OLTP workloads](media/standard-stress-testing-for-oltp-workloads.png)
 <center> *Figure 4: Standard stress testing for OLTP workloads* </center>
 
+Standard stress testing for the `INSERT` statement:
+
 | Threads | QPS | Latency (avg/.95/max) |
 | :----- | :----- | :----- |
-| 8 | 3625.75 | 2.20/2.71/337.94 |
-| 16 | 6527.24 | 2.45/3.55/160.84 |
-| 32 | 10307.66 | 3.10/4.91/332.41 |
-| 64 | 13662.83 | 4.68/7.84/467.56 |
-| 128 | 15100.44 | 8.47/16.41/278.23 |
-| 256 | 17286.86 | 14.81/25.74/3146.52 |
-<center> *Standard stress testing for the INSERT Statement* </center>
+| 8 | 3625.75 | 2.20 / 2.71 / 337.94 |
+| 16 | 6527.24 | 2.45 / 3.55 / 160.84 |
+| 32 | 10307.66 | 3.10 / 4.91 / 332.41 |
+| 64 | 13662.83 | 4.68 / 7.84 / 467.56 |
+| 128 | 15100.44 | 8.47 / 16.41 / 278.23 |
+| 256 | 17286.86 | 14.81 / 25.74 / 3146.52 |
 
 ![Standard stress testing for the INSERT statement](media/standard-stress-testing-for-the-insert-statement.png)
 <center> *Figure 5: Standard stress testing for the INSERT statement* </center>
