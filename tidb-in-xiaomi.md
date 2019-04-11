@@ -103,6 +103,7 @@ As part of our evaluation of TiDB, we performed some stress testing to verify wh
 <center> *Figure 4: Standard stress testing for OLTP workloads* </center>
 
 | Threads | QPS | Latency (avg/.95/max) |
+| :----- | :----- | :----- |
 | 8 | 3625.75 | 2.20/2.71/337.94 |
 | 16 | 6527.24 | 2.45/3.55/160.84 |
 | 32 | 10307.66 | 3.10/4.91/332.41 |
