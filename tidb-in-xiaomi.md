@@ -8,7 +8,8 @@ categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-xiaomi/
 --- 
 
-**Industry:** Consumer Electronics 
+**Industry:** Consumer Electronics
+ 
 **Authors:** Liang Zhang (DBA team leader at Xiaomi), Youfei Pan (DBA at Xiaomi), and Biwen Wang (Software engineer at Xiaomi)
 
 [Xiaomi](https://en.wikipedia.org/wiki/Xiaomi) is a leading consumer electronics and software company and the [fourth-largest smartphone manufacturer](https://www.notebookcheck.net/IDC-Xiaomi-ends-Q1-2018-as-the-fourth-largest-smartphone-brand-in-the-world.301842.0.html) in the world, with market-leading positions in both China and India. 
