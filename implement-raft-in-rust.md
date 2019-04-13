@@ -169,4 +169,4 @@ As a distributed transactional key-value database that is strongly consistent, T
 
 If you are interested in Raft and Rust, and want to build your own consistent service using [raft-rs](https://github.com/pingcap/tidb), please let me know (tl@pingcap.com). I would be thrilled to hear from you!
 
-Illustration by [**Amanda Limardi**](https://www.behance.net/amandalimadff4).
+Illustration by [**Amanda Limardi**](https://www.upwork.com/o/profiles/users/_~0111fdbe9a7fb1f46e/).
