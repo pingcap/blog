@@ -89,4 +89,4 @@ Of course, there are many items on our [Roadmap](https://github.com/pingcap/docs
 
 Along with TiDB 2.0, we also released [TiSpark 1.0](https://github.com/pingcap/tispark/releases/tag/1.0), a Spark plug-in that leverages the best of SparkSQL and the power of TiKV to help our customers process complex OLAP queries in real-time. We will have more to say about TiSpark soon. So follow us on Twitter (@PingCAP), [LinkedIn](https://www.linkedin.com/company/pingcap/), and stay tuned. 
 
-*Illustration by [Amanda Limardi](https://www.behance.net/amandalimadff4)*
+*Illustration by [Amanda Limardi](https://www.upwork.com/o/profiles/users/_~0111fdbe9a7fb1f46e/)*
