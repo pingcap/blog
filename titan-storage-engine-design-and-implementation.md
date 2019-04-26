@@ -13,7 +13,7 @@ Titan is a RocksDB plugin for key-value separation, inspired by [WiscKey](https:
 
 WiscKey is specifically designed for solid-state drives (SSDs). WiscKey separates keys from values, which generates random I/O that is not well suited for hard drives. Our internal testing indicates that when the value size in Key-Value pairs is large, Titan performs better than RocksDB in write, update, and point read scenarios. However, according to [RUM Conjecture](http://daslab.seas.harvard.edu/rum-conjecture/), improvements achieved in one are usually at the cost of another. The same is true with Titan -- it gets a higher write performance by sacrificing storage space and range query performance. As the price of SSDs continues to decrease, we believe this trade-off will be more and more meaningful.
 
-## Design Goals
+## Design goals
 
 As a child project of TiKV, Titan's first design goal is to be compatible with RocksDB. As the bottom-layer storage engine for TiKV and a mature project itself, RocksDB already has a large user base. These users should be able to seamlessly upgrade their RocksDB-based TiKV to a Titan-based TiKV. Therefore, we have developed the following design goals:
 
