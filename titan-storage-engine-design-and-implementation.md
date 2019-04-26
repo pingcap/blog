@@ -1,15 +1,15 @@
 ---
-title: Titan Storage Engine Design and Implementation
+title: 'Titan: A RocksDB Plugin to Reduce Write Amplification'
 author: ['Zhiquan Zheng']
 date: 2019-04-25
-summary: Based on the RocksDB source, Titan is a new storage engine available for preview in TiDB 3.0 and  its design is inspired by Wisckey. This post introduces the design and implementation of Titan.
+summary: As a RocksDB plugin for key-value separation, inspired by WiscKey, Titan is available for preview in TiDB 3.0. This post introduces the design and implementation of Titan.
 tags: ['Engineering']
 categories: ['Engineering']
 ---
 
 ## Introduction
 
-The Titan storage engine is a new storage engine available for preview in TiDB 3.0. Titan is based on the RocksDB source, and is designed to reduce write amplification when using large values. The design is inspired by [WiscKey](https://www.usenix.org/system/files/conference/fast16/fast16-papers-lu.pdf), a paper issued in USENIX FAST 2016.
+Titan is a RocksDB plugin for key-value separation, inspired by WiscKey, a paper issued in USENIX FAST 2016. It's available for preview in TiDB 3.0. The goal of Titan is to reduce write amplification in RocksDB when using large values. 
 
 WiscKey is specifically designed for solid-state drives (SSDs). WiscKey separates keys from values, which generates random I/O that is not well suited for hard drives. Our internal testing indicates that when the value size in Key-Value pairs is large, Titan performs better than RocksDB in write, update, and point read scenarios. However, according to [RUM Conjecture](http://daslab.seas.harvard.edu/rum-conjecture/), improvements achieved in one are usually at the cost of another. The same is true with Titan -- it gets a higher write performance by sacrificing storage space and range query performance. As the price of SSDs continues to decrease, we believe this trade-off will be more and more meaningful.
 
