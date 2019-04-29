@@ -60,7 +60,7 @@ TiDB's presence is truly global. You just have to go local to see it.
 
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('FOSDEM 2019 Recap: Global Technology, Local Community', 'download-tidb-btn')"><button>Download TiDB</button></a>
-    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('FOSDEM 2019 Recap: Global Technology, Local Community', 'subscribe-blog-btn')"><button>Subscribe to Blog</button></a>
+    <a href="/download" onclick="trackViews('FOSDEM 2019 Recap: Global Technology, Local Community', 'download-tidb-btn-bottom')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('FOSDEM 2019 Recap: Global Technology, Local Community', 'subscribe-blog-btn-bottom')"><button>Subscribe to Blog</button></a>
 </div>
 
