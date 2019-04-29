@@ -28,6 +28,13 @@ If you missed Morgan's presentation, here's the recording.
 
 <iframe src="https://player.vimeo.com/video/315525849" frameborder="0" allowFullScreen mozallowfullscreen webkitAllowFullScreen></iframe>
 
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('FOSDEM 2019 Recap: Global Technology, Local Community', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('FOSDEM 2019 Recap: Global Technology, Local Community', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
+
 ## Day 2 - Rust DevRoom
 
 The second day of FOSDEM was less snowy, but no less crowded. The Rust DevRoom was especially so given the growing popularity of the programming language. As one of the largest production Rust users, our team had a lot of learning to share with the community, and the organizers were generous in giving us two presentation slots.
@@ -50,3 +57,10 @@ After my talk, over pizza and more beer (German beer this time), I learned about
 <center> *Mobike on the streets of Cologne, Germany* </center> 
 
 TiDB's presence is truly global. You just have to go local to see it.
+
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('FOSDEM 2019 Recap: Global Technology, Local Community', 'download-tidb-btn-bottom')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('FOSDEM 2019 Recap: Global Technology, Local Community', 'subscribe-blog-btn-bottom')"><button>Subscribe to Blog</button></a>
+</div>
+

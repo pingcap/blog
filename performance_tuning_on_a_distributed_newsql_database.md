@@ -21,7 +21,7 @@ Doing performance tuning on distributed systems is no joking matter. It’s much
 
 ## Gathering Metrics
 
-We gather a lot of metrics inside each component and they are periodically sent to [Prometheus](https://prometheus.io/), an open source system monitoring solution. You can easily observe the behaviors of these metrics in [Grafana](https://grafana.com/), an open source platform for time series analytics. If you deploy the TiDB cluster using [Ansible](https://github.com/pingcap/docs/blob/master/op-guide/ansible-deployment.md), Prometheus and Grafana will be installed by default. By observing various metrics, we can see how each component is working, pinpoint where are the bottlenecks, and address them via tuning. Let’s see an example.
+We gather a lot of metrics inside each component and they are periodically sent to [Prometheus](https://prometheus.io/), an open source system monitoring solution. You can easily observe the behaviors of these metrics in [Grafana](https://grafana.com/), an open source platform for time series analytics. If you deploy the TiDB cluster using [Ansible](https://pingcap.com/docs/dev/how-to/deploy/orchestrated/ansible/), Prometheus and Grafana will be installed by default. By observing various metrics, we can see how each component is working, pinpoint where are the bottlenecks, and address them via tuning. Let’s see an example.
 
 ## Writeflow of an Insert SQL Statement
 
