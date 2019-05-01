@@ -144,7 +144,7 @@ We applied this patch to the kernel as a hotfix and tested for a week. The issue
 
 We recommend that you use CentOS 7.6 kernel-3.10.0-957 or later.
 
-1. Install [kpatc](https://github.com/dynup/kpatch) and kpatch-build dependencies: 
+1. Install [kpatch](https://github.com/dynup/kpatch) and kpatch-build dependencies: 
     
     ```
     UNAME=$(uname -r)
