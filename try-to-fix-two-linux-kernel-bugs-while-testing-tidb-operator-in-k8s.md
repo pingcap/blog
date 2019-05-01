@@ -53,7 +53,7 @@ When we created the Docker container, we didn't set `memory.kmem.limit_in_bytes`
 
 Because we knew that the kmem accounting was unstable in the RHEL 3.10 kernel, we suspected that a kernel bug caused the SLUB allocation failure. We searched for kernel patch information, and found that it was a kernel bug, and that it had been fixed in Linux kernel version 4.x: [slub: make dead caches discard free slabs immediately](https://github.com/torvalds/linux/commit/d6e0b7fa11862433773d986b5f995ffdf47ce672). There was also a namespace leak issue associated with kmem accounting: [mm: memcontrol: fix cgroup creation failure after many small jobs](https://github.com/torvalds/linux/commit/73f576c04b9410ed19660f74f97521bee6e1c546).
 
-So how was kmem accounting enabled? We used the [opensnoop](https://github.com/iovisor/bcc/blob/master/tools/opensnoop.py) tool in [bcc](http://github.com/iovisor/bcc) to monitor the kmem configuration file and captured `[runc](https://github.com/opencontainers/runc)` as the file modifier. From the K8s code, we found that kmem accounting was enabled by default in the K8s-dependent `runc` project. 
+So how was kmem accounting enabled? We used the [opensnoop](https://github.com/iovisor/bcc/blob/master/tools/opensnoop.py) tool in [bcc](http://github.com/iovisor/bcc) to monitor the kmem configuration file and captured [runc](https://github.com/opencontainers/runc) as the file modifier. From the K8s code, we found that kmem accounting was enabled by default in the K8s-dependent `runc` project. 
 
 ### Solution
 
@@ -73,7 +73,7 @@ We need to disable the kmem accounting feature on both kubelet and Docker.
     - For kubelet v1.14 or later, add [Build Tags](https://github.com/kubernetes/kubernetes/blob/release-1.14/vendor/github.com/opencontainers/runc/libcontainer/cgroups/fs/kmem_disabled.go#L1) when you compile kubelet to disable kmem accounting:
 
     ```
-    $ make BUILDTAGS=”nokmem”
+    $ make BUILDTAGS="nokmem"
     ```
 
     - For kubelet v1.13 or earlier, we cannot add Build Tags when compiling kubelet. Instead, manually replace the [two functions](https://github.com/kubernetes/kubernetes/blob/release-1.12/vendor/github.com/opencontainers/runc/libcontainer/cgroups/fs/memory.go#L70-L106) that enable kmem accounting with [the following code](https://github.com/kubernetes/kubernetes/blob/release-1.14/vendor/github.com/opencontainers/runc/libcontainer/cgroups/fs/kmem_disabled.go#L5-L11):
