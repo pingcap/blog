@@ -119,6 +119,11 @@ To check if your deployment is successful:
 
 <center> TiDB-vision </center>
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('How To Spin Up an HTAP Database in 5 Minutes with TiDB + TiSpark', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How To Spin Up an HTAP Database in 5 Minutes with TiDB + TiSpark', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 # Test TiDB compatibility with MySQL
 
 As we mentioned, TiDB is MySQL compatible. You can use TiDB as MySQL slaves with instant horizontal scalability. That’s how many innovative tech companies, like [Mobike](https://www.pingcap.com/blog/Use-Case-TiDB-in-Mobike/), use TiDB.
