@@ -89,6 +89,12 @@ After we create the Raft Storage, the next step is to use `RawNode::new()` to cr
 
 Other important fields like `check_quorum` and `pre_vote` are used to avoid the disturbance and make the cluster more stable. I will explain them in detail in another article later. 
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Implement Raft in Rust', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Implement Raft in Rust', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
+
 ### Step 2: Drive and Run the Raft node
 
 Now that you have created a Raft node, the next step is to drive and run the Raft node. There three steps to this process:
