@@ -115,6 +115,11 @@ Note that the Key encoding solution of either Row or Index has the same prefix. 
 
 [Back to the top](#top)
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('TiDB Internal (II) - Computing', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Internal (II) - Computing', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 Now we take the previous requirements and TiDB’s mapping solution into consideration and verify the feasibility of the solution. 
 
 1. Firstly, we transform Row and Index data into Key-Value data through the mapping solution and make sure that each row and each piece of index data has a unique Key. 
