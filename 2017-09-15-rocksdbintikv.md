@@ -122,6 +122,11 @@ Scanning a region has a high I/O cost, so now, we use table properties instead. 
 
 Although the final calculated total size is approximate, it is more effective, we can avoid the useless scan to reduce the I/O cost.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('RocksDB in TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('RocksDB in TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Table Property for GC Check
 
 ![Table Property for GC Check](media/tablecheck.png)
