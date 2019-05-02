@@ -113,6 +113,11 @@ If the query involves lots of rows, scanning index proceeds concurrently. When t
 
 [Back to the top](#top)
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('TiDB Best Practices', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Best Practices', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 The following two conditions don’t have the problem of two accesses:
 
 + Columns of the index have already met the query requirement. Assume that the `c` Column on the `t` Table has an index and the query is: `select c from t where c > 10;`. At this time, all needed data can be obtained if accessing the index. We call this condition Covering Index. But if you focus more on the query performance, you can put a portion of columns that don’t need to be filtered but need to be returned in the query result into index, creating composite index. Take `select c1, c2 from t where c1 > 10;` as an example. You can optimize this query by creating composite index `Index c12 (c1, c2)`.
