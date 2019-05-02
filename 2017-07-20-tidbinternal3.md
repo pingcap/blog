@@ -77,6 +77,11 @@ The Raft protocol happens to meet these requirements: the `AddReplica`, `RemoveR
 
 [Back to the top](#top)
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('TiDB Internal (III) - Scheduling', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Internal (III) - Scheduling', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## <span id="collection">Information Collecting</span>
 
 Schedule depends on the information gathering of the whole cluster. Simply put, we need to know the state of each TiKV node and each Region. TiKV cluster reports two kinds of information to PD:
