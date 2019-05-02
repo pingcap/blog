@@ -273,6 +273,11 @@ And thanks to Raft, within itself, Placement Driver is a cluster too and it is a
 
 [Back to the top](#top)
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('How we build TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How we build TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### <span id="16">Raft</span>
 
 In TiKV, we use the Raft for scaling and replication. We have multiple Raft groups. Workload is distributed among multiple regions. There could be millions of regions in one big cluster. Once a region is too large, it will be split into two smaller regions, just like cell division.
