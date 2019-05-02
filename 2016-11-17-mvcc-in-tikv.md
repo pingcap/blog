@@ -72,6 +72,11 @@ impl Storage {
 
 This `start` function in the example above explains how the storage struct runs.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('MVCC in TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('MVCC in TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Engine
 
 [Engine](https://github.com/pingcap/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/engine/mod.rs#L44) is the trait which describes the actual database used in the storage system. It is implemented in [raftkv](https://github.com/pingcap/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/engine/raftkv.rs#L91) and [rocksdb_engine](https://github.com/tikv/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/engine/rocksdb.rs#L137).
