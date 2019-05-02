@@ -44,6 +44,11 @@ In conclusion, what we want is a database that is as easy to use as MySQL, elimi
 
 We studied many distributed database solutions in the community and came upon TiDB. As the protocol layer of TiDB is compatible with MySQL and it supports complex query, we can power our applications without changing a single line of code. Besides, there is hardly any migration cost.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Migration from MySQL to TiDB to handle tens of millions of rows of data per day', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Migration from MySQL to TiDB to handle tens of millions of rows of data per day', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## TiDB, give it a go
 
 In the process of test deployment, we used the Syncer tool, provided by TiDB, to deploy TiDB as a MySQL Slave to the MySQL master of the original business, testing the compatibility and stability of read/write. After a while, the system was proved to perform well in read/write so we decided to move the read request of the business layer to TiDB. Later, we also switch the write business to the TiDB cluster, making the system online smoothly.
