@@ -172,6 +172,11 @@ message RegionLocalState {
 
 [Back to the top](#top)
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('The Design and Implementation of Multi-raft', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('The Design and Implementation of Multi-raft', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Peer Storage
 
 We use Raft through `RawNode` because one Region corresponds to one Raft Group. Peer in Region corresponds to one Raft replica. Therefore, we encapsulate operations towards `RawNode` in Peer.
