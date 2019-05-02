@@ -181,6 +181,11 @@ For the above example, now we can do:
 
 In this example, we inject a fail point with name "snapshot," and then we can trigger it to throw a panic message like `FAILPOINTS=snapshot=panic(msg) cargo run`. 
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('From Chaos to Order -- Tools and Techniques for Testing TiDB, A Distributed NewSQL Database', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('From Chaos to Order -- Tools and Techniques for Testing TiDB, A Distributed NewSQL Database', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## Fault Injection Platforms 
 
 We have introduced some individual methods for fault injection. There are also platforms that are integrated with these methods, which enable us to inject faults separately or simultaneously. The most popular of these platforms is [Namazu](https://github.com/osrg/namazu), a programmable fuzzy scheduler to test a distributed system. 
