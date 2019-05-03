@@ -77,6 +77,11 @@ Assume we pick the `studentID` index, the primary index, to access the table. Th
 
 ![Primary Index Path](media/primary-index-path.png)
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('TiSpark: More Data Insights, Less ETL', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiSpark: More Data Insights, Less ETL', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Path 2: Secondary Index
 
 So what if we choose a different path by using the 'school' column index instead of the primary index? TiSpark will then go through a different procedure for secondary index. A secondary index in TiKV is encoded like main table data. (For more detailed info on how TiKV encodes data, please see this [post](https://pingcap.com/blog/2017-07-11-tidbinternal2/).) The difference is the split / sort key is not on primary key but on the index keys, and primary key is attached at the end for each index entry.
