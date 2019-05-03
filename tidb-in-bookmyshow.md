@@ -28,6 +28,11 @@ TiDB quickly emerged as the winner because it was easy to set up, deploy, and in
 
 During the initial migration phase to TiDB, the BookMyShow team used Apache Spark to stream historical data into its TiDB cluster, which was fast and easy. 
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('BookMyShow.com: More Uptime, 30% Less Operational Cost with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('BookMyShow.com: More Uptime, 30% Less Operational Cost with TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## Result and Advice
 
 BookMyShow's current architecture streams transactional data in near real-time from MS SQL to TiDB using Kafka. It currently has about 5TB of data in TiDB, and expects to reach 10TB soon. 
