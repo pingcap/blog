@@ -122,6 +122,11 @@ The following picture shows the TiDB Lightning architecture:
 ![Figure 4: TiDB Lightning implementation architecture](https://download.pingcap.com/images/success-stories/tidb-lightning-implementation-architecture.png)
 <center> *Figure 4: TiDB Lightning implementation architecture* </center>
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Always Fun, Always On: How TiDB Helps iQiyi Deliver Streaming Videos to Its 421 Million Monthly Users', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Always Fun, Always On: How TiDB Helps iQiyi Deliver Streaming Videos to Its 421 Million Monthly Users', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Scenario 3: User Login Information
 
 In the user login information database project, we were confronted with some thorny problems—and all of them have been resolved with TiDB.
