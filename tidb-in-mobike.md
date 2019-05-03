@@ -102,6 +102,11 @@ Based on our internal test results, TiDB is well-suited to support Mobike Store�
 
 Since we deployed TiDB, the data size for OLTP in Mobike Store has reached tens of billions of rows and operation has been smooth, with timely and professional support from the PingCAP team.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Blitzscaling the Largest Dockless Bikesharing Platform with TiDB’s Help', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Blitzscaling the Largest Dockless Bikesharing Platform with TiDB’s Help', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### **Case 4: The Log Collection Database**
 
 To enable instant insights for real-time decision-making, Mobike keeps and analyzes logs from all kinds of data sources, such as parking histories and notifications when bikes are successfully unlocked. Because of this large log data volume, we care a lot about a database’s scalability, as well as cross-database analysis capacity.
