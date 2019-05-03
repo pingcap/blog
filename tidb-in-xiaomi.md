@@ -121,6 +121,11 @@ Standard stress testing for the `INSERT` statement:
 
 TiDB's performance results were able to meet our requirements, even though the system did have some stability issues when we dramatically increased our test workloads that far exceeded the real production environment. Therefore, we decided to use some read traffic in the MySQL slave as the canary traffic in TiDB. 
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Powering the Xiaomi Mobile Lifestyle with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Powering the Xiaomi Mobile Lifestyle with TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## Migration Process
 
 Our team conducted the migration process to TiDB in two steps: data migration and traffic shifting.  
