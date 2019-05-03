@@ -118,6 +118,11 @@ We need to disable the kmem accounting feature on both kubelet and Docker.
 - https://github.com/projectcalico/calico/issues/1109
 - https://github.com/moby/moby/issues/5618
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Try to Fix Two Linux Kernel Bugs While Testing TiDB Operator in K8s', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Try to Fix Two Linux Kernel Bugs While Testing TiDB Operator in K8s', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Issue description
 
 After the K8s platform ran for a time, the following message was displayed: "Kernel:unregister_netdevice: waiting for eth0 to become free. Usage count = 1". In addition, multiple processes would be in an uninterruptible state. The only workaround for this problem was to restart the server.
