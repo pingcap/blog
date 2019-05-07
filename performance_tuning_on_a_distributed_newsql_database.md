@@ -102,6 +102,11 @@ The reason why we tune block-cache-size is because the TiKV server reads data fr
 
 *RocksDB-kv panel*
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('How to do Performance Tuning on TiDB, A Distributed NewSQL Database', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How to do Performance Tuning on TiDB, A Distributed NewSQL Database', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## Tuning Technique #4: Batch Insert
 
 You can achieve better write performance by using batch insert. From the TiDB server’s perspective, batch insert can reduce not only the RPC latency between clients and TiDB servers, but also the SQL parsing time. Inside TiKV, batch insert can reduce the total number of Raft messages by combining multiple records into one Raft log entry. Based on our experience, it is recommended that you keep the batch size between 50~100 rows. When there are more than 10 indexes in one table, you should decrease the batch size, because inserting one row will create more than 10 KV pairs based on the encoding rules I described above.

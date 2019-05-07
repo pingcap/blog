@@ -204,6 +204,11 @@ The following lists the expressions that implement the interface:
 	
 	The execution interface for distributed SQL. If the storage engine at the bottom supports distributed executor, it can send requests through this interface. See [The distributed executor](#the-distributed-executor) for further information.
     
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('About the TiDB Source Code', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('About the TiDB Source Code', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 # The protocol layer
 
 The protocol layer is the interface to interact with the applications. Currently, TiDB supports the MySQL protocol only. All the related codes are in the [server](https://github.com/pingcap/tidb/tree/master/server) package.

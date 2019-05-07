@@ -7,7 +7,7 @@ url: /success-stories/tidb-in-yuanfudao/
 aliases: ['/blog/2017/08/08/tidbforyuanfudao/', '/blog/2017-08-08-tidbforyuanfudao/']
 ---
 
-Yuanfudao.com is an online tutoring service targeting the K-12 educational segment in China with the largest number of elementary and secondary school student users. It owns three applications, Yuantiku (猿题库), the online question bank, Xiaoyuansouti (小猿搜题), the application for question search by taking pictures, and yuanfudao.com, an online tutoring service.
+Yuanfudao.com is an online tutoring service targeting the K-12 educational segment in China with the largest number of elementary and secondary school student users. It owns three applications, Yuantiku, the online question bank, Xiaoyuansouti, the application for question search by taking pictures, and yuanfudao.com, an online tutoring service.
 
 So far, the Yuanfudao APPs have more than 1.16 million paying users and provide live tutoring courses of English and Math Olympiad to the elementary users, as well as all the subjects for secondary school students. With yuanfudao.com, students from every corner of China can enjoy high-quality courses from top teachers at home.
 
@@ -34,6 +34,11 @@ In the early stage of solution evaluation and selection, yuanfudao.com considere
 In the end, the backend developers of yuanfudao.com decided to use a distributed storage solution and after researching quite a few community solutions, they found TiDB, a distributed relational database.
 
 TiDB is an open source distributed Hybrid Transactional/Analytical Processing (HTAP) database. It features horizontal scalability, strong consistency, and high availability. Users can regard TiDB as a standalone database with an infinite storage capacity. TiDB is nonintrusive to business and can elegantly replace the traditional sharding solutions such as database middleware and database sharding while at the same time maintaining the ACID properties of transactions. Instead of paying too much attention to the details of database scaling, developers are freed to focus on business development, which greatly improves the R&D productivity. 
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('How TiDB tackles fast data growth and complex queries for yuanfudao.com', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How TiDB tackles fast data growth and complex queries for yuanfudao.com', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
 
 As the complicated distributed transactions and data replication are supported by the underlying storage engine, developers just need to concentrate on the business logic and creating values.
 

@@ -61,6 +61,11 @@ We also introduced `Chunk`, a new internal data encoding method where a chunk of
 
 * Vector computing is made possible in certain circumstances and cache miss rate of CPU is reduced.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('TiDB 2.0 is Ready - Faster, Smarter, and Battle-Tested', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB 2.0 is Ready - Faster, Smarter, and Battle-Tested', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## Ease of Use and Operation 
 
 While the entire TiDB project can appear rather complex, it doesn’t have to be. Thus, we spent a lot of time improving its usability and operationality, so users can easily deploy, upgrade, scale, monitor, management, and diagnose the entire system, no matter how many TiDB clusters you have running. 

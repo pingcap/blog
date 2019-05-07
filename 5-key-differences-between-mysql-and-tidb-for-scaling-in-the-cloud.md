@@ -41,6 +41,11 @@ By contrast, TiDB uses RocksDB as the storage engine with TiKV. RocksDB has adva
 
 Note that both MySQL and TiDB support an API that allows new storage engines to be made available. For example, Percona Server and MariaDB both support RocksDB as an option.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('5 Key Differences Between MySQL and TiDB for Scaling in the Cloud', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('5 Key Differences Between MySQL and TiDB for Scaling in the Cloud', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## 3. TiDB gathers metrics in Prometheus/Grafana
 
 Tracking key metrics is an important part of maintaining database health. MySQL centralizes these fast-changing metrics in Performance Schema. Performance Schema is a set of in-memory tables that can be queried via regular SQL queries.

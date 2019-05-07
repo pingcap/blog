@@ -1,5 +1,5 @@
 ---
-title: How we Hunted a Data Corruption bug in RocksDB
+title: How We Found a Data Corruption Bug in RocksDB
 author: ['Huachao HUANG']
 date: 2017-09-08
 summary: Data was corrupted. A cluster panicked. The crime scene was compromised. What happened? Detective Huang went all lengths to locate the criminal and solved it once and for all.
@@ -175,6 +175,11 @@ In the table, it looks like:
 </table>
 
 Now, if we try to get "a", we will encounter the `DELETE_RANGE` first, and return that "a" is not found. That's good, we don't need to scan all data anymore, and the size of a DeleteRange entry can be ignored in face of a large range. So we planned to use the DeleteRange feature in TiKV and started to test it. 
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('How We Found a Data Corruption Bug in RocksDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How We Found a Data Corruption Bug in RocksDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
 
 ## The BUG
 

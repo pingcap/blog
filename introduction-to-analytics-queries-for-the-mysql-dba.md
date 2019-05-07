@@ -298,6 +298,11 @@ ORDER BY year, UniqueCarrier;
 
 **Note:** SQL:2003 introduced the [FILTER clause](https://modern-sql.com/feature/filter) which would make this query easier to read.  It is not yet supported in MySQL or TiDB.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Introduction to Analytics Queries for the MySQL DBA', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Introduction to Analytics Queries for the MySQL DBA', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## Improving query readability
 
 If we combine our knowledge of window functions from the first example, we can write a query to express the percentage of flights delayed by greater than 30 minutes and compare that to the previous year. At this point, our queries are also getting sufficiently complicated. We can make two improvements:

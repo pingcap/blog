@@ -94,6 +94,11 @@ In summary, through the standalone RocksDB, we can store data on a disk rapidly;
  
 [Back to the top](#top)
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('TiDB Internal (I) - Data Storage', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Internal (I) - Data Storage', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 #### <span id="region">Region</span>
 In this section, I want to introduce a very important concept: Region. It is the foundation to comprehend a series of mechanism.
 

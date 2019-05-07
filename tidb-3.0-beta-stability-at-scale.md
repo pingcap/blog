@@ -21,6 +21,11 @@ As our team brainstormed and roadmapped TiDB’s future, taking in valuable sugg
 
 **Multi-thread Raftstore:** As you may know, the consensus algorithm that underpins TiDB’s strong consistency and high availability characteristics is Raft. As a distributed database serves more production traffic, concurrency increases and Raft becomes a bottleneck that can impact performance due to limitations in Raft’s original design. Thus, we built a new implementation where multiple Raft communication threads can be processed concurrently, leading to improved performance. Based on our internal testing, in TiDB with multi-thread raftstore `INSERT` performance increases as concurrency increases. We will release additional benchmark information soon for those interested in reproducing what we see. 
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('TiDB 3.0 Beta: Stability at Scale', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB 3.0 Beta: Stability at Scale', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 **Batch Message in gRPC:** We use gRPC extensive inside the TiDB platform to execute communications between its various components, i.e. TiDB server, TiKV, Placement Driver, etc. While gRPC is easy to use and feature rich, it does create performance bottlenecks. To improve performance, we batch gRPC messages that are going to the same destination in a queue, with a timer that detects whether the receiver side is busy. If not, send the message immediately, and only triggers batch message when the receiver is too busy. 
 
 **Query Tracing:** One of our big goals in 3.0 besides bringing stability at scale is improving usability, and one important element of the usability is diagnosing and debugging queries. Even though we improved the readability of EXPLAIN and EXPLAIN ANALYZE in [TiDB 2.1](https://www.pingcap.com/blog/tidb-2.1-ga-Battle-tested-to-handle-an-unpredictable-world/), there’s more we can do to make DBAs', architects', and DevOps' lives easier. Thus, we implemented Query Tracing, which is a much more clear, visual, and intuitive way to identify which part(s) of a query is slow or causing issues, making diagnosis and debugging a breeze.

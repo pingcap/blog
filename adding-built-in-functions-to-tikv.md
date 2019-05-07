@@ -183,6 +183,11 @@ To add argument check:
 
 2. Add the check for the number of the expression arguments as the implemented signatures do.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Landing Your First Rust Pull Request in TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Landing Your First Rust Pull Request in TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Step 6: Add pushdown support
 
 TiKV calls the `eval` function to evaluate a row of data and the `eval` function executes the sub-function based on the returned value type. This operation is done in [`scalar_function.rs`](https://github.com/pingcap/tikv/blob/master/src/coprocessor/dag/expr/scalar_function.rs) by `dispatch_call`.

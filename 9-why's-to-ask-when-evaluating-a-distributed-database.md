@@ -58,6 +58,12 @@ However, the disadvantages to this approach are also glaring. MySQL has been aro
 
 You might ask: isn’t writing a MySQL layer from scratch really difficult. Yes and no. It does take a long time if you plan to rebuild every single feature of MySQL. But if you are more strategic and forgo certain functions, like stored procedures, that are not longer widely used, then your workload becomes much more manageable. (Here’s the [full list](https://github.com/pingcap/docs/blob/1543a00bea4f9f171c30a1102867a0d9065909dc/sql/mysql-compatibility.md#unsupported-features) of MySQL functions TiDB currently doesn’t support.) Plus, you can use a new programming language like Go to build (and maintain), which actually increases productivity and efficiency over time.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('9 Why's to Ask When Evaluating a Distributed Database', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('9 Why's to Ask When Evaluating a Distributed Database', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
+
 ## 6. Why Use RocksDB and etcd?
 
 **RocksDB.** Many engineers like to build better wheels, and I’m no different. However, when you try to build an enterprise-grade infrastructure technology for industry users, like a distributed database, your consideration must be more practical. Currently, to build a new database, there are two types of storage structure to choose from: 1. B+ Tree; 2. LSM Tree. Instead of building our own storage engine from scratch, we chose LSM Tree with RocksDB.
@@ -93,6 +99,4 @@ When a company starts out small, any database and infrastructure would work, but
 When we first started designing and building TiDB, we carried a lot of these lessons, from both our own experiences and other fellow DBAs and infrastructure engineers, with us. A truly useful and robust distributed database should instantly solve scalability bottlenecks and render all the “quick fixes” like manual sharding obsolete, so application developers can focus on doing what they do best--serve customers and grow the business, not managing database shards. Recently, we’ve seen two of our users, [Mobike (dockless bikesharing)](https://www.pingcap.com/blog/Use-Case-TiDB-in-Mobike/) and Zhuan Zhuan (online marketplace), do exactly that. Both companies have been experiencing explosive growth, and because they deployed TiDB right as this growth was taking off, their database infrastructure was not the bottleneck that prevented them from growing the way they did. In fact, Zhuan Zhuan is all-in on TiDB, because it knows that a well-built distributed database is mission critical to its future. 
 
 Note: An abridged version of this article was published on [The New Stack](https://thenewstack.io/5-questions-for-evaluating-a-distributed-database/).
-
-
 

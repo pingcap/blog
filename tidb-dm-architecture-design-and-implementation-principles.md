@@ -142,6 +142,11 @@ Now let’s take a look at the internals of TiDB-DM:
 2. If there is any SQL statement that needs to be synchronized to the downstream, we can query `trie` to obtain the corresponding rules via the schema name and table name in the upstream, and replace the original schema name and table name in the SQL statement based on the rules.
 3. After executing the replaced SQL statements to the downstream TiDB, the router replication based on table names are completed. For the detailed implementation of the router rules, see [table-router pkg source code](https://github.com/pingcap/tidb-tools/tree/master/pkg/table-router) in TiDB-Tools.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('TiDB Tools (III): TiDB-DM Architecture Design and Implementation Principles', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Tools (III): TiDB-DM Architecture Design and Implementation Principles', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 #### Column mapping
 
 With the table router feature, we can implement the basic function of replicating data from sharded tables. But in a database, auto-increment columns are widely used as the primary keys. If multiple primary keys of the sharded tables in the upstream generate their numbers automatically and independently, a conflict between primary keys might occur and result in the data mismatch after merging and synchronizing them into the downstream. Let’s see another example as follows:

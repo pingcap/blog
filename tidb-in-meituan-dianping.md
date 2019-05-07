@@ -166,6 +166,12 @@ At present, MySQL is used with [Hive](https://en.wikipedia.org/wiki/Apache_Hive)
         ![Synchronization Data from TiDB to Hive](media/synchronization-data-from-tidb-to-hive.png)
         <center> *Synchronization Data from TiDB to Hive* </center>
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('TiDB, the Key to a Better Life for Meituan-Dianping’s 290 Million Monthly Users', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB, the Key to a Better Life for Meituan-Dianping’s 290 Million Monthly Users', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
+
 ### Issues and Solutions
 
 After the service went online, some issues occurred. Here are some typical ones: 

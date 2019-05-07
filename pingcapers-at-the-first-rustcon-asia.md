@@ -29,6 +29,11 @@ Normally we use a language to implement our designs, but how often do we get to 
 ![Qu Peng, TiKV team engineer, at RustCon Asia](media/qu-peng-at-rustcon-asia.png)
 <center> *Qu Peng, TiKV team engineer, at RustCon Asia* </center>
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('PingCAPers at the First RustCon Asia!', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('PingCAPers at the First RustCon Asia!', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 While talks from Siddon and Nick were delivered from high-level perspectives on development and designs, our third talk, "Futures in TiKV" from Qu Peng, a core engineer on the TiKV team, focused on some hardcore implementation details of Rust in TiKV. (Not the development or roadmap of our product in the future, but the futures crate in Rust provides common asynchronous primitives for Rust). With a few code samples, Qu Peng illustrated how TiKV utilizes futures in multiple critical contexts like basic streaming and remote procedure calls (RPCs), how TiKV collects futures in a stream to reduce context switch cost, and how TiKV implements an executor-task style batch system using future and stream traits. 
  
 On Day 2, Nick closed RustCon Asia with results from a survey on the Rust community. He listed many figures which vividly showed how the Rust community is growing worldwide. Particularly, the Chinese community is becoming a key contributor in Asia. According to Nick, the Rust 2018 edition has offered stability without stagnation. Besides, "Rust is a language that can really get your work done," said Nick. In 2019, what we can expect is a more mature Rust. As the community grows in popularity, governance has started to become an important issue. Objectively, we should admit that there are still some long-standing requests. However, as Rust advances, we can have confidence and optimism about the continuous improvements to resolve these requests.

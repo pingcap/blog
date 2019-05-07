@@ -135,6 +135,11 @@ Note that the above Storage interface is just for Raft. But actually we also use
 
 [Back to the top](#top)
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('A TiKV Source Code Walkthrough - Raft in TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('A TiKV Source Code Walkthrough - Raft in TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### <span id="config">Config</span>
 
 Before using Raft, we need to know some relevant configuration of Raft. Below are the items that need extra attention in Config:
