@@ -175,6 +175,7 @@ We recommend that you use CentOS 7.6 kernel-3.10.0-957 or later.
     git clone https://github.com/dynup/kpatch && cd kpatch
     make 
     sudo make install
+    systemctl enable kpatch
     ```
 
 3. Download and construct the hotfix kernel module:
@@ -182,7 +183,9 @@ We recommend that you use CentOS 7.6 kernel-3.10.0-957 or later.
     ```
     curl -SOL https://raw.githubusercontent.com/pingcap/kdt/master/kpatchs/route.patch
     kpatch-build -t vmlinux route.patch (Compiles and generates the kernel module)
-    kpatch load livepatch-route.ko (Loads the kernel module)
+    mkdir -p /var/lib/kpatch/${UNAME} 
+    cp -a livepatch-route.ko /var/lib/kpatch/${UNAME}
+    systemctl restart kpatch (Loads the kernel module)
     kpatch list (Checks the loaded module)
     ```
 
