@@ -1,7 +1,7 @@
 ---
 title: TiDB-Binlog Tutorial
 date: 2019-05-08
-author: Kolbe Kegel
+author: ['Kolbe Kegel']
 summary: Learn to deploy TiDB-Binlog with a simple TiDB cluster.
 tags: ['TiDB', 'Engineering']
 categories: ['Engineering']
