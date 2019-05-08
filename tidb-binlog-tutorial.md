@@ -31,7 +31,7 @@ See [TiDB-Binlog Cluster User Guide](https://pingcap.com/docs/tools/tidb-binlog-
 
 TiDB-Binlog comprises two components: the **Pump** and the **Drainer**. Several Pump nodes make up a Pump cluster. Each Pump node connects to TiDB Server instances and receives updates made to each of the TiDB Server instances in a cluster. A Drainer connects to the Pump cluster and transforms updates into the correct format for a particular downstream destination, be it Kafka or another TiDB Cluster or a MySQL/MariaDB server.
 
-![TiDB-Binlog architecture](../../media/tidb_binlog_cluster_architecture.png)
+![TiDB-Binlog architecture](/media/tidb_binlog_cluster_architecture.png)
 
 The clustered architecture of the Pump component ensures that updates won't be lost as new TiDB Server instances join or leave the TiDB Cluster or Pump nodes join or leave the Pump cluster.
 
