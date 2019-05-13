@@ -106,7 +106,7 @@ message Binlog {
 }
 ```
 
-For more details about binlog and the data structure definition, see [binlog.proto](https://github.com/WangXiangUSTC/tipb/blob/master/proto/binlog/binlog.proto).
+For more details about binlog and the data structure definition, see [binlog.proto](https://github.com/pingcap/tipb/blob/535e1abaa330653c8955cb3484261ea9f229e926/proto/binlog/binlog.proto).
 
 In TiDB, `ts` (TSO, Timestamp Oracle) is a globally unique time service provided by Placement Driver (PD). It is converted from the physical time and the logic time. `start_ts` is the starting timestamp value of a transaction. `commit_ts` is the commit timestamp value of a transaction. 
 
@@ -268,7 +268,7 @@ After ensuring that the binlog is sent to available Pump instances, another prob
 
 It should be noted that the above strategies are only for the Prewrite binlog. For the Commit binlog, Pump Client will send it to the Pump instance selected by the corresponding Prewrite binlog. This is because Pump needs to provide Drainer with the complete binlog of a successfully executed transaction, namely both the Prewrite binlog and the Commit binlog. So it does not make sense to send the Commit binlog to other Pump instances.
 
-Pump Client uses the `WriteBinlog` interface in [pump.proto](https://github.com/WangXiangUSTC/tipb/blob/master/proto/binlog/pump.proto) to submit writing binlog requests to Pump, and gRPC is used to send these requests.
+Pump Client uses the `WriteBinlog` interface in [pump.proto](https://github.com/pingcap/tipb/blob/535e1abaa330653c8955cb3484261ea9f229e926/proto/binlog/pump.proto) to submit writing binlog requests to Pump, and gRPC is used to send these requests.
 
 ### Pump
 
@@ -284,7 +284,7 @@ There is a problem here. As mentioned in the the [binlog](#binlog) section, if T
 
 So we handled this problem in Pump. If one piece of Prewrite binlog cannot find the corresponding Commit binlog within the transaction timeout limit (ten minutes by default), `prewrite_key` in the binlog data will be used to query in TiKV whether the transaction has been committed. If the commit is successful, TiKV will return the `commit_ts` of this transaction. Otherwise, Pump will discard this piece of Prewrite binlog.
 
-The binlog metadata provides the file and location of the data store, which can be used to obtain data by reading the specified location of the binlog file. Because binlog data is basically written to the file in order, Pump only needs to read the binlog file sequentially, which ensures that Pump performance will not be affected by frequent file read operations. Finally, Pump transfers the binlog data to Drainer with `commit_ts` as the sorting criteria. The interface that Drainer requests binlog data from Pump is `PullBinlogs` in [pump.proto](https://github.com/WangXiangUSTC/tipb/blob/master/proto/binlog/pump.proto), which transfers binlog data in the form of gRPC streaming.
+The binlog metadata provides the file and location of the data store, which can be used to obtain data by reading the specified location of the binlog file. Because binlog data is basically written to the file in order, Pump only needs to read the binlog file sequentially, which ensures that Pump performance will not be affected by frequent file read operations. Finally, Pump transfers the binlog data to Drainer with `commit_ts` as the sorting criteria. The interface that Drainer requests binlog data from Pump is `PullBinlogs` in [pump.proto](https://github.com/pingcap/tipb/blob/535e1abaa330653c8955cb3484261ea9f229e926/proto/binlog/pump.proto), which transfers binlog data in the form of gRPC streaming.
 
 It is worth mentioning that there is a fake binlog mechanism in Pump. Pump periodically (three seconds by default) writes a piece of binlog with empty data to the local storage. Before generating binlog, Pump will get a timestamp from PD as the `start_ts` and `commit_ts` of this binlog. This type of binlog is called fake binlog.
 
