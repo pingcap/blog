@@ -106,94 +106,7 @@ message Binlog {
 }
 ```
 
-For more details about binlog and the data structure definition, see ([binlog.proto code](https://github.com/pingcap/tipb/blob/master/proto/binlog/binlog.proto)): 
-
-```
-syntax = "proto2";
-
-package binlog;
-
-import "gogoproto/gogo.proto";
-
-option (gogoproto.marshaler_all) = true;
-option (gogoproto.sizer_all) = true;
-option (gogoproto.unmarshaler_all) = true;
-
-enum MutationType {
-    Insert = 0;
-    Update = 1;
-    DeleteID = 2; // Obsolete field.
-    DeletePK = 3; // Obsolete field.
-    DeleteRow = 4;
-}
-
-// TableMutation contains mutations in a table.
-message TableMutation {
-    optional int64 table_id      = 1 [(gogoproto.nullable) = false];
-
-    // The inserted row contains all column values.
-    repeated bytes inserted_rows = 2;
-
-    // The updated row contains old values and new values of the row.
-    repeated bytes updated_rows  = 3;
-
-    // Obsolete field.
-    repeated int64 deleted_ids   = 4;
-
-    // Obsolete field.
-    repeated bytes deleted_pks   = 5;
-
-    // The row value of the deleted row.
-    repeated bytes deleted_rows  = 6;
-
-    // Used to apply table mutations in original sequence.
-    repeated MutationType sequence = 7;
-}
-
-message PrewriteValue {
-    optional int64         schema_version = 1 [(gogoproto.nullable) = false];
-    repeated TableMutation mutations      = 2 [(gogoproto.nullable) = false];
-}
-
-enum BinlogType {
-    Prewrite = 0; // has start_ts, prewrite_key, prewrite_value.
-    Commit   = 1; // has start_ts, commit_ts.
-    Rollback = 2; // has start_ts.
-    PreDDL   = 3; // has ddl_query, ddl_job_id.
-    PostDDL  = 4; // has ddl_job_id.
-}
-
-// Binlog contains all the changes in a transaction, which can be used to reconstruct SQL statement, then export to
-// other systems.
-message Binlog {
-    optional BinlogType    tp             = 1 [(gogoproto.nullable) = false];
-
-    // start_ts is used in Prewrite, Commit and Rollback binlog Type.
-    // It is used for pairing prewrite log to commit log or rollback log.
-    optional int64         start_ts       = 2 [(gogoproto.nullable) = false];
-
-    // commit_ts is used only in binlog type Commit.
-    optional int64         commit_ts      = 3 [(gogoproto.nullable) = false];
-
-    // prewrite key is used only in Prewrite binlog type.
-    // It is the primary key of the transaction, is used to check that the transaction is
-    // commited or not if it failed to pair to commit log or rollback log within a time window.
-    optional bytes         prewrite_key   = 4;
-
-    // prewrite_data is marshalled from PrewriteData type,
-    // we do not need to unmarshal prewrite data before the binlog have been successfully paired.
-    optional bytes         prewrite_value = 5;
-
-    // ddl_query is the original ddl statement query, used for PreDDL type.
-    optional bytes         ddl_query      = 6;
-
-    // ddl_job_id is used for PreDDL and PostDDL binlog type.
-    // If PreDDL has matching PostDDL with the same job_id, we can execute the DDL right away, otherwise,
-    // we can use the job_id to check if the ddl statement has been successfully added to DDL job list.
-    optional int64         ddl_job_id     = 7 [(gogoproto.nullable) = false];
-}
-
-```
+For more details about binlog and the data structure definition, see [binlog.proto](https://github.com/pingcap/tipb/blob/535e1abaa330653c8955cb3484261ea9f229e926/proto/binlog/binlog.proto).
 
 In TiDB, `ts` (TSO, Timestamp Oracle) is a globally unique time service provided by Placement Driver (PD). It is converted from the physical time and the logic time. `start_ts` is the starting timestamp value of a transaction. `commit_ts` is the commit timestamp value of a transaction. 
 
@@ -355,7 +268,7 @@ After ensuring that the binlog is sent to available Pump instances, another prob
 
 It should be noted that the above strategies are only for the Prewrite binlog. For the Commit binlog, Pump Client will send it to the Pump instance selected by the corresponding Prewrite binlog. This is because Pump needs to provide Drainer with the complete binlog of a successfully executed transaction, namely both the Prewrite binlog and the Commit binlog. So it does not make sense to send the Commit binlog to other Pump instances.
 
-Pump Client uses the `WriteBinlog` interface in [pump.proto](https://github.com/pingcap/tipb/blob/master/proto/binlog/pump.proto) to submit writing binlog requests to Pump, and gRPC is used to send these requests.
+Pump Client uses the `WriteBinlog` interface in [pump.proto](https://github.com/pingcap/tipb/blob/535e1abaa330653c8955cb3484261ea9f229e926/proto/binlog/pump.proto) to submit writing binlog requests to Pump, and gRPC is used to send these requests.
 
 ### Pump
 
@@ -371,7 +284,7 @@ There is a problem here. As mentioned in the the [binlog](#binlog) section, if T
 
 So we handled this problem in Pump. If one piece of Prewrite binlog cannot find the corresponding Commit binlog within the transaction timeout limit (ten minutes by default), `prewrite_key` in the binlog data will be used to query in TiKV whether the transaction has been committed. If the commit is successful, TiKV will return the `commit_ts` of this transaction. Otherwise, Pump will discard this piece of Prewrite binlog.
 
-The binlog metadata provides the file and location of the data store, which can be used to obtain data by reading the specified location of the binlog file. Because binlog data is basically written to the file in order, Pump only needs to read the binlog file sequentially, which ensures that Pump performance will not be affected by frequent file read operations. Finally, Pump transfers the binlog data to Drainer with `commit_ts` as the sorting criteria. The interface that Drainer requests binlog data from Pump is `PullBinlogs` in [pump.proto](https://github.com/pingcap/tipb/blob/master/proto/binlog/pump.proto), which transfers binlog data in the form of gRPC streaming.
+The binlog metadata provides the file and location of the data store, which can be used to obtain data by reading the specified location of the binlog file. Because binlog data is basically written to the file in order, Pump only needs to read the binlog file sequentially, which ensures that Pump performance will not be affected by frequent file read operations. Finally, Pump transfers the binlog data to Drainer with `commit_ts` as the sorting criteria. The interface that Drainer requests binlog data from Pump is `PullBinlogs` in [pump.proto](https://github.com/pingcap/tipb/blob/535e1abaa330653c8955cb3484261ea9f229e926/proto/binlog/pump.proto), which transfers binlog data in the form of gRPC streaming.
 
 It is worth mentioning that there is a fake binlog mechanism in Pump. Pump periodically (three seconds by default) writes a piece of binlog with empty data to the local storage. Before generating binlog, Pump will get a timestamp from PD as the `start_ts` and `commit_ts` of this binlog. This type of binlog is called fake binlog.
 
