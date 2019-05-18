@@ -189,6 +189,11 @@ It marks the part that needs rewriting during the AST rewriting phase and has th
 - `func Fallthrough() {}`
 - `func Label(label string) {}`
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Try to Fix Two Linux Kernel Bugs While Testing TiDB Operator in K8s', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Try to Fix Two Linux Kernel Bugs While Testing TiDB Operator in K8s', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## How to inject a failpoint in the program
 
 You can call `failpoint.Inject` to inject a failpoint to the call site, and `failpoint.Inject` is rewritten as an `if` statement. In the `if` statement, `mock-io-error` is used to judge whether to trigger a failpoint and after a failpoint is triggered, the logic of failpoint-closure is executed.
@@ -558,5 +563,3 @@ GO_FAILPOINTS="github.com/pingcap/tidb/ddl/renameTableErr=return(100);github.com
 
 - Thanks to [gofail](https://github.com/etcd-io/gofail) for the initial implementation of failpoints. Inspired by them, we can traverse failpoints standing on the shoulders of giants. 
 - Thanks to FreeBSD for the [syntactic rules](https://www.freebsd.org/cgi/man.cgi?query=fail).
-
-
