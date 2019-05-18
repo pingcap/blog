@@ -126,7 +126,7 @@ We designed a failpoint based on the following principles:
 
 ### How to implement a failpoint macro in Golang?
 
-We can use an abstract syntax tree ((AST)[https://en.wikipedia.org/wiki/Abstract_syntax_tree]) to rewrite the code to implement failpoints that meet the above design principles in Golang. The rationale diagram is as follows:
+We can use an abstract syntax tree ([AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree)) to rewrite the code to implement failpoints that meet the above design principles in Golang. The rationale diagram is as follows:
 
 ![](media/failpoint-rationale.png)
 
