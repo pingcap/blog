@@ -9,7 +9,7 @@ categories: ['MySQL Scalability']
 
 TiDB-DM (Data Migration) is an integrated data transfer and replication management platform that supports full data migration or incremental data replication from MySQL or MariaDB instances into a TiDB cluster.
 
-A common real-life use case is using TiDB-DM to connect sharded MySQL or MariaDB to TiDB, treating TiDB almost as a slave, then run analytical workloads on this TiDB cluster to fulfill real-time reporting needs. TiDM-DM provides good support if you need to manage multiple data replication tasks at the same time or need to merge multiple MySQL/MariaDB instances into a single TiDB cluster.
+A common real-life use case is using TiDB-DM to connect sharded MySQL or MariaDB to TiDB, treating TiDB almost as a slave, then run analytical workloads on this TiDB cluster to fulfill real-time reporting needs. TiDB-DM provides good support if you need to manage multiple data replication tasks at the same time or need to merge multiple MySQL/MariaDB instances into a single TiDB cluster.
 
 ## Architecture design
 
