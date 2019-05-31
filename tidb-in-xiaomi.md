@@ -135,7 +135,7 @@ Our team conducted the migration process to TiDB in two steps: data migration an
 The data to be migrated included full data and incremental data. We made use of two tools developed by PingCAP, Lightning and Syncer.
 
 - Logical backup and import can be used for full data migration. In addition, [TiDB-Lightning](https://pingcap.com/docs/tools/lightning/overview-architecture/) is a tool for the physical import of full data to the TiDB cluster.
-- [Syncer](https://pingcap.com/docs/tools/syncer/) (now [Data Migration](https://pingcap.com/docs/tools/data-migration-overview/)) can be used to replicate the incremental data from MySQL to TiDB.
+- [Syncer](https://pingcap.com/docs/tools/syncer/) (now [Data Migration](https://pingcap.com/docs/dev/reference/tools/data-migration/overview/)) can be used to replicate the incremental data from MySQL to TiDB.
 
 As shown in the following diagram, Syncer relies on various rules to implement different filtering and merging effects; one upstream MySQL instance corresponds to one Syncer process; multiple Syncer processes are required when sharding data is replicated.
 
