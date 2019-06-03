@@ -226,7 +226,7 @@ TiDB has a large number of official documents either in[ Chinese](https://www.pi
 
 If you have met an issue, you can start from the [FAQ](https://www.pingcap.com/docs/FAQ/) and [Troubleshooting](https://www.pingcap.com/docs/trouble-shooting/) sections. If the issue is not documented, please [file an issue](https://github.com/pingcap/tidb/issues/new).
 
-For more information, see [our website](www.pingcap.com) and our [Technical Blog](https://www.pingcap.com/blog/).
+For more information, see [our website](https://www.pingcap.com/en/) and our [Technical Blog](https://www.pingcap.com/blog/).
 
 ### <span id="scenario">Best Scenarios for TiDB</span>
 

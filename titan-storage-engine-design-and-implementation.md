@@ -17,7 +17,7 @@ WiscKey is specifically designed for solid-state drives (SSDs). WiscKey separate
 
 As a child project of TiKV, Titan's first design goal is to be compatible with RocksDB. As the bottom-layer storage engine for TiKV and a mature project itself, RocksDB already has a large user base. These users should be able to seamlessly upgrade their RocksDB-based TiKV to a Titan-based TiKV. Therefore, we have developed the following design goals:
 
-- Reduce write amplification by separating values from the long-structured merge-tree (LSM tree) and storing them independently.
+- Reduce write amplification by separating values from the log-structured merge-tree (LSM tree) and storing them independently.
 - Seamlessly upgrade RocksDB instances to Titan. The upgrade will not require human intervention and will not impact online services.
 - Achieve 100% compatibility with all RocksDB features used by the current TiKV. 
 - Minimize invasive changes to RocksDB to ensure an easier RocksDB upgrade to Titan.

@@ -29,4 +29,4 @@ Because the exam is in beta, you won't immediately receive your score (as either
 
 While in beta, **the exams are heavily discounted: only $50!**
 
-The exam is ready for you to sign up and take [HERE](https://prod.examity.com/PingCAP/), and if you have any questions, just email our teaching staff at: [academy@pingcap.com](academy@pingcap.com). Good luck!
+The exam is ready for you to sign up and take [HERE](https://prod.examity.com/PingCAP/), and if you have any questions, just email our teaching staff at: [academy@pingcap.com](mailto:academy@pingcap.com). Good luck!
