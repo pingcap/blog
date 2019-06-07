@@ -151,7 +151,7 @@ At present, MySQL is used with [Hive](https://en.wikipedia.org/wiki/Apache_Hive)
 
     - This involves data migration and real-time synchronization of incremental data (DTS). 
         
-        [Mydumper](https://github.com/maxbube/mydumper) + [Loader](https://github.com/pingcap/docs/blob/master/tools/loader.md) is used to export the data in MySQL and then import the data to TiDB; DM can be used to synchronize the incremental data from MySQL to TiDB. 
+        [Mydumper](https://github.com/maxbube/mydumper) + [Loader](https://pingcap.com/docs/dev/reference/tools/loader/) is used to export the data in MySQL and then import the data to TiDB; DM can be used to synchronize the incremental data from MySQL to TiDB. 
 
     - MySQL uses a large number of auto-increment IDs as the primary key. When the data of sharded MySQL is aggregated to TiDB, the conflict of auto-increment IDs should be resolved. 
 
