@@ -87,12 +87,12 @@ Some of TiDB’s largest customers, [Mobike](https://www.crunchbase.com/organiza
 
 ## TiDB 1.1 Alpha Release
 
-On January 19th, one day before DevCon, [TiDB 1.1 Alpha](https://www.pingcap.com/blog/2018-01-19-11-alpha/) was released with the following improvements:
+On January 19th, one day before DevCon, [TiDB 1.1 Alpha](https://pingcap.com/docs/releases/11alpha/) was released with the following improvements:
 
 ### Performance & latency
 
 * Average QPS of TiDB increased by 50%.
-* To support requirement from [Toutiao](https://www.crunchbase.com/organization/toutiao), [TiDB 1.1 Alpha](https://www.pingcap.com/blog/2018-01-19-11-alpha/) is able to scale auto-increment ID and achieve 16x speed improvement for queries like  `alter table t shard_row_id_bits = 4` and is also able to handle millions of TPS.
+* To support requirement from [Toutiao](https://www.crunchbase.com/organization/toutiao), [TiDB 1.1 Alpha](https://pingcap.com/docs/releases/11alpha/) is able to scale auto-increment ID and achieve 16x speed improvement for queries like  `alter table t shard_row_id_bits = 4` and is also able to handle millions of TPS.
 * Read QPS speed of TiKV improved by 2x.
 * Counting table is now 70% faster than the previous version.
 * Hash-join is 3 times faster than the previous version.
