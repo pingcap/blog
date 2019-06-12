@@ -12,7 +12,7 @@ After several months of close collaboration with Kyle, we are excited that TiDB'
 
 ***tl;dr:*** Kyle tested the following versions of TiDB: 2.1.7, 2.1.8, 3.0.0-beta.1-40, and 3.0.0-rc.2. The latest version, 3.0.0-rc.2, passes the Jepsen tests for snapshot isolation and single-key linearizability, and previous versions, TiDB 2.1.8 through 3.0.0-beta.1-40, also pass when the auto-retry mechanism is disabled, which was enabled by default. In 3.0.0-rc.2 and future versions of TiDB, the auto-retry mechanism is *disabled* by default. 
 
-See the discussion [on Hacker News](https://news.ycombinator.com/item?id=20163975).
+*See the discussion of [TiDB's results on HackerNews](https://news.ycombinator.com/item?id=20163975).*
 
 In this blog post, we would like to provide some additional context to the results and share our thoughts on what's next.
 
@@ -33,11 +33,11 @@ To disable or enable the transaction retry, users can configure both `tidb_retry
 
 [Jepsen report](https://jepsen.io/analyses/tidb-2.1.7) has also found some other issues, some of which are expected behaviors, and some are already fixed or being fixed. Here is more information about these issues:
 
-Expected behavior: Crashes on Startup
+### Expected behavior: Crashes on Startup
 
 This behavior is expected for TiDB server. We decided to adopt the fail-fast approach when we first designed TiDB, so that DBAs and operation engineers can quickly discover and identify issues at the deployment stage. If the startup fails because of errors with some processes, or the system restarts frequently after startup, an alerting system is available to inform the DBAs and operation engineers timely as well. In a production environment, we use `systemd` to ensure that the service can be restarted even if there are any issues.
 
-Fixed in the 3.0.0-rc.2: Created Tables May Not Exist
+### Fixed in the 3.0.0-rc.2: Created Tables May Not Exist
 
 This issue is fixed in 3.0.0-rc.2 and the [pull request](https://github.com/pingcap/tidb/pull/10029) to handle the related issue had been merged into the master branch before Kyle [filed the issue](https://github.com/pingcap/tidb/issues/10410). The reason for this issue is that if a new cluster is created and multiple TiDB servers are bootstrapped, write conflicts occur because the bootstrapping process changes the global variables in one TiKV server. The issue is triggered only if all the following 3 conditions are met:
 
@@ -47,11 +47,11 @@ This issue is fixed in 3.0.0-rc.2 and the [pull request](https://github.com/ping
 
 The issue is fixed by ensuring that only the TiDB server who is the DDL Owner can process the bootstrap logic.
 
-Fixing: Under-Replicated Regions
+### Fixing: Under-Replicated Regions
  
 To ensure all regions in the cluster have enough replicas before providing services, we have added [a new API](https://github.com/pingcap/pd/pull/1555) to let users know quickly when a cluster is initialized and ready. This new API will be integrated into the deployment tools such as [TiDB Ansible](https://github.com/pingcap/tidb-ansible/pull/774) and TiDB Operator (a Kubernetes operator) so that we can identify a successful deployment only when the number of replicas is sufficient.
 
-Documentation Fixes
+### Documentation Fixes
 
 Admittedly, there is always room for improvement in our documentation. Thanks to the Jepsen tests, here are some immediate fixes per issues found in the test report:
 
