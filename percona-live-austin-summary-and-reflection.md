@@ -5,6 +5,7 @@ author: ['Kevin Xu']
 summary: In this post, Kevin Xu shares the PingCAP team's experience and activities at Percona Live in Austin, including several technical sharing sessions and boosting friendship with people inside and outside PingCAP.
 tags: ['TiKV', 'Rust', 'TiDB', 'Open Source Community']
 categories: ['Open Source Community']
+aliases: ['/blog/percona-live-austin-summary-and--eflection/']
 ---
 
 From May 28 to May 30, the PingCAP team attended [Percona Live](https://www.percona.com/live/19/), a leading open-source database conference, in Austin, Texas. It's our 5th Percona Live, and it's clear to us that the Percona-led open-source database community is growing strong, and the TiDB community is growing alongside it. 
