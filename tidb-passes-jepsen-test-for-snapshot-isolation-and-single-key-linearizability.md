@@ -12,7 +12,7 @@ After several months of close collaboration with Kyle, we are excited that TiDB'
 
 ***tl;dr:*** Kyle tested the following versions of TiDB: 2.1.7, 2.1.8, 3.0.0-beta.1-40, and 3.0.0-rc.2. The latest version, 3.0.0-rc.2, passes the Jepsen tests for snapshot isolation and single-key linearizability, and previous versions, TiDB 2.1.8 through 3.0.0-beta.1-40, also pass when the auto-retry mechanism is disabled, which was enabled by default. In 3.0.0-rc.2 and future versions of TiDB, the auto-retry mechanism is *disabled* by default. 
 
-*See the discussion of [TiDB's results on HackerNews](https://news.ycombinator.com/item?id=20163975).*
+*See the discussion of [TiDB's results on Hacker News](https://news.ycombinator.com/item?id=20163975).*
 
 In this blog post, we would like to provide some additional context to the results and share our thoughts on what's next.
 
