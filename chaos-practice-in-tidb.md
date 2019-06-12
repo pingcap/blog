@@ -117,7 +117,7 @@ Although the Linux kernel’s Fault Injection Framework is powerful, we have to 
 
 ### SystemTap
 
-Another way to inject fault is `[SystemTap](https://sourceware.org/systemtap/)`, a scripting language and tool which can assist diagnosis of a performance or functional problem. We use `SystemTap` to probe the kernel function and do accurate fault injection. For example, we can delay the I/O operation in the read/write return by doing the following: 
+Another way to inject fault is ['SystemTap'](https://sourceware.org/systemtap/), a scripting language and tool which can assist diagnosis of a performance or functional problem. We use `SystemTap` to probe the kernel function and do accurate fault injection. For example, we can delay the I/O operation in the read/write return by doing the following: 
 
 	probe vfs.read.return {
 
@@ -167,7 +167,7 @@ Sometimes, we want to do **fault injection in specific places** like:
 		save_meta();
 	}
 
-We do this because, for example, we want to see the system panic after the snapshot data is saved, but meta is not yet. How can we do this? We can use a mechanism called `[fail](https://www.freebsd.org/cgi/man.cgi?query=fail&sektion=9&apropos=0&manpath=FreeBSD%2B10.0-RELEASE)`. Using `fail` we can inject the fault exactly where we want it. In Go, we can use `[gofail](https://github.com/coreos/gofail)` and in Rust, we can use `[fail-rs](https://github.com/pingcap/fail-rs)`. 
+We do this because, for example, we want to see the system panic after the snapshot data is saved, but meta is not yet. How can we do this? We can use a mechanism called [`fail`](https://www.freebsd.org/cgi/man.cgi?query=fail&sektion=9&apropos=0&manpath=FreeBSD%2B10.0-RELEASE). Using `fail` we can inject the fault exactly where we want it. In Go, we can use [`gofail`](https://github.com/coreos/gofail) and in Rust, we can use [`fail-rs`](https://github.com/pingcap/fail-rs). 
 
 For the above example, now we can do:
 
