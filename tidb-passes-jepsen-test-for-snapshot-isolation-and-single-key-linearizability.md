@@ -22,7 +22,7 @@ Although TiDB tries to be as compatible with MySQL as possible, its nature of a 
 
 To help our customers solve this problem, we provide a retry mechanism for those failed commits, which automatically retry the conflicting transactions in TiDB. This, however, has its downsides, which we didn't clearly document. Thanks to Kyle and the Jepsen tests for pointing this out, we have updated our [documentation](https://www.pingcap.com/docs/dev/reference/transactions/transaction-model/#transaction-retry) to keep the users aware of the difference and its possible consequences, and we [disabled the transaction retry mechanism by default](https://pingcap.com/docs/dev/reference/transactions/transaction-model/#transaction-retry) by changing the default value of `tidb_disable_txn_auto_retry` to `on`.
 
-Regarding the decision on whether to enable or disable the retry mechanism by default, we had gone through some changes. For the 3.0.0 GA version, we had originally planned to change the behavior of `tidb_disable_txn_auto_retry` to make it control the retry over transactions in write conflicts only, and we implemented the same in **3.0.0-beta.1-40**. Unfortunately, though, we didn't update the documentation to reflect the change in time. Thanks to Jepsen tests, we reflected on this change and believed this was not a good design. Therefore, in 3.0.0-rc2, we have adjusted the behavior of `tidb_disable_txn_auto_retry` to what it used to be prior to **3.0.0-beta.1-40**, which is consistent with the [documentation](https://pingcap.com/docs/dev/reference/configuration/tidb-server/tidb-specific-variables/#tidb-disable-txn-auto-retry). 
+Regarding the decision on whether to enable or disable the retry mechanism by default, we had gone through some changes. For the 3.0.0 GA version, we had originally planned to change the behavior of `tidb_disable_txn_auto_retry` to make it control the retry over transactions in write conflicts only, and we implemented the same in 3.0.0-beta.1-40. Unfortunately, though, we didn't update the documentation to reflect the change in time. Thanks to Jepsen tests, we reflected on this change and believed this was not a good design. Therefore, in 3.0.0-rc2, we have adjusted the behavior of `tidb_disable_txn_auto_retry` to what it used to be prior to 3.0.0-beta.1-40, which is consistent with the [documentation](https://pingcap.com/docs/dev/reference/configuration/tidb-server/tidb-specific-variables/#tidb-disable-txn-auto-retry). 
 
 To disable or enable the transaction retry, users can configure both `tidb_retry_limit` and `tidb_disable_txn_auto_retry`, with the following differences:
 
@@ -65,7 +65,7 @@ Admittedly, there is always room for improvement in our documentation. Thanks to
 
 - **Comment from Jepsen report:** "*PingCAP's official documentation did not describe what select ... for update should have done*."
 
-    **Fix:** We have updated the description of `[Select for Update](https://pingcap.com/docs/dev/reference/sql/statements/select/#description-of-the-syntax-elements)` with more detailed behaviors of the clause and its difference with other databases.
+    **Fix:** We have updated the description of [`Select for Update`](https://pingcap.com/docs/dev/reference/sql/statements/select/#description-of-the-syntax-elements) with more detailed behaviors of the clause and its difference with other databases.
 
 
 ## Next Steps
