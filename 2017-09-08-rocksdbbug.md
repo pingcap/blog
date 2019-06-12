@@ -218,7 +218,7 @@ Once we confirmed that something must be wrong here, we reported this discovery 
 
 [Back to the top](#top)
 
-Meanwhile, we tried to keep investigating this problem further. Since file 185830 was wrong, let's trace back to see which compaction generated this file. The `LOG` file showed that file 185830 was generated in compaction [JOB 10654] where the input files of [JOB 10654] (texts below were edited and combined together to make them more easy to trace):
+Meanwhile, we tried to keep investigating this problem further. Since file 185830 was wrong, let's trace back to see which compaction generated this file. The `LOG` file showed that file 185830 was generated in compaction [JOB 10654] where the input files of [JOB 10654] \(texts below were edited and combined together to make them more easy to trace):
 
 1. Again, files in Level-1 should not overlap with each other. **But file 185582 was overlapped with some files in Level-1.**
 
