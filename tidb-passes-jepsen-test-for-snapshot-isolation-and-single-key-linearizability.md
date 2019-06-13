@@ -42,7 +42,9 @@ This behavior is expected for TiDB server. We decided to adopt the fail-fast app
 This issue is fixed in 3.0.0-rc.2 and the [pull request](https://github.com/pingcap/tidb/pull/10029) to handle the related issue had been merged into the master branch before Kyle [filed the issue](https://github.com/pingcap/tidb/issues/10410). The reason for this issue is that if a new cluster is created and multiple TiDB servers are bootstrapped, write conflicts occur because the bootstrapping process changes the global variables in one TiKV server. The issue is triggered only if all the following 3 conditions are met:
 
 1) The TiDB server in the DDL Owner node which handles the DDL job is not the first one to finish bootstrapping, and
+
 2) Write conflict occurs right before the very same TiDB server finishes bootstrapping, and
+
 3) When 2) happens, the TiDB server that finishes bootstrapping receives the DDL request
 
 The issue is fixed by ensuring that only the TiDB server who is the DDL Owner can process the bootstrap logic.
