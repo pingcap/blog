@@ -10,7 +10,7 @@ Earlier this year, we reached out to Kyle Kingsbury, the creator of the Jepsen t
 
 After several months of close collaboration with Kyle, we are excited that TiDB's first official Jepsen Test report is published. You can read it [HERE](https://jepsen.io/analyses/tidb-2.1.7). 
 
-***tl;dr:*** Kyle tested the following versions of TiDB: 2.1.7, 2.1.8, 3.0.0-beta.1-40, and 3.0.0-rc.2. The latest version, 3.0.0-rc.2, passes the Jepsen tests for snapshot isolation and single-key linearizability, and previous versions, TiDB 2.1.8 through 3.0.0-beta.1-40, also pass when the auto-retry mechanism is disabled, which was enabled by default. In 3.0.0-rc.2 and future versions of TiDB, the auto-retry mechanism is *disabled* by default. 
+***tl;dr:*** Kyle tested the following versions of TiDB: 2.1.7, 2.1.8, 3.0.0-beta.1-40, and 3.0.0-rc.2. The latest version, 3.0.0-rc.2, passes Jepsen tests for snapshot isolation and single-key linearizability, and previous versions, TiDB 2.1.8 through 3.0.0-beta.1-40, also pass when the auto-retry mechanism is disabled, which was enabled by default. In 3.0.0-rc.2 and future versions of TiDB, the auto-retry mechanism is *disabled* by default. 
 
 *See the discussion of [TiDB's results on Hacker News](https://news.ycombinator.com/item?id=20163975).*
 
@@ -20,7 +20,7 @@ In this blog post, we would like to provide some additional context to the resul
 
 Although TiDB tries to be as compatible with MySQL as possible, its nature of a distributed system results in certain [differences](https://www.pingcap.com/docs/dev/reference/mysql-compatibility/), one of which is the [transaction-model](https://www.pingcap.com/docs/dev/reference/transactions/transaction-model/). On the one hand, TiDB adopts an optimistic transaction model that detects conflicts only when transactions are committing, and the transaction will be rolled back if any conflicts are detected. On the other, being a distributed database means that transactions in TiDB will also be rolled back in the event of failures such as network partitions. However, many of the clients that our current customers use to talk to the databases are tailored for traditional databases like MySQL and Oracle, where commits rarely fail at the default isolation level so retry mechanisms are not needed. For these clients, when commits fail, they abort with errors as this is rendered as rare exceptions in these databases. Unlike traditional databases such as MySQL, in TiDB, if users want to avoid massive commit failures, they need to add mechanisms in their own business logic of their applications to handle the related errors, which is the last thing some customers are willing to do. 
 
-To help our customers solve this problem, we provide a retry mechanism for those failed commits, which automatically retry the conflicting transactions in TiDB. This, however, has its downsides, which we didn't clearly document. Thanks to Kyle and the Jepsen tests for pointing this out, we have updated our [documentation](https://www.pingcap.com/docs/dev/reference/transactions/transaction-model/#transaction-retry) to keep the users aware of the difference and its possible consequences, and we [disabled the transaction retry mechanism by default](https://pingcap.com/docs/dev/reference/transactions/transaction-model/#transaction-retry) by changing the default value of `tidb_disable_txn_auto_retry` to `on`.
+To help our customers solve this problem, we provide a retry mechanism for those failed commits, which automatically retry the conflicting transactions in TiDB. This, however, has its downsides, which we didn't clearly document. Thanks to Kyle and Jepsen tests for pointing this out, we have updated our [documentation](https://www.pingcap.com/docs/dev/reference/transactions/transaction-model/#transaction-retry) to keep the users aware of the difference and its possible consequences, and we [disabled the transaction retry mechanism by default](https://pingcap.com/docs/dev/reference/transactions/transaction-model/#transaction-retry) by changing the default value of `tidb_disable_txn_auto_retry` to `on`.
 
 Regarding the decision on whether to enable or disable the retry mechanism by default, we had gone through some changes. For the 3.0.0 GA version, we had originally planned to change the behavior of `tidb_disable_txn_auto_retry` to make it control the retry over transactions in write conflicts only, and we implemented the same in 3.0.0-beta.1-40. Unfortunately, though, we didn't update the documentation to reflect the change in time. Thanks to Jepsen tests, we reflected on this change and believed this was not a good design. Therefore, in 3.0.0-rc2, we have adjusted the behavior of `tidb_disable_txn_auto_retry` to what it used to be prior to 3.0.0-beta.1-40, which is consistent with the [documentation](https://pingcap.com/docs/dev/reference/configuration/tidb-server/tidb-specific-variables/#tidb-disable-txn-auto-retry). 
 
@@ -60,30 +60,30 @@ To ensure all regions in the cluster have enough replicas before providing servi
 
 ### Documentation Fixes
 
-Admittedly, there is always room for improvement in our documentation. Thanks to the Jepsen tests, here are some immediate fixes per issues found in the test report:
+Admittedly, there is always room for improvement in our documentation. Thanks to Jepsen tests, here are some immediate fixes per issues found in the test report:
 
-- **Comment from Jepsen report:** "*The documentation is therefore somewhat confusing: some of its descriptions of repeatable read actually refer to repeatable read, and other parts refer to snapshot isolation*."		
+> **Comment from Jepsen report:** "The documentation is therefore somewhat confusing: some of its descriptions of repeatable read actually refer to repeatable read, and other parts refer to snapshot isolation."		
 		
     **Fix:** We have updated our [transactional isolation](https://github.com/pingcap/docs/blob/master/dev/reference/transactions/transaction-isolation.md#difference-between-tidb-and-ansi-repeatable-read) documentation to state that "TiDB allows some phantoms (P3), but does not allow strict phantoms (A3)" to clear the inconsistency implied in our documentation. 
 
-- **Comments from Jepsen report:** "*TiDB's automatic transaction retry mechanism was documented, but poorly'", "The documentation for auto-retries was titled "Description of optimistic transactions", and it simply said that the automatic-retry mechanism "cannot guarantee the final result is as expected" — but did not describe how*."
+> **Comments from Jepsen report:** "TiDB's automatic transaction retry mechanism was documented, but poorly'", "The documentation for auto-retries was titled "Description of optimistic transactions", and it simply said that the automatic-retry mechanism "cannot guarantee the final result is as expected" — but did not describe how."
 
     **Fix:** We have updated the TiDB [transaction documentation](https://pingcap.com/docs/dev/reference/transactions/transaction-isolation/#transaction-retry) to note that automatic transaction retry is disabled in TiDB by default and that enabling it can result in lost updates. Transactional anomalies caused by automatic retries are also introduced in detail. 
 
-- **Comment from Jepsen report:** "*PingCAP's official documentation did not describe what select ... for update should have done*."
+> **Comment from Jepsen report:** "PingCAP's official documentation did not describe what select ... for update should have done."
 
     **Fix:** We have updated the description of [`Select for Update`](https://pingcap.com/docs/dev/reference/sql/statements/select/#description-of-the-syntax-elements) with more detailed behaviors of the clause and its difference with other databases.
 
 
 ## Next Steps
 
-Building a distributional database and continuously improving it is a long stretching battle. Inspired by the Jepsen tests, we are planning to continue to integrate Jepsen and other forms of tests more comprehensively across our processes and components.
+Building a distributional database and continuously improving it is a long stretching battle. Inspired by Jepsen tests, we are planning to continue to integrate Jepsen and other forms of tests more comprehensively across our processes and components.
 
-- Integrate Jepsen tests with our own Continuous Integration (CI) system to make sure each commit passes the Jepsen tests.
+- Integrate Jepsen tests with our own Continuous Integration (CI) system to make sure each commit passes Jepsen tests.
 
 - Add more TiDB test cases to Jepsen tests, including membership changes, DDL, etc. We are also considering adding an independent Jepsen tests for TiKV.
 
-- Support pessimistic transaction locking to make transactions behave more similarly to that in MySQL. TiDB 3.0.0-rc.2 has provided pessimistic transaction locking as an experimental support and users can configure whether to enable it. This for sure needs to pass the Jepsen tests.
+- Support pessimistic transaction locking to make transactions behave more similarly to that in MySQL. TiDB 3.0.0-rc.2 has provided pessimistic transaction locking as an experimental support and users can configure whether to enable it. This for sure needs to pass Jepsen tests.
 
 - Continuously amplify and improve our documentation to provide comprehensive, consistent, accurate, and user-friendly content and user experience. 
 
