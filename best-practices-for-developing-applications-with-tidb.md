@@ -49,7 +49,7 @@ In a database with pessimistic locking applied, the concurrent `SELECT FOR UPDAT
 
 According to the [ACID](https://en.wikipedia.org/wiki/ACID) (Atomicity, Consistency, Isolation, Durability) theory, concurrent transactions should be isolated from each other to avoid mutual interference. This means that transactions cannot be "nested."
 
-At the read committed (RC) isolation level, if multiple reads exist in the same transaction, the data is read each time the data is committed. When multiple transactions execute concurrently, multiple read results in a transaction may be very different. These are called "ron-repeatable reads."
+At the read committed (RC) isolation level, if multiple reads exist in the same transaction, the data is read each time the data is committed. When multiple transactions execute concurrently, multiple read results in a transaction may be very different. These are called "non-repeatable reads."
 
 Most RDBMS products use RC as the default isolation level. However, sometimes database application developers don't pay attention to the isolation level setting. They even treat non-repeatable reads as a feature, and develop applications based on "nested transactions." 
 
@@ -292,7 +292,7 @@ You can't use an index when the query predicate is among the following:
 like ‘%...'，like ‘%...%'，not like ‘%...'，not like ‘%...%'，<=>
 ```
 
-> **Notes:**
+> **Note:**
 > 
 > - The current version of TiDB (V2.1.0) hasn't implemented `<=>` so it can't use indexes as "is null."
 > - The current version of TiDB doesn't support using two indexes simultaneously in one table for the query against the same table. The related optimizations are still under development.
@@ -332,7 +332,7 @@ select a,b,c from tablename where a<predicate>'<value1>' and b<predicate>'<value
 
 To conclude, when you design composite indexes in TiDB, you should place columns with a high degree of discrimination in front as much as possible, and columns for frequent range queries in the back. 
 	
-Also, composite index (a,b,c)` is available for the query structured as `select c, count(*) from tablename where a=1 and b=2 group by c order by c`, which also complies with the above principle.
+Also, composite index `(a,b,c)` is available for the query structured as `select c, count(*) from tablename where a=1 and b=2 group by c`, and the `where` clause complies with the above principle.
 
 ## 6. Write optimization in batch job scenarios 
 
