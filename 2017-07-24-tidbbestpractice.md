@@ -62,6 +62,7 @@ TiDB provides complete distributed transactions and the model has some optimizat
 	
 	As distributed transactions need to conduct two-phase commit and the bottom layer performs Raft replication, if a transaction is very large, the commit process would be quite slow and the following Raft replication flow is thus struck. To avoid this problem, we limit the transaction size:
 
+	- A transaction is limited to 5000 SQL statements (by default)
 	- Each Key-Value entry is no more than 6MB
 	- The total number of Key-Value entry is no more than 300,000 rows
 	- The total size of Key-Value entry is no more than 100MB
@@ -178,6 +179,7 @@ sync-log = true
 
 As mentioned before, TiDB limits the size of a single transaction in the Key-Value layer. As for the SQL layer, a row of data is mapped to a Key-Value entry. For each additional index, there will be one more Key-Value entries. So the limits mirrored in the SQL layer for a single transaction are:
 
++ A transaction is limited to 5000 SQL statements (by default)
 + Each Key-Value entry is no more than 6MB
 + The total number of rows * (1 + the number of indexes) is less than 300,000
 + The total data of a single commit is less than 100MB
