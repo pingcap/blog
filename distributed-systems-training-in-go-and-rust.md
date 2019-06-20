@@ -2,8 +2,7 @@
 title: Distributed Systems Training in Go and Rust
 date: 2019-06-20
 author: ['Brian Anderson']
-summary: PingCAP has made a talent plan for training and/or evaluating students, new employees, and new contributors to TiDB and TiKV. This blog post gives a brief overview of training courses for this plan on writing
-distributed systems in Go and Rust.
+summary: PingCAP has made a talent plan for training and/or evaluating students, new employees, and new contributors to TiDB and TiKV. This blog post gives a brief overview of training courses for this plan on writing distributed systems in Go and Rust.
 tags: ['Engineering', 'Open Source Community']
 categories: ['Open Source Community']
 ---
@@ -53,9 +52,9 @@ look and help us improve them over at our [PingCAP Talent Plan][c].
 [TiDB]: http://github.com/pingcap/tidb
 [TiKV]: https://github.com/tikv/tikv/
 [c]: https://github.com/pingcap/talent-plan
-[c-rust]: https://github.com/pingcap/talent-plan/rust/
-[c-dss]: https://github.com/pingcap/talent-plan/dss/
-[c-go]: https://github.com/pingcap/talent-plan/tidb/
+[c-rust]: https://github.com/pingcap/talent-plan/tree/master/rust
+[c-dss]: https://github.com/pingcap/talent-plan/tree/master/dss
+[c-go]: https://github.com/pingcap/talent-plan/tree/master/tidb
 [MIT 6.824]: http://nil.csail.mit.edu/6.824/2017/index.html
 [Raft]: https://raft.github.io/
 [Percolator]: https://storage.googleapis.com/pub-tools-public-publication-data/pdf/36726.pdf
