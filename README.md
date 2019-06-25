@@ -24,7 +24,7 @@ draft: true
 > This is used to show the thumbnail shown in the social media platform.
 
 - summary: PingCAP is focused on developing distributed NewSQL and is the team building TiDB, an open-source distributed NewSQL database.
-> This is for the discription shown in the social media platform.
+> This is for the description shown in the social media platform.
 
 ```
 ---
