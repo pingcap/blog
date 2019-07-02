@@ -66,7 +66,7 @@ Besides the features we have described above and those we mentioned in [TiDB 3.0
 
 - Inspired by [WiscKey](https://www.usenix.org/system/files/conference/fast16/fast16-papers-lu.pdf), Titan, a RocksDB plugin to reduce write amplification, is added for scenarios with value sizes greater than 1 KB, relieves write amplification in RocksDB, and decreases the disk I/O usage, see the [Engineering blog for its design and implementation](https://www.pingcap.com/blog/titan-storage-engine-design-and-implementation/).
 
-For a full list of new features and improvements, I strongly encourage you to check out the TiDB 3.0 GA release notes. If you'd like to upgrade from previous TiDB versions to 3.0, please see instructions here [TiDB 3.0 Upgrade Guide](https://www.pingcap.com/docs/v3.0/how-to/upgrade/from-previous-version/), and contact our team via email at info@pingcap.com or join our community [Slack channel](https://pingcap.com/tidbslack). 
+For a full list of new features and improvements, I strongly encourage you to check out the [TiDB 3.0 GA release notes](https://www.pingcap.com/docs/v3.0/releases/3.0-ga/). If you'd like to upgrade from previous TiDB versions to 3.0, please see instructions here [TiDB 3.0 Upgrade Guide](https://www.pingcap.com/docs/v3.0/how-to/upgrade/from-previous-version/), and contact our team via email at info@pingcap.com or join our community [Slack channel](https://pingcap.com/tidbslack). 
  
 TiDB 3.0 is the strongest version yet, and we are grateful for all the help, feedback, and support our users and community have given us. 
 
