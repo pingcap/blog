@@ -35,7 +35,7 @@ CREATE TABLE User {
    	Name varchar(20),
    	Role varchar(20),
    	Age int,
-   	PRIMARY KEY (ID)，
+   	PRIMARY KEY (ID),
    	Key idxAge (age)
 };
 ```
@@ -81,7 +81,7 @@ TiDB allocates a `TableID` to each table, an `IndexID` to each index, and a `Row
 Each row of data is encoded into a Key-Value pair according to the following rule:
 
 ```
-Key: tablePrefix_tableID_recordPrefixSep_rowID
+Key: tablePrefix{tableID}_recordPrefixSep{rowID}
 Value: [col1, col2, col3, col4]
 ```
 
@@ -89,14 +89,14 @@ The `tablePrefix`/`recordPrefixSep` of the Key are specific string constants and
 Index data is encoded into a Key-Value pair according to the following rule:
 
 ```
-Key: tablePrefix_tableID_indexPrefixSep_indexID_indexedColumnsValue
+Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue
 Value: rowID
 ```
 
-The above encoding rule applies to Unique Index while it cannot create a unique Key for Non-unique Index. The reason is that the `tablePrefix_tableID_indexPrefixSep_indexID` of an Index is the same. It’s possible that the `ColumnsValue of` multiple rows is also the same. Therefore, we’ve made some changes to encode the Non-unique Index:
+The above encoding rule applies to Unique Index while it cannot create a unique Key for Non-unique Index. The reason is that the `tablePrefix{tableID}_indexPrefixSep{indexID}` of an Index is the same. It’s possible that the `ColumnsValue of` multiple rows is also the same. Therefore, we’ve made some changes to encode the Non-unique Index:
 
 ```
-Key: tablePrefix_tableID_indexPrefixSep_indexID_indexedColumnsValue_rowID
+Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue_rowID
 Value: null
 ```
 
