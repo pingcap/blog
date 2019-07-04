@@ -2,7 +2,7 @@
 title: 'The KOST Stack: An Open-Source Cloud-Native Hybrid Database Stack'
 date: 2019-07-04
 author: ['Kevin Xu']
-summary: A new infrastructure pattern is emerging called the KOST stack (Kubernetes, Operator, Spark, TiDB). This blog post introduces each component of the KOST stack. 
+summary: A new infrastructure pattern is emerging called the KOST stack (Kubernetes, Operator, Spark, TiDB). This blog post introduces each component of the KOST stack and cloud-native HTAP in the wild. 
 tags: ['HTAP']
 categories: ['HTAP']
 ---
