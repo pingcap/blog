@@ -43,7 +43,7 @@ If you don't have reproducible, fair benchmarking, you can be blinded by your ow
 
 For our business, benchmarks give us tangible, real data we can share with both potential and existing users:
 
-_> How will new feature X impact the performance of workload Y that customer Z uses?_
+_How will new feature X impact the performance of workload Y that customer Z uses?_
 
 Being able to benchmark against these workloads can inform our development, and positively impact all users — not just the originating benchmarker.
 
