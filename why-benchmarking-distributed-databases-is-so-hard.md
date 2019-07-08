@@ -91,6 +91,11 @@ Also, distributed systems like TiDB are often flexible, and tuning can dramatica
 
 Databases have an incredible variety of use cases and workloads. Understandably, there is no universal, all-encompassing benchmark. Instead, we have a variety of tools at our disposal.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Why Benchmarking Distributed Databases Is So Hard', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Why Benchmarking Distributed Databases Is So Hard', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 #### TPC-C
 
 The [TPC-C benchmark](http://www.tpc.org/tpc_documents_current_versions/pdf/tpc-c_v5.11.0.pdf) is an Online Transactional Processing (OLTP) standard takes the perspective of distributing orders to customers. The metric it measures is the number of orders processed by the benchmark per minute.
