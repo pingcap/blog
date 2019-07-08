@@ -65,7 +65,7 @@ While everyone wants to be incomparable, it's very important to compare yourself
 
 ### The status quo
 
-It's fairly common to see articles touting benchmarks gathered off big cloud machines in fairly small deployments. The author will go over the deployment specifications, then run a few tools like Yahoo! Cloud Serving Benchmark (YCSB) and Transaction Processing Performance Council Benchmark C (TCP-C), and show off some graphs comparing the outcomes to either other versions or other products.
+It's fairly common to see articles touting benchmarks gathered off big cloud machines in fairly small deployments. The author will go over the deployment specifications, then run a few tools like Yahoo! Cloud Serving Benchmark (YCSB) and Transaction Processing Performance Council Benchmark C (TPC-C), and show off some graphs comparing the outcomes to either other versions or other products.
 
 This is pretty awesome, actually.
 
@@ -116,7 +116,7 @@ The [TPC-H benchmark](http://www.tpc.org/tpc_documents_current_versions/pdf/tpc-
 
 The TPC-H tries to measure the ability of a database to handle complex, large, ad-hoc queries. It functions similar to how a data lake functions in an extract, transform, load (ETL) pipeline, staying closely synchronized with an online transactional database. Complex queries are run over the dataset ad-hoc, and at varied intervals.
 
-In many ways, TPC-H complements TPC-C. TCP-H represents the analytical database which handles the queries the TPC-C doesn't.
+In many ways, TPC-H complements TPC-C. TPC-H represents the analytical database which handles the queries the TPC-C doesn't.
 
 #### Sysbench
 
@@ -168,7 +168,7 @@ Stutter can affect high-load databases just like other performance games. You ca
 
 A naive approach to writing a benchmark might involve a single client interacting with a distributed database and running a workload.
 
-However this is rarely a realistic situation. It's much more likely that a large number of clients will be interacting with the database. Consider the TCP-C. It's unlikely that all of the warehouses and districts would connect over the same connection, or wait to take turns running their queries!
+However this is rarely a realistic situation. It's much more likely that a large number of clients will be interacting with the database. Consider the TPC-C. It's unlikely that all of the warehouses and districts would connect over the same connection, or wait to take turns running their queries!
 
 When you benchmark a distributed system intended to handle a high volume of traffic, like TiDB, using only one connection will almost certainly result in your benchmarking tool becoming bottlenecked. Instead of benchmarking the database, you're actually benchmarking the tool!
 
