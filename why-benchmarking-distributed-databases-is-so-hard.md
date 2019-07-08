@@ -5,10 +5,10 @@ author: ['Ana Hobden']
 summary: Benchmarks are hard to get right, and many articles touting benchmarks are actually benchmarketing, showcasing skewed outcomes to sell products. This post introduces some of the motivations for benchmarking and the common tools, and discusses a few things to keep in mind when benchmarking.
 tags: ['Engineering']
 categories: ['Engineering']
-image: /images/why-benchmarking-distributed-databases-is-so-hard.png
+image: /images/blog/why-benchmarking-distributed-databases-is-so-hard-1.png
 ---
 
-![Why Benchmarking Distributed Databases Is So Hard](media/why-benchmarking-distributed-databases-is-so-hard.png)
+![Why Benchmarking Distributed Databases Is So Hard](media/why-benchmarking-distributed-databases-is-so-hard-2.png)
 
 At KubeCon+CloudNativeCon Europe 2019, [Iqbal Farabi](https://www.linkedin.com/in/iqbal-farabi-02756923/) and [Tara Baskara](https://www.linkedin.com/in/tara-baskara-5050003b/) from [GO-JEK](https://www.go-jek.com/) presented their findings on experiments to benchmark various cloud native databases. such as Vitess, CockroachDB, FoundationDB, TiDB, YugaByte DB, etc. They applied the following filters to the list: 
 
