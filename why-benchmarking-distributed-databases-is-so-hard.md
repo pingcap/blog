@@ -20,8 +20,8 @@ At KubeCon+CloudNativeCon Europe 2019, [Iqbal Farabi](https://www.linkedin.com/i
 The result was the following list of databases to benchmark:
 
 - [CockroachDB](https://github.com/cockroachdb/cockroach)
-- [TiDB](https://github.com/cockroachdb/cockroach) 
-- [YugaByte DB](https://github.com/cockroachdb/cockroach)
+- [TiDB](https://github.com/pingcap/tidb) 
+- [YugaByte DB](https://github.com/YugaByte/yugabyte-db)
 
 For the database benchmarking, they used [go-ycsb](https://github.com/pingcap/go-ycsb), a Go port of Yahoo! Cloud System Benchmark (YCSB) from PingCAP. Feel free to check out the [video recording](https://youtu.be/cz-eHwqtyvU) and [slides](https://static.sched.com/hosted_files/kccnceu19/22/Benchmarking%20Cloud%20Native%20Database%20Running%20on%20Kubernetes.pdf).
 
