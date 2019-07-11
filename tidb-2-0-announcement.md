@@ -88,7 +88,7 @@ We always strive to be transparent, fair, and reproducible with every set of ben
 
 TiDB 2.0 is faster, smarter, and battle-tested by both our own sophisticated testing regiment and the production usage of more than 200 companies. We can’t wait to see the value and benefits it’ll create for our customers and community in the coming months. You can dig into the details of 2.0 in our release notes of TiDB [here](https://github.com/pingcap/tidb/releases/tag/v2.0.0) and TiKV [here](https://github.com/pingcap/tikv/releases/tag/v2.0.0). 
 
-Of course, there are many items on our [Roadmap](https://github.com/pingcap/docs/blob/master/ROADMAP.md) still, which we hope to accomplish with a bigger team and a stronger community (see our [contributor guideline](https://github.com/pingcap/tidb/blob/master/CONTRIBUTING.md)). Looking ahead, we will also integrate TiDB with more cloud services. While it is already on Tencent Cloud and UCloud, our team is working overtime to bring TiDB to a cloud service near you, both public and private. 
+Of course, there are many items on our [Roadmap](https://github.com/pingcap/docs/blob/master/v2.0/ROADMAP.md) still, which we hope to accomplish with a bigger team and a stronger community (see our [contributor guideline](https://github.com/pingcap/tidb/blob/master/CONTRIBUTING.md)). Looking ahead, we will also integrate TiDB with more cloud services. While it is already on Tencent Cloud and UCloud, our team is working overtime to bring TiDB to a cloud service near you, both public and private. 
 
 ## Wait, One More Thing...
 
