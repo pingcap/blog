@@ -10,7 +10,7 @@ image: /images/blog/why-benchmarking-distributed-databases-is-so-hard-1.png
 
 ![Why Benchmarking Distributed Databases Is So Hard](media/why-benchmarking-distributed-databases-is-so-hard-2.png)
 
-At KubeCon+CloudNativeCon Europe 2019, [Iqbal Farabi](https://www.linkedin.com/in/iqbal-farabi-02756923/) and [Tara Baskara](https://www.linkedin.com/in/tara-baskara-5050003b/) from [GO-JEK](https://www.go-jek.com/) presented their findings on experiments to benchmark various cloud native databases. such as Vitess, CockroachDB, FoundationDB, TiDB, YugaByte DB, etc. They applied the following filters to the list: 
+At KubeCon+CloudNativeCon Europe 2019, [Iqbal Farabi](https://www.linkedin.com/in/iqbal-farabi-02756923/) and [Tara Baskara](https://www.linkedin.com/in/tara-baskara-5050003b/) from [GO-JEK](https://www.go-jek.com/) presented their findings on experiments to benchmark various cloud native databases, such as Vitess, CockroachDB, FoundationDB, TiDB, YugaByte DB, etc. They applied the following filters to the list: 
 
 - Open source 
 - Operational database
