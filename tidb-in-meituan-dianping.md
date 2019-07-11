@@ -161,7 +161,7 @@ At present, MySQL is used with [Hive](https://en.wikipedia.org/wiki/Apache_Hive)
 
     - It is easy to migrate data from Hive to TiDB, since TiDB is highly compatible with MySQL. The Insert statement needs no modification; we just need to adjust it slightly.
     
-    - For data migration from TiDB to Hive, using [TiDB-Binlog](https://github.com/pingcap/docs/blob/master/tools/tidb-binlog.md) (Pump + Drainer), an enterprise tool developed by PingCAP, is a good solution. Drainer can export data to Kafka, MySQL, and TiDB. We are currently considering the schema of using Drainer to output data to Kafka in order to synchronize data from TiDB to Hive, as shown in the diagram below. 
+    - For data migration from TiDB to Hive, using [TiDB-Binlog](https://github.com/pingcap/tidb-binlog) (Pump + Drainer), an enterprise tool developed by PingCAP, is a good solution. Drainer can export data to Kafka, MySQL, and TiDB. We are currently considering the schema of using Drainer to output data to Kafka in order to synchronize data from TiDB to Hive, as shown in the diagram below. 
 
         ![Synchronization Data from TiDB to Hive](media/synchronization-data-from-tidb-to-hive.png)
         <center> *Synchronization Data from TiDB to Hive* </center>

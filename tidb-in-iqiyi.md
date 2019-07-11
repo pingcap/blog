@@ -113,7 +113,7 @@ The video transcoding database stores the historical data produced in transcodin
 
 **Solution:** To solve this problem, we deployed a TiDB cluster at the end of 2017 and migrated the data to the TiDB cluster through full and incremental import. This strategy ensured data consistency between the previous MySQL cluster and the newly-built TiDB cluster.  
 
-During the full import, we originally used Mydumper + [Loader](https://github.com/pingcap/docs/blob/master/tools/loader.md), a data migration tool developed by PingCAP. But we found that Loader was too slow for our needs.
+During the full import, we originally used Mydumper + [Loader](https://github.com/pingcap/docs/blob/master/v3.0/reference/tools/loader.md), a data migration tool developed by PingCAP. But we found that Loader was too slow for our needs.
 
 To fix this problem, PingCAP developed TiDB Lightning, which converted the data exported from Mydumper to SST files and imported the files to TiKV nodes. This way, data migration efficiency was improved greatly: 1T data could be migrated successfully in five or six hours. After video transcoding ran stably for a while, we switched all the traffic to the TiDB cluster and expanded our services. So far, it has run smoothly.
 
