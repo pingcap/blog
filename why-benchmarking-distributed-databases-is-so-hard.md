@@ -98,7 +98,7 @@ Databases have an incredible variety of use cases and workloads. Understandably,
 
 #### TPC-C
 
-The [TPC-C benchmark](http://www.tpc.org/tpc_documents_current_versions/pdf/tpc-c_v5.11.0.pdf) is an Online Transactional Processing (OLTP) standard takes the perspective of distributing orders to customers. The metric it measures is the number of orders processed by the benchmark per minute.
+The [TPC-C benchmark](http://www.tpc.org/tpc_documents_current_versions/pdf/tpc-c_v5.11.0.pdf) is an Online Transactional Processing (OLTP) standard that takes the perspective of distributing orders to customers. The metric it measures is the number of orders processed by the benchmark per minute.
 
 The TPC-C tries to measure the essential performance characteristics of some operations portrayed through the lens of a company distributing products to warehouses and districts, and then on to customers.
 
@@ -178,7 +178,7 @@ Instead, it's better to use multiple connections like TPC-C and sysbench do. Not
 
 A good benchmark report doesn't just show off numbers and state “X is faster” — that's not interesting! _Why_ is X faster? Is it because of mistakes? Or is it the result of deliberate choices that had consequences?
 
-Talking about why one test subject is faster not only makes the results more interesting, it also makes them more legitimate. If an author can explain why results differ, it demonstrates that they performed the necessary research to make an accurate benchmark.
+Talking about why one test subject is faster not only makes the results more interesting, it also makes them more legitimate. If an author can explain why results differ, it demonstrates that he/she performed the necessary research to make an accurate benchmark.
 
 ### Consult the experts
 
