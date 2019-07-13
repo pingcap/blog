@@ -332,7 +332,7 @@ You should see the same rows when querying the MariaDB server that you inserted 
 
 ## binlogctl
 
-Information about Pumps and Drainers that have joined the cluster is stored in pd, and the binlogctl tool is used to query and manipulate information about their states. See [binlogctl guide](https://github.com/pingcap/docs/blob/master/tools/tidb-binlog-cluster.md#binlogctl-guide) for more information.
+Information about Pumps and Drainers that have joined the cluster is stored in pd, and the binlogctl tool is used to query and manipulate information about their states. See [binlogctl guide](https://pingcap.com/docs/v3.0/how-to/maintain/tidb-binlog/#binlogctl-guide) for more information.
 
 You can use `binlogctl` to get a view of the current status of Pumps and Drainers in the cluster:
 
