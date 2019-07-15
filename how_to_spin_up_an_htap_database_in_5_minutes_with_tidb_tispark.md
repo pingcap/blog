@@ -225,11 +225,10 @@ Now let’s launch TiSpark, the last missing piece of our hybrid database puzzle
     **Result:** Now you can Spark!
     ![Now you can Spark](media/now_you_can_spark.png)
 
-3. Use the following two commands, one by one, to bind TiSpark to this Spark instance and map to the database `TPCH_001`, the same sample data that’s available in our MySQL instance:
+3. Use the following command to set `TPCH_001` as default database:
 
     ```bash
     spark.sql("use TPCH_001")
-    spark.sql("select count(*) from lineitem").show
     ```
 
     It looks something like this:
