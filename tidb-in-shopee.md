@@ -39,7 +39,7 @@ Inside the TiDB platform, the main components are as follows:
 - [**TiSpark**](https://github.com/pingcap/tispark) cluster also sits on top of TiKV. It is an Apache Spark plugin that works with the TiDB platform to support complex OLAP queries for BI analysts and data scientists. 
 - [**Placement Driver (PD)**](https://github.com/pingcap/pd): A metadata cluster powered by [etcd](https://github.com/etcd-io/etcd) that manages and schedules TiKV.
 
-Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://www.pingcap.com/docs/tools/syncer/) and [DM](https://github.com/pingcap/dm) for seamless migration from MySQL, and [TiDB-Binlog](https://github.com/pingcap/docs/blob/master/tools/tidb-binlog-cluster.md), which is used to ​collect the logical changes made to a TiDB cluster and provide incremental backup and replication to the downstream (TiDB, Kafka or MySQL)​.
+Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://www.pingcap.com/docs/tools/syncer/) and [DM](https://github.com/pingcap/dm) for seamless migration from MySQL, and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), which is used to collect the logical changes made to a TiDB cluster and provide incremental backup and replication to the downstream (TiDB, Kafka or MySQL).
 
 ## Our Pain Point
 
@@ -149,7 +149,7 @@ Although the data size has grown eightfold over the past 6 months, the whole clu
 
 While we have been happy with our experience with TiDB, the adoption was not without challenges. One issue we have encountered is that after adding new nodes to an existing TiKV cluster to expand our storage capacity, it took a long time to rebalance data -- roughly 24 hours to rebalance about 1TB of new data. Thus, to better prepare for this bottleneck, we would usually do this scaling a few days before any of our promotional campaigns when we know traffic will spike, and closely monitor the progress of data rebalancing. We also recommend setting the scheduling related parameters in PD to a larger value. 
 
-Another issue is that TiDB’s MySQL compatibility is not fully complete; for example, TiDB does not currently support the `SHOW CREATE USER` syntax, which is related to MySQL user privilege. Instead, we have to read the system table (mysql.user) to check the basic information of a database account. The good thing is the PingCAP team is very transparent about MySQL features that are [currently not supported](https://www.pingcap.com/docs/sql/mysql-compatibility/) in TiDB, and is responsive to our requests -- a [pull request](https://github.com/pingcap/tidb/issues/7733) is already filed for this particular issue. 
+Another issue is that TiDB’s MySQL compatibility is not fully complete; for example, TiDB does not currently support the `SHOW CREATE USER` syntax, which is related to MySQL user privilege. Instead, we have to read the system table (mysql.user) to check the basic information of a database account. The good thing is the PingCAP team is very transparent about MySQL features that are [currently not supported](https://pingcap.com/docs/v3.0/reference/mysql-compatibility) in TiDB, and is responsive to our requests -- a [pull request](https://github.com/pingcap/tidb/issues/7733) is already filed for this particular issue. 
 
 ## What’s Next
 
@@ -163,4 +163,4 @@ With one year’s worth of TiDB experience under our belt, we feel confident in 
 
 - Currently, we are running TiDB clusters on bare metal. It takes our DBAs substantial amount of time to maintain the hardware, network, and OS of our servers. In the future, we intend to run TiDB on our container platform and build up a toolset to achieve self-service resource application and configuration management. Then our staff will be freed from the daily grinds of operation and maintenance.
 
-We would like to thank every PingCAP member who has helped us during the past year. They have been quick to respond, attentive in following up our project, and provided helpful  advice along the way. We have also relied on the TiDB documentation, which is informative and clearly-structured.
+We would like to thank every PingCAP member who has helped us during the past year. They have been quick to respond, attentive in following up our project, and provided helpful advice along the way. We have also relied on the TiDB documentation, which is informative and clearly-structured.
