@@ -46,7 +46,7 @@ Inside the TiDB Platform, there are several components:
 - [**TiKV**](https://github.com/pingcap/tikv) cluster, composed of TiKV instances, is the distributed transactional Key-Value storage layer where the data resides. Regardless of where the data comes from, it is stored in TiKV eventually. It uses the [Raft](https://raft.github.io/) consensus protocol for replication to ensure data consistency and disaster recovery.
 - [**TiSpark**](https://github.com/pingcap/tispark) cluster also sits on top of TiKV. It is an Apache Spark plugin that works with the TiDB platform to support complex OLAP queries for BI analysts and data scientists. 
 
-The TiDB ecosystem also has a wealth of other enterprise-level tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://www.pingcap.com/docs/tools/syncer/) for seamless migration from MySQL, Wormhole for migrating heterogeneous data, and [TiDB-Binlog](https://github.com/pingcap/docs/blob/master/tools/tidb-binlog.md), which is a tool to collect binlog files.
+The TiDB ecosystem also has a wealth of other enterprise-level tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://www.pingcap.com/docs/tools/syncer/) for seamless migration from MySQL, Wormhole for migrating heterogeneous data, and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), which is a tool to collect binlog files.
 
 ## How Are We Using TiDB?
 
