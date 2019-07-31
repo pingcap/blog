@@ -67,7 +67,7 @@ TiDB provides complete distributed transactions and the model has some optimizat
 	- The total number of Key-Value entry is no more than 300,000 rows
 	- The total size of Key-Value entry is no more than 100MB
 
-	There are[ similar limits](https://cloud.google.com/spanner/docs/limits) on Google Cloud Spanner.
+	There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Google Cloud Spanner.
 
 [Back to the top](#top)
 
@@ -129,12 +129,12 @@ The following two conditions don’t have the problem of two accesses:
 
 	As data is distributed across many Regions, TiDB makes query concurrently. But the concurrency by default is not high in case it consumes lots of system resources. Besides, as for the OLTP query, it doesn’t involve a large amount of data and the low concurrency is enough. But for the OLAP Query, the concurrency is high and TiDB modifies the query concurrency through System Variable.
 
-	- [tidb\_distsql\_scan\_concurrency](https://www.pingcap.com/docs/sql/tidb-specific/#tidb_distsql_scan_concurrency): 
+	- [tidb\_distsql\_scan\_concurrency](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-distsql-scan-concurrency): 
 	The concurrency of scanning data, including scanning the Table and index data.
-	- [tidb\_index\_lookup\_size](https://www.pingcap.com/docs/sql/tidb-specific/#tidb_index_lookup_size): 
+	- [tidb\_index\_lookup\_size](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-index-lookup-size): 
 	If it needs to access the index to get row IDs before accessing Table data, it uses a batch of row IDs as a single request to access Table data. This parameter can set the size of Batch. The larger Batch increases latency while the smaller one may lead to more queries. The proper size of this parameter is related to the amount of data that the query involves. Generally, no modification is required.
 
-	- [ tidb\_index\_lookup\_concurrency](https://www.pingcap.com/docs/sql/tidb-specific/#tidb_index_lookup_concurrency): If it needs to access the index to get row IDs before accessing Table data, the concurrency of getting data through row IDs every time is modified through this parameter.
+	- [tidb\_index\_lookup\_concurrency](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-index-lookup-concurrency): If it needs to access the index to get row IDs before accessing Table data, the concurrency of getting data through row IDs every time is modified through this parameter.
 
 + Ensure the order of results through index
 
@@ -189,7 +189,6 @@ As mentioned before, TiDB limits the size of a single transaction in the Key-Val
 When deleting a large amount of data, it is recommended to use `Delete * from t where xx limit 5000;`. It deletes through the loop and use `Affected Rows == 0` as a condition to end the loop, so as not to exceed the limit of transaction size. If the amount of data that needs to be deleted at a time is large, this loop method will get slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags will remain in a short period (then all will be Garbage Collected) and influence the following `Delete` statement. If possible, it is recommended to refine the `Where` condition. Assume that you need to delete all data on 2017-05-26, you can:
 
 ```
-
 for i from 0 to 23:
 
 	while affected_rows > 0:
@@ -206,7 +205,7 @@ This pseudocode means to split huge chunks of data into small ones and then dele
 
 ### <span id="query">Query</span>
 
-For query requirements and specific statements, please refer to[ this article](https://www.pingcap.com/docs/sql/tidb-specific/).
+For query requirements and specific statements, please refer to [this article](https://www.pingcap.com/docs/sql/tidb-specific/).
 
 You can control the concurrency of SQL execution through the `SET` statement and the selection of the `Join` operator through `Hint`.
 
@@ -216,7 +215,7 @@ If the business scenario needs both OLTP and OLAP, you can send the TP request a
 
 ### <span id="log">Monitoring and Log</span>
 
-TiDB uses[ Grafana+Prometheus to monitor the system state](https://www.pingcap.com/docs/op-guide/monitor-overview/). The monitoring system is automatically deployed and configured if using TiDB-Ansible.
+TiDB uses [Grafana+Prometheus to monitor the system state](https://www.pingcap.com/docs/op-guide/monitor-overview/). The monitoring system is automatically deployed and configured if using TiDB-Ansible.
 
 There are lots of items in the monitoring system, the majority of which are for TiDB developers. There is no need to understand these items but for an in-depth knowledge of the source code. We’ve picked out some items that are related to business or to the state of system key components in a separate panel for users.
 
@@ -224,7 +223,7 @@ In addition to monitoring, you can also view the system logs. The three componen
 
 ### <span id="doc">Documentation</span>
 
-TiDB has a large number of official documents either in[ Chinese](https://www.pingcap.com/docs-cn/) or[ English](https://www.pingcap.com/docs/). You can also search the issue list for a solution.
+TiDB has a large number of official documents either in [Chinese](https://www.pingcap.com/docs-cn/) or [English](https://www.pingcap.com/docs/). You can also search the issue list for a solution.
 
 If you have met an issue, you can start from the [FAQ](https://www.pingcap.com/docs/FAQ/) and [Troubleshooting](https://www.pingcap.com/docs/trouble-shooting/) sections. If the issue is not documented, please [file an issue](https://github.com/pingcap/tidb/issues/new).
 
