@@ -50,7 +50,7 @@ Currently, you can use TiDB Operator to quickly deploy a TiDB cluster on
 
 * [AWS EKS (Elastic Kubernetes Service)](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/deploy/aws-eks/)
 * [GKE (Google Kubernetes Engine)](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke/)
-* [Alibaba Cloud ACK (Container Service for Kubernetes)](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/deploy/alibaba-cloud/).
+* [Alibaba Cloud ACK (Container Service for Kubernetes)](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/deploy/alibaba-cloud/)
 
 You can also learn how to [deploy a TiDB cluster on general Kubernetes clusters](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/deploy/general-kubernetes/) and try [TiDB Operator](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/deploy/tidb-operator/) on any Kubernetes cluster. 
 
