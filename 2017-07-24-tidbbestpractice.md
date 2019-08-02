@@ -205,7 +205,7 @@ This pseudocode means to split huge chunks of data into small ones and then dele
 
 ### <span id="query">Query</span>
 
-For query requirements and specific statements, please refer to [this article](https://www.pingcap.com/docs/sql/tidb-specific/).
+For query requirements and specific statements, please refer to [this statement](https://pingcap.com/docs/v3.0/reference/sql/statements/add-column/).
 
 You can control the concurrency of SQL execution through the `SET` statement and the selection of the `Join` operator through `Hint`.
 
