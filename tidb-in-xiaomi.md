@@ -183,6 +183,6 @@ We also encountered write amplification with RocksDB that makes our storage usag
 
 With our initial success of using TiDB in the instant delivery and third party ad network applications, we have plans to migrate over more Xiaomi services in the MIUI ecosystem, many of which have similar technical characteristics. To better use our resources, we also plan to deploy an archival cluster for some data and use Syncer to support the archiving process. 
 
-On top of the current OLTP-centric workload, we also plan to support more OLAP scenarios using TiSpark and [TiDB-Binlog](https://github.com/pingcap/docs/blob/master/tools/tidb-binlog-cluster.md), for both online and offline analysis. 
+On top of the current OLTP-centric workload, we also plan to support more OLAP scenarios using TiSpark and [TiDB-Binlog](https://github.com/pingcap/tidb-binlog), for both online and offline analysis. 
 
 We would like to thank PingCAP engineers for all their help, support, and professionalism during our data migration and deployment process. 

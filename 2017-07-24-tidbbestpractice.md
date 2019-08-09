@@ -138,7 +138,7 @@ The following two conditions don’t have the problem of two accesses:
 
 + Ensure the order of results through index
 
-	Index cannot only be used to filter data, but also to sort data. Firstly, get row IDs according to the index order. Then return the row content according to the return order of row IDs. In this way, the return results are ordered according to the index column. I’ve mentioned that the model of scanning index and getting Row is parallel + Pipeline. If Row is returned according to the index order, a high concurrency between two queries will not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [tidb\_index\_serial\_scan\_concurrency](https://www.pingcap.com/docs/sql/tidb-specific/#tidb_index_serial_scan_concurrency) variable.
+	Index cannot only be used to filter data, but also to sort data. Firstly, get row IDs according to the index order. Then return the row content according to the return order of row IDs. In this way, the return results are ordered according to the index column. I’ve mentioned that the model of scanning index and getting Row is parallel + Pipeline. If Row is returned according to the index order, a high concurrency between two queries will not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [tidb\_index\_serial\_scan\_concurrency](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-index-serial-scan-concurrency) variable.
 
 + Reverse index scan
 
