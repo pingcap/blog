@@ -68,6 +68,6 @@ TiDB is designed to perform well across [hybrid transaction/analytical processin
 
 ## Conclusion
 
-These are my top five observations based on 15 years in the MySQL world and coming to TiDB. While many of them refer to internal differences, I recommend checking out the TiDB documentation on [MySQL Compatibility](https://www.pingcap.com/docs/sql/mysql-compatibility/). It describes some of the finer points about any differences that may affect your applications.
+These are my top five observations based on 15 years in the MySQL world and coming to TiDB. While many of them refer to internal differences, I recommend checking out the TiDB documentation on [MySQL Compatibility](https://pingcap.com/docs/v3.0/reference/mysql-compatibility). It describes some of the finer points about any differences that may affect your applications.
 
 Note: The original version of this article was published on [opensource.com](https://opensource.com/article/18/11/key-differences-between-mysql-and-tidb)
