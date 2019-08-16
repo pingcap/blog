@@ -36,7 +36,7 @@ The TiDB platform is comprised of three main components: the TiDB server, the Pl
 
 * During the TiKV build, we addressed [RocksDB 5450](https://github.com/facebook/rocksdb/pull/5450) and [Titan 23](https://github.com/pingcap/titan/pull/23) compilation issues. We resolved these issues by passing an ARM64 or AARCH64 marco to each component.
 
-By the way, there is a [script](https://gist.github.com/siddontang/3a35473437bc47ebf27e541ba7d41141#file-build_on_arm-sh) which can help you build TiBD on ARM64. Enjoy it.
+By the way, there is a [script](https://gist.github.com/siddontang/3a35473437bc47ebf27e541ba7d41141#file-build_on_arm-sh) which can help you build TiDB on ARM64. Enjoy it.
 
 ## Benchmarking the TiDB ARM64 and x86-64 versions
 
