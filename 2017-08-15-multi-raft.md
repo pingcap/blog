@@ -26,7 +26,7 @@ Placement Driver (PD), the global central controller of TiKV, stores the metadat
 
 PD is a critical central node. With the integration of etcd, it automatically supports the distributed scaling and failover as well as solves the problem of single point of failure. We will write another article to thoroughly introduce PD.
 
-In TiKV, the interaction with PD is placed in the [pd](https://github.com/pingcap/tikv/tree/master/src/pd) directory. You can interact with PD with your self-defined RPC and the protocol is quite simple. In [pd/mod.rs](https://github.com/pingcap/tikv/blob/master/src/pd/mod.rs), we provide the Client trait to interact with PD and have implemented the RPC Client.
+In TiKV, the interaction with PD is placed in the [pd](https://github.com/tikv/tikv/tree/master/components/pd_client) directory. You can interact with PD with your self-defined RPC and the protocol is quite simple. In [pd/mod.rs](https://github.com/tikv/tikv/blob/master/components/pd_client/src/lib.rs), we provide the Client trait to interact with PD and have implemented the RPC Client.
 
 The Client trait of PD is easy to understand, most of which are the set/get operations towards the metadata information of the cluster. But you need to pay extra attention to the operations below:
 

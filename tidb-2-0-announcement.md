@@ -80,7 +80,7 @@ We’ve mentioned significant OLAP performance boost in TiDB 2.0 compared to 1.0
 
 ![TiDB 2.0 TPC-H query result](media/tpch-query-result.png)
 
-As you can see, all queries run much faster in 2.0 than in 1.0, many of them several times if not orders of magnitude faster. What’s more, queries that could not be processed at all in 1.0 (i.e. Q2, 5, 7, 17, 18, 19, 21) all returned results with good performance in 2.0. Only one query, Q15, returned NaN in 2.0 because this version currently does not support VIEW. (Don’t worry, VIEW support is on our roadmap.) You can find [details of TiDB 2.0’s TPC-H 50G Performance Test Report here](https://github.com/pingcap/docs/blob/master/benchmark/tpch.md) and reproduce the results yourself. 
+As you can see, all queries run much faster in 2.0 than in 1.0, many of them several times if not orders of magnitude faster. What’s more, queries that could not be processed at all in 1.0 (i.e. Q2, 5, 7, 17, 18, 19, 21) all returned results with good performance in 2.0. Only one query, Q15, returned NaN in 2.0 because this version currently does not support VIEW. (Don’t worry, VIEW support is on our roadmap.) You can find [details of TiDB 2.0’s TPC-H 50G Performance Test Report here](https://github.com/pingcap/docs/blob/master/v2.0/benchmark/tpch.md) and reproduce the results yourself. 
 
 We always strive to be transparent, fair, and reproducible with every set of benchmarks we release and avoid "benchmark-eting." There are too many misleading benchmarks out there that look shiny on the surface but don’t stand up to scrutiny. Abusing benchmarks may yield an easy win, but is ultimately detrimental to the product, the community, and the users who rely on them. That’s something we are committed to never do.
 
