@@ -8,10 +8,10 @@ jobs:
     steps:
       - checkout
 
-      # - run:
-      #     name: "Check links"
-      #     command: |
-      #       hack/verify-links.sh
+      - run:
+          name: "Check links"
+          command: |
+            hack/verify-links.sh
 
 workflows:
   version: 2
