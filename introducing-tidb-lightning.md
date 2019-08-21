@@ -2,14 +2,14 @@
 title: "TiDB Tools (II): Introducing TiDB Lightning"
 author: ['Kenny Chan']
 date: 2019-01-30
-summary: Lightning is an open source TiDB ecosystem tool that supports high speed full-import of a large SQL dump into a TiDB cluster. This post introduces its architecture and future improvements on the roadmap.
+summary: TiDB Lightning is an open source TiDB ecosystem tool that supports high speed full-import of a large SQL dump into a TiDB cluster. This post introduces its architecture and future improvements on the roadmap.
 tags: ['TiDB', 'Engineering', 'MySQL Scalability']
 categories: ['MySQL Scalability']
 ---
 
-[Lightning](https://github.com/pingcap/tidb-lightning) is an open source TiDB ecosystem tool that supports high speed full-import of a large SQL dump into a TiDB cluster. It is much faster than the traditional “execute each SQL statement” way of importing, at least tripling the import speed to about 250 GB per hour. 
+[TiDB Lightning](https://github.com/pingcap/tidb-lightning) is an open source TiDB ecosystem tool that supports high speed full-import of a large SQL dump into a TiDB cluster. It is much faster than the traditional “execute each SQL statement” way of importing, at least tripling the import speed to about 250 GB per hour. 
 
-Lightning is designed for quickly importing a large MySQL dump into a new TiDB cluster by using just a few spare machines. This is commonly used to bootstrap TiDB from a pre-existing production MySQL database, in order to evaluate TiDB with real-world data, or directly migrate the production workload into TiDB.
+TiDB Lightning is designed for quickly importing a large MySQL dump into a new TiDB cluster by using just a few spare machines. This is commonly used to bootstrap TiDB from a pre-existing production MySQL database, in order to evaluate TiDB with real-world data, or directly migrate the production workload into TiDB.
 
 ## Design
 
@@ -32,7 +32,7 @@ TiKV stores data as KV pairs on RocksDB, and RocksDB stores the persistent data 
 
 ![](media/lightning-architecture.png)
 
-Lightning consists of two components: **tidb-lightning** (“Lightning”) and **tikv-importer** (“Importer”). Lightning is responsible for converting SQL into KV pairs, and Importer is responsible for sorting KV pairs and scheduling them into the TiKV servers. 
+TiDB Lightning consists of two components: **tidb-lightning** (“Lightning”) and **tikv-importer** (“Importer”). Lightning is responsible for converting SQL into KV pairs, and Importer is responsible for sorting KV pairs and scheduling them into the TiKV servers. 
 
 While it is possible to combine these into a single program like Loader, we chose to split it into two components for two reasons:
 
@@ -45,7 +45,7 @@ Below we’ll go through the internals of each component.
 
 ![](media/tidb-lightning-work-flow.png)
 
-Currently, Lightning only supports loading SQL dump created by mydumper. Unlike mysqldump, mydumper distributes the content of each table into individual files, which help us to process the database in parallel without parsing the entire dump first.
+Currently, Lightning only supports loading SQL dump created by Mydumper. Unlike mysqldump, Mydumper distributes the content of each table into individual files, which help us to process the database in parallel without parsing the entire dump first.
 
 First, Lightning scans the SQL dump, and classifies them into schema files (involving CREATE TABLE statements) and data files (involving INSERT statements). The schema files are executed directly on the target TiDB server to initialize the skeleton of the database. Lightning then processes each table in parallel. 
 
@@ -95,18 +95,18 @@ In TiDB, we implement the checksum by computing the CRC64 of each KV pair, and t
 
 ## What’s Ahead
 
-This article shows us that Lightning improves the import speed by skipping some complicated, time-consuming operations and thus makes it suitable for initializing a big database. Our team still has many items on our roadmap to make Lightning better.
+This article shows us that TiDB Lightning improves the import speed by skipping some complicated, time-consuming operations and thus makes it suitable for initializing a big database. Our team still has many items on our roadmap to make TiDB Lightning better.
 
 ### Speed improvement
 
-Currently, Lightning feeds the entire INSERT INTO statement into the KV encoder unmodified. So even though we have avoided the cost of distributed SQL, we still need to use TiDB's parser for generic SQL, go through the query planner, and other steps before populating the in-memory KV store. We could instead create a specialized parser, and expose lower-level APIs to Lightning to shorten the path of SQL-to-KV conversion.
+Currently, TiDB Lightning feeds the entire INSERT INTO statement into the KV encoder unmodified. So even though we have avoided the cost of distributed SQL, we still need to use TiDB's parser for generic SQL, go through the query planner, and other steps before populating the in-memory KV store. We could instead create a specialized parser, and expose lower-level APIs to TiDB Lightning to shorten the path of SQL-to-KV conversion.
 
 ### Parallel import
 
 ![](media/parallel-import.png)
 
-The capacity that a single machine can provide is limited, so to increase capacity, we need horizontal scaling, i.e. adding more machines. As explained before, the Lightning can be naturally parallelized, by distributing different tables to different nodes. However, the current implementation can only read from the filesystem, so setting this up is pretty messy (requires mounting a network drive and manually allocating tables to different nodes). Thus, we plan to allow Lightning to interact with the network file storage API (e.g. S3 API), and create a utility to automatically split the database for multiple Lightning instances to simplify deployment.
+The capacity that a single machine can provide is limited, so to increase capacity, we need horizontal scaling, i.e. adding more machines. As explained before, the TiDB Lightning can be naturally parallelized, by distributing different tables to different nodes. However, the current implementation can only read from the filesystem, so setting this up is pretty messy (requires mounting a network drive and manually allocating tables to different nodes). Thus, we plan to allow TiDB Lightning to interact with the network file storage API (e.g. S3 API), and create a utility to automatically split the database for multiple TiDB Lightning instances to simplify deployment.
 
 ### Online import
 
-When the Lightning is importing data, it will put the cluster in a mode exclusive for the write access from Lightning. This is fine for now, because the main application of Lightning is to initialize an empty TiDB database before production. But we do like to support more scenarios (e.g. restoring a backup or storing large-scale OLAP computation results), which requires keeping the cluster online. Thus, one direction we'll pursue is how to minimize the impact of Lightning on the cluster.
+When the TiDB Lightning is importing data, it will put the cluster in a mode exclusive for the write access from TiDB Lightning. This is fine for now, because the main application of TiDB Lightning is to initialize an empty TiDB database before production. But we do like to support more scenarios (e.g. restoring a backup or storing large-scale OLAP computation results), which requires keeping the cluster online. Thus, one direction we'll pursue is how to minimize the impact of TiDB Lightning on the cluster.

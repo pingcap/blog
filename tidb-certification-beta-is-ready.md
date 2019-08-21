@@ -18,7 +18,7 @@ Today, I am excited to announce that the official [TiDB Certification](https://p
 This is an online exam which consists of 45 multiple choice questions weighted according to the following topics:
 
 - 20% - Architecture
-- 10% - Data Migration
+- 10% - TiDB Data Migration
 - 20% - Placement Drive (PD)
 - 30% - TiDB server
 - 20% - TiKV

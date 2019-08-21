@@ -55,7 +55,7 @@ Inside the TiDB project, there are several components:
 
 3. [**TiSpark**](https://github.com/pingcap/tispark) sits right on top of TiKV to support both our data scientists for real-time analysis or for offline daily analysis in the existing Hadoop system.
 
-The TiDB ecosystem also has a wealth of other enterprise-level tools, such as the [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, Syncer for seamless migration from MySQL, Wormhole for migrating heterogeneous data, and TiDB-Binlog, which is a tool to collect binlog files.
+The TiDB ecosystem also has a wealth of other enterprise-level tools, such as the [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, Syncer for seamless migration from MySQL, Wormhole for migrating heterogeneous data, and TiDB Binlog, which is a tool to collect binlog files.
 
 ## Four In-Production Applications
 

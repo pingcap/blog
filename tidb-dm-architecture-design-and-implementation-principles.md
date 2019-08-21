@@ -1,25 +1,25 @@
 ---
-title: "TiDB Tools (III): TiDB-DM Architecture Design and Implementation Principles"
+title: "TiDB Tools (III): TiDB Data Migration Architecture Design and Implementation Principles"
 author: ['Xuecheng Zhang']
 date: 2019-02-01
-summary: TiDB-DM is an integrated data transfer and replication management platform that supports full data migration or incremental data replication from MySQL or MariaDB instances into a TiDB cluster. This post introduces its architecture design and implementation principles.
+summary: TiDB Data Migration is an integrated data transfer and replication management platform that supports full data migration or incremental data replication from MySQL or MariaDB instances into a TiDB cluster. This post introduces its architecture design and implementation principles.
 tags: ['TiDB', 'Engineering', 'MySQL Scalability']
 categories: ['MySQL Scalability']
 ---
 
-TiDB-DM (Data Migration) is an integrated data transfer and replication management platform that supports full data migration or incremental data replication from MySQL or MariaDB instances into a TiDB cluster.
+TiDB Data Migration (DM) is an integrated data transfer and replication management platform that supports full data migration or incremental data replication from MySQL or MariaDB instances into a TiDB cluster.
 
-A common real-life use case is using TiDB-DM to connect sharded MySQL or MariaDB to TiDB, treating TiDB almost as a slave, then run analytical workloads on this TiDB cluster to fulfill real-time reporting needs. TiDB-DM provides good support if you need to manage multiple data replication tasks at the same time or need to merge multiple MySQL/MariaDB instances into a single TiDB cluster.
+A common real-life use case is using TiDB DM to connect sharded MySQL or MariaDB to TiDB, treating TiDB almost as a slave, then run analytical workloads on this TiDB cluster to fulfill real-time reporting needs. TiDB DM provides good support if you need to manage multiple data replication tasks at the same time or need to merge multiple MySQL/MariaDB instances into a single TiDB cluster.
 
 ## Architecture design
 
-TiDB-DM consists of three components: DM-master, DM-worker, and dmctl. It supports migrating the data of multiple upstream MySQL instances to multiple downstream TiDB clusters. The architecture design is as follows:
+TiDB DM consists of three components: DM-master, DM-worker, and dmctl. It supports migrating the data of multiple upstream MySQL instances to multiple downstream TiDB clusters. The architecture design is as follows:
 
 ![](media/tidb-dm-architecture.png)
 
 - DM-master:
 
-    - Managing the whole TiDB-DM cluster, maintaining the topology information of the TiDB-DM cluster, and monitoring the running state of each DM-worker instance;
+    - Managing the whole TiDB DM cluster, maintaining the topology information of the TiDB DM cluster, and monitoring the running state of each DM-worker instance;
     - Splitting and delivering the data replication tasks, and monitoring the running state of data replication tasks;
     - Coordinating DM-workers to execute or skip the DDL statements when incrementally replicating data;
     - Providing a unified portal for the management of data replication tasks.
@@ -33,15 +33,15 @@ TiDB-DM consists of three components: DM-master, DM-worker, and dmctl. It suppor
 
 - dmctl
 
-    - The command line tool used to manage both the TiDB-DM cluster and data replication tasks after connecting to DM-master.
+    - The command line tool used to manage both the TiDB DM cluster and data replication tasks after connecting to DM-master.
 
 ## Implementation principles
 
-Now, I’ll introduce TiDB-DM’s implementation principles in detail.
+Now, I’ll introduce TiDB DM’s implementation principles in detail.
 
 ### Data migration process
 
-A single TiDB-DM cluster can perform multiple data replication tasks simultaneously. For each task, it can be split into multiple subtasks undertaken by many DM-worker nodes. Each DM-worker node is responsible for replicating the data of the corresponding upstream MySQL instance. 
+A single TiDB DM cluster can perform multiple data replication tasks simultaneously. For each task, it can be split into multiple subtasks undertaken by many DM-worker nodes. Each DM-worker node is responsible for replicating the data of the corresponding upstream MySQL instance. 
 
 The following diagram shows the data migration process of a single subtask of data replication on each DM-worker node. 
 
@@ -61,21 +61,21 @@ In each DM-worker node, dumper, loader, relay, syncer (binlog replication) and o
     1. Relay is used as a slave of the upstream MySQL to fetch the binlog that is persisted in the local storage as the relay log. 
     2. Syncer reads and parses the relay log to build SQL statements, and then replicates these SQL statements to the downstream TiDB. 
 
-This process is similar to the master-slave replication in MySQL. But the main difference is in TiDB-DM, the persisted relay log in the local storage can be used simultaneously by multiple syncer units of different subtasks, which avoids multiple tasks’ repeatedly fetching the binlog from the upstream MySQL.
+This process is similar to the master-slave replication in MySQL. But the main difference is in TiDB DM, the persisted relay log in the local storage can be used simultaneously by multiple syncer units of different subtasks, which avoids multiple tasks’ repeatedly fetching the binlog from the upstream MySQL.
 
 ### Concurrency model
 
-In order to accelerate data migration, TiDB-DM applies the concurrency model in part of the process of both full backup migration and incremental data replication.
+In order to accelerate data migration, TiDB DM applies the concurrency model in part of the process of both full backup migration and incremental data replication.
 
 **For full backup migration**
 
-1. Dumper calls mydumper, a data exporting tool, to implement data exporting. For the corresponding concurrency model, see [mydumper source code](https://github.com/pingcap/mydumper). 
+1. Dumper calls Mydumper, a data exporting tool, to implement data exporting. For the corresponding concurrency model, see [Mydumper source code](https://github.com/pingcap/mydumper). 
 
 2. Loader is used to load the data. For the corresponding concurrency model, see the following diagram:
 
     ![](media/concurrency-model-of-loader.png)
  
-During the data exporting process with mydumper, a single table can be split into multiple SQL files with `--chunk-filesize` and other parameters. Each of these SQL files corresponds to a static snapshot data of the upstream MySQL at a specific moment and no correlation exists between two SQL files. So when importing the data with loader, you can directly start multiple worker goroutines in a loader unit and each worker goroutine reads to-be-imported SQL files independently and concurrently and applies them into downside streaming. That’s to say, loader loads data concurrently at the level of the SQL file. In task configuration,TiDB-DM controls the number of worker goroutines with the `pool-size` parameter in the loader unit.
+During the data exporting process with Mydumper, a single table can be split into multiple SQL files with `--chunk-filesize` and other parameters. Each of these SQL files corresponds to a static snapshot data of the upstream MySQL at a specific moment and no correlation exists between two SQL files. So when importing the data with loader, you can directly start multiple worker goroutines in a loader unit and each worker goroutine reads to-be-imported SQL files independently and concurrently and applies them into downside streaming. That’s to say, loader loads data concurrently at the level of the SQL file. In task configuration,TiDB DM controls the number of worker goroutines with the `pool-size` parameter in the loader unit.
 
 **For incremental data replication**
 
@@ -89,26 +89,26 @@ Syncer reads and parses the local relay log in a stream, which is executed seria
 
 At the other end of the channel, the worker goroutine concurrently fetches the job from the corresponding channel and replicates the job to the downstream TiDB. 
 
-That’s to say, Syncer imports data concurrently at the level of the binlog event. In task allocation, TiDB-DM controls the number of worker goroutines with the worker-count parameter in the syncer unit. 
+That’s to say, Syncer imports data concurrently at the level of the binlog event. In task allocation, TiDB DM controls the number of worker goroutines with the worker-count parameter in the syncer unit. 
 
 However, some limitations exist in this process as follows:
 
 - For the DDL operation, the downstream table schema will change so the replication process can only start after all the DML events corresponding to the previous table schema have been successfully replicated. 
 
-    1. In TiDB-DM, a specific flush job is sent to each job channel after DDL events are obtained from the parsed binlog event. 
+    1. In TiDB DM, a specific flush job is sent to each job channel after DDL events are obtained from the parsed binlog event. 
     2. When each worker goroutine meets a flush job, it replicates all the previously fetched jobs to the downstream TiDB.
     3. When all the jobs in job channels are replicated to the downstream TiDB, the DDL event replication starts. 
     4. After all the DDL events are replicated, DML event replication starts. 
 
     In other words, DDL and DML events are not replicated concurrently, and the DML events before and after the DDL operation are not replicated concurrently either. 
 
-- For the DML operation, the conflict exists when multiple DML statements possibly concurrently modify the data of the same row, even the primary or the same unique key, which leads to the failure of some DML operations. If these DML events are replicated concurrently, data inconsistency might occur. Detection and resolution of DML event conflicts in TiDB-DM is similar to those in TiDB-Binlog. For more details of the specific principles, see [TiDB-Binlog Architecture Evolution and Implementation Principles](https://www.pingcap.com/blog/tidb-binlog-architecture-evolution-and-implementation-principles/).
+- For the DML operation, the conflict exists when multiple DML statements possibly concurrently modify the data of the same row, even the primary or the same unique key, which leads to the failure of some DML operations. If these DML events are replicated concurrently, data inconsistency might occur. Detection and resolution of DML event conflicts in TiDB DM is similar to those in TiDB Binlog. For more details of the specific principles, see [TiDB Binlog Architecture Evolution and Implementation Principles](https://www.pingcap.com/blog/tidb-binlog-architecture-evolution-and-implementation-principles/).
 
 ### Replicating data from merged tables
 
 When handling a large amount of data using MySQL, manual sharding is commonly used. After data has been replicated to TiDB, logically merging tables needs to be done. 
 
-This section introduces some features of TiDB-DM for supporting replicating data from merged tables as follows. 
+This section introduces some features of TiDB DM for supporting replicating data from merged tables as follows. 
 
 #### Table router
 
@@ -118,7 +118,7 @@ Let’s start with an example as shown in the diagram below:
 
 In this example, there are two MySQL instances in the upstream; each instance has two schemas and each schema has two tables; there are eight tables in total. After we replicate the data to the downstream TiDB, the eight tables should be merged and replicated into one table.
  
-To replicate these tables with different names from different schemas of different instances to the same table, data of different tables should be routed to the same downstream table according to the predefined rules. In TiDB-DM, these rules are `router-rule`s.
+To replicate these tables with different names from different schemas of different instances to the same table, data of different tables should be routed to the same downstream table according to the predefined rules. In TiDB DM, these rules are `router-rule`s.
  
 For instance, the router rule for the above example is:
 
@@ -136,15 +136,15 @@ name-of-router-rule:
 - `target-schema`: the name of the target schema. The data matched will be routed into this schema. 
 - `target-table`: the name of the target table. The data that matches the schema name and table name are routed to this table in the `target-schema`. 
  
-Now let’s take a look at the internals of TiDB-DM:
+Now let’s take a look at the internals of TiDB DM:
 
 1. We build the trie structure based on `schema-pattern`/`table-pattern` and store the rules in the trie nodes.
 2. If there is any SQL statement that needs to be synchronized to the downstream, we can query `trie` to obtain the corresponding rules via the schema name and table name in the upstream, and replace the original schema name and table name in the SQL statement based on the rules.
 3. After executing the replaced SQL statements to the downstream TiDB, the router replication based on table names are completed. For the detailed implementation of the router rules, see [table-router pkg source code](https://github.com/pingcap/tidb-tools/tree/master/pkg/table-router) in TiDB-Tools.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('TiDB Tools (III): TiDB-DM Architecture Design and Implementation Principles', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
-    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Tools (III): TiDB-DM Architecture Design and Implementation Principles', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+    <a href="/download" onclick="trackViews('TiDB Tools (III): TiDB DM Architecture Design and Implementation Principles', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Tools (III): TiDB DM Architecture Design and Implementation Principles', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
 #### Column mapping
@@ -216,7 +216,7 @@ Now, suppose that the binlog data received from the two upstream sharded tables 
 4. At point `t3`, the sharding DDL events on instance 2 are received. 
 5. From point `t4` on, the two sharded tables receive the DML events from `schema V2` on instance 2 as well.
 
-Suppose that we do no operation to the DDL of the sharded tables during data replication. When the DDL of Instance 1 is replicated to downstream, the table structure of downstream will be changed to `schema V2`. But DM-worker still receives the DML of `schema V1` during the period between `t2` and `t3`. When DM-worker tries to replicate the DML of `schema V1` to downstream, the inconsistency between the DML and the table structure may lead to error and data cannot be replicated correctly. Let’s look at the example above again to see how we handle the DDL replication when merging tables in TiDB-DM.
+Suppose that we do no operation to the DDL of the sharded tables during data replication. When the DDL of Instance 1 is replicated to downstream, the table structure of downstream will be changed to `schema V2`. But DM-worker still receives the DML of `schema V1` during the period between `t2` and `t3`. When DM-worker tries to replicate the DML of `schema V1` to downstream, the inconsistency between the DML and the table structure may lead to error and data cannot be replicated correctly. Let’s look at the example above again to see how we handle the DDL replication when merging tables in TiDB DM.
 
 ![](media/ddl-replication-example.png)
 
@@ -230,9 +230,9 @@ In this example, DM-worker-1 replicates the data from MySQL Instance 1 and DM-wo
 6. DM-worker-1 verifies the DDL execution request based on the DDL lock information received at step 2; executes the DDL to downstream, and returns the results to DM-master. If the execution is successful, DM-worker-1 continues to replicate subsequent (from the binlog at t2) DML.
 7. DM-master receives a response from the lock owner that the DDL is successfully executed, requests all other DM-workers that wait for the DDL lock to ignore the DDL and to continue to replicate subsequent (from the binlog at t4) DML. 
 
-As for the sharding DDL replication within one TiDB-DM, we can generalize some characteristics from the above procedures:
+As for the sharding DDL replication within one TiDB DM, we can generalize some characteristics from the above procedures:
 
-- Based on the information of task configuration and the TiDB-DM cluster topology configuration, we build a logical sharding group in DM-master that coordinates DDL replication. The group members are the DM-workers of each sub-task into which the task is divided.
+- Based on the information of task configuration and the TiDB DM cluster topology configuration, we build a logical sharding group in DM-master that coordinates DDL replication. The group members are the DM-workers of each sub-task into which the task is divided.
 - After receiving DDL from binlog event, each DM-worker sends the DDL information to DM-master. 
 - DM-master creates or updates the DDL lock based on the DDL information from DM-worker and sharding group information.
 - If all members of the sharding group receive a specific DDL, this indicates that all DML of the upstream sharded tables before the DDL execution is replicated; that the DDL can be executed and subsequent DML can be replicated. 
@@ -264,7 +264,7 @@ But when DM-worker coordinates the replication among sharding groups within a DM
 - When DM-worker receives the DDL of  `table_1`, it can not pause the replication and must continue parsing binlog to get the DDL of the following `table_2`, namely continuing parsing from `t2` to `t3`. 
 - During the period of binlog parsing from `t2` to `t3`, the DML of `schema V2` of `table_1` cannot be replicated to downstream until sharding DDL is replicated and successfully executed. 
 
-In TiDB-DM, a simplified replication process of sharding DDL within the TiDB-DM worker is as described below:
+In TiDB DM, a simplified replication process of sharding DDL within the TiDB DM worker is as described below:
 
 1. When receiving the DDL statement for `table_1` at `t1`, the DM-worker records the DDL information and the current position of the binlog.
 2. Resume parsing the binlog between `t2` and `t3`.
@@ -277,7 +277,7 @@ In TiDB-DM, a simplified replication process of sharding DDL within the TiDB-DM 
 9. When the parse reaches binlog position saved in step 4, the DM-worker knows that all DML statements that have been ignored in step 4 have been re-replicated to downstream.
 10. Resume normal replication from the binlog position of `t4`.
  
-As you can see, TiDB-DM mostly uses a two-level sharding group for coordination and control when handling replication of sharding DDL. Here is the simplified process:
+As you can see, TiDB DM mostly uses a two-level sharding group for coordination and control when handling replication of sharding DDL. Here is the simplified process:
 
 1. Each DM-worker independently coordinates the DDL replication for the corresponding upstream sharding group made of multiple sharded tables within the MySQL instance.
 2. After receiving the DDL statements for all sharding tables of the DM-worker, the DM-worker sends DDL related information to the DM-master.
@@ -290,11 +290,11 @@ As you can see, TiDB-DM mostly uses a two-level sharding group for coordination 
 
 ### Data replication filtering
 
-During data replication, sometimes it is not necessary to replicate all upstream data to downstream. This is a scenario where we could use certain rules to filter out the unwanted part of the data. In TiDB-DM, we support two replication filters that apply to different levels.
+During data replication, sometimes it is not necessary to replicate all upstream data to downstream. This is a scenario where we could use certain rules to filter out the unwanted part of the data. In TiDB DM, we support two replication filters that apply to different levels.
 
 #### Black and white table lists
 
-TiDB-DM allows you to configure inclusive/exclusive replication of a specific part of tables or schemas for processing units including Dumper, Loader, and Syncer.
+TiDB DM allows you to configure inclusive/exclusive replication of a specific part of tables or schemas for processing units including Dumper, Loader, and Syncer.
 
 For example, if we only want to export data from tables t1 and t2 in the test schema, we can configure the following rule for the dumper unit:
 
@@ -304,9 +304,9 @@ name-of-dump-rule:
 ```
 
 - `name-of-dump-rule`: name of the rule specified by the user. Multiple upstream instances can share a common rule by referencing the rule name.
-- `extra-args`: an extra parameter for the dumper unit. Mydumper configuration options that are not explicitly defined in the dumper unit must be passed in through this parameter. The format is consistent with mydumper.
+- `extra-args`: an extra parameter for the dumper unit. Mydumper configuration options that are not explicitly defined in the dumper unit must be passed in through this parameter. The format is consistent with Mydumper.
 
-For more information on support for black and white table list, see mydumper parameters and its [source code](https://github.com/pingcap/mydumper).
+For more information on support for black and white table list, see Mydumper parameters and its [source code](https://github.com/pingcap/mydumper).
 
 The corresponding rule of table and schema black and white list for Loader and Syncer is black-white-list. Assuming you only want to replicate data from tables t1 and t2 from the test schema, you can configure the rule as below:
 
@@ -321,7 +321,7 @@ name-of-bwl-rule:
       tbl-name: "t2"
 ```
 
-Only part of the configuration options are used in the sample above. For complete configuration options and their definitions, see the [user documentation](https://pingcap.com/docs//tools/dm/data-synchronization-features/#black-and-white-table-lists) for this feature. The rule used in TiDB-DM is similar to the master-slave filter rule in MySQL, so you can also refer to [Evaluation of Database-Level Replication and Binary Logging Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html) and [Evaluation of Table-Level Replication Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html).
+Only part of the configuration options are used in the sample above. For complete configuration options and their definitions, see the [user documentation](https://pingcap.com/docs//tools/dm/data-synchronization-features/#black-and-white-table-lists) for this feature. The rule used in TiDB DM is similar to the master-slave filter rule in MySQL, so you can also refer to [Evaluation of Database-Level Replication and Binary Logging Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html) and [Evaluation of Table-Level Replication Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html).
 
 For the Loader unit, after getting the schema name and table name by parsing the SQL file name, it identifies the configured black and white list rule. If the result indicates no replication is required, the entire SQL file will be ignored. For the Syncer unit, after getting the schema name and table name by parsing the binlog file, it identifies the configured black and white list rule. If the result indicates no replication is required, the corresponding binlog event data will be ignored.
 
@@ -332,7 +332,7 @@ During an incremental data replication, sometimes you may want to filter out spe
 - Do not empty data in downstream tables when executing `TRUNCATE TABLE` in upstream
 - Do not drop merged tables in downstream when executing `DROP TABLE` in upstream sharded tables
 
-TiDB-DM allows you to filter by binlog event types. For the `TRUNCATE TABLE` and `DROP TABLE` filter scenarios mentioned above, configure the rule as below:
+TiDB DM allows you to filter by binlog event types. For the `TRUNCATE TABLE` and `DROP TABLE` filter scenarios mentioned above, configure the rule as below:
 
 ```
 name-of-filter-rule:
@@ -344,8 +344,8 @@ name-of-filter-rule:
 
 The matching pattern of the rule is similar to [table routing](https://pingcap.com/docs//tools/dm/data-synchronization-features/#table-routing) and [column mapping](https://pingcap.com/docs//tools/dm/data-synchronization-features/#column-mapping). For detailed configurations, see the user documentation for the feature.
 
-To implement this, after getting the schema name, table name, and binlog event type, the TiDB-DM processing unit will identify the configured rule, and decide whether to filter based on the action configuration. For detailed implementation of the filter function, see [binlog-filter pkg](https://github.com/pingcap/tidb-tools/tree/master/pkg/binlog-filter) under TiDB-tools.
+To implement this, after getting the schema name, table name, and binlog event type, the TiDB DM processing unit will identify the configured rule, and decide whether to filter based on the action configuration. For detailed implementation of the filter function, see [binlog-filter pkg](https://github.com/pingcap/tidb-tools/tree/master/pkg/binlog-filter) under TiDB-tools.
 
 ## Conclusion
 
-As an integrated data transfer and replication management platform, TiDB-DM plays an important role in the TiDB ecosystem. It works well in providing the full data migration and the incremental data replication services, and gains more and more popularity among customers. In the future, it will still be a key focus of our development team and we are expecting more contributors to join us to improve its reliability, stability, and usability together.
+As an integrated data transfer and replication management platform, TiDB DM plays an important role in the TiDB ecosystem. It works well in providing the full data migration and the incremental data replication services, and gains more and more popularity among customers. In the future, it will still be a key focus of our development team and we are expecting more contributors to join us to improve its reliability, stability, and usability together.

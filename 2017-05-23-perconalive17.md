@@ -229,7 +229,7 @@ TiDB’s SQL layer currently supports 3 kinds of distributed join type, hashjoin
 
 ## <span id="tools">Tools matter<span>
 
-To help users exploit the best part of TiDB, we have prepared the following tools: Syncer, TiDB-Binlog, Mydumper/MyLoader(loader).
+To help users exploit the best part of TiDB, we have prepared the following tools: Syncer, TiDB Binlog, Mydumper/MyLoader(Loader).
 
 ![](media/image_11.png)
 
@@ -241,7 +241,7 @@ It is hook up as a MySQL replica: we have a MySQL master with binlog enabled and
 
 On the other hand, TiDB can output binlogs too. We build TiDB-binlog toolset to make it possible for 3rd party applications synchronize data from TiDB cluster. As TiDB-server is distributed, binlog pumper should be deployed in every TiDB-server instance and send it to a component we called ‘Cistern’. Cistern will sort the transactions by TransactionID (aka. timestamp) in a short period of time, and output as protobuf for downstream application.
 
-For data migration, we don’t have our own tool. We use MyDumper / Loader for data backup and restore in parallel. you can use MyDumper to export data from MySQL and MyLoader to import the data into TiDB.
+For data migration, we don’t have our own tool. We use Mydumper/Loader for data backup and restore in parallel. you can use Mydumper to export data from MySQL and MyLoader to import the data into TiDB.
 
 [Back to the top](#top)
 
