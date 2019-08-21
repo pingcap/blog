@@ -59,7 +59,7 @@ And the three main use cases where TiDB shines are: MySQL Scalability, HTAP real
 
 ## Use Case 1: MySQL Scalability for explosive business growth 
 
-Because TiDB speaks MySQL--compatible with both its wire protocol and ecosystem tools like MyDumper and MyLoader--it’s a natural fit for MySQL users who have trouble scaling. To be clear, TiDB is *not* a replacement of MySQL; it *complements* MySQL. MySQL is still a great option as a single instance database, so if your data size or workload is small, stick with MySQL. But, as our co-founder and CTO Ed Huang talked about [in another post](https://www.pingcap.com/blog/9-whys-to-ask-when-evaluating-a-distributed-database/), if you are scratching your heads thinking about the following:
+Because TiDB speaks MySQL--compatible with both its wire protocol and ecosystem tools like Mydumper and MyLoader--it’s a natural fit for MySQL users who have trouble scaling. To be clear, TiDB is *not* a replacement of MySQL; it *complements* MySQL. MySQL is still a great option as a single instance database, so if your data size or workload is small, stick with MySQL. But, as our co-founder and CTO Ed Huang talked about [in another post](https://www.pingcap.com/blog/9-whys-to-ask-when-evaluating-a-distributed-database/), if you are scratching your heads thinking about the following:
 
 - Considering how to replicate, migrate, or scale your database for extra capacity;
 - Looking for ways to optimize your existing storage capacity;

@@ -41,7 +41,7 @@ Inside the TiDB platform, the main components are as follows:
 - **[TiSpark](https://github.com/pingcap/tispark)** cluster also sits on top of TiKV. It is an Apache Spark plugin that works with the TiDB platform to support complex OLAP queries for BI analysts and data scientists.
 - **[Placement Driver (PD)](https://github.com/pingcap/pd)**: A metadata cluster powered by [etcd](https://github.com/etcd-io/etcd) that manages and schedules TiKV.
 
-Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://www.pingcap.com/docs/tools/syncer/) and [DM](https://github.com/pingcap/dm) for data replication from existing MySQL instances (both sharded and unsharded), and [TiDB-Binlog](https://github.com/pingcap/tidb-binlog), which is used to collect the logical changes made to a TiDB cluster and provide incremental backup and replication to different  downstream options (e.g. TiDB, Kafka or MySQL).
+Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://www.pingcap.com/docs/tools/syncer/) and [DM](https://github.com/pingcap/dm) for data replication from existing MySQL instances (both sharded and unsharded), and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), which is used to collect the logical changes made to a TiDB cluster and provide incremental backup and replication to different  downstream options (e.g. TiDB, Kafka or MySQL).
 
 ### Core Features
 
@@ -130,12 +130,12 @@ TiDB's performance results were able to meet our requirements, even though the s
 
 Our team conducted the migration process to TiDB in two steps: data migration and traffic shifting.  
 
-### Data Migration
+### TiDB Data Migration
 
-The data to be migrated included full data and incremental data. We made use of two tools developed by PingCAP, Lightning and Syncer.
+The data to be migrated included full data and incremental data. We made use of two tools developed by PingCAP, TiDB Lightning and Syncer.
 
-- Logical backup and import can be used for full data migration. In addition, [TiDB-Lightning](https://pingcap.com/docs/tools/lightning/overview-architecture/) is a tool for the physical import of full data to the TiDB cluster.
-- [Syncer](https://pingcap.com/docs/tools/syncer/) (now [Data Migration](https://pingcap.com/docs/dev/reference/tools/data-migration/overview/)) can be used to replicate the incremental data from MySQL to TiDB.
+- Logical backup and import can be used for full data migration. In addition, [TiDB Lightning](https://pingcap.com/docs/tools/lightning/overview-architecture/) is a tool for the physical import of full data to the TiDB cluster.
+- [Syncer](https://pingcap.com/docs/tools/syncer/) (now [TiDB Data Migration](https://pingcap.com/docs/dev/reference/tools/data-migration/overview/)) can be used to replicate the incremental data from MySQL to TiDB.
 
 As shown in the following diagram, Syncer relies on various rules to implement different filtering and merging effects; one upstream MySQL instance corresponds to one Syncer process; multiple Syncer processes are required when sharding data is replicated.
 
@@ -183,6 +183,6 @@ We also encountered write amplification with RocksDB that makes our storage usag
 
 With our initial success of using TiDB in the instant delivery and third party ad network applications, we have plans to migrate over more Xiaomi services in the MIUI ecosystem, many of which have similar technical characteristics. To better use our resources, we also plan to deploy an archival cluster for some data and use Syncer to support the archiving process. 
 
-On top of the current OLTP-centric workload, we also plan to support more OLAP scenarios using TiSpark and [TiDB-Binlog](https://github.com/pingcap/tidb-binlog), for both online and offline analysis. 
+On top of the current OLTP-centric workload, we also plan to support more OLAP scenarios using TiSpark and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), for both online and offline analysis. 
 
 We would like to thank PingCAP engineers for all their help, support, and professionalism during our data migration and deployment process. 

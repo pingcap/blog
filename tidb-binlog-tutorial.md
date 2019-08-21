@@ -1,15 +1,15 @@
 ---
-title: TiDB-Binlog Tutorial
+title: TiDB Binlog Tutorial
 date: 2019-05-08
 author: ['Kolbe Kegel']
-summary: Learn to deploy TiDB-Binlog with a simple TiDB cluster.
+summary: Learn to deploy TiDB Binlog with a simple TiDB cluster.
 tags: ['TiDB', 'Engineering']
 categories: ['Engineering']
 ---
 
-This tutorial will start with a very simple TiDB-Binlog deployment with a single node of each component (Placement Driver, TiKV Server, TiDB Server, Pump, and Drainer), set up to push data into a MariaDB Server instance.
+This tutorial will start with a very simple TiDB Binlog deployment with a single node of each component (Placement Driver, TiKV Server, TiDB Server, Pump, and Drainer), set up to push data into a MariaDB Server instance.
 
-This tutorial is targeted toward users who have some familiarity with the [TiDB Architecture](https://pingcap.com/docs/v3.0/architecture/), who may have already set up a TiDB cluster (though that is not mandatory), and who wants to gain hands-on familiarity with the features and functionality of TiDB-Binlog. This tutorial is a good way to "kick the tires" of TiDB-Binlog and to familiarize yourself with the concepts of its architecture. 
+This tutorial is targeted toward users who have some familiarity with the [TiDB Architecture](https://pingcap.com/docs/v3.0/architecture/), who may have already set up a TiDB cluster (though that is not mandatory), and who wants to gain hands-on familiarity with the features and functionality of TiDB Binlog. This tutorial is a good way to "kick the tires" of TiDB Binlog and to familiarize yourself with the concepts of its architecture. 
 
 > **Warning:**
 >
@@ -19,19 +19,19 @@ This tutorial assumes you're using a modern Linux distribution on x86-64. I'll u
 
 ## Overview
 
-TiDB-Binlog is a solution to collect binary log data from TiDB server and provide real-time data backup and replication. It pushes incremental data updates made to a TiDB Server cluster into any of various downstream platforms.
+TiDB Binlog is a solution to collect binary log data from TiDB server and provide real-time data backup and replication. It pushes incremental data updates made to a TiDB Server cluster into any of various downstream platforms.
 
-You can use TiDB-Binlog for incremental backups, to replicate data from one TiDB cluster to another, or to send TiDB updates through Kafka to a downstream platform of your choice.
+You can use TiDB Binlog for incremental backups, to replicate data from one TiDB cluster to another, or to send TiDB updates through Kafka to a downstream platform of your choice.
 
-TiDB-Binlog is particularly useful when you migrate data from MySQL or MariaDB to TiDB, in which case you may use the TiDB DM (Data Migration) platform to get data from a MySQL/MariaDB cluster into TiDB, and then use TiDB-Binlog to keep a separate, downstream MySQL/MariaDB instance/cluster in sync with your TiDB cluster. TiDB-Binlog enables application traffic to TiDB to be pushed to a downstream MySQL or MariaDB instance/cluster, which reduces the risk of a migration to TiDB because you can easily revert the application to MySQL or MariaDB without downtime or data loss.
+TiDB Binlog is particularly useful when you migrate data from MySQL or MariaDB to TiDB, in which case you may use the TiDB DM (Data Migration) platform to get data from a MySQL/MariaDB cluster into TiDB, and then use TiDB Binlog to keep a separate, downstream MySQL/MariaDB instance/cluster in sync with your TiDB cluster. TiDB Binlog enables application traffic to TiDB to be pushed to a downstream MySQL or MariaDB instance/cluster, which reduces the risk of a migration to TiDB because you can easily revert the application to MySQL or MariaDB without downtime or data loss.
 
-See [TiDB-Binlog Cluster Overview](https://pingcap.com/docs/v3.0/reference/tidb-binlog-overview) for more information.
+See [TiDB Binlog Cluster Overview](https://pingcap.com/docs/v3.0/reference/tidb-binlog-overview) for more information.
 
 ## Architecture
 
-TiDB-Binlog comprises two components: the **Pump** and the **Drainer**. Several Pump nodes make up a Pump cluster. Each Pump node connects to TiDB Server instances and receives updates made to each of the TiDB Server instances in a cluster. A Drainer connects to the Pump cluster and transforms updates into the correct format for a particular downstream destination, be it Kafka or another TiDB Cluster or a MySQL/MariaDB server.
+TiDB Binlog comprises two components: the **Pump** and the **Drainer**. Several Pump nodes make up a Pump cluster. Each Pump node connects to TiDB Server instances and receives updates made to each of the TiDB Server instances in a cluster. A Drainer connects to the Pump cluster and transforms updates into the correct format for a particular downstream destination, be it Kafka or another TiDB Cluster or a MySQL/MariaDB server.
 
-![TiDB-Binlog architecture](/media/tidb_binlog_cluster_architecture.png)
+![TiDB Binlog architecture](/media/tidb_binlog_cluster_architecture.png)
 
 The clustered architecture of the Pump component ensures that updates won't be lost as new TiDB Server instances join or leave the TiDB Cluster or Pump nodes join or leave the Pump cluster.
 
@@ -328,7 +328,7 @@ MariaDB [tidbtest]> select * from t1;
 5 rows in set (0.00 sec)
 ```
 
-You should see the same rows when querying the MariaDB server that you inserted into TiDB. Congratulations! You've just set up TiDB-Binlog!
+You should see the same rows when querying the MariaDB server that you inserted into TiDB. Congratulations! You've just set up TiDB Binlog!
 
 ## binlogctl
 
@@ -389,7 +389,7 @@ There are 3 solutions to that issue:
 
 ## Cleanup
 
-To stop the TiDB cluster and TiDB-Binlog processes, you can execute `pkill -P $$` in the shell where you first started the various processes that form the cluster (pd-server, tikv-server, pump, tidb-server, drainer). To give them each time to shut down cleanly, it's helpful to stop them in a particular order:
+To stop the TiDB cluster and TiDB Binlog processes, you can execute `pkill -P $$` in the shell where you first started the various processes that form the cluster (pd-server, tikv-server, pump, tidb-server, drainer). To give them each time to shut down cleanly, it's helpful to stop them in a particular order:
 
 ```bash
 for p in tidb-server drainer pump tikv-server pd-server; do pkill "$p"; sleep 1; done
@@ -422,6 +422,6 @@ If any of the components fail to start, try again to start the unsuccessful comp
 
 ## Conclusion
 
-In this tutorial, we've set up TiDB-Binlog to replicate from a TiDB cluster to a downstream MariaDB server. We did that using a single `pump` and a single `drainer`. As we've seen, TiDB-Binlog is a comprehensive platform for capturing and processing changes to a TiDB cluster.
+In this tutorial, we've set up TiDB Binlog to replicate from a TiDB cluster to a downstream MariaDB server. We did that using a single `pump` and a single `drainer`. As we've seen, TiDB Binlog is a comprehensive platform for capturing and processing changes to a TiDB cluster.
 
 In a more robust development, testing, or production deployment, you'd have multiple TiDB servers for HA and scaling purposes, and you'd use multiple instances of `pump` to ensure that application traffic to TiDB server instances is unaffected by problems in the Pump cluster. You may also use additional `drainer` instances to push updates to different downstream platforms or to implement incremental backups.
