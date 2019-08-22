@@ -113,7 +113,7 @@ The second design principle is about the usability. After years of struggling am
 
 The database we are building also needs to be cross-platform. The database can run on the on premise devices. Here is a picture of TiDB running on a Raspberry Pi cluster with 20 nodes.
 
-![](media/how-we-build-tidb-1.png)
+![How we build TiDB](media/how-we-build-tidb-1.png)
 
 It can also support the popular containers such as Docker. And we are making it work with Kubernetes. Of course, it can be run on any cloud platform, whether it&#39;s public, private or hybrid.
 
@@ -163,7 +163,7 @@ So overall, we&#39;d like to be a part of the big open source community and woul
 
 This diagram shows the logical architecture of the database.
 
-![](media/how-we-build-tidb-2.png)
+![How we build TiDB](media/how-we-build-tidb-2.png)
 
 As I mentioned earlier about our design principle, we are adopting the loose coupling approach. From the diagram, we can see that it is highly-layered. We have TiDB to work as the MySQL server, and TiKV to work as the distributed Key-Value layer. Inside TiDB, we have the MySQL Server layer and the SQL layer. Inside TiKV, we have transaction, MVCC, Raft, and the Local Key-Value Storage, RocksDB.
 
@@ -221,7 +221,7 @@ In this section, I will introduce the architecture and the core technologies for
 
 ## <span id="12">The architecture</span>
 
-![](media/how-we-build-tidb-3.png)
+![How we build TiDB](media/how-we-build-tidb-3.png)
 
 About TiKV architecture: Let&#39;s take a look from the bottom.
 
@@ -232,7 +232,7 @@ About TiKV architecture: Let&#39;s take a look from the bottom.
 - KV API: it&#39;s a set of programming interfaces and allows developers to put or get data.
 - Placement Driver: Placement driver is a very important part, and it helps to achieve geo-replication, horizontal scalability and consistent distributed transactions. It&#39;s kind-of the brain of the cluster.
 
-![](media/how-we-build-tidb-4.png)
+![How we build TiDB](media/how-we-build-tidb-4.png)
 
 About the TiDB architecture:
 
@@ -255,7 +255,7 @@ We build TiKV to be a distributed key-value layer to store data.
 
 Let&#39;s take a look at the software stack.
 
-![](media/how-we-build-tidb-5.png)
+![How we build TiDB](media/how-we-build-tidb-5.png)
 
  First, we can see that there is a client connecting to TiKV. We also have several nodes. And within each node, we have stores, one per physical disk. Within each store, we have many regions. Region is the basic unit of data movement and is replicated by Raft. Each region is replicated to several nodes.  A Raft group consists of the replicas of one Region. And region is more like a logical concept, in a single store, many regions may share the same Rocksdb instance.
 
