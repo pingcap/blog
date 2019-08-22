@@ -9,7 +9,7 @@ categories: ['MySQL Scalability']
 
 As businesses adopt cloud-native architectures, conversations will naturally lead to what we can do to make the database horizontally scalable. The answer will likely be to take a closer look at [TiDB](https://www.pingcap.com/docs/).
 
-TiDB is an open source [NewSQL](https://en.wikipedia.org/wiki/NewSQL) database released under the Apache 2.0 License. Because it speaks the [MySQL](https://en.wikipedia.org/wiki/MySQL) protocol, your existing applications will be able to connect to it using any MySQL connector, and [most SQL functionality](https://www.pingcap.com/docs/sql/mysql-compatibility/) remains identical (joins, subqueries, transactions, etc.).
+TiDB is an open source [NewSQL](https://en.wikipedia.org/wiki/NewSQL) database released under the Apache 2.0 License. Because it speaks the [MySQL](https://en.wikipedia.org/wiki/MySQL) protocol, your existing applications will be able to connect to it using any MySQL connector, and [most SQL functionality](https://pingcap.com/docs/v3.0/reference/mysql-compatibility/#compatibility-with-mysql) remains identical (joins, subqueries, transactions, etc.).
 
 Step under the covers, however, and there are differences. If your architecture is based on MySQL with Read Replicas, you'll see things work a little bit differently with TiDB. In this post, I'll go through the top five key differences I've found between TiDB and MySQL.
 
