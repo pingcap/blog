@@ -74,7 +74,7 @@ EXISTS(SELECT * FROM TMP WHERE TMP.id = SRC.id)
 ```
 the `Apply` operator representation is as follows:
 
-![](media/apply1.png)
+![The `Apply` operator](media/apply1.png)
 
 Because the operator above `Apply` is `Selection`, formally, it is:
 

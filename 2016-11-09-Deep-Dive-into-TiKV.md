@@ -28,7 +28,7 @@ TiKV (The pronunciation is: /'taɪkeɪvi:/ tai-K-V, etymology: titanium) is a di
 
 # Architecture
 
-![](media/TiKV_ Architecture.png)
+![TiKV architecture](media/TiKV_ Architecture.png)
 
 * Placement Driver (PD): PD is the brain of the TiKV system which manages the metadata about Nodes, Stores, Regions mapping, and makes decisions for data placement and load balancing. PD periodically checks replication constraints to balance load and data automatically.
 
