@@ -29,7 +29,7 @@ This is the speech Siddon Tang gave at the 1st Rust Meetup in Beijing on April 1
 - [Key technologies](#key)
 - [Future plan](#todo) 
 
-![](media/tangsir.jpg)
+![Siddon Tang at the 1st Rust Meetup in Beijing](media/tangsir.jpg)
 
 Hello everyone, today I will talk about how we use Rust in [TiKV](https://github.com/pingcap/tikv).
 
@@ -86,7 +86,7 @@ More seriously, CGO has heavy expenses, but we need to call RocksDB API without 
 
 Rust is a system programming language,  maintained by Mozilla. It is a very powerful language, however, you can see the curve, the learning curve is very very steep. 
 
-![](media/curve.jpg)
+![Steep learning curve of Rust](media/curve.jpg)
 
 I have been using many programming languages, like C++, Go, python, lua, etc. and Rust is the hardest language for me to master. In PingCAP, we will let the new colleague spend at least one month to learn Rust, to struggle with the compiling errors, and then to rise above it. This would never happen for Go.  
 
@@ -113,7 +113,7 @@ Rust has no GC expenses, so we won’t meet the "stop the world" problem. Callin
 
 ### <span id="timeline">TiKV Timeline </span>
 
-![](media/timeline.jpg)
+![TiKV timeline](media/timeline.jpg)
 
 Here you can see the TiKV timeline. We first began to develop TiKV January 1st, 2016, and made it open source on April 1st, 2016, and this is not a joke like Gmail at All April Fool's Day. TiKV was first used in production in October, 2016, when we had not even released a beta version. In November, 2016, we released the first beta version; then RC1 in December, 2016, RC2 in February, this year. Later we plan to release RC3 in April and the first GA version in June.
 					
@@ -121,7 +121,7 @@ As you can see, the development of TiKV is very fast and the released versions o
 
 ### <span id="architecture">TiKV Architecture </span>
 
-![](media/kvarchi.jpg)
+![TiKV architecture](media/kvarchi.jpg)
 
 Now let’s go deep into TiKV. You can see from the TiKV architecture that the hierarchy of TiKV is clear and easy to understand.
 
@@ -139,7 +139,7 @@ On the top layer, it is the KV and coprocessor API layer for handling client req
 
 ### <span id="mult">Multi-Raft </span>
 
-![](media/multi.jpg)
+![Multi-Raft](media/multi.jpg)
 
 Here is an example of Multi-Raft. 
 
@@ -149,7 +149,7 @@ You can see that there are four TiKV nodes. Within each store, we have several r
 
 #### Scale-out (initial state)
 
-![](media/scale2.jpg)
+![Scale-out (initial state)](media/scale2.jpg)
 
 Here is an example of horizontal scalability. At first, we have four nodes, Node A has three regions, others have two regions. 
 
@@ -157,17 +157,17 @@ Of course, Node A is busier than other nodes, and we want to reduce its stress.
 
 #### Scale-out (add new node)
 
-![](media/scale3.jpg)
+![Scale-out (add a new node)](media/scale3.jpg)
 
 So we add a new Node E, and begin to move the region 1 in Node A to Node E. But here we find that the leader of region 1 is in Node A, so we will first transfer the leader from Node A to Node B.
 
 #### Scale-out (balancing)
 
-![](media/scale4.jpg)
+![Scale-out (balancing)](media/scale4.jpg)
 
 After that, the leader of region 1 is in Node B now, then we add a new replica of region 1 in Node E. 
 
-![](media/scale5.jpg)
+![Remove a replica from Node A](media/scale5.jpg)
 
 Then we remove the replica of region 1 from Node A. All these are executed by the Placement Driver automatically. What we only need is to add node, if we find the system is busy. Very easy, right? 
 
@@ -175,7 +175,7 @@ Then we remove the replica of region 1 from Node A. All these are executed by th
 
 ### <span id="write">A simple write flow </span>
 
-![](media/write.jpg)
+![A simple write flow](media/write.jpg)
 
 Here is a simple write flow: when a client sends a write request to TiKV, TiKV first parses the protocol and then dispatches the request to the KV thread, then the KV thread executes some transaction logics and sends the request to Raft thread, after TiKV replicates the Raft log and applies it to RocksDB, the write request is finished.
 
@@ -211,7 +211,6 @@ Ok, that’s what we have done and are doing. Here are what we will do in the fu
 
 * Be a strong advocate of Rust in China.
 
-![](media/group.jpg)
+![Attendees at the 1st Rust Meetup](media/group.jpg)
 
 [Back to the top](#top)
-

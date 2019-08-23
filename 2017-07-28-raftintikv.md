@@ -24,7 +24,7 @@ categories: ['Engineering']
 
 Below is TiKV’s overall architecture:
 
-![](media/TiKV_ Architecture.png)
+![TiKV architecture](media/TiKV_ Architecture.png)
 
 **Placement Driver:** Placement Driver (PD) is responsible for the management scheduling of the whole cluster.
 

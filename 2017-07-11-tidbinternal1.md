@@ -36,7 +36,7 @@ This is the first of our series of articles.
 
 ### <span id="storingdata">Storing data</span>
 
-![](media/database.png)
+![Storing data](media/database.png)
 
 I’d like to begin with the most fundamental function of a database -- storing data.
 There are lots of ways to store data and the easiest one is building a data structure in the memory to store data sent by users. For example, use an array to store data and add a new entry to the array when receiving a piece of data. This solution is simple, meets the basic needs and has good performance. But its drawback outweighs the advantages. The biggest problem is that as all data is stored in the memory, if the server stops or restarts, data would get lost.
@@ -88,7 +88,7 @@ Raft is a consensus algorithm and offers three important functions:
 
 TiKV uses Raft to replicate data and each data change will be recorded as a Raft log. Through the log replication function of Raft, data is safely and reliably synchronized to multiple nodes of the Raft group.
 
-![](media/raft-rocksdb.png)
+![Data is replicated to multiple nodes of the Raft group](media/raft-rocksdb.png)
 
 In summary, through the standalone RocksDB, we can store data on a disk rapidly; through Raft, we can replicate data to multiple machines in case of machine failure. Data is written through the interface of Raft instead of to RocksDB. Thanks to the implementation of Raft, we have a distributed Key-Value and no longer need to worry about machine failure.
  
@@ -106,7 +106,7 @@ Before we begin, let’s forget about Raft and try to picture that all the data 
 As I mentioned earlier, TiKV is seen as a huge but ordered Key-Value Map. To implement the horizontal scalability of storage, we need to distribute data among multiple machines.
 For a Key-Value system, there are two typical solutions to distribute data among multiple machines. One is to create Hash and select the corresponding storage node according to the Hash value; the other is to use Range and store a segment of serial Key in a storage node. TiKV chose the second solution and divided the whole Key-Value space into many segments. Each segment consists of a series of adjacent Key and we call such segment “Region”. There is a size limit for each Region to store data (the default value is 64MB and the size can be configured). Each Region can be described by a left-close-right-open interval, which is from StartKey to EndKey.
 
-![](media/region.png)
+![Region in TiKV](media/region.png)
  
 Please be reminded that the Region that I’m talking about has no relation with the Table in SQL! Please forget about SQL and focus on Key-Value for now.
 
@@ -123,7 +123,7 @@ Now let’s move to the second task. TiKV replicates data in Regions, which mean
 
 The following diagram shows the whole picture about Region and Raft group.
 
- ![](media/raft-region.png)
+ ![Region and Raft group](media/raft-region.png)
  
 As we distribute and replicate data in Regions, we have a distributed Key-Value system that, to some extent, has the capability of disaster recovery. You no longer need to worry about the capacity or the problem of data loss caused by disk failure. This is cool but not perfect. We need more functions.
 
