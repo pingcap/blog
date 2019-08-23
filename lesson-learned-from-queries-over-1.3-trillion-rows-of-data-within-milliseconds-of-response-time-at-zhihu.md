@@ -132,8 +132,8 @@ As an example, take a set of performance metrics for the Moneta application in J
 
 * **30,000 queries and 12 million posts were examined per second at peak time**.
 
-![Queries and posts examined per second at peak time](media/queries-and-posts-examined-per-second-at-peak-time.png)
-<center> *Queries and posts examined per second at peak time* </center>
+![Queries examined per second at peak time](media/queries-and-posts-examined-per-second-at-peak-time.png)
+<center> *Queries examined per second at peak time* </center>
 
 * **The 99th percentile response time was about 25 ms, and the 999th percentile response time was about 50 ms**. In fact, the average response time is far less than these figures, even for long-tail queries that demand a stable response time.
 
