@@ -113,7 +113,7 @@ The second design principle is about the usability. After years of struggling am
 
 The database we are building also needs to be cross-platform. The database can run on the on premise devices. Here is a picture of TiDB running on a Raspberry Pi cluster with 20 nodes.
 
-![How we build TiDB](media/how-we-build-tidb-1.png)
+![TiDB running on a Raspberry Pi cluster with 20 nodes](media/how-we-build-tidb-1.png)
 
 It can also support the popular containers such as Docker. And we are making it work with Kubernetes. Of course, it can be run on any cloud platform, whether it&#39;s public, private or hybrid.
 
@@ -163,7 +163,7 @@ So overall, we&#39;d like to be a part of the big open source community and woul
 
 This diagram shows the logical architecture of the database.
 
-![How we build TiDB](media/how-we-build-tidb-2.png)
+![TiDB's logical architecture](media/how-we-build-tidb-2.png)
 
 As I mentioned earlier about our design principle, we are adopting the loose coupling approach. From the diagram, we can see that it is highly-layered. We have TiDB to work as the MySQL server, and TiKV to work as the distributed Key-Value layer. Inside TiDB, we have the MySQL Server layer and the SQL layer. Inside TiKV, we have transaction, MVCC, Raft, and the Local Key-Value Storage, RocksDB.
 
@@ -221,7 +221,7 @@ In this section, I will introduce the architecture and the core technologies for
 
 ## <span id="12">The architecture</span>
 
-![How we build TiDB](media/how-we-build-tidb-3.png)
+![TiKV architecture](media/how-we-build-tidb-3.png)
 
 About TiKV architecture: Let&#39;s take a look from the bottom.
 
@@ -232,7 +232,7 @@ About TiKV architecture: Let&#39;s take a look from the bottom.
 - KV API: it&#39;s a set of programming interfaces and allows developers to put or get data.
 - Placement Driver: Placement driver is a very important part, and it helps to achieve geo-replication, horizontal scalability and consistent distributed transactions. It&#39;s kind-of the brain of the cluster.
 
-![How we build TiDB](media/how-we-build-tidb-4.png)
+![TiDB architecture](media/how-we-build-tidb-4.png)
 
 About the TiDB architecture:
 
@@ -255,7 +255,7 @@ We build TiKV to be a distributed key-value layer to store data.
 
 Let&#39;s take a look at the software stack.
 
-![How we build TiDB](media/how-we-build-tidb-5.png)
+![TiKV software stack](media/how-we-build-tidb-5.png)
 
  First, we can see that there is a client connecting to TiKV. We also have several nodes. And within each node, we have stores, one per physical disk. Within each store, we have many regions. Region is the basic unit of data movement and is replicated by Raft. Each region is replicated to several nodes.  A Raft group consists of the replicas of one Region. And region is more like a logical concept, in a single store, many regions may share the same Rocksdb instance.
 
@@ -288,21 +288,21 @@ In the next few slides, I will show you the scaling-out process.
 
 #### Scale-out
 
-![](media/how-we-build-tidb-6.png)
+![Step 1 of the scaling-out process in TiKV](media/how-we-build-tidb-6.png)
 
 In this diagram, we have 4 nodes, namely Node A, Node B, Node C, and Node D. And we have 3 regions, Region 1, Region 2 and Region 3. We can see that there are 3 regions on Node A.
 
 To balance the data, we add a new node, Node E. The first step we do is to transfer the leadership from the replica of Region 1 on Node A to the replica on Node B.
 
-![](media/how-we-build-tidb-7.png)
+![Step 2 of the scaling-out process in TiKV](media/how-we-build-tidb-7.png)
 
 Step 2, we add a Replica of Region 1 to Node E.
 
-![](media/how-we-build-tidb-8.png)
+![Step 3 of the scaling-out process in TiKV](media/how-we-build-tidb-8.png)
 
 Step 3, remove the replica of Region 1 from Node A.
 
-![](media/how-we-build-tidb-9.png)
+![Step 4 of the scaling-out process in TiKV](media/how-we-build-tidb-9.png)
 
 Now the data is balanced and the cluster scales out from 4 nodes to 5 nodes.
 
@@ -345,27 +345,27 @@ Speak of Transaction, It&#39;s mainly a two-phase commit protocol with some prac
 Let&#39;s see an example: If Bob wants transfer 7 dollars to Joe.
 
 1. Initial state: Joe has 2 dollars in his account, Bob has 10 dollars.
-	![](media/how-we-build-tidb-10.png)
+	![Transaction example 1](media/how-we-build-tidb-10.png)
 
 2. The transfer transaction begins by locking Bob&#39;s account by writing the lock column. This lock is the primary for the transaction. The transaction also writes data at its start timestamp, 7.
 
-	![](media/how-we-build-tidb-11.png)
+	![Transaction example 2](media/how-we-build-tidb-11.png)
 
 3. The transaction now locks Joe&#39;s account and writes Joe&#39;s new balance. The lock is secondary for the transaction and contains a reference to the primary lock; So we can use this secondary lock to find the primary lock.
 
-	![](media/how-we-build-tidb-12.png)
+	![Transaction example 3](media/how-we-build-tidb-12.png)
 
 4. The transaction has now reached the commit point: it erases the primary lock and replaces it with a write record at a new timestamp (called the commit timestamp): 8. The write record contains a pointer to the timestamp where the data is stored. Future readers of the column &quot;bal&quot; in row &quot;Bob&quot; will see the value $3.
 
-	![](media/how-we-build-tidb-13.png)
+	![Transaction example 4](media/how-we-build-tidb-13.png)
 
 5. The transaction completes by adding write records and deleting locks at the secondary cells. In this case, there is only one secondary: Joe.
 
-	![](media/how-we-build-tidb-14.png)
+	![Transaction example 5](media/how-we-build-tidb-14.png)
 
 	So this is how it looks like when the transaction is done.
 
-	![](media/how-we-build-tidb-15.png)
+	![Transaction example 6](media/how-we-build-tidb-15.png)
 
 [Back to the top](#top)
 
@@ -393,13 +393,13 @@ INSERT INTO user VALUES (2, &quot;tom&quot;, &quot;tom@pingcap.com&quot;);
 
 If we map this table to key-value pairs, it should be put in the following way.
 
-![](media/how-we-build-tidb-16.png)
+![Mapping table data to Key-Value pairs](media/how-we-build-tidb-16.png)
 
 Of course, TiDB supports secondary index. It&#39;s a global index. TiDB puts data and index updates into the same transaction, so all the indexes in TiDB are transactional and fully consistent. And it&#39;s transparent to the users.
 
 Indexes are just key-value pairs that the values point to the row key. After we create indexes for the user name, the key-value storage looks like this:
 
-![](media/how-we-build-tidb-17.png)
+![Key-Value pairs](media/how-we-build-tidb-17.png)
 
 The key of the index consists of two parts: the name and the user id as the suffix. So here &quot;bob&quot; is the name, and 1 is the user id, and the value points to the row key.
 
@@ -409,7 +409,7 @@ The key of the index consists of two parts: the name and the user id as the suff
 
 For some operations like count some columns in a table, TiDB pushes down these operations to the corresponding TiKV nodes, the TiKV nodes do the computing and then TiDB merges the final results. This diagram shows the process of a simple predicate push-down.
 
-![](media/how-we-build-tidb-18.png)
+![Predicate push-down](media/how-we-build-tidb-18.png)
 
 [Back to the top](#top)
 
@@ -449,11 +449,11 @@ But TiDB is also different from Google F1 at the following aspects:
 
 One more thing before schema change. Let&#39;s take a look at the big picture of SQL in TiDB:
 
-![](media/how-we-build-tidb-19.png)
+![SQL in TiDB](media/how-we-build-tidb-19.png)
 
 Here is an overview of a TiDB instance during a schema change:
 
-![](media/how-we-build-tidb-20.png)
+![A TiDB instance during a schema change](media/how-we-build-tidb-20.png)
 
 [Back to the top](#top)
 
@@ -509,7 +509,7 @@ then Step 4,  switch to the final state where all of the new queries can use the
 
 Here is one of the screenshots for adding an index.
 
-![](media/how-we-build-tidb-21.png)
+![Adding an index](media/how-we-build-tidb-21.png)
 
 We can use any MySQL client to query the status of the online DDL job. Just simply run the &quot;show status&quot; statement and we can see that the current state is &quot;delete-only&quot; as I highlighted and that the action is &quot;add index&quot;. There is some other information such as who is doing the DDL job, the state of the current job and the current schema version.
 
@@ -519,7 +519,7 @@ We can use any MySQL client to query the status of the online DDL job. Just simp
 
 This screenshot shows that the current state is &quot;write reorganization&quot; as I highlighted.
 
-![](media/how-we-build-tidb-22.png)
+![Status of adding index](media/how-we-build-tidb-22.png)
 
 [Back to the top](#top)
 

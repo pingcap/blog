@@ -62,7 +62,7 @@ Let’s begin. About Async.
 
 The first thing is why not Sync. As we all know, the Sync programming is easier. If the load of your service is low, using Sync may be better. You just need to start some threads to handle the concurrence. 
 
-![](media/why-not-sync.png)
+![Why not Sync?](media/why-not-sync.png)
 
 But if we want to support a high performance service, such as a database, Sync is not enough. Sync I/O can block the execution, which reduces the performance. Although we can use threads, but thread is heavy and wastes system resources. What’s more, frequent thread switching is inefficient and causes the performance to reduce seriously.
 
@@ -70,7 +70,7 @@ But if we want to support a high performance service, such as a database, Sync i
 
 So we chose Async. 
 
-![](media/why-async.png)
+![Why Async?](media/why-async.png)
 
 There is no blocking in Async programming, so we don’t have to wait the slow I/O and can do other things. When the I/O is ready, the system can notify us and we can handle it again. This is very efficient and therefore, the performance is high. But as you can see, the Async way is much more complex and it is hard to write the code correctly. The code logic is split into pieces when the I/O is not ready and we have to switch to do other things. 
 
@@ -91,7 +91,7 @@ Sometimes, we have to use the callback mechanism to handle the I/O or other asyn
 
 #### Coroutine Makes it Easy
 
-![](media/coroutine-makes-it-easy.png)
+![Coroutine makes Async easy](media/coroutine-makes-it-easy.png)
 
 Of course, if we have to write code like this, it might drive us crazy. Luckily, we have at least two ways to bypass it. First, it is the coroutine. 
 
@@ -177,7 +177,7 @@ For example, we can use the `ok` future plus map combinator, and the end result 
 
 The future library provides two synchronization channels. One-shot is for SPSC and channel is for MPSC. Both can be used for communication cross threads. 
 
-![](media/synchronization.png)
+![Two synchronization channels](media/synchronization.png)
 
 
 <div class="trackable-btns">
@@ -296,7 +296,7 @@ As you can see, the flow is asynchronous, so we can use future to wrap gRPC C AP
 
 For unary, client sends a request, and waits for a response.
 
-![](media/unary.png)
+![Unary](media/unary.png)
 
 Client:
 
@@ -324,7 +324,7 @@ In the server side, the associated server handle looks like this, the context ca
 
 For client streaming, client sends many requests and receives a single response, then the client streaming is finished.
 
-![](media/client-streaming.png)
+![Client streaming](media/client-streaming.png)
 
 Client:
 
@@ -356,7 +356,7 @@ In the server side, we use a stream to receive the client requests and use a sin
 
 For server streaming, client first sends a request and then receives many responses one by one.
 
-![](media/server-streaming.png)
+![Server streaming](media/server-streaming.png)
 
 Client :
 
@@ -384,7 +384,7 @@ So for the client side, we return a stream to recv the response. And for the ser
 
 For duplex streaming, both the client and server can send many requests and responses.
 
-![](media/duplex-streaming.png)
+![Duplex streaming](media/duplex-streaming.png)
 
 Client:
 
@@ -472,7 +472,7 @@ The flow is very easy, and client streaming, server streaming and duplex streami
 
 ## Benchmark
 
-![](media/benchmark.png)
+![Performance benchmark](media/benchmark.png)
 
 Using future to support gRPC is very efficient. We have done many benchmarks. You can see that the performance is great. 
 
