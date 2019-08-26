@@ -157,7 +157,6 @@ void tcp_wfree(struct sk_buff *skb)
 		    list_add(&tp->tsq_node, &tsq->head);
 		    tasklet_schedule(&tsq->tasklet);
 		    local_irq_restore(flags);
-
 	} else {
 		    sock_wfree(skb);
 	}
@@ -201,8 +200,8 @@ static void tcp_tasklet_func(unsigned long data)
 		    if (!sock_owned_by_user(sk)) {
 			        tcp_tsq_handler(sk);
 		    } else {
-			    /* defer the work to tcp_release_cb() */
-			    set_bit(TCP_TSQ_DEFERRED, &tp->tsq_flags);
+			        /* defer the work to tcp_release_cb() */
+			        set_bit(TCP_TSQ_DEFERRED, &tp->tsq_flags);
 		    }
 		    bh_unlock_sock(sk);
 
@@ -218,7 +217,7 @@ The core logic is:
 if (!sock_owned_by_user(sk)) {
 	    tcp_tsq_handler(sk);
 } else {
-	    /* defer the work to tcp_release_cb() */
+        /* defer the work to tcp_release_cb() */
 	    set_bit(TCP_TSQ_DEFERRED, &tp->tsq_flags);
 }
 ```
