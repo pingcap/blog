@@ -2,6 +2,10 @@
 draft: true
 ---
 
+<!-- markdownlint-disable MD013 -->
+
+<!-- markdownlint-disable MD040 -->
+
 # blog
 
 ## meta data
@@ -21,9 +25,11 @@ draft: true
 ## For SEO and social media share
 
 - image: /images/pingcap-opengraph.jpg
+
 > This is used to show the thumbnail shown in the social media platform.
 
 - summary: PingCAP is focused on developing distributed NewSQL and is the team building TiDB, an open-source distributed NewSQL database.
+
 > This is for the description shown in the social media platform.
 
 ```
