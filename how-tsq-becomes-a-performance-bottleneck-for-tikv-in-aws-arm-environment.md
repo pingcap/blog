@@ -62,6 +62,7 @@ To reproduce the environment consistently, we did the following:
     ```
     watch -d cat /proc/softirqs
     mpstat -P ALL 2
+    ```
 
 ![Reproducing the environment](media/reproducing-the-environment.png)
 <center> *Reproducing the environment* </center>
