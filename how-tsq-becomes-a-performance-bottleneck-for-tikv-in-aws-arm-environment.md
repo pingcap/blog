@@ -115,7 +115,7 @@ static int ena_clean_tx_irq(struct ena_ring *tx_ring, u32 budget)
 }
 ```
 
-It can be noted that the NIC driver responds to the transmit completion interrupt and the data reception interrupt by multiplexing `NET_RX`, while the context captured is in the lower half of the transmit completion interrupt. The NIC driver calls the `dev_kfree_skb` macro (`#define dev_kfree_skb(a) consume_skb(a)`) to release `sk_buffer` when performing post-transfer cleanup. Then it checks the TSQ_THROTTLED flag to determine where there is data waiting for the qdisc space when executing the `tcp_wfree` function. If there is any packet waiting, the sock object corresponding to the packet will be added to the tsq queue of the current cpu, as shown below:
+It can be noted that the NIC driver responds to the transmit completion interrupt and the data reception interrupt by multiplexing `NET_RX`, while the context captured is in the lower half of the transmit completion interrupt. The NIC driver calls the `dev_kfree_skb` macro (`#define dev_kfree_skb(a) consume_skb(a)`) to release `sk_buffer` when performing post-transfer cleanup. Then it checks the TSQ_THROTTLED flag to determine where there is data waiting for the qdisc space when executing the `tcp_wfree` function. If there is any packet waiting, the sock object corresponding to the packet will be added to the TCP small queues (TSQ)[<sup>1</sup>](#1) of the current CPU, as shown below:
 
 ```
 struct tsq_tasklet {
@@ -297,8 +297,9 @@ ENA’s NIC hardware queue only contains 2 hard interrupts, which means only two
 
 Based on the observations and analysis in the previous section, we can conclude that for a network card running on a Linux kernel that supports TSQs, if the number of hardware queues is much smaller than the number of CPU cores, the corresponding CPU is likely to become a bottleneck when network card interrupts occur.
 
+## Reference
 
-## Appendix
+- TCP small queues is a mechanism designed to fight bufferbloat. TCP Small Queues goal is to reduce number of TCP packets in `xmit` queues (qdisc & device queues), to reduce RTT and cwnd bias, part of the bufferbloat problem. See [TCP Small Queues](https://lwn.net/Articles/506237/). <a class="anchor" id="1"></a>
 
-- [tcp: TCP Small Queues](https://lwn.net/Articles/506237/)
 - [tcp: auto corking](https://lwn.net/Articles/576263/)
+
