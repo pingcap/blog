@@ -55,7 +55,7 @@ To reproduce the environment consistently, we did the following:
     sudo sh -c 'echo fe00 > /sys/class/net/eth0/queues/rx-1/rps_cpus'
     ```
 
-2.  Generate the workload using wrk + nginx
+2.  Generate the workload using wrk + nginx.
 
 3.  Confirm successful reproduction by monitoring the CPU and interrupts.
 
@@ -96,7 +96,7 @@ Jul 17 07:30:50 ip-172-31-4-116 kernel: comm: ksoftirqd/0, pid: 7, state: 0
 Jul 17 07:30:50 ip-172-31-4-116 kernel: ctx: bh
 ```
 
-As can be seen from the trace information, the `ksoftirqd` thread running in the lower half of the interrupt is processing the `NET_RX` soft interrupt, attempting to initiate the tasklet scheduling. Let’s take a look at the NIC driver code (version 2.0.1k not found, so here we used version 2.0.2 instead)
+As can be seen from the trace information, the `ksoftirqd` thread running in the lower half of the interrupt is processing the `NET_RX` soft interrupt, attempting to initiate the tasklet scheduling. Let’s take a look at the NIC driver code (version 2.0.1k not found, so here we used version 2.0.2 instead).
 
 ```
 static int ena_io_poll(struct napi_struct *napi, int budget)
