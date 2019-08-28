@@ -298,7 +298,7 @@ ENA’s NIC hardware queue only contains 2 hard interrupts, which means only two
 Based on the observations and analysis in the previous section, we can conclude that for a network card running on a Linux kernel that supports TSQs, if the number of hardware queues is much smaller than the number of CPU cores, the corresponding CPU is likely to become a bottleneck when network card interrupts occur.
 
 ## Reference
-<a class="anchor" id="1"></a>
+<a class="anchor" id="1" href=""></a>
 - TCP small queues is a mechanism designed to fight bufferbloat. TCP Small Queues goal is to reduce number of TCP packets in `xmit` queues (qdisc & device queues), to reduce RTT and cwnd bias, part of the bufferbloat problem. See [TCP Small Queues](https://lwn.net/Articles/506237/).
 
 - [tcp: auto corking](https://lwn.net/Articles/576263/)
