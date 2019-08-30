@@ -52,7 +52,7 @@ Tracking key metrics is an important part of maintaining database health. MySQL 
 
 With TiDB, rather than retaining the metrics inside the server, a strategic choice was made to ship the information to a best-of-breed service. Prometheus+Grafana is a common technology stack among operations teams today, and the included graphs make it easy to create your own or configure thresholds for alarms.
 
-![](media/grafana-in-tidb.png)
+![Grafana in TiDB](media/grafana-in-tidb.png)
 
 ## 4. TiDB handles DDL significantly better
 

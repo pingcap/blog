@@ -7,7 +7,7 @@ tags: ['HTAP']
 categories: ['HTAP']
 ---
 
-![](media/kost-header-image.png)
+![KOST stack](media/kost-header-image.png)
 
 Many technology stacks have emerged over the years that made software developers' lives easier and more productive -- better development efficiency, clearer software choices. The most notably among them is the [LAMP](https://en.wikipedia.org/wiki/LAMP_(software_bundle)) stack (Linux, Apache HTTP server, MySQL, PHP), which helped countless developers turn their big ideas into big companies, none bigger perhaps than [Mark Zuckerberg creating Facebook](https://www.infoq.com/presentations/Facebook-Software-Stack). More recently, popular web development patterns that leverage Javascript, like the [MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle)#cite_note-MongoDBMEANstack-2) stack (MongoDB, Express.js, Angular, Node.js) and its close cousins, MERN (swap Angular for React) and MEVN (swap Angujar for Vue.js), have shrunk idea-to-market time dramatically.
 

@@ -71,7 +71,7 @@ The following diagram shows the implementation logic for a set of nested transac
     2. At T7, it commits the transaction opened at T2. 
     3. At T8, session 1 executes a query statement to check the `val` value of the corresponding row for `k=1` that is written by session 2 at T4.
 
-![](media/nested-transaction-example.png)
+![Nested transaction example](media/nested-transaction-example.png)
 
 At the RC isolation level, the returned result for the query at T8 is `102`, which seems to meet the feature requirement for a nested transaction. But this process does not conform to reality. The diagram above only uses a single thread to simulate a nested transaction. But in the concurrent requests in practical application scenarios, multiple transactions are alternately executed and committed in the timeline. In this case, we can't predict the execution result of the nested transactions.
 

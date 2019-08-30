@@ -128,7 +128,7 @@ We designed a failpoint based on the following principles:
 
 We can use an abstract syntax tree ([AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree)) to rewrite the code to implement failpoints that meet the above design principles in Golang. The rationale diagram is as follows:
 
-![](media/failpoint-rationale.png)
+![Failpoint rationale](media/failpoint-rationale.png)
 
 For any Golang source file, we can parse its syntax tree to traverse the whole syntax tree, find the injection points of all failpoints, and rewrite and convert the syntax tree to the logic we want. 
 

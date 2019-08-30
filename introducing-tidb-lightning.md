@@ -15,7 +15,7 @@ TiDB Lightning is designed for quickly importing a large MySQL dump into a new T
 
 TiDB has provided a “[Loader](https://pingcap.com/docs/tools/loader/)” tool since early 2017. Loader itself is a fairly optimized full-import tool, using multi-threaded execution, error retry, checkpoints and adjustment of some TiDB-specific system variables for further speed-up. 
 
-![](media/loader.png)
+![Loader](media/loader.png)
 
 However, the heart of the process is still the same — run each INSERT statement in the SQL dump one-by-one. Our goal is to initialize an empty TiDB cluster, and loading data this way is fundamentally inefficient. The issue of importing through the SQL layer is having too much protection. As the import happens online, the TiDB cluster needs to guarantee many invariants throughout the process:
 
@@ -30,7 +30,7 @@ TiKV stores data as KV pairs on RocksDB, and RocksDB stores the persistent data 
 
 ## Architecture
 
-![](media/lightning-architecture.png)
+![Lightning architecture](media/lightning-architecture.png)
 
 TiDB Lightning consists of two components: **tidb-lightning** (“Lightning”) and **tikv-importer** (“Importer”). Lightning is responsible for converting SQL into KV pairs, and Importer is responsible for sorting KV pairs and scheduling them into the TiKV servers. 
 
@@ -43,7 +43,7 @@ Below we’ll go through the internals of each component.
 
 ### Lightning
 
-![](media/tidb-lightning-work-flow.png)
+![TiDB Lightning workflow](media/tidb-lightning-work-flow.png)
 
 Currently, Lightning only supports loading SQL dump created by Mydumper. Unlike mysqldump, Mydumper distributes the content of each table into individual files, which help us to process the database in parallel without parsing the entire dump first.
 
@@ -75,7 +75,7 @@ After KV pairs are obtained, they will be passed to Importer.
 
 ### Importer
 
-![](media/tidb-importer.png)
+![TiDB Importer](media/tidb-importer.png)
 
 Since Lightning processes chunks in parallel, the KV pairs received by Importer are essentially out of order. Thus the primary work of Importer is to sort them. This would require a storage space as large as the table itself, which we call an “engine file”. Every table is associated with one engine file. 
 
@@ -103,7 +103,7 @@ Currently, TiDB Lightning feeds the entire INSERT INTO statement into the KV enc
 
 ### Parallel import
 
-![](media/parallel-import.png)
+![Parallel import](media/parallel-import.png)
 
 The capacity that a single machine can provide is limited, so to increase capacity, we need horizontal scaling, i.e. adding more machines. As explained before, the TiDB Lightning can be naturally parallelized, by distributing different tables to different nodes. However, the current implementation can only read from the filesystem, so setting this up is pretty messy (requires mounting a network drive and manually allocating tables to different nodes). Thus, we plan to allow TiDB Lightning to interact with the network file storage API (e.g. S3 API), and create a utility to automatically split the database for multiple TiDB Lightning instances to simplify deployment.
 
