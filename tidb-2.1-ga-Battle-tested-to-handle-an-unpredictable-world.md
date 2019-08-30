@@ -9,7 +9,7 @@ categories: ['MySQL Scalability']
 
 Today, we are proud to announce that TiDB 2.1 is ready for General Availability. TiDB is an open-source NewSQL Hybrid Transactional and Analytical Processing (HTAP) database -- [one of the most popular](https://github.com/pingcap/tidb) and active database products on GitHub. It is designed to provide elastic horizontal scalability, strong consistency, and high availability. TiDB is MySQL-compatible and serves as a single relational database solution for both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workloads.
 
-![](media/tidb-2.1-announcement-image.jpg)
+![TiDB 2.1 announcement](media/tidb-2.1-announcement-image.jpg)
 
 ## From 2.0 to 2.1
 
@@ -90,7 +90,7 @@ We loathe benchmark-eting. It’s misleading to users and customers to cherry-pi
 
 In order to improve performance on typical OLTP workloads, which is what many of our users have, we engineered many optimizations in TiDB’s parser and cost-based optimizer to speed up Point Select operations. When you access your data via Unique Key or Primary Key using 2.1, you will see a 50% performance improvement over 2.0. You can find the details and reproduce [the benchmark here](https://github.com/pingcap/docs/blob/master/v2.1/benchmark/sysbench-v3.md). 
 
-![](media/point-select-benchmark.png)
+![Point select benchmark](media/point-select-benchmark.png)
 
 ### OLAP with TPC-H
 
@@ -100,7 +100,7 @@ Back when we released 2.0 in April, we published a TPC-H Scale 50 benchmark [com
 
 Now with 2.1 ready for GA, we compared it with 2.0 using the same benchmark and observed significant performance improvements on query 17 and 18 (see graph below, Y-axis is performance time per second, so lower the better), as well as improvements on all other queries across the board. This performance boost is due to improvements in TiDB’s CBO and executor, plus optimization in TiKV’s range scan capabilities.
 
-![](media/tpc-h-50-g-query-result.png)
+![TPC-H 50G query result](media/tpc-h-50-g-query-result.png)
 
 ## Ecosystem Tools
 

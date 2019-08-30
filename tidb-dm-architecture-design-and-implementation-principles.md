@@ -15,7 +15,7 @@ A common real-life use case is using TiDB DM to connect sharded MySQL or MariaDB
 
 TiDB DM consists of three components: DM-master, DM-worker, and dmctl. It supports migrating the data of multiple upstream MySQL instances to multiple downstream TiDB clusters. The architecture design is as follows:
 
-![](media/tidb-dm-architecture.png)
+![TiDB DM architecture](media/tidb-dm-architecture.png)
 
 - DM-master:
 
@@ -45,7 +45,7 @@ A single TiDB DM cluster can perform multiple data replication tasks simultaneou
 
 The following diagram shows the data migration process of a single subtask of data replication on each DM-worker node. 
 
-![](media/data-migration-process.png)
+![Data migration process](media/data-migration-process.png)
 
 In the whole process, the upper data flow is the full backup migration and the lower data flow is the incremental data replication.
 
@@ -73,7 +73,7 @@ In order to accelerate data migration, TiDB DM applies the concurrency model in 
 
 2. Loader is used to load the data. For the corresponding concurrency model, see the following diagram:
 
-    ![](media/concurrency-model-of-loader.png)
+    ![Concurrency model of Loader](media/concurrency-model-of-loader.png)
  
 During the data exporting process with Mydumper, a single table can be split into multiple SQL files with `--chunk-filesize` and other parameters. Each of these SQL files corresponds to a static snapshot data of the upstream MySQL at a specific moment and no correlation exists between two SQL files. So when importing the data with loader, you can directly start multiple worker goroutines in a loader unit and each worker goroutine reads to-be-imported SQL files independently and concurrently and applies them into downside streaming. That’s to say, loader loads data concurrently at the level of the SQL file. In task configuration,TiDB DM controls the number of worker goroutines with the `pool-size` parameter in the loader unit.
 
@@ -83,7 +83,7 @@ During the data exporting process with Mydumper, a single table can be split int
 
 2. When importing the data using syncer, you can import data concurrently under limited conditions. The corresponding model architecture is as follows:
 
-    ![](media/concurrency-model-of-syncer.png)
+    ![Concurrency model of Syncer](media/concurrency-model-of-syncer.png)
 
 Syncer reads and parses the local relay log in a stream, which is executed serially. When syncer parses the binlog events and builds the to-be-synchronized jobs, it delivers the jobs to different to-be-synchronized job channels after hash computing based on the primary key, index and other information of the corresponding row. 
 
@@ -114,7 +114,7 @@ This section introduces some features of TiDB DM for supporting replicating data
 
 Let’s start with an example as shown in the diagram below:
 
-![](media/table-router-example.png)
+![Table router example](media/table-router-example.png)
 
 In this example, there are two MySQL instances in the upstream; each instance has two schemas and each schema has two tables; there are eight tables in total. After we replicate the data to the downstream TiDB, the eight tables should be merged and replicated into one table.
  
@@ -151,7 +151,7 @@ Now let’s take a look at the internals of TiDB DM:
 
 With the table router feature, we can implement the basic function of replicating data from sharded tables. But in a database, auto-increment columns are widely used as the primary keys. If multiple primary keys of the sharded tables in the upstream generate their numbers automatically and independently, a conflict between primary keys might occur and result in the data mismatch after merging and synchronizing them into the downstream. Let’s see another example as follows:
 
-![](media/column-mapping-example.png)
+![Column mapping example](media/column-mapping-example.png)
 
 In this example, there are four tables that need to be merged and replicated into the table in the downstream TiDB. Each table has a record in the `id` column whose value is 1. Suppose that this `id` column is the primary key of the table. During the replication process, as some update operations use the `id` column as the condition to confirm records that need to be updated, it might make the latter replicated data overwrite the data that has been replicated and thus result in some data loss.
  
@@ -184,7 +184,7 @@ Currently, `partition id` is the mainly supported conversion expression. It reso
 
 Each argument has the following binary distribution in the conversion result (the number of bits that each part occupies by default):
 
-![](media/binary-distribution.png)
+![Binary distribution](media/binary-distribution.png)
 
 Suppose that the original data is "123" before conversion and the arguments are set up as above, then the conversion result is: 
 
@@ -204,7 +204,7 @@ For the detailed implementation of the column mapping, see [column-mapping pkg s
 
 With the table router and column mapping function, we can replicate DML statements from sharded tables in a smooth manner. But in the process of incrementally replicating data, if DDL statements are executed on the upstream sharded tables that are waiting for merging, then an error might occur. Let’s see a simple example of executing DDL statements on the sharded tables. 
 
-![](media/sharding-ddl-example.png)
+![Sharding DDL example](media/sharding-ddl-example.png)
 
 In this example, we simplify the replication process, in which there are only two MySQL instances in the upstream and each instance has only one table. Suppose that during the replication, we mark the schema version of two sharded tables as `schema V1`, and mark the schema version after executing DDL statements as `schema V2`. 
 
@@ -218,7 +218,7 @@ Now, suppose that the binlog data received from the two upstream sharded tables 
 
 Suppose that we do no operation to the DDL of the sharded tables during data replication. When the DDL of Instance 1 is replicated to downstream, the table structure of downstream will be changed to `schema V2`. But DM-worker still receives the DML of `schema V1` during the period between `t2` and `t3`. When DM-worker tries to replicate the DML of `schema V1` to downstream, the inconsistency between the DML and the table structure may lead to error and data cannot be replicated correctly. Let’s look at the example above again to see how we handle the DDL replication when merging tables in TiDB DM.
 
-![](media/ddl-replication-example.png)
+![DDL replication example](media/ddl-replication-example.png)
 
 In this example, DM-worker-1 replicates the data from MySQL Instance 1 and DM-worker-2 replicates the data from MySQL Instance 2. DM-master coordinates the DDL replication among multiple DM-workers. After DM-worker-1 receives DDL, simplified procedures of DDL replication are as follows:
 
@@ -247,7 +247,7 @@ From the above characteristics, we can see some functional restrictions as follo
 
 In the example above, there is only one sharded table to be merged in the upstream MySQL instance that corresponds to each DM-worker. But in actual scenarios, there may be multiple sharded tables to be merged in a MySQL instance, and one such scenario is where we introduce table router and column mapping in the above section. With this scenario, the replication of sharding DDL becomes more complex. Assume that in a MySQL instance there are 2 tables to be merged, `table_1` and `table_2`. See the following figure：
 
-![](media/two-tables-to-be-merged.png)
+![Two tables to be merged](media/two-tables-to-be-merged.png)
 
 Because data comes from the same MySQL instance, all the data is obtained from the same binlog flow. In this case, the time sequence is as follows:
 

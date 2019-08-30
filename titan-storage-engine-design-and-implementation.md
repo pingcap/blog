@@ -26,7 +26,7 @@ As a child project of TiKV, Titan's first design goal is to be compatible with R
 
 The following figure shows the basic Titan architecture:
 
-![](media/titan-architecture.png)
+![Titan architecture](media/titan-architecture.png)
 
 Figure 1. During flush and compaction operations, Titan separates values from the LSM tree. The advantage of this approach is that the write process is consistent with RocksDB, which reduces the chance of invasive changes to RocksDB.
 	
@@ -36,7 +36,7 @@ Titan core components include BlobFile, TitanTableBuilder, Version, and Garbage 
 
 When Titan separates the value file from the LSM tree, it stores the value file in the BlobFile. The following figure shows the BlobFile format:
 
-![](media/blobfile-format.png)
+![BlobFile format](media/blobfile-format.png)
 
 Figure 2. A blob file is mainly comprised of blob records, meta blocks, a meta index block, and a footer. Each block record stores a Key-Value pair. The meta blocks are used for scalability, and store properties related to the blob file. The meta index block is used for meta block searching.
 
@@ -50,7 +50,7 @@ Figure 2. A blob file is mainly comprised of blob records, meta blocks, a meta i
 
 TitanTableBuilder is the key to achieving Key-Value separation. As you may know, RocksDB supports custom table builders for creating a Sorted String Table (SST). This feature let's us separate values from the SST without making any invasive changes to the existing table building process. Now, let's look at the TitanTableBuilder main workflow:
 
-![](media/titantablebuilder-workflow.png)
+![TitanTableBuilder workflow](media/titantablebuilder-workflow.png)
 
 Figure 3. TitanTableBuilder determines the Key-Pair value size, and based on that, decides whether to separate the value from the Key-Value pair and store it in the blob file. 
 
@@ -66,7 +66,7 @@ Titan's design differs greatly from [Badger](https://github.com/dgraph-io/badger
 
 Titan uses Version to refer to a valid blob file at a specific point of time. We draw this data management method from LevelDB. The core concept behind this method is Multi-version Concurrency Control ([MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control)). The advantage of this approach is that it allows concurrent reads with no locking required when a file is added or deleted. Each time a file is added or deleted, Titan generates a new version. Before each read, Titan gets the latest version. 
 
-![](media/versionset.png)
+![VersionSet](media/versionset.png)
 
 Figure 4. New and old versions form a head-to-tail bidirectional linked list. VersionSet manages all versions, with a **current** pointer that points to the latest version. 
 
@@ -83,7 +83,7 @@ Titan addresses these problems using two features of RocksDB: the Table Properti
 
 RocksDB let's us use BlobFileSizeCollector, a custom table property collector, to collect properties from the SST which are written into corresponding SST files. The collected properties are named BlobFileSizeProperties. The following figure shows the BlobFileSizeCollector workflow and data formats.
 
-![](media/blobfilesizecollector-workflow-and-data-formats.png)
+![BlobFileSizeCollector workflow and data formats](media/blobfilesizecollector-workflow-and-data-formats.png)
 
 Figure 5. On the left is the SST index format. The first column is the blob file ID; the second column is the offset for the blob record in the blob file; the third column is the blob record size. 
 
@@ -93,7 +93,7 @@ On the right is the BlobFileSizeProperties format. Each line represents a blob f
 
 As we know, RocksDB uses compaction to discard old data and reclaim space. After each compaction, some blob files in Titan may contain partly or entirely outdated data. Therefore, we could trigger GC by listening to compaction events. During compaction, we could collect and compare the input/output blob file size properties of SST to determine which blob files require GC. The following figure shows the general process:
 
-![](media/eventlistener.png)
+![EventListener](media/eventlistener.png)
 
 Figure 6. Event Listener Process
 
@@ -142,23 +142,23 @@ The test focused on the following common scenarios:
 
 ### Test results
 
-![](media/data-loading-performance.png)
+![Data loading performance](media/data-loading-performance.png)
 
 Figure 7. Data Loading Performance: Titan's performance is 70% higher than RocksDB in write scenarios. The gap becomes more evident as the value size increases. It's worth noting that data is first written into the Raft Log before the KV Engine, which dilutes Titan's performance. If we use both Titan's API and RocksDB API nakedly for the test instead of first going through TiKV's API, the performance gap is even bigger. 
 
-![](media/update-performance.png)
+![Update performance](media/update-performance.png)
 
 Figure 8. Update Performance: Titan's performance in update scenarios is 180% higher than RocksDB. This is mainly attributable to Titan's excellent read performance and optimal GC algorithm.  
 
-![](media/output-size.png)
+![Output size](media/output-size.png)
 
 Figure 9. Output Size: Titan has a slightly higher space amplification than RocksDB. This is mostly a result of the write amplification caused by storage overhead for keys in the blob file. As the number of keys is reduced, this gap drops a little. 
 
-![](media/random-key-lookup.png)
+![Random key lookup](media/random-key-lookup.png)
 
 Figure 10. Random Key Lookup: Titan outperforms RocksDB in point query scenarios. This is due mainly to the design that separates values from the LSM tree to make the latter smaller. Using the same amount of memory as RocksDB, Titan allows more indexes, filters, and data blocks in block cache. Accordingly, most point queries require only one I/O (mainly for reading data from the blob file).
 
-![](media/sorted-range-iteration.png)
+![Sorted range iteration](media/sorted-range-iteration.png)
 
 Figure 11. Sorted Range Iteration: Currently, Titan underperforms RocksDB in range query scenarios. In future optimizations, one of our goals is to improve this performance.
 
