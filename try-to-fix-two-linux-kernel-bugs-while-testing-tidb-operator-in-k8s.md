@@ -39,9 +39,9 @@ The only negative indicator was the message, "SLUB: Unable to allocate memory on
 
 We used [funcslower](https://github.com/brendangregg/perf-tools/blob/master/bin/funcslower) in [perf-tools](http://github.com/brendangregg/perf-tools) to trace kernel functions that were executed slowly and adjusted the threshold value of the `hung_task_timeout_secs` kernel parameter. When we performed the write operations in TiKV, we found the following kernel path information:
 
-![](media/kernel-path-information-1.png)
+![Kernel path information 1](media/kernel-path-information-1.png)
 
-![](media/kernel-path-information-2.png)
+![Kernel path information 2](media/kernel-path-information-2.png)
 
 Based on the information above, we could see that the I/O jitter was related to the file system executing `writepage`. At the same time, before and after the performance jitter was captured, the `dmesg` output contained a large amount of information about "SLUB: Unable to allocate memory on node -1". This message occurred even when the node had sufficient memory.
 
