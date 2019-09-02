@@ -7,7 +7,7 @@ tags: ['TiKV', 'Rust', 'TiDB', 'MySQL Scalability', 'HTAP', 'Open Source Communi
 categories: ['Open Source Community']
 ---
 
-On the heels of a successful TiDB DevCon in Beijing, where [more than 700 people attended](https://www.pingcap.com/blog/tidb-3.0-beta-stability-at-scale/) this annual TiDB user conference, Team PingCAP trekked halfway around the world to Brussels, Belgium, to participate in the largest developer conference in Europe, [FOSDEM](https://fosdem.org/2019/). We had three talks to deliver, one in the MySQL, MariaDB and Friends DevRoom and two in the Rust DevRoom. Even though TiDB as an open-source NewSQL database is growing in popularity and global reach, our team knows that a truly global technology hinges on the support of local communities. After all, globalization is localization, and there's no better place to "localize" a technology for thousands of developers than FOSDEM.
+On the heels of a successful TiDB DevCon in Beijing, where [more than 700 people attended](https://pingcap.com/blog/tidb-3.0-beta-stability-at-scale/) this annual TiDB user conference, Team PingCAP trekked halfway around the world to Brussels, Belgium, to participate in the largest developer conference in Europe, [FOSDEM](https://fosdem.org/2019/). We had three talks to deliver, one in the MySQL, MariaDB and Friends DevRoom and two in the Rust DevRoom. Even though TiDB as an open-source NewSQL database is growing in popularity and global reach, our team knows that a truly global technology hinges on the support of local communities. After all, globalization is localization, and there's no better place to "localize" a technology for thousands of developers than FOSDEM.
 
 ## Early Bird Gets the Beer
 
@@ -49,7 +49,7 @@ Our second talk was by Wish Shi, another one of our database engineers, who intr
 
 Brussels wasn't our only stop. Reaching local communities is part of our global strategy, so we always try to attend local meetups during long trips whenever schedules allow. This time the folks at [Giant Swarm](https://giantswarm.io/) graciously hosted us in Cologne, Germany, where I gave a talk to the [local Kubernetes + Docker meetup](https://www.meetup.com/Kubernetes-Meetup-Cologne/events/258123715/) on how we leverage the Operator pattern to run TiDB in the cloud. Since the Operator pattern is relatively new but [gaining prominence](https://thenewstack.io/databases-operators-bring-stateful-workloads-to-kubernetes/), the audience was engaged and appreciative that we came all this way to share our learning.
 
-After my talk, over pizza and more beer (German beer this time), I learned about the lively local tech scene -- a sizable insurance technology community, enterprise companies like Giant Swarm, and fellow open-source database company ArangoDB. It was also awesome to see big TiDB user, [Mobike](https://www.pingcap.com/success-stories/tidb-in-mobike/), on every busy street corner of Cologne.
+After my talk, over pizza and more beer (German beer this time), I learned about the lively local tech scene -- a sizable insurance technology community, enterprise companies like Giant Swarm, and fellow open-source database company ArangoDB. It was also awesome to see big TiDB user, [Mobike](https://pingcap.com/success-stories/tidb-in-mobike/), on every busy street corner of Cologne.
 
 ![Mobike on the streets of Cologne, Germany](media/mobike-on-the-streets-of-cologne-germany.png)
 <center> *Mobike on the streets of Cologne, Germany* </center> 

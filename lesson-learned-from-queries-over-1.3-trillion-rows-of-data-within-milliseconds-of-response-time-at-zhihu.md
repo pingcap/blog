@@ -83,11 +83,11 @@ Inside the TiDB platform, the main components are as follows:
 * **[TiSpark](https://github.com/pingcap/tispark)** cluster also sits on top of TiKV. It is an Apache Spark plugin that works with the TiDB platform to support complex Online Analytical Processing (OLAP) queries for business intelligence (BI) analysts and data scientists.
 * **[Placement Driver (PD) server](https://github.com/pingcap/pd)** is a metadata cluster powered by [etcd](https://github.com/etcd-io/etcd) that manages and schedules TiKV. 
 
-Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://www.pingcap.com/docs/tools/syncer/) and [TiDB Data Migration](https://github.com/pingcap/dm) for seamless migration from MySQL, and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), for collecting the logical changes made to a TiDB cluster and providing incremental backup and replication to the downstream (TiDB, Kafka, or MySQL).
+Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://pingcap.com/docs/tools/syncer/) and [TiDB Data Migration](https://github.com/pingcap/dm) for seamless migration from MySQL, and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), for collecting the logical changes made to a TiDB cluster and providing incremental backup and replication to the downstream (TiDB, Kafka, or MySQL).
 
 ### TiDB's key features
 
-[TiDB's key features](https://www.pingcap.com/docs/v3.0/key-features/) include the following:
+[TiDB's key features](https://pingcap.com/docs/v3.0/key-features/) include the following:
 
 * Horizontal scalability
 * MySQL-compatible syntax
@@ -192,7 +192,7 @@ The statistics show that after we enabled Titan, both write and query latencies 
 
 We have also used TiDB 3.0's Table Partition feature in the anti-spam application. Using this feature, we can divide a table into multiple partitions by time. When a query comes, it is performed on a partition that covers the target time range. This has drastically improved our query performance.
 
-Let's consider what may happen if we implement [TiDB 3.0](https://www.pingcap.com/docs/v3.0/releases/3.0-ga/) in both Moneta and anti-spam applications in the future.
+Let's consider what may happen if we implement [TiDB 3.0](https://pingcap.com/docs/v3.0/releases/3.0-ga/) in both Moneta and anti-spam applications in the future.
 
 ### TiDB 3.0 in the Moneta application
 

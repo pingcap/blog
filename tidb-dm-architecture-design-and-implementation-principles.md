@@ -102,7 +102,7 @@ However, some limitations exist in this process as follows:
 
     In other words, DDL and DML events are not replicated concurrently, and the DML events before and after the DDL operation are not replicated concurrently either. 
 
-- For the DML operation, the conflict exists when multiple DML statements possibly concurrently modify the data of the same row, even the primary or the same unique key, which leads to the failure of some DML operations. If these DML events are replicated concurrently, data inconsistency might occur. Detection and resolution of DML event conflicts in TiDB DM is similar to those in TiDB Binlog. For more details of the specific principles, see [TiDB Binlog Architecture Evolution and Implementation Principles](https://www.pingcap.com/blog/tidb-binlog-architecture-evolution-and-implementation-principles/).
+- For the DML operation, the conflict exists when multiple DML statements possibly concurrently modify the data of the same row, even the primary or the same unique key, which leads to the failure of some DML operations. If these DML events are replicated concurrently, data inconsistency might occur. Detection and resolution of DML event conflicts in TiDB DM is similar to those in TiDB Binlog. For more details of the specific principles, see [TiDB Binlog Architecture Evolution and Implementation Principles](https://pingcap.com/blog/tidb-binlog-architecture-evolution-and-implementation-principles/).
 
 ### Replicating data from merged tables
 

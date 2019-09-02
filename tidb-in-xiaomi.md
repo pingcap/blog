@@ -41,7 +41,7 @@ Inside the TiDB platform, the main components are as follows:
 - **[TiSpark](https://github.com/pingcap/tispark)** cluster also sits on top of TiKV. It is an Apache Spark plugin that works with the TiDB platform to support complex OLAP queries for BI analysts and data scientists.
 - **[Placement Driver (PD)](https://github.com/pingcap/pd)**: A metadata cluster powered by [etcd](https://github.com/etcd-io/etcd) that manages and schedules TiKV.
 
-Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://www.pingcap.com/docs/tools/syncer/) and [DM](https://github.com/pingcap/dm) for data replication from existing MySQL instances (both sharded and unsharded), and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), which is used to collect the logical changes made to a TiDB cluster and provide incremental backup and replication to different  downstream options (e.g. TiDB, Kafka or MySQL).
+Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://pingcap.com/docs/tools/syncer/) and [DM](https://github.com/pingcap/dm) for data replication from existing MySQL instances (both sharded and unsharded), and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), which is used to collect the logical changes made to a TiDB cluster and provide incremental backup and replication to different  downstream options (e.g. TiDB, Kafka or MySQL).
 
 ### Core Features
 

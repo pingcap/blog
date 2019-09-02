@@ -7,7 +7,7 @@ tags: ['TiDB', 'Product', 'MySQL Scalability', 'HTAP', 'Open Source Community']
 categories: ['MySQL Scalability']
 ---
 
-As businesses adopt cloud-native architectures, conversations will naturally lead to what we can do to make the database horizontally scalable. The answer will likely be to take a closer look at [TiDB](https://www.pingcap.com/docs/).
+As businesses adopt cloud-native architectures, conversations will naturally lead to what we can do to make the database horizontally scalable. The answer will likely be to take a closer look at [TiDB](https://pingcap.com/docs/).
 
 TiDB is an open source [NewSQL](https://en.wikipedia.org/wiki/NewSQL) database released under the Apache 2.0 License. Because it speaks the [MySQL](https://en.wikipedia.org/wiki/MySQL) protocol, your existing applications will be able to connect to it using any MySQL connector, and [most SQL functionality](https://pingcap.com/docs/v3.0/reference/mysql-compatibility/#compatibility-with-mysql) remains identical (joins, subqueries, transactions, etc.).
 
