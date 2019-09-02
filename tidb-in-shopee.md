@@ -21,7 +21,7 @@ Shopee, a Sea company, was first launched in Singapore in 2015, and has since ex
 ![The Shopee website](media/the-shopee-website.png)
 <center> *Figure 1: The Shopee website* </center>
 
-As our business boomed, our team faced severe challenges in scaling our backend system to meet the demand. Fortunately, we found [TiDB](https://www.pingcap.com/docs/), a MySQL-compatible NewSQL hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built and supported by [PingCAP](https://www.pingcap.com/en/) and its open-source community. Now we can provide better service and experience for our users without worrying about our database capacity.
+As our business boomed, our team faced severe challenges in scaling our backend system to meet the demand. Fortunately, we found [TiDB](https://pingcap.com/docs/), a MySQL-compatible NewSQL hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built and supported by [PingCAP](https://pingcap.com/en/) and its open-source community. Now we can provide better service and experience for our users without worrying about our database capacity.
 
 Currently, we have deployed two TiDB clusters totalling 60 nodes in our risk control and audit log systems. In this post, we will elaborate on why we chose TiDB, how we are using it, and our future plan for TiDB inside our infrastructure.
 
@@ -39,7 +39,7 @@ Inside the TiDB platform, the main components are as follows:
 - [**TiSpark**](https://github.com/pingcap/tispark) cluster also sits on top of TiKV. It is an Apache Spark plugin that works with the TiDB platform to support complex OLAP queries for BI analysts and data scientists. 
 - [**Placement Driver (PD)**](https://github.com/pingcap/pd): A metadata cluster powered by [etcd](https://github.com/etcd-io/etcd) that manages and schedules TiKV.
 
-Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://www.pingcap.com/docs/tools/syncer/) and [DM](https://github.com/pingcap/dm) for seamless migration from MySQL, and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), which is used to collect the logical changes made to a TiDB cluster and provide incremental backup and replication to the downstream (TiDB, Kafka or MySQL).
+Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://pingcap.com/docs/tools/syncer/) and [DM](https://github.com/pingcap/dm) for seamless migration from MySQL, and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), which is used to collect the logical changes made to a TiDB cluster and provide incremental backup and replication to the downstream (TiDB, Kafka or MySQL).
 
 ## Our Pain Point
 

@@ -14,6 +14,6 @@ Many TiDB users currently use TiDB DM to connect sharded MySQL, MariaDB, or Amaz
 ![TiDB Data Migration Architecture](media/dm-architecture-1.png)
 <center> *TiDB Data Migration Architecture* </center>
 
-(For more detailed information on the architectural design and implementation of TiDB DM, read this deep-dive [blog post](https://www.pingcap.com/blog/tidb-dm-architecture-design-and-implementation-principles/).) 
+(For more detailed information on the architectural design and implementation of TiDB DM, read this deep-dive [blog post](https://pingcap.com/blog/tidb-dm-architecture-design-and-implementation-principles/).) 
 
-To ease the learning curve of using TiDB DM, we’ve put together a [TiDB DM (Data Migration) Tutorial](https://pingcap.com/docs/dev/how-to/get-started/data-migration/) for you to experiment with this tool. While the settings used in this tutorial are certainly not for production deployment, it’s a quick and easy way to kick the tires before going further on your TiDB journey. And our team is always here—if you need help or support, just [contact us](https://www.pingcap.com/contact-us/). 
+To ease the learning curve of using TiDB DM, we’ve put together a [TiDB DM (Data Migration) Tutorial](https://pingcap.com/docs/dev/how-to/get-started/data-migration/) for you to experiment with this tool. While the settings used in this tutorial are certainly not for production deployment, it’s a quick and easy way to kick the tires before going further on your TiDB journey. And our team is always here—if you need help or support, just [contact us](https://pingcap.com/contact-us/). 

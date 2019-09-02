@@ -13,7 +13,7 @@ I know in my case, as someone who's spent more than 15 years in the MySQL world,
 
 So in this post, I want to go through some simple use cases where a MySQL DBA can expand their *repertoire* and answer some basic business questions by writing SQL queries with window functions. This knowledge could add a lot of value, especially if you work at a company that doesn't yet have a full-fledged data science team, but is already doing some analytics. 
 
-Our sample data set will be the 30 years of USA flight on-time statistics [loaded](https://github.com/Percona-Lab/ontime-airline-performance) into [TiDB 3.0 BETA](https://www.pingcap.com/blog/tidb-3.0-beta-stability-at-scale/).
+Our sample data set will be the 30 years of USA flight on-time statistics [loaded](https://github.com/Percona-Lab/ontime-airline-performance) into [TiDB 3.0 BETA](https://pingcap.com/blog/tidb-3.0-beta-stability-at-scale/).
 
 ## Finding the average arrival delay
 

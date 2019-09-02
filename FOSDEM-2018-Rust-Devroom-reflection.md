@@ -34,9 +34,9 @@ In my talk, I shared our experiences on the following topics from our process of
 
 2. How we build the TiKV core system using Rust, including the backend store, the gRPC framework, and the consensus replication mechanism.
 
-	* Backend store: TiKV adopts [RocksDB](http://rocksdb.org/) as the backend storage engine for its high-performance and fast storage, and uses[ Raft](https://raft.github.io/) and [Multi-raft](https://www.pingcap.com/blog/2017-08-15-multi-raft/) to ensure data safety and horizontal scalability. We implemented t[he Raft Consensus algorithm in Rust](https://github.com/pingcap/raft-rs)**.**
+	* Backend store: TiKV adopts [RocksDB](http://rocksdb.org/) as the backend storage engine for its high-performance and fast storage, and uses[ Raft](https://raft.github.io/) and [Multi-raft](https://pingcap.com/blog/2017-08-15-multi-raft/) to ensure data safety and horizontal scalability. We implemented t[he Raft Consensus algorithm in Rust](https://github.com/pingcap/raft-rs)**.**
 
-	* Transaction: As a distributed Key-Value database, TiKV also supports transaction and is ACID compliant. To maintain consistency among the Multi-raft groups, TiKV adopts an optimized [two-phase commit (2PC) protocol](https://en.wikipedia.org/wiki/Two-phase_commit_protocol) and supports [Multiversion Concurrency Control (MVCC)](https://www.pingcap.com/blog/2016-11-17-mvcc-in-tikv/), [Snapshot Isolation](https://en.wikipedia.org/wiki/Snapshot_isolation), and [Optimistic Transaction](https://en.wikipedia.org/wiki/Optimistic_concurrency_control).
+	* Transaction: As a distributed Key-Value database, TiKV also supports transaction and is ACID compliant. To maintain consistency among the Multi-raft groups, TiKV adopts an optimized [two-phase commit (2PC) protocol](https://en.wikipedia.org/wiki/Two-phase_commit_protocol) and supports [Multiversion Concurrency Control (MVCC)](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/), [Snapshot Isolation](https://en.wikipedia.org/wiki/Snapshot_isolation), and [Optimistic Transaction](https://en.wikipedia.org/wiki/Optimistic_concurrency_control).
 
 	* For different machines to communicate to each other, TiKV uses [gRPC](https://grpc.io/), a high-performance universal RPC framework. We develop a[ gRPC library for Rust built on C Core library and futures](https://github.com/pingcap/grpc-rs).
 
@@ -61,7 +61,7 @@ Our team has big plans beyond just building a full-featured distributed transact
 
 *Architecture of TiDB, a Hybrid Transactional/Analytical Processing (HTAP) database*
 
-TiKV, TiDB, and TiSpark have been widely adopted in production environments by companies, ranging from e-commerce and gaming to financial services and bike-sharing. We are working to publish specific use case stories from our customers soon, and the best way to receive them is to subscribe to our [blog](https://www.pingcap.com/blog/). Stay tuned for more!
+TiKV, TiDB, and TiSpark have been widely adopted in production environments by companies, ranging from e-commerce and gaming to financial services and bike-sharing. We are working to publish specific use case stories from our customers soon, and the best way to receive them is to subscribe to our [blog](https://pingcap.com/blog/). Stay tuned for more!
 
 Last but not least, we welcome everyone to fork, star, use, and contribute to the following projects that we’ve written in Rust for TiKV:
 

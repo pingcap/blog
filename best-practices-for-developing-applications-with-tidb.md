@@ -11,7 +11,7 @@ categories: ['MySQL Scalability']
 
 Target audience: Database architects, database administrators, infrastructure engineers, or application developers.
 
-As an open source distributed database, in most cases, TiDB can serve as a scale-out MySQL database without manual sharding. However, because of its distributed nature, there are some differences between traditional relational databases like MySQL and TiDB. For detailed information, see [TiDB Compatibility with MySQL](https://www.pingcap.com/docs/dev/reference/mysql-compatibility/). 
+As an open source distributed database, in most cases, TiDB can serve as a scale-out MySQL database without manual sharding. However, because of its distributed nature, there are some differences between traditional relational databases like MySQL and TiDB. For detailed information, see [TiDB Compatibility with MySQL](https://pingcap.com/docs/dev/reference/mysql-compatibility/). 
 
 This article shows you how to efficiently develop high-quality applications with TiDB. You'll get an in-depth look at several TiDB features that will save you hours of work and prevent some common coding errors. You'll also learn important best practices from the many TiDB users that have come before you.
 
@@ -23,7 +23,7 @@ This section is an in-depth look at transaction-related issues in TiDB and provi
 
 ### 2.1 Snapshot isolation in TiDB: Jepsen tested! And a few caveats 
 
-TiDB supports snapshot isolation (SI) as is shown in [TiDB Passes Jepsen Test for Snapshot Isolation and Single-Key Linearizability](https://www.pingcap.com/blog/tidb-passes-jepsen-test-for-snapshot-isolation-and-single-key-linearizability/). For more information about the TiDB transaction model and translation level, see [Transaction Model](https://www.pingcap.com/docs/dev/reference/transactions/transaction-model/) and [TiDB Transaction Isolation Levels](https://www.pingcap.com/docs/dev/reference/transactions/transaction-isolation/).
+TiDB supports snapshot isolation (SI) as is shown in [TiDB Passes Jepsen Test for Snapshot Isolation and Single-Key Linearizability](https://pingcap.com/blog/tidb-passes-jepsen-test-for-snapshot-isolation-and-single-key-linearizability/). For more information about the TiDB transaction model and translation level, see [Transaction Model](https://pingcap.com/docs/dev/reference/transactions/transaction-model/) and [TiDB Transaction Isolation Levels](https://pingcap.com/docs/dev/reference/transactions/transaction-isolation/).
 
 ### 2.2 Solution to hot record scenarios where the same row is modified concurrently
 

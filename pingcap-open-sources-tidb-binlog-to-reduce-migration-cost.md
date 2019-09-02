@@ -15,12 +15,12 @@ Many of our users have been using TiDB Binlog in-production for incremental back
 ![TiDB Binlog Architecture](media/tidb_binlog_cluster.png)
 <center> *TiDB Binlog Architecture* </center>
 
-(For more detailed information on the architectural design and implementation of TiDB Binlog, read this deep-dive [blog post](https://www.pingcap.com/blog/tidb-binlog-architecture-evolution-and-implementation-principles/).)
+(For more detailed information on the architectural design and implementation of TiDB Binlog, read this deep-dive [blog post](https://pingcap.com/blog/tidb-binlog-architecture-evolution-and-implementation-principles/).)
 
 ## Why Open-Source TiDB Binlog?
 
 TiDB Binlog has become a popular tool among our users, as TiDB itself continues to gain popularity. Whether it's replicating data between two data centers to provide disaster recovery, or evaluating TiDB in a more risk-free manner, TiDB Binlog is an essential part of that experience. In order to deliver better testing and in-production experience to more users, we believe open-sourcing it is the best approach. As a company that lives and breathes the open-source ethos, we firmly believe that more openness in general is always better than less.
 
-To help you "kick the tires" now, we've put together [this tutorial](https://www.pingcap.com/docs/dev/how-to/get-started/tidb-binlog/) to help you deploy and get a feel for how TiDB Binlog operates.
+To help you "kick the tires" now, we've put together [this tutorial](https://pingcap.com/docs/dev/how-to/get-started/tidb-binlog/) to help you deploy and get a feel for how TiDB Binlog operates.
 
 We look forward to your issues, PRs, and contributions. As always, we appreciate everything our open-source community has done to make TiDB what it is today.

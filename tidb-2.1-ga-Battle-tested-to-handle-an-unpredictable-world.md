@@ -13,9 +13,9 @@ Today, we are proud to announce that TiDB 2.1 is ready for General Availability.
 
 ## From 2.0 to 2.1
 
-Since we [launched TiDB 2.0](https://www.pingcap.com/blog/tidb-2-0-announcement/) back in April 2018, we’ve seen an incredible pace of adoption. [Hundreds of companies](https://pingcap.com/success-stories/) now use TiDB in production, serving millions of users in industries from banking, fintech, and insurance, to food delivery, ridesharing, and gaming. The largest cluster has more than 100 nodes storing 100+ TB of data. Workloads range from pure OLTP, to pure OLAP, to a hybrid mixture of both. In addition, some customers are taking advantage of TiDB’s modular architecture by just using [TiKV](https://github.com/tikv/tikv), the distributed transactional key-value store (now a [Cloud Native Computing Foundation member project](https://www.cncf.io/blog/2018/08/28/cncf-to-host-tikv-in-the-sandbox/)) to unify data storage. 
+Since we [launched TiDB 2.0](https://pingcap.com/blog/tidb-2-0-announcement/) back in April 2018, we’ve seen an incredible pace of adoption. [Hundreds of companies](https://pingcap.com/success-stories/) now use TiDB in production, serving millions of users in industries from banking, fintech, and insurance, to food delivery, ridesharing, and gaming. The largest cluster has more than 100 nodes storing 100+ TB of data. Workloads range from pure OLTP, to pure OLAP, to a hybrid mixture of both. In addition, some customers are taking advantage of TiDB’s modular architecture by just using [TiKV](https://github.com/tikv/tikv), the distributed transactional key-value store (now a [Cloud Native Computing Foundation member project](https://www.cncf.io/blog/2018/08/28/cncf-to-host-tikv-in-the-sandbox/)) to unify data storage. 
 
-We’ve also launched [TiDB Academy](https://www.pingcap.com/tidb-academy/), a series of self-paced technical training courses and certifications on TiDB and distributed databases, and [TiDB Cloud](https://www.pingcap.com/tidb-cloud/), to enable more customers to easily use TiDB in any cloud environment, either as a fully-managed service delivered by PingCAP or on a public marketplace.
+We’ve also launched [TiDB Academy](https://pingcap.com/tidb-academy/), a series of self-paced technical training courses and certifications on TiDB and distributed databases, and [TiDB Cloud](https://pingcap.com/tidb-cloud/), to enable more customers to easily use TiDB in any cloud environment, either as a fully-managed service delivered by PingCAP or on a public marketplace.
 
 What’s exciting isn’t just the rate of adoption, but also the multitude of real-world scenarios that TiDB is exposed to and must navigate with resilience and grace. In the last few months, TiDB has had to handle challenges like cross-data center disaster recovery, six-figure throughput requirement, [massive traffic spike on Singles’ Day](https://twitter.com/pingcap/status/1061679993040834560) (one of the largest online shopping holidays in the world), hardware and network failures, and more. 
 
@@ -23,7 +23,7 @@ In short, the PingCAP team has seen a lot of unpredictable unknowns as we suppor
 
 ## What’s New in TiDB 2.1
 
-There are many new features, improvements, and enhancements in 2.1. To check out the full list, please see the [official 2.1 GA release notes](https://www.pingcap.com/docs/releases/2.1ga/), but here are some major highlights: 
+There are many new features, improvements, and enhancements in 2.1. To check out the full list, please see the [official 2.1 GA release notes](https://pingcap.com/docs/releases/2.1ga/), but here are some major highlights: 
 
 ### Smarter Optimizer
 
@@ -56,7 +56,7 @@ Timely update of the latest statistics to TiDB’s CBO is very important for gen
 
 Here’s how it works in brief: when TiDB first generates a query plan, it will do so based on existing statistics generated from previous queries to estimate the amount of data involved in the query to be processed. After this query is processed, TiDB will measure how much data was actually involved. Depending on the difference between the estimate and the actual, TiDB will automatically update the system, including both the histogram and the CM-sketch. Based on our internal testing, for a table with no previous statistics available, it takes about 10 rounds of queries worth of updates, before TiDB can generate the most optimal and efficient query plan consistently.
 
-Besides dynamic statistics update, 2.1 also adds additional support for auto analyze (see details in [our documentation](https://www.pingcap.com/docs/sql/statistics/#automatic-update)), so depending on the ratio of the number of modified rows to the total number of rows, TiDB can automatically execute ANALYZE to update the statistics of that table.
+Besides dynamic statistics update, 2.1 also adds additional support for auto analyze (see details in [our documentation](https://pingcap.com/docs/sql/statistics/#automatic-update)), so depending on the ratio of the number of modified rows to the total number of rows, TiDB can automatically execute ANALYZE to update the statistics of that table.
 
 ### Concurrent DDL
 
@@ -68,7 +68,7 @@ In 2.1, we have revamped TiDB’s online DDL process to completely separate Add 
 
 EXPLAIN is a very important tool for debugging and diagnosing queries. Before 2.1, TiDB generally followed MySQL’s EXPLAIN format, but as queries become more complex, this format became less useful, because it doesn’t easily show each layer of subqueries to help with diagnosing issues. 
 
-In 2.1, we improved TiDB’s EXPLAIN to display information in each layer of operation of a complex query in a format that’s more readable at a glance, so users can quickly spot, troubleshoot, and identify potential problems in their queries. This [section of our documentation](https://www.pingcap.com/docs/sql/understanding-the-query-execution-plan/) explains how the new EXPLAIN works in more detail. 
+In 2.1, we improved TiDB’s EXPLAIN to display information in each layer of operation of a complex query in a format that’s more readable at a glance, so users can quickly spot, troubleshoot, and identify potential problems in their queries. This [section of our documentation](https://pingcap.com/docs/sql/understanding-the-query-execution-plan/) explains how the new EXPLAIN works in more detail. 
 
 In addition, users can now also use EXPLAIN ANALYZE to see additional execution statistics while a query is being executed, to investigate every operation’s execution time and the amount of data involved. With these improvements, debugging and diagnosing query issues in TiDB is easier than ever before.   
 
@@ -116,7 +116,7 @@ With these three tools in hand, you can easily migrate in and out of TiDB from y
 
 TiDB 2.1 simply would not be possible with the help and support of an increasingly vibrant TiDB open source community. We firmly believe that for TiDB to become a core infrastructure technology that can help its users handle an unpredictable world, the open source way is the only way forward to achieve that goal. And our community has more than validated our belief, with bug fixes, issue reports, and valuable contributions in every corner of this release. 
 
-Since the 2.0 release in April, we celebrated our [200 contributors milestone](https://www.pingcap.com/blog/tidb-community-200-contributors/) in the TiDB repo and welcomed 87 new contributors in different repos in the entire TiDB platform, including one from Tencent [who contributed 76 PRs](https://github.com/pingcap/tidb/commits?author=spongedu); he is now our newest TiDB committer. 
+Since the 2.0 release in April, we celebrated our [200 contributors milestone](https://pingcap.com/blog/tidb-community-200-contributors/) in the TiDB repo and welcomed 87 new contributors in different repos in the entire TiDB platform, including one from Tencent [who contributed 76 PRs](https://github.com/pingcap/tidb/commits?author=spongedu); he is now our newest TiDB committer. 
 
 We’ve made design documents for both [TiDB](https://github.com/pingcap/tidb/wiki/Design-Documents) and [TiKV](https://github.com/tikv/rfcs) public, as well as specific feature development processes publicly available via GitHub Issue and Project, to encourage community participation. We will also open up the planning discussion of certain features to the community via video conference to better incorporate community input. You can check out what’s currently [in store here](https://github.com/pingcap/community/blob/master/proposals.md).
 
@@ -126,4 +126,4 @@ We are forever grateful and indebted to our open source community for always fue
 
 Phew! That’s a long post and a lot of features and updates, each one probably deserving of its own blog post. Rest assured, our team is preparing deep dives on all of them, so stay tuned. 
 
-One more thing, if you are an existing 2.0 user, make sure you check out the [official 2.1 GA release notes](https://www.pingcap.com/docs/releases/2.1ga/) for tips and guidance on upgrading to the best TiDB yet. Thank you.
+One more thing, if you are an existing 2.0 user, make sure you check out the [official 2.1 GA release notes](https://pingcap.com/docs/releases/2.1ga/) for tips and guidance on upgrading to the best TiDB yet. Thank you.

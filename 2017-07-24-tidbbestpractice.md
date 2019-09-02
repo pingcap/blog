@@ -152,7 +152,7 @@ In the last section, we discussed some basic implementation mechanisms of TiDB a
 
 ### <span id="deploy"> Deployment</span>
 
-Please read [Software and Hardware Requirements](https://www.pingcap.com/docs/op-guide/recommendation/) before deployment.
+Please read [Software and Hardware Requirements](https://pingcap.com/docs/op-guide/recommendation/) before deployment.
 
 It is recommended to deploy the TiDB cluster through [TiDB Ansible](https://pingcap.com/docs/op-guide/ansible-deployment/). This tool can deploy, stop, destroy, and update the whole cluster, which is quite convenient.
 
@@ -162,7 +162,7 @@ If there is a Unique Key and if the business end can ensure that there is no con
 
 `SET @@session.tidb_skip_constraint_check=1;`
 
-In order to improve the write performance, you can tune TiKV’s parameters as stated in [this document](https://www.pingcap.com/docs/op-guide/tune-tikv/).
+In order to improve the write performance, you can tune TiKV’s parameters as stated in [this document](https://pingcap.com/docs/op-guide/tune-tikv/).
 
 Please pay extra attention to this parameter:
 
@@ -215,7 +215,7 @@ If the business scenario needs both OLTP and OLAP, you can send the TP request a
 
 ### <span id="log">Monitoring and Log</span>
 
-TiDB uses [Grafana+Prometheus to monitor the system state](https://www.pingcap.com/docs/op-guide/monitor-overview/). The monitoring system is automatically deployed and configured if using TiDB Ansible.
+TiDB uses [Grafana+Prometheus to monitor the system state](https://pingcap.com/docs/op-guide/monitor-overview/). The monitoring system is automatically deployed and configured if using TiDB Ansible.
 
 There are lots of items in the monitoring system, the majority of which are for TiDB developers. There is no need to understand these items but for an in-depth knowledge of the source code. We’ve picked out some items that are related to business or to the state of system key components in a separate panel for users.
 
@@ -223,11 +223,11 @@ In addition to monitoring, you can also view the system logs. The three componen
 
 ### <span id="doc">Documentation</span>
 
-TiDB has a large number of official documents either in [Chinese](https://www.pingcap.com/docs-cn/) or [English](https://www.pingcap.com/docs/). You can also search the issue list for a solution.
+TiDB has a large number of official documents either in [Chinese](https://pingcap.com/docs-cn/) or [English](https://pingcap.com/docs/). You can also search the issue list for a solution.
 
-If you have met an issue, you can start from the [FAQ](https://www.pingcap.com/docs/FAQ/) and [Troubleshooting](https://www.pingcap.com/docs/trouble-shooting/) sections. If the issue is not documented, please [file an issue](https://github.com/pingcap/tidb/issues/new).
+If you have met an issue, you can start from the [FAQ](https://pingcap.com/docs/FAQ/) and [Troubleshooting](https://pingcap.com/docs/trouble-shooting/) sections. If the issue is not documented, please [file an issue](https://github.com/pingcap/tidb/issues/new).
 
-For more information, see [our website](https://www.pingcap.com/en/) and our [Technical Blog](https://www.pingcap.com/blog/).
+For more information, see [our website](https://pingcap.com/en/) and our [Technical Blog](https://pingcap.com/blog/).
 
 ### <span id="scenario">Best Scenarios for TiDB</span>
 

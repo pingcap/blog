@@ -9,7 +9,7 @@ categories: ['MySQL Scalability']
 
 Author: Li Shen (VP of Engineering at PingCAP)
 
-Earlier this year at the [2nd TiDB DevCon](https://pingcap.com/blog/tidb-3.0-beta-stability-at-scale/), we gave an audience of 700+ users and developers a sneak peek of what we were working on for TiDB 3.0. Since then, we've been racing towards the finish line and conducting rigorous testing, including the [official Jepsen test](https://www.pingcap.com/blog/tidb-passes-jepsen-test-for-snapshot-isolation-and-single-key-linearizability/). Today, I'm proud to announce that TiDB 3.0 has reached general availability. 
+Earlier this year at the [2nd TiDB DevCon](https://pingcap.com/blog/tidb-3.0-beta-stability-at-scale/), we gave an audience of 700+ users and developers a sneak peek of what we were working on for TiDB 3.0. Since then, we've been racing towards the finish line and conducting rigorous testing, including the [official Jepsen test](https://pingcap.com/blog/tidb-passes-jepsen-test-for-snapshot-isolation-and-single-key-linearizability/). Today, I'm proud to announce that TiDB 3.0 has reached general availability. 
 
 Our goal for 3.0 is to deliver stability at a massive scale, but "massive" means different things to different people. For us, it is the several hundreds of production users from all kinds of industries who have battle-tested TiDB with a multitude of real-world scenarios; for our users, we are talking about up to 300 TBs of data and 150+ physical nodes within a cluster. That's not a theoretical limit; it's the real in-production cluster size of our customers! Delivering stability at this scale is no small feat, but we are one giant step closer towards that goal. 
 
@@ -64,9 +64,9 @@ Besides the features we have described above and those we mentioned in [TiDB 3.0
 
 - TiDB 3.0 introduces an experimental feature for pessimistic locking to make transactions behave more similarly to that in MySQL. For more details, see [TiDB Pessimistic Transaction Mode](https://pingcap.com/docs/v3.0/reference/transactions/transaction-pessimistic/).
 
-- Inspired by [WiscKey](https://www.usenix.org/system/files/conference/fast16/fast16-papers-lu.pdf), Titan, a RocksDB plugin to reduce write amplification, is added for scenarios with value sizes greater than 1 KB, relieves write amplification in RocksDB, and decreases the disk I/O usage, see the [Engineering blog for its design and implementation](https://www.pingcap.com/blog/titan-storage-engine-design-and-implementation/).
+- Inspired by [WiscKey](https://www.usenix.org/system/files/conference/fast16/fast16-papers-lu.pdf), Titan, a RocksDB plugin to reduce write amplification, is added for scenarios with value sizes greater than 1 KB, relieves write amplification in RocksDB, and decreases the disk I/O usage, see the [Engineering blog for its design and implementation](https://pingcap.com/blog/titan-storage-engine-design-and-implementation/).
 
-For a full list of new features and improvements, I strongly encourage you to check out the [TiDB 3.0 GA release notes](https://www.pingcap.com/docs/v3.0/releases/3.0-ga/). If you'd like to upgrade from previous TiDB versions to 3.0, please see instructions here [TiDB 3.0 Upgrade Guide](https://www.pingcap.com/docs/v3.0/how-to/upgrade/from-previous-version/), and contact our team via email at info@pingcap.com or join our community [Slack channel](https://pingcap.com/tidbslack). 
+For a full list of new features and improvements, I strongly encourage you to check out the [TiDB 3.0 GA release notes](https://pingcap.com/docs/v3.0/releases/3.0-ga/). If you'd like to upgrade from previous TiDB versions to 3.0, please see instructions here [TiDB 3.0 Upgrade Guide](https://pingcap.com/docs/v3.0/how-to/upgrade/from-previous-version/), and contact our team via email at info@pingcap.com or join our community [Slack channel](https://pingcap.com/tidbslack). 
  
 TiDB 3.0 is the strongest version yet, and we are grateful for all the help, feedback, and support our users and community have given us. 
 
