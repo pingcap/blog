@@ -211,7 +211,7 @@ The following sketch shows how data returns layer by layer:
 
 ![How data returns layer by layer](media/dist-query.png)
 
-You can refer to [this article (in Chinese)](https://mp.weixin.qq.com/s?__biz=MzI3NDIxNTQyOQ==&mid=2247484187&idx=1&sn=90a7ce3e6db7946ef0b7609a64e3b423&chksm=eb162471dc61ad679fc359100e2f3a15d64dd458446241bff2169403642e60a95731c6716841&scene=4) to know how TiDB makes the SQL statement run faster.
+You can refer to [MPP and SMP in TiDB (in Chinese)](https://mp.weixin.qq.com/s?__biz=MzI3NDIxNTQyOQ==&mid=2247484187&idx=1&sn=90a7ce3e6db7946ef0b7609a64e3b423&chksm=eb162471dc61ad679fc359100e2f3a15d64dd458446241bff2169403642e60a95731c6716841&scene=4) to know how TiDB makes the SQL statement run faster.
 
 ### <span id="sqlarch">Architecture of the SQL Layer</span>
 The previous sections introduce some functions of the SQL layer and I hope you have a basic idea about how to process the SQL statement. Actually, TiDB’s SQL Layer is much complicated and has lots of modules and layers. The following diagram lists all important modules and the call relation:
