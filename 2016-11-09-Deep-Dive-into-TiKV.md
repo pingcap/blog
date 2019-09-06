@@ -75,7 +75,7 @@ There are following ways for external applications to connect to TiKV:
 
 # Raft
 
-TiKV uses the Raft algorithm to ensure the data consistency in the distributed systems. For more information, see [https://raft.github.io/](https://raft.github.io/).
+TiKV uses the Raft algorithm to ensure the data consistency in the distributed systems. For more information, see [The Raft Consensus Algorithm](https://raft.github.io/).
 
 The Raft in TiKV is completely migrated from etcd. We chose etcd Raft because it is very simple to implement, very easy to migrate and it is production proven.
 

@@ -238,7 +238,7 @@ Finally, we narrowed down to a DeleteRange function in RocksDB and reviewed it a
 
 ## The End
 
-The RocksDB team reacted quickly and released a bugfix version for us, we highly appreciate that. However, it turns out the DeleteRange feature cannot work well with another delete files in range feature we are using now (see this [issue](https://github.com/facebook/rocksdb/issues/2833)), and both the features are kind of dangerous, so we still need to wait and test them thoroughly.
+The RocksDB team reacted quickly and released a bugfix version for us, we highly appreciate that. However, it turns out the DeleteRange feature cannot work well with another delete files in range feature we are using now (see [issue: overlapped files of delete range](https://github.com/facebook/rocksdb/issues/2833)), and both the features are kind of dangerous, so we still need to wait and test them thoroughly.
 
 RocksDB plays a significant role in TiKV, thanks for the support from the RocksDB team and their great work. We are happy to help to improve the stability and performance in the future. 
 
