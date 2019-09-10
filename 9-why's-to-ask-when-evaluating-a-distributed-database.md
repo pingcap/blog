@@ -9,7 +9,7 @@ categories: ['Engineering']
 
 When I first started building [TiDB](http://bit.ly/tidb_repo_publication) with my co-founders, we encountered countless challenges, pitfalls, and critical design choices that could have made or broken the project. To build an enterprise-grade distributed database like TiDB from scratch, we have to constantly make difficult decisions that balance the speed of development with long-term considerations for our customers and our team. 
 
-Three years and two big releases later, [TiDB 2.0](http://bit.ly/tidb_2_0) is now deployed in-production in [more than 200 companies](http://bit.ly/adopters_list). Along the way, our team answered many questions from our users as they evaluated TiDB and other distributed databases. Choosing what to use in your infrastructure stack is an important decision and not an easy one. So I’ve gathered our learning from over the years, and summarized them into the following “9 why’s” that every engineer should ask when looking at a distributed database. Hopefully, this list can make your decision-making a bit easier. 
+Three years and two big releases later, [TiDB 2.0](http://bit.ly/tidb_2_0) is now deployed in-production in [more than 200 companies](https://pingcap.com/docs/v3.0/adopters/). Along the way, our team answered many questions from our users as they evaluated TiDB and other distributed databases. Choosing what to use in your infrastructure stack is an important decision and not an easy one. So I’ve gathered our learning from over the years, and summarized them into the following “9 why’s” that every engineer should ask when looking at a distributed database. Hopefully, this list can make your decision-making a bit easier. 
 
 ## 1. Why Distributed Database is Not a Silver Bullet?
 
