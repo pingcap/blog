@@ -106,7 +106,7 @@ message Peer {
 
 In terms of actual data storage, whether it’s Raft Metadata, Log or the data in State Machine, we store them inside a RocksDB instance. More information about RocksDB, please refer to [the RocksDB project on GitHub](https://github.com/facebook/rocksdb).
 
-We use different prefixes to differentiate data of Raft and State Machine. For detailed information, please refer to [raftstore/store/keys.rs](https://github.com/pingcap/tikv/blob/master/src/raftstore/store/keys.rs). As for the actual data of State Machine, we add "z" as the prefix and for other metadata stored locally, including Raft, we use the 0x01 prefix.
+We use different prefixes to differentiate data of Raft and State Machine. For detailed information, please refer to [keys/src/lib.rs](https://github.com/tikv/tikv/blob/master/components/keys/src/lib.rs). As for the actual data of State Machine, we add "z" as the prefix and for other metadata stored locally, including Raft, we use the 0x01 prefix.
 
 I want to highlight the Key format of some important metadata and I’ll skip the first 0x01 prefix.
 
