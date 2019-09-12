@@ -15,7 +15,7 @@ At the crack of dawn on February 1, I landed in Brussels, Belgium, for the first
 
 *People lining up to listen to their favorite Rust talk. Photo credit: Andrew Hobden*
 
-You can find the slides of my presentation [here](https://fosdem.org/2018/schedule/event/rust_distributed_kv_store/attachments/slides/2034/export/events/attachments/rust_distributed_kv_store/slides/2034/Siddon_Tang_Use_Rust_to_Build_a_Distributed_Transactional_Key_Value_Database.pdf) and the full video [here](https://ftp.osuosl.org/pub/fosdem/2018/H.2214/rust_distributed_kv_store.mp4). But we are all busy people, so just in case you don’t have time to go through it all, here’s a summary of the highlights and where you can go learn more!
+You can find the [slides of my presentation here](https://fosdem.org/2018/schedule/event/rust_distributed_kv_store/attachments/slides/2034/export/events/attachments/rust_distributed_kv_store/slides/2034/Siddon_Tang_Use_Rust_to_Build_a_Distributed_Transactional_Key_Value_Database.pdf). But we are all busy people, so just in case you don’t have time to go through it all, here’s a summary of the highlights and where you can go learn more!
 
 Building TiKV, a distributed key-value store with Rust
 
