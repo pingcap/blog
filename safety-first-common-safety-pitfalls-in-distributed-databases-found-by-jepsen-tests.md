@@ -10,13 +10,13 @@ categories: ['Engineering']
 ![Jepsen Offers System-Wide Approach to Testing Databases at Scale](media/jepsen-offers-system-wide-approach-to-testing-databases-at-scale.png)
 <center> Image source: [Jepsen Offers System-Wide Approach to Testing Databases at Scale](https://thenewstack.io/jepsen-offers-system-wide-approach-testing-databases-scale/) </center> 
 
-When [Jepsen](https://jepsen.io/) appeared in the industry several years ago we couldn’t have been happier. Finally, an approachable, understandable reliability testing framework along with an enjoyable and rigorous library of analyses of popular databases.
+When [Jepsen](https://jepsen.io/) appeared in the industry several years ago we couldn't have been happier. Finally, an approachable, understandable reliability testing framework along with an enjoyable and rigorous library of analyses of popular databases.
 
 Jepsen is an umbrella term for the software library, collection of articles, and service of the same name. Together, the project pushes distributed systems to be more accurate in their claims and more thorough in their testing.
 
-It’s been indispensable for battle-testing TiDB, our distributed NewSQL database, as we deploy it in some of the largest technology companies in the world.
+It's been indispensable for battle-testing TiDB, our distributed NewSQL database, as we deploy it in some of the largest technology companies in the world.
 
-This article is, in many ways, a love letter to one of our favorite projects. We’ll talk about [why it’s important](#why-is-jepsen-so-important-to-our-industry), [how it works](#how-does-jepsen-work), [common issues found](#commonly-found-problems), [how we use Jepsen](#how-we-use-jepsen-with-tidb), and finally we included a really [short summary of all the problems Jepsen has found](#appendix-i).
+This article is, in many ways, a love letter to one of our favorite projects. We'll talk about [why it's important](#why-is-jepsen-so-important-to-our-industry), [how it works](#how-does-jepsen-work), [common issues found](#commonly-found-problems), [how we use Jepsen](#how-we-use-jepsen-with-tidb), and finally we included a really [short summary of all the problems Jepsen has found](#appendix-i).
 
 In the rest of this article, and in any Jepsen analyses you might find, you're going to find a lot of database jargon. Jepsen has our back! [Located here](https://jepsen.io/consistency) you can see definitions and explanations of many of these terms.
 
@@ -24,7 +24,7 @@ We'll refer to [*serializability*](https://jepsen.io/consistency/models/serializ
 
 ## Why is Jepsen so important to our industry?
 
-Testing a distributed system like [TiDB](https://en.wikipedia.org/wiki/TiDB) isn't easy! Because these systems depend on multiple nodes coordinating there is a lot of room for failures. Networks and hardware aren’t reliable, and when multiple nodes are involved, the probability of failure is much higher. Even still, deployments (and even nodes!) are highly variable in scale, OS, hardware, and workloads. It’s impossible to test all of them.
+Testing a distributed system like [TiDB](https://en.wikipedia.org/wiki/TiDB) isn't easy! Because these systems depend on multiple nodes coordinating there is a lot of room for failures. Networks and hardware aren't reliable, and when multiple nodes are involved, the probability of failure is much higher. Even still, deployments (and even nodes!) are highly variable in scale, OS, hardware, and workloads. It's impossible to test all of them.
 
 Is all hope lost? No! In [Why Is Random Testing Effective for Partition Tolerance Bugs?](https://people.mpi-sws.org/~fniksic/popl2018/paper.pdf) Majumdar and Niksic formalized many failure scenarios and discussed how even a small, random subset of possibilities can be sufficient to achieve a specific coverage goal.
 
@@ -40,7 +40,7 @@ This is great. This is the goal:
 
 > Jepsen is an effort to improve the safety of distributed databases, queues, consensus systems, etc. 
 
-- [The Jepsen website](https://jepsen.io/)
+-- [The Jepsen website](https://jepsen.io/)
 
 When a project wishes to improve themselves, a Jepsen analysis places the Jepsen framework in the hands of an expert operator who improves and expands the test suite. Often this involves adding aggressive failure scenarios or entirely new complex tests.
 
@@ -48,7 +48,7 @@ When a project wishes to improve themselves, a Jepsen analysis places the Jepsen
 
 The tool itself, also called Jepsen, is a Clojure framework used to set up distributed systems tests, run operations against them, and verify the operation history is sane and possible given the claims of the project. Then, it can generate some nice graphs out of that data.
 
-> It’s kind of like a really flexible failure-injecting fuzzer.
+> It's kind of like a really flexible failure-injecting fuzzer.
 
 In many cases, Jepsen tests for *linearizability* by using [Knossos](https://github.com/jepsen-io/knossos) to prove that a given history (from a test) is non-linearizable. Jepsen also frequently tests for timing-related issues using [libfaketime](https://github.com/jepsen-io/libfaketime) to create clock skew.
 
@@ -91,7 +91,7 @@ Common tests include:
 
 In addition to these tests, Jepsen uses *Nemeses*, an error injection tool which introduces failures to a system. A Nemesis can create partitions, fail processes, and cause other types of actions.
 
-Here’s an example of some nemeses that do partitioning:
+Here's an example of some nemeses that do partitioning:
 
 * `partition-halves`: Cuts the network into two halves, a majority and a minority.
 * `random-partition-halves`: Cuts the network into two randomly chosen halves.
