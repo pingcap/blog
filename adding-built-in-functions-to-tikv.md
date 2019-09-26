@@ -20,13 +20,13 @@ So follow along this guide to contribute a built-in MySQL function to TiKV in Ru
 
 Before diving into our step-by-step guide on how to contribute, it’s worth understanding how TiDB’s Coprocessor works at a high-level. After TiDB receives a SQL statement, it parses the statement into an abstract syntax tree (AST), then generates an optimal execution plan using its Cost-Based Optimizer. (Learn more details on how TiDB generates a query plan [HERE](https://pingcap.com/docs/sql/understanding-the-query-execution-plan/).) The execution plan is split into multiple subtasks and the Coprocessor API pushes down these subtasks to different TiKV nodes to be processed in parallel.
 
-Here’s an illustration on how a statement like `select count(*) from t where a + b > 5` gets pushed down:    
+Here’s an illustration on how a statement like `select count(*) from t where a + b > 5` gets pushed down:
 
-![Pushing Down a Statement](https://upload-images.jianshu.io/upload_images/542677-5e242bc6212f6b8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![Pushing Down a Statement](/media/pushing-down-a-statement.png)
 
 After TiKV receives these subtask expressions, the following steps are performed in a loop:
 
-1. Obtain the complete data of the next row, parse and decode the data record based on the requested columns. 
+1. Obtain the complete data of the next row, parse and decode the data record based on the requested columns.
 
 2. Use the predicate specified in the `where` clause to filter data.
 
@@ -77,8 +77,7 @@ Take [`MultiplyIntUnsigned`](https://github.com/pingcap/tikv/pull/3277) as an ex
 
 4. All the arguments of the `builtin-in` function should be consistent with that of the `eval` function of the expression:
 
-    * The statement context is `ctx:&StatementContext`         
-
+    * The statement context is `ctx:&StatementContext`
     * The value of each column in this row is `row: &[Datum]`
 
 Putting all this together, the definition of the pushdown function `multiply_int_unsigned` should look like this:
@@ -95,7 +94,7 @@ Putting all this together, the definition of the pushdown function `multiply_int
 
     ) -> Result<Option<i64>>
 
-``` 
+```
 
 ### Step 4: Implement the function logic
 
@@ -141,7 +140,7 @@ func (s *builtinArithmeticMultiplyIntUnsignedSig) evalInt(row types.Row) (val in
 
 ```
 
-To implement the same function in Rust for TiKV, it should be: 
+To implement the same function in Rust for TiKV, it should be:
 
 ```rust
 
@@ -173,13 +172,13 @@ To implement the same function in Rust for TiKV, it should be:
 
 ### Step 5: Add argument check
 
-When TiKV receives a pushdown request, it checks all the expressions first including the number of the expression arguments.  
+When TiKV receives a pushdown request, it checks all the expressions first including the number of the expression arguments.
 
 In TiDB, there is a strict limit for the number of arguments in each built-in function. For the number of arguments, see [`builtin.go`](https://github.com/pingcap/tidb/blob/master/expression/builtin.go) in TiDB.
 
 To add argument check:
 
-1. Go to [`scalar_function.rs`](https://github.com/tikv/tikv/blob/master/components/tidb_query/src/expr/scalar_function.rs ) in TiKV and find the `check_args` function of `ScalarFunc`. 
+1. Go to [`scalar_function.rs`](https://github.com/tikv/tikv/blob/master/components/tidb_query/src/expr/scalar_function.rs ) in TiKV and find the `check_args` function of `ScalarFunc`.
 
 2. Add the check for the number of the expression arguments as the implemented signatures do.
 
@@ -309,4 +308,3 @@ After you finish the above steps, you can file a PR for TiKV! After we merge, yo
 ### Wrapping Up
 
 We hope this guide provides an easy entry point to contributing to our Coprocessor, one of TiDB and TiKV’s core features. If you run into any issues or problems with this guide, please let us know on our [Twitter](https://twitter.com/PingCAP), [Reddit](https://www.reddit.com/r/tidb), [Stack Overflow](https://stackoverflow.com/questions/tagged/tikv), or [Google Group](https://groups.google.com/forum/#!forum/tidb-user). Look forward to seeing your PR, and once it’s merged, expect a special gift of gratitude from our team!
-
