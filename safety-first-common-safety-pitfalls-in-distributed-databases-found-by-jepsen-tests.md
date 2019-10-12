@@ -197,7 +197,7 @@ Strict serializability means that operations should appear to have some order co
 
 ### Error message compatibility
 
-In [ElasticSearch - 2014-06-15 - 1.1.0]((https://aphyr.com/posts/317-call-me-maybe-elasticsearch)) it was noted that different JVMs serialize classes differently (e.g., InetAddress), meaning it was possible clients and servers would be unable to correctly communicate error messages from a different node.
+In [ElasticSearch - 2014-06-15 - 1.1.0](https://aphyr.com/posts/317-call-me-maybe-elasticsearch) it was noted that different JVMs serialize classes differently (e.g., InetAddress), meaning it was possible clients and servers would be unable to correctly communicate error messages from a different node.
 
 This is [issue #3145](https://github.com/elastic/elasticsearch/issues/3145):
 
