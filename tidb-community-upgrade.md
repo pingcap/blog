@@ -22,7 +22,7 @@ The old community was mainly geared towards the TiDB Developer Group. The main r
 * Committer: Recommended by Maintainer or PMC as a Contributor who has made a significant contribution to TiDB. Must have completed at least one feature or fixed a major bug.
 
 * Maintainer: The planner and designer of the project, with the right to merge branches into the master, generated from Committer. A Maintainer should:
-    
+
     - demonstrate good judgment and sense of responsibility for the health of the subprojects
     - set up the technical direction directly or by delegating the responsibilities
     - make or approve design decisions for the subprojects
