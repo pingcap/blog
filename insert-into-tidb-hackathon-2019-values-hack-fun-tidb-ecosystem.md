@@ -25,7 +25,7 @@ So without further ado, here are the top 3 winners!
 
 **Project:** Unified Thread Pool
 
-**Comment:** There are following issues in [TiKV](https://tikv.org/)could use some improvements:
+**Comment:** There are following issues in [TiKV](https://tikv.org/) could use some improvements:
 
 * TiKV (TiDB’s storage engine) has too many thread pools. If you switch among threads too frequently, performance declines.
 * Big queries impact small queries.
@@ -113,6 +113,6 @@ To accelerate participants’ performance, we had mentors standing by field ques
 
 ## What’s next
 
-Stay tuned to this blog, because our winning teams are going to share more details of their excellent project. If you’re interested in one of the projects, you’re warmly welcomed to join in our open-source community. [Slack](https://pingcap.com/tidbslack)channel is always open for you to contact our engineers. Want to contribute your ideas to the next Hackathon? Feel free to shoot a DM to our [Twitter](https://twitter.com/PingCAP). 
+Stay tuned to this blog, because our winning teams are going to share more details of their excellent project. If you’re interested in one of the projects, you’re warmly welcomed to join in our open-source community. [Slack](https://pingcap.com/tidbslack) channel is always open for you to contact our engineers. Want to contribute your ideas to the next Hackathon? Feel free to shoot a DM to our [Twitter](https://twitter.com/PingCAP). 
 
 See you next year!
