@@ -1,7 +1,7 @@
 ---
-title: New Structure, New Roles - TiDB Community Upgrade！
+title: New Structure, New Roles - TiDB Community Upgrade!
 author: ['Jian Zhang']
-date: 2019-10-22
+date: 2019-10-30
 summary: Four years of development has seen the TiDB community gradually grow into maturity. However, as the community expands, some shortcomings begin to loom out of the current community structure. After a series of reflections and summaries, we decided to upgrade and adjust the current community organization structure, with more community roles and community organizations introduced to better stimulate the vitality of the community and maintain a positive and healthy community environment.
 tags: ['TiDB','Open Source Community']
 categories: ['Open Source Community']
