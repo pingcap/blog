@@ -39,7 +39,7 @@ As TiDB becomes maturer, the TiDB user community is growing stronger. The feedba
 
 <center>Figure 2. New Community Structure - User Group</center>
 
-The TiDB User Group (TUG) is an independent, non-profit, third-party organization sponsored and managed by TiDB users to enhance communication and learning among the community. The operation forms of TUG include, but are not limited to, online Q&A and technical article sharing, offline technical salons, visits to famous companies, official interactive events and so on. TUG members can learn cutting-edge technical knowledge, publish technical insights, and jointly build TiDB projects through online and offline activities. More information can be found on the TUG Q&A forum [asktug.com](https://asktug.com).
+The TiDB User Group (TUG) is an independent, non-profit, third-party organization sponsored and managed by TiDB users to enhance communication and learning among the community. The operation forms of TUG include, but are not limited to, online Q&A and technical article sharing, offline technical salons, visits to famous companies, official interactive events and so on. TUG members can learn cutting-edge technical knowledge, publish technical insights, and jointly build TiDB projects through online and offline activities. More information can be found on the TUG Q&A forum at [asktug.com](https://asktug.com).
 
 ### Change 2: Active Contributor and Reviewer
 
@@ -74,7 +74,7 @@ In addition, this picture also reflects the relationship between community roles
 2. Reviewer
     + Must belong to a SIG; has the obligation to review PRs.
     + Generated from Active Contributors. When an Active Contributor has significant contributions to the module and is nominated by 2 or more Committers, he/she will be invited to be a Reviewer of the module.
-    + Has valid sign-off (approval with Looks Good To Me, or LGTM) for code reviews of the module)
+    + Has valid sign-off (approval with Looks Good To Me, or LGTM) for code reviews of the module
 
         > **Note:**
         >
