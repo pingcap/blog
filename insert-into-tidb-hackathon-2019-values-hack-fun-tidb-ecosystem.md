@@ -10,7 +10,7 @@ categories: ['Open Source Community']
 
 The weekend of Oct. 26 and 27 saw a bunch of hackers and geeks gather in three PingCAP offices in Beijing, Shanghai, and Guangzhou. They were summoned by TiDB Hackathon 2019 and the fun of hacking!
 
-During the two days of hacking, we were amazed to see 39 awesome projects from 39 teams. Great new ideas sparkled in the TiDB universe, and it was hard to decide which team would win the trophy. 
+During the two days of hacking, we were amazed to see 37 awesome projects from 37 teams. Great new ideas sparkled in the TiDB universe, and it was hard to decide which team would win the trophy. 
 
 Our PingCAP customers will benefit from all this hacking because the theme of this year’s event was "Improve." Some participants worked to improve TiDB’s performance, usability or functionality. Other hackers focused on improving the efficiency of TiDB Ecosystem tools. 
 
