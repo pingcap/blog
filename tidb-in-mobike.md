@@ -145,11 +145,11 @@ To resolve this issue, we collaborated with the PingCAP team and accomplished th
 
 ### **Optimization 2: Resource Isolation at Table Level**
 
-We added mapping relations between the TableID and NameSpace, as well as NameSpace and TiKV Store to the [table directory](https://github.com/pingcap/pd/tree/master/table) in PD. The mapping relations is written and persisted in etcd to ensure security. Now, whenever new data is inserted, we can get the TableID from TiDB layer and then find the TiKV address of the target Region by PD to ensure that the new data is not placed in other TiKV nodes. Additionally, we have worked with the PingCAP team and built a NameSpace scheduler to reschedule the unstructured Regions to the TiKV servers where they should be, thus guaranteeing no data interference at table level.
+We added mapping relations between the TableID and NameSpace, as well as NameSpace and TiKV Store to the [table directory](https://github.com/pingcap/pd/tree/release-1.1/table) in PD. The mapping relations is written and persisted in etcd to ensure security. Now, whenever new data is inserted, we can get the TableID from TiDB layer and then find the TiKV address of the target Region by PD to ensure that the new data is not placed in other TiKV nodes. Additionally, we have worked with the PingCAP team and built a NameSpace scheduler to reschedule the unstructured Regions to the TiKV servers where they should be, thus guaranteeing no data interference at table level.
 
 ### **Optimization 3: Management Tool**
 
-To manage the NameSpace, we developed a specific management tool. Fortunately, TiDB was designed flexibly enough, so to accomplish this optimization,  we just need to call the related API to get the TableID by the table name via the original TiDB interface. We added an [HTTP interface](https://github.com/pingcap/pd/blob/master/tools/pd-ctl/pdctl/command/table_namespace_command.go) to the command directory of [pd-ctl](https://github.com/pingcap/pd/tree/master/tools/pd-ctl), the PD command line management tool, to manage and verify the relations between Table Name and Table ID.
+To manage the NameSpace, we developed a specific management tool. Fortunately, TiDB was designed flexibly enough, so to accomplish this optimization,  we just need to call the related API to get the TableID by the table name via the original TiDB interface. We added an [HTTP interface](https://github.com/pingcap/pd/blob/release-1.1/pdctl/command/table_namespace_command.go) to the command directory of [pd-ctl](https://github.com/pingcap/pd/tree/master/tools/pd-ctl), the PD command line management tool, to manage and verify the relations between Table Name and Table ID.
 
 ## Conclusion
 
