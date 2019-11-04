@@ -29,7 +29,7 @@ However, as the business became more complex, and the amount of data kept increa
 
 We could use the master-slave model or sharding to relieve the problem, but it would be hard to implement application requirements.
 
-In this context, the big data technology represented by [Apache Hadoop](https://en.wikipedia.org/wiki/Apache_Hadoop) began to flourish. This technology builds a data analysis platform with many relatively inexpensive x86 machines, and uses parallel capabilities to solve computing problems of big data sets. In addition, architects **divide the storage system into two modules: online transactions and data analysis **. 
+In this context, the big data technology represented by [Apache Hadoop](https://en.wikipedia.org/wiki/Apache_Hadoop) began to flourish. This technology builds a data analysis platform with many relatively inexpensive x86 machines, and uses parallel capabilities to solve computing problems of big data sets. In addition, architects **divide the storage system into two modules: online transactions and data analysis**. 
 
 As shown in the following figure, the application data is extracted by the ETL tool, and then imported into a data analysis platform. The application database focuses on OLTP workloads, and the analysis platform on OLAP workloads.
 
@@ -46,7 +46,7 @@ The traditional data platform's architecture seems perfect, but it has the follo
 
 * **It can't guarantee data consistency**. Consistency is an important concept in the database field, and the database transaction is used to ensure consistency. If data is stored in two different systems, it is difficult to ensure data consistency. The query result of the OLAP system can't correctly correspond to the online transaction. Then, these two systems can't cooperate well. For example, users can't access the data of the two systems simultaneously in a single transaction. 
 
-Because of the above limitations for the traditional data processing platform, we developed TiDB**, **an open-source MySQL-compatible HTAP database, which serves as a one-stop solution for both OLTP and OLAP. Our users needn't worry about the complex architecture of the data platform, or feel anxious when they have to select a product from various OLTP-specific and OLAP-specific options.
+Because of the above limitations for the traditional data processing platform, we developed **TiDB**, an open-source MySQL-compatible HTAP database, which serves as a one-stop solution for both OLTP and OLAP. Our users needn't worry about the complex architecture of the data platform, or feel anxious when they have to select a product from various OLTP-specific and OLAP-specific options.
 
 ## Challenges in building an HTAP database
 
@@ -72,11 +72,11 @@ Inside the TiDB platform, the main components are as follows:
 
 * **[TiDB server](https://github.com/pingcap/tidb)** is a stateless SQL layer that processes users' SQL queries, accesses data in the storage layer, and returns the corresponding results to the application. It is MySQL-compatible and sits on top of TiKV.
 
-* **[TiKV server](https://github.com/pingcap/tikv) **is the distributed transactional key-value storage layer where the data persists. Designed specially for **processing OLTP workloads**, it uses the [Raft](https://raft.github.io/) consensus protocol for replication to ensure strong data consistency and high availability.
+* **[TiKV server](https://github.com/pingcap/tikv)** is the distributed transactional key-value storage layer where the data persists. Designed specially for **processing OLTP workloads**, it uses the [Raft](https://raft.github.io/) consensus protocol for replication to ensure strong data consistency and high availability.
 
 * **[Placement Driver (PD) server](https://github.com/pingcap/pd)** is a metadata cluster powered by [etcd](https://github.com/etcd-io/etcd) that manages and schedules TiKV.
 
-* **[TiSpark](https://github.com/pingcap/tispark) **cluster** **also** **sits on top of TiKV. It is an [Apache Spark](https://spark.apache.org/docs/latest/index.html) plugin that works with the TiDB platform to **support complex OLAP queries for business intelligence (BI) analysts and data scientists**.
+* **[TiSpark](https://github.com/pingcap/tispark) cluster** also sits on top of TiKV. It is an [Apache Spark](https://spark.apache.org/docs/latest/index.html) plugin that works with the TiDB platform to **support complex OLAP queries for business intelligence (BI) analysts and data scientists**.
 
 Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://www.pingcap.com/docs/tools/syncer/) and [TiDB Data Migration](https://github.com/pingcap/dm) for seamless migration from MySQL, and [TiDB Binlog](https://github.com/pingcap/tidb-binlog) for ​collecting the logical changes made to a TiDB cluster and providing incremental backup and replication to the downstream (TiDB, Kafka, or MySQL)​.
 
@@ -200,7 +200,7 @@ TiFlash endows TiDB with true OLAP capabilities, giving you storage and computin
 
 ### Minimizing the effect of OLAP applications on OLTP applications
 
-**TiDB isolates OLAP and OLTP applications, minimizing the effect of OLAP on OLTP. **
+**TiDB isolates OLAP and OLTP applications, minimizing the effect of OLAP on OLTP.**
 
 Because TiFlash is deployed independently from TiKV, it's possible to isolate hardware resources. TiDB uses labels to manage different types of storage nodes.
 
@@ -253,7 +253,7 @@ Finally, we would like to extend our appreciation for the excellent work of the 
 
 If you're interested in TiFlash technologies, you can contact me at [weiwan@pingcap.com](mailto:weiwan@pingcap.com).
 
-<div style="margin-top: 5rem; text-align: left;">
+<div style="margin-top: 5rem; margin-bottom: 2rem;text-align: left;">
 <!--[if lte IE 8]>
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
 <![endif]-->
