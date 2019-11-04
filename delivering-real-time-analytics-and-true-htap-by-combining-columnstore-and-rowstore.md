@@ -9,6 +9,8 @@ categories: ['Engineering']
 
 **Author:** Wan Wei (Database Engineer at PingCAP, specializing in database storage engine development and system performance optimization)
 
+![Delivering Real-time Analytics and True HTAP by Combining Columnstore and Rowstore](media/combining-columnstore-and-rowstore-makes-a-true-htap-database.png)
+
 Traditionally, transactional and analytical data are managed in separate systems. To derive business insights to support important business decisions, enterprises have to use [extract, transform, load](https://en.wikipedia.org/wiki/Extract,_transform,_load) (ETL) tools and processes to migrate data from an [online transaction processing](https://en.wikipedia.org/wiki/Online_transaction_processing) (OLTP) database to an [online analytical processing](https://en.wikipedia.org/wiki/Online_analytical_processing) (OLAP) database. This approach involves complex software, and leads to issues like stale or inconsistent data. Any insights gained from this stale data are of limited value.
 
 In 2014, [Gartner Inc.](https://en.wikipedia.org/wiki/Gartner) coined a term: [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)), short for **Hybrid Transactional/Analytical Processing**. An HTAP database aims to break the wall between transaction processing and analytics. In 2015, we at [PingCAP](https://pingcap.com/en/) began to develop [TiDB](https://en.wikipedia.org/wiki/TiDB), an open-source MySQL-compatible HTAP database, to meet both OLTP and OLAP requirements in a single system. To further strengthen our OLAP capabilities, we're now building TiFlash, an extended analytical engine and a columnar store for TiDB, which has currently increased the scan performance for massive data by four to nine times.
