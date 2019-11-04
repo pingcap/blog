@@ -35,7 +35,7 @@ In this context, the big data technology represented by [Apache Hadoop](https://
 
 As shown in the following figure, the application data is extracted by the ETL tool, and then imported into a data analysis platform. The application database focuses on OLTP workloads, and the analysis platform on OLAP workloads.
 
-![Traditional data platform](media/traditional-data-platform.png)
+![Traditional data platform](media/traditional-data-platform-5.png)
 <center> *Traditional data platform* </center> 
 
 ### Disadvantages of separating OLTP and OLAP systems
