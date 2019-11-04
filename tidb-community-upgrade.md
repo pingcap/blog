@@ -31,7 +31,7 @@ It can be seen in the old community structure that the growing TiDB user communi
 
 ## New community structure
 
-### Change 1：Include the TiDB user community
+### Change 1: Include the TiDB user community
 
 As TiDB becomes maturer, the TiDB user community is growing stronger. The feedback and practical experience gained from users have an important role to play in the improvement and application of TiDB products. Therefore, we would like to take this opportunity to officially include the TiDB User Group (TUG) in the new community structure, so that users and developers can communicate and interact better, thereby promoting healthy development of the TiDB community.
 
