@@ -11,7 +11,7 @@ categories: ['Engineering']
 
 Remember the time when you had to download, install/deploy, and configure a database before knowing whether a database is compatible with your existing applications and your familiar SQL statements? What about a brand-new database that's built from the ground up?
 
-For TiDB, an open source distributed database which supports pluggable storage engine, our community users and our customers tell us that they need an easier way to write TiDB SQL statements, to test the compatibility, and to easily understand the difference between TiDB and MySQL. Thanks to Ti-Cool (PR: [#13069 - support compiling tidb to wasm](https://github.com/pingcap/tidb/pull/13069)), the second place project from [INSERT INTO tidb.hackathon_2019 VALUES ("Hack", "Fun", "TiDB Ecosystem"](https://pingcap.com/blog/insert-into-tidb-hackathon-2019-values-hack-fun-tidb-ecosystem), we are one step closer.
+For TiDB, an open source database which supports pluggable storage engine, our community users and our customers tell us that they need an easier way to write TiDB SQL statements, to test the compatibility, and to easily understand the difference between TiDB and MySQL. Thanks to Ti-Cool (PR: [#13069 - support compiling tidb to wasm](https://github.com/pingcap/tidb/pull/13069)), the second place project from [INSERT INTO tidb.hackathon_2019 VALUES ("Hack", "Fun", "TiDB Ecosystem"](https://pingcap.com/blog/insert-into-tidb-hackathon-2019-values-hack-fun-tidb-ecosystem), we are one step closer.
 
 The Ti-Cool team was composed of:
 
