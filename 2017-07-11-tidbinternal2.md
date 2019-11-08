@@ -193,7 +193,7 @@ See the following diagram for the process:
 
 This solution works though it still has the following drawbacks:
 
-1. When scanning data, each row needs to be read from TiKV through Key-Value operation. Therefore, there is at least one PRC overhead. The overhead becomes huge if there is a large amount of data to be scanned.
+1. When scanning data, each row needs to be read from TiKV through Key-Value operation. Therefore, there is at least one RPC overhead. The overhead becomes huge if there is a large amount of data to be scanned.
 2. It is not applicable to all rows. Data that doesn’t meet the conditions doesn’t need to be read.
 3. The value of the rows that meet the conditions is meaningless. What we need here is just the number of rows.
 
