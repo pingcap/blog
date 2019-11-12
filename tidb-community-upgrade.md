@@ -27,7 +27,7 @@ The old community was mainly geared towards the TiDB Developer Group. The main r
     - Set up the technical direction directly or by delegating the responsibilities
     - Make or approve design decisions for the subprojects
 
-It can be seen in the old community structure that the growing TiDB user community that has been essential for product polishing and upgrading was obscured, and that the responsibilities for the roles in the developer community and the relationship between the roles are relatively simple. Therefore, we decided to include the TiDB user community in the new community structure while providing the TiDB developer community with clearly defined roles, rights, and responsibilities. At the same time, some new roles and new organizations have been introduced. Let's take a closer look.
+The TiDB user community has played an important role to play in product polishing and upgrading. However, it was obscured in the old community structure. In addition, the responsibilities for the roles in the developer community and the relationship between roles are relatively simple. Therefore, we decided to include the TiDB user community in the new community structure while providing the TiDB developer community with clearly defined roles, rights, and responsibilities. At the same time, some new roles and new organizations have been introduced. Let's take a closer look.
 
 ## New community structure
 
