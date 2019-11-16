@@ -68,7 +68,7 @@ Going through the goleveldb code and the storage package led to the heartbreakin
 
 That's why we had the `undefined` error messages about `newFileLock`, `rename`, `syncDir`, etc. 
 
-As shown in the code below, we decided to add a `file_storage_js.go` file and leave those functions unimplemented::
+As shown in the code below, we decided to add a `file_storage_js.go` file and leave those functions unimplemented:
 
 ```go
 package storage
@@ -245,7 +245,7 @@ Here is what we did:
 
 ### What about the terminal?
 
-We now had an `Exec` function that could take SQL statements, output the result, and run in the browser. We also needed an SQL client to interact with the function. We considered the following options::
+We now had an `Exec` function that could take SQL statements, output the result, and run in the browser. We also needed an SQL client to interact with the function. We considered the following options:
 
 * Use Golang to manipulate dom to implement this client.
 * Use Golang to expose the `Exec` function to the global, and find an existing SQL client/terminal in JavaScript(JS) to interact with the `Exec` function. 
