@@ -31,7 +31,7 @@ _We had a lot of fun—and learned a lot—from our little adventure at TiDB Hac
 
 * _As [WebAssembly Weekly - Issue #100](https://wasmweekly.news/issue-100/) mentioned, "WebAssembly support for Go applications is very much in its infancy.” For example, Golang hasn't fully supported WASI, and goleveldb doesn’t support Wasm/js. Be discreet before you go too deep, and clearly understand the use cases for your application._
 
-* _Make sure your application doesn't have third-party platform-specific dependencies that can’t be compiled to Wasm. _
+* _Make sure your application doesn't have third-party platform-specific dependencies that can’t be compiled to Wasm._
 
 * _Browsers don’t allow port listening and file operations, so you’ll have to work around those limitations._
 
