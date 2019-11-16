@@ -179,6 +179,11 @@ fs.mkdir = unimplemented2;
 go.run(result.instance);
 ```
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('How We Compiled a Golang Database in the Browser Using WebAssembly', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How We Compiled a Golang Database in the Browser Using WebAssembly', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 When we refreshed the page, the expected TiDB log was finally displayed:
 
 ![TiDB log was finally displayed](media/tidb-log-was-finally-displayed.png)
