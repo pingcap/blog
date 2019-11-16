@@ -133,9 +133,9 @@ In this way, the `mathutil` directory provided all the functions in the original
 
 Compiling again: 
 
-![TiDB could be complied to an in-browser application](media/tidb-could-be-complied-to-an-in-browser-application.png)
+![TiDB could be compiled to an in-browser application](media/tidb-could-be-compiled-to-an-in-browser-application.png)
 
-Yay! We made it! The `main.wasm` is the compiled TiDB Wasm file we wanted, and it proves that TiDB could be complied to an in-browser application. 
+Yay! We made it! The `main.wasm` is the compiled TiDB Wasm file we wanted, and it proves that TiDB could be compiled to an in-browser application. 
 
 Ok. Now we have a compiled TiDB Wasm. Let’s run it, and see what comes out! 
 
@@ -279,7 +279,7 @@ Result: Now you can run the Golang database the SQL directly in your browser!
 
 ### One more thing: taking in local files
 
-Our users now have an in-browser database where they can write SQL directly. However, there’s a small problem: They can only write one SQL statement at one time. 
+Our users now have an in-browser database where they can write SQL directly. However, there’s a small problem: they can only write one SQL statement at one time. 
 
 Imagine if a user wanted to test the compatibility between TiDB and MySQL. It would be a nightmare to run the statements one by one. 
 
@@ -307,33 +307,33 @@ To resolve this issue, we did the following:
 
 2. Added a `source` command. Users can run the `source` command to upload a SQL file, and the TiDB Wasm executes the SQL statements in the file.
 
-For example, users could enter the `source` command. The browser displays a window for you to load an SQL file.
+    For example, users could enter the `source` command. The browser displays a window for you to load an SQL file.
 
-![Load an SQL file](media/load-an-sql-file.png)
+    ![Load an SQL file](media/load-an-sql-file.png)
 
-If you load the `test.sql` file:
+    If you load the `test.sql` file:
 
-```sql
-CREATE DATABASE IF NOT EXISTS samp_db;
+    ```sql
+    CREATE DATABASE IF NOT EXISTS samp_db;
 
-USE samp_db;
+    USE samp_db;
 
-CREATE TABLE IF NOT EXISTS person (
-    number INT(11),
-    name VARCHAR(255),
-    birthday DATE
-);
+    CREATE TABLE IF NOT EXISTS person (
+        number INT(11),
+        name VARCHAR(255),
+        birthday DATE
+    );
 
-CREATE INDEX person_num ON person (number);
+    CREATE INDEX person_num ON person (number);
 
-INSERT INTO person VALUES("1","tom","20170912");
+    INSERT INTO person VALUES("1","tom","20170912");
 
-UPDATE person SET birthday='20171010' WHERE name='tom';
-```
+    UPDATE person SET birthday='20171010' WHERE name='tom';
+    ```
 
-And then show the database, you see the following results:
+    And then show the database, you see the following results:
 
-![The result](media/the-result.png)
+    ![The result](media/the-result.png)
 
 ## What’s next
 
