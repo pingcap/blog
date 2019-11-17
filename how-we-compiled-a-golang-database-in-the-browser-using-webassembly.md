@@ -278,9 +278,9 @@ Here are the specific steps:
 
 2. Built an SQL client using `jquery.console.js` and passed the `executeSQL` as callbacks:
 
-Result: Now you can run the Golang database the SQL directly in your browser!
+    Result: Now you can run the Golang database the SQL directly in your browser!
 
-![Run the Golang database in the browser](media/run-the-golang-database-in-the-browser.png)
+    ![Run the Golang database in the browser](media/run-the-golang-database-in-the-browser.png)
 
 ### One more thing: taking in local files
 
