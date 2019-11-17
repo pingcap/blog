@@ -35,8 +35,6 @@ _We had a lot of fun—and learned a lot—from our little adventure at TiDB Hac
 
 * _Browsers don’t allow port listening and file operations, so you’ll have to work around those limitations._
 
-_Hope this helps!_
-
 ## Why an in-browser database?
 
 The idea came to us when we were planning our TiDB Hackathon 2019. The goal of participating in the Hackathon was very simple: hack something cool together! (So cool that we name ourselves: Ti-Cool.) What could be cooler than an in-browser database?
@@ -48,7 +46,7 @@ It’s a hackathon, so we hack, of course. =)
 Let’s take a look at our goal again: building an in-browser TiDB database. Breaking it down, we got a few questions to answer:
 
 1. Can TiDB be compiled to an in-browser application? If yes, how?
-2. How can users input the SQL statements and get their results?
+2. How can users input the SQL statements and get their results just from the browser?
 
 Let’s find out.
 
@@ -192,7 +190,7 @@ Yay, we made it again!
 
 At this point, we had cleared all the technical blockers. Now it was time to get inputs and outputs.
 
-### Question # 2: How can users input the SQL statements and get their results?
+### Question # 2: How can users input the SQL statements and get their results from the browser?
 
 We all know that browsers cannot let the web applications within them do dangerous things such as port listening and file operations. However, TiDB lets users start a client and connect to TiDB using MySQL statements ([mostly](https://pingcap.com/docs/stable/reference/mysql-compatibility/)), which means users need to listen on a certain port. We want our users to have a built-in TiDB client in the Wasm file together with the TiDB sever: When the browser loads the Wasm file, the client is launched immediately to allow users to input SQL statements and output the SQL results. 
 
