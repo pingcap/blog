@@ -21,7 +21,7 @@ The time to experiment with SQL without pain has come. In fact, the community ha
 
 The source code for this project is in [PR: #13069 - support compiling tidb to wasm](https://github.com/pingcap/tidb/pull/13069). You are welcome to join us!
 
-The rest of this blog will dive deep into how and why we built an in-browser database. By the end of the article, you’ll know to reproduce it yourself, create your own projects, and get inspired.
+The rest of this blog will dive deep into how and why we built an in-browser database. By the end of the article, you’ll know how to reproduce it yourself, create your own projects, and get inspired.
 
 **TL;DR**
 
