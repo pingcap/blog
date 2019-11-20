@@ -85,7 +85,7 @@ If you use multiple Raft groups, which can be combined with the sharding strateg
 
 TiKV divides data into Regions according to the key range. When a Region becomes too large (the current limit is 96 MB), it splits into two new ones. This splitting happens on all physical nodes where the Region is located. The newly-generated replicas of the Region constitute a new Raft group.
 
-### Then here comes two questions: 
+Then here comes two questions: 
 
 * How do we ensure that the split operation is securely executed on each replica of this Region? 
 * How do we guarantee application transparency?
