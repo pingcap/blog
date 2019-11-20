@@ -117,7 +117,7 @@ The split process is coupled with network isolation, which can lead to very comp
 
 4. Then the latest snapshot of Region 2 [b, c) arrives at node B. After the new Region 2 is applied, it must be guaranteed that the [c, d) data no longer exists on Region 2 at node B.
 
-## **Question #2: How do we guarantee application transparency?**
+**Question #2: How do we guarantee application transparency?**
 
 Raft does a better job of transparency than Paxos. Specifically, Raft provides a clear configuration change process to make sure nodes can be securely and dynamically added or removed in a Raft group. With this algorithm, the rebalance process can be summarized as follows:
 
