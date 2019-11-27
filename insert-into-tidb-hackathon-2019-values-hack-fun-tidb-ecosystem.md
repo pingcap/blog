@@ -4,6 +4,7 @@ date: 2019-10-30
 summary: This post introduces the top 3 winners at TiDB Hackathon 2019 and the cozy and friendly environment of this meeting. 
 tags: ['TiDB', 'Open Source Community']
 categories: ['Open Source Community']
+image: /images/blog/tidb-hackathon-2019.png
 --- 
 
 ![TiDB Hackathon 2019](media/tidb-hackathon-2019.png)

@@ -5,6 +5,7 @@ date: 2019-11-16
 summary: We compiled a Golang database (TiDB) into an in-browser database using WebAssembly (Wasm). This post introduces why and how we built an in-browser database.
 tags: ['Engineering']
 categories: ['Engineering']
+image: /images/blog/how-we-compiled-a-golang-database-in-the-browser-using-webassembly.png
 ---
 
 ![How we compiled a Golang database in the browser using WebAssembly](media/how-we-compiled-a-golang-database-in-the-browser-using-webassembly.png)

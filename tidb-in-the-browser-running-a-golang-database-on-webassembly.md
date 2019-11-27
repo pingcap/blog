@@ -5,6 +5,7 @@ date: 2019-11-06
 summary: This post introduces how you can run TiDB directly in a web browser, how it is possible, and what the limitations are.
 tags: ['Engineering']
 categories: ['Engineering']
+image: /images/blog/tidb-in-the-browser-running-a-golang-database-on-webassembly.png
 ---
 
 ![TiDB in the Browser: Running a Golang Database on WebAssembly](media/tidb-in-the-browser-running-a-golang-database-on-webassembly.png)

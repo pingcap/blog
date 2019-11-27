@@ -197,3 +197,5 @@ The epoch strategy that PD adopts is to get the larger value by comparing the lo
 ## Conclusion
 
 It's a highly complex project to build a robust distributed system. I've shared some of the key design ideas of building a large-scale distributed storage system based on the Raft consensus algorithm. If you're interested in how we implement TiKV, you're welcome to dive deep by reading our [TiKV source code](https://github.com/tikv/tikv) and [TiKV documentation](https://tikv.org/docs/).
+
+*This article is first published on the [CNCF website](https://www.cncf.io/blog/2019/11/04/building-a-large-scale-distributed-storage-system-based-on-raft/).*
