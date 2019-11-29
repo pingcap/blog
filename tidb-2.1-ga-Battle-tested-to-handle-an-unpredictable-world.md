@@ -118,7 +118,7 @@ TiDB 2.1 simply would not be possible with the help and support of an increasing
 
 Since the 2.0 release in April, we celebrated our [200 contributors milestone](https://pingcap.com/blog/tidb-community-200-contributors/) in the TiDB repo and welcomed 87 new contributors in different repos in the entire TiDB platform, including one from Tencent [who contributed 76 PRs](https://github.com/pingcap/tidb/commits?author=spongedu); he is now our newest TiDB committer. 
 
-We’ve made design documents for both [TiDB](https://github.com/pingcap/tidb/wiki/Design-Documents) and [TiKV](https://github.com/tikv/rfcs) public, as well as specific feature development processes publicly available via GitHub Issue and Project, to encourage community participation. We will also open up the planning discussion of certain features to the community via video conference to better incorporate community input. You can check out what’s currently [in store here](https://github.com/pingcap/community/blob/master/proposals.md).
+We’ve made design documents for both [TiDB](https://github.com/pingcap/tidb/wiki/Design-Documents) and [TiKV](https://github.com/tikv/rfcs) public, as well as specific feature development processes publicly available via GitHub Issue and Project, to encourage community participation. We will also open up the planning discussion of certain features to the community via video conference to better incorporate community input.
 
 We are forever grateful and indebted to our open source community for always fueling our spirit with your encouragement, critique, contribution, and patience. TiDB would not be what it is today without you. And we can’t wait to take it to new heights with you, together.     
 
