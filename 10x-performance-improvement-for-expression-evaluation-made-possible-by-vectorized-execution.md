@@ -12,7 +12,7 @@ image: /images/blog/vectorized-execution.png
 
 The query execution engine plays an important role in database system performance. [TiDB](https://en.wikipedia.org/wiki/TiDB), an open-source MySQL-compatible [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)) (HTAP) database, implemented the widely-used [Volcano model](https://paperhub.s3.amazonaws.com/dace52a42c07f7f8348b08dc2b186061.pdf) to evaluate queries. Unfortunately, when querying a large dataset, the Volcano model caused high interpretation overhead and low CPU cache hit rates. 
 
-Inspired by the paper [MonetDB/X100: Hyper-Pipelining Query Execution](http://cidrdb.org/cidr2005/papers/P19.pdf), we began to employ vectorized execution in TiDB to improve query performance. (Besides this article, we also suggest you take Andy Pavlo’s course on [Query Execution](https://www.youtube.com/watch?v=L5NhM7kw6Eg&list=PLSE8ODhjZXjbohkNBWQs_otTrBTrjyohi&index=12), which details principles about execution models and expression evaluation.)
+Inspired by the paper [MonetDB/X100: Hyper-Pipelining Query Execution](http://cidrdb.org/cidr2005/papers/P19.pdf), we began to employ vectorized execution in TiDB to improve query performance. (Besides this article, we also suggest you take Andy Pavlo's course on [Query Execution](https://www.youtube.com/watch?v=L5NhM7kw6Eg&list=PLSE8ODhjZXjbohkNBWQs_otTrBTrjyohi&index=12), which details principles about execution models and expression evaluation.)
 
 At the end of 2017, we performed three optimizations on the TiDB SQL execution engine:
 
@@ -22,9 +22,9 @@ At the end of 2017, we performed three optimizations on the TiDB SQL execution e
 
 Benefited by these optimizations, [TiDB 2.0](https://pingcap.com/blog/tidb-2-0-announcement/) significantly boosted analytical query performance, compared with TiDB 1.0. For information on the TPC-H benchmark we used, see [TiDB TPC-H 50G Performance Test Report](https://github.com/pingcap/docs/blob/master/v2.1-legacy/benchmark/tpch.md).
 
-Later, we released [TiDB 2.1](https://pingcap.com/blog/tidb-2.1-ga-Battle-tested-to-handle-an-unpredictable-world/) and [TiDB 3.0](https://pingcap.com/blog/tidb-3.0-announcement/), and our vectorized execution engine has become more stable. We’re now developing TiDB 4.0, which includes vectorizing expressions to further improve TiDB’s performance.
+Later, we released [TiDB 2.1](https://pingcap.com/blog/tidb-2.1-ga-Battle-tested-to-handle-an-unpredictable-world/) and [TiDB 3.0](https://pingcap.com/blog/tidb-3.0-announcement/), and our vectorized execution engine has become more stable. We're now developing TiDB 4.0, which includes vectorizing expressions to further improve TiDB's performance.
 
-In this post, I’ll deep dive into why we need vectorized execution, how we implement it, how we managed to vectorize more than 360 functions along with community contributors, and our thoughts about the future.  
+In this post, I'll deep dive into why we need vectorized execution, how we implement it, how we managed to vectorize more than 360 functions along with community contributors, and our thoughts about the future.  
 
 ## Why do we need vectorized execution？
 
@@ -73,7 +73,7 @@ func (node *columnNode) evalReal(row Row) (float64, bool) {
 
 Similar to the Volcano model, the expression implementation discussed above is iterating over rows.
 
-How much is the interpretation overhead for row-by-row iteration? Let’s take a look at the implementation of a function in TiDB.
+How much is the interpretation overhead for row-by-row iteration? Let's take a look at the implementation of a function in TiDB.
 
 The `builtinArithmeticMultiplyRealSig` function multiplies two floating-point numbers. The following code block describes the implementation of this function. The numbers on the right indicate the number of assembly instructions for the corresponding row, which are obtained after code assembling. Note that this block includes only rows that are iterated in normal conditions, and ignores logic for error processing.
 
@@ -136,7 +136,7 @@ The following table lists each `builtinArithmeticMultiplyRealSig` function task 
   </tr>
 </table>
 
-As the table reveals, every time this function performs a multiplication, only 8 out of 82 (9+30+28+8+7=82) instructions are doing the “real” multiplication. That’s only about 10% of the total instructions. The other 90% are considered interpretation overhead. Once we vectorized this function, its performance was improved by nearly nine times. See [PR #12543](https://github.com/pingcap/tidb/pull/12543).
+As the table reveals, every time this function performs a multiplication, only 8 out of 82 (9+30+28+8+7=82) instructions are doing the “real” multiplication. That's only about 10% of the total instructions. The other 90% are considered interpretation overhead. Once we vectorized this function, its performance was improved by nearly nine times. See [PR #12543](https://github.com/pingcap/tidb/pull/12543).
 
 ### Batch processing reduces interpretation overhead
 
@@ -164,7 +164,7 @@ type VecNode interface {
 
 You might wonder why. 
 
-To explain the reason, let me briefly introduce TiDB’s `Chunk` structure, which is the data representation in memory during the query execution phase.
+To explain the reason, let me briefly introduce TiDB's `Chunk` structure, which is the data representation in memory during the query execution phase.
 
 At the end of 2017, we were working on vector optimization and introduced the concept of a `Chunk`. A `Chunk` is composed of multiple columns. 
 
@@ -173,12 +173,12 @@ There are two types of columns:
 * Fixed-length columns, in which the data has a specified length that cannot be changed.
 * Variable-length columns, in which the data length can change.
 
-![TiDB’s Chunk structure](media/tidb-chunk-structure.png)
-<center> _TiDB’s Chunk structure_ </center> 
+![TiDB's Chunk structure](media/tidb-chunk-structure.png)
+<center> _TiDB's Chunk structure_ </center> 
 
 No matter whether the data length is fixed or variable, data in columns are contiguously stored in memory in the `Column.data` field (which is an array). If the data length varies, `Column.offset` records the data offset. If the data is with fixed length, no offset is recorded.
 
-The following figure illustrates the new vector access interface we’ve recently introduced for `Chunk`s:
+The following figure illustrates the new vector access interface we've recently introduced for `Chunk`s:
 
 ![New vector access interface](media/new-vector-access-interface.png)
 <center> _New vector access interface_ </center>
@@ -187,7 +187,7 @@ The following figure illustrates the new vector access interface we’ve recentl
 
 * For variable-length data, such as a string, we can use only `GetString(rowIdx int) string` to obtain the data in the corresponding row, and only append data to update it.  Randomly modifying an element in the variable-length data column involves moving all the subsequent data. This creates a heavy overhead. To improve the overall performance, this operation is not implemented in `Column`.
 
-Now that you understand the basics of TiDB `Chunk`s, let’s come back to the interface design. 
+Now that you understand the basics of TiDB `Chunk`s, let's come back to the interface design. 
 
 Based on the `Chunk` implementation and the Golang characteristics, we optimized the expression evaluation interface in these aspects:
 
@@ -246,7 +246,7 @@ This implementation method diminishes the interpretation overhead by batch proce
 
 ## Benchmark comparison between vectorized execution and row-based execution
 
-In this section, I’ll use the TiDB source code for benchmark testing and compare the performance before and after code vectorization.
+In this section, I'll use the TiDB source code for benchmark testing and compare the performance before and after code vectorization.
 
 We use the same data (1024 rows formed by two columns of floating-point numbers) to respectively compute `col0 * 0.8 + col1` in two ways: row-based execution and vectorized execution. The results are as follows: 
 
@@ -274,17 +274,17 @@ After we tested more than 300 vectorized functions, we found that **over 50% of 
 
 ## How do we vectorize 360+ built-in functions?
 
-On our journey towards TiDB 4.0, expression vectorization is a huge project, as expressions involve more than 500 built-in functions. Since we have so many built-in functions in TiDB’s code—and a fairly small staff—handcrafting these built-in functions one by one is a nearly impossible mission.
+On our journey towards TiDB 4.0, expression vectorization is a huge project, as expressions involve more than 500 built-in functions. Since we have so many built-in functions in TiDB's code—and a fairly small staff—handcrafting these built-in functions one by one is a nearly impossible mission.
 
-To develop our code more efficiently, we’re vectorizing as many built-in functions as we can by using the Golang [`text/template`](https://golang.org/pkg/text/template/). This template generates the source code of vectorized functions. To get more people working on the project, we founded the [Vectorized Expression Working Group](https://github.com/pingcap/community/blob/master/working-groups/wg-vec-expr.md) in the developer community. In this approach, community contributors take the vast majority of work during the vectorizing progress.
+To develop our code more efficiently, we're vectorizing as many built-in functions as we can by using the Golang [`text/template`](https://golang.org/pkg/text/template/). This template generates the source code of vectorized functions. To get more people working on the project, we founded the [Vectorized Expression Working Group](https://github.com/pingcap/community/blob/master/working-groups/wg-vec-expr.md) in the developer community. In this approach, community contributors take the vast majority of work during the vectorizing progress.
 
 With our joint efforts, we have refactored more than two-thirds of our built-in functions, and most of them have gained an impressive performance boost. Some have even achieved performance gains of one or two orders of magnitude.
 
 ### Vectorization using a template
 
-When we vectorized built-in functions, we found that many functions had similarities. For example, most of the LT (`<`), GT (`>`), and LE (`<=`) functions have similar logic. They only differ in the operators they use. Therefore, it’s possible to use a template to generate the code of these functions.
+When we vectorized built-in functions, we found that many functions had similarities. For example, most of the LT (`<`), GT (`>`), and LE (`<=`) functions have similar logic. They only differ in the operators they use. Therefore, it's possible to use a template to generate the code of these functions.
 
-Currently, Golang doesn’t support generic types and macro definition, so we use the [`text/template`](https://golang.org/pkg/text/template/) package to generate code.
+Currently, Golang doesn't support generic types and macro definition, so we use the [`text/template`](https://golang.org/pkg/text/template/) package to generate code.
 
 Based on the syntax of the Golang template, we abstract the functions to be generated into a template. For example, here is the template for comparison functions like `LT` and `GT`:
 
@@ -323,7 +323,7 @@ For different types of data and operators, the template generates the correspond
 
 This template is in the `expression/generator` package. We can run the `main()` function in this template file to generate the corresponding built-in function code (`xx_vec_generated.go`) in the expression package.
 
-### Vectorization with the community’s help
+### Vectorization with the community's help
 
 Besides using a template to vectorize built-in functions, we also started our [vectorization campaign](https://github.com/pingcap/tidb/issues/12058) in the community to get more hands involved in vectorization. At the beginning of the campaign, we found that when we merged PRs, conflicts often occurred. Therefore, we wrote a script to generate vectorization interfaces for all built-in functions, and reserved these interfaces in the code:
 
@@ -337,7 +337,7 @@ func (b *builtinCastStringAsDurationSig) vectorized() bool {
 }
 ```
 
-Since then, we’ve been asking contributors to fill or refactor the functions they’re interested in. 
+Since then, we've been asking contributors to fill or refactor the functions they're interested in. 
 
 Reserving function interfaces can avoid conflicts caused by different pull requests simultaneously modifying the same document when merging code.
 
@@ -361,7 +361,7 @@ func BenchmarkVectorizedBuiltinArithmeticFunc(b *testing.B) {
 }
 ```
 
-Next, they can run following two functions that we’ve written. Then, they can perform correctness and performance tests.
+Next, they can run following two functions that we've written. Then, they can perform correctness and performance tests.
 
 
 ```
@@ -382,13 +382,13 @@ Both correctness and performance tests directly generate random data and compare
 
 The two operations above help contributors easily vectorize our built-in functions. 
 
-With the community’s help, we’ve vectorized more than 360 functions in just two months. During this period, our community contributors have filed 256 PRs.
+With the community's help, we've vectorized more than 360 functions in just two months. During this period, our community contributors have filed 256 PRs.
 
 This campaign also resulted in nine Active Contributors (who open at least eight PRs in one year) and two Reviewers (who merge at least 30 PRs in one year).
 
-## What’s next
+## What's next
 
-By introducing vectorized execution, we’ve dramatically improved the performance of expression execution. Currently, vectorized execution is enabled on our master branch by default. Once all built-in functions of an expression support vectorized execution, this expression will use vectorized execution. In the future, we’ll also use vectorized execution to improve TiDB’s HTAP capabilities.
+By introducing vectorized execution, we've dramatically improved the performance of expression execution. Currently, vectorized execution is enabled on our master branch by default. Once all built-in functions of an expression support vectorized execution, this expression will use vectorized execution. In the future, we'll also use vectorized execution to improve TiDB's HTAP capabilities.
 
 Note that all the performance test data above is in memory. If the data is stored on disk, reading it might cause high overhead. In that case, the benefits of vectorized execution may be less noticeable. But on the whole, vectorized execution has noticeably enhanced the performance of TiDB expression evaluation.
 
@@ -402,4 +402,4 @@ In addition, when we vectorized expressions, we found that vectorized execution 
 
 We welcome you to join us in our [vectorization campaign for built-in functions](https://github.com/pingcap/tidb/issues/12058).
 
-In a future post, we’ll introduce how we use the vectorization idea to optimize other parts of the SQL execution engine. Stay tuned.
+In a future post, we'll introduce how we use the vectorization idea to optimize other parts of the SQL execution engine. Stay tuned.
