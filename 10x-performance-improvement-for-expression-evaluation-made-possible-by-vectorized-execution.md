@@ -136,7 +136,7 @@ The following table lists each `builtinArithmeticMultiplyRealSig` function task 
   </tr>
 </table>
 
-As the table reveals, every time this function performs a multiplication, only_ _8 out of 82 (9+30+28+8+7=82) instructions are doing the “real” multiplication. That’s only about 10% of the total instructions. The other 90% are considered interpretation overhead. Once we vectorized this function, its performance was improved by nearly nine times. See [PR #12543](https://github.com/pingcap/tidb/pull/12543).
+As the table reveals, every time this function performs a multiplication, only 8 out of 82 (9+30+28+8+7=82) instructions are doing the “real” multiplication. That’s only about 10% of the total instructions. The other 90% are considered interpretation overhead. Once we vectorized this function, its performance was improved by nearly nine times. See [PR #12543](https://github.com/pingcap/tidb/pull/12543).
 
 ### Batch processing reduces interpretation overhead
 
@@ -276,7 +276,7 @@ After we tested more than 300 vectorized functions, we found that **over 50% of 
 
 On our journey towards TiDB 4.0, expression vectorization is a huge project, as expressions involve more than 500 built-in functions. Since we have so many built-in functions in TiDB’s code—and a fairly small staff—handcrafting these built-in functions one by one is a nearly impossible mission.
 
-To develop our code more efficiently, we’re vectorizing as many built-in functions as we can by using the Golang `[text/template](https://golang.org/pkg/text/template/)`. This template generates the source code of vectorized functions. To get more people working on the project, we founded the [Vectorized Expression Working Group](https://github.com/pingcap/community/blob/master/working-groups/wg-vec-expr.md) in the developer community. In this approach, community contributors take the vast majority of work during the vectorizing progress.
+To develop our code more efficiently, we’re vectorizing as many built-in functions as we can by using the Golang [`text/template`](https://golang.org/pkg/text/template/). This template generates the source code of vectorized functions. To get more people working on the project, we founded the [Vectorized Expression Working Group](https://github.com/pingcap/community/blob/master/working-groups/wg-vec-expr.md) in the developer community. In this approach, community contributors take the vast majority of work during the vectorizing progress.
 
 With our joint efforts, we have refactored more than two-thirds of our built-in functions, and most of them have gained an impressive performance boost. Some have even achieved performance gains of one or two orders of magnitude.
 
@@ -284,7 +284,7 @@ With our joint efforts, we have refactored more than two-thirds of our built-in 
 
 When we vectorized built-in functions, we found that many functions had similarities. For example, most of the LT (`<`), GT (`>`), and LE (`<=`) functions have similar logic. They only differ in the operators they use. Therefore, it’s possible to use a template to generate the code of these functions.
 
-Currently, Golang doesn’t support generic types and macro definition, so we use the `[text/template](https://golang.org/pkg/text/template/)` package to generate code.
+Currently, Golang doesn’t support generic types and macro definition, so we use the [`text/template`](https://golang.org/pkg/text/template/) package to generate code.
 
 Based on the syntax of the Golang template, we abstract the functions to be generated into a template. For example, here is the template for comparison functions like `LT` and `GT`:
 
