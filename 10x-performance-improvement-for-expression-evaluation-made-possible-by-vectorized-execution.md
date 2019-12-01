@@ -384,7 +384,7 @@ The two operations above help contributors easily vectorize our built-in functio
 
 With the community's help, we've vectorized more than 360 functions in just two months. During this period, our community contributors have filed 256 PRs.
 
-This campaign also resulted in nine Active Contributors (who open at least eight PRs in one year) and two Reviewers (who merge at least 30 PRs in one year).
+This campaign also resulted in nine Active Contributors (who merge at least eight PRs in one year) and two Reviewers (who merge at least 30 PRs in one year).
 
 ## What's next
 
