@@ -5,7 +5,10 @@ date: 2019-10-30
 summary: PingCAP has upgraded and adjusted the TiDB community organization structure, with more community roles and community organizations introduced to better stimulate the vitality of the community and maintain a positive and healthy community environment.
 tags: ['TiDB','Open Source Community']
 categories: ['Open Source Community']
+image: /images/blog/tidb-community-upgrade.png
 ---
+
+![TiDB community upgrade](media/tidb-community-upgrade.png)
 
 Years of development has seen the TiDB community gradually grow into maturity. As the community expands, some shortcomings begin to loom out of the current community structure. After a series of reflections and summaries, we decided to upgrade and adjust the current community organization structure, with more community roles and community organizations introduced to better stimulate the vitality of the community and maintain a positive and healthy community environment.
 
