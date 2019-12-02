@@ -48,7 +48,7 @@ The TiDB User Group (TUG) is an independent, non-profit, third-party organizatio
 
 ![Figure 3. New Community Structure - Active Contributor and Reviewer](media/tidb-community-new-roles.png)
 
-<center>*Figure 3. New community structure - Active Contributor and Reviewer</center>
+<center>*Figure 3. New community structure - Active Contributor and Reviewer*</center>
 
 The above picture reflects the second change in this community structure upgrade - the roles of Reviewer and Active Contributor will be introduced to the developer community.
 
@@ -60,7 +60,7 @@ Let's take a closer look at the developer community structure diagram:
 
 ![Figure 4. New Community Structure - Special Interest Group](media/tidb-community-new-sig.png)
 
-<center>*Figure 3. New community structure - Special Interest Group*</center>
+<center>*Figure 4. New community structure - Special Interest Group*</center>
 
 The above diagram shows the overall structure of the developer community from a vertical angle, reflecting the third change in this community architecture upgrade - the introduction of the Special Interest Group (SIG).
 
