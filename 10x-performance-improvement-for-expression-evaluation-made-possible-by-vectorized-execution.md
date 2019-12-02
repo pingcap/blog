@@ -78,7 +78,8 @@ How much is the interpretation overhead for row-by-row iteration? Let's take a l
 The `builtinArithmeticMultiplyRealSig` function multiplies two floating-point numbers. The following code block describes the implementation of this function. The numbers on the right indicate the number of assembly instructions for the corresponding row, which are obtained after code assembling. Note that this block includes only rows that are iterated in normal conditions, and ignores logic for error processing.
 
 ```
-func (s *builtinArithmeticMultiplyRealSig) evalReal(row chunk.Row) (float64, bool, error) {                                                                              9
+func (s *builtinArithmeticMultiplyRealSig) evalReal(row chunk.Row) (float64, bool, 
+error) {                                                                              9
   a, isNull, err := s.args[0].EvalReal(s.ctx, row)                                    27
   if isNull || err != nil {                                                           3
      return 0, isNull, err
