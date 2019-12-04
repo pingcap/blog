@@ -93,13 +93,13 @@ In this section, I'll describe the ideal database for our applications, and what
 
 Considering our billing applications were highly coupled with MySQL, to resolve our issues we needed a new storage solution with the following features:
 
-*   Compatible with the MySQL protocol.
-*   Support for transactions—tasks are executed as transactions or rolled back in the case of error.
-*   Support for indexes—especially for secondary indexes.
-*   Horizontal scalability—the system can elastically scale while online, including performance scaling and capacity expansion.
-*   Stability and reliability.
-*   Backup and recovery.
-*   Disaster tolerance.
+* Compatible with the MySQL protocol.
+* Support for transactions—tasks are executed as transactions or rolled back in the case of error.
+* Support for indexes—especially for secondary indexes.
+* Horizontal scalability—the system can elastically scale while online, including performance scaling and capacity expansion.
+* Stability and reliability.
+* Backup and recovery.
+* Disaster tolerance.
 
 ### Our options
 
@@ -421,7 +421,7 @@ Inside the TiDB cluster, there are three main components:
 <p>
 88 instances
 <p>
-38 Syncer real-time replication streams (will upgrade to \
+38 Syncer real-time replication streams (will upgrade to
 <a href="https://pingcap.com/docs/stable/reference/tools/data-migration/overview/">TiDB Data Migration</a>)
    </td>
   </tr>
