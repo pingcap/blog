@@ -385,7 +385,7 @@ Throughout our journey with TiDB, we've used multiple versions for testing or pr
 We deploy the TiDB cluster in a highly-layered structure as shown below. [NGINX](https://www.nginx.com/) is used for load balancing in the front end.
 
 ![TiDB architecture for billing applications](media/tidb-architecture-for-billing-applications.png)
-<center> _TiDB architecture for billing applications_ <center>
+<center> _TiDB architecture for billing applications_ </center>
 
 Inside the TiDB cluster, there are three main components:
 
