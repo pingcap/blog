@@ -93,7 +93,7 @@ There are another two roles:
 2. Maintainer
     + A developer deeply involved in daily operations of the TiDB community; generated from Committers, with write access to the code repository.
 
-> The detailed definitions and rights and responsibilities of the above community roles can be viewed [here](https://pingcap.com/community-cn/developer-group/).
+> The detailed definitions and rights and responsibilities of the above community roles can be viewed [here](https://pingcap.com/community/developer-group/).
 
 ### Change 4: Working Group
 
