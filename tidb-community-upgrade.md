@@ -42,7 +42,7 @@ As TiDB becomes maturer, the TiDB user community is growing stronger. The feedba
 
 <center>*Figure 2. New community structure - User Group*</center>
 
-The TiDB User Group (TUG) is an independent, non-profit, third-party organization sponsored and managed by TiDB users to enhance communication and learning among the community. The operation forms of TUG include, but are not limited to, online Q&A and technical article sharing, offline technical salons, visits to famous companies, official interactive events and so on. TUG members can learn cutting-edge technical knowledge, publish technical insights, and jointly build TiDB projects through online and offline activities. More information can be found on the TUG Q&A forum at [asktug.com](https://asktug.com).
+The TiDB User Group (TUG) is an independent, non-profit, third-party organization sponsored and managed by TiDB users to enhance communication and learning among the community. The operation forms of TUG include, but are not limited to, online Q&A and technical article sharing, offline technical salons, visits to famous companies, official interactive events and so on. TUG members can learn cutting-edge technical knowledge, publish technical insights, and jointly build TiDB projects through online and offline activities.
 
 ### Change 2: Active Contributor and Reviewer
 
@@ -96,7 +96,7 @@ There are another two roles:
 2. Maintainer
     + A developer deeply involved in daily operations of the TiDB community; generated from Committers, with write access to the code repository.
 
-> The detailed definitions and rights and responsibilities of the above community roles can be viewed [here](https://pingcap.com/community-cn/developer-group/).
+> The detailed definitions and rights and responsibilities of the above community roles can be viewed [here](https://pingcap.com/community/developer-group/).
 
 ### Change 4: Working Group
 
