@@ -5,6 +5,7 @@ author: ['Ana Hobden']
 summary: This post introduces why Jepsen is important to the distributed database industry, how it works, common issues found, how we use Jepsen with TiDB, and a short summary of all problems Jepsen has found.
 tags: ['Engineering']
 categories: ['Engineering']
+image: /images/blog/jepsen-offers-system-wide-approach-to-testing-databases-at-scale.png
 ---
 
 ![Jepsen Offers System-Wide Approach to Testing Databases at Scale](media/jepsen-offers-system-wide-approach-to-testing-databases-at-scale.png)
