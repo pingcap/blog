@@ -2,10 +2,13 @@
 title: New Structure, New Roles - TiDB Community Upgrade!
 author: ['Jian Zhang']
 date: 2019-10-30
-summary: Four years of development has seen the TiDB community gradually grow into maturity. However, as the community expands, some shortcomings begin to loom out of the current community structure. After a series of reflections and summaries, we decided to upgrade and adjust the current community organization structure, with more community roles and community organizations introduced to better stimulate the vitality of the community and maintain a positive and healthy community environment.
+summary: PingCAP has upgraded and adjusted the TiDB community organization structure, with more community roles and community organizations introduced to better stimulate the vitality of the community and maintain a positive and healthy community environment.
 tags: ['TiDB','Open Source Community']
 categories: ['Open Source Community']
+image: /images/blog/tidb-community-upgrade.png
 ---
+
+![TiDB community upgrade](media/tidb-community-upgrade.png)
 
 Years of development has seen the TiDB community gradually grow into maturity. As the community expands, some shortcomings begin to loom out of the current community structure. After a series of reflections and summaries, we decided to upgrade and adjust the current community organization structure, with more community roles and community organizations introduced to better stimulate the vitality of the community and maintain a positive and healthy community environment.
 
@@ -15,29 +18,29 @@ This is what the community organization structure used to be:
 
 ![Figure 1. Old Community Structure](media/tidb-community-old-structure.png)
 
-<center>Figure 1. Old Community Structure</center>
+<center>*Figure 1. Old community structure*</center>
 
 The old community was mainly geared towards the TiDB Developer Group. The main roles are Maintainer, Committer, Contributor, etc., among which:
 
-* Committer: Recommended by Maintainer or PMC as a Contributor who has made a significant contribution to TiDB. Must have completed at least one feature or fixed a major bug.
+* Committer: Recommended by Maintainer or Project Management Committee (PMC) as a Contributor who has made a significant contribution to TiDB. Must have completed at least one feature or fixed a major bug.
 
 * Maintainer: The planner and designer of the project, with the right to merge branches into the master, generated from Committer. A Maintainer should:
 
-    - demonstrate good judgment and sense of responsibility for the health of the subprojects
-    - set up the technical direction directly or by delegating the responsibilities
-    - make or approve design decisions for the subprojects
+    - Demonstrate good judgment and sense of responsibility for the health of the subprojects
+    - Set up the technical direction directly or by delegating the responsibilities
+    - Make or approve design decisions for the subprojects
 
-It can be seen in the old community structure that the growing TiDB user community that has been essential for product polishing and upgrading was obscured, and that the responsibilities for the roles in the developer community and the relationship between the roles are relatively simple. Therefore, we decided to include the TiDB user community in the new community structure while providing the TiDB developer community with clearly defined roles, rights, and responsibilities. At the same time, some new roles and new organizations have been introduced. Let's take a closer look.
+The TiDB user community has played an important role to play in product polishing and upgrading. However, it was obscured in the old community structure. In addition, the responsibilities for the roles in the developer community and the relationship between roles are relatively simple. Therefore, we decided to include the TiDB user community in the new community structure while providing the TiDB developer community with clearly defined roles, rights, and responsibilities. At the same time, some new roles and new organizations have been introduced. Let's take a closer look.
 
 ## New community structure
 
-### Change 1：Include the TiDB user community
+### Change 1: Include the TiDB user community
 
 As TiDB becomes maturer, the TiDB user community is growing stronger. The feedback and practical experience gained from users have an important role to play in the improvement and application of TiDB products. Therefore, we would like to take this opportunity to officially include the TiDB User Group (TUG) in the new community structure, so that users and developers can communicate and interact better, thereby promoting healthy development of the TiDB community.
 
 ![Figure 2. New Community Structure - User Group](media/tidb-community-new-user-group.png)
 
-<center>Figure 2. New Community Structure - User Group</center>
+<center>*Figure 2. New community structure - User Group*</center>
 
 The TiDB User Group (TUG) is an independent, non-profit, third-party organization sponsored and managed by TiDB users to enhance communication and learning among the community. The operation forms of TUG include, but are not limited to, online Q&A and technical article sharing, offline technical salons, visits to famous companies, official interactive events and so on. TUG members can learn cutting-edge technical knowledge, publish technical insights, and jointly build TiDB projects through online and offline activities. More information can be found on the TUG Q&A forum at [asktug.com](https://asktug.com).
 
@@ -45,11 +48,11 @@ The TiDB User Group (TUG) is an independent, non-profit, third-party organizatio
 
 ![Figure 3. New Community Structure - Active Contributor and Reviewer](media/tidb-community-new-roles.png)
 
-<center>Figure 3. New Community Structure - Active Contributor and Reviewer</center>
+<center>*Figure 3. New community structure - Active Contributor and Reviewer</center>
 
 The above picture reflects the second change in this community structure upgrade - the roles of Reviewer and Active Contributor will be introduced to the developer community.
 
-An Active Contributor is a contributor who contributes more than 8 PRs within a year. A Reviewer is generated from Active Contributors and has the right and obligation to review PRs for sub-modules of TiDB or TiKV. These roles will be covered in more details later when we introduce the Special Interest Group.
+An Active Contributor is a contributor who contributes more than 8 pull requests (PRs) within a year. A Reviewer is generated from Active Contributors and has the right and obligation to review PRs for sub-modules of TiDB or TiKV. These roles will be covered in more details later when we introduce the Special Interest Group.
 
 ### Change 3: Special Interest Group
 
@@ -57,7 +60,7 @@ Let's take a closer look at the developer community structure diagram:
 
 ![Figure 4. New Community Structure - Special Interest Group](media/tidb-community-new-sig.png)
 
-<center>Figure 3. New Community Structure - Special Interest Group</center>
+<center>*Figure 3. New community structure - Special Interest Group*</center>
 
 The above diagram shows the overall structure of the developer community from a vertical angle, reflecting the third change in this community architecture upgrade - the introduction of the Special Interest Group (SIG).
 
@@ -72,7 +75,7 @@ In addition, this picture also reflects the relationship between community roles
     + To join an SIG, a Contributor needs to contribute more than 8 PRs to the module that the SIG is responsible for within 1 year, so that he/she can be invited to join the SIG for targeted learning and contributions.
 
 2. Reviewer
-    + Must belong to a SIG; has the obligation to review PRs.
+    + Must belong to an SIG; has the obligation to review PRs.
     + Generated from Active Contributors. When an Active Contributor has significant contributions to the module and is nominated by 2 or more Committers, he/she will be invited to be a Reviewer of the module.
     + Has valid sign-off (approval with Looks Good To Me, or LGTM) for code reviews of the module
 
@@ -99,7 +102,7 @@ There are another two roles:
 
 ![Figure 5. New Community Structure - Working Group](media/tidb-community-new-wg.png)
 
-<center>Figure 5. New Community Structure - Working Group</center>
+<center>*Figure 5. New community structure - Working Group*</center>
 
 The fourth change is the introduction of the Working Group (WG) in the developer community structure. A WG is formed by community developers who gather together to accomplish a specific goal with PingCAP members. To achieve the goal, some WGs may span over multiple SIGs, and some WGs may only focus on something specific in a specific SIG.
 
