@@ -104,7 +104,7 @@ TiKV has the following [features](https://tikv.org/docs/3.0/concepts/features/):
 * [Consistent distributed transactions](https://tikv.org/docs/3.0/concepts/architecture)
 * [Coprocessor support](https://tikv.org/docs/3.0/concepts/architecture)
 * [Automatic sharding](https://tikv.org/docs/3.0/concepts/architecture)
-* [Region balanc](https://tikv.org/docs/3.0/concepts/architecture)ing
+* [Region balancing](https://tikv.org/docs/3.0/concepts/architecture)
 * [Dynamic membership](https://tikv.org/docs/3.0/concepts/architecture)
 * [Rolling online updates](https://tikv.org/docs/3.0/concepts/architecture)
 * [An extensive metric suite](https://tikv.org/docs/3.0/concepts/architecture)
