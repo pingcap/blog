@@ -214,3 +214,5 @@ In the future, we'll optimize TiKV in the following ways:
 * **Optimize the cluster hardware resources.** Because object metadata storage is a storage-intensive application, we want to reduce hardware costs. For example, we hope we can use larger disks (8 TB or 10 TB) or cheaper disks. We'll work together with PingCAP engineers to optimize hardware resources.
 
 * **Optimize the Region scheduling mechanism.** Currently, TiKV's scheduling mechanism is complicated. This is troublesome for storage-intensive applications that have a huge amount of data. We'll optimize the Region scheduling process so that when data upsurges we don't need to migrate data to another machine.
+
+*This post was first published on the [CNCF website](https://www.cncf.io/blog/2019/11/26/case-study-tikv-in-jd-cloud/).*
