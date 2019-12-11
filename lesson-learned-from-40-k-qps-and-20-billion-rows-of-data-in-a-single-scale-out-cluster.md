@@ -1,12 +1,12 @@
 ---
-title: 'Replacing MySQL with a Horizontally Scaling Database: 40 K QPS and 20+ Billion Rows of Data in a Single Cluster'
+title: 'Lesson Learned from 40 K QPS and 20+ Billion Rows of Data in a Single Scale-out Cluster'
 author: ['Can Cui']
 date: 2019-12-11
 summary: As the business developed, standalone MySQL couldn't meet JD Cloud's OSS metadata storage requirements. This post introduces how TiKV empowered JD Cloud to manage huge amounts of OSS metadata with a simple and horizontally scalable architecture.
 image: /images/blog/replacing-mysql-with-a-horizontally-scaling-database.png
 tags: ['TiKV','Success Story']
 categories: ['MySQL Scalability']
-url: /success-stories/replacing-mysql-with-a-horizontally-scaling-database-40-k-qps-and-20-billion-rows-of-data-in-a-single-cluster/
+url: /success-stories/lesson-learned-from-40-k-qps-and-20-billion-rows-of-data-in-a-single-scale-out-cluster/
 ---
 
 **Industry:** Cloud Computing Service Provider
@@ -111,8 +111,8 @@ TiKV has the following [features](https://tikv.org/docs/3.0/concepts/features/):
 * [Flexible APIs](https://tikv.org/docs/3.0/concepts/architecture)
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Replacing MySQL with a Horizontally Scaling Database: 40 K QPS and 20+ Billion Rows of Data in a Single Cluster', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
-    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Replacing MySQL with a Horizontally Scaling Database: 40 K QPS and 20+ Billion Rows of Data in a Single Cluster', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+    <a href="/download" onclick="trackViews('Lesson Learned from 40 K QPS and 20+ Billion Rows of Data in a Single Scale-out Cluster', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Lesson Learned from 40 K QPS and 20+ Billion Rows of Data in a Single Scale-out Cluster', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
 ## Why we chose TiKV
