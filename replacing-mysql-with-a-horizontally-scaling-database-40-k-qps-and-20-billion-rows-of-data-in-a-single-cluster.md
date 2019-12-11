@@ -9,9 +9,9 @@ categories: ['MySQL Scalability']
 url: /success-stories/replacing-mysql-with-a-horizontally-scaling-database-40-k-qps-and-20-billion-rows-of-data-in-a-single-cluster/
 ---
 
-**Author:** Can Cui (Infrastructure Specialist at JD Cloud)
-
 **Industry:** Cloud Computing Service Provider
+
+**Author:** Can Cui (Infrastructure Specialist at JD Cloud)
 
 ![Replacing MySQL with a horizontally scaling database](media/replacing-mysql-with-a-horizontally-scaling-database.png)
 
