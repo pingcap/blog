@@ -9,7 +9,7 @@ categories: ['MySQL Scalability']
 url: /success-stories/lesson-learned-from-40-k-qps-and-20-billion-rows-of-data-in-a-single-scale-out-cluster/
 ---
 
-**Industry:** Cloud Computing Service Provider
+**Industry:** Cloud Computing
 
 **Author:** Can Cui (Infrastructure Specialist at JD Cloud)
 
