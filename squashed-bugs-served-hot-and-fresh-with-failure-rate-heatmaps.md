@@ -13,11 +13,8 @@ image: /images/blog/automatic-debug.png
 To err is human; to introduce bugs is be a developer; and to debug is part of everyday life. Debugging is not just about the fix—sometimes it's the drudgery of trying to locate the root cause that kills passion, especially when you have thousands or even millions of lines of code. A former Oracle database developer, who helped maintain Oracle v12.2 and its 25 million lines of C code, [described](https://news.ycombinator.com/item?id=18442637) his struggling life with bugs this way:
 
 * Spend weeks trying to understand the 20 different flags that interact in mysterious ways to cause a bug.
-
 * Find out that his fix causes 100~1000 failed tests.
-
 * Randomly pick some of the tests and dive into the code again. It seems there are 10 more flags that are related to this bug.
-
 * Finally, _after a few weeks or months_, get the combination of flags right and succeed with zero failing tests.
 
 He was clearly frustrated with the situation, and this is something we really want to avoid in our own projects!
@@ -37,11 +34,8 @@ At the Hackathon, we built a bot that helps us quickly locate several bugs in Ti
 This bot was built based on the following techniques:
 
 * **SQL fuzzing** to randomly generate a large number of SQL queries as the test cases for the TiDB database
-
 * **Dynamic binary instrumentation** to instrument TiDB‘s source code and collect execution traces of these SQL queries
-
 * **Statistical debugging** to analyze TiDB source code's participation in the passed and failed test cases
-
 * **Visualization** to graphically map the potentially faulty lines of code in the source files
 
 The rest of this post describes in detail how we used the above techniques to build our bot. By the end of the article, you'll know the bot's three most important components, and hopefully, find inspiration for your own cool ideas.
@@ -70,9 +64,7 @@ The Apollo system consists of three modules: SQLFuzz, SQLMin, and SQLDebug.
 In the end, the Apollo system produces a bug report that includes:
 
 * The git commit that introduced the performance regression
-
 * The source files that contain potentially faulty code
-
 * The line numbers of the functions that caused the regression
 
 But in the real world, analyzing execution traces is very complicated. You have to consider the impact of concurrencies, loops, recursions, and so on. Plus, we only had two days to present our Hackathon project. We needed a simpler way to display our results. 
@@ -89,9 +81,7 @@ What's even cooler is that you can apply both automated debugging and visualizat
 Every time we hack on a project, our team first breaks down our goal into several actionable items, and then focuses our efforts on answering the most difficult questions. For this project, our team asked:
 
 * How do we generate a lot of test cases?
-
 * How do we track the execution of each SQL query?
-
 * How do we visually display the potentially faulty basic blocks?
 
 Here are our answers.
