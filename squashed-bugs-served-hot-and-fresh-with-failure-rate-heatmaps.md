@@ -22,14 +22,14 @@ He was clearly frustrated with the situation, and this is something we really wa
 Modern computer programs are so large and complex that designing a way to easily locate bugs would greatly improve a developer's quality of life. So, why not build a **bot** to automatically find program bugs? At our recent [TiDB Hackathon 2019](https://pingcap.com/blog/insert-into-tidb-hackathon-2019-values-hack-fun-tidb-ecosystem/), my teammates and I successfully brought this idea to reality, and our project won third prize!
 
 ![Bug track](media/bug-track.png)
-<center> _"Check" out that big check!_ </center>
+<center> "Check" out that big check! </center>
 
 ## The bug tracking bot we built
 
 At the Hackathon, we built a bot that helps us quickly locate several bugs in TiDB's source code. (BTW, for those who don't know [TiDB](https://pingcap.com/en/)—it's an open-source distributed SQL database written in Go.) Below, you can see how our bot highlights potentially faulty areas in the code. The higher the failure rate, the darker the color; the higher the failure count, the brighter the block.
 
 ![Bug test](media/bug-test.gif)
-<center> _Colored code blocks with their "failure rate" and "failure count" highlighted_ </center>
+<center> Colored code blocks with their "failure rate" and "failure count" highlighted </center>
 
 This bot was built based on the following techniques:
 
@@ -51,7 +51,7 @@ This project was initially inspired by [APOLLO: Automatic Detection and Diagnosi
 This approach can be also applied to finding bugs, so let's understand some of Apollo's basics first.
 
 ![Apollo system architecture](media/apollo-system-architecture.png)
-<center> *Apollo system architecture ([image source](http://www.vldb.org/pvldb/vol13/p57-jung.pdf))* </center>
+<center> Apollo system architecture ([image source](http://www.vldb.org/pvldb/vol13/p57-jung.pdf)) </center>
 
 The Apollo system consists of three modules: SQLFuzz, SQLMin, and SQLDebug. 
 
@@ -72,7 +72,7 @@ But in the real world, analyzing execution traces is very complicated. You have 
 So we found another paper, [Visualization of Test Information to Assist Fault Localization](https://www.cc.gatech.edu/~john.stasko/papers/icse02.pdf). This paper presents a technique that uses varying colors and brightness to visually map the participation of each code block in the passed and failed test cases.
 
 ![Visually mapped code blocks](media/visually-mapped-code-blocks.png)
-<center> *Visually mapped code blocks ([image source](https://www.cc.gatech.edu/~john.stasko/papers/icse02.pdf))* </center>
+<center> Visually mapped code blocks ([image source](https://www.cc.gatech.edu/~john.stasko/papers/icse02.pdf)) </center>
 
 What's even cooler is that you can apply both automated debugging and visualization techniques to do a lot of other things. I'll share some thoughts in a later section. Before that, let's see how we hacked our way to build this bug-hunting bot.
 
@@ -95,12 +95,12 @@ Projects such as [RAGS](http://vldb.org/conf/2007/papers/industrial/p1243-bati.p
 Users first define a grammar file that contains some Backus–Naur form ([BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)) grammars for SQL. go-randgen then starts from the "query" statement and randomly traverses the "SQL grammar tree" in the file to generate a SQL query. This process is shown below as a red line path. 
 
 ![SQL grammar tree](media/sql-grammar-tree.png)
-<center> _SQL grammar tree_ </center>
+<center> SQL grammar tree </center>
 
 Also, as shown below, we implemented a SQL fuzzing demonstration page that shows which SQL BNF grammar is most likely to generate a failed SQL query. Each BNF grammar is assigned a color value based on the ratio of the passed and failed test cases (SQL queries) that the grammar appears in.
 
 ![Colored BNF grammars for SQL](media/colored-bnf-grammars-for-sql.gif)
-<center> _Colored BNF grammars for SQL_ </center>
+<center> Colored BNF grammars for SQL </center>
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('Squashed Bugs, Served Hot and Fresh with Failure Rate Heatmaps', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -170,7 +170,7 @@ We implemented the following metrics for the visualization model:
     Thus, BlockBrightness is significant for reducing this kind of noise. Only the basic blocks with a darker color and a higher brightness are those worth investing time to troubleshoot. For example, the following basic block might contain the fault—the BlockColor score is 0.82 (the value of `Failure rate`) and the value of `FailedTests` with the `block` subscript is 292 (the value of `Failure count`).
 
 ![A basic block that might contain the fault](media/a-basic-block-that-might-contain-the-fault.png)
-<center> _A basic block that might contain the fault_ </center> 
+<center> A basic block that might contain the fault </center> 
 
 * **FileRank**. For each source file, the file rank score is determined by dividing **the total number of failed test cases that execute each basic block** by the total number of basic blocks. The higher the score, the more test cases that a file fails, and the higher the file ranks.
 
@@ -181,7 +181,7 @@ We implemented the following metrics for the visualization model:
     In the figure below, the files that rank higher are more likely to contain the fault.
 
 ![Ranked files](media/ranked-files.png)
-<center> _Ranked files_ </center> 
+<center> Ranked files </center> 
 
 ## Limitations
 
