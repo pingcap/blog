@@ -22,7 +22,7 @@ To err is human; to introduce bugs is be a developer; and to debug is part of ev
 
 He was clearly frustrated with the situation, and this is something we really want to avoid in our own projects!
 
-Modern computer programs are so large and complex that designing a way to easily locate bugs would greatly improve a developer's quality of life. So, why not build a **bot **to automatically find program bugs? At our recent [TiDB Hackathon 2019](https://pingcap.com/blog/insert-into-tidb-hackathon-2019-values-hack-fun-tidb-ecosystem/), my teammates and I successfully brought this idea to reality, and our project won third prize!
+Modern computer programs are so large and complex that designing a way to easily locate bugs would greatly improve a developer's quality of life. So, why not build a **bot** to automatically find program bugs? At our recent [TiDB Hackathon 2019](https://pingcap.com/blog/insert-into-tidb-hackathon-2019-values-hack-fun-tidb-ecosystem/), my teammates and I successfully brought this idea to reality, and our project won third prize!
 
 ![Bug track](media/bug-track.png)
 <center> _"Check" out that big check!_ </center>
@@ -32,7 +32,7 @@ Modern computer programs are so large and complex that designing a way to easily
 At the Hackathon, we built a bot that helps us quickly locate several bugs in TiDB's source code. (BTW, for those who don't know [TiDB](https://pingcap.com/en/)—it's an open-source distributed SQL database written in Go.) Below, you can see how our bot highlights potentially faulty areas in the code. The higher the failure rate, the darker the color; the higher the failure count, the brighter the block.
 
 ![Bug test](media/bug-test.gif)
-<center> _Colored code blocks with their "failure rate” and "failure count” highlighted_ </center>
+<center> _Colored code blocks with their "failure rate" and "failure count" highlighted_ </center>
 
 This bot was built based on the following techniques:
 
@@ -57,7 +57,7 @@ This project was initially inspired by [APOLLO: Automatic Detection and Diagnosi
 This approach can be also applied to finding bugs, so let's understand some of Apollo's basics first.
 
 ![Apollo system architecture](media/apollo-system-architecture.png)
-<center> _Apollo system architecture ([image source](http://www.vldb.org/pvldb/vol13/p57-jung.pdf) )_ </center>
+<center> *Apollo system architecture ([image source](http://www.vldb.org/pvldb/vol13/p57-jung.pdf))* </center>
 
 The Apollo system consists of three modules: SQLFuzz, SQLMin, and SQLDebug. 
 
@@ -80,7 +80,7 @@ But in the real world, analyzing execution traces is very complicated. You have 
 So we found another paper, [Visualization of Test Information to Assist Fault Localization](https://www.cc.gatech.edu/~john.stasko/papers/icse02.pdf). This paper presents a technique that uses varying colors and brightness to visually map the participation of each code block in the passed and failed test cases.
 
 ![Visually mapped code blocks](media/visually-mapped-code-blocks.png)
-<center> _Visually mapped code blocks ([image source](https://www.cc.gatech.edu/~john.stasko/papers/icse02.pdf) )_ </center>
+<center> *Visually mapped code blocks ([image source](https://www.cc.gatech.edu/~john.stasko/papers/icse02.pdf))* </center>
 
 What's even cooler is that you can apply both automated debugging and visualization techniques to do a lot of other things. I'll share some thoughts in a later section. Before that, let's see how we hacked our way to build this bug-hunting bot.
 
@@ -102,7 +102,7 @@ To do an accurate and effective statistical diagnosis, we need to feed the bot a
 
 Projects such as [RAGS](http://vldb.org/conf/2007/papers/industrial/p1243-bati.pdf) and [SQLSmith](https://github.com/anse1/sqlsmith) provide a popular SQL fuzzing framework in the DBMS community. For our scenario, we used an open-source stochastic testing framework, [go-randgen](https://github.com/pingcap/go-randgen), to implement SQL fuzzing. 
 
-Users first define a grammar file that contains some Backus–Naur form ([BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)) grammars for SQL. go-randgen then starts from the "query” statement and randomly traverses the "SQL grammar tree” in the file to generate a SQL query. This process is shown below as a red line path. 
+Users first define a grammar file that contains some Backus–Naur form ([BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)) grammars for SQL. go-randgen then starts from the "query" statement and randomly traverses the "SQL grammar tree" in the file to generate a SQL query. This process is shown below as a red line path. 
 
 ![SQL grammar tree](media/sql-grammar-tree.png)
 <center> _SQL grammar tree_ </center>
@@ -125,7 +125,7 @@ By referring to the implementation of a Golang tool [cover](https://github.com/g
 
 Injecting an HTTP server is useful when you work with SQL query summaries. A query summary is the hex representation of the 32-bit MurmurHash result of the query, and is used to simplify data transfer. 
 
-For example, if a SQL query's summary is "df6bfbff”, we can then browse "http://<tidb-server-ip>:43222/trace/df6bfbff”. The HTTP server will print the query's execution traces (including the files and the lines of code) in the JSON format. 
+For example, if a SQL query's summary is "df6bfbff", we can then browse "http://<tidb-server-ip>:43222/trace/df6bfbff". The HTTP server will print the query's execution traces (including the files and the lines of code) in the JSON format. 
 
 ```
 $ curl http://localhost:43222/trace/df6bfbff | jq
@@ -153,7 +153,7 @@ $ curl http://localhost:43222/trace/df6bfbff | jq
 }
 ```
 
-In the returned JSON list, each array of the "line” field stores the line numbers at which a basic block starts and ends. A basic block is a code block that cannot be split into smaller branches. It is the smallest "unit” for our statistics. 
+In the returned JSON list, each array of the "line" field stores the line numbers at which a basic block starts and ends. A basic block is a code block that cannot be split into smaller branches. It is the smallest "unit" for our statistics. 
 
 But how can we identify all the basic blocks in a Golang source file? We found a similar implementation in the Golang source code, and borrowed it and created a library called [go-blockscanner](https://github.com/DQinYuan/go-blockscanner).
 
@@ -173,15 +173,11 @@ We implemented the following metrics for the visualization model:
 
 * **BlockBrightness**. For each basic block, the brightness score is determined by dividing the number of failed test cases that have executed the block by **the total number of test cases that have ever failed**. The higher the score, the more failed test cases that the block causes, and the brighter the block.
 
-    <p id="gdcalert9" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: equation: use MathJax/LaTeX if your publishing platform supports it. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert10">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-    <p id="gdcalert10" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: equation: use MathJax/LaTeX if your publishing platform supports it. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert11">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+    
 
     The BlockBrightness metric is introduced to correct the bias of the BlockColor metric. For example, if **only one failed** test case executes a basic block, the block will get the highest score, `1`, on BlockColor. But most of the time, this block is not the real cause of the bug because only one out of many failed test cases executes the block. 
 
-    Thus, BlockBrightness is significant for reducing this kind of noise. Only the basic blocks with a darker color and a higher brightness are those worth investing time to troubleshoot. For example, the following basic block might contain the fault—the BlockColor score is 0.82 (the value of `Failure rate`) and the value of the 
-
-    <p id="gdcalert11" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: equation: use MathJax/LaTeX if your publishing platform supports it. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert12">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>variable is 292 (the value of `Failure count`).
+    Thus, BlockBrightness is significant for reducing this kind of noise. Only the basic blocks with a darker color and a higher brightness are those worth investing time to troubleshoot. For example, the following basic block might contain the fault—the BlockColor score is 0.82 (the value of `Failure rate`) and the value of the FailedTests_block variable is 292 (the value of `Failure count`).
 
 ![A basic block that might contain the fault](media/a-basic-block-that-might-contain-the-fault.png)
 <center> _A basic block that might contain the fault_ </center> 
