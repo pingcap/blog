@@ -125,7 +125,7 @@ By referring to the implementation of a Golang tool [cover](https://github.com/g
 
 Injecting an HTTP server is useful when you work with SQL query summaries. A query summary is the hex representation of the 32-bit MurmurHash result of the query, and is used to simplify data transfer. 
 
-For example, if a SQL query's summary is "df6bfbff", we can then browse "http://<tidb-server-ip>:43222/trace/df6bfbff". The HTTP server will print the query's execution traces (including the files and the lines of code) in the JSON format. 
+For example, if a SQL query's summary is "df6bfbff", we can then browse "http://\<tidb-server-ip\>:43222/trace/df6bfbff". The HTTP server will print the query's execution traces (including the files and the lines of code) in the JSON format. 
 
 ```
 $ curl http://localhost:43222/trace/df6bfbff | jq
