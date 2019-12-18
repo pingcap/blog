@@ -182,7 +182,7 @@ We implemented the following metrics for the visualization model:
 ![A basic block that might contain the fault](media/a-basic-block-that-might-contain-the-fault.png)
 <center> _A basic block that might contain the fault_ </center> 
 
-* **FileRank**. For each source file, the file rank score is determined by dividing **the total number of failed test cases that execute each basic block **by the total number of basic blocks. The higher the score, the more test cases that a file fails, and the higher the file ranks.
+* **FileRank**. For each source file, the file rank score is determined by dividing **the total number of failed test cases that execute each basic block** by the total number of basic blocks. The higher the score, the more test cases that a file fails, and the higher the file ranks.
 
     ![FileRank](media/file-rank.png) 
 
