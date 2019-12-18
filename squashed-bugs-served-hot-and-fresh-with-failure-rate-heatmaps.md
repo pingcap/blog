@@ -51,7 +51,7 @@ This project was initially inspired by [APOLLO: Automatic Detection and Diagnosi
 This approach can be also applied to finding bugs, so let's understand some of Apollo's basics first.
 
 ![Apollo system architecture](media/apollo-system-architecture.png)
-<center> Apollo system architecture(source: http://www.vldb.org/pvldb/vol13/p57-jung.pdf) </center>
+<center> Apollo system architecture (source: http://www.vldb.org/pvldb/vol13/p57-jung.pdf) </center>
 
 The Apollo system consists of three modules: SQLFuzz, SQLMin, and SQLDebug. 
 
