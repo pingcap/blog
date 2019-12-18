@@ -169,7 +169,7 @@ We implemented the following metrics for the visualization model:
 
 * **BlockColor**. For each basic block, the color score is determined by dividing the number of failed test cases that have executed the block by **the total number of test cases that have executed the block**. The higher the score, the darker the color.
 
-   \it BlockColor = {FailedTests_block\over PassedTests_block+FailedTests_block
+   $$\it BlockColor = {FailedTests_block\over PassedTests_block+FailedTests_block$$
 
 * **BlockBrightness**. For each basic block, the brightness score is determined by dividing the number of failed test cases that have executed the block by **the total number of test cases that have ever failed**. The higher the score, the more failed test cases that the block causes, and the brighter the block.
 
