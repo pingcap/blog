@@ -57,7 +57,7 @@ This project was initially inspired by [APOLLO: Automatic Detection and Diagnosi
 This approach can be also applied to finding bugs, so let's understand some of Apollo's basics first.
 
 ![Apollo system architecture](media/apollo-system-architecture.png)
-<center> *Apollo system architecture ([image source](http://www.vldb.org/pvldb/vol13/p57-jung.pdf))* </center>
+<center> *Apollo system architecture* ([image source](http://www.vldb.org/pvldb/vol13/p57-jung.pdf)) </center>
 
 The Apollo system consists of three modules: SQLFuzz, SQLMin, and SQLDebug. 
 
@@ -80,7 +80,7 @@ But in the real world, analyzing execution traces is very complicated. You have 
 So we found another paper, [Visualization of Test Information to Assist Fault Localization](https://www.cc.gatech.edu/~john.stasko/papers/icse02.pdf). This paper presents a technique that uses varying colors and brightness to visually map the participation of each code block in the passed and failed test cases.
 
 ![Visually mapped code blocks](media/visually-mapped-code-blocks.png)
-<center> *Visually mapped code blocks ([image source](https://www.cc.gatech.edu/~john.stasko/papers/icse02.pdf))* </center>
+<center> *Visually mapped code blocks* ([image source](https://www.cc.gatech.edu/~john.stasko/papers/icse02.pdf)) </center>
 
 What's even cooler is that you can apply both automated debugging and visualization techniques to do a lot of other things. I'll share some thoughts in a later section. Before that, let's see how we hacked our way to build this bug-hunting bot.
 
@@ -109,7 +109,7 @@ Users first define a grammar file that contains some Backus–Naur form ([BNF](h
 
 Also, as shown below, we implemented a SQL fuzzing demonstration page that shows which SQL BNF grammar is most likely to generate a failed SQL query. Each BNF grammar is assigned a color value based on the ratio of the passed and failed test cases (SQL queries) that the grammar appears in.
 
-![Colored BNF grammars for SQL](media/colored-bnf-grammars-for-sql.png)
+![Colored BNF grammars for SQL](media/colored-bnf-grammars-for-sql.gif)
 <center> _Colored BNF grammars for SQL_ </center>
 
 <div class="trackable-btns">
