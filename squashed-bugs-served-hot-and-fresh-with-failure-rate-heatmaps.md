@@ -57,7 +57,7 @@ This project was initially inspired by [APOLLO: Automatic Detection and Diagnosi
 This approach can be also applied to finding bugs, so let's understand some of Apollo's basics first.
 
 ![Apollo system architecture](media/apollo-system-architecture.png)
-<center> _Apollo system architecture ([image source](http://www.vldb.org/pvldb/vol13/p57-jung.pdf))_ </center>
+<center> _Apollo system architecture ([image source](http://www.vldb.org/pvldb/vol13/p57-jung.pdf) )_ </center>
 
 The Apollo system consists of three modules: SQLFuzz, SQLMin, and SQLDebug. 
 
@@ -80,7 +80,7 @@ But in the real world, analyzing execution traces is very complicated. You have 
 So we found another paper, [Visualization of Test Information to Assist Fault Localization](https://www.cc.gatech.edu/~john.stasko/papers/icse02.pdf). This paper presents a technique that uses varying colors and brightness to visually map the participation of each code block in the passed and failed test cases.
 
 ![Visually mapped code blocks](media/visually-mapped-code-blocks.png)
-<center> _Visually mapped code blocks ([image source](https://www.cc.gatech.edu/~john.stasko/papers/icse02.pdf))_ </center>
+<center> _Visually mapped code blocks ([image source](https://www.cc.gatech.edu/~john.stasko/papers/icse02.pdf) )_ </center>
 
 What's even cooler is that you can apply both automated debugging and visualization techniques to do a lot of other things. I'll share some thoughts in a later section. Before that, let's see how we hacked our way to build this bug-hunting bot.
 
@@ -169,7 +169,7 @@ We implemented the following metrics for the visualization model:
 
 * **BlockColor**. For each basic block, the color score is determined by dividing the number of failed test cases that have executed the block by **the total number of test cases that have executed the block**. The higher the score, the darker the color.
 
-    <p id="gdcalert8" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: equation: use MathJax/LaTeX if your publishing platform supports it. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert9">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+   \it BlockColor = {FailedTests_block\over PassedTests_block+FailedTests_block
 
 * **BlockBrightness**. For each basic block, the brightness score is determined by dividing the number of failed test cases that have executed the block by **the total number of test cases that have ever failed**. The higher the score, the more failed test cases that the block causes, and the brighter the block.
 
