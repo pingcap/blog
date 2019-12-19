@@ -10,7 +10,7 @@ image: /images/blog/automatic-debug.png
 
 ![Automatic debug](media/automatic-debug.png)
 
-To err is human; to introduce bugs is be a developer; and to debug is part of everyday life. Debugging is not just about the fix—sometimes it's the drudgery of trying to locate the root cause that kills passion, especially when you have thousands or even millions of lines of code. A former Oracle database developer, who helped maintain Oracle v12.2 and its 25 million lines of C code, [described](https://news.ycombinator.com/item?id=18442637) his struggling life with bugs this way:
+To err is human; to introduce bugs is to be a developer; and to debug is part of everyday life. Debugging is not just about the fix—sometimes it's the drudgery of trying to locate the root cause that kills passion, especially when you have thousands or even millions of lines of code. A former Oracle database developer, who helped maintain Oracle v12.2 and its 25 million lines of C code, [described](https://news.ycombinator.com/item?id=18442637) his struggling life with bugs this way:
 
 * Spend weeks trying to understand the 20 different flags that interact in mysterious ways to cause a bug.
 * Find out that his fix causes 100~1000 failed tests.
