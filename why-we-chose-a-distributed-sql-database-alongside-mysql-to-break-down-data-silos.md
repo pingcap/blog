@@ -32,7 +32,7 @@ In this section, I'll introduce the MySQL architecture for our billing applicati
 We deploy more than 10 billing applications to provide services for different game products. A big product employs a dedicated billing application, while multiple small products share the same application. Each billing application applies the standalone MySQL architecture as shown below. (The direction of the arrows indicates the flow of the data or request.)
 
 ![Standalone MySQL architecture](media/standalone-mysql-architecture.png)
-<center> _Standalone MySQL architecture_ </center> 
+<center> Standalone MySQL architecture </center>  
 
 The architecture has the following characteristics:
 
@@ -83,7 +83,7 @@ With our applications' traffic and data volume growing rapidly, our standalone M
     We deployed databases independently for different game products. Data was scattered on data silos (that is, isolated islands of data), which made it difficult to gain insights from data analysis. When performing cross-product calculations, we needed to maintain multiple heterogeneous data sources, and the methods to access these sources were complicated. 
 
 ![Data silos](media/data-silos.png)
-<center> _Data silos_ </center>
+<center> Data silos </center> 
 
 ## New database exploration
 
@@ -159,7 +159,7 @@ At the beginning, we preferred to use MySQL-based solutions such as MySQL InnoDB
 In MySQL clusters of two different versions—5.7.25 and 8.0.12—we performed writes on 10 tables (each had 10 million rows) with 128 concurrent threads. The same test was run for clusters with a single node (that is, a standalone architecture), three nodes, and five nodes. The results are shown below:
 
 ![Results of testing MySQL clusters of different node sizes](media/results-of-testing-mysql-clusters-of-different-node-sizes.png)
-<center> _Results of testing MySQL clusters of different node sizes_ </center> 
+<center> Results of testing MySQL clusters of different node sizes </center>  
 
 The tests showed that a multi-node MySQL cluster performed about 30% worse under write workloads than a standalone MySQL node. Other read and write tests had similar results. 
 
@@ -235,7 +235,7 @@ SELECT DISTINCT c FROM sbtest%u WHERE id BETWEEN ? AND ? ORDER BY c
 The following figure shows one of our important testing results: In general, CRDB 2.1.0 and TiDB 2.0.5 had a similar performance in most of the read and write workloads.
 
 ![Performance comparison of reads and writes on a large table](media/performance-comparison-of-reads-and-writes-on-a-large-table.png)
-<center> _Performance comparison of reads and writes on a large table_ </center> 
+<center> Performance comparison of reads and writes on a large table </center>  
 
 Conclusion:
 
@@ -244,10 +244,10 @@ Conclusion:
     Note: The above is the testing result for TiDB 2.0.5. In July 2019, PingCAP announced that [TiDB 3.0 reached general availability](https://pingcap.com/blog/tidb-3.0-announcement/), achieving a major performance boost. Our recent tests showed that in most scenarios TiDB 3.0's performance was multiple times better than TiDB 2.1. The following test results compare TiDB 3.0.3 and TiDB 2.1.15 in the areas of peak [online transaction processing](https://en.wikipedia.org/wiki/Online_transaction_processing) (OLTP) and [TPC Benchmark C](http://www.tpc.org/tpcc/) (TPC-C):
 
 ![Peak OLTP performance comparison](media/peak-oltp-performance-comparison.png)
-<center> _Peak OLTP performance comparison_ </center>
+<center> Peak OLTP performance comparison </center> 
 
 ![TPC-C performance comparison](media/tpc-c-performance-comparison.png)
-<center> _TPC-C performance comparison_ </center>
+<center> TPC-C performance comparison </center> 
 
 * CRDB is compatible with the PostgreSQL protocol. If we migrate our application architecture to CRDB, we have to change the protocol, which is complicated and costly.
 
@@ -385,7 +385,7 @@ Throughout our journey with TiDB, we've used multiple versions for testing or pr
 We deploy the TiDB cluster in a highly-layered structure as shown below. [NGINX](https://www.nginx.com/) is used for load balancing in the front end.
 
 ![TiDB architecture for billing applications](media/tidb-architecture-for-billing-applications.png)
-<center> _TiDB architecture for billing applications_ </center>
+<center> TiDB architecture for billing applications </center> 
 
 Inside the TiDB cluster, there are three main components:
 
