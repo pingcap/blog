@@ -20,7 +20,7 @@ A common real-life use case is using TiDB Binlog to replicate data from one TiDB
 The first version of TiDB Binlog was released more than two years ago. Among the multiple versions of TiDB Binlog, the Kafka-based version was widely used. The architecture was as follows:
 
 ![The architecture of the Kafka version of TiDB Binlog](media/tidb_binlog_kafka_architecture.png)
-<center> *The architecture of the Kafka version of TiDB Binlog* </center>
+<center> The architecture of the Kafka version of TiDB Binlog </center>
 
 The Kafka version of TiDB Binlog consisted of the following two components:
 
@@ -49,7 +49,7 @@ This Kafka-based version of TiDB Binlog had a few issues:
 To resolve these issues, we refactored TiDB Binlog into the following architecture:
 
 ![The architecture of the latest (cluster) version of TiDB Binlog](media/tidb_binlog_cluster_architecture.png)
-<center> *The architecture of the latest (cluster) version of TiDB Binlog* </center>
+<center> The architecture of the latest (cluster) version of TiDB Binlog </center>
 
 This version of TiDB Binlog no longer uses Kafka to store the binlog. Although it still keeps both the Pump and Drainer components, the functionality has been adjusted as follows:
 

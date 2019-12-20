@@ -13,7 +13,7 @@ It's similar in functionality to MySQL master-slave replication, but the main di
 Many of our users have been using TiDB Binlog in-production for incremental backups, to replicate data from one TiDB cluster to another (often across multiple data centers or availability zones), or to send TiDB updates through Kafka to any given downstream platform. It's particularly useful if you are a MySQL or MariaDB user thinking about trying out TiDB, but would like to minimize the risk of migration and testing. TiDB Binlog enables application traffic to TiDB to be pushed to a downstream MySQL or MariaDB instance/cluster. This ensures that even if the migration to TiDB encounters problems, you can easily revert the application back to MySQL or MariaDB.
 
 ![TiDB Binlog Architecture](media/tidb_binlog_cluster.png)
-<center> *TiDB Binlog Architecture* </center>
+<center> TiDB Binlog Architecture </center>
 
 (For more detailed information on the architectural design and implementation of TiDB Binlog, read this deep-dive [blog post](https://pingcap.com/blog/tidb-binlog-architecture-evolution-and-implementation-principles/).)
 

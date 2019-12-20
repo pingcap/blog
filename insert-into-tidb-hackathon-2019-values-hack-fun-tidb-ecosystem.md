@@ -22,7 +22,7 @@ So without further ado, here are the top 3 winners!
 ## Top 3 winners
 
 ![1st place of TiDB Hackathon 2019](media/1st-place-of-tidb-hackathon-2019.png)
-<center> *1st place of TiDB Hackathon 2019* </center>
+<center> 1st place of TiDB Hackathon 2019 </center>
 
 **Project:** Unified Thread Pool
 
@@ -46,7 +46,7 @@ This project won the praise of all the judges, and we are looking forward to the
 * [https://github.com/sticnarf/kvproto/tree/hackathon](https://github.com/sticnarf/kvproto/tree/hackathon) 
 
 ![2nd place of TiDB Hackathon 2019](media/2nd-place-of-tidb-hackathon-2019.png)
-<center> *2nd place of TiDB Hackathon 2019* </center>
+<center> 2nd place of TiDB Hackathon 2019 </center>
 
 **Project:** tidb-wasm: Run TiDB Inside Your Browser (and everywhere)
 
@@ -57,7 +57,7 @@ This project won the praise of all the judges, and we are looking forward to the
 **GitHub link:** [https://github.com/lucklove/tidb-wasm](https://github.com/lucklove/tidb-wasm) 
 
 ![2nd place of TiDB Hackathon 2019](media/using-raft-to-mitigate-tidb-cross-dc-latency.png)
-<center> *2nd place of TiDB Hackathon 2019* </center>
+<center> 2nd place of TiDB Hackathon 2019 </center>
 
 **Project:** Using Raft to mitigate TiDB Cross-DC latency
 
@@ -83,34 +83,34 @@ Highlights of this project include the following:
 On Day 1, hackers from all over China gathered in TiDB "distributed" offices. The day kicked off with a warm welcome from Ed Huang, our Co-founder and CTO, who shared his own hackathon experience and offered some advice for hackathon newbies. 
 
 ![Happy Hacking starts!](media/happy-hacking-starts.png)
-<center> *Happy Hacking starts!* </center>
+<center> Happy Hacking starts! </center>
 
 At 10:00 a.m, 2019 TiDB Hackathon officially launched! Happy Hacking, folks!
 
 ![Hacking in Beijing](media/hacking-in-beijing.png)
-<center> *Hacking in Beijing* </center>
+<center> Hacking in Beijing </center>
 
 ![Hacking in Shanghai](media/hacking-in-shanghai.png)
-<center> *Hacking in Shanghai* </center>
+<center> Hacking in Shanghai </center>
 
 ![And hacking in Guangzhou, too!](media/hacking-in-guangzhou.png)
-<center> *And hacking in Guangzhou, too!* </center>
+<center> And hacking in Guangzhou, too! </center>
 
 Hackathon is more than a coding competition. It’s a great opportunity for you to meet more like-minded friends in a free and cozy environment. And we definitely followed the hackathon tradition: pizza, beer, and swag!
 
 ![Pizza and crayfish](media/pizza-and-crayfish.png)
-<center> *Pizza and crayfish* </center>
+<center> Pizza and crayfish </center>
 
 ![This bottle helps solve coding bottlenecks](media/this-bottle-helps-solve-coding-bottlenecks.png)
-<center> *This bottle helps solve coding bottlenecks* </center>
+<center> This bottle helps solve coding bottlenecks </center>
 
 ![TiDB Hackathon 2019 swag](media/tidb-hackathon-2019-swag.png)
-<center> *TiDB Hackathon 2019 swag* </center>
+<center> TiDB Hackathon 2019 swag </center>
 
 To accelerate participants’ performance, we had mentors standing by field questions and provide inspiration. What a great way to share technical knowledge!
 
 ![A mentor sharing technical knowledge](media/a-mentor-sharing-technical-knowledge.png)
-<center> *A mentor sharing technical knowledge* </center>
+<center> A mentor sharing technical knowledge </center>
 
 ## What’s next
 
