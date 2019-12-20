@@ -74,7 +74,7 @@ Database scalability was still the weak point of the overall system until we fou
 The TiDB platform is a collection of components that when used together become a NewSQL database with HTAP capabilities.
 
 ![TiDB platform architecture](media/tidb-platform-architecture.png)
-<center> *TiDB platform architecture* </center>
+<center> TiDB platform architecture </center>
 
 Inside the TiDB platform, the main components are as follows:
 
@@ -115,7 +115,7 @@ We deployed TiDB in our system, and the overall architecture of the Moneta appli
 * The bottom layer: the TiDB cluster stores all the stateful data. Its components are highly available, and if a node crashes, it can self-recover its service. 
 
 ![TiDB architecture in Zhihu's Moneta application](media/tidb-architecture-in-zhihu's-moneta-application.png)
-<center> *TiDB architecture in Zhihu's Moneta application* </center>
+<center> TiDB architecture in Zhihu's Moneta application </center>
 
 In this system, all the components are self-recoverable, and the entire system has a global failure monitoring mechanism. We then use [Kubernetes](https://en.wikipedia.org/wiki/Kubernetes) to orchestrate the entire system to guarantee high availability of the service as a whole. 
 
@@ -128,20 +128,20 @@ As an example, take a set of performance metrics for the Moneta application in J
 * **40,000 rows of data were written per second at peak time**.
 
 ![Data written per second at peak time](media/data-written-per-second-at-peak-time.png)
-<center> *Data written per second at peak time* </center>
+<center> Data written per second at peak time </center>
 
 * **30,000 queries and 12 million posts were examined per second at peak time**.
 
 ![Queries examined per second at peak time](media/queries-and-posts-examined-per-second-at-peak-time.png)
-<center> *Queries examined per second at peak time* </center>
+<center> Queries examined per second at peak time </center>
 
 * **The 99th percentile response time was about 25 ms, and the 999th percentile response time was about 50 ms**. In fact, the average response time is far less than these figures, even for long-tail queries that demand a stable response time.
 
 ![99th percentile response time](media/99th-percentile-response-time.png)
-<center> *The 99th percentile response time* </center> 
+<center> The 99th percentile response time </center> 
 
 ![999th percentile response time](media/999th-percentile-response-time.png)
-<center> *The 999th percentile response time* </center>
+<center> The 999th percentile response time </center>
 
 ## What we learned
 
@@ -184,7 +184,7 @@ We heard that TiDB 3.0 would introduce Titan, a key-value storage engine, to red
 To give this feature a try, we enabled Titan after TiDB 3.0.0-rc.2 was released. The following figure shows the latency for writes and queries respectively, compared to that of RocksDB and Titan: 
 
 ![Latency for writes and queries](media/latency-for-writes-and-queries-respectively.png)
-<center> *Latency for writes and queries* </center>
+<center> Latency for writes and queries </center>
 
 The statistics show that after we enabled Titan, both write and query latencies dropped sharply. It was really astonishing! When we saw the statistics, we couldn't believe our eyes.
 

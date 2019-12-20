@@ -23,7 +23,7 @@ The Ti-Cool team was composed of:
 Now, you can run TiDB directly in a web browser. Just like this:
 
 ![Run TiDB directly in a web browser](media/run-tidb-in-a-web-browser.gif)
-<center> *Run TiDB in a web browser* </center> 
+<center> Run TiDB in a web browser </center> 
 
 ## How can you try it?
 

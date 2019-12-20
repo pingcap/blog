@@ -37,7 +37,7 @@ In this context, the big data technology represented by [Apache Hadoop](https://
 As shown in the following figure, the application data is extracted by the ETL tool, and then imported into a data analysis platform. The application database focuses on OLTP workloads, and the analysis platform on OLAP workloads.
 
 ![Traditional data platform](media/traditional-data-platform.png)
-<center> *Traditional data platform* </center> 
+<center> Traditional data platform </center> 
 
 ### Disadvantages of separating OLTP and OLAP systems
 
@@ -69,7 +69,7 @@ To build an HTAP database system like TiDB, we had to conquer several engineerin
 The TiDB platform is a collection of components that when used together become a NewSQL database with HTAP capabilities.
 
 ![TiDB platform architecture](media/tidb-platform-architecture.png)
-<center> *TiDB platform architecture* </center> 
+<center> TiDB platform architecture </center> 
 
 Inside the TiDB platform, the main components are as follows:
 
@@ -92,7 +92,7 @@ In 2017, we released TiSpark, which directly accesses the data in TiKV (the stor
 However, TiKV is designed specially for **OLTP scenarios**. It has a limited capability to extract and analyze large volumes of data. For many OLAP queries, column-oriented databases outperform row-oriented databases. Therefore, we introduced TiFlash to promote TiDB's OLAP capabilities and power TiDB to become a true HTAP database.
 
 ![TiFlash architecture](media/tiflash-architecture.png)
-<center> *TiFlash architecture* </center> 
+<center> TiFlash architecture </center> 
 
 ## What is TiFlash
 
@@ -117,7 +117,7 @@ This section shows details of TiFlash's core technologies, including column-orie
 ### Column-oriented storage
 
 ![Row-oriented storage vs. column-oriented storage](media/row-oriented-storage-vs-column-oriented-storage.png)
-<center> *Row-oriented storage vs. column-oriented storage* </center> 
+<center> Row-oriented storage vs. column-oriented storage </center> 
 
 Generally, OLAP systems use column-oriented storage, and so does TiFlash. TiFlash performs scan operations 10 times faster than TiKV because the columnar format has the following characteristics:
 
@@ -143,7 +143,7 @@ Data replication is one of the most significant issues in distributed systems. T
 In a Raft group, TiFlash is a Raft learner instead of a Raft leader or follower, because TiFlash currently doesn't support direct writes from the SQL client (TiDB or TiSpark). We'll support this feature in the near future.
 
 ![Data replication for a Raft learner](media/data-replication-for-a-raft-learner.png)
-<center> *Data replication for a Raft learner* </center> 
+<center> Data replication for a Raft learner </center> 
 
 To speed up data replication, replicating Raft logs from a leader to a follower or learner could be performed asynchronously. When a log entry is replicated to the majority of nodes (leader and followers), it is considered committed. 
 
@@ -164,12 +164,12 @@ A Region is the basic unit for data storage, and multiple Region replicas form a
 How does the learner know that the current Region replica is sufficiently new? The answer is: before reading data, the learner with its read `ts` sends a request to the leader to obtain the Raft log offset that ensures the Region replica is sufficiently new. 
 
 ![Raft learner sends a request to the leader](media/raft-learner-sends-a-request-to-the-leader.png)
-<center> *Raft learner sends a request to the leader* </center>
+<center> Raft learner sends a request to the leader </center>
 
 When serving a read request, the Raft learner sends the leader a request to obtain the latest committed index. Then, the leader returns the latest committed index (for example, 4) to the learner.
 
 ![Leader sends the Raft log to the learner](media/leader-sends-the-raft-log-to-the-learner.png)
-<center> *Leader sends the Raft log to the learner* </center>
+<center> Leader sends the Raft log to the learner </center>
 
 The learner waits until the leader sends it the Raft log (for example, the tenth Raft log). The learner reads the log on the local node, and then returns data to the client.
 
@@ -184,7 +184,7 @@ All changes on the TiKV table are replicated to TiFlash. When you replicate data
 * OLAP applications perform a lot of scans. When updates are frequent, it's difficult to ensure scan performance.
 
 ![Update support](media/update-support.png)
-<center> *Update support* </center>
+<center> Update support </center>
 
 As a solution, TiFlash uses a storage engine similar to a [log-structured merge-tree](https://en.wikipedia.org/wiki/Log-structured_merge-tree) (LSM tree) and [multiversion concurrency control](https://en.wikipedia.org/wiki/Multiversion_concurrency_control) (MVCC) to implement the same isolation level with TiDB. The LSM tree architecture can handle OLTP high-frequency small I/O writes well. And its partially ordered property could benefit the scan operation.
 
@@ -208,7 +208,7 @@ TiFlash endows TiDB with true OLAP capabilities, giving you storage and computin
 Because TiFlash is deployed independently from TiKV, it's possible to isolate hardware resources. TiDB uses labels to manage different types of storage nodes.
 
 ![Isolation of OLAP and OLTP applications](media/isolation-of-olap-and-oltp-applications.png)
-<center> *Isolation of OLAP and OLTP applications* </center>
+<center> Isolation of OLAP and OLTP applications </center>
 
 In the TiDB system, both TiFlash and TiKV are the storage layer. However, when they start, they report different node labels to the managing component of the TiDB cluster (the Placement Driver). Based on the node label, TiDB routes requests of different types to the corresponding nodes. 
 
@@ -219,14 +219,14 @@ If users choose to have a clean isolation between transactional and analytical w
 TiFlash nodes do more than just getting replicated data from TiKV nodes. Further cooperation of TiFlash and TiKV **helps achieve the effect of "1 + 1 > 2."** Inside the TiDB project, the computing layer (TiDB server or TiSpark) can read data from TiFlash and TiKV simultaneously, as shown in the figure below.
 
 ![Integrating TiFlash and TiKV](media/integrating-tiflash-and-tikv.png)
-<center> *Integrating TiFlash and TiKV* </center>
+<center> Integrating TiFlash and TiKV </center>
 
 For example, an SQL statement needs to join two pieces of data: one needing a full table scan and the other to be queried by index. Obviously, we can simultaneously use TiFlash's powerful scan operations and TiKV's point queries. It's worth mentioning that users usually deploy three or five replicas in TiKV, and to save costs, they might deploy only one replica in TiFlash. When one TiFlash node fails, we need to replicate data from TiKV again.
 
 The figure below compares the performance of  TiSpark+TiFlash and [Spark](https://en.wikipedia.org/wiki/Apache_Spark)+[Parquet](https://en.wikipedia.org/wiki/Apache_Parquet). As you can see, the performance of TiSpark+TiFlash is comparable to that of Spark+Parquet; TiSpark+TiFlash supports real-time updates and transactional consistency while Spark+Parquet does not.
 
 ![TiFlash vs. Parquet](media/tiflash-vs-parquet.png)
-<center> *TiFlash vs. Parquet* </center>
+<center> TiFlash vs. Parquet </center>
 
 TiFlash is iterating fast. Compared to the figure above, the latest version has considerably boosted performance. In addition, we're now developing a new storage engine specifically designed for TiFlash, which will increase the scan performance by 50%.
 
@@ -237,7 +237,7 @@ To meet their application requirements, companies must often integrate multiple 
 We've designed TiDB to hide system complexity and simply your application architecture.
 
 ![TiDB hides system complexity](media/tidb-hides-system-complexity.png)
-<center> *TiDB hides system complexity* </center>
+<center> TiDB hides system complexity </center>
 
 ## What's next
 
@@ -246,7 +246,7 @@ As a data analytics extension, TiFlash fosters TiDB's OLAP capabilities, and, ac
 We also plan to add [massive parallel processing](https://en.wikipedia.org/w/index.php?title=Massive_parallel_processing&redirect=no) (MPP) support and direct write support on the columnar engine without the need of a Raft learner.
 
 ![TiFlash MPP cluster](media/tiflash-mpp-cluster.png)
-<center> *TiFlash MPP cluster* </center>
+<center> TiFlash MPP cluster </center>
 
 Direct write support on the columnar engine will enable the product to be useful in a lot more cases. For example, user can build a data warehouse directly on TiFlash storage, or combining TiFlash with TiKV to form a lambda architecture within TiDB by moving historical data from TiKV to TiFlash.
 

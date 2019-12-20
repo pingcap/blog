@@ -18,7 +18,7 @@ Deploying transactional databases like TiDB in Kubernetes for production has alw
 TiDB Operator is a system that automates the operation and maintenance of TiDB clusters in Kubernetes. TiDB Operator covers the full range of TiDB management tasks from deployment, upgrades, scaling, to backup, recovery, and configuration changes.
 
 ![TiDB Operator 1.0 architecture](media/tidb-operator-overview.png)
-<center> *TiDB Operator 1.0 architecture* </center>
+<center> TiDB Operator 1.0 architecture </center>
 
 With TiDB Operator, TiDB can run seamlessly in Kubernetes clusters deployed on public cloud platforms or privately-deployed Kubernetes clusters.
 

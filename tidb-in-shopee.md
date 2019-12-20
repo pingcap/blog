@@ -19,7 +19,7 @@ Shopee aims to continually enhance its platform and become the region’s e-comm
 Shopee, a Sea company, was first launched in Singapore in 2015, and has since expanded its reach to Malaysia, Thailand, Taiwan, Indonesia, Vietnam and the Philippines. Sea is a leader in digital entertainment, e-commerce and digital financial services across Greater Southeast Asia. Sea's mission is to better the lives of consumers and small businesses with technology, and is listed on the NYSE under the symbol SE.
 
 ![The Shopee website](media/the-shopee-website.png)
-<center> *Figure 1: The Shopee website* </center>
+<center> Figure 1: The Shopee website </center>
 
 As our business boomed, our team faced severe challenges in scaling our backend system to meet the demand. Fortunately, we found [TiDB](https://en.wikipedia.org/wiki/TiDB), a MySQL-compatible NewSQL hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built and supported by [PingCAP](https://pingcap.com/en/) and its open-source community. Now we can provide better service and experience for our users without worrying about our database capacity.
 
@@ -30,7 +30,7 @@ Currently, we have deployed two TiDB clusters totalling 60 nodes in our risk con
 TiDB in a nutshell is a platform comprised of multiple components that when used together becomes a NewSQL database that has HTAP capabilities.
 
 ![TiDB platform architecture](media/tidb-platform-architecture.png)
-<center> *Figure 2: TiDB platform architecture* </center>
+<center> Figure 2: TiDB platform architecture </center>
 
 Inside the TiDB platform, the main components are as follows:
 
@@ -46,7 +46,7 @@ Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansi
 Our risk control system detects abnormal behaviors and fraudulent transactions from our internal logs of orders and user behaviors. This log was stored in MySQL and sharded into 100 tables based on `USER_ID`. 
 
 ![Data collection and processing in the risk control system](media/data-collection-and-processing-in-the-risk-control-system.png)
-<center> *Figure 3: Data collection and processing in the risk control system* </center>
+<center> Figure 3: Data collection and processing in the risk control system </center>
 
 This approach began to show its limitations as the major shopping season approached. During one major 2018 promotion event, the number of orders exceeded 11 million, 4.5 times larger than the previous year. On December 12, 2018, another major online shopping day known as “Double 12”, the number of orders reached an all-time high in Shopee history -- 12 million. 
 
@@ -95,7 +95,7 @@ Our traffic migration process from MySQL to TiDB is as follows:
 4. Stopped doublewrite and from this point, the application traffic was completely migrated to TiDB.
 
 ![Traffic migration process](media/traffic-migration-process.png)
-<center> *Figure 4: Traffic migration process* </center>
+<center> Figure 4: Traffic migration process </center>
 
 During the traffic migration process, we benefited a great deal from the doublewrite approach:
 
@@ -131,19 +131,19 @@ Initially, we migrated 4TB of data from MySQL to a TiDB cluster that consisted o
 So far, our system has been running smoothly with the data volume growing to 35TB at the time of this writing (See Figure 5). After scaling our capacity twice, there are now 42 nodes in the cluster.
 
 ![Hardware status of TiDB for risk control logs](media/hardware-status-of-tidb-for-risk-control-logs.png)
-<center> *Figure 5: Hardware status of TiDB for risk control logs* </center>
+<center> Figure 5: Hardware status of TiDB for risk control logs </center>
 
 ### Performance
 
 ![QPS of TiDB for risk control logs](media/qps-of-tidb-for-risk-control-logs.png)
-<center> *Figure 6: QPS of TiDB for risk control logs* </center>
+<center> Figure 6: QPS of TiDB for risk control logs </center>
 
 Generally, the total value of [QPS](https://en.wikipedia.org/wiki/Queries_per_second) (queries per second) (for both Error and OK queries) of TiDB for risk control logs is less than 20,000. But during the December 12 shopping holiday the QPS jumped to more than 100,000.
 
 Although the data size has grown eightfold over the past 6 months, the whole cluster still maintains a stable query response time. Generally, the 99th percentile response time was less than 60ms (See Figure 7), which is very good for a risk control system mainly processing complex SQL queries.
 
 ![99th percentile response time of TiDB for risk control logs](media/99th-percentile-response-time-of-tidb-for-risk-control-logs.png)
-<center> *Figure 7: 99th percentile response time of TiDB for risk control logs* </center>
+<center> Figure 7: 99th percentile response time of TiDB for risk control logs </center>
 
 ## Advice for Other TiDB Users
 
