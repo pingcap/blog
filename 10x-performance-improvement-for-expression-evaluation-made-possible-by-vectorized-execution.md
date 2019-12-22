@@ -26,7 +26,7 @@ Later, we released [TiDB 2.1](https://pingcap.com/blog/tidb-2.1-ga-Battle-tested
 
 In this post, I'll deep dive into why we need vectorized execution, how we implement it, how we managed to vectorize more than 360 functions along with community contributors, and our thoughts about the future.  
 
-## Why do we need vectorized execution？
+## Why do we need vectorized execution?
 
 Previously, TiDB implemented the Volcano-style execution engine. This iterator model uses a standard data access interface. It has open()-next()-close() between algebra operators and processes data row by row. The Volcano model is simple and extensible.
 
