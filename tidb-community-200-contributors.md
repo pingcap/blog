@@ -13,7 +13,7 @@ As you might’ve noticed, TiDB recently added its 200th contributor. As CEO and
 
 ![TiDB contributor growth](media/tidb-contributor-growth.png)
 
-<center>*TiDB development started in 2015.  In August 2018, we welcomed our 200th contributor!*</center>
+<div class="caption-center">*TiDB development started in 2015.  In August 2018, we welcomed our 200th contributor!*</div>
 
 Here are a few of my favorite contributions to highlight:
 

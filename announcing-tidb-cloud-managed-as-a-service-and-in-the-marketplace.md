@@ -10,7 +10,7 @@ tags: ['TiDB', 'Product', 'MySQL Scalability', 'HTAP']
 Today, we are excited to announce that [TiDB Cloud](https://pingcap.com/tidb-cloud/) is now available for public preview. It is a suite of product offerings that enables customers to easily use TiDB in any cloud environment, either as a fully-managed service delivered by PingCAP or on a self-served marketplace. TiDB is the first open source, NewSQL, hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database in the market that’s available in either public, private, or hybrid cloud setting. 
 
 ![TiDB Platform Architecture](media/tidb-platform-architecture.png)
-<center> TiDB Platform Architecture </center> 
+<div class="caption-center"> TiDB Platform Architecture </div> 
 
 ## Product Offerings
 

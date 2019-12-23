@@ -30,16 +30,16 @@ See the following selected list of optimizations in TiDB 3.0 for stability:
 For TiDB 3.0 GA, Sysbench results show that the Point Select, Update Index, and Update Non-Index performance are all about 1.5 times that of TiDB 2.1, and the TPC-C performance is 4.5 times as good, as shown in the below snapshots. Check out the complete [Sysbench result](https://github.com/pingcap/docs/blob/master/v3.0/benchmark/sysbench-v4.md) and the [TPC-C performance result](https://github.com/pingcap/docs/blob/master/v3.0/benchmark/tpcc.md). For how to reproduce these results, see [How to Test TiDB Using Sysbench](https://github.com/pingcap/docs/blob/master/v3.0/benchmark/how-to-run-sysbench.md) and [TiDB TPC-C Performance Test Report -- v3.0 vs. v2.1](https://github.com/pingcap/docs/blob/master/v3.0/benchmark/tpcc.md).
 
 ![Figure 1: OLTP Point Select in Sysbench and TiDB 2.1](media/oltp-point-select-in-sysbench-and-tidb-2.1.png)
-<center> Figure 1: OLTP Point Select in Sysbench and TiDB 2.1 </center>
+<div class="caption-center"> Figure 1: OLTP Point Select in Sysbench and TiDB 2.1 </div>
 
 ![Figure 2: OLTP Update Index in Sysbench results for TiDB 3.0 and TiDB 2.1](media/oltp-update-index-in-sysbench-results-for-tidb-3.0-and-tidb-2.1.png)
-<center> Figure 2: OLTP Update Index in Sysbench results for TiDB 3.0 and TiDB 2.1 </center>
+<div class="caption-center"> Figure 2: OLTP Update Index in Sysbench results for TiDB 3.0 and TiDB 2.1 </div>
 
 ![Figure 3: OLTP Update Non-Index in Sysbench results for TiDB 3.0 GA and TiDB 2.1](media/oltp-update-non-index-in-sysbench-results-for-tidb-3.0-ga-and-tidb-2.1.png)
-<center> Figure 3: OLTP Update Non-Index in Sysbench results for TiDB 3.0 GA and TiDB 2.1 </center>
+<div class="caption-center"> Figure 3: OLTP Update Non-Index in Sysbench results for TiDB 3.0 GA and TiDB 2.1 </div>
 
 ![Figure 4: TPC-C results for TiDB 3.0 and TiDB 2.1](media/tpc-c-results-for-tidb-3.0-and-tidb-2.1.png)
-<center> Figure 4: TPC-C results for TiDB 3.0 and TiDB 2.1 </center>
+<div class="caption-center"> Figure 4: TPC-C results for TiDB 3.0 and TiDB 2.1 </div>
 
 ## Evolving to HTAP
 
@@ -48,7 +48,7 @@ As you know, TiDB is an open-source NewSQL Hybrid Transactional and Analytical P
 The way TiFlash works in a nutshell is: data continues to be replicated using the Raft consensus protocol but now an extra, non-voting replica (called Raft Learner) is made per each Raft group and sits in TiFlash purely for the purpose of faster data analytics and for better resource isolation between OLTP workloads and OLAP workloads. Live transactional data is made available almost immediately and near real-time for fast analysis, all data is still kept strongly consistent throughout the entire TiDB system, and there's no need to manage an ETL pipeline anymore.
 	
 ![Figure 5: the TiDB HTAP architecture](media/tidb-htap-architecture-1.png)
-<center> Figure 5: the TiDB HTAP architecture </center>
+<div class="caption-center"> Figure 5: the TiDB HTAP architecture </div>
 
 We will write more deep dive blog posts on TiFlash soon, but the evolution of the TiDB architecture and the value it delivers is clear: faster time to insight, more productive developers.
 

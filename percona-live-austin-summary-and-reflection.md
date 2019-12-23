@@ -19,7 +19,7 @@ To satisfy that hunger, we decided to organize a keynote plus an entire TiDB tra
 Our presence at Percona Live started off with a bang where Ed Huang, PingCAP's co-founder and CTO, delivered a keynote on all that's new and cool in TiDB 3.0, our newest version that will reach General Availability later this month. It was a very technical talk -- rare for a keynote -- and Ed himself admitted during the keynote that there are just too many new features in 3.0 to cover in a 15-minute window. ([Here are his slides](https://cdn2.hubspot.net/hubfs/4466002/PerconaLive%20Keynote.pdf?utm_source=hs_email&utm_medium=email&_hsenc=p2ANqtz-_9qqk129R8ydcMJWkPxjLT4cNKGctCfS4uVI51iiE8T4Ept8cNY5YGf2qrDwO4hVamWK-U).) Luckily, a full TiDB track awaits to showcase them all. 
 
 ![Ed Huang on the Percona Live keynote stage](media/ed-huang-on-the-percona-live-keynote-stage.png)
-<center> Ed Huang on the Percona Live keynote stage </center> 	
+<div class="caption-center"> Ed Huang on the Percona Live keynote stage </div> 	
 
 We designed the TiDB track to share with developers, DBAs, and all practitioners technical know-how, reproducible benchmarks, and best practices on how TiDB can solve their problems. Here is the list of topics linked to their respective slides, along with some action shots: 
 
@@ -31,19 +31,19 @@ We designed the TiDB track to share with developers, DBAs, and all practitioners
 - [From MySQL to TiDB and back again](https://cdn2.hubspot.net/hubfs/4466002/From%20MySQL%20to%20TiDB%20and%20back%20again.pdf?utm_source=hs_email&utm_medium=email&_hsenc=p2ANqtz-_9qqk129R8ydcMJWkPxjLT4cNKGctCfS4uVI51iiE8T4Ept8cNY5YGf2qrDwO4hVamWK-U)
 
 ![Siddon Tang sharing how our team uses Chaos Engineering to make TiDB more reliable](media/siddon-tang-sharing-how-our-team-uses-chaos-engineering-to-make-tidb-more-reliable.png)
-<center> Siddon Tang sharing how our team uses Chaos Engineering to make TiDB more reliable </center>
+<div class="caption-center"> Siddon Tang sharing how our team uses Chaos Engineering to make TiDB more reliable </div>
 
 ![Jason Zhang deep diving into the TiDB SQL layer](media/jason-zhang-deep-diving-into-the-tidb-sql-layer.png)
-<center> Jason Zhang deep diving into the TiDB SQL layer </center>
+<div class="caption-center"> Jason Zhang deep diving into the TiDB SQL layer </div>
 
 ![Ruoxi Sun explaining our new columnar storage, TiFlash](media/ruoxi-sun-explaining-our-new-columnar-storage-tiflash.png)
-<center> Ruoxi Sun explaining our new columnar storage, TiFlash </center>	
+<div class="caption-center"> Ruoxi Sun explaining our new columnar storage, TiFlash </div>	
 
 ![Greg Weber introducing how to make an 'aaS' out of TiDB: building DBaaS on a Kubernetes Operator](media/greg-weber-introducing-how-to-make-an-aas-out-of-tidb-building-dbaas-on-a-kubernetes-operator.png)
-<center> Greg Weber introducing how to make an 'aaS' out of TiDB: building DBaaS on a Kubernetes Operator </center>	
+<div class="caption-center"> Greg Weber introducing how to make an 'aaS' out of TiDB: building DBaaS on a Kubernetes Operator </div>	
 
 ![Morgan Tocker sharing how to use open source tools to migrate from MySQL into (and out of) TiDB](media/morgan-tocker-sharing-how-to-use-open-source-tools-to-migrate-from-mysql-into-and-out-of-tidb.png)
-<center> Morgan Tocker sharing how to use open source tools to migrate from MySQL into (and out of) TiDB </center>	
+<div class="caption-center"> Morgan Tocker sharing how to use open source tools to migrate from MySQL into (and out of) TiDB </div>	
 
 In addition to our own team's presence, we were lucky to have Frank Ober from Intel sharing his take on [how TiDB is leveraging Intel Optane to tackle IO challenges](https://www.percona.com/live/19/sessions/leveraging-optane-to-tackle-your-io-challenges-with-tidb) (download Frank's slides [HERE](https://cdn2.hubspot.net/hubfs/4466002/Intel-TiDB-Percona-May19-FINAL.pdf)), and Jervin Real and Francisco Bordenave from Percona, who shared their own take on how to replicate [MySQL data to TiDB for real-time analytics](https://www.percona.com/live/19/sessions/replicating-mysql-data-to-tidb-for-real-time-analytics).
 
@@ -58,13 +58,13 @@ The PingCAP booth was also buzzing with activities as many attendees came by to 
 Open-source is truly a global force.
 
 ![Queeny Jin chatting with a TiDB enthusiast at the PingCAP booth](media/queeny-jin-chatting-with-a-tidb-enthusiast-at-the-pingcap-booth.png)
-<center> Queeny Jin chatting with a TiDB enthusiast at the PingCAP booth </center>	
+<div class="caption-center"> Queeny Jin chatting with a TiDB enthusiast at the PingCAP booth </div>	
 
 ![Samantha Peters running a raffle for conference attendees](media/samantha-peters-running-a-raffle-for-conference-attendees.png)
-<center> Samantha Peters running a raffle for conference attendees </center>
+<div class="caption-center"> Samantha Peters running a raffle for conference attendees </div>
 
 ![Our stickers. Yes we love stickers!](media/our-stickers-yes-we-love-stickers.png)
-<center> Our stickers. Yes we love stickers! </center>
+<div class="caption-center"> Our stickers. Yes we love stickers! </div>
 
 Going to conferences serves a double purpose for our team. At PingCAP, we are a very remote-friendly workforce with people residing and working from many different cities in China and throughout North America. So going to conferences is also an opportunity to meet other team members face to face, work and live together under one roof, and connect as human beings. 
 

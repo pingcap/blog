@@ -110,14 +110,14 @@ There are many product lines in Meituan-Dianping. The services all have huge vol
 Meituan-Dianping currently uses the Mt-Falcon platform (a customized distributed monitoring system inspired by [Open-Falcon](https://github.com/open-falcon)) for monitoring and alert. Various plugins have been configured in Mt-Falcon to customize monitoring multiple components, and with [Puppet](https://en.wikipedia.org/wiki/Puppet_(software)) deployed, the privileges of different users and the issue of different files can be recognized. This way, machine installation and privilege control will be established as long as we complete the plugin scripts and the necessary files.
 
 ![Monitoring Architecture](media/monitoring-architecture.png)
-<center> Monitoring Architecture </center>
+<div class="caption-center"> Monitoring Architecture </div>
 
 #### Monitoring Architecture
 
 TiDB uses [Prometheus](https://github.com/prometheus/prometheus) plus [Grafana](https://github.com/grafana/grafana) as the monitoring system as shown in the above diagram, with a cluster of more than 700 metrics. As the monitoring architecture below shows, each component pushes its metrics to Pushgateway, and Prometheus obtains metrics from Pushgateway.
 
 ![TiDB Monitoring Architecture](media/tidb-monitoring-architecture.png)
-<center> TiDB Monitoring Architecture </center>
+<div class="caption-center"> TiDB Monitoring Architecture </div>
 
 With a set of Prometheus instances deployed in a TiDB cluster, it was inconvenient to gather, analyze, and configure the monitoring metrics in the original TiDB monitoring architecture. Therefore, we decided to converge the monitoring components. As the alert system had been working well on Mt-Falcon, it was unnecessary to build a new one on AlertManager.
 
@@ -164,7 +164,7 @@ At present, MySQL is used with [Hive](https://en.wikipedia.org/wiki/Apache_Hive)
     - For data migration from TiDB to Hive, using [TiDB Binlog](https://github.com/pingcap/tidb-binlog) (Pump + Drainer), an enterprise tool developed by PingCAP, is a good solution. Drainer can export data to Kafka, MySQL, and TiDB. We are currently considering the schema of using Drainer to output data to Kafka in order to synchronize data from TiDB to Hive, as shown in the diagram below. 
 
         ![Synchronization Data from TiDB to Hive](media/synchronization-data-from-tidb-to-hive.png)
-        <center> Synchronization Data from TiDB to Hive </center>
+        <div class="caption-center"> Synchronization Data from TiDB to Hive </div>
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('TiDB, the Key to a Better Life for Meituan-Dianping’s 290 Million Monthly Users', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -191,7 +191,7 @@ We once ran into the Write stall problem, and found that the causes for too many
 - TiKV created snapshots more slowly than the requests for creating snapshots were sent. Because of this, the accumulated replicas of creating Regions were released suddenly, and a good many L0 files were created in rocksdb-raft. 
 
 ![Write Stall Monitoring](media/write-stall-monitoring.png) 
-<center> Write Stall Monitoring </center>
+<div class="caption-center"> Write Stall Monitoring </div>
 
 We resolved the Write stall issue using the following measures:
 
@@ -218,7 +218,7 @@ The solutions for this issue are as follows:
     Extend the heartbeat interval from 1s to 2s. This policy has had positive results, as shown in the picture below:
 
     ![Response Time Before and After Optimization of the Insert Statement](media/response-time-before-and-after-optimization-of-the-insert-statement.png) 
-    <center> Response Time Before and After Optimization of the Insert Statement </center>
+    <div class="caption-center"> Response Time Before and After Optimization of the Insert Statement </div>
 
 - Permanent solution
 
@@ -249,7 +249,7 @@ In the long term, we will build a mightier ecosystem together with PingCAP. Here
     Based on the original computing engine of TiDB Server, PingCAP engineers have built [TiSpark](https://github.com/pingcap/tispark), a thin layer for running Apache Spark on top of TiDB/TiKV to answer complex OLAP queries. This addition makes the TiDB platform a complete [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)) database. This architecture has drastically decreased the data replicas of core services in the company’s data cycle, which saves costs and improves the cost-effectiveness of OLAP applications. We plan to migrate some analytical query systems with real-time or near real-time requirements to TiDB.
 
     ![TiDB Platform Architecture](media/tidb-platform-architecture.png)
-    <center> TiDB Platform Architecture </center>
+    <div class="caption-center"> TiDB Platform Architecture </div>
 
 - **Follow-on physical backup policy and multi-write across data centers**
 

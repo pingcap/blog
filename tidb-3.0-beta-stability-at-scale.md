@@ -31,7 +31,7 @@ As our team brainstormed and roadmapped TiDB’s future, taking in valuable sugg
 **Query Tracing:** One of our big goals in 3.0 besides bringing stability at scale is improving usability, and one important element of the usability is diagnosing and debugging queries. Even though we improved the readability of EXPLAIN and EXPLAIN ANALYZE in [TiDB 2.1](https://pingcap.com/blog/tidb-2.1-ga-Battle-tested-to-handle-an-unpredictable-world/), there’s more we can do to make DBAs', architects', and DevOps' lives easier. Thus, we implemented Query Tracing, which is a much more clear, visual, and intuitive way to identify which part(s) of a query is slow or causing issues, making diagnosis and debugging a breeze.
 
 ![Query Tracing screenshot](media/query-tracing-screenshot.png)
-<center> Query Tracing screenshot </center>
+<div class="caption-center"> Query Tracing screenshot </div>
 
 Of course, these aren’t the only new features. TiDB 3.0 beta also includes the following, which we will write more about in the future: 
 

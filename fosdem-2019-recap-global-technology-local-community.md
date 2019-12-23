@@ -16,7 +16,7 @@ Our FOSDEM activities got started early with the [pre-FOSDEM MySQL community day
 A full day of technical presentations was followed by a festive community dinner, an annual pre-FOSDEM tradition, where attendees continue their technical (and non-technical) discussion over (16 kinds of) Belgian beers. I had the enviable job of "bartending" the event, which meant pouring beers in the proper Belgian way for a room of people who were both MySQL experts and beer aficionados.
 
 ![Me pouring Belgian beers at the MySQL community dinner](media/me-pouring-belgian-beers-at-the-mysql-community-dinner.png)
-<center> Me pouring Belgian beers at the MySQL community dinner </center> 
+<div class="caption-center"> Me pouring Belgian beers at the MySQL community dinner </div> 
 
 ## Day 1 - MySQL DevRoom
 
@@ -52,6 +52,6 @@ Brussels wasn't our only stop. Reaching local communities is part of our global 
 After my talk, over pizza and more beer (German beer this time), I learned about the lively local tech scene -- a sizable insurance technology community, enterprise companies like Giant Swarm, and fellow open-source database company ArangoDB. It was also awesome to see big TiDB user, [Mobike](https://pingcap.com/success-stories/tidb-in-mobike/), on every busy street corner of Cologne.
 
 ![Mobike on the streets of Cologne, Germany](media/mobike-on-the-streets-of-cologne-germany.png)
-<center> Mobike on the streets of Cologne, Germany </center> 
+<div class="caption-center"> Mobike on the streets of Cologne, Germany </div> 
 
 TiDB's presence is truly global. You just have to go local to see it.

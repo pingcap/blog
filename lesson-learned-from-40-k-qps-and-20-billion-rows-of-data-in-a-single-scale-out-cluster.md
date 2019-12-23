@@ -32,7 +32,7 @@ In this section, I'll elaborate on challenges we encountered in storing OSS meta
 As shown in the figure below, we previously used MySQL to store OSS metadata (such as image size). Metadata was grouped in buckets, which are similar to namespaces.  
 
 ![Original OSS metadata storage system based on MySQL](media/original-oss-metadata-storage-system-based-on-mysql.png)
-<center> Original OSS metadata storage system based on MySQL </center> 
+<div class="caption-center"> Original OSS metadata storage system based on MySQL </div> 
 
 Many similar systems use such a design. But facing business growth with metadata booming, we were plagued by the following challenges:
 
@@ -55,7 +55,7 @@ Many similar systems use such a design. But facing business growth with metadata
 To conquer the difficulties mentioned above, we redesigned our metadata storage system as shown in the following figure:
 
 ![Redesigning the OSS metadata storage system](media/redesigning-the-oss-metadata-storage-system.png)
-<center> Redesigning the OSS metadata storage system </center> 
+<div class="caption-center"> Redesigning the OSS metadata storage system </div> 
 
 The core technique of this solution was making the most data static, because static data was easy to store, migrate, and split. Every day, we made the data written on the previous day static, and merged the static data into the historical data. 
 
@@ -66,7 +66,7 @@ However, as the following diagram reveals, this solution had two problems:
 * Data scheduling was inflexible, which made system maintenance more difficult.
 
 ![Complexity of the metadata storage system](media/complexity-of-the-metadata-storage-system.png)
-<center> Complexity of the metadata storage system </center> 
+<div class="caption-center"> Complexity of the metadata storage system </div> 
 
 Therefore, we began to look for a new solution: a **globally ordered key-value** store with **great storage capacity** and **elastic scalability**. Finally, we found TiKV, and it turns out it's a perfect match for storing enormous amounts of data.
 
@@ -83,7 +83,7 @@ TiKV complements other CNCF project technologies like [etcd](https://etcd.io/), 
 The overall architecture of TiKV is illustrated in the figure below:
 
 ![TiKV architecture](media/tikv-architecture.png)
-<center> TiKV architecture </center>  
+<div class="caption-center"> TiKV architecture </div>  
 
 TiKV connect to clients. To understand how TiKV works, you need to understand some basic terms:
 
@@ -142,7 +142,7 @@ Besides the advantages above, TiKV also passed our tests, including:
 The test results showed that TiKV met our requirements for system performance and security. Then, we applied TiKV in our OSS metadata storage system, as shown in the following figure:
 
 ![OSS metadata storage system based on TiKV](media/oss-metadata-storage-system-based-on-tikv.png)
-<center> OSS metadata storage system based on TiKV </center> 
+<div class="caption-center"> OSS metadata storage system based on TiKV </div> 
 
 ## Migrating data from MySQL to TiKV
 
@@ -155,7 +155,7 @@ This section covers how we migrated data from MySQL to TiKV, including our migra
 The following figure shows our data migration policy:
 
 ![Data migration policy](media/data-migration-policy.png)
-<center> Data migration policy </center> 
+<div class="caption-center"> Data migration policy </div> 
 
 The key points of this policy are as follows:
 

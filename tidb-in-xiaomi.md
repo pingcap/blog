@@ -17,7 +17,7 @@ url: /success-stories/tidb-in-xiaomi/
 [MIUI](https://en.wikipedia.org/wiki/MIUI) (MI User Interface) is a mobile operating system developed by Xiaomi, based on Google's Android operating system. It supports various Xiaomi services and customized apps, such as Themes, Music, and its own App Store.
 
 ![The MIUI interface](media/miui-interface.png)
-<center> Figure 1: MIUI interface </center>
+<div class="caption-center"> Figure 1: MIUI interface </div>
  
 As sales of Xiaomi smartphones continue to climb and the MIUI user base continues to grow, we as the Database Administration (DBA) team was having an increasingly hard time managing our MySQL database infrastructure. That is until we adopted [TiDB](http://bit.ly/tidb_repo_publication), an open source distributed hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database created and supported by [PingCAP](https://pingcap.com).
 
@@ -32,7 +32,7 @@ In this post, we will show how we stress-tested TiDB during our evaluation, how 
 TiDB in a nutshell is a platform comprised of multiple components that when used together becomes a NewSQL database that has HTAP capabilities.
 
 ![TiDB platform architecture](media/tidb-platform-architecture.png)
-<center> Figure 2: TiDB platform architecture </center>
+<div class="caption-center"> Figure 2: TiDB platform architecture </div>
 
 Inside the TiDB platform, the main components are as follows:
 
@@ -89,7 +89,7 @@ Standard stress testing for the `SELECT` statement:
 | 256 | 40920.64 | 6.25 / 13.70 / 95.13 |
 
 ![Standard stress testing for the SELECT statement](media/standard-stress-testing-for-the-select-statement.png)
-<center> Figure 3: Standard stress testing for the SELECT statement </center>
+<div class="caption-center"> Figure 3: Standard stress testing for the SELECT statement </div>
 
 Standard stress testing for OLTP workloads:
 
@@ -103,7 +103,7 @@ Standard stress testing for OLTP workloads:
 | 256 | 941.26 | 18825.1 | 271.94 / 369.77 / 572.88 |
 
 ![Standard stress testing for OLTP workloads](media/standard-stress-testing-for-oltp-workloads.png)
-<center> Figure 4: Standard stress testing for OLTP workloads </center>
+<div class="caption-center"> Figure 4: Standard stress testing for OLTP workloads </div>
 
 Standard stress testing for the `INSERT` statement:
 
@@ -117,7 +117,7 @@ Standard stress testing for the `INSERT` statement:
 | 256 | 17286.86 | 14.81 / 25.74 / 3146.52 |
 
 ![Standard stress testing for the INSERT statement](media/standard-stress-testing-for-the-insert-statement.png)
-<center> Figure 5: Standard stress testing for the INSERT statement </center>
+<div class="caption-center"> Figure 5: Standard stress testing for the INSERT statement </div>
 
 TiDB's performance results were able to meet our requirements, even though the system did have some stability issues when we dramatically increased our test workloads that far exceeded the real production environment. Therefore, we decided to use some read traffic in the MySQL slave as the canary traffic in TiDB. 
 
@@ -140,7 +140,7 @@ The data to be migrated included full data and incremental data. We made use of 
 As shown in the following diagram, Syncer relies on various rules to implement different filtering and merging effects; one upstream MySQL instance corresponds to one Syncer process; multiple Syncer processes are required when sharding data is replicated.
 
 ![Syncer architecture](media/syncer-architecture.png)
-<center> Figure 6: Syncer architecture </center>
+<div class="caption-center"> Figure 6: Syncer architecture </div>
 
 Here is our experience with using Syncer:
 
@@ -169,7 +169,7 @@ We deployed our 7-node TiDB cluster, with 3 nodes each deployed with one TiDB in
 TiDB uses [Prometheus](https://github.com/prometheus/prometheus) plus [Grafana](https://github.com/grafana/grafana) by default as the monitoring system stack. Prometheus is used to store the monitoring and performance metrics, and Grafana is used to visualize these metrics in a dashboard. This monitoring system also connects to [Open-Falcon](https://github.com/open-falcon) and running stably.
        
 ![TiDB monitoring system in Xiaomi](media/tidb-monitoring-system-in-Xiaomi.png)
-<center> Figure 7: TiDB monitoring system in Xiaomi </center>
+<div class="caption-center"> Figure 7: TiDB monitoring system in Xiaomi </div>
 
 ## Advice for Other TiDB Users
 
