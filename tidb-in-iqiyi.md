@@ -38,7 +38,7 @@ TiDB checked all of those boxes, and in fact, its performance has exceeded our e
 TiDB is an open source, NewSQL, scalable hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database built by the PingCAP team and the open source community. It aims to break down the traditional separation between an OLTP database and an OLAP database, and offer a one-stop solution that enables real-time business analysis on live transactional data.
 
 ![Figure 1: TiDB Platform Architecture](https://download.pingcap.com/images/success-stories/tidb-htap-architecture.png)
-<center> Figure 1: TiDB Platform Architecture </center>
+<div class="caption-center"> Figure 1: TiDB Platform Architecture </div>
 
 Inside the TiDB Platform, there are several components:
 
@@ -100,10 +100,10 @@ The following issues occurred during our adoption of TiDB, but were quickly reso
 - We are amazed by the fact that no matter how much the data increases (as shown in Figure 2), the response time remains stable, thanks to the automatic Region splitting strategy of TiKV (as shown in Figure 3), the storage layer of TiDB. Tables in TiDB are split automatically to several parts of equal size (96 MB by default but configurable) based on the data size of a table. These Regions are scheduled to various storage nodes by a series of complex schedule algorithms. For a specific query, however big its data size is, TiDB quickly locates the corresponding Region, guaranteeing timely query response.
 
 ![Figure 2: Data growth in the Risk Monitoring Center](https://download.pingcap.com/images/success-stories/data-growth-in-the-risk-monitoring-center.png)
-<center> Figure 2: Data growth in the Risk Monitoring Center </center>
+<div class="caption-center"> Figure 2: Data growth in the Risk Monitoring Center </div>
 
 ![Figure 3: Auto partition of tables in TiKV](https://download.pingcap.com/images/success-stories/auto-partition-of-tables-in-tikv.png)
-<center> Figure 3: Auto partition of tables in TiKV </center>
+<div class="caption-center"> Figure 3: Auto partition of tables in TiKV </div>
 
 ### Scenario 2: Video Transcoding
 
@@ -120,7 +120,7 @@ To fix this problem, PingCAP developed TiDB Lightning, which converted the data 
 The following picture shows the TiDB Lightning architecture:
 
 ![Figure 4: TiDB Lightning implementation architecture](https://download.pingcap.com/images/success-stories/tidb-lightning-implementation-architecture.png)
-<center> Figure 4: TiDB Lightning implementation architecture </center>
+<div class="caption-center"> Figure 4: TiDB Lightning implementation architecture </div>
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('Always Fun, Always On: How TiDB Helps iQiyi Deliver Streaming Videos', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -143,7 +143,7 @@ In the incremental synchronization process, we used Syncer, which aggregated dat
 The [Syncer](https://pingcap.com/docs/tools/syncer/) architecture is as follows:
 
 ![Figure 5: Syncer architecture](https://download.pingcap.com/images/success-stories/syncer-architecture-in-iqiyi.png)
-<center> Figure 5: Syncer architecture </center>
+<div class="caption-center"> Figure 5: Syncer architecture </div>
 
 However, Syncer currently cannot display real-time delay information in Grafana. This is a drawback for the applications that are sensitive to synchronization delay. The good news is that PingCAP is working on this issue, and they have refactored Syncer to automatically deal with the primary key conflict of table partition. With Syncer and TiDB, users can quickly synchronize data from multiple MySQL clusters in real time.       
 We have two requirements for high availability of the database:
@@ -159,7 +159,7 @@ For these requirements, TiDB has the corresponding solutions:
 To ensure high availability during the data migration process, we used Drainer to synchronize the data in the TiDB cluster with the MySQL cluster. Drainer supports reverse synchronization by specifying the starting timestamp.
 
 ![Figure 6: Deploying TiDB in multiple data centers](https://download.pingcap.com/images/success-stories/deploying-tidb-in-multiple-data-centers.png) 
-<center> Figure 6: Deploying TiDB in multiple data centers </center>
+<div class="caption-center"> Figure 6: Deploying TiDB in multiple data centers </div>
 
 Throughout the process, the PingCAP team offered us timely and expert-level help. They helped us locate the issue and gave us constructive suggestions. We really appreciate their patience and dedicated support!
 

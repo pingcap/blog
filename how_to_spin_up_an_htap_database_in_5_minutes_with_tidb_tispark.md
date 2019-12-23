@@ -107,7 +107,7 @@ To check if your deployment is successful:
 
 ![Grafana display of TiKV metrics](media/grafana_display_of_tikv_metrics.png)
 
-<center> Grafana display of TiKV metrics </center>
+<div class="caption-center"> Grafana display of TiKV metrics </div>
 
 * Now go to TiDB-vision at [http://localhost:8010](http://localhost:8010) (TiDB-vision is a cluster visualization tool to see data transfer and load-balancing inside your cluster).
 
@@ -117,7 +117,7 @@ To check if your deployment is successful:
 
 ![TiDB-vision](media/tidb_vision.png)
 
-<center> TiDB-vision </center>
+<div class="caption-center"> TiDB-vision </div>
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('How To Spin Up an HTAP Database in 5 Minutes with TiDB + TiSpark', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -153,7 +153,7 @@ Server version: 5.7.10-TiDB-v2.0.0-rc.4-31
 ```
 ![TiDB Compatibility with MySQL](media/test_tidb_compatibility_with_mysql.png)
 
-<center> The Compatibility of TiDB with MySQL </center>
+<div class="caption-center"> The Compatibility of TiDB with MySQL </div>
 
 
 # Let’s get some data!

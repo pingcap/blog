@@ -41,7 +41,7 @@ According to arithmetic operators and their operator precedence, TiDB parses thi
 In this tree, each non-leaf node represents an arithmetic operator, and the leaf node represents the data source. Each non-leaf node is either a constant (like `0.8`) or a field (like `colA`) in the table. The parent-child relationship between nodes indicates a computationally dependent relationship: the evaluation result of the child node is the input data for the parent node.
 
 ![An expression evaluation tree](media/an-expression-evaluation-tree.png)
-<center> An expression evaluation tree </center> 
+<div class="caption-center"> An expression evaluation tree </div> 
 
 The computing logic of each node can be abstracted as the following evaluation interface:
 
@@ -175,14 +175,14 @@ There are two types of columns:
 * Variable-length columns, in which the data length can change.
 
 ![TiDB's Chunk structure](media/tidb-chunk-structure.png)
-<center> TiDB's Chunk structure </center>  
+<div class="caption-center"> TiDB's Chunk structure </div>  
 
 No matter whether the data length is fixed or variable, data in columns are contiguously stored in memory in the `Column.data` field (which is an array). If the data length varies, `Column.offset` records the data offset. If the data is with fixed length, no offset is recorded.
 
 The following figure illustrates the new vector access interface we've recently introduced for `Chunk`s:
 
 ![New vector access interface](media/new-vector-access-interface.png)
-<center> New vector access interface </center> 
+<div class="caption-center"> New vector access interface </div> 
 
 * For fixed-length data, such as int64 numbers, the Golang `unsafe` package directly converts `Column.data` to `[]int64` in `Int64s() []int64`, and returns the result. The user who wants to read or modify `Column.data` can directly manipulate the array. This is the most efficient way to access fixed-length data.
 
@@ -261,17 +261,17 @@ The results above show vectorized execution is four times faster than row-based 
 The following figure compares the performance of various less than (`LT`) functions before and after vectorization. The horizontal axis indicates the `LT` functions for testing, and the vertical axis represents the execution duration (in nanoseconds) to complete an operation.
 
 ![Before-and-after performance comparison for various LT functions](media/performance-comparison-for-various-lt-functions.png)
-<center> Before-and-after performance comparison for various LT functions </center>  
+<div class="caption-center"> Before-and-after performance comparison for various LT functions </div>  
 
 The following figure compares the performance of arithmetic functions before and after vectorization:
 
 ![Before-and-after performance comparison for arithmetic functions](media/performance-comparison-for-arithmetic-functions.png)
-<center> Before-and-after performance comparison for arithmetic functions </center> 
+<div class="caption-center"> Before-and-after performance comparison for arithmetic functions </div> 
 
 After we tested more than 300 vectorized functions, we found that **over 50% of these functions more than doubled their performance, and 18.7% of functions achieved 10x performance**.
 
 ![Performance improvement for vectorized functions_](media/performance-improvement-for-vectorized-functions.png)
-<center> Performance improvement for vectorized functions </center> 
+<div class="caption-center"> Performance improvement for vectorized functions </div> 
 
 ## How do we vectorize 360+ built-in functions?
 

@@ -23,7 +23,7 @@ The entire TiDB platform has the following components:
 - Placement Driver (PD): a metadata cluster powered by etcd that manages and schedules TiKV
 
 ![TiDB Platform Architecture](media/tidb-platform-architecture.png)
-<center> TiDB Platform Architecture </center> 
+<div class="caption-center"> TiDB Platform Architecture </div> 
 
 ### How they work together
 
@@ -46,7 +46,7 @@ One initial trade-off is some added complexity to deployment and monitoring--the
 That’s why we built TiDB Operator, and recently open-sourced it, so you can deploy, scale, upgrade, and maintain TiDB in any cloud environment--public, private or hybrid. TiDB installs Prometheus and Grafana by default, so monitoring comes "out of the box". ([Here’s a tutorial on TiDB Operator.](https://www.infoworld.com/article/3297700/kubernetes/introducing-the-kubernetes-operator-for-tidb.html))
 
 ![Sample Grafana Dashboard Monitoring a TiDB Deployment](media/sample-grafana-dashboard-monitoring-a-tidb-deployment.png)
-<center> Sample Grafana Dashboard Monitoring a TiDB Deployment </center>
+<div class="caption-center"> Sample Grafana Dashboard Monitoring a TiDB Deployment </div>
 
 Ultimately, flexible scalability for your technical needs is crucial for business success. It’s the difference between becoming the next Facebook versus Friendster. That’s the value that TiDB brings to our users, so they can focus on delivering the best product for *their* users. 
 

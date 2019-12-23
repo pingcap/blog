@@ -65,7 +65,7 @@ To reproduce the environment consistently, we did the following:
     ```
 
 ![Reproducing the environment](media/reproducing-the-environment.png)
-<center> Reproducing the environment </center>
+<div class="caption-center"> Reproducing the environment </div>
 
 ## Analysis
 

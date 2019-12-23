@@ -20,7 +20,7 @@ While growth is always a good thing, we soon became concerned that the surging d
 Currently, we have deployed TiDB in multiple clusters for the messaging and risk management applications. These TiDB clusters hold several dozens of TBs of data with excellent and stable performance. In this post, we will elaborate on our pain points, why we chose TiDB, our practice in production, and our future plans with TiDB.
 
 ![TiDB Cluster Architecture at Zhuan Zhuan](media/tidb-cluster-architecture-at-zhuan-zhuan.png)
-<center> TiDB Cluster Architecture at Zhuan Zhuan </center>
+<div class="caption-center"> TiDB Cluster Architecture at Zhuan Zhuan </div>
 
 ## Our Pain Points
 
@@ -54,7 +54,7 @@ For the stress testing, we simulated various application scenarios using testing
 In this stress testing, we used six physical servers in total, three of which were CPU-intensive for starting the TiDB server and the Placement Driver (PD). The others were IO/CPU-intensive PCIe servers for starting the TiKV server. The sysbench-1.0.11 was used to test the response time (95th percent) of a 200GB TiDB cluster in different scenarios:
 
 ![Response time under different scenarios](media/response-time.png)
-<center> Response time under different scenarios </center>
+<div class="caption-center"> Response time under different scenarios </div>
 
 This is what we found:
 

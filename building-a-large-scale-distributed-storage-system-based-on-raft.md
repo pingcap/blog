@@ -28,7 +28,7 @@ Sharding is a database partitioning strategy that splits your datasets into smal
 Two commonly-used sharding strategies are range-based sharding and hash-based sharding. The choice of the sharding strategy changes according to different types of systems. A typical example is the data distribution of a Hadoop Distributed File System (HDFS) DataNode, shown in Figure 1 (source: [Distributed Systems: GFS/HDFS/Spanner](http://energystudy.synergylabs.org/courses/15-440-Fall2017/lectures/16-gfs_hdfs_spanner.pdf)).
 
 ![Data distribution of HDFS DataNode](media/data-distribution-of-hdfs-dataNode.png)
-<center> Figure 1. Data distribution of HDFS DataNode </center> 
+<div class="caption-center"> Figure 1. Data distribution of HDFS DataNode </div> 
 
 #### Range-based sharding
 
@@ -37,7 +37,7 @@ Range-based sharding assumes that all keys in the database system can be put in 
 It's very common to sort keys in order. HBase keys are sorted in byte order, while MySQL keys are sorted in auto-increment ID order. For some storage engines, the order is natural. In the case of both log-structured merge-tree (LSM-Tree) and B-Tree, keys are naturally in order. 
 
 ![Range-based sharding for data partitioning](media/range-based-sharding-for-data-partitioning.png)
-<center> Figure 2. Range-based sharding for data partitioning </center> 
+<div class="caption-center"> Figure 2. Range-based sharding for data partitioning </div> 
 
 In Figure 2 (source: [MongoDB uses range-based sharding to partition data](https://docs.mongodb.com/manual/core/ranged-sharding/)), the key space is divided into (minKey, maxKey). Each sharding unit (chunk) is a section of continuous keys. The advantage of range-based sharding is that the adjacent data has a high probability of being together (such as the data with a common prefix), which can well support operations like `range scan`. For example, HBase Region is a typical range-based sharding strategy.
 
@@ -50,7 +50,7 @@ Hash-based sharding processes keys using a hash function and then uses the resul
 Contrary to range-based sharding, where all keys can be put in order, hash-based sharding has the advantage that keys are distributed almost randomly, so the distribution is even. As a result, it is more friendly to systems with heavy write workloads and read workloads that are almost all random. This is because the write pressure can be evenly distributed in the cluster. But apparently, operations like `range scan` are almost impossible.
 
 ![Hash-based sharding for data partitioning](media/hash-based-sharding-for-data-partitioning.png)
-<center> Figure 3. Hash-based sharding for data partitioning </center> 
+<div class="caption-center"> Figure 3. Hash-based sharding for data partitioning </div> 
 
 Some typical examples of hash-based sharding are [Cassandra Consistent hashing](https://docs.datastax.com/en/archived/cassandra/2.1/cassandra/architecture/architectureDataDistributeHashing_c.html), presharding of Redis Cluster and [Codis](https://github.com/CodisLabs/codis), and [Twemproxy consistent hashing](https://github.com/twitter/twemproxy/blob/master/README.md#features).
 
@@ -77,7 +77,7 @@ However, this replication solution matters a lot for a large-scale storage syste
 In TiKV, each range shard is called a Region. Because we need to support scanning and the stored data generally has a relational table schema, we want the data of the same table to be as close as possible. Each Region in TiKV uses the Raft algorithm to ensure data security and high availability on multiple physical nodes.
 
 ![Raft group in distributed database TiKV](media/raft-group-in-distributed-database-tikv.png)
-<center> Figure 4. Raft group in distributed database TiKV </center> 
+<div class="caption-center"> Figure 4. Raft group in distributed database TiKV </div> 
 
 Several open source Raft implementations, including [etcd](https://coreos.com/etcd/), [LogCabin](https://github.com/logcabin/logcabin), [raft-rs](https://github.com/pingcap/raft-rs) and [Consul](https://www.consul.io/), are just implementations of a single Raft group, which cannot be used to store a large amount of data. So the major use case for these implementations is configuration management. After all, the more participating nodes in a single Raft group, the worse the performance. If physical nodes cannot be added horizontally, the system has no way to scale.
 
