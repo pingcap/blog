@@ -9,7 +9,7 @@ image: /images/blog/jepsen-offers-system-wide-approach-to-testing-databases-at-s
 ---
 
 ![Jepsen Offers System-Wide Approach to Testing Databases at Scale](media/jepsen-offers-system-wide-approach-to-testing-databases-at-scale.png)
-<div class="caption-center"> Image source: [Jepsen Offers System-Wide Approach to Testing Databases at Scale](https://thenewstack.io/jepsen-offers-system-wide-approach-testing-databases-scale/) </div> 
+<div class="caption-center"> Image source: <a href="https://thenewstack.io/jepsen-offers-system-wide-approach-testing-databases-scale/" target="_blank">Jepsen Offers System-Wide Approach to Testing Databases at Scale </a></div>
 
 When [Jepsen](https://jepsen.io/) appeared in the industry several years ago we couldn't have been happier. Finally, an approachable, understandable reliability testing framework along with an enjoyable and rigorous library of analyses of popular databases.
 
