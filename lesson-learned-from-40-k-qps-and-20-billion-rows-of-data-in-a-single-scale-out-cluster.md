@@ -1,5 +1,5 @@
 ---
-title: 'Lesson Learned from 40 K QPS and 20+ Billion Rows of Data in a Single Scale-out Cluster'
+title: 'How We Achieved 40 K QPS and 20+ Billion Rows of Data in a Single Scale-out Cluster'
 author: ['Can Cui']
 date: 2019-12-11
 summary: As the business developed, standalone MySQL couldn't meet JD Cloud's OSS metadata storage requirements. This post introduces how TiKV empowered JD Cloud to manage huge amounts of OSS metadata with a simple and horizontally scalable architecture.
