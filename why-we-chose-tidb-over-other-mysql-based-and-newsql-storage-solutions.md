@@ -6,7 +6,8 @@ summary: As business boomed, NetEase Games met bottlenecks in database scalabili
 image: /images/blog/database-scaling-data-isolation.jpg
 tags: ['TiDB','Success Story']
 categories: ['MySQL Scalability']
-url: /success-stories/why-we-chose-a-distributed-sql-database-alongside-mysql-to-break-down-data-silos/
+url: /success-stories/why-we-chose-tidb-over-other-mysql-based-and-newsql-storage-solutions/
+aliases: ['/success-stories/why-we-chose-a-distributed-sql-database-alongside-mysql-to-break-down-data-silos/']
 ---
 
 **Industry:** Gaming
@@ -252,6 +253,11 @@ Conclusion:
 * CRDB is compatible with the PostgreSQL protocol. If we migrate our application architecture to CRDB, we have to change the protocol, which is complicated and costly.
 
 * TiDB is compatible with the MySQL protocol, which means few code modifications and low migration costs.
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('NetEase Games: Why We Chose TiDB over Other MySQL-based and NewSQL Storage Solutions', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('NetEase Games: Why We Chose TiDB over Other MySQL-based and NewSQL Storage Solutions', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
 
 #### Choosing TiDB
 
