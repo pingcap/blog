@@ -1,5 +1,5 @@
 ---
-title: 'NetEase Games: Why We Chose a Distributed SQL Database Alongside MySQL to Break down Data Silos'
+title: 'NetEase Games: Why We Chose TiDB over Other MySQL-based and NewSQL Storage Solutions'
 author: ['Wenjie Li']
 date: 2019-12-04
 summary: As business boomed, NetEase Games met bottlenecks in database scalability and data isolation. This post introduces why they chose TiDB over other MySQL-based and NewSQL storage solutions to solve their pain points.
@@ -13,7 +13,7 @@ url: /success-stories/why-we-chose-a-distributed-sql-database-alongside-mysql-to
 
 **Author:** Wenjie Li (Senior Database Administrator at NetEase Games Billing Team, TiDB User Group Ambassador)
 
-![Why We Chose a Distributed SQL Database Alongside MySQL to Break down Data Silos](media/database-scaling-data-isolation.jpg)
+![Why We Chose TiDB over Other MySQL-based and NewSQL Storage Solutions](media/database-scaling-data-isolation.jpg)
 
 NetEase Games, affiliated with [NetEase, Inc.](https://en.wikipedia.org/wiki/NetEase), is a leading provider of self‐developed PC‐client and mobile games to worldwide users. As one of the biggest players in China's online gaming market, we currently have over 250 games in operation, some of which maintain millions of daily active users. NetEase Games has achieved more than $1 billion in revenue for the fifth consecutive quarter.
 
@@ -327,7 +327,7 @@ Finally, it was time to make our decision. For each solution in the discussion, 
    </td>
    <td>Yes
    </td>
-   <td>No
+   <td>BSL and CCL
    </td>
   </tr>
   <tr>
