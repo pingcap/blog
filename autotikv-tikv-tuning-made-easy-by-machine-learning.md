@@ -16,6 +16,7 @@ As the team behind [TiDB](https://en.wikipedia.org/wiki/TiDB), an open source di
 
 So far, our exploration of automatic tuning has been rewarding—machine learning technologies applied to a database can not only yield optimal and efficient tuning, but also help us understand the system better. In this post, I'll discuss AutoTiKV's design, its machine learning model, and the automatic tuning workflow. I'll also share the results of experiments we ran to verify whether the tuning results are optimal and as expected. Finally, I'll share some interesting and unexpected findings. 
 
+AutoTiKV is an open source tool developed by [TiKV](https://github.com/tikv/tikv), a Cloud Native Computing ([CNCF](https://www.cncf.io/)) incubating project. The project is available on [GitHub](https://github.com/tikv/auto-tikv). 
 
 ## Our story of exploration and exploitation
 
@@ -77,7 +78,7 @@ The following diagram and description show how AutoTiKV works:
 4. The Controller includes functions that control TiKV directly. It changes TiKV knobs based on recommendations, runs benchmarking, and gets performance metrics.
 5. The metrics and the corresponding knobs are sent back to the DataModel as a newly generated sample. The training data is updated incrementally. 
 
-By default, the entire process runs 200 rounds. You can also customize the number of rounds, or you can set the process to run until the results stabilize. AutoTiKV supports restarting TiKV after modifying parameters, or you can choose not to restart if it's not required. You can declare the parameters to be adjusted and the metrics to be viewed in `[controller.py](https://github.com/tikv/auto-tikv/blob/master/controller.py)`. The information of the DBMS is defined in `[settings.py](https://github.com/tikv/auto-tikv/blob/master/settings.py)`.
+By default, the entire process runs 200 rounds. You can also customize the number of rounds, or you can set the process to run until the results stabilize. AutoTiKV supports restarting TiKV after modifying parameters, or you can choose not to restart if it's not required. You can declare the parameters to be adjusted and the metrics to be viewed in [`controller.py`](https://github.com/tikv/auto-tikv/blob/master/controller.py). The information of the DBMS is defined in [`settings.py`](https://github.com/tikv/auto-tikv/blob/master/settings.py).
 
 ## Experiment design
 
@@ -250,7 +251,7 @@ The overall recommended results are just as expected. Regarding the `optimizatio
 ```
 workload=pntlookup80
 
-knobs={rocksdb.writecf.bloom-filter-bits-per-key,     rocksdb.defaultcf.bloom-filter-bits-per-key,  rocksdb.writecf.optimize-filters-for-hits,  rocksdb.defaultcf.block-size,  rocksdb.defaultcf.disable-auto-compactions}	metric=get_throughput
+knobs={rocksdb.writecf.bloom-filter-bits-per-key, rocksdb.defaultcf.bloom-filter-bits-per-key, rocksdb.writecf.optimize-filters-for-hits, rocksdb.defaultcf.block-size, rocksdb.defaultcf.disable-auto-compactions}	metric=get_throughput
 ```
 
 In this experiment, we made several adjustments based on 
@@ -259,7 +260,7 @@ In this experiment, we made several adjustments based on
 
 * Set `optimize-filters-for-hits` in the writeCF. The default value for defaultCF is 0. 
 * Set `bloom-filter-bits-per-key` in defaultCF and writeCF respectively, and use them as two knobs.
-* Adjust the workload by setting the `[recordcount](https://github.com/brianfrankcooper/YCSB/wiki/Core-Properties)` of the run phase to twice of that of the load phase to measure the effect of the Bloom filter as much as possible. This way, half of the keys for the query won't exist, so the recommended value for `optimize-filters-for-hits` should be `disable`.
+* Adjust the workload by setting the [`recordcount`](https://github.com/brianfrankcooper/YCSB/wiki/Core-Properties) of the run phase to twice of that of the load phase to measure the effect of the Bloom filter as much as possible. This way, half of the keys for the query won't exist, so the recommended value for `optimize-filters-for-hits` should be `disable`.
 
 The results are shown in the figure below, along with an interesting finding:
 
