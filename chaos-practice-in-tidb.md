@@ -191,8 +191,7 @@ In this example, we inject a fail point with name "snapshot," and then we can tr
 We have introduced some individual methods for fault injection. There are also platforms that are integrated with these methods, which enable us to inject faults separately or simultaneously. The most popular of these platforms is [Namazu](https://github.com/osrg/namazu), a programmable fuzzy scheduler to test a distributed system. 
 
 ![Fault Injection Platform Namazu](media/fault_injection_platform_namazu.PNG)
-
-*Fault Injection Platform Namazu*
+<div class="caption-center"> Fault Injection Platform Namazu </div>
 
 You can run your system in the Namazu container. In the container, Namazu will schedule the process through `sched_setattr`, the file system with fuse and the network with netfilter. Unfortunately, we found that enabling file system scheduler of Namazu will cause the CentOS 7 operating system to crash, so for TiDB, we only run Namazu on Ubuntu. 
 
@@ -225,36 +224,41 @@ To solve this problem, we built Schrodinger, a test platform that performs Chaos
 Schrodinger is based on Kubernetes (K8s), so we don’t depend on physical machines anymore. K8s will hide the machine-level details and help us schedule the right job to the right machines.
 
 ![Shrodinger Architecture on K8s](media/shrodinger-architecture-on-k8s.PNG)
-*Shrodinger Architecture on K8s*
+<div class="caption-center"> Shrodinger Architecture on K8s </div>
 
 Below is the homepage screenshot of Schrodinger, showing an overview of tests that are running. We can see that two tests failed and one test is still running. If the test fails, an alert will be sent to our Slack channel and notify a developer to fix the problem. 
 
 ![Schrodinger Homepage](media/schrodinger-homepage.PNG)
-*Schrodinger Homepage*
+<div class="caption-center"> Schrodinger Homepage </div>
 
 ### How to use Schrodinger?
 
 Schrodinger can be implemented in 5 steps:
 
 1. Create a TiDB cluster using the **Create Cluster Template**. In the following snapshot, we deploy a TiDB cluster with 3 Placement Driver (PD) servers, 5 TiKV servers, and 3 TiDB servers. (PD is the managing component of a TiDB cluster, responsible for meta-data store, schedule and load-balancing, and allocating transaction IDs.)
-	![Create a TiDB Cluster](media/create-a-tidb-cluster.PNG)
-	*Create a TiDB Cluster*
+
+![Create a TiDB Cluster](media/create-a-tidb-cluster.PNG)
+<div class="caption-center"> Create a TiDB Cluster </div>
 
 2. Create a test case for the cluster using the **Create Case Template**. We can use a prebuilt binary test like the following `bank` test, or let Schrodinger build a new one from the Git source.
-	![Create a TiDB test case](media/create-a-test-case.PNG)
-	*Create a TiDB test case*
+	
+![Create a TiDB test case](media/create-a-test-case.PNG)
+<div class="caption-center"> Create a TiDB test case </div>
 
 3. Create a scene to link the cluster we configured in the previous step and add the test cases to this cluster.
-	![Create a testing scene](media/create-a-new-scene.PNG)
-	*Create a testing scene*
+	
+![Create a testing scene](media/create-a-new-scene.PNG)
+<div class="caption-center"> Create a testing scene </div>
 
 4. Create a mission to tell Schrodinger the detailed versions of the TiDB cluster and attach a Slack channel for alert. For example, in the following snapshot, we let Schrodinger build the entire cluster from the newest master sources.
-	![Create a testing mission](media/create-a-new-mission.PNG)
-	*Create a testing mission*
+	
+![Create a testing mission](media/create-a-new-mission.PNG)
+<div class="caption-center"> Create a testing mission </div>
 
 5. After we create the mission, Schrodinger gets working and runs all the test cases automatically. 
-	![Shrondinger automation](media/shrondinger-automation.PNG)
-	*Shrondinger automation*
+
+![Shrondinger automation](media/shrondinger-automation.PNG)
+<div class="caption-center"> Shrondinger automation </div>
 
 Schrodinger can now run tests in 7 different clusters simultaneously, 24/7 without stop. This frees up our team from manual testing; we just need to configure the testing environments and tasks. 
 
