@@ -101,6 +101,10 @@ To check if your deployment is successful:
 
 * Go to: [http://localhost:3000](http://localhost:3000) to launch Grafana with default user/password: admin/admin.
 
+    > **Note:**
+    >
+    > If you are deploying TiDB on a remote machine rather than a local PC, go to `http://<remote host's IP address>:3000` instead to access the Grafana monitoring dashboard.
+
     * Go to `Home` and click on the pull down menu to see dashboards of different TiDB components: TiDB, TiKV, PD, entire cluster.
 
     * You will see a dashboard full of panels and stats on your current TiDB cluster. Feel free to play around in Grafana, e.g. `TiDB-Cluster-TiKV`, or `TiDB-Cluster-PD`.
