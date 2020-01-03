@@ -1,7 +1,7 @@
 ---
 title: Achieving 5x QPS with Only 26 Lines of Code
 author: ['Edward Huang']
-date: 2019-11-29
+date: 2020-01-03
 summary: The Follower Read feature lets any follower replica in a Region serve a read request under the premise of strongly consistent reads. It reduces the load on the Raft leader and improves the read throughput of the TiDB cluster. Read this post to learn more. 
 tags: ['Engineering']
 categories: ['Engineering']
@@ -126,36 +126,10 @@ We ran a test to simulate an application scenario where there is a long distance
 
 ### The test environment
 
-<table>
-  <tr>
-   <td><strong>Instance</strong>
-   </td>
-   <td><strong>Instance count</strong>
-   </td>
-   <td><strong>Configuration</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>PD
-   </td>
-   <td>1
-   </td>
-   <td>16 core 2.2 GHz/SSD 500 GB
-   </td>
-  </tr>
-  <tr>
-   <td>TiKV
-   </td>
-   <td>2
-   </td>
-   <td>16 core 2.2 GHz/SSD 500 GB
-<p>
-172.16.4.223: leader
-<p>
-172.16.5.203: follower
-   </td>
-  </tr>
-</table>
+| **Instance** | **Instance count** | **Configuration** |
+|:----------|:----------|:----------|
+| PD | 1 | 16 core 2.2 GHz/SSD 500 GB |
+| TiKV | 2 | 16 core 2.2 GHz/SSD 500 GB <br> 172.16.4.223: leader <br> 172.16.5.203: follower |
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('Achieving 5x QPS with Only 26 Lines of Code', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
