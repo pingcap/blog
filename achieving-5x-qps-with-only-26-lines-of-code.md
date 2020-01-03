@@ -71,9 +71,9 @@ In fact, in trivial Raft implementation, even if the leader handles all loads, t
 
 #### `ReadIndex` as the solution to the linearizability issue
 
-The quorum reads mechanism helps solve this problem, but it might consume a lot of resources or take too long. Can we improve its effectiveness? The crucial issue is that the old leader is not sure whether it is the latest leader. Therefore, we need a method for the leader to confirm its leader state. This method is called the `_ReadIndex` algorithm_. It works as follows:
+The quorum reads mechanism helps solve this problem, but it might consume a lot of resources or take too long. Can we improve its effectiveness? The crucial issue is that the old leader is not sure whether it is the latest leader. Therefore, we need a method for the leader to confirm its leader state. This method is called the _`ReadIndex` algorithm_. It works as follows:
 
-1.  When the current leader processes a read request, the system records the current leader's latest committed index.
+1. When the current leader processes a read request, the system records the current leader's latest committed index.
 
 2. The current leader ensures that it's still the leader by sending a heartbeat to the quorum.
 
