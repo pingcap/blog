@@ -51,9 +51,9 @@ When the key is stored in the Data CF and the Write CF, the corresponding timest
 
 Suppose we need to write `a = 1`, first a `startTS`, 10 for example, is obtained from the TSO; then comes the PreWrite stage of Percolator, when data is written in the Lock CF and the Data CF, as shown below:
 
-{{< info >}}
-The following operation instances use W for Write, R for Read, D for Delete, and S for Seek.
-{{< /info >}}
+> **Info:**
+>
+> The following operation instances use W for Write, R for Read, D for Delete, and S for Seek.
 
 ```
 Lock CF: W a = lock
