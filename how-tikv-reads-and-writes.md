@@ -33,9 +33,9 @@ TiKV supports a feature called Lease Read. For Read requests, they can be sent d
 ![Multi Raft](media/multi-raft.png)
 <div class="caption-center"> Multi Raft </div>
 
-Because one Raft Group only processes a limited amount of data, we split the data into multiple Raft Groups, each of which correspond to a Region. The way of splitting is to slice by range. That is, we sort the keys of the data in byte order to form an infinite sorted map, and then slice it into a segments of continuous key range. Each key range is treated as a Region. The range of the Region uses the front-end and back-open mode \\([start, end)\\). The end key of the previous region is the start key of the next region.
+Because one Raft Group only processes a limited amount of data, we split the data into multiple Raft Groups, each of which correspond to a Region. The way of splitting is to slice by range. That is, we sort the keys of the data in byte order to form an infinite sorted map, and then slice it into a segments of continuous key range. Each key range is treated as a Region. The range of the Region uses the front-end and back-open mode [start, end). The end key of the previous region is the start key of the next region.
 
-Regions in TiKV have a maximum size limit. When this threshold is exceeded, it splits into two Regions, such as \\([a, b) \rightarrow [a, ab) + [ab, b)\\). Conversely, if there is very little data in the Region, it will be merged with the neighboring Regions to form a larger Region, such as \\([a, ab) + [ab, b) \rightarrow [a, b)\\).
+Regions in TiKV have a maximum size limit. When this threshold is exceeded, it splits into two Regions, such as [a, b) -> [a, ab) + [ab, b). Conversely, if there is very little data in the Region, it will be merged with the neighboring Regions to form a larger Region, such as [a, ab) + [ab, b) -> [a, b).
 
 ### Percolator
 
@@ -232,7 +232,7 @@ CREATE TABLE t1 {
 
 In this example, we create table t1 with 4 fields, with `ID` as the primary key, `name` as the unique index, and `age` as a non-unique index. So how does the data in this table correspond to TiKV?
 
-In TiDB, each table has a unique ID, such as 11 here, and each index also has a unique ID, for example, 12 for the name index and 13 for the age index. We use prefixes `t` and `i` to distinguish between data and index in the table. For table `t1` above, suppose it now has two rows of data, which are `(1, “a”, 10, “hello”)` and `(2, “b”, 12, “world”)`. In TiKV, each row of data has different a corresponding key-value pair, as shown below:
+In TiDB, each table has a unique ID, such as 11 here, and each index also has a unique ID, for example, 12 for the name index and 13 for the age index. We use prefixes `t` and `i` to distinguish between data and index in the table. For table `t1` above, suppose it now has two rows of data, which are `(1, "a", 10, "hello")` and `(2, "b", 12, "world")`. In TiKV, each row of data has different a corresponding key-value pair, as shown below:
 
 ```
 Primary Key
