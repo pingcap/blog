@@ -5,7 +5,10 @@ date: 2020-01-11
 summary: This post details how TiKV, as a distributed database, stores the data contained in a write request and how it retrieves the corresponding data with consistency guaranteed.
 tags: ['Engineering']
 categories: ['Engineering']
+image: /images/blog/how-tikv-reads-and-writes.png
 ---
+
+![How TiKV reads and writes](media/how-tikv-reads-and-writes.png)
 
 This article introduces in detail how TiKV handles read and write operations. Together we will explore how TiKV, as a distributed database, stores the data contained in a write request and how it retrieves the corresponding data with consistency guaranteed.
 
