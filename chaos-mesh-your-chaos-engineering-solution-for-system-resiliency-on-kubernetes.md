@@ -120,15 +120,15 @@ For more details on CRD objects such as NetworkChaos and IOChaos, see the [Chaos
 
 With the CRD design settled, let's look at the big picture on how Chaos Mesh works. The following major components are involved: 
 
-**controller-manager**
+- **controller-manager**
 
     Acts as the platform's "brain." It manages the life cycle of CRD objects and schedules chaos experiments. It has object controllers for scheduling CRD object instances, and the [admission-webhooks](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) controller dynamically injects sidecar containers into Pods. 
 
-**chaos-daemon** 
+- **chaos-daemon** 
 
     Runs as a privileged daemonset that can operate network devices on the node and Cgroup.
 
-**sidecar**
+- **sidecar**
 
     Runs as a special type of container that is dynamically injected into the target Pod by the admission-webhooks. For example, the `chaosfs` sidecar container runs a fuse-daemon to hijack the I/O operation of the application container. 
 
