@@ -38,24 +38,15 @@ After some diagnosis, we found the TiDB cluster version under test (V3.0.1) had 
 
 But Chaos Mesh can do a lot more than just simulate downtime. It also includes these fault injection methods: 
 
-- pod-kill
-    Simulates Kubernetes Pods being killed
-- pod-failure 
-    Simulates Kubernetes Pods being continuously unavailable 
-- network-delay
-    Simulates network delay
-- network-loss
-    Simulates network packet loss
-- network-duplication
-    Simulates network packet duplication
-- network-corrupt 
-    Simulates network packet corruption
-- network-partition
-    Simulates network partition
-- I/O delay
-    Simulates file system I/O delay
-- I/O errno
-    Simulates file system I/O errors
+- **pod-kill:** Simulates Kubernetes Pods being killed
+- **pod-failure:** Simulates Kubernetes Pods being continuously unavailable 
+- **network-delay:** Simulates network delay
+- **network-loss:** Simulates network packet loss
+- **network-duplication:** Simulates network packet duplication
+- **network-corrupt:** Simulates network packet corruption
+- **network-partition:** Simulates network partition
+- **I/O delay:** Simulates file system I/O delay
+- **I/O errno:** Simulates file system I/O errors
 
 ## Design principles
 
