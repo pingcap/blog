@@ -36,7 +36,7 @@ TiKV supports a feature called Lease Read. For Read requests, they can be sent d
 ![Multi Raft](media/multi-raft.png)
 <div class="caption-center"> Multi Raft </div>
 
-Because one Raft Group only processes a limited amount of data, we split the data into multiple Raft Groups, each of which correspond to a Region. The way of splitting is to slice by range. That is, we sort the keys of the data in byte order to form an infinite sorted map, and then slice it into a segments of continuous key range. Each key range is treated as a Region. The range of the Region uses the front-end and back-open mode [start, end). The end key of the previous region is the start key of the next region.
+Because one Raft Group only processes a limited amount of data, we split the data into multiple Raft Groups, each of which corresponds to a Region. The way of splitting is to slice by range. That is, we sort the keys of the data in byte order to form an infinite sorted map, and then slice it into segments of continuous key ranges. Each key range is treated as a Region. The range of the Region uses the left-inclusive and right-exclusive mode - `[start, end)`. The end key of the previous Region is the start key of the next Region.
 
 Regions in TiKV have a maximum size limit. When this threshold is exceeded, it splits into two Regions, such as [a, b) -> [a, ab) + [ab, b). Conversely, if there is very little data in the Region, it will be merged with the neighboring Regions to form a larger Region, such as [a, ab) + [ab, b) -> [a, b).
 
