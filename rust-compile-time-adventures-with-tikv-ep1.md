@@ -8,11 +8,9 @@ categories: ['Engineering']
 image: /images/blog/rust-compile-time-adventures.png
 ---
 
-> The Rust programming language was designed for slow compilation times.
+> _The Rust programming language was designed for slow compilation times._
 >
-> I was there. I witnessed it for myself, and I am finally ready to break the silence: Rust is a hoax. It's a prank the language designers played on you, the Rust user — adopt this high-performance, high-reliability language for your products, and we'll reduce your productivity to a crawl.
->
-> It's brilliantly insidious.
+> _I was there. I witnessed it for myself, and I am finally ready to break the silence: Rust is a hoax. It's a prank the language designers played on you, the Rust user — adopt this high-performance, high-reliability language for your products, and we'll reduce your productivity to a crawl._
 
 ![Rust Compile Time Adventures with TiKV](media/rust-compile-time-adventures.png)
 
@@ -24,7 +22,7 @@ This is kinda infuriating, as almost everything that matters about Rust is prett
 
 Rust compile times are perhaps its biggest weakness.
 
-At [PingCAP](https://pingcap.com/), we develop our distributed storage system, [TiKV](http://localhost:4000/hackmd-collab/github.com/tikv/tikv/), in Rust, and it compiles slow enough to discourage many in the company from using Rust. I recently spent some time, along with several others on the TiKV team and its wider community, investigating TiKV's compile times.
+At [PingCAP](https://pingcap.com/), we develop our distributed storage system, [TiKV](https://github.com/tikv/tikv/), in Rust, and it compiles slow enough to discourage many in the company from using Rust. I recently spent some time, along with several others on the TiKV team and its wider community, investigating TiKV's compile times.
 
 Over a series of posts, I'll discuss what we have learned:
 
@@ -41,7 +39,7 @@ Over a series of posts, I'll discuss what we have learned:
 In this episode:
 
 * [The spectre of poor Rust compile times at PingCAP](#the-spectre-of-poor-rust-compile-times-at-pingcap)
-    * [A peek at the TiKV compile-time adventure so far](#a-peek-at-the-tikv-compile-time-adventure-so-far)
+    * [Preview: the TiKV compile-time adventure so far](#preview-the-tikv-compile-time-adventure-so-far)
 * [The Rust compilation model calamity](#the-rust-compilation-model-calamity-1)
     * [Bootstrapping Rust](#bootstrapping-rust)
     * [(Un)virtuous cycles](#unvirtuous-cycles)
@@ -52,18 +50,17 @@ In this episode:
 
 ## The spectre of poor Rust compile times at PingCAP
 
-At [PingCAP](https://pingcap.com/en/), my colleagues use Rust to write [TiKV](http://localhost:4000/hackmd-collab/github.com/tikv/tikv/), the storage node of [TiDB](https://github.com/pingcap/tidb), our distributed database. They do this because they want this most important node in the system to be fast and reliable by construction, at least to the greatest extent reasonable.
+At [PingCAP](https://pingcap.com/en/), my colleagues use Rust to write [TiKV](https://github.com/tikv/tikv/), the storage node of [TiDB](https://github.com/pingcap/tidb), our distributed database. They do this because they want this most important node in the system to be fast and reliable by construction, at least to the greatest extent reasonable.
 
 It was mostly a great decision, and most people internally are mostly happy about it.
 
-But many complain about how long it takes to build. For some, a full rebuild might take 15 minutes in development mode, and 30 minutes in release mode. To developers of large systems projects, this might not sound horrible, but it's much slower than what many developers expect out of modern programming environments. TiKV is not even that big of a codebase, although it does contain 2 million lines of Rust and 2 million lines of C/C++, which makes it sizable. In comparison, Rust itself contains over 3 million lines of Rust, and [Servo](https://github.com/servo/servo) contains 2.7 million. See [full line counts here](https://gist.github.com/brson/31b6f8c5467b050779ce9aa05d41aa84/edit).
+But many complain about how long it takes to build. For some, a full rebuild might take 15 minutes in development mode, and 30 minutes in release mode. To developers of large systems projects, this might not sound horrible, but it's much slower than what many developers expect out of modern programming environments. TiKV is not even that big of a codebase, but it does contain 2 million lines of Rust and 2 million lines of C/C++, which makes it sizable. In comparison, Rust itself contains over 3 million lines of Rust, and [Servo](https://github.com/servo/servo) contains 2.7 million. See [full line counts here](https://gist.github.com/brson/31b6f8c5467b050779ce9aa05d41aa84/edit).
 
-Other nodes in the system are written in Go, which of course comes with a different set of advantages and disadvantages from Rust. Some of the Go developers at PingCAP resent having to wait for the Rust components to build. They are used to a rapid build-test cycle.
+Other nodes in TiDB are written in Go, which of course comes with a different set of advantages and disadvantages from Rust. Some of the Go developers at PingCAP resent having to wait for the Rust components to build. They are used to a rapid build-test cycle.
 
-Rust developers, on the other hand, are used to taking a lot of coffee breaks (or tea, or cigarettes, or sobbing, or whatever, as the case may be — Rust developers have the spare time to nurse their demons).
+Rust developers, on the other hand, are used to taking a lot of coffee breaks (or tea, cigarettes, sobbing, or whatever as the case may be — Rust developers have the spare time to nurse their demons).
 
-
-### A peek at the TiKV Compile-time adventure so far
+### Preview: The TiKV Compile-time adventure so far
 
 The first entry in this series is just a story about the history of Rust with respect to compilation time. Since it might take several more entries before we dive into concrete technical details of what we've done with TiKV's compile times, here's a pretty graph to capture your imagination, without comment.
 
@@ -91,20 +88,19 @@ But it's not like the designers didn't put _any_ consideration into fast compile
 
 Story time.
 
-
 ### Bootstrapping Rust
 
-I don't remember when I realized that Rust's bad compile times were a strategic problem for the language, potentially a fatal mistake in the face of competition from future low-level programming languages. For the first few years, hacking almost entirely on the Rust compiler itself, I wasn't too concerned, and I don't think most of my peers were either. I mostly remember that Rust compile time was always* bad, and like, whatever, I can deal with that.
+I don't remember when I realized that Rust's bad compile times were a strategic problem for the language, potentially a fatal mistake in the face of competition from future low-level programming languages. For the first few years, hacking almost entirely on the Rust compiler itself, I wasn't too concerned, and I don't think most of my peers were either. I mostly remember that Rust compile time was always bad, and like, whatever, I can deal with that.
 
-When I worked daily on the Rust compiler it was common for me to have at least three copies of the repository on the computer, hacking on one while all the others were building and testing. I would start building workspace 1, switch terminals, remember what's going on over here in workspace 2, hack on that for a while, start building in workspace 2, switch terminals, etc. Little flow, constant context switching.
+When I worked daily on the Rust compiler, it was common for me to have at least three copies of the repository on the computer, hacking on one while all the others were building and testing. I would start building workspace 1, switch terminals, remember what's going on over here in workspace 2, hack on that for a while, start building in workspace 2, switch terminals, etc. Little flow, constant context switching.
 
 This was (and probably is) typical of other Rust developers too. I still do the same thing hacking on TiKV today.
 
-So, historically, how bad have Rust compile times been? A simple barometer here is to see how Rust's self-hosting times have changed over the years, that is the time it takes Rust to build itself. Rust building itself is not directly comparable to Rust building other projects, for a variety of reasons, but I think it will be illustrative.
+So, historically, how bad have Rust compile times been? A simple barometer here is to see how Rust's self-hosting times have changed over the years, which is the time it takes Rust to build itself. Rust building itself is not directly comparable to Rust building other projects, for a variety of reasons, but I think it will be illustrative.
 
 The [first Rust compiler](https://gist.github.com/brson/31b6f8c5467b050779ce9aa05d41aa84/edit), from 2010, called rustboot, was written in OCaml, and it's ultimate purpose was to build a second compiler, rustc, written in Rust, and begin the self-hosting bootstrap cycle. In addition to being written in Rust, rustc would also use [LLVM](https://llvm.org/) as its backend for generating machine code, instead of rustboot’s hand-written x86 code-generator.
 
-Rust needed to become self-hosting as a means of "dog-fooding" the language — writing the Rust compiler in Rust meant that the Rust authors needed to use their own language to write practical software early in the language design process, with the intention of lead to a useful and practical language.
+Rust needed to become self-hosting as a means of "dog-fooding" the language — writing the Rust compiler in Rust meant that the Rust authors needed to use their own language to write practical software early in the language design process. It was hoped that self-hosting  could lead to a useful and practical language.
 
 The first time Rust built itself was on April 20, 2011. [It took one hour](https://mail.mozilla.org/pipermail/rust-dev/2011-April/000330.html), which was a laughably long time. At least it was back then.
 
@@ -120,13 +116,13 @@ This is where the long, gruelling history of Rust's tragic compile times began, 
 >* _49 kilo-hamsters_ - rustc building Rust immediately after rustboot’s retirement
 >* _188 giga-sloths_ - rustc building Rust in 2020
 
-Anyways, last time I bootstrapped Rust a few months ago, it took over five hours.
+Anyway, last time I bootstrapped Rust a few months ago, it took over five hours.
 
 The Rust language developers became acclimated to Rust's poor self-hosting times and failed to recognize or address the severity of the problem of bad compile times during Rust's crucial early design phase.
 
-### **(Un)virtuous cycles**
+### (Un)virtuous cycles
 
-In the Rust project, we like processes that reinforce and build upon themselves. This is one of the keys to Rust's success, both as a language and community.
+In the Rust project, we like processes that reinforce and build upon themselves. This is one of the keys to Rust's success, both as a language and a community.
 
 As an obvious, hugely-successful example, consider [Servo](https://github.com/servo/servo). Servo is a web browser built in Rust, and Rust was created with the explicit purpose of building Servo. Rust and Servo are sister-projects. They were created by the same team (initially), at roughly the same time, and they evolved together. Not only was Rust built to create Servo, but Servo was built to inform the design of Rust.
 
@@ -134,20 +130,20 @@ The initial few years of both projects were extremely difficult, with both proje
 
 Here are some cursory examples of the Servo-Rust feedback loop:
 
-* Labeled break and continue[was implemented in order to auto-generate an HTML parser](https://github.com/rust-lang/rust/issues/2216).
-* Owned closures[were implemented after analyzing closure usage in Servo](https://github.com/rust-lang/rust/issues/2549#issuecomment-19588158).
-* Extern function calls used to be considered safe.[This changed in part due to experience in Servo](https://github.com/rust-lang/rust/issues/2628#issuecomment-9384243).
+* Labeled break and continue [was implemented in order to auto-generate an HTML parser](https://github.com/rust-lang/rust/issues/2216).
+* Owned closures [were implemented after analyzing closure usage in Servo](https://github.com/rust-lang/rust/issues/2549#issuecomment-19588158).
+* External function calls used to be considered safe. [This changed in part due to experience in Servo](https://github.com/rust-lang/rust/issues/2628#issuecomment-9384243).
 * The migration from green-threading to native threading was informed by the experience of building Servo, observing the FFI overhead of Servo's SpiderMonkey integration, and profiling "hot splits", where the green thread stacks needed to be expanded and contracted.
 
 The co-development of Rust and Servo created a [virtuous cycle](https://en.wikipedia.org/wiki/Virtuous_circle_and_vicious_circle) that allowed both projects to thrive. Today, Servo components are deeply integrated into Firefox, ensuring that Rust cannot die while Firefox lives.
 
 Mission accomplished.
 
-![Rust Mission Completed](media/rust-compile-mission-completed.png)
+![Rust mission accomplished](media/rust-compile-mission-completed.png)
 
 The previously-mentioned early self-hosting was similarly crucial to Rust's design, making Rust a superior language for building Rust compilers. Likewise, Rust and [WebAssembly](https://webassembly.org/) were developed in close collaboration (the author of [Emscripten](https://github.com/emscripten-core/emscripten), the author of [Cranelift](https://github.com/CraneStation/cranelift), and I had desks next to each other for years), making WASM an excellent platform for running Rust, and Rust well-suited to target WASM.
 
-Sadly there was no such reinforcement to drive down Rust compile times. The opposite is probably true: the more Rust became known as a _fast_ language, the more important it was to be _the fastest_ language. And, the more Rust's developers got used to developing their Rust projects across multiple branches, context switching between builds, the less pressure was felt to address compile times.
+Sadly there was no such reinforcement to drive down Rust compile times. The opposite is probably true — the more Rust became known as a _fast_ language, the more important it was to be _the fastest_ language. And, the more Rust's developers got used to developing their Rust projects across multiple branches, context switching between builds, the less pressure was felt to address compile times.
 
 That is, until Rust was released to production and met by a wide audience, it was not so tolerant of slow compile times.
 
@@ -159,9 +155,9 @@ Too many tired metaphors in this section. Sorry about that.
 
 If Rust is designed for poor compile time, then what are those designs specifically? I describe a few briefly here. The next episode in this series will go into further depth. Some have greater compile-time impact than others, but I assert that all of them cause more time to be spent in compilation than alternative designs.
 
-Looking at some of these in retrospect, I am tempting to think that "well, of course Rust _must_ have feature _foo_", and it's true that Rust would be a completely different language without many of these features. However, language designs are tradeoffs and none of these were predestined to be part of Rust.
+Looking at some of these in retrospect, I am tempted to think that "well, of course Rust _must_ have feature _foo_", and it's true that Rust would be a completely different language without many of these features. However, language designs are tradeoffs and none of these were predestined to be part of Rust.
 
-* _Borrowing_ — Rust's defining feature — its sophisticated pointer analysis — spends compile-time to make run-time safe.
+* _Borrowing_ — Rust's defining feature. Its sophisticated pointer analysis spends compile-time to make run-time safe.
 
 * _Monomorphization_ — Rust translates each generic instantiation into its own machine code, creating code bloat and increasing compile time.
 
@@ -183,9 +179,9 @@ Looking at some of these in retrospect, I am tempting to think that "well, of co
 
 * _Trait coherence_ — Rust's traits have a property called "coherence", which makes it impossible to define implementations that conflict with each other. Trait coherence imposes restrictions on where code is allowed to live. As such, it is difficult to decompose Rust abstractions into, small, easily-parallelizable compilation units.
 
-* _Tests next to code_ — Rust encourages tests to reside in the same codebase as the code they are testing. With Rust's compilation model this requires compiling and linking that code twice, which is expensive, particularly for large crates.
+* _Tests next to code_ — Rust encourages tests to reside in the same codebase as the code they are testing. With Rust's compilation model, this requires compiling and linking that code twice, which is expensive, particularly for large crates.
 
-## **Recent work on Rust compile times**
+## Recent work on Rust compile times
 
 The situation isn't hopeless. Not at all. There is always work going on to improve Rust compile times, and there are still many avenues to be explored. I'm hopeful that we'll continue to see improvements. Here is a selection of the activities I'm aware of from the last year or two. Thanks to everybody who helps with this problem.
 
