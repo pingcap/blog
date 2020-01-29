@@ -97,6 +97,11 @@ Because TrueTime has the clock uncertainty bound  `ε`, so for every transaction
 
 The biggest hurdle to adopting TrueTime is that it depends on special hardware, such as GPS clocks and atomic clocks, which many companies do not have.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Tick or Tock? Keeping Time and Order in Distributed Databases', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Tick or Tock? Keeping Time and Order in Distributed Databases', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## Hybrid Logical Clock
 
 [Hybrid logical clock](https://www.cse.buffalo.edu/tech-reports/2014-04.pdf) (HLC) is another way for timekeeping and timestamping in distributed systems.
@@ -149,7 +154,7 @@ But what can we do if the NTP is not working as expected? Start panicking? Or ju
 
 ## Why we choose TSO?
 
-![](media/Timestamp_Oracle.png)
+![Timestamp Oracle](media/Timestamp_Oracle.png)
 
 As a distributed relational database, [TiDB](https://github.com/pingcap/tidb) supports cross-instance transactions by using an optimized two-phase commit protocol (2PC) from [Google Percolator](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36726.pdf). In the practical implementation, we adopt a centralized control service -- [Placement Driver (PD)](https://github.com/pingcap/pd) -- to allocate the monotonically increasing timestamps, same as Percolator which uses a timestamp oracle (TSO) service to do so. We decide to use TSO from the beginning and use PD to allocate the timestamp. The main reason is that it is very easy to implement a correct and high-performance TSO service.
 

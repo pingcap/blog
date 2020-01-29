@@ -4,6 +4,7 @@ author: ['Yinggang Zhao', 'Kun Li', 'Changjun Piao']
 date: 2018-12-06
 summary: As our business grew quickly, we were overwhelmed trying to tackle the mounting data until we found TiDB, a MySQL-compatible NewSQL hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Now we can harness our data with more confidence than ever before and provide better services for our users to enjoy a better life. 
 tags: ['TiDB','Success Story']
+categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-meituan-dianping/
 image: /images/blog-article/p35.jpg
 ---
@@ -16,7 +17,7 @@ image: /images/blog-article/p35.jpg
 
 In Chinese, [Meituan-Dianping](https://en.wikipedia.org/wiki/Meituan-Dianping) means “better buying, better life,” and since it was formed in 2015 by the [merger of two companies](https://www.forbes.com/sites/ywang/2015/10/08/chinas-meituan-dianping-merges-to-create-a-mega-online-to-offline-service-platform/#4353d0323e28), the platform has facilitated billions of purchases of goods and services with built-in discounts. By gross merchandise volume, Meituan-Dianping is [China’s largest group-buying website](https://www.crunchbase.com/organization/meituan-com#section-overview). Part Groupon, part Yelp, and part Uber Eats, we offer a range of localized services and entertainment, such as food delivery, restaurant reviews, haircuts and manicures, ticket bookings, bike-sharing, and more. [In April 2018, we had 290 million monthly active users, and last year we generated more than 5.8 billion transactions with over $51 billion in gross transaction volume.](https://www.home.saxo/insights/content-hub/articles/2018/09/07/a-closer-look-at-meituan-dianping) On September 20, 2018, our company [debuted on the Hong Kong stock exchange at an IPO price of HK$69 per share](https://money.cnn.com/2018/09/20/technology/meituan-dianping-ipo/index.html). 
 
-As our business has grown rapidly, our data volume has also surged. This has placed tremendous pressure on the MySQL database system in our backend. Burdened by handling this immense data, we began to explore a better data storage solution. Fortunately, we found [TiDB](http://bit.ly/tidb_repo_publication), a MySQL-compatible NewSQL hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built and supported by PingCAP. Now we can harness our data with more confidence than ever before and provide better services for our users to enjoy a better life.
+As our business has grown rapidly, our data volume has also surged. This has placed tremendous pressure on the MySQL database system in our backend. Burdened by handling this immense data, we began to explore a better data storage solution. Fortunately, we found [TiDB](https://en.wikipedia.org/wiki/TiDB), a MySQL-compatible NewSQL hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built and supported by PingCAP. Now we can harness our data with more confidence than ever before and provide better services for our users to enjoy a better life.
 
 At the beginning of 2018, our [DBA](https://en.wikipedia.org/wiki/Database_administrator) (database administrator) team worked together with the architecture storage team to choose and implement a distributed database solution. Since November 2018, 10 TiDB clusters have been deployed in our production environment, with nearly 200 physical nodes. These clusters are deployed for six product divisions or platforms: delivery, transport, quick pass, accommodation, the Meituan platform, and the core development platform. Most of these applications are pure [OLTP](https://en.wikipedia.org/wiki/Online_transaction_processing) (online transaction processing) workloads. We are happy to report that all the clusters have been running smoothly since their deployment.
 
@@ -110,14 +111,14 @@ There are many product lines in Meituan-Dianping. The services all have huge vol
 Meituan-Dianping currently uses the Mt-Falcon platform (a customized distributed monitoring system inspired by [Open-Falcon](https://github.com/open-falcon)) for monitoring and alert. Various plugins have been configured in Mt-Falcon to customize monitoring multiple components, and with [Puppet](https://en.wikipedia.org/wiki/Puppet_(software)) deployed, the privileges of different users and the issue of different files can be recognized. This way, machine installation and privilege control will be established as long as we complete the plugin scripts and the necessary files.
 
 ![Monitoring Architecture](media/monitoring-architecture.png)
-<center> *Monitoring Architecture* </center>
+<div class="caption-center"> Monitoring Architecture </div>
 
 #### Monitoring Architecture
 
 TiDB uses [Prometheus](https://github.com/prometheus/prometheus) plus [Grafana](https://github.com/grafana/grafana) as the monitoring system as shown in the above diagram, with a cluster of more than 700 metrics. As the monitoring architecture below shows, each component pushes its metrics to Pushgateway, and Prometheus obtains metrics from Pushgateway.
 
 ![TiDB Monitoring Architecture](media/tidb-monitoring-architecture.png)
-<center> *TiDB Monitoring Architecture* </center>
+<div class="caption-center"> TiDB Monitoring Architecture </div>
 
 With a set of Prometheus instances deployed in a TiDB cluster, it was inconvenient to gather, analyze, and configure the monitoring metrics in the original TiDB monitoring architecture. Therefore, we decided to converge the monitoring components. As the alert system had been working well on Mt-Falcon, it was unnecessary to build a new one on AlertManager.
 
@@ -151,20 +152,26 @@ At present, MySQL is used with [Hive](https://en.wikipedia.org/wiki/Apache_Hive)
 
     - This involves data migration and real-time synchronization of incremental data (DTS). 
         
-        [Mydumper](https://github.com/maxbube/mydumper) + [Loader](https://github.com/pingcap/docs/blob/master/tools/loader.md) is used to export the data in MySQL and then import the data to TiDB; DM can be used to synchronize the incremental data from MySQL to TiDB. 
+        [Mydumper](https://github.com/maxbube/mydumper) + [Loader](https://pingcap.com/docs/dev/reference/tools/loader/) is used to export the data in MySQL and then import the data to TiDB; TiDB DM can be used to synchronize the incremental data from MySQL to TiDB. 
 
     - MySQL uses a large number of auto-increment IDs as the primary key. When the data of sharded MySQL is aggregated to TiDB, the conflict of auto-increment IDs should be resolved. 
 
-        This issue can be fixed by removing the auto-increment IDs and building the unique primary key on TiDB. The new DM version also has the feature of automatically handling the primary key during the process of merging sharded tables.
+        This issue can be fixed by removing the auto-increment IDs and building the unique primary key on TiDB. The new TiDB DM version also has the feature of automatically handling the primary key during the process of merging sharded tables.
 
 - Data migration from Hive to TiDB and from TiDB to Hive.
 
     - It is easy to migrate data from Hive to TiDB, since TiDB is highly compatible with MySQL. The Insert statement needs no modification; we just need to adjust it slightly.
     
-    - For data migration from TiDB to Hive, using [TiDB-Binlog](https://github.com/pingcap/docs/blob/master/tools/tidb-binlog.md) (Pump + Drainer), an enterprise tool developed by PingCAP, is a good solution. Drainer can export data to Kafka, MySQL, and TiDB. We are currently considering the schema of using Drainer to output data to Kafka in order to synchronize data from TiDB to Hive, as shown in the diagram below. 
+    - For data migration from TiDB to Hive, using [TiDB Binlog](https://github.com/pingcap/tidb-binlog) (Pump + Drainer), an enterprise tool developed by PingCAP, is a good solution. Drainer can export data to Kafka, MySQL, and TiDB. We are currently considering the schema of using Drainer to output data to Kafka in order to synchronize data from TiDB to Hive, as shown in the diagram below. 
 
         ![Synchronization Data from TiDB to Hive](media/synchronization-data-from-tidb-to-hive.png)
-        <center> *Synchronization Data from TiDB to Hive* </center>
+        <div class="caption-center"> Synchronization Data from TiDB to Hive </div>
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('TiDB, the Key to a Better Life for Meituan-Dianping’s 290 Million Monthly Users', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB, the Key to a Better Life for Meituan-Dianping’s 290 Million Monthly Users', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 
 ### Issues and Solutions
 
@@ -185,7 +192,7 @@ We once ran into the Write stall problem, and found that the causes for too many
 - TiKV created snapshots more slowly than the requests for creating snapshots were sent. Because of this, the accumulated replicas of creating Regions were released suddenly, and a good many L0 files were created in rocksdb-raft. 
 
 ![Write Stall Monitoring](media/write-stall-monitoring.png) 
-<center> *Write Stall Monitoring* </center>
+<div class="caption-center"> Write Stall Monitoring </div>
 
 We resolved the Write stall issue using the following measures:
 
@@ -212,7 +219,7 @@ The solutions for this issue are as follows:
     Extend the heartbeat interval from 1s to 2s. This policy has had positive results, as shown in the picture below:
 
     ![Response Time Before and After Optimization of the Insert Statement](media/response-time-before-and-after-optimization-of-the-insert-statement.png) 
-    <center> *Response Time Before and After Optimization of the Insert Statement* </center>
+    <div class="caption-center"> Response Time Before and After Optimization of the Insert Statement </div>
 
 - Permanent solution
 
@@ -243,7 +250,7 @@ In the long term, we will build a mightier ecosystem together with PingCAP. Here
     Based on the original computing engine of TiDB Server, PingCAP engineers have built [TiSpark](https://github.com/pingcap/tispark), a thin layer for running Apache Spark on top of TiDB/TiKV to answer complex OLAP queries. This addition makes the TiDB platform a complete [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)) database. This architecture has drastically decreased the data replicas of core services in the company’s data cycle, which saves costs and improves the cost-effectiveness of OLAP applications. We plan to migrate some analytical query systems with real-time or near real-time requirements to TiDB.
 
     ![TiDB Platform Architecture](media/tidb-platform-architecture.png)
-    <center> *TiDB Platform Architecture* </center>
+    <div class="caption-center"> TiDB Platform Architecture </div>
 
 - **Follow-on physical backup policy and multi-write across data centers**
 

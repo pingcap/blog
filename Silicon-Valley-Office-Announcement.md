@@ -2,13 +2,18 @@
 title: PingCAP Plants its Seed in Silicon Valley
 date: 2017-12-08
 summary: PingCAP, a cutting-edge distributed Hybrid Transactional/Analytical Processing (HTAP) database company, is excited to announce the opening of its Silicon Valley office, located at the GSV Labs in Redwood City, California.
+<<<<<<< HEAD
 tags: ['TiDB', 'Golang']
 image: /images/blog-article/p37.jpg
+=======
+tags: ['TiDB', 'Golang', 'Open Source Community']
+categories: ['Open Source Community']
+>>>>>>> rust-compile-times
 ---
 
 # PingCAP Plants its Seed in Silicon Valley
 
-[PingCAP](https://www.pingcap.com), a cutting-edge distributed Hybrid Transactional/Analytical Processing (HTAP) database company, is excited to announce the opening of its Silicon Valley office, located at the [GSV Labs](http://gsvlabs.com/) in Redwood City, California. GSV (Global Silicon Valley) Labs is a global innovation platform that houses more than 170 startups, investors, and partners in its 60,000 square foot space in the heart of Silicon Valley. Its member startups work in a wide range of technologies and industries, from Big Data and healthcare, to VR and education. 
+[PingCAP](https://pingcap.com), a cutting-edge distributed Hybrid Transactional/Analytical Processing (HTAP) database company, is excited to announce the opening of its Silicon Valley office, located at the [GSV Labs](http://gsvlabs.com/) in Redwood City, California. GSV (Global Silicon Valley) Labs is a global innovation platform that houses more than 170 startups, investors, and partners in its 60,000 square foot space in the heart of Silicon Valley. Its member startups work in a wide range of technologies and industries, from Big Data and healthcare, to VR and education. 
 
 ![GSV Location in the Silicon Valley](media/Silicon_Valley_Map_Unicorn.png)
 

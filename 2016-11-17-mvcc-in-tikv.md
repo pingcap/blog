@@ -10,23 +10,23 @@ categories: ['Engineering']
 
 ## Introduction to concurrency control
 
-Transaction isolation is important for database management system. Because database should provide an illusion that the user is the only one who connects to the database, which greatly simplifies application development. But, the concurrency controlling problems like data races must be resolved since there will be a lot of connections to the database. Due to this background, the database management system (DBMS) ensures that the resulting concurrent access patterns are safe, ideally by serializablity.
+Serializability is the classical concurrency scheme. It ensures that a schedule for executing concurrent transactions is equivalent to one that executes the transactions serially in some order. Though serializablity is a great concept, it is hard to implement efficiently. A classical solution is a variant of [Two-Phase Locking, aka 2PL](https://en.wikipedia.org/wiki/Two-phase_locking). Using 2PL, the database management system (DBMS) maintains read and write locks to ensure that conflicting transactions are executed in a well-defined order, or in serializable execution schedules. Locking, however, has several drawbacks. First, readers and writers block each other. Second, most transactions are read-only and are therefore harmless from a transaction-ordering perspective. Under a locking-based isolation mechanism, no update transaction is allowed on a data object that is being read by a potentially long-running read transaction. Thus the update has to wait until the read finishes. This severely limits the degree of concurrency in the system.
 
-Though serializablity is a great concept, it is hard to implement efficiently. A classical solution is a variant of [Two-Phase Locking, aka 2PL][1]. Using 2PL, the DBMS maintains read and write locks to ensure that conflicting transactions are executed in a well-defined order, which results in serializable execution schedules. But, locking, however, has several drawbacks: First, readers and writers block each other. Second, most transactions are read-only and therefore harmless from a transaction-ordering perspective. Using a locking-based isolation mechanism, no update transaction is allowed to change a data object that has been read by a potentially long-running read transaction and thus has to wait until the read transaction finishes. This severely limits the degree of concurrency in the system.
+*Multi-Version Concurrency Control (MVCC)* is an elegant solution for this problem, where each update creates a new version of the data object instead of updating it in-place, so that concurrent readers can still see the old version while the update transaction proceeds. Such a strategy can prevent read-only transactions from waiting. In fact, locking is not required at all. This is an extremely desirable property and the reason why many database systems like PostgreSQL, Oracle, and Microsoft SQL Server implement MVCC.
 
-*Multi-Version Concurrency Control (MVCC)* is an elegant solution for this problem, in which each update creates a new version of the data object instead of updating data objects in-place, such that concurrenct readers can still see the old version while the update transaction proceeds concurrently. Such stradegy can prevent read-only transactions from waiting, and in fact do not have to use locking at all. This is an extremely desirable property and the reason why many DBMS implements MVCC, e.g., PostgreSQL, Oracle, Microsoft SQL Server.
+In this post, we will explore the complexities of implementation of MVCC in TiKV.
 
 ## MVCC in TiKV
 
-Let's dive into `TiKV`'s MVCC implementation, located at [src/storage](https://github.com/tikv/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/mod.rs).
+Let's dive into `TiKV`'s MVCC implementation, which is located at [src/storage](https://github.com/tikv/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/mod.rs).
 
 ### Timestamp Oracle(TSO)
 
-Since `TiKV` is a distributed storage system, it needs a globally unique time service, called `Timestamp Oracle`(TSO), to allocate a monotonic increasing timestamp. This function is provided in `PD` in TiKV, which is provided by `TrueTime API` by using multiple modern clock references(GPS and atomic locks) in [Spanner](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf). So keep in mind that every `TS` represents a monotonic increasing timestamp.
+Since `TiKV` is a distributed storage system, it needs a globally unique time service, called `Timestamp Oracle`(TSO), to allocate a monotonic increasing timestamp. Similar to the TrueTime API from Google's [Spanner](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf), this service is implemented in Placement Driver (PD) in TiKV. Every `TS` represents a monotonic increasing timestamp.
 
 ### Storage
 
-To dive into the Transaction part in `TiKV`, [src/storage](https://github.com/tikv/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage) is a good beginning, which implements the entries. `Storage` is a struct that actually receives the get/Scan commands.
+To dive into the transaction part in `TiKV`, [src/storage](https://github.com/tikv/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage) is a good starting point. `Storage` is a struct that actually receives the Get/Scan commands.
 
 ```rust
 pub struct Storage {
@@ -70,55 +70,62 @@ impl Storage {
 }
 ```
 
-This `start` function helps to explain how a storage runs.
+This `start` function in the example above explains how the storage struct runs.
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('MVCC in TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('MVCC in TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
 
 ### Engine
 
-[Engine](https://github.com/pingcap/tikv/blob/master/src/storage/engine/mod.rs#L44) is the trait which describes the actual database used in storage system, which is implemented in [raftkv](https://github.com/pingcap/tikv/blob/master/src/storage/engine/raftkv.rs#L91) and [Enginerocksdb](https://github.com/pingcap/tikv/blob/master/src/storage/engine/rocksdb.rs#L66).
+[Engine](https://github.com/pingcap/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/engine/mod.rs#L44) is the trait which describes the actual database used in the storage system. It is implemented in [raftkv](https://github.com/pingcap/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/engine/raftkv.rs#L91) and [rocksdb_engine](https://github.com/tikv/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/engine/rocksdb.rs#L137).
 
 ### StorageHandle
 
-`StorageHandle` is the struct that handles commands received from `sendch` powered by [`mio`](https://github.com/carllerche/mio).
+`StorageHandle` is the struct that handles commands received from `sendch`. The I/O is processed by [`mio`](https://github.com/carllerche/mio).
 
-Then the following functions like `async_get` and `async_batch_get` will send the corresponding commands to the channel, which can be got by the scheduler to execute asynchronously.
+Then functions like `async_get` and `async_batch_get` in the `storage` struct will send the corresponding commands to the channel, which can be obtained by the scheduler to execute asynchronously.
 
-All right, the MVCC protocol calling is exactly implemented in [Scheduler](https://github.com/pingcap/tikv/blob/master/src/storage/txn/scheduler.rs#L763).
-The storage receives commands from clients and sends commands as messages to the scheduler. Then the scheduler will process the command or [call corresponding asynchronous function](https://github.com/pingcap/tikv/blob/master/src/storage/txn/scheduler.rs#L643). There are two types of operations, reading and writing. Reading is implemented in [MvccReader](https://github.com/tikv/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/mvcc/reader.rs#L20), which is easy to understand. Writing part is the core of MVCC implementation.
+The MVCC layer is called in [Scheduler](https://github.com/pingcap/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/txn/scheduler.rs#L763).
+The storage receives commands from clients and sends commands as messages to the scheduler. Then the scheduler will process the command or [call corresponding asynchronous function](https://github.com/pingcap/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/txn/scheduler.rs#L643). There are two types of operations - read and write. Read is implemented in [MvccReader](https://github.com/tikv/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/mvcc/reader.rs#L20), which is easy to understand so we will not elaborate on it. Let's focus on write, which is the core of MVCC implementation.
 
 ### MVCC
 
-Here comes the core of the transaction model of TiKV, which called 2-Phase Commit powered by MVCC. There are two stages in one transaction.
+#### Column family
 
-#### Prewrite
+Compared with Percolator where the information such as Lock is stored by adding an extra column to a specific row, TiKV uses a column family (CF) in RocksDB to handle all the information related to Lock. To be specific, TiKV stores the Key-Values, Locks and Writes information in `CF_DEFAULT`, `CF_LOCK`, and `CF_WRITE`.
 
-1. Select one row as the primary row, the others as the secondary rows.
-2. [Lock the primary row](https://github.com/pingcap/tikv/blob/master/src/storage/mvcc/txn.rs#L80). Before locking, it will check [whether there is other locks on this row](https://github.com/pingcap/tikv/blob/master/src/storage/mvcc/txn.rs#L71) or whether there are some commits located after startTS. These two situations will lead to conflicts.If any of themhappens, [rollback](https://github.com/pingcap/tikv/blob/master/src/storage/mvcc/txn.rs#L115) will be called.
-3. Repeat the  operations on secondary row.
+All the values of the CF are encoded as following:
 
-#### Commit
+| | Default | Lock | Write |
+| --- | --- | --- | --- |
+| **Key** | z{encoded_key}{start_ts(desc)} | z{encoded_key} | z{encoded_key}{commit_ts(desc)} |
+| **Value** | {value} | {flag}{primary_key}{start_ts(varint)} | {flag}{start_ts(varint)} |
 
-1. Write to the `CF_WRITE` with commitTS.
-2. Delete the corresponding lock.
+More details can be found [here](https://github.com/pingcap/tikv/issues/1077).
 
-#### Rollback
+#### Transaction model
 
-[Rollback](https://github.com/pingcap/tikv/blob/master/src/storage/mvcc/txn.rs#L115) is called when there are conflicts during the `prewrite`.
+Here comes the core of the transaction model for TiKV, which is MVCC powered by 2-phase commit. There are two stages in one transaction:
+
+- **Prewrite**
+
+  1. The transaction starts. The client obtains the current timestamp (`startTS`) from TSO.
+  2. Select one row as the primary row, the others as the secondary rows.
+  3. Check [whether there is another lock on this row](https://github.com/pingcap/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/mvcc/txn.rs#L71) or whether there are any commits located after `startTS`. These two situations will lead to conflicts. If either happens, the commit fails and [rollback](https://github.com/pingcap/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/mvcc/txn.rs#L115) will be called.
+  4. [Lock the primary row](https://github.com/pingcap/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/mvcc/txn.rs#L80).
+  5. Repeat the steps above on secondary rows.
+
+- **Commit**
+
+  1. Obtain the commit timestamp `commit_ts` from TSO.
+  2. Check whether the lock on the primary row still exists. Proceed if the lock is still there. Roll back if not.
+  3. Write to column `CF_WRITE` with `commit_ts`.
+  4. Clear the corresponding primary lock.
+  5. Repeat the steps above on secondary rows.
 
 #### Garbage collector
-It is easy to predict that there will be more and more MVCC versions if there is no [Garbage Collector](https://github.com/pingcap/tikv/blob/master/src/storage/mvcc/txn.rs#L143) to remove the invalid versions. But we cannot just simply removeall the versions before a safe point. Since there maybe only one version for a key, it will be kept. In `TiKV`, if there is  any `Put` or `Delete` before the safe point, then all the latter writes can be deleted, otherwise only `Delete`, `Rollback` and `Lock` will be deleted.
 
-# TiKV-Ctl for MVCC
+It is easy to predict that there will be more and more MVCC versions if there is no [Garbage Collector](https://github.com/pingcap/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/mvcc/txn.rs#L143) to remove the invalid versions. But we cannot simply remove all the versions before a safe point, for there may be only one version for a key, which must be kept. In TiKV, if there is any `Put` or `Delete` records before the safe point, then all the latter writes can be deleted; otherwise only `Delete`, `Rollback` and `Lock` will be deleted.
 
-During developing and debugging, sometimes we need to know the MVCC version information.So we develop a new tool for searching the MVCC information. `TiKV` stores the Key-Values, Locks and Writes information in `CF_DEFAULT`, `CF_LOCK`, `CF_WRITE`.
-All the  values of the CF are encoded as following:
-
-|  | default | lock | write |
-| --- | --- | --- | --- |
-| **key** | z{encoded_key}{start_ts(desc)} | z{encoded_key} | z{encoded_key}{commit_ts(desc)} |
-| **value** | {value} | {flag}{primary_key}{start_ts(varint)} | {flag}{start_ts(varint)} |
-
-Details can be found [here](https://github.com/pingcap/tikv/issues/1077).
-
-Since all the MVCC version information is stored as CF Key-Values in RocksDB, to search for a Key's version information, we just need to encode the key with different formats then search in the corresponding CF. The CF Key-Values are modeled by [MvccKv](https://github.com/pingcap/tikv/blob/master/src/bin/tikv-ctl.rs#L210).
-
-[1]: https://en.wikipedia.org/wiki/Two-phase_locking

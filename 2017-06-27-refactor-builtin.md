@@ -93,6 +93,11 @@ First, let's take a look at the [`expression/builtin_string.go`](https://github.
 
 [Back to the top](#top)
  
+ <div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Refactoring the Built-in Functions in TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Refactoring the Built-in Functions in TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 #### <span id="move"> Refine the existing `TestLength()` method:</span>
 
 Moving on to [`expression/builtin_string_test.go`](https://github.com/pingcap/tidb/blob/master/expression/builtin_string_test.go), let’s refine the existing `TestLength()` method:
@@ -203,7 +208,7 @@ About the `where` condition in the `select` statement shown above:
 
 In the **compiling phase**. TiDB will build an expression tree as shown in the graph below:
  
-![](media/before_reconstruction.png)
+![An expression tree](media/before_reconstruction.png)
 
 
 In the **executing phase**, the `eval` method of the root node is called, and the expression is evaluated by the following traversal expression tree.
@@ -228,7 +233,7 @@ The refactored framework has two advantages:
  
 Let’s go back to the previous example, in the **compiling phase**, the generated expression tree is shown in the following graph. For expressions that do not match the function parameters types, we add the `cast` function for type conversion:
 
-![](media/after_reconstruction.png)
+![Add the `cast` function for type conversion](media/after_reconstruction.png)
  
 In this way, in the **executing phase**, for every `ScalarFunction`, it is guaranteed that all of its parameter types match the data types in the given expression evaluation, and we don’t need to check and convert parameter types repeatedly.
  

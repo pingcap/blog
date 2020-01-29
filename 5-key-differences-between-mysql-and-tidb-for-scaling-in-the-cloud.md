@@ -3,12 +3,13 @@ title: 5 Key Differences Between MySQL and TiDB for Scaling in the Cloud
 author: ['Morgan Tocker']
 date: 2018-12-11
 summary: This post introduces the top five key differences between TiDB and MySQL.
-tags: ['TiDB', 'Product']
+tags: ['TiDB', 'Product', 'MySQL Scalability', 'HTAP', 'Open Source Community']
+categories: ['MySQL Scalability']
 ---
 
-As businesses adopt cloud-native architectures, conversations will naturally lead to what we can do to make the database horizontally scalable. The answer will likely be to take a closer look at [TiDB](https://www.pingcap.com/docs/).
+As businesses adopt cloud-native architectures, conversations will naturally lead to what we can do to make the database horizontally scalable. The answer will likely be to take a closer look at [TiDB](https://pingcap.com/docs/).
 
-TiDB is an open source [NewSQL](https://en.wikipedia.org/wiki/NewSQL) database released under the Apache 2.0 License. Because it speaks the [MySQL](https://en.wikipedia.org/wiki/MySQL) protocol, your existing applications will be able to connect to it using any MySQL connector, and [most SQL functionality](https://www.pingcap.com/docs/sql/mysql-compatibility/) remains identical (joins, subqueries, transactions, etc.).
+TiDB is an open source [NewSQL](https://en.wikipedia.org/wiki/NewSQL) database released under the Apache 2.0 License. Because it speaks the [MySQL](https://en.wikipedia.org/wiki/MySQL) protocol, your existing applications will be able to connect to it using any MySQL connector, and [most SQL functionality](https://pingcap.com/docs/v3.0/reference/mysql-compatibility/#compatibility-with-mysql) remains identical (joins, subqueries, transactions, etc.).
 
 Step under the covers, however, and there are differences. If your architecture is based on MySQL with Read Replicas, you'll see things work a little bit differently with TiDB. In this post, I'll go through the top five key differences I've found between TiDB and MySQL.
 
@@ -40,13 +41,18 @@ By contrast, TiDB uses RocksDB as the storage engine with TiKV. RocksDB has adva
 
 Note that both MySQL and TiDB support an API that allows new storage engines to be made available. For example, Percona Server and MariaDB both support RocksDB as an option.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('5 Key Differences Between MySQL and TiDB for Scaling in the Cloud', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('5 Key Differences Between MySQL and TiDB for Scaling in the Cloud', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## 3. TiDB gathers metrics in Prometheus/Grafana
 
 Tracking key metrics is an important part of maintaining database health. MySQL centralizes these fast-changing metrics in Performance Schema. Performance Schema is a set of in-memory tables that can be queried via regular SQL queries.
 
 With TiDB, rather than retaining the metrics inside the server, a strategic choice was made to ship the information to a best-of-breed service. Prometheus+Grafana is a common technology stack among operations teams today, and the included graphs make it easy to create your own or configure thresholds for alarms.
 
-![](media/grafana-in-tidb.png)
+![Grafana in TiDB](media/grafana-in-tidb.png)
 
 ## 4. TiDB handles DDL significantly better
 
@@ -62,6 +68,6 @@ TiDB is designed to perform well across [hybrid transaction/analytical processin
 
 ## Conclusion
 
-These are my top five observations based on 15 years in the MySQL world and coming to TiDB. While many of them refer to internal differences, I recommend checking out the TiDB documentation on [MySQL Compatibility](https://www.pingcap.com/docs/sql/mysql-compatibility/). It describes some of the finer points about any differences that may affect your applications.
+These are my top five observations based on 15 years in the MySQL world and coming to TiDB. While many of them refer to internal differences, I recommend checking out the TiDB documentation on [MySQL Compatibility](https://pingcap.com/docs/v3.0/reference/mysql-compatibility). It describes some of the finer points about any differences that may affect your applications.
 
 Note: The original version of this article was published on [opensource.com](https://opensource.com/article/18/11/key-differences-between-mysql-and-tidb)

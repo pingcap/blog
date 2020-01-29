@@ -2,7 +2,7 @@
 title: The Design and Implementation of Multi-raft
 date: 2017-08-15
 summary: The goal of TiKV is to support 100 TB+ data and it is impossible for one Raft group to make it, we need to use multiple Raft groups, which is called Multi-raft.
-tags: ['TiKV', 'PD', 'Engineering', 'Raft', 'Golang', 'Rust']
+tags: ['TiKV', 'Engineering', 'Raft', 'Golang', 'Rust']
 aliases: ['/blog/2017/08/15/multi-raft/']
 categories: ['Engineering']
 ---
@@ -26,7 +26,7 @@ Placement Driver (PD), the global central controller of TiKV, stores the metadat
 
 PD is a critical central node. With the integration of etcd, it automatically supports the distributed scaling and failover as well as solves the problem of single point of failure. We will write another article to thoroughly introduce PD.
 
-In TiKV, the interaction with PD is placed in the [pd](https://github.com/pingcap/tikv/tree/master/src/pd) directory. You can interact with PD with your self-defined RPC and the protocol is quite simple. In [pd/mod.rs](https://github.com/pingcap/tikv/blob/master/src/pd/mod.rs), we provide the Client trait to interact with PD and have implemented the RPC Client.
+In TiKV, the interaction with PD is placed in the [pd](https://github.com/tikv/tikv/tree/master/components/pd_client) directory. You can interact with PD with your self-defined RPC and the protocol is quite simple. In [pd/mod.rs](https://github.com/tikv/tikv/blob/master/components/pd_client/src/lib.rs), we provide the Client trait to interact with PD and have implemented the RPC Client.
 
 The Client trait of PD is easy to understand, most of which are the set/get operations towards the metadata information of the cluster. But you need to pay extra attention to the operations below:
 
@@ -104,9 +104,9 @@ message Peer {
 
 ### RocksDB / Keys Prefix
 
-In terms of actual data storage, whether it’s Raft Metadata, Log or the data in State Machine, we store them inside a RocksDB instance. More information about RocksDB, please refer to[ https://github.com/facebook/rocksdb](https://github.com/facebook/rocksdb).
+In terms of actual data storage, whether it’s Raft Metadata, Log or the data in State Machine, we store them inside a RocksDB instance. More information about RocksDB, please refer to [the RocksDB project on GitHub](https://github.com/facebook/rocksdb).
 
-We use different prefixes to differentiate data of Raft and State Machine. For detailed information, please refer to [raftstore/store/keys.rs](https://github.com/pingcap/tikv/blob/master/src/raftstore/store/keys.rs). As for the actual data of State Machine, we add "z" as the prefix and for other metadata stored locally, including Raft, we use the 0x01 prefix.
+We use different prefixes to differentiate data of Raft and State Machine. For detailed information, please refer to [keys/src/lib.rs](https://github.com/tikv/tikv/blob/master/components/keys/src/lib.rs). As for the actual data of State Machine, we add "z" as the prefix and for other metadata stored locally, including Raft, we use the 0x01 prefix.
 
 I want to highlight the Key format of some important metadata and I’ll skip the first 0x01 prefix.
 
@@ -171,6 +171,11 @@ message RegionLocalState {
 **`RegionLocalStaste`:** Used to store Region information and the corresponding Peer state on this Store. `Normal` indicates that this Peer is normal, `Applying` means this Peer hasn’t finished the `apply snapshot` operation and `Tombstone` shows that this Peer has been removed from Region and cannot join in Raft Group.
 
 [Back to the top](#top)
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('The Design and Implementation of Multi-raft', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('The Design and Implementation of Multi-raft', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
 
 ### Peer Storage
 

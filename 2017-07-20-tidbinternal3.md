@@ -1,9 +1,9 @@
 ---
 title: TiDB Internal (III) - Scheduling
-author: ['Li SHEN']
+author: ['Li Shen']
 date: 2017-07-20
 summary: This is the third one of three blogs to introduce TiDB internal.
-tags: ['TiDB', 'Golang', 'Engineering']
+tags: ['TiDB', 'Golang', 'Engineering', 'MySQL Scalability', 'HTAP']
 aliases: ['/blog/2017/07/20/tidbinternal3/']
 categories: ['Engineering']
 ---
@@ -77,6 +77,11 @@ The previous scheduler requirements seem to be complicated, but can be generaliz
 The Raft protocol happens to meet these requirements: the `AddReplica`, `RemoveReplica` and `TransferLeader` commands support the three basic operations.
 
 [Back to the top](#top)
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('TiDB Internal (III) - Scheduling', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Internal (III) - Scheduling', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
 
 ## <span id="collection">Information Collecting</span>
 

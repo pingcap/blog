@@ -21,7 +21,7 @@ Doing performance tuning on distributed systems is no joking matter. It’s much
 
 ## Gathering Metrics
 
-We gather a lot of metrics inside each component and they are periodically sent to [Prometheus](https://prometheus.io/), an open source system monitoring solution. You can easily observe the behaviors of these metrics in [Grafana](https://grafana.com/), an open source platform for time series analytics. If you deploy the TiDB cluster using [Ansible](https://github.com/pingcap/docs/blob/master/op-guide/ansible-deployment.md), Prometheus and Grafana will be installed by default. By observing various metrics, we can see how each component is working, pinpoint where are the bottlenecks, and address them via tuning. Let’s see an example.
+We gather a lot of metrics inside each component and they are periodically sent to [Prometheus](https://prometheus.io/), an open source system monitoring solution. You can easily observe the behaviors of these metrics in [Grafana](https://grafana.com/), an open source platform for time series analytics. If you deploy the TiDB cluster using [Ansible](https://pingcap.com/docs/dev/how-to/deploy/orchestrated/ansible/), Prometheus and Grafana will be installed by default. By observing various metrics, we can see how each component is working, pinpoint where are the bottlenecks, and address them via tuning. Let’s see an example.
 
 ## Writeflow of an Insert SQL Statement
 
@@ -102,6 +102,11 @@ The reason why we tune block-cache-size is because the TiKV server reads data fr
 
 *RocksDB-kv panel*
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('How to do Performance Tuning on TiDB, A Distributed NewSQL Database', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How to do Performance Tuning on TiDB, A Distributed NewSQL Database', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## Tuning Technique #4: Batch Insert
 
 You can achieve better write performance by using batch insert. From the TiDB server’s perspective, batch insert can reduce not only the RPC latency between clients and TiDB servers, but also the SQL parsing time. Inside TiKV, batch insert can reduce the total number of Raft messages by combining multiple records into one Raft log entry. Based on our experience, it is recommended that you keep the batch size between 50~100 rows. When there are more than 10 indexes in one table, you should decrease the batch size, because inserting one row will create more than 10 KV pairs based on the encoding rules I described above.
@@ -120,7 +125,7 @@ I hope this article helps you get a good sense of some common bottleneck scenari
 
 Many of our customers, from e-commerce marketplace and gaming, to fintech, media, and travel, are already applying these tuning techniques in-production to get the full benefits of TiDB’s design, architecture, and optimizations. We look forward to sharing their use cases and experiences in the near future. 
 
-Illustration by [**Amanda Limardi**](https://www.behance.net/amandalimadff4)
+Illustration by [**Amanda Limardi**](https://www.upwork.com/o/profiles/users/_~0111fdbe9a7fb1f46e/)
 
 *Reprinted with permission. © IDG Communications, Inc., 2018. All rights reserved. https://www.infoworld.com/article/3258810/sql/tidb-performance-tuning-a-distributed-newsql-database.html*
 

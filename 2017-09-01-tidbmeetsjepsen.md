@@ -3,7 +3,7 @@ title: When TiDB Meets Jepsen
 author: ['Peng XU']
 date: 2017-09-01
 summary: What happens when TiDB meets Jepsen?
-tags: ['TiDB', 'Engineering', 'Golang']
+tags: ['TiDB', 'Engineering', 'Golang', 'MySQL Scalability', 'HTAP']
 aliases: ['/blog/2017/09/01/tidbmeetsjepsen/']
 categories: ['Engineering']
 ---
@@ -60,6 +60,11 @@ After introducing the `parts` type into the tests, a `time-out` error occurs whe
 ### Generator
 
 Generator, the event generator of Jepsen, interweaves the operations of Client with that of Nemesis and generates specific execute statements for the entire test process.
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('When TiDB Meets Jepsen', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('When TiDB Meets Jepsen', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
 
 ## Jepsen tests that TiDB goes through
 

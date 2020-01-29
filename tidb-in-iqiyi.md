@@ -1,9 +1,10 @@
 ---
-title: 'Always Fun, Always On: How TiDB Helps iQiyi Deliver Streaming Videos to Its 421 Million Monthly Users'
+title: 'Always Fun, Always On: How TiDB Helps iQiyi Deliver Streaming Videos'
 author: ['Boshuai Zhu']
 date: 2018-10-18
 summary: As our business grew exponentially, we were overwhelmed trying to handle the mounting data until we found TiDB, a MySQL-compatible NewSQL hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Now we no longer worry about data volume and can bring high-quality entertainment services to our users with more confidence than before. 
-tags: ['TiDB','Success Story']
+tags: ['TiDB', 'Success Story']
+categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-iqiyi/
 image: /images/blog-article/p29.jpg
 ---
@@ -12,7 +13,7 @@ image: /images/blog-article/p29.jpg
 
 **Author:** Boshuai Zhu (Senior Infrastructure Engineer at iQiyi)
 
-[iQiyi](https://en.wikipedia.org/wiki/IQiyi), formerly Qiyi, is the Netflix of China: the country’s [largest online video-on-demand platform](https://www.thewrap.com/paramount-signs-licensing-deal-with-chinas-largest-online-video-platform-iqiyi/). With “Always Fun, Always Fine” as our brand’s motto, we are committed to providing users with high-resolution, authentic media content including movies, TV dramas, variety shows, documentaries, animations and travel programs. By the end of 2017, our [monthly active users on mobile devices reached 421 million and daily active users hit 126 million](https://variety.com/2018/digital/asia/china-iqiyi-expands-nickelodeon-deal-1202900418/); at the end of June 2018, [the number of our subscribers jumped to 66 million](https://variety.com/2018/digital/asia/china-iqiyi-expands-nickelodeon-deal-1202900418/). On March 29, 2018, our company IPO’ed on the NASDAQ and raised $2.25 billion.
+[iQiyi](https://en.wikipedia.org/wiki/IQiyi), formerly Qiyi, is the Netflix of China: the country’s [largest online video-on-demand platform](https://www.thewrap.com/paramount-signs-licensing-deal-with-chinas-largest-online-video-platform-iqiyi/). With “Always Fun, Always Fine” as our brand’s motto, we are committed to providing users with high-resolution, authentic media content including movies, TV dramas, variety shows, documentaries, animations and travel programs. On March 29, 2018, our company IPO’ed on the NASDAQ and raised $2.25 billion.
 
 Since our business has grown rapidly, our data size has also soared. This has placed enormous pressure on our backend system, especially the MySQL cluster. We experienced the suffocating pain of tackling immense data until we found [TiDB](http://bit.ly/tidb_repo_publication), a MySQL-compatible NewSQL hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built and supported by PingCAP. Finally, we can properly manage our data.
 
@@ -38,7 +39,7 @@ TiDB checked all of those boxes, and in fact, its performance has exceeded our e
 TiDB is an open source, NewSQL, scalable hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database built by the PingCAP team and the open source community. It aims to break down the traditional separation between an OLTP database and an OLAP database, and offer a one-stop solution that enables real-time business analysis on live transactional data.
 
 ![Figure 1: TiDB Platform Architecture](https://download.pingcap.com/images/success-stories/tidb-htap-architecture.png)
-<center> *Figure 1: TiDB Platform Architecture* </center>
+<div class="caption-center"> Figure 1: TiDB Platform Architecture </div>
 
 Inside the TiDB Platform, there are several components:
 
@@ -46,7 +47,7 @@ Inside the TiDB Platform, there are several components:
 - [**TiKV**](https://github.com/pingcap/tikv) cluster, composed of TiKV instances, is the distributed transactional Key-Value storage layer where the data resides. Regardless of where the data comes from, it is stored in TiKV eventually. It uses the [Raft](https://raft.github.io/) consensus protocol for replication to ensure data consistency and disaster recovery.
 - [**TiSpark**](https://github.com/pingcap/tispark) cluster also sits on top of TiKV. It is an Apache Spark plugin that works with the TiDB platform to support complex OLAP queries for BI analysts and data scientists. 
 
-The TiDB ecosystem also has a wealth of other enterprise-level tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://www.pingcap.com/docs/tools/syncer/) for seamless migration from MySQL, Wormhole for migrating heterogeneous data, and [TiDB-Binlog](https://github.com/pingcap/docs/blob/master/tools/tidb-binlog.md), which is a tool to collect binlog files.
+The TiDB ecosystem also has a wealth of other enterprise-level tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://pingcap.com/docs/tools/syncer/) for seamless migration from MySQL, Wormhole for migrating heterogeneous data, and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), which is a tool to collect binlog files.
 
 ## How Are We Using TiDB?
 
@@ -68,7 +69,7 @@ Therefore, we decided to deploy TiDB in our Risk Monitoring Center.
 
 The Risk Monitoring Center was the first iQiyi project to use TiDB online in the production environment, so we came up with the following plan:
 
-1. To ensure the absolute data safety, we designed a plan B for the TiDB cluster: We replaced the InnoDB in MySQL with TokuDB for its write capability. Then we deployed MySQL with TokuDB as the slave for the TiDB cluster and synchronize the data in the TiDB cluster with TiDB-Binlog. Although this was not optimal because the MySQL with TokuDB solution cannot handle the data growth in the peak time, we designed this to be the disaster recovery plan regardless of the delay.
+1. To ensure the absolute data safety, we designed a plan B for the TiDB cluster: We replaced the InnoDB in MySQL with TokuDB for its write capability. Then we deployed MySQL with TokuDB as the slave for the TiDB cluster and synchronize the data in the TiDB cluster with TiDB Binlog. Although this was not optimal because the MySQL with TokuDB solution cannot handle the data growth in the peak time, we designed this to be the disaster recovery plan regardless of the delay.
 2. Deployed an internally developed load balancer on the front end to make full use of the computing capability of multiple TiDB nodes and guarantee the high availability of the TiDB nodes.
 3. Deployed [Prometheus](https://en.wikipedia.org/wiki/Prometheus) and [Grafana](https://www.crunchbase.com/organization/raintank#section-overview) to monitor the TiDB cluster status. Connected Grafana to our internal alert platform to instantly inform the operations team of the alert information via short messages and emails.
 
@@ -100,10 +101,10 @@ The following issues occurred during our adoption of TiDB, but were quickly reso
 - We are amazed by the fact that no matter how much the data increases (as shown in Figure 2), the response time remains stable, thanks to the automatic Region splitting strategy of TiKV (as shown in Figure 3), the storage layer of TiDB. Tables in TiDB are split automatically to several parts of equal size (96 MB by default but configurable) based on the data size of a table. These Regions are scheduled to various storage nodes by a series of complex schedule algorithms. For a specific query, however big its data size is, TiDB quickly locates the corresponding Region, guaranteeing timely query response.
 
 ![Figure 2: Data growth in the Risk Monitoring Center](https://download.pingcap.com/images/success-stories/data-growth-in-the-risk-monitoring-center.png)
-<center> *Figure 2: Data growth in the Risk Monitoring Center* </center>
+<div class="caption-center"> Figure 2: Data growth in the Risk Monitoring Center </div>
 
 ![Figure 3: Auto partition of tables in TiKV](https://download.pingcap.com/images/success-stories/auto-partition-of-tables-in-tikv.png)
-<center> *Figure 3: Auto partition of tables in TiKV* </center>
+<div class="caption-center"> Figure 3: Auto partition of tables in TiKV </div>
 
 ### Scenario 2: Video Transcoding
 
@@ -113,14 +114,19 @@ The video transcoding database stores the historical data produced in transcodin
 
 **Solution:** To solve this problem, we deployed a TiDB cluster at the end of 2017 and migrated the data to the TiDB cluster through full and incremental import. This strategy ensured data consistency between the previous MySQL cluster and the newly-built TiDB cluster.  
 
-During the full import, we originally used Mydumper + [Loader](https://github.com/pingcap/docs/blob/master/tools/loader.md), a data migration tool developed by PingCAP. But we found that Loader was too slow for our needs.
+During the full import, we originally used Mydumper + [Loader](https://github.com/pingcap/docs/blob/master/v3.0/reference/tools/loader.md), a data migration tool developed by PingCAP. But we found that Loader was too slow for our needs.
 
 To fix this problem, PingCAP developed TiDB Lightning, which converted the data exported from Mydumper to SST files and imported the files to TiKV nodes. This way, data migration efficiency was improved greatly: 1T data could be migrated successfully in five or six hours. After video transcoding ran stably for a while, we switched all the traffic to the TiDB cluster and expanded our services. So far, it has run smoothly.
 
 The following picture shows the TiDB Lightning architecture:
 
 ![Figure 4: TiDB Lightning implementation architecture](https://download.pingcap.com/images/success-stories/tidb-lightning-implementation-architecture.png)
-<center> *Figure 4: TiDB Lightning implementation architecture* </center>
+<div class="caption-center"> Figure 4: TiDB Lightning implementation architecture </div>
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Always Fun, Always On: How TiDB Helps iQiyi Deliver Streaming Videos', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Always Fun, Always On: How TiDB Helps iQiyi Deliver Streaming Videos', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
 
 ### Scenario 3: User Login Information
 
@@ -135,10 +141,10 @@ After data was migrated to TiDB, we did not need sharding anymore, and the appli
 
 In the incremental synchronization process, we used Syncer, which aggregated data from multiple sources and various tables in a single table using wildcards. It has vastly simplified the incremental synchronization work.
 
-The [Syncer](https://www.pingcap.com/docs/tools/syncer/) architecture is as follows:
+The [Syncer](https://pingcap.com/docs/tools/syncer/) architecture is as follows:
 
 ![Figure 5: Syncer architecture](https://download.pingcap.com/images/success-stories/syncer-architecture-in-iqiyi.png)
-<center> *Figure 5: Syncer architecture* </center>
+<div class="caption-center"> Figure 5: Syncer architecture </div>
 
 However, Syncer currently cannot display real-time delay information in Grafana. This is a drawback for the applications that are sensitive to synchronization delay. The good news is that PingCAP is working on this issue, and they have refactored Syncer to automatically deal with the primary key conflict of table partition. With Syncer and TiDB, users can quickly synchronize data from multiple MySQL clusters in real time.       
 We have two requirements for high availability of the database:
@@ -154,7 +160,7 @@ For these requirements, TiDB has the corresponding solutions:
 To ensure high availability during the data migration process, we used Drainer to synchronize the data in the TiDB cluster with the MySQL cluster. Drainer supports reverse synchronization by specifying the starting timestamp.
 
 ![Figure 6: Deploying TiDB in multiple data centers](https://download.pingcap.com/images/success-stories/deploying-tidb-in-multiple-data-centers.png) 
-<center> *Figure 6: Deploying TiDB in multiple data centers* </center>
+<div class="caption-center"> Figure 6: Deploying TiDB in multiple data centers </div>
 
 Throughout the process, the PingCAP team offered us timely and expert-level help. They helped us locate the issue and gave us constructive suggestions. We really appreciate their patience and dedicated support!
 
@@ -171,4 +177,4 @@ TiDB is a perfect alternative for MySQL sharding + proxy solutions. With highly 
 
 As our business grew exponentially, we were overwhelmed trying to handle the mounting data. After a careful and rigorous evaluation of TiDB, we found it to be a powerful database that’s growing in mindshare. We have now deployed TiDB in our production environment. Thanks to the horizontal scalability and high availability of TiDB, we no longer worry about data volume and can bring high-quality entertainment services to our users with more confidence than before. 
 
-In addition to its use in the applications mentioned above, TiDB is also being evaluated or tested in other applications at iQiyi. In some use cases, TiDB needs to handle a mixed scenario of OLTP and OLAP, and that is a good opportunity to put TiSpark to work. One area of development we’re interested in is getting TiDB-Binlog, TiDB’s data synchronizing tool, to synchronize with [Kudu](https://en.wikipedia.org/wiki/Kudu) and [HBase](https://en.wikipedia.org/wiki/Apache_HBase) in addition to MySQL. To that end, we plan to invest more in TiDB and send some pull requests to [the TiDB community](https://github.com/pingcap/tidb). We believe that with its powerful technology and the professional and highly-motivated team behind it, TiDB will be embraced by companies in more and more industries in the future.
+In addition to its use in the applications mentioned above, TiDB is also being evaluated or tested in other applications at iQiyi. In some use cases, TiDB needs to handle a mixed scenario of OLTP and OLAP, and that is a good opportunity to put TiSpark to work. One area of development we’re interested in is getting TiDB Binlog, TiDB’s data synchronizing tool, to synchronize with [Kudu](https://en.wikipedia.org/wiki/Kudu) and [HBase](https://en.wikipedia.org/wiki/Apache_HBase) in addition to MySQL. To that end, we plan to invest more in TiDB and send some pull requests to [the TiDB community](https://github.com/pingcap/tidb). We believe that with its powerful technology and the professional and highly-motivated team behind it, TiDB will be embraced by companies in more and more industries in the future.

@@ -23,7 +23,7 @@ categories: ['MySQL Scalability']
 ## MySQL, our first choice
 
 Considering the amount of data and for a simplified implementation, GAEA chose the highly-available MySQL RDS storage solution at the very beginning of designing GaeaAD. At that time, we mainly used SQL Syntax to implement the matching logic, including many join table queries and aggregation operations. The system worked well and responded within one minute with tens of millions of rows of data.
-![](media/gaea 1.png)
+![MySQL in GAEA](media/gaea 1.png)
 
 ## Look for new solutions
 
@@ -45,15 +45,20 @@ In conclusion, what we want is a database that is as easy to use as MySQL, elimi
 
 We studied many distributed database solutions in the community and came upon TiDB. As the protocol layer of TiDB is compatible with MySQL and it supports complex query, we can power our applications without changing a single line of code. Besides, there is hardly any migration cost.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Migration from MySQL to TiDB to handle tens of millions of rows of data per day', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Migration from MySQL to TiDB to handle tens of millions of rows of data per day', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## TiDB, give it a go
 
 In the process of test deployment, we used the Syncer tool, provided by TiDB, to deploy TiDB as a MySQL Slave to the MySQL master of the original business, testing the compatibility and stability of read/write. After a while, the system was proved to perform well in read/write so we decided to move the read request of the business layer to TiDB. Later, we also switch the write business to the TiDB cluster, making the system online smoothly.
 
 The GaeaAD system works well for more than half a year since it has come online in October, 2016. Based on the hands-on experience, we summarized the following benefits brought by TiDB:
-![](media/gaea 2.png)
+![TiDB in GAEA](media/gaea 2.png)
 
 We replaced the highly-available MySQL RDS with the 3-node TiDB cluster. The average time needed for a single match reduces to about 30 seconds from over 2 minutes, and it even reaches to 10 seconds or so with the continuous optimization of TiDB’s engineers. In addition, we found that TiDB has superior advantages and outperforms MySQL especially when the data volume is large. We guess this owes to the existence of TiDB’s self-developed distributed SQL Optimizer. But when it comes to a small amount of data, this advantage is not that prominent because of the internal communication cost.
-![](media/gaea 3.png)
+![Comparison between the query time of TiDB and MySQL](media/gaea 3.png)
 (A comparison between the query time of TiDB and MySQL in cases of different amounts of data)
 
 1. TiDB supports automatic Sharding. The business side doesn’t need to split tables and TiDB no longer sets the Sharding key or partition table as a traditional database middleware product. Storage of the bottom layer automatically spreads across clusters according to the data distribution. The capacity and performance can be scaled horizontally through adding more nodes, greatly reducing the maintenance cost.

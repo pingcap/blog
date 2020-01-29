@@ -4,6 +4,7 @@ author: ['Xuan Sun', 'Dong Chen', 'Haodong Ji']
 date: 2018-08-07
 summary: With our fast-growing business, the surging data volume posed a serious challenge to our backend system and put the operations team under great pressure. How to tackle these challenges became a thorny problem until we found TiDB, a MySQL compatible distributed hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Finally, we do not have to worry about scaling databases and can focus on building better applications for our users.
 tags: ['TiDB','Success Story']
+categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-zhuanzhuan/
 aliases: ['/blog/use-case-tidb-in-zhuanzhuan']
 image: /images/blog-article/p49.jpg
@@ -20,7 +21,7 @@ While growth is always a good thing, we soon became concerned that the surging d
 Currently, we have deployed TiDB in multiple clusters for the messaging and risk management applications. These TiDB clusters hold several dozens of TBs of data with excellent and stable performance. In this post, we will elaborate on our pain points, why we chose TiDB, our practice in production, and our future plans with TiDB.
 
 ![TiDB Cluster Architecture at Zhuan Zhuan](media/tidb-cluster-architecture-at-zhuan-zhuan.png)
-<center> *TiDB Cluster Architecture at Zhuan Zhuan* </center>
+<div class="caption-center"> TiDB Cluster Architecture at Zhuan Zhuan </div>
 
 ## Our Pain Points
 
@@ -54,7 +55,7 @@ For the stress testing, we simulated various application scenarios using testing
 In this stress testing, we used six physical servers in total, three of which were CPU-intensive for starting the TiDB server and the Placement Driver (PD). The others were IO/CPU-intensive PCIe servers for starting the TiKV server. The sysbench-1.0.11 was used to test the response time (95th percent) of a 200GB TiDB cluster in different scenarios:
 
 ![Response time under different scenarios](media/response-time.png)
-<center> *Response time under different scenarios* </center>
+<div class="caption-center"> Response time under different scenarios </div>
 
 This is what we found:
 
@@ -67,6 +68,11 @@ Based on the testing results, we recommended these use-case scenarios:
 - Sequential write scenarios such as data archiving, logging, and turnover amortizing.
 
 After the functional testing and stress testing, we felt confident  that TiDB met our requirements, so we began pre-production adoption. We mounted TiDB on the online MySQL and used it as MySQL’s slave to synchronize online data. Then we migrated some online read traffic from MySQL to TiDB, to see whether the TiDB cluster met the needs of application access. It turned out that TiDB could handle that well.
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Managing the Surging Data Volume of a Fast-Growing Marketplace with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Managing the Surging Data Volume of a Fast-Growing Marketplace with TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
 
 ### In-Production Practice
 

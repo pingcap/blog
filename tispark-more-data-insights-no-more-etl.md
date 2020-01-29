@@ -77,9 +77,14 @@ Assume we pick the `studentID` index, the primary index, to access the table. Th
 
 ![Primary Index Path](media/primary-index-path.png)
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('TiSpark: More Data Insights, Less ETL', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiSpark: More Data Insights, Less ETL', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Path 2: Secondary Index
 
-So what if we choose a different path by using the 'school' column index instead of the primary index? TiSpark will then go through a different procedure for secondary index. A secondary index in TiKV is encoded like main table data. (For more detailed info on how TiKV encodes data, please see this [post](https://pingcap.com/blog/2017-07-11-tidbinternal2/).) The difference is the split / sort key is not on primary key but on the index keys, and primary key is attached at the end for each index entry.
+So what if we choose a different path by using the 'school' column index instead of the primary index? TiSpark will then go through a different procedure for secondary index. A secondary index in TiKV is encoded like main table data. (For more detailed info on how TiKV encodes data, please see the [post about computing](https://pingcap.com/blog/2017-07-11-tidbinternal2/).) The difference is the split / sort key is not on primary key but on the index keys, and primary key is attached at the end for each index entry.
 
 TiSpark reads all index entries per value range "school = 'engineering'" to retrieve all primary keys in the similar way illustrated above. We don’t directly search the main table via primary keys retrieved. Instead, we do a shuffle by regionID for each primary key, and then in each of the executor, TiSpark tries to merges all the keys into continuous range. By doing so, TiSpark transforms point queries into range queries and improves performance. If there are cases where primary keys are sparse and scattered, then for that specific region, the system automatically adapts by downgrading point queries to a single region scan to avoid performance hit.
 
@@ -99,7 +104,7 @@ Another optimization we've implemented is aggregation pushdown. TiSpark will rew
 
 ## Why Use TiSpark?
 
-Because TiDB as a whole is a distributed NewSQL database, storing data sizes that are far larger than what can be stored in a single machine, it's natural to layer a distributed compute engine like Spark on top of it. Without TiSpark, you would need do things the old way: do a daily dump of all your data into a Hadoop/Hive cluster or another data warehouse before you can analyze it--a situation many of our customers like [Mobike](https://www.pingcap.com/blog/Use-Case-TiDB-in-Mobike/) avoided by adopting TiDB with TiSpark. If you want to run queries on “fresh” data, not stale ones that are at least one day old, then TiSpark shines. Plus, you no longer need to manage and maintain any ETL pipelines, saving your team lots of time, resources, and headaches.
+Because TiDB as a whole is a distributed NewSQL database, storing data sizes that are far larger than what can be stored in a single machine, it's natural to layer a distributed compute engine like Spark on top of it. Without TiSpark, you would need do things the old way: do a daily dump of all your data into a Hadoop/Hive cluster or another data warehouse before you can analyze it--a situation many of our customers like [Mobike](https://pingcap.com/blog/Use-Case-TiDB-in-Mobike/) avoided by adopting TiDB with TiSpark. If you want to run queries on “fresh” data, not stale ones that are at least one day old, then TiSpark shines. Plus, you no longer need to manage and maintain any ETL pipelines, saving your team lots of time, resources, and headaches.
 
 ## What's Next?
 
@@ -115,4 +120,4 @@ If you are interested in helping us build any of these features, please [contrib
 
 ## Try it Out!
 
-Lastly, seeing is believing. You can easily try out the TiDB + TiSpark combo by following a [5-minute tutorial](https://www.pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/) our team recently put together, to spin up a cluster on your laptop using Docker-Compose. If you want to deploy this HTAP solution in a production environment, please [contact us](https://pingcap.com/contact-us/), and our team would be happy to help you!
+Lastly, seeing is believing. You can easily try out the TiDB + TiSpark combo by following a [5-minute tutorial](https://pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/) our team recently put together, to spin up a cluster on your laptop using Docker-Compose. If you want to deploy this HTAP solution in a production environment, please [contact us](https://pingcap.com/contact-us/), and our team would be happy to help you!

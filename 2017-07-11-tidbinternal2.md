@@ -3,7 +3,7 @@ title: TiDB Internal (II) - Computing
 author: ['Li SHEN']
 date: 2017-07-11
 summary: This is the second one of three blogs to introduce TiDB internal.
-tags: ['TiDB', 'Golang', 'Engineering']
+tags: ['TiDB', 'Golang', 'Engineering', 'MySQL Scalability', 'HTAP']
 aliases: ['/blog/2017/07/11/tidbinternal2/']
 categories: ['Engineering']
 ---
@@ -36,7 +36,7 @@ CREATE TABLE User {
    	Name varchar(20),
    	Role varchar(20),
    	Age int,
-   	PRIMARY KEY (ID)，
+   	PRIMARY KEY (ID),
    	Key idxAge (age)
 };
 ```
@@ -82,24 +82,28 @@ TiDB allocates a `TableID` to each table, an `IndexID` to each index, and a `Row
 Each row of data is encoded into a Key-Value pair according to the following rule:
 
 ```
-Key: tablePrefix_rowPrefix_tableID_rowID
+Key: tablePrefix{tableID}_recordPrefixSep{rowID}
 Value: [col1, col2, col3, col4]
 ```
 
-The `tablePrefix`/`rowPrefix` of the Key are specific string constants and used to differentiate other data in the Key-Value space.
+The `tablePrefix`/`recordPrefixSep` of the Key are specific string constants and used to differentiate other data in the Key-Value space.
 Index data is encoded into a Key-Value pair according to the following rule:
-Key: tablePrefix_idxPrefix_tableID_indexID_indexColumnsValue
-Value: rowID
-
-The above encoding rule applies to Unique Index while it cannot create a unique Key for Non-unique Index. The reason is that the `tablePrefix_idxPrefix_tableID_indexID_` of an Index is the same. It’s possible that the `ColumnsValue of` multiple rows is also the same. Therefore, we’ve made some changes to encode the Non-unique Index:
 
 ```
-Key: tablePrefix_idxPrefix_tableID_indexID_ColumnsValue_rowID
-Value：null
+Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue
+Value: rowID
+```
+
+The above encoding rule applies to Unique Index while it cannot create a unique Key for Non-unique Index. The reason is that the `tablePrefix{tableID}_indexPrefixSep{indexID}` of an Index is the same. It’s possible that the `ColumnsValue of` multiple rows is also the same. Therefore, we’ve made some changes to encode the Non-unique Index:
+
+```
+Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue_rowID
+Value: null
 ```
 
 In this way, the unique Key of each row of data can be created.
 In the above rules, all `xxPrefix` of the Keys are string constants with the function of differentiating the namespace to avoid the conflict between different types of data.
+
 ```
 var(
    	tablePrefix     = []byte{'t'}
@@ -107,9 +111,15 @@ var(
    	indexPrefixSep  = []byte("_i")
 )
 ```
+
 Note that the Key encoding solution of either Row or Index has the same prefix. Specifically speaking, all Rows in a Table has the same prefix, so does data of Index. These data with the same prefix is arranged together in the Key space of TiKV. In other words, we just need to carefully design the encoding solution of the suffix, ensuing the comparison relation remains unchanged, then Row or Index data can be stored in TiKV orderly. The solution of maintaining the relation unchanged before and after encoding is called `Memcomparable`. As for any type of value, the comparison result of two objects before encoding is consistent with that of the byte array after encoding (Note: both Key and Value of TiKV are the primitive byte array). For more detailed information, please refer to the [codec package](https://github.com/pingcap/tidb/tree/master/util/codec) of TiDB. When adopting this encoding solution, all Row data of a table will be arranged in the Key space of TiKV according to the RowID order. So will the data of a certain Index, according to the ColumnValue order of Index.
 
 [Back to the top](#top)
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('TiDB Internal (II) - Computing', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Internal (II) - Computing', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
 
 Now we take the previous requirements and TiDB’s mapping solution into consideration and verify the feasibility of the solution. 
 
@@ -128,17 +138,19 @@ Up to now, we’ve already covered how to map Table onto Key-Value. Here is one 
 First, each row of data will be mapped as a Key-Value pair. As this table has an Int Primary Key, the value of RowID is the value of this Primary Key. Assume that the TableID of this table is 10, its Row data is:
 
 ```
-t_r_10_1  --> ["TiDB", "SQL Layer", 10]
-t_r_10_2 --> ["TiKV", "KV Engine", 20]
-t_r_10_3 --> ["PD", "Manager", 30]
+t10_r1 --> ["TiDB", "SQL Layer", 10]
+t10_r2 --> ["TiKV", "KV Engine", 20]
+t10_r3 --> ["PD", "Manager", 30]
 ```
 
 In addition to Primary Key, this table also has an Index. Assume that the ID of Index is 1, its data is:
+
 ```
-t_i_10_1_10_1 —> null
-t_i_10_1_20_2 --> null
-t_i_10_1_30_3 --> null
+t10_i1_10_1 --> null
+t10_i1_20_2 --> null
+t10_i1_30_3 --> null
 ```
+
 The previous encoding rules help you to understand the above example. We hope that you can realize the reason why we chose this mapping solution and the purpose of doing so.
 
 [Back to the top](#top)
@@ -157,7 +169,7 @@ Apart from this, a specialized Key-Value stores the version of the current Schem
 
 The following diagram shows the entire architecture of TiDB:
 
-![](media/tidbarchitecture.png)
+![TiDB architecture](media/tidbarchitecture.png)
 
 The main function of the TiKV Cluster is to serve as the Key-Value engine to store data, which is thoroughly introduced in the last column. This article focuses on the SQL layer, i.e. the TiDB Servers. Nodes of this layer are stateless, storing no data, and each of them is completely equivalent. TiDB Server is responsible for handling user requests and executing SQL operation logic.
 
@@ -178,11 +190,11 @@ As for the statement `Select count(*) from user where name="TiDB";`, we need to 
 
 See the following diagram for the process:
 
-![](media/queryprocess.png)
+![SQL computing](media/queryprocess.png)
 
 This solution works though it still has the following drawbacks:
 
-1. When scanning data, each row needs to be read from TiKV through Key-Value operation. Therefore, there is at least one PRC overhead. The overhead becomes huge if there is a large amount of data to be scanned.
+1. When scanning data, each row needs to be read from TiKV through Key-Value operation. Therefore, there is at least one RPC overhead. The overhead becomes huge if there is a large amount of data to be scanned.
 2. It is not applicable to all rows. Data that doesn’t meet the conditions doesn’t need to be read.
 3. The value of the rows that meet the conditions is meaningless. What we need here is just the number of rows.
 
@@ -198,14 +210,14 @@ It is simple to avoid the above drawbacks.
 
 The following sketch shows how data returns layer by layer:
 
-![](media/dist-query.png)
+![How data returns layer by layer](media/dist-query.png)
 
-You can refer to [this article (in Chinese)](https://mp.weixin.qq.com/s?__biz=MzI3NDIxNTQyOQ==&mid=2247484187&idx=1&sn=90a7ce3e6db7946ef0b7609a64e3b423&chksm=eb162471dc61ad679fc359100e2f3a15d64dd458446241bff2169403642e60a95731c6716841&scene=4) to know how TiDB makes the SQL statement run faster.
+You can refer to [MPP and SMP in TiDB (in Chinese)](https://mp.weixin.qq.com/s?__biz=MzI3NDIxNTQyOQ==&mid=2247484187&idx=1&sn=90a7ce3e6db7946ef0b7609a64e3b423&chksm=eb162471dc61ad679fc359100e2f3a15d64dd458446241bff2169403642e60a95731c6716841&scene=4) to know how TiDB makes the SQL statement run faster.
 
 ### <span id="sqlarch">Architecture of the SQL Layer</span>
 The previous sections introduce some functions of the SQL layer and I hope you have a basic idea about how to process the SQL statement. Actually, TiDB’s SQL Layer is much complicated and has lots of modules and layers. The following diagram lists all important modules and the call relation:
 
-![](media/sqlarchitecture.png)
+![Architecture of the SQL Layer](media/sqlarchitecture.png)
 
 The SQL requests will be sent directly or via a Load Balancer to tidb-server, which then parses the MySQL Protocol Packet for the request content. After that, it performs syntax parsing, makes and optimizes the query plan and executes the plan to access and process data. As all data is stored in the TiKV cluster. Tidb-server needs to interact with tikv-server for accessing data during the process. Finally, tidb-server needs to return the query result to users.
 

@@ -3,7 +3,11 @@ title: TiDB Reaches the 200 Contributors Milestone
 date: 2018-08-30
 summary: TiDB recently added its 200th contributor. As CEO and co-founder of PingCAP who began building TiDB three years ago, I would like to thank the entire TiDB community for helping us reach this important milestone!
 author: ['Max Liu']
+<<<<<<< HEAD
 tags: ['TiDB','Community']
+=======
+tags: ['TiDB','Open Source Community']
+>>>>>>> rust-compile-times
 categories: ['Open Source Community']
 ---
 
@@ -13,7 +17,7 @@ As you might’ve noticed, TiDB recently added its 200th contributor. As CEO and
 
 ![TiDB contributor growth](media/tidb-contributor-growth.png)
 
-<center>*TiDB development started in 2015.  In August 2018, we welcomed our 200th contributor!*</center>
+<div class="caption-center">*TiDB development started in 2015.  In August 2018, we welcomed our 200th contributor!*</div>
 
 Here are a few of my favorite contributions to highlight:
 

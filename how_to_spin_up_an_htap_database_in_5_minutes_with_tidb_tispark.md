@@ -3,7 +3,11 @@ title: How To Spin Up an HTAP Database in 5 Minutes with TiDB + TiSpark
 author: ['Queeny Jin']
 date: 2018-06-08
 summary: In this 5-minute tutorial for beginners, we will show you how to spin up a standard TiDB cluster using Docker Compose on your local computer, so you can get a taste of its hybrid power, before using it for work or your own project in production.
+<<<<<<< HEAD
 tags: ['TiDB', 'TiSpark', 'HTAP', 'Golang']
+=======
+tags: ['TiDB', 'TiSpark', 'Golang', 'MySQL Scalability', 'HTAP']
+>>>>>>> rust-compile-times
 categories: ['HTAP']
 ---
 
@@ -89,7 +93,7 @@ Now that Docker is set up, let's deploy TiDB!
     docker-compose up -d
     ```
 
-You can see messages in your terminal launching the default components of a TiDB cluster: 1 TiDB instance, 3 TiKV instances, 3 Placement Driver (PD) instances, Prometheus, Grafana, 2 TiSpark instances (one master, one slave), and a TiDB-Vision instance. 
+You can see messages in your terminal launching the default components of a TiDB cluster: 1 TiDB instance, 3 TiKV instances, 3 Placement Driver (PD) instances, Prometheus, Grafana, 2 TiSpark instances (one master, one slave), and a TiDB-Vision instance.
 
 Your terminal will show something like this:
 
@@ -101,13 +105,17 @@ To check if your deployment is successful:
 
 * Go to: [http://localhost:3000](http://localhost:3000) to launch Grafana with default user/password: admin/admin.
 
+    > **Note:**
+    >
+    > If you are deploying TiDB on a remote machine rather than a local PC, go to `http://<remote host's IP address>:3000` instead to access the Grafana monitoring dashboard.
+
     * Go to `Home` and click on the pull down menu to see dashboards of different TiDB components: TiDB, TiKV, PD, entire cluster.
 
     * You will see a dashboard full of panels and stats on your current TiDB cluster. Feel free to play around in Grafana, e.g. `TiDB-Cluster-TiKV`, or `TiDB-Cluster-PD`.
 
 ![Grafana display of TiKV metrics](media/grafana_display_of_tikv_metrics.png)
 
-<center> Grafana display of TiKV metrics </center>
+<div class="caption-center"> Grafana display of TiKV metrics </div>
 
 * Now go to TiDB-vision at [http://localhost:8010](http://localhost:8010) (TiDB-vision is a cluster visualization tool to see data transfer and load-balancing inside your cluster).
 
@@ -117,11 +125,16 @@ To check if your deployment is successful:
 
 ![TiDB-vision](media/tidb_vision.png)
 
-<center> TiDB-vision </center>
+<div class="caption-center"> TiDB-vision </div>
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('How To Spin Up an HTAP Database in 5 Minutes with TiDB + TiSpark', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How To Spin Up an HTAP Database in 5 Minutes with TiDB + TiSpark', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
 
 # Test TiDB compatibility with MySQL
 
-As we mentioned, TiDB is MySQL compatible. You can use TiDB as MySQL slaves with instant horizontal scalability. That’s how many innovative tech companies, like [Mobike](https://www.pingcap.com/blog/Use-Case-TiDB-in-Mobike/), use TiDB.
+As we mentioned, TiDB is MySQL compatible. You can use TiDB as MySQL slaves with instant horizontal scalability. That’s how many innovative tech companies, like [Mobike](https://pingcap.com/blog/Use-Case-TiDB-in-Mobike/), use TiDB.
 
 To test out this MySQL compatibility:
 
@@ -148,7 +161,7 @@ Server version: 5.7.10-TiDB-v2.0.0-rc.4-31
 ```
 ![TiDB Compatibility with MySQL](media/test_tidb_compatibility_with_mysql.png)
 
-<center> The Compatibility of TiDB with MySQL </center>
+<div class="caption-center"> The Compatibility of TiDB with MySQL </div>
 
 
 # Let’s get some data!
@@ -168,13 +181,14 @@ Now we will grab some sample data that we can play around with.
     ```
 
 3. Inject the sample test data from sample data folder to MySQL:
-	
+
     ```bash
-    mysql --local-infile=1 -u root -h 127.0.0.1 -P 4000 < tispark-sample-data/dss.ddl
+    cd tispark-sample-data
+    ./sample_data.sh
     ```
     This will take a few seconds.
 
-4. Go back to your MySQL client window or tab, and see what’s in there: 
+4. Go back to your MySQL client window or tab, and see what’s in there:
 
     ```sql
     SHOW DATABASES;
@@ -199,7 +213,7 @@ Now we will grab some sample data that we can play around with.
     SELECT * FROM NATION;
     ```
 
-**Result:** You’ll see a list of countries with some keys and comments. 
+**Result:** You’ll see a list of countries with some keys and comments.
 
 ![The records in the NATION table](media/the_records_in_the_nation_table.png)
 
@@ -212,40 +226,38 @@ Now let’s launch TiSpark, the last missing piece of our hybrid database puzzle
 2. Launch Spark within TiDB with the following command:
 
     ```bash
-    docker-compose exec tispark-master  /opt/spark-2.1.1-bin-hadoop2.7/bin/spark-shell
+    docker-compose exec tispark-master  /opt/spark/bin/spark-shell
     ```
-	
+
     This will take a few minutes.
     **Result:** Now you can Spark!
-    ![Now you can Spark](media/now_you_can_spark.png)          
+    ![Now you can Spark](media/now_you_can_spark.png)
 
-3. Use the following three commands, one by one, to bind TiSpark to this Spark instance and map to the database `TPCH_001`, the same sample data that’s available in our MySQL instance:
+3. Use the following command to set `TPCH_001` as default database:
 
     ```bash
-    import org.apache.spark.sql.TiContext
-    val ti = new TiContext(spark)
-    ti.tidbMapDatabase("TPCH_001")
+    spark.sql("use TPCH_001")
     ```
 
     It looks something like this:
     ![Bind TiSpark to this Spark instance](media/bind_tispark_to_this_spark_instance.png)
 
 4. Now, let’s see what’s in the `NATION` table (should be the same as what we saw on our MySQL client):
-    
+
     ```java
     spark.sql("select * from nation").show(30);
     ```
-	
+
     **Result:**
-    
+
     ![What’s in the NATION table in Spark](media/whats_in_the_nation_table_in_spark.png)
-	
+
 # Let’s get hybrid!
 
 Now, let’s go back to the MySQL tab or window, make some changes to our tables, and see if the changes show up on the TiSpark side.
 
 1. In the MySQL client, try this `UPDATE`:
-    
+
     ```sql
     UPDATE NATION SET N_NATIONKEY=444 WHERE N_NAME="CANADA";
     SELECT * FROM NATION;
@@ -262,9 +274,9 @@ Now, let’s go back to the MySQL tab or window, make some changes to our tables
     ```java
     spark.sql("select * from nation").show(30);
     ```
-    
+
     **Result:** The `UPDATE` you made on the MySQL side shows up immediately in TiSpark!
-    
+
     ![The same result is showing on both the MySQL client and TiSpark Client](media/the_same_result_is_showing_on_both_the_mysql_client_and_tispark_client.png)
 
 You can see that both the MySQL and TiSpark clients return the same results -- fresh data for you to do analytics on right away. Voila!
@@ -273,4 +285,4 @@ You can see that both the MySQL and TiSpark clients return the same results -- f
 
 With this simple deployment of TiDB on your local machine, you now have a functioning Hybrid Transactional and Analytical processing (HTAP) database. You can continue to make changes to the data in your MySQL client (simulating transactional workloads) and analyze the data with those changes in TiSpark (simulating real-time analytics).
 
-Of course, launching TiDB on your local machine is purely for experimental purposes. If you are interested in trying out TiDB for your production environment, send us a note: [info@pingcap.com](mailto:info@pingcap.com) or reach out on [our website](https://www.pingcap.com/en/). We’d be happy to help you!
+Of course, launching TiDB on your local machine is purely for experimental purposes. If you are interested in trying out TiDB for your production environment, send us a note: [info@pingcap.com](mailto:info@pingcap.com) or reach out on [our website](https://pingcap.com/en/). We’d be happy to help you!

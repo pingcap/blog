@@ -3,17 +3,22 @@ title: TiDB 2.0 is Ready - Faster, Smarter, and Battle-Tested
 author: ['Shen Li']
 date: 2018-04-29
 summary: TiDB 2.0 is released! We absorbed insights and feedbacks from our customers, listened to requests and issues from our community, and reflected internally on our ultimate vision of building a distributed hybrid transactional and analytical processing database that scales itself, heals itself, and lives in the cloud. 
+<<<<<<< HEAD
 tags: ['TiDB', 'Product', 'Golang']
 image: /images/blog-article/p38.jpg
+=======
+tags: ['TiDB', 'Product', 'Golang', 'MySQL Scalability', 'HTAP']
+categories: ['MySQL Scalability']
+>>>>>>> rust-compile-times
 ---
 
 TiDB 2.0 is Ready! TiDB is an open-source distributed scalable Hybrid Transactional and Analytical Processing (HTAP) database. It is designed to provide infinite horizontal scalability, strong consistency, and high availability. TiDB is MySQL compatible and serves as a one-stop data warehouse for both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workload.
 
 ![TiDB 2.0 is released](media/tidb-2-0-announcement.jpg)
 
-When we [launched](https://pingcap.com/blog/2017-10-17-announcement/#pingcap-launches-tidb-1-0-a-scalable-hybrid-database-solution) TiDB 1.0 last October, we were excited but also a bit nervous. After working on TiDB heads-down, non-stop for more than two years, even with the support of a [large (and growing)](https://github.com/pingcap) open-source community, we weren’t sure how the world would receive what we’ve built. What we saw during the following six months was nothing short of overwhelming. More than 200 companies have deployed [TiDB](http://bit.ly/tidb_repo_publication) in their production environments. These companies come from a wide range of industries from e-commerce and food delivery, to fintech, media, gaming, and travel. (You can see an always-incomplete and constantly-updated list of adopters [here](http://bit.ly/adopters_list).)
+When we [launched](https://pingcap.com/blog/2017-10-17-announcement/#pingcap-launches-tidb-1-0-a-scalable-hybrid-database-solution) TiDB 1.0 last October, we were excited but also a bit nervous. After working on TiDB heads-down, non-stop for more than two years, even with the support of a [large (and growing)](https://github.com/pingcap) open-source community, we weren’t sure how the world would receive what we’ve built. What we saw during the following six months was nothing short of overwhelming. More than 200 companies have deployed [TiDB](http://bit.ly/tidb_repo_publication) in their production environments. These companies come from a wide range of industries from e-commerce and food delivery, to fintech, media, gaming, and travel. (You can see an always-incomplete and constantly-updated list of [adopters here](https://pingcap.com/docs/v3.0/adopters/).)
 
-Many of these companies may be unfamiliar to a North American or European audience, but their scale is huge and so is the data they generate. Innovative startups like [Mobike](https://www.pingcap.com/blog/Use-Case-TiDB-in-Mobike/) (dockless bike-sharing platform with 200 million users) and [Yiguo](https://www.datanami.com/2018/02/22/hybrid-database-capturing-perishable-insights-yiguo/) (fresh produce delivery with 5 million customers) use TiDB as a hybrid real-time analytics data warehouse, entrusting us with more than a dozen TBs of data. Fast-growing companies like Toutiao.com (news and short videos app with 120 million DAUs) use TiDB as a solution for their massive amounts of metadata. Platforms like Ele.me (food delivery service recently acquired by Alibaba for [9.5 billion USD](https://www.bloomberg.com/news/articles/2018-04-02/alibaba-buys-ele-me-in-deal-that-implies-9-5b-enterprise-value)) deploys [TiKV](https://github.com/pingcap/tikv), the distributed transactional key-value store within the TiDB ecosystem, as its unifying storage layer to hold more than 10 TBs of data. 
+Many of these companies may be unfamiliar to a North American or European audience, but their scale is huge and so is the data they generate. Innovative startups like [Mobike](https://pingcap.com/blog/Use-Case-TiDB-in-Mobike/) (dockless bike-sharing platform with 200 million users) and [Yiguo](https://www.datanami.com/2018/02/22/hybrid-database-capturing-perishable-insights-yiguo/) (fresh produce delivery with 5 million customers) use TiDB as a hybrid real-time analytics data warehouse, entrusting us with more than a dozen TBs of data. Fast-growing companies like Toutiao.com (news and short videos app with 120 million DAUs) use TiDB as a solution for their massive amounts of metadata. Platforms like Ele.me (food delivery service recently acquired by Alibaba for [9.5 billion USD](https://www.bloomberg.com/news/articles/2018-04-02/alibaba-buys-ele-me-in-deal-that-implies-9-5b-enterprise-value)) deploys [TiKV](https://github.com/pingcap/tikv), the distributed transactional key-value store within the TiDB ecosystem, as its unifying storage layer to hold more than 10 TBs of data. 
 
 Despite this initial traction, we know TiDB has much room for improvement. To figure out what we should work on in TiDB 2.0, we absorbed insights and feedbacks from our customers, listened to requests and issues from our community, and reflected internally on our ultimate vision of building a distributed hybrid transactional and analytical processing database that scales itself, heals itself, and lives in the cloud. We decided to focus on three areas:
 
@@ -61,6 +66,11 @@ We also introduced `Chunk`, a new internal data encoding method where a chunk of
 
 * Vector computing is made possible in certain circumstances and cache miss rate of CPU is reduced.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('TiDB 2.0 is Ready - Faster, Smarter, and Battle-Tested', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB 2.0 is Ready - Faster, Smarter, and Battle-Tested', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## Ease of Use and Operation 
 
 While the entire TiDB project can appear rather complex, it doesn’t have to be. Thus, we spent a lot of time improving its usability and operationality, so users can easily deploy, upgrade, scale, monitor, management, and diagnose the entire system, no matter how many TiDB clusters you have running. 
@@ -75,7 +85,7 @@ We’ve mentioned significant OLAP performance boost in TiDB 2.0 compared to 1.0
 
 ![TiDB 2.0 TPC-H query result](media/tpch-query-result.png)
 
-As you can see, all queries run much faster in 2.0 than in 1.0, many of them several times if not orders of magnitude faster. What’s more, queries that could not be processed at all in 1.0 (i.e. Q2, 5, 7, 17, 18, 19, 21) all returned results with good performance in 2.0. Only one query, Q15, returned NaN in 2.0 because this version currently does not support VIEW. (Don’t worry, VIEW support is on our roadmap.) You can find [details of TiDB 2.0’s TPC-H 50G Performance Test Report here](https://github.com/pingcap/docs/blob/master/benchmark/tpch.md) and reproduce the results yourself. 
+As you can see, all queries run much faster in 2.0 than in 1.0, many of them several times if not orders of magnitude faster. What’s more, queries that could not be processed at all in 1.0 (i.e. Q2, 5, 7, 17, 18, 19, 21) all returned results with good performance in 2.0. Only one query, Q15, returned NaN in 2.0 because this version currently does not support VIEW. (Don’t worry, VIEW support is on our roadmap.) You can find [details of TiDB 2.0’s TPC-H 50G Performance Test Report here](https://github.com/pingcap/docs/blob/master/v2.0/benchmark/tpch.md) and reproduce the results yourself. 
 
 We always strive to be transparent, fair, and reproducible with every set of benchmarks we release and avoid "benchmark-eting." There are too many misleading benchmarks out there that look shiny on the surface but don’t stand up to scrutiny. Abusing benchmarks may yield an easy win, but is ultimately detrimental to the product, the community, and the users who rely on them. That’s something we are committed to never do.
 
@@ -83,10 +93,10 @@ We always strive to be transparent, fair, and reproducible with every set of ben
 
 TiDB 2.0 is faster, smarter, and battle-tested by both our own sophisticated testing regiment and the production usage of more than 200 companies. We can’t wait to see the value and benefits it’ll create for our customers and community in the coming months. You can dig into the details of 2.0 in our release notes of TiDB [here](https://github.com/pingcap/tidb/releases/tag/v2.0.0) and TiKV [here](https://github.com/pingcap/tikv/releases/tag/v2.0.0). 
 
-Of course, there are many items on our [Roadmap](https://github.com/pingcap/docs/blob/master/ROADMAP.md) still, which we hope to accomplish with a bigger team and a stronger community (see our [contributor guideline](https://github.com/pingcap/tidb/blob/master/CONTRIBUTING.md)). Looking ahead, we will also integrate TiDB with more cloud services. While it is already on Tencent Cloud and UCloud, our team is working overtime to bring TiDB to a cloud service near you, both public and private. 
+Of course, there are many items on our [Roadmap](https://github.com/pingcap/docs/blob/master/v2.0/ROADMAP.md) still, which we hope to accomplish with a bigger team and a stronger community (see our [contributor guideline](https://github.com/pingcap/tidb/blob/master/CONTRIBUTING.md)). Looking ahead, we will also integrate TiDB with more cloud services. While it is already on Tencent Cloud and UCloud, our team is working overtime to bring TiDB to a cloud service near you, both public and private. 
 
 ## Wait, One More Thing...
 
 Along with TiDB 2.0, we also released [TiSpark 1.0](https://github.com/pingcap/tispark/releases/tag/1.0), a Spark plug-in that leverages the best of SparkSQL and the power of TiKV to help our customers process complex OLAP queries in real-time. We will have more to say about TiSpark soon. So follow us on Twitter (@PingCAP), [LinkedIn](https://www.linkedin.com/company/pingcap/), and stay tuned. 
 
-*Illustration by [Amanda Limardi](https://www.behance.net/amandalimadff4)*
+*Illustration by [Amanda Limardi](https://www.upwork.com/o/profiles/users/_~0111fdbe9a7fb1f46e/)*

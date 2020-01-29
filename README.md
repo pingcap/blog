@@ -2,6 +2,10 @@
 draft: true
 ---
 
+<!-- markdownlint-disable MD013 -->
+
+<!-- markdownlint-disable MD040 -->
+
 # blog
 
 ## meta data
@@ -14,14 +18,19 @@ draft: true
 - summary
 - tags -
   - format: list(array)  **['tag-1', 'tag-2']**
+- categories
+  - format: list(array) **['category']**
+  - category values: Engineering, HTAP, MySQL Scalability, Open Source Community
 
 ## For SEO and social media share
 
 - image: /images/pingcap-opengraph.jpg
+
 > This is used to show the thumbnail shown in the social media platform.
 
 - summary: PingCAP is focused on developing distributed NewSQL and is the team building TiDB, an open-source distributed NewSQL database.
-> This is for the discription shown in the social media platform.
+
+> This is for the description shown in the social media platform.
 
 ```
 ---
@@ -30,5 +39,6 @@ author: ['Author']
 date: yyyy-mm-dd
 summary: Blog Summary
 tags: ['Tag1', 'Tag2']
+categories: ['category']
 ---
 ```

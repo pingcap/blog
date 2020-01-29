@@ -29,7 +29,7 @@ TiKV (The pronunciation is: /'taɪkeɪvi:/ tai-K-V, etymology: titanium) is a di
 
 # Architecture
 
-![](media/TiKV_ Architecture.png)
+![TiKV architecture](media/tikv-architecture.png)
 
 * Placement Driver (PD): PD is the brain of the TiKV system which manages the metadata about Nodes, Stores, Regions mapping, and makes decisions for data placement and load balancing. PD periodically checks replication constraints to balance load and data automatically.
 
@@ -76,7 +76,7 @@ There are following ways for external applications to connect to TiKV:
 
 # Raft
 
-TiKV uses the Raft algorithm to ensure the data consistency in the distributed systems. For more information, see [https://raft.github.io/](https://raft.github.io/).
+TiKV uses the Raft algorithm to ensure the data consistency in the distributed systems. For more information, see [The Raft Consensus Algorithm](https://raft.github.io/).
 
 The Raft in TiKV is completely migrated from etcd. We chose etcd Raft because it is very simple to implement, very easy to migrate and it is production proven.
 
@@ -140,6 +140,11 @@ In TiKV, each Raft group corresponds to a Region. At the very beginning, there i
 Of course, where there is Split, there is Merge. If there are very few data in two adjacent Regions, these two regions can merge to one big Region. Region Merge is in the TiKV roadmap but it is not implemented yet.
 
 [Back to the Top](#top)
+
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('A Deep Dive into TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('A Deep Dive into TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
 
 # Placement Driver
 

@@ -2,9 +2,13 @@
 title: About the TiDB Source Code
 date: 2017-01-06
 summary: The target audience of this document is the contributors in the TiDB community. The document aims to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process.
-tags: ['TiDB', 'Engineering', 'Golang']
+tags: ['TiDB', 'Engineering', 'Golang','MySQL Scalability', 'HTAP']
 aliases: ['/blog/2017/01/06/about-the-tidb-source-code/']
+<<<<<<< HEAD
 categories: ['Engineering']
+=======
+categories: ['MySQL Scalability']
+>>>>>>> rust-compile-times
 ---
 
 The target audience of this document is the contributors in the TiDB community. The document aims to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process.
@@ -21,7 +25,7 @@ The target audience of this document is the contributors in the TiDB community. 
 
 # System architecture
 
-![](media/architecture.png)
+![TiDB system architecture](media/architecture.png)
 
 As is shown in the architecture diagram, the TiDB Server is between the Load Balancer (or Application) and the storage engine layer at the bottom. Within the TiDB server, there are three layers:
 
@@ -204,6 +208,11 @@ The following lists the expressions that implement the interface:
 	
 	The execution interface for distributed SQL. If the storage engine at the bottom supports distributed executor, it can send requests through this interface. See [The distributed executor](#the-distributed-executor) for further information.
     
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('About the TiDB Source Code', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('About the TiDB Source Code', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 # The protocol layer
 
 The protocol layer is the interface to interact with the applications. Currently, TiDB supports the MySQL protocol only. All the related codes are in the [server](https://github.com/pingcap/tidb/tree/master/server) package.
@@ -212,7 +221,7 @@ The main function of the protocol layer is to manage the client connections, par
 
 For a single connection, the entry point method is the [dispatch](https://github.com/pingcap/tidb/blob/master/server/conn.go#L350) of the `clientConn` class, where the protocol is parsed and different processing functions are called.
 
-![](media/protocol_layer.png)
+![TiDB protocol layer](media/protocol_layer.png)
 
 # The SQL layer
 
@@ -224,7 +233,7 @@ Parse statement -> Validate statement -> Optimize statement -> Generate access p
 
 The following diagram shows how TiDB processes a SQL statement:
 
-![](media/process_flow.png)
+![How TiDB processes an SQL statement](media/process_flow.png)
 
 The entry point of the process is in the [`session.go`](https://github.com/pingcap/tidb/blob/master/session/session.go) file. TiDB-Server calls the `Session.Execute()` interface, inputs the SQL statement and implements `Session.Execute()`.
 
@@ -330,7 +339,7 @@ type PartialResult interface {
  
 2. The second parameter is `SelectRequest`, which is constructed by the executor on the upper layer. It puts the computing logic, such as whether to sort or aggregate the expressions, in `req` which is a `Protobuf` structure, sends to the `Select` interface, and finally sends to the computing TiKV region server.
 
-![](media/dist_sql_example.png)
+![`distsql` example](media/dist_sql_example.png)
 
 The distributed executor is mainly about distributing tasks and collecting results. The `Select` interface returns a data structure, which is called `SelectResult`. The structure can be considered to be an iterator. Because there are many region servers at the bottom layer, the results returned from each node is `PartialResult`. On top of these results is an encapsulated `SelectResult` which is an iterator of `PartialResult`. The next `PartialResult` can be obtained by using the `next` method.
 

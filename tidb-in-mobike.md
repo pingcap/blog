@@ -4,6 +4,7 @@ author: ['Chengjie Ding', 'Ming Hu']
 date: 2018-04-03
 summary: Mobike has been using the TiDB database in the production environment since early 2017. Now they have deployed TiDB in multiple clusters with close to 100 nodes, handling dozens of TBs of data for different application scenarios. This post will provide a deep dive on why Mobike chose TiDB over MySQL and its sharding solutions by illustrating how TiDB solves their pain points.
 tags: ['TiDB','Success Story']
+categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-mobike/
 aliases: ['/blog/Use-Case-TiDB-in-Mobike/']
 image: /images/blog-article/mobike.jpg
@@ -55,7 +56,7 @@ Inside the TiDB project, there are several components:
 
 3. [**TiSpark**](https://github.com/pingcap/tispark) sits right on top of TiKV to support both our data scientists for real-time analysis or for offline daily analysis in the existing Hadoop system.
 
-The TiDB ecosystem also has a wealth of other enterprise-level tools, such as the [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, Syncer for seamless migration from MySQL, Wormhole for migrating heterogeneous data, and TiDB-Binlog, which is a tool to collect binlog files.
+The TiDB ecosystem also has a wealth of other enterprise-level tools, such as the [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, Syncer for seamless migration from MySQL, Wormhole for migrating heterogeneous data, and TiDB Binlog, which is a tool to collect binlog files.
 
 ## Four In-Production Applications
 
@@ -102,6 +103,11 @@ Based on our internal test results, TiDB is well-suited to support Mobike Store�
 
 Since we deployed TiDB, the data size for OLTP in Mobike Store has reached tens of billions of rows and operation has been smooth, with timely and professional support from the PingCAP team.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Blitzscaling the Largest Dockless Bikesharing Platform with TiDB’s Help', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Blitzscaling the Largest Dockless Bikesharing Platform with TiDB’s Help', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### **Case 4: The Log Collection Database**
 
 To enable instant insights for real-time decision-making, Mobike keeps and analyzes logs from all kinds of data sources, such as parking histories and notifications when bikes are successfully unlocked. Because of this large log data volume, we care a lot about a database’s scalability, as well as cross-database analysis capacity.
@@ -140,11 +146,11 @@ To resolve this issue, we collaborated with the PingCAP team and accomplished th
 
 ### **Optimization 2: Resource Isolation at Table Level**
 
-We added mapping relations between the TableID and NameSpace, as well as NameSpace and TiKV Store to the [table directory](https://github.com/pingcap/pd/tree/master/table) in PD. The mapping relations is written and persisted in etcd to ensure security. Now, whenever new data is inserted, we can get the TableID from TiDB layer and then find the TiKV address of the target Region by PD to ensure that the new data is not placed in other TiKV nodes. Additionally, we have worked with the PingCAP team and built a NameSpace scheduler to reschedule the unstructured Regions to the TiKV servers where they should be, thus guaranteeing no data interference at table level.
+We added mapping relations between the TableID and NameSpace, as well as NameSpace and TiKV Store to the [table directory](https://github.com/pingcap/pd/tree/release-1.1/table) in PD. The mapping relations is written and persisted in etcd to ensure security. Now, whenever new data is inserted, we can get the TableID from TiDB layer and then find the TiKV address of the target Region by PD to ensure that the new data is not placed in other TiKV nodes. Additionally, we have worked with the PingCAP team and built a NameSpace scheduler to reschedule the unstructured Regions to the TiKV servers where they should be, thus guaranteeing no data interference at table level.
 
 ### **Optimization 3: Management Tool**
 
-To manage the NameSpace, we developed a specific management tool. Fortunately, TiDB was designed flexibly enough, so to accomplish this optimization,  we just need to call the related API to get the TableID by the table name via the original TiDB interface. We added an [HTTP interface](https://github.com/pingcap/pd/blob/master/tools/pd-ctl/pdctl/command/table_namespace_command.go) to the command directory of [pd-ctl](https://github.com/pingcap/pd/tree/master/tools/pd-ctl), the PD command line management tool, to manage and verify the relations between Table Name and Table ID.
+To manage the NameSpace, we developed a specific management tool. Fortunately, TiDB was designed flexibly enough, so to accomplish this optimization,  we just need to call the related API to get the TableID by the table name via the original TiDB interface. We added an [HTTP interface](https://github.com/pingcap/pd/blob/release-1.1/pdctl/command/table_namespace_command.go) to the command directory of [pd-ctl](https://github.com/pingcap/pd/tree/master/tools/pd-ctl), the PD command line management tool, to manage and verify the relations between Table Name and Table ID.
 
 ## Conclusion
 
