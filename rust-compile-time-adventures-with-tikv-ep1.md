@@ -7,6 +7,7 @@ tags: ['Engineering']
 categories: ['Engineering']
 image: /images/blog/rust-compile-time-adventures.png
 ---
+<!-- markdownlint-disable -->
 
 > _The Rust programming language was designed for slow compilation times._
 >
