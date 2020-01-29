@@ -45,7 +45,7 @@ In this episode:
     * [(Un)virtuous cycles](#unvirtuous-cycles)
     * [Early decisions that favored run-time over compile-time](#early-decisions-that-favored-run-time-over-compile-time)
 * [Recent work on Rust compile times](#recent-work-on-rust-compile-times)
-* [In the next episode](#in-the-next-episode-of-rust-compile-time-adventures-with-tikv)
+* [In the next episode](#in-the-next-episode)
 * [Thanks](#thanks)
 
 ## The spectre of poor Rust compile times at PingCAP
@@ -100,7 +100,7 @@ So, historically, how bad have Rust compile times been? A simple barometer here 
 
 The [first Rust compiler](https://gist.github.com/brson/31b6f8c5467b050779ce9aa05d41aa84/edit), from 2010, called rustboot, was written in OCaml, and it's ultimate purpose was to build a second compiler, rustc, written in Rust, and begin the self-hosting bootstrap cycle. In addition to being written in Rust, rustc would also use [LLVM](https://llvm.org/) as its backend for generating machine code, instead of rustboot’s hand-written x86 code-generator.
 
-Rust needed to become self-hosting as a means of "dog-fooding" the language — writing the Rust compiler in Rust meant that the Rust authors needed to use their own language to write practical software early in the language design process. It was hoped that self-hosting  could lead to a useful and practical language.
+Rust needed to become self-hosting as a means of "dog-fooding" the language — writing the Rust compiler in Rust meant that the Rust authors needed to use their own language to write practical software early in the language design process. It was hoped that self-hosting could lead to a useful and practical language.
 
 The first time Rust built itself was on April 20, 2011. [It took one hour](https://mail.mozilla.org/pipermail/rust-dev/2011-April/000330.html), which was a laughably long time. At least it was back then.
 
@@ -186,19 +186,19 @@ Looking at some of these in retrospect, I am tempted to think that "well, of cou
 The situation isn't hopeless. Not at all. There is always work going on to improve Rust compile times, and there are still many avenues to be explored. I'm hopeful that we'll continue to see improvements. Here is a selection of the activities I'm aware of from the last year or two. Thanks to everybody who helps with this problem.
 
 * The Rust compile-time [master issue](https://github.com/rust-lang/rust/issues/48547)
-    * Tracks various work to improve compile times.
-    * Contains a great overview of factors that affect Rust compilation performance and potential mitigation strategies.
+    * Tracks various work to improve compile times
+    * Contains a great overview of factors that affect Rust compilation performance and potential mitigation strategies
 * Pipelined compilation ([1](https://github.com/rust-lang/rust/issues/60988),[2](https://github.com/rust-lang/cargo/issues/6660),[3](https://internals.rust-lang.org/t/evaluating-pipelined-rustc-compilation/10199))
 
-    * Typechecks downstream crates in parallel with upstream codegen. Now on by default on the stable channel.
+    * Typechecks downstream crates in parallel with upstream codegen. Now on by default on the stable channel
     * Developed by [@alexcrichton](https://github.com/alexcrichton) and [@nikomatsakis](https://github.com/nikomatsakis).
 * Parallel rustc ([1](https://internals.rust-lang.org/t/parallelizing-rustc-using-rayon/6606),[2](https://github.com/rust-lang/rust/issues/48685),[3](https://internals.rust-lang.org/t/help-test-parallel-rustc/11503/14))
 
-    * Runs analysis phases of the compiler in parallel. Not yet available on the stable channel.
-    * Developed by [@Zoxc](https://github.com/Zoxc), [@michaelwoerister](https://github.com/michaelwoerister), [@oli-obk](http://github.com/oli-obk), and others.
+    * Runs analysis phases of the compiler in parallel. Not yet available on the stable channel
+    * Developed by [@Zoxc](https://github.com/Zoxc), [@michaelwoerister](https://github.com/michaelwoerister), [@oli-obk](http://github.com/oli-obk), and others
 * [MIR-level constant propagation](https://blog.rust-lang.org/inside-rust/2019/12/02/const-prop-on-by-default.html)
-    * Performs constant propagation on MIR, which reduces duplicated LLVM work on monomorphized functions.
-    * Developed by [@wesleywiser](https://github.com/wesleywiser).
+    * Performs constant propagation on MIR, which reduces duplicated LLVM work on monomorphized functions
+    * Developed by [@wesleywiser](https://github.com/wesleywiser)
 * [MIR optimizations](https://github.com/rust-lang/rust/pulls?q=mir-opt)
     * Optimizing MIR should be faster than optimizeng monomorphized LLVM IR
     * Not in stable compilers yet
@@ -206,11 +206,11 @@ The situation isn't hopeless. Not at all. There is always work going on to impro
 * cargo build -Ztimings ([1](https://internals.rust-lang.org/t/exploring-crate-graph-build-times-with-cargo-build-ztimings/10975),[2](https://github.com/rust-lang/cargo/issues/7405))
 
     * Collects and graphs information about cargo's parallel build timings
-    * Developed by [@ehuss](https://github.com/ehuss) and [@luser](https://github.com/luser).
+    * Developed by [@ehuss](https://github.com/ehuss) and [@luser](https://github.com/luser)
 * rustc -Zself-profile ([1](https://rust-lang.github.io/rustc-guide/profiling.html),[2](https://github.com/rust-lang/rust/issues/58967),[3](https://github.com/rust-lang/rust/pull/51657))
 
     * Generates detailed information about rustc's internal performance
-    * Developed by [@wesleywiser](https://github.com/wesleywiser) and [@michaelwoerister](https://github.com/michaelwoerister).
+    * Developed by [@wesleywiser](https://github.com/wesleywiser) and [@michaelwoerister](https://github.com/michaelwoerister)
 * [Shared monomorphizations](https://github.com/rust-lang/rust/issues/47317)
     * Reduces code bloat by deduplicating monomorphizations that occur in multiple crates
     * Enabled by default if the optimization level is less than 3.
@@ -223,16 +223,16 @@ The situation isn't hopeless. Not at all. There is always work going on to impro
     * Developed by[@nrc](https://github.com/nrc), [@Mark-Simulacrum](https://github.com/Mark-Simulacrum), [@nnethercote](https://github.com/nnethercote) and many more
 * [cargo-bloat](https://github.com/RazrFalcon/cargo-bloat)
     * Finds what occupies the most space in binaries. Bloat is correlated with compile time
-    * Developed by [@RazrFalcon](https://github.com/RazrFalcon) and others.
+    * Developed by [@RazrFalcon](https://github.com/RazrFalcon) and others
 * [cargo-feature-analyst](https://github.com/psinghal20/cargo-feature-analyst)
-    * Finds unused features.
-    * Developed by [@psinghal20](https://github.com/psinghal20).
+    * Finds unused features
+    * Developed by [@psinghal20](https://github.com/psinghal20)
 * [cargo-udeps](https://github.com/est31/cargo-udeps)
-    * Finds unused crates.
+    * Finds unused crates
     * Developed by [@est31](https://github.com/est31)
 * [twiggy](https://github.com/rustwasm/twiggy)
     * Profiles code size, which is correlated with compile time
-    * Developed by [@fitzgen](https://github.com/fitzgen), [@data-pup](https://github.com/data-pup), and others.
+    * Developed by [@fitzgen](https://github.com/fitzgen), [@data-pup](https://github.com/data-pup), and others
 * [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)
     * A new language server for Rust with faster response time than the original [RLS](https://github.com/rust-lang/rls)
     * Developed by [@matklad](https://github.com/matklad), [@flodiebold](https://github.com/flodiebold), [@kjeremy](https://github.com/kjeremy), and many others
