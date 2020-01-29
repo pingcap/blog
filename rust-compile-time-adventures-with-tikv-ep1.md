@@ -1,5 +1,5 @@
 ---
-title: Rust Compile-time Adventures with TiKV: Episode 1
+title: "Rust Compile-time Adventures with TiKV: Episode 1"
 author: ['Brian Anderson']
 date: 2020-01-29
 summary: In this first episode of the Rust Compile time series, Brian Anderson, co-author of Rust, shares with you his researches and experiences with Rust compile times, using the TiKV project as a case study.
@@ -64,7 +64,10 @@ Rust developers, on the other hand, are used to taking a lot of coffee breaks (o
 
 The first entry in this series is just a story about the history of Rust with respect to compilation time. Since it might take several more entries before we dive into concrete technical details of what we've done with TiKV's compile times, here's a pretty graph to capture your imagination, without comment.
 
-![Rust Compile Time for TiKV](media/rust-compile-times-tikv.svg)
+![Rust Compile Times for TiKV](media/rust-compile-times-tikv.svg)
+
+<div class="caption-center"> Rust Compile Times for TiKV </div>
+
 
 ## The Rust compilation model calamity
 
@@ -171,7 +174,7 @@ Looking at some of these in retrospect, I am tempted to think that "well, of cou
 
 * _Relying too much on the LLVM optimizer_ — Rust is well-known for generating a large quantity of LLVM IR and letting LLVM optimize it away. This is exacerbated by duplication from monomorphization.
 
-* _Split compiler / package manager_ — although it is normal for languages to have a package manager separate from the compiler, in Rust at least this results in both cargo and rustc having imperfect and redundant information about the overall compilation pipeline. As more parts of the pipeline are short-circuited for efficiency, more metadata needs to be transferred between instances of the compiler, mostly through the filesystem, which has overhead.
+* _Split compiler/package manager_ — although it is normal for languages to have a package manager separate from the compiler, in Rust at least this results in both cargo and rustc having imperfect and redundant information about the overall compilation pipeline. As more parts of the pipeline are short-circuited for efficiency, more metadata needs to be transferred between instances of the compiler, mostly through the filesystem, which has overhead.
 
 * _Per-compilation-unit code-generation_ — rustc generates machine code each time it compiles a crate, but it doesn't need to — with most Rust projects being statically linked, the machine code isn't needed until the final link step. There may be efficiencies to be achieved by completely separating analysis and code generation.
 
