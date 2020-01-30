@@ -2,7 +2,7 @@
 title: "The Rust Compilation Model Calamity"
 author: ['Brian Anderson']
 date: 2020-01-30
-summary: In this first episode of the Rust Compile time series, Brian Anderson, co-author of Rust, shares with you his researches and experiences with Rust compile times, using the TiKV project as a case study.
+summary: In this first episode of the Rust Compile time series, Brian Anderson, one of Rust's original authors, shares with you his researches and experiences with Rust compile times, using the TiKV project as a case study.
 tags: ['Engineering']
 categories: ['Engineering']
 image: /images/blog/rust-compile-time-adventures.png
