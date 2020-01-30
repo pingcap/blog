@@ -1,5 +1,5 @@
 ---
-title: "Rust Compile-time Adventures with TiKV: Episode 1"
+title: "The Rust Compilation Model Calamity"
 author: ['Brian Anderson']
 date: 2020-01-29
 summary: In this first episode of the Rust Compile time series, Brian Anderson, co-author of Rust, shares with you his researches and experiences with Rust compile times, using the TiKV project as a case study.
@@ -15,6 +15,8 @@ _The Rust programming language was designed for slow compilation times._
 I mean, that wasn't _the goal_. As is often cautioned in debates among their designers, programming language design is full of tradeoffs. One of those fundamental tradeoffs is **run-time performance** vs. **compile-time performance**, and the Rust team nearly always (if not always) chose run-time over compile-time.
 
 So Rust compile times are bad. This is kinda infuriating, as almost everything that matters about Rust is pretty damn good. But Rust compile times are so, so bad.
+
+## Rust Compile-time Adventures with TiKV: Episode 1
 
 At [PingCAP](https://pingcap.com/), we develop our distributed storage system, [TiKV](https://github.com/tikv/tikv/), in Rust, and it compiles slow enough to discourage many in the company from using Rust. I recently spent some time, along with several others on the TiKV team and its wider community, investigating TiKV's compile times.
 
@@ -34,7 +36,7 @@ In this episode:
 
 * [The spectre of poor Rust compile times at PingCAP](#the-spectre-of-poor-rust-compile-times-at-pingcap)
     * [Preview: the TiKV compile-time adventure so far](#preview-the-tikv-compile-time-adventure-so-far)
-* [The Rust compilation model calamity](#the-rust-compilation-model-calamity-1)
+* [Rust's designs for poor compilation time](#rusts-designs-for-poor-compilation-time)
     * [Bootstrapping Rust](#bootstrapping-rust)
     * [(Un)virtuous cycles](#unvirtuous-cycles)
     * [Early decisions that favored run-time over compile-time](#early-decisions-that-favored-run-time-over-compile-time)
@@ -63,7 +65,7 @@ The first entry in this series is just a story about the history of Rust with re
 <div class="caption-center"> Rust Compile Times for TiKV </div>
 
 
-## The Rust compilation model calamity
+## Rust's designs for poor compilation time
 
 Rust was designed for slow compilation times.
 
