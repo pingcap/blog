@@ -50,7 +50,7 @@ At [PingCAP](https://pingcap.com/en/), my colleagues use Rust to write [TiKV](ht
 
 It was mostly a great decision, and most people internally are mostly happy about it.
 
-But many complain about how long it takes to build. For some, a full rebuild might take 15 minutes in development mode, and 30 minutes in release mode. To developers of large systems projects, this might not sound horrible, but it's much slower than what many developers expect out of modern programming environments. TiKV is not even that big of a codebase, but it does contain 2 million lines of Rust and 2 million lines of C/C++, which makes it sizable. In comparison, Rust itself contains over 3 million lines of Rust, and [Servo](https://github.com/servo/servo) contains 2.7 million. See [full line counts here](https://gist.github.com/brson/31b6f8c5467b050779ce9aa05d41aa84).
+But many complain about how long it takes to build. For some, a full rebuild might take 15 minutes in development mode, and 30 minutes in release mode. To developers of large systems projects, this might not sound so bad, but it's much slower than what many developers expect out of modern programming environments. TiKV is a relatively large Rust codebase, with 2 million lines of Rust. In comparison, Rust itself contains over 3 million lines of Rust, and [Servo](https://github.com/servo/servo) contains 2.7 million (see [full line counts here](https://gist.github.com/brson/31b6f8c5467b050779ce9aa05d41aa84)).
 
 Other nodes in TiDB are written in Go, which of course comes with a different set of advantages and disadvantages from Rust. Some of the Go developers at PingCAP resent having to wait for the Rust components to build. They are used to a rapid build-test cycle.
 
