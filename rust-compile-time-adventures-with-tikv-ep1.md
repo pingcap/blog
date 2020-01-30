@@ -144,7 +144,7 @@ The previously-mentioned early self-hosting was similarly crucial to Rust's desi
 
 Sadly there was no such reinforcement to drive down Rust compile times. The opposite is probably true — the more Rust became known as a _fast_ language, the more important it was to be _the fastest_ language. And, the more Rust's developers got used to developing their Rust projects across multiple branches, context switching between builds, the less pressure was felt to address compile times.
 
-That is, until Rust was released to production and met by a wide audience that was not so tolerant of slow compile times.
+This only really changed once Rust 1.0 was released in 2015 and started to receive wider use.
 
 For years Rust [slowly boiled](https://en.wikipedia.org/wiki/Boiling_frog) in its own poor compile times, not realizing how bad it had gotten until it was too late. It was 1.0. Those decisions were locked in.
 
