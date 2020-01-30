@@ -81,7 +81,7 @@ If fast compilation time was not a core Rust design principle, what were Rust's 
 * _Performance_ — it must be in the same performance class as C++.
 * _Concurrency_ — it must provide modern solutions to writing concurrent code.
 
-But it's not like the designers didn't put _any_ consideration into fast compile times. For example, for any analysis Rust needs to do, the team tried to ensure reasonable bounds on computational complexity. Rust's design history though one of increasingly being sucked into a swamp of poor compile-time performance.
+But it's not like the designers didn't put _any_ consideration into fast compile times. For example, for any analysis Rust needs to do, the team tried to ensure reasonable bounds on computational complexity. Rust's design history though is one of increasingly being sucked into a swamp of poor compile-time performance.
 
 Story time.
 
