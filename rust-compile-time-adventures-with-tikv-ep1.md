@@ -8,19 +8,13 @@ categories: ['Engineering']
 image: /images/blog/rust-compile-time-adventures.png
 ---
 
-> _The Rust programming language was designed for slow compilation times._
->
-> _I was there. I witnessed it for myself, and I am finally ready to break the silence: Rust is a hoax. It's a prank the language designers played on you, the Rust user — adopt this high-performance, high-reliability language for your products, and we'll reduce your productivity to a crawl._
-
 ![Rust Compile Time Adventures with TiKV](media/rust-compile-time-adventures.png)
 
-## Rust compile times are bad
+_The Rust programming language was designed for slow compilation times._
 
-I know it because I encounter it every day. I know it because my coworkers complain about it. I know it because the Rust production users I talk to consistently mention it. I know it because so many of us indicated so [in the last Rust survey](https://blog.rust-lang.org/2018/11/27/Rust-survey-2018.html#challenges).
+I mean, that wasn't _the goal_. As is often cautioned in debates among their designers, programming language design is full of tradeoffs. One of those fundamental tradeoffs is **run-time performance** vs. **compile-time performance**, and the Rust team nearly always (if not always) chose run-time over compile-time.
 
-This is kinda infuriating, as almost everything that matters about Rust is pretty damn good. But Rust compile times are so, so bad.
-
-Rust compile times are perhaps its biggest weakness.
+So Rust compile times are bad. This is kinda infuriating, as almost everything that matters about Rust is pretty damn good. But Rust compile times are so, so bad.
 
 At [PingCAP](https://pingcap.com/), we develop our distributed storage system, [TiKV](https://github.com/tikv/tikv/), in Rust, and it compiles slow enough to discourage many in the company from using Rust. I recently spent some time, along with several others on the TiKV team and its wider community, investigating TiKV's compile times.
 
