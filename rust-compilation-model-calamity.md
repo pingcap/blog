@@ -35,7 +35,7 @@ Over a series of posts, I'll discuss what we have learned:
 In this episode:
 
 * [The spectre of poor Rust compile times at PingCAP](#the-spectre-of-poor-rust-compile-times-at-pingcap)
-    * [Preview: the TiKV compile-time adventure so far](#preview-the-tikv-compile-time-adventure-so-far)
+* [Preview: the TiKV compile-time adventure so far](#preview-the-tikv-compile-time-adventure-so-far)
 * [Rust's designs for poor compilation time](#rusts-designs-for-poor-compilation-time)
     * [Bootstrapping Rust](#bootstrapping-rust)
     * [(Un)virtuous cycles](#unvirtuous-cycles)
@@ -56,7 +56,7 @@ Other nodes in TiDB are written in Go, which of course comes with a different se
 
 Rust developers, on the other hand, are used to taking a lot of coffee breaks (or tea, cigarettes, sobbing, or whatever as the case may be — Rust developers have the spare time to nurse their demons).
 
-### Preview: The TiKV Compile-time adventure so far
+## Preview: The TiKV Compile-time adventure so far
 
 The first entry in this series is just a story about the history of Rust with respect to compilation time. Since it might take several more entries before we dive into concrete technical details of what we've done with TiKV's compile times, here's a pretty graph to capture your imagination, without comment.
 
@@ -263,4 +263,4 @@ A number of people helped with this blog series. Thanks especially to Niko Matsa
 
 ## About the author
 
-[**Brian Anderson**](https://github.com/brson) is the co-founder of the Rust programming language and its sister project, the Servo web browser. He is now working in PingCAP as a senior database engineer.
+[**Brian Anderson**](https://github.com/brson) is one of the co-founders of the Rust programming language and its sister project, the Servo web browser. He is now working in PingCAP as a senior database engineer.
