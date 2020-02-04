@@ -131,7 +131,7 @@ You can read this section to get more details.
 
 ### Test environment
 
-We used the following machines for testing::
+We used the following machines for testing:
 
 * UCloud 16C 32 GB 100 GB SSD in Beijing, China
 * UCloud 16C 32 GB 100 GB SSD in Shanghai, China
