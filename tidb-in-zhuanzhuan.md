@@ -7,6 +7,7 @@ tags: ['TiDB','Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-zhuanzhuan/
 aliases: ['/blog/use-case-tidb-in-zhuanzhuan']
+customer: Zhuan Zhuan
 ---
 
 **Industry:** E-commerce

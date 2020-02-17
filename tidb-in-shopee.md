@@ -6,6 +6,7 @@ summary: As our business boom, our team faced severe challenges in scaling our b
 tags: ['TiDB','Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-shopee/
+customer: Shopee
 --- 
 
 **Industry:** E-Commerce 

@@ -6,6 +6,7 @@ summary: As our business grew quickly, we were overwhelmed trying to tackle the 
 tags: ['TiDB','Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-meituan-dianping/
+customer: Meituan-Dianping
 ---
 
 **Industry:** Search and Ecommerce Platform

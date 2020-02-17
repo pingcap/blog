@@ -7,6 +7,7 @@ tags: ['TiDB','Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-mobike/
 aliases: ['/blog/Use-Case-TiDB-in-Mobike/']
+customer: Mobike
 ---
 
 **Industry:** Ridesharing 

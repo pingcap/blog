@@ -6,6 +6,7 @@ summary: As our business grew exponentially, we were overwhelmed trying to handl
 tags: ['TiDB', 'Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-iqiyi/
+customer: iQiyi
 ---
 
 **Industry:** Media and Entertainment
