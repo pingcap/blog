@@ -18,7 +18,7 @@ Note: my experience with remote work is working at home where I've had a separat
 
 ## Work and life
 
-Everyone has to find a balance between life and work. That balance is a personal thing and different for everyone. When working remotely, there is much more of an issue of work/life *separation* - how do you keep your work life and personal life distinct? Just like the time balance, how much separation is idea is a personal thing. The important thing is to figure out what is optimal *for you*.
+Everyone has to find a balance between life and work. That balance is a personal thing and different for everyone. When working remotely, there is much more of an issue of work/life *separation* - how do you keep your work life and personal life distinct? Just like the time balance, how much separation is ideal is a personal thing. The important thing is to figure out what is optimal *for you*.
 
 It's a good idea to have a well-defined idea of the hours you will work. Sticking to those hours makes it easier for colleagues and family to know if you're likely to be working, and for you to maintain boundaries between work and the rest of your life. It should also help you focus on work during those hours and avoid distractions.
 
