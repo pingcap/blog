@@ -7,6 +7,7 @@ image: /images/blog/replacing-mysql-with-a-horizontally-scaling-database.png
 tags: ['TiKV','Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/lesson-learned-from-40-k-qps-and-20-billion-rows-of-data-in-a-single-scale-out-cluster/
+customer: JD Cloud
 ---
 
 **Industry:** Cloud Computing

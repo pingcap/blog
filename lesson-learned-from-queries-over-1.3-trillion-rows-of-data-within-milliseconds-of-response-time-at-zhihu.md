@@ -6,6 +6,7 @@ summary: As the business boomed and massive data in applications accrued each mo
 tags: ['TiDB','Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/lesson-learned-from-queries-over-1.3-trillion-rows-of-data-within-milliseconds-of-response-time-at-zhihu/
+customer: Zhihu
 --- 
 
 **Industry:** Knowledge Sharing

@@ -6,6 +6,7 @@ summary: As sales of Xiaomi smartphones continue to climb and the MIUI user base
 tags: ['TiDB','Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-xiaomi/
+customer: Xiaomi
 --- 
 
 **Industry:** Consumer Electronics
