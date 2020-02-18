@@ -44,7 +44,7 @@ By the way, we will make PD support gRPC protocol in the future, so the `ClientA
 
 ## Raftstore
 
-The goal of TiKV is to support 100 TB+ data and it is impossible for one Raft group to make it, we need to use multiple Raft groups, which is **Multi-raft**. In TiKV, the implementation of Multi-raft is completed in Raftstore and you can find the code in the [raftstore/store](https://github.com/pingcap/tikv/tree/master/src/raftstore/store) directory.
+The goal of TiKV is to support 100 TB+ data and it is impossible for one Raft group to make it, we need to use multiple Raft groups, which is **Multi-raft**. In TiKV, the implementation of Multi-raft is completed in Raftstore and you can find the code in the [raftstore/store](https://github.com/pingcap/tikv/tree/master/components/raftstore/src/store) directory.
 
 ### Region
 
@@ -181,7 +181,7 @@ message RegionLocalState {
 
 We use Raft through `RawNode` because one Region corresponds to one Raft Group. Peer in Region corresponds to one Raft replica. Therefore, we encapsulate operations towards `RawNode` in Peer.
 
-To use Raft, we need to define our storage and this can be implemented in the `PeerStorage` class of [raftstore/store/peer_storage.rs](https://github.com/pingcap/tikv/blob/master/src/raftstore/store/peer_storage.rs).
+To use Raft, we need to define our storage and this can be implemented in the `PeerStorage` class of [raftstore/store/peer_storage.rs](https://github.com/pingcap/tikv/blob/master/components/raftstore/src/store/peer_storage.rs).
 
 When creating `PeerStorage`, we need to get the previous `RaftLocalStat`, `RaftApplyState` and `last_term` of this Peer from RocksDB. These will be cached to memory for the subsequent quick access.
 
