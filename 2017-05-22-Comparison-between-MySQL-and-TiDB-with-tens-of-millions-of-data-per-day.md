@@ -6,6 +6,7 @@ tags: ['TiDB', 'MySQL Scalability', 'Success Story']
 aliases: ['/blog/2017/05/22/Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day/', '/blog/2017/05/22/comparison-between-mysql-and-tidb-with-tens-of-millions-of-data-per-day/']
 categories: ['MySQL Scalability']
 customer: GAEA
+customerCategory: Gaming
 ---
 
 ## Table of content

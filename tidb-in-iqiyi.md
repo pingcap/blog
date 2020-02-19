@@ -7,6 +7,7 @@ tags: ['TiDB', 'Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-iqiyi/
 customer: iQiyi
+customerCategory: Internet
 ---
 
 **Industry:** Media and Entertainment

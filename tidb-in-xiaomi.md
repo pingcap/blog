@@ -7,6 +7,7 @@ tags: ['TiDB','Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-xiaomi/
 customer: Xiaomi
+customerCategory: Internet
 --- 
 
 **Industry:** Consumer Electronics

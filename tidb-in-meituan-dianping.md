@@ -7,6 +7,7 @@ tags: ['TiDB','Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-meituan-dianping/
 customer: Meituan-Dianping
+customerCategory: Internet
 ---
 
 **Industry:** Search and Ecommerce Platform
