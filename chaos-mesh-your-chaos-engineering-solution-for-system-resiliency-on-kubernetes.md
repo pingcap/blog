@@ -227,7 +227,7 @@ For more YAML file examples, see <https://github.com/pingcap/chaos-mesh/tree/mas
 
 Chaos Mesh uses CRD to define chaos objects, so you can manipulate CRD objects directly through the Kubernetes API. This way, it is very convenient to apply Chaos Mesh to your own applications with customized test scenarios and automated chaos experiments.
 
-In the [test-infra](https://github.com/pingcap/tipocket/tree/master/test-infra ) project, we simulate potential errors in [ETCD](https://github.com/pingcap/tipocket/blob/master/test-infra/tests/etcd/nemesis_test.go) clusters on Kubernetes, including nodes restarting, network failure, and file system failure.
+In the [test-infra](https://github.com/pingcap/tipocket/tree/35206e8483b66f9728b7b14823a10b3e4114e0e3/test-infra) project, we simulate potential errors in [etcd](https://github.com/pingcap/tipocket/blob/35206e8483b66f9728b7b14823a10b3e4114e0e3/test-infra/tests/etcd/nemesis_test.go) clusters on Kubernetes, including nodes restarting, network failure, and file system failure.
 
 The following is a Chaos Mesh sample script using the Kubernetes API:
 
