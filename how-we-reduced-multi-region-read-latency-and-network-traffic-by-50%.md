@@ -149,17 +149,17 @@ When no atomic clock is available, to guarantee linearizability, one request is 
 
 Our project won 2nd place at TiDB Hackathon 2019 and received positive comments: 
 
-    "We're glad to see that the multi-region reads and writes optimization project lets TiDB boost its multi-region architecture capabilities."
+"We're glad to see that the multi-region reads and writes optimization project lets TiDB boost its multi-region architecture capabilities."
 
-    "With the joint cooperation of community contributors, I believe that TiDB will deliver a Google Spanner-grade user experience for customers in the future."
+"With the joint cooperation of community contributors, I believe that TiDB will deliver a Google Spanner-grade user experience for customers in the future."
 
-    -- Xiaoguang Sun (Backend Search Manager at [Zhihu](https://en.wikipedia.org/wiki/Zhihu))
+-- Xiaoguang Sun (Backend Search Manager at [Zhihu](https://en.wikipedia.org/wiki/Zhihu))
 
-    "Generally, we recommend that users deploy TiDB components in three DCs with five replicas within the same city or in two cities. Among the three DCs, one has a single replica and each of the others has two replicas. The network lease cost is the main investment for this architecture. In a stress test, we found that the network bandwidth was fully occupied under extreme stress." 
+"Generally, we recommend that users deploy TiDB components in three DCs with five replicas within the same city or in two cities. Among the three DCs, one has a single replica and each of the others has two replicas. The network lease cost is the main investment for this architecture. In a stress test, we found that the network bandwidth was fully occupied under extreme stress." 
 
-    "This Hackathon project notably reduced the network bandwidth across DCs and cut TiDB customers' expenses."
+"This Hackathon project notably reduced the network bandwidth across DCs and cut TiDB customers' expenses."
 
-    -- Tianshuang Qin (Senior Technical Support Director at PingCAP)
+-- Tianshuang Qin (Senior Technical Support Director at PingCAP)
 
 ## Further thoughts
 
@@ -171,8 +171,9 @@ The optimizations discussed above are not final implementations. In addition to 
 
     We can also reduce the latency for read transaction to one RTT if we do the following:
 
-* Find the relationship between the timestamp and the committed index.
-* Regularly maintain the safe timestamp. Transactions with a timestamp less than the safe timestamp have been committed or aborted.
+        * Find the relationship between the timestamp and the committed index.
+        * Regularly maintain the safe timestamp. Transactions with a timestamp less than the safe timestamp have been committed or aborted.
+
 * **Implementing cross-DC scalability**
 
     In common scenarios for cross-DC read requests, we don't need the most up-to-date data. What we should figure out is what syntax we must provide so read requests in this scenario can read data locally with zero RTT. Thus, reading data will no longer rely on the primary DC, and we can achieve database horizontal scalability across data centers in different regions.
