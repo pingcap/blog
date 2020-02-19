@@ -7,6 +7,7 @@ tags: ['TiDB','Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-shopee/
 customer: Shopee
+customerCategory: Internet
 --- 
 
 **Industry:** E-Commerce 

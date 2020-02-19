@@ -9,6 +9,7 @@ categories: ['MySQL Scalability']
 url: /success-stories/why-we-chose-tidb-over-other-mysql-based-and-newsql-storage-solutions/
 aliases: ['/success-stories/why-we-chose-a-distributed-sql-database-alongside-mysql-to-break-down-data-silos/']
 customer: NetEase Games
+customerCategory: Gaming
 ---
 
 **Industry:** Gaming
