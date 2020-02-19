@@ -171,8 +171,8 @@ The optimizations discussed above are not final implementations. In addition to 
 
     We can also reduce the latency for read transaction to one RTT if we do the following:
 
-        * Find the relationship between the timestamp and the committed index.
-        * Regularly maintain the safe timestamp. Transactions with a timestamp less than the safe timestamp have been committed or aborted.
+    * Find the relationship between the timestamp and the committed index.
+    * Regularly maintain the safe timestamp. Transactions with a timestamp less than the safe timestamp have been committed or aborted.
 
 * **Implementing cross-DC scalability**
 
