@@ -259,4 +259,4 @@ TiDB needs to ensure the consistency of keys when interacting with TiKV, so it u
 
 ## Conclusion
 
-The above briefly introduces the process of reading and writing data in TiKV. There are still many things that have not been covered, such as error handling and performance optimization of Percolator. You can refer to [TiKV documentation](https://tikv.org/docs/3.0/concepts/overview/) and [deep dive TiKV](https://tikv.org/docs/deep-dive/introduction/) for more details. Even better, join us in the development of the [TiKV](https://github.com/tikv/tikv) project!
+The above briefly introduces the process of reading and writing data in TiKV. There are still many things that have not been covered, such as error handling and performance optimization of Percolator. You can refer to [TiKV documentation](https://tikv.org/docs/3.0/concepts/overview/) and [deep dive TiKV](https://tikv.org/deep-dive/introduction/) for more details. Even better, join us in the development of the [TiKV](https://github.com/tikv/tikv) project!

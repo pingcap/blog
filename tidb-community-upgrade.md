@@ -18,7 +18,7 @@ This is what the community organization structure used to be:
 
 ![Figure 1. Old Community Structure](media/tidb-community-old-structure.png)
 
-<div class="caption-center">*Figure 1. Old community structure*</div>
+<div class="caption-center"> Figure 1. Old community structure </div>
 
 The old community was mainly geared towards the TiDB Developer Group. The main roles are Maintainer, Committer, Contributor, etc., among which:
 
@@ -40,7 +40,7 @@ As TiDB becomes maturer, the TiDB user community is growing stronger. The feedba
 
 ![Figure 2. New Community Structure - User Group](media/tidb-community-new-user-group.png)
 
-<div class="caption-center">*Figure 2. New community structure - User Group*</div>
+<div class="caption-center"> Figure 2. New community structure - User Group </div>
 
 The TiDB User Group (TUG) is an independent, non-profit, third-party organization sponsored and managed by TiDB users to enhance communication and learning among the community. The operation forms of TUG include, but are not limited to, online Q&A and technical article sharing, offline technical salons, visits to famous companies, official interactive events and so on. TUG members can learn cutting-edge technical knowledge, publish technical insights, and jointly build TiDB projects through online and offline activities.
 
@@ -48,7 +48,7 @@ The TiDB User Group (TUG) is an independent, non-profit, third-party organizatio
 
 ![Figure 3. New Community Structure - Active Contributor and Reviewer](media/tidb-community-new-roles.png)
 
-<div class="caption-center">*Figure 3. New community structure - Active Contributor and Reviewer*</div>
+<div class="caption-center"> Figure 3. New community structure - Active Contributor and Reviewer </div>
 
 The above picture reflects the second change in this community structure upgrade - the roles of Reviewer and Active Contributor will be introduced to the developer community.
 
@@ -60,13 +60,13 @@ Let's take a closer look at the developer community structure diagram:
 
 ![Figure 4. New Community Structure - Special Interest Group](media/tidb-community-new-sig.png)
 
-<div class="caption-center">*Figure 4. New community structure - Special Interest Group*</div>
+<div class="caption-center"> Figure 4. New community structure - Special Interest Group </div>
 
 The above diagram shows the overall structure of the developer community from a vertical angle, reflecting the third change in this community architecture upgrade - the introduction of the Special Interest Group (SIG).
 
 An SIG mainly leads the development and maintenance of a TiDB/TiKV module and is responsible for the quality of the module's code. Active Contributors that meet the requirements will be invited to an SIG. Developers in the SIG will receive continuous guidance from Tech Leads while they optimize and improve the module, and meanwhile exercise their technical skills. Community developers can gradually grow from the initial Active Contributor to the community-recognized Reviewer, Committer, and even Maintainer through SIGs. In general, each SIG will organize meetings periodically to discuss about the recent progress and the problems encountered. All meeting discussions are open to the community, so that interested community members can participate.
 
-For reference, see our [Expression Special Interest Group](https://github.com/pingcap/community/tree/master/special-interest-groups/sig-expr) in operation.
+For reference, see our [Execution Interest Group](https://github.com/pingcap/community/tree/master/special-interest-groups/sig-exec) in operation.
 
 In addition, this picture also reflects the relationship between community roles and SIGs. Let's take a closer look at the community roles in an SIG:
 
@@ -102,7 +102,7 @@ There are another two roles:
 
 ![Figure 5. New Community Structure - Working Group](media/tidb-community-new-wg.png)
 
-<div class="caption-center">*Figure 5. New community structure - Working Group*</div>
+<div class="caption-center"> Figure 5. New community structure - Working Group </div>
 
 The fourth change is the introduction of the Working Group (WG) in the developer community structure. A WG is formed by community developers who gather together to accomplish a specific goal with PingCAP members. To achieve the goal, some WGs may span over multiple SIGs, and some WGs may only focus on something specific in a specific SIG.
 
