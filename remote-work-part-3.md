@@ -4,7 +4,7 @@ author: ['Nick Cameron']
 date: 2020-02-17
 summary: It's the third post in a series on remote work. In this post, Nick Cameron talks a bit about some of the practicalities, specifically around work and life balance.
 tags: ['Remote work']
-categories: ['Open Source Community']
+categories: ['Company']
 image: /images/blog/remote-work-part-3.png
 ---
 

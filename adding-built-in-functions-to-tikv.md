@@ -1,28 +1,26 @@
 ---
 title: Landing Your First Rust Pull Request in TiKV
 date: 2018-08-03
-summary: This guide is intended to show how you can land your first Pull Request (PR) in Rust to contribute to TiKV in less than 30 minutes. But before we do that, here's some helpful background.
-tags: ['TiKV', 'Community', 'Rust']
-categories: ['Open Source Community']
+summary: This guide is intended to show how you can land your first Pull Request (PR) in Rust to contribute to TiKV in less than 30 minutes. But before we do that, here’s some helpful background.
+tags: ['TiKV', 'Rust', 'How to']
+categories: ['Community']
 ---
 
-*Note: This post is out of date.*
+This guide is intended to show how you can land your first Pull Request (PR) in Rust to contribute to TiKV in less than 30 minutes. But before we do that, here’s some helpful background.
 
-This guide is intended to show how you can land your first Pull Request (PR) in Rust to contribute to TiKV in less than 30 minutes. But before we do that, here's some helpful background.
+[TiDB](https://github.com/pingcap/tidb) ("Ti" = Titanium) is an open-source distributed scalable Hybrid Transactional and Analytical Processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built by the company PingCAP (that’s us!) and its active open-source community (that’s you!). It’s designed to provide infinite horizontal scalability, strong consistency, and high availability with MySQL compatibility. It serves as a one-stop data warehouse for both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workloads.
 
-[TiDB](https://github.com/pingcap/tidb) ("Ti" = Titanium) is an open-source distributed scalable Hybrid Transactional and Analytical Processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built by the company PingCAP (that's us!) and its active open-source community (that's you!). It's designed to provide infinite horizontal scalability, strong consistency, and high availability with MySQL compatibility. It serves as a one-stop data warehouse for both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workloads.
+What powers this experience is [TiKV](https://github.com/pingcap/tikv), a distributed transactional key-value store (all built in Rust!), which is now deployed in more than 200 companies in production (see the [constantly-updated list of adopters](https://pingcap.com/docs/adopters)). One key reason why TiDB can process complex SQL queries so quickly is a Coprocessor API layer between TiDB and TiKV, which takes advantage of the distributed nature of a distributed database to "push down" partial queries in parallel, where partial results are generated and reassembled for the client. This is a key differentiator between TiDB and other distributed databases. 
 
-What powers this experience is [TiKV](https://github.com/pingcap/tikv), a distributed transactional key-value store (all built in Rust!), which is now deployed in more than 200 companies in production (see the [constantly-updated list of adopters](https://pingcap.com/docs/adopters)). One key reason why TiDB can process complex SQL queries so quickly is a Coprocessor API layer between TiDB and TiKV, which takes advantage of the distributed nature of a distributed database to "push down" partial queries in parallel, where partial results are generated and reassembled for the client. This is a key differentiator between TiDB and other distributed databases.
+So far, TiDB can only push down some simple expressions to TiKV to be processed, e.g. fetching the value in a column and doing comparison or arithmetic operations on simple data structures. To get more juice out of distributed computing resources, we need to include more expressions to push down. The first type is MySQL built-in functions. How do we accomplish that in short order? That’s where *you*--our intrepid systems hacker, Rust lover, and distributed system geek--come in!
 
-So far, TiDB can only push down some simple expressions to TiKV to be processed, e.g. fetching the value in a column and doing comparison or arithmetic operations on simple data structures. To get more juice out of distributed computing resources, we need to include more expressions to push down. The first type is MySQL built-in functions. How do we accomplish that in short order? That's where *you*--our intrepid systems hacker, Rust lover, and distributed system geek--come in!
-
-So follow along this guide to contribute a built-in MySQL function to TiKV in Rust in 30 minutes. And when you do, you will receive some special gifts from us reserved just for our beloved contributors, as a small token of our gratitude. Let's get started!
+So follow along this guide to contribute a built-in MySQL function to TiKV in Rust in 30 minutes. And when you do, you will receive some special gifts from us reserved just for our beloved contributors, as a small token of our gratitude. Let’s get started!
 
 ## How the Coprocessor Works
 
-Before diving into our step-by-step guide on how to contribute, it's worth understanding how TiDB's Coprocessor works at a high-level. After TiDB receives a SQL statement, it parses the statement into an abstract syntax tree (AST), then generates an optimal execution plan using its Cost-Based Optimizer. (Learn more details on how TiDB generates a query plan [HERE](https://pingcap.com/docs/sql/understanding-the-query-execution-plan/).) The execution plan is split into multiple subtasks and the Coprocessor API pushes down these subtasks to different TiKV nodes to be processed in parallel.
+Before diving into our step-by-step guide on how to contribute, it’s worth understanding how TiDB’s Coprocessor works at a high-level. After TiDB receives a SQL statement, it parses the statement into an abstract syntax tree (AST), then generates an optimal execution plan using its Cost-Based Optimizer. (Learn more details on how TiDB generates a query plan [HERE](https://pingcap.com/docs/sql/understanding-the-query-execution-plan/).) The execution plan is split into multiple subtasks and the Coprocessor API pushes down these subtasks to different TiKV nodes to be processed in parallel.
 
-Here's an illustration on how a statement like `select count(*) from t where a + b > 5` gets pushed down:
+Here’s an illustration on how a statement like `select count(*) from t where a + b > 5` gets pushed down:
 
 ![Pushing Down a Statement](/media/pushing-down-a-statement.png)
 
@@ -32,13 +30,13 @@ After TiKV receives these subtask expressions, the following steps are performed
 
 2. Use the predicate specified in the `where` clause to filter data.
 
-3. If the data passes the filter predicate, the aggregation result will be computed.
+3. If the data passes the filter predicate, the aggregation result will be computed. 
 
 After different TiKV nodes compute and return results of their respective subtasks, they are returned to TiDB. TiDB then aggregates on all the results sent from TiKV and sends the final result to the client.
 
 ## How to add a MySQL built-in function to TiKV
 
-Now that you have an overview of how Coprocessor in TiDB/TiKV works, here's how to contribute MySQL built-in functions to further strengthen TiKV's coprocessing power!
+Now that you have an overview of how Coprocessor in TiDB/TiKV works, here’s how to contribute MySQL built-in functions to further strengthen TiKV’s coprocessing power!
 
 ### Step 1: Select a function for pushdown
 
@@ -48,25 +46,22 @@ Go to the [`push down scalar functions` issue page](https://github.com/pingcap/t
 
 Search the related `builtinXXXSig` (XXX is the function signature you want to implement) in the [`expression`](https://github.com/pingcap/tidb/tree/master/expression) directory of TiDB.
 
-
 Take [`MultiplyIntUnsigned`](https://github.com/pingcap/tikv/pull/3277) as an example, which we will use throughout this guide, you can find the corresponding function signature (`builtinArithmeticMultiplyIntUnsignedSig`) and its [implementation](https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532).
 
 ### Step 3: Define the function
 
-1. The name of the file where the built-in function exists in TiKV should correspond to the same name in TiDB.
+1. The name of the file where the built-in function exists in TiKV should correspond to the same name in TiDB. 
 
-    For example, since all the pushdown files in the [`expression`](https://github.com/pingcap/tidb/tree/master/expression) directory in TiDB are named `builtin_XXX`, in TiKV the corresponding file name should be `builtin_XXX.rs`. In this example, the current function is in the [builtin_arithmetic.go](https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532) file in TiDB, so the function should be placed in builtin_arithmetic.rs in TiKV.
-
-
+    For example, since all the pushdown files in the [`expression`](https://github.com/pingcap/tidb/tree/master/expression) directory in TiDB are named `builtin_XXX`, in TiKV the corresponding file name should be `builtin_XXX.rs`. In this example, the current function is in the [builtin_arithmetic.go](https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532) file in TiDB, so the function should be placed in [builtin_arithmetic.rs](https://github.com/tikv/tikv/blob/master/components/tidb_query/src/expr/builtin_arithmetic.rs) in TiKV.
 
     **Note:** If the corresponding file in TiKV does not exist, you need to create a new file in the corresponding directory with the same name as in TiDB.
 
-2. The function name should follow the Rust snake_case naming conventions.
+2. The function name should follow the Rust snake_case naming conventions. 
 
     For this example, `MultiplyIntUnsigned` will be defined as `multiply_int_unsigned`.
 
 3. For the return value, you can refer to the `Eval` functions which are implemented in TiDB and their corresponding return value types, as shown in the following table:
-
+    
     | `Eval` Function in TiDB       | Return Value Type in TiKV|
     | ------------- |:-------------|
     | evalInt    | Result\<Option\<i64\>\> |
@@ -76,8 +71,9 @@ Take [`MultiplyIntUnsigned`](https://github.com/pingcap/tikv/pull/3277) as an ex
     | evalTime    | Result\<Option\<Cow\<'a, Time\>\>\> |
     | evalDuration    | Result\<Option\<Cow\<'a, Duration\>\>\> |
     | evalJSON    | Result\<Option\<Cow\<'a, Json\>\>\> |
+    
 
-    Thus, in TiDB's `builtinArithmeticMultiplyIntUnsignedSig`, it implements the `evalInt` method, so the return value type of this function `multiply_int_unsigned` should be `Result<Option<i64>>`.
+    Thus, in TiDB’s `builtinArithmeticMultiplyIntUnsignedSig`, it implements the `evalInt` method, so the return value type of this function `multiply_int_unsigned` should be `Result<Option<i64>>`.
 
 4. All the arguments of the `builtin-in` function should be consistent with that of the `eval` function of the expression:
 
@@ -180,10 +176,9 @@ When TiKV receives a pushdown request, it checks all the expressions first inclu
 
 In TiDB, there is a strict limit for the number of arguments in each built-in function. For the number of arguments, see [`builtin.go`](https://github.com/pingcap/tidb/blob/master/expression/builtin.go) in TiDB.
 
-
 To add argument check:
 
-1. Go to `scalar_function.rs` in TiKV and find the `check_args` function of `ScalarFunc`.
+1. Go to [`scalar_function.rs`](https://github.com/tikv/tikv/blob/master/components/tidb_query/src/expr/scalar_function.rs ) in TiKV and find the `check_args` function of `ScalarFunc`.
 
 2. Add the check for the number of the expression arguments as the implemented signatures do.
 
@@ -194,15 +189,15 @@ To add argument check:
 
 ### Step 6: Add pushdown support
 
-TiKV calls the `eval` function to evaluate a row of data and the `eval` function executes the sub-function based on the returned value type. This operation is done in `scalar_function.rs` by `dispatch_call`.
+TiKV calls the `eval` function to evaluate a row of data and the `eval` function executes the sub-function based on the returned value type. This operation is done in [`scalar_function.rs`](https://github.com/tikv/tikv/blob/master/components/tidb_query/src/expr/scalar_function.rs) by `dispatch_call`.
 
 For our example function, `MultiplyIntUnsigned`, the final return value type is `Int`, so `INT_CALLS` can be found in `dispatch_call`. Then take the code of other signatures in `INT_CALLS` as reference and add `MultiplyIntUnsigned => multiply_int_unsigned`. It indicates that when the function signature `MultiplyIntUnsigned` is being parsed, the implemented function `multiply_int_unsigned` will be called. The pushdown logic of `MultiplyIntUnsigned` is now implemented.
 
 ### Step 7: Add at least one test
 
-1. Go to `builtin_arithmetic.rs` where the `multiply_int_unsigned` function resides.
+1. Go to [`builtin_arithmetic.rs`](https://github.com/tikv/tikv/blob/master/components/tidb_query/src/expr/builtin_arithmetic.rs) where the `multiply_int_unsigned` function resides.
 
-2. Add the unit test for the function signature in the `test` module which is at the end of `builtin_arithmetic.rs`. Make sure that the unit test covers all the code which is added above. You can see the related test code in TiDB for reference.
+2. Add the unit test for the function signature in the `test` module which is at the end of [`builtin_arithmetic.rs`](https://github.com/tikv/tikv/blob/master/components/tidb_query/src/expr/builtin_arithmetic.rs). Make sure that the unit test covers all the code which is added above. You can see the related test code in TiDB for reference.
 
 For this example, the test code implemented in TiKV is as follows:
 
@@ -312,4 +307,4 @@ After you finish the above steps, you can file a PR for TiKV! After we merge, yo
 
 ### Wrapping Up
 
-We hope this guide provides an easy entry point to contributing to our Coprocessor, one of TiDB and TiKV's core features. If you run into any issues or problems with this guide, please let us know on our [Twitter](https://twitter.com/PingCAP), [Reddit](https://www.reddit.com/r/tidb), [Stack Overflow](https://stackoverflow.com/questions/tagged/tikv), or [Google Group](https://groups.google.com/forum/#!forum/tidb-user). Look forward to seeing your PR, and once it's merged, expect a special gift of gratitude from our team!
+We hope this guide provides an easy entry point to contributing to our Coprocessor, one of TiDB and TiKV’s core features. If you run into any issues or problems with this guide, please let us know on our [Twitter](https://twitter.com/PingCAP), [Reddit](https://www.reddit.com/r/tidb), [Stack Overflow](https://stackoverflow.com/questions/tagged/tikv), or [Google Group](https://groups.google.com/forum/#!forum/tidb-user). Look forward to seeing your PR, and once it’s merged, expect a special gift of gratitude from our team!

@@ -2,8 +2,8 @@
 title: 'PingCAPers at the First RustCon Asia!'
 date: 2019-04-29
 summary: PingCAP has been an active member in the Rust community and one of the first production users of Rust in building TiKV. As part of being a co-organizer for the first RustCon Asia, PingCAP also contributed several topics in both keynote sessions and workshops.
-tags: ['TiKV', 'Rust', 'Open Source Community']
-categories: ['Open Source Community']
+tags: ['TiKV', 'Rust', 'Conference']
+categories: ['Community']
 ---
 
 Sunshine, blue sky, with sprinkles of rain - such diverse weather these days echoed the lively atmosphere at Hyatt Regency Beijing, where the Rust Conference was held for the first time in Asia. Co-organized by PingCAP and Cryptape, this conference lasted for 4 days, involving 2 days of talks and 2 days of workshops. Speakers came from all over the world, representing some of the top influencers in the Rust community, especially in Asia. Nearly 300 Rust developers and fans attended this international event. Some of them even traveled all the way from Singapore, Germany, Australia, and Canada. For many attendees, first time encounters  blossomed into new friendships.

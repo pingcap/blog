@@ -3,7 +3,7 @@ title: Porting TiDB to ARM64 for Greater Flexibility
 author: ['Siddon Tang']
 date: 2019-08-16
 summary: This article describes how PingCAP compiled and benchmarked TiDB on the Amazon Web Services (AWS) ARM64 platform.
-tags: ['Engineering']
+tags: ['Benchmark', 'ARM']
 categories: ['Engineering']
 ---
 

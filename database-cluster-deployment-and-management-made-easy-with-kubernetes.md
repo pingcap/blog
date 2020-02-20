@@ -3,8 +3,8 @@ title: "TiDB Operator 1.0 GA: Database Cluster Deployment and Management Made Ea
 author: ['Ken Liu']
 date: 2019-07-30
 summary: Deploying transactional databases like TiDB in Kubernetes for production has always been challenging. Now, with TiDB Operator 1.0, running TiDB database clusters has never been easier.
-tags: ['TiDB', 'Product', 'MySQL Scalability', 'HTAP']
-categories: ['MySQL Scalability']
+tags: ['Release', 'Cloud']
+categories: ['Product']
 ---
 
 ![Database Cluster Deployment and Management Made Easy with Kubernetes](media/tidb-operator-kubernetes.jpg)

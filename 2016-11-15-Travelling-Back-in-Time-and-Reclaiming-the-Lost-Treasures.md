@@ -3,14 +3,14 @@ title: Travelling Back in Time and Reclaiming the Lost Treasures
 author: ['Ewan Chou']
 date: 2016-11-15
 summary: This document introduces the History Read feature in TiDB.
-tags: ['TiDB', 'Engineering', 'Golang']
+tags: ['MVCC']
 aliases: ['/blog/2016/11/15/Travelling-Back-in-Time-and-Reclaiming-the-Lost-Treasures/', '/blog/2016/11/15/travelling-back-in-time-and-reclaiming-the-lost-treasures/']
-categories: ['Engineering']
+categories: ['Product']
 ---
 
 ## About the History Read feature in TiDB
 
-Data is the core and is a matter of life and death for every business.  So ensuring the data safety is the top priority of every database. From a macro point of view, the safety of data is not only about whether a database is stable enough that no data is lost, but also about whether a sufficient and convenient solution is in place when data is lost because of the business or human errors, for example, to solve the anti-cheat problem in the game industry or to meet the audit requirements in the financing business. If a proper mechanism is enabled in the database level, it will reduce the workload and the complexity of business development significantly.
+Data is the core and is a matter of life and death for every business. So ensuring the data safety is the top priority of every database. From a macro point of view, the safety of data is not only about whether a database is stable enough that no data is lost, but also about whether a sufficient and convenient solution is in place when data is lost because of the business or human errors, for example, to solve the anti-cheat problem in the game industry or to meet the audit requirements in the financing business. If a proper mechanism is enabled in the database level, it will reduce the workload and the complexity of business development significantly.
 
 The traditional solution is to backup data in full volume periodically, in days or daily. These backups are to restore the data in case of accidents. But to restore data using backups is very costly because all the data after the backup time will be lost, which might be the last thing you want. In addition, the storage and computing overhead for full backups is no small cost for every company.
 

@@ -3,8 +3,8 @@ title: 5 Key Differences Between MySQL and TiDB for Scaling in the Cloud
 author: ['Morgan Tocker']
 date: 2018-12-11
 summary: This post introduces the top five key differences between TiDB and MySQL.
-tags: ['TiDB', 'Product', 'MySQL Scalability', 'HTAP', 'Open Source Community']
-categories: ['MySQL Scalability']
+tags: ['MySQL', 'Scalability', 'Cloud']
+categories: ['Product']
 ---
 
 As businesses adopt cloud-native architectures, conversations will naturally lead to what we can do to make the database horizontally scalable. The answer will likely be to take a closer look at [TiDB](https://pingcap.com/docs/).

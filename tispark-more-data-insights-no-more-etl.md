@@ -2,9 +2,9 @@
 title: 'TiSpark: More Data Insights, Less ETL'
 author: ['Shawn Ma']
 date: 2018-07-10
-summary: The motivation behind building TiSpark was to enable real-time analytics on TiDB without the delay and challenges of ETL. Extract, transform, and load (ETL)--a process to extract data from operational databases, transform that data, then load it into a database designed to supporting analytics--has been one of the most complex, tedious, error-prone, and therefore disliked tasks for many data engineers. However, it was a necessary evil to make data useful, because there hasn't been good solutions on the market to render ETL obsolete--until now.
-tags: ['TiDB', 'TiSpark', 'HTAP', 'Product', 'Golang']
-categories: ['HTAP']
+summary: The motivation behind building TiSpark was to enable real-time analytics on TiDB without the delay and challenges of ETL. Extract, transform, and load (ETL)--a process to extract data from operational databases, transform that data, then load it into a database designed to supporting analytics--has been one of the most complex, tedious, error-prone, and therefore disliked tasks for many data engineers. However, it was a necessary evil to make data useful, because there hasn’t been good solutions on the market to render ETL obsolete--until now.
+tags: ['TiSpark', 'HTAP', 'Real-time analytics']
+categories: ['Product']
 ---
 
 **Author**: Shawn Ma is a Tech Lead at PingCAP in the OLAP team. Previously, he was Tech Lead at Netease and Quantcast. He received his Masters in Computer Science from University of California--Irvine.
@@ -13,7 +13,7 @@ When we released [TiDB 2.0](http://bit.ly/tidb_2_0) in April, part of that annou
 
 ## Motivation
 
-The motivation behind building TiSpark was to enable real-time analytics on TiDB without the delay and challenges of ETL. [Extract, transform, and load (ETL)](https://en.wikipedia.org/wiki/Extract,_transform,_load)--a process to extract data from operational databases, transform that data, then load it into a database designed to supporting analytics--has been one of the most complex, tedious, error-prone, and therefore disliked tasks for many data engineers. However, it was a necessary evil to make data useful, because there hasn't been good solutions on the market to render ETL obsolete--until now.
+The motivation behind building TiSpark was to enable real-time analytics on TiDB without the delay and challenges of ETL. [Extract, transform, and load (ETL)](https://en.wikipedia.org/wiki/Extract,_transform,_load)--a process to extract data from operational databases, transform that data, then load it into a database designed to supporting analytics--has been one of the most complex, tedious, error-prone, and therefore disliked tasks for many data engineers. However, it was a necessary evil to make data useful, because there hasn’t been good solutions on the market to render ETL obsolete--until now.
 
 With the emergence of open-source database solutions like TiDB, the promise of a hybrid transactional and analytical processing (HTAP) architecture, a term first coined by [Gartner](https://www.gartner.com/doc/3599217/market-guide-htapenabling-inmemory-computing), is fast becoming a reality. Whether you subscribe to HTAP or other similar terms, like hybrid operational and analytical workloads (HOAP) (by [451 Research](https://451research.com/report-short?entityId=93844)) or "Translytical" (by [Forrester](https://www.forrester.com/report/The+Forrester+Wave+Translytical+Data+Platforms+Q4+2017/-/E-RES134282)), it's clear that the industry is calling for an end to the separation of the online transactional processing (OLTP) and online analytical processing (OLAP). No one wants to deal with ETL anymore.
 
@@ -21,7 +21,7 @@ To make this possible, PingCAP and its open source contributors built [TiDB](htt
 
 (If you are interested in experiencing an HTAP database on your laptop with TiDB + TiSpark, check out this [5-minute tutorial](https://pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/) to spin up a cluster using Docker-Compose!)
 
-## So How Does TiSpark Work?
+## So How Does TiSpark Work? 
 
 TiSpark leverages the power and popularity of Apache [Spark](https://en.wikipedia.org/wiki/Apache_Spark) with TiKV to enhance TiDB's OLAP capabilities. Spark is a unified analytics engine that supports many big data use cases with a nice SQL interface (aka Spark SQL). TiDB from its very first day was built to be a relational SQL database with horizontal scalability; currently it's compatible with MySQL. While TiDB has a complex and powerful optimizer and coprocessor architecture to support ad-hoc OLAP queries using MySQL, it's even better to leverage a feature-rich engine like Spark to complete the missing piece in the HTAP puzzle. Thus, TiSpark was born.
 
@@ -30,11 +30,11 @@ TiSpark is a connector that supports the following features:
 - Complex calculation pushdown: this feature produces better performance by pushing down complex calculations to TiKV
 - Key-range pruning: examines the sorted keys in TiKV and only returns the results we need
 - Index support for:
-  - Clustered index/non-clustered index
-  - Index only query optimization
+    - Clustered index/non-clustered index
+    - Index only query optimization
 - Cost-based optimization for:
-  - Histogram support
-  - Index selection
+    - Histogram support
+    - Index selection
 
 Here's high-level overview of TiSpark's architecture:
 
@@ -86,7 +86,7 @@ Assume we pick the `studentID` index, the primary index, to access the table. Th
 
 So what if we choose a different path by using the 'school' column index instead of the primary index? TiSpark will then go through a different procedure for secondary index. A secondary index in TiKV is encoded like main table data. (For more detailed info on how TiKV encodes data, please see the [post about computing](https://pingcap.com/blog/2017-07-11-tidbinternal2/).) The difference is the split / sort key is not on primary key but on the index keys, and primary key is attached at the end for each index entry.
 
-TiSpark reads all index entries per value range "school = 'engineering'" to retrieve all primary keys in the similar way illustrated above. We don't directly search the main table via primary keys retrieved. Instead, we do a shuffle by regionID for each primary key, and then in each of the executor, TiSpark tries to merges all the keys into continuous range. By doing so, TiSpark transforms point queries into range queries and improves performance. If there are cases where primary keys are sparse and scattered, then for that specific region, the system automatically adapts by downgrading point queries to a single region scan to avoid performance hit.
+TiSpark reads all index entries per value range "school = 'engineering'" to retrieve all primary keys in the similar way illustrated above. We don’t directly search the main table via primary keys retrieved. Instead, we do a shuffle by regionID for each primary key, and then in each of the executor, TiSpark tries to merges all the keys into continuous range. By doing so, TiSpark transforms point queries into range queries and improves performance. If there are cases where primary keys are sparse and scattered, then for that specific region, the system automatically adapts by downgrading point queries to a single region scan to avoid performance hit.
 
 ![Secondary Index Path](media/secondary-index-path.png)
 
@@ -104,7 +104,7 @@ Another optimization we've implemented is aggregation pushdown. TiSpark will rew
 
 ## Why Use TiSpark?
 
-Because TiDB as a whole is a distributed NewSQL database, storing data sizes that are far larger than what can be stored in a single machine, it's natural to layer a distributed compute engine like Spark on top of it. Without TiSpark, you would need do things the old way: do a daily dump of all your data into a Hadoop/Hive cluster or another data warehouse before you can analyze it--a situation many of our customers like [Mobike](https://pingcap.com/case-studies/tidb-in-mobike) avoided by adopting TiDB with TiSpark. If you want to run queries on “fresh” data, not stale ones that are at least one day old, then TiSpark shines. Plus, you no longer need to manage and maintain any ETL pipelines, saving your team lots of time, resources, and headaches.
+Because TiDB as a whole is a distributed NewSQL database, storing data sizes that are far larger than what can be stored in a single machine, it's natural to layer a distributed compute engine like Spark on top of it. Without TiSpark, you would need do things the old way: do a daily dump of all your data into a Hadoop/Hive cluster or another data warehouse before you can analyze it--a situation many of our customers like [Mobike](https://pingcap.com/blog/Use-Case-TiDB-in-Mobike/) avoided by adopting TiDB with TiSpark. If you want to run queries on “fresh” data, not stale ones that are at least one day old, then TiSpark shines. Plus, you no longer need to manage and maintain any ETL pipelines, saving your team lots of time, resources, and headaches.
 
 ## What's Next?
 

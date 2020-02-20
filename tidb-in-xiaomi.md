@@ -3,8 +3,7 @@ title: Powering the Xiaomi Mobile Lifestyle with TiDB
 author: ['Liang Zhang', 'Youfei Pan', 'Biwen Wang']
 date: 2019-04-11
 summary: As sales of Xiaomi smartphones continue to climb and the MIUI user base continues to grow, the Database Administration team at Xiaomi was having an increasingly hard time managing their MySQL database infrastructure until they adopted TiDB, an open source distributed hybrid transactional and analytical processing database created and supported by PingCAP. Now they also have plans to migrate additional workloads to TiDB in the future.
-tags: ['TiDB','Success Story']
-categories: ['MySQL Scalability']
+tags: ['MySQL', 'Scalability']
 url: /success-stories/tidb-in-xiaomi/
 customer: Xiaomi
 customerCategory: Internet
