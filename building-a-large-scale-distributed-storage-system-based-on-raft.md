@@ -3,7 +3,7 @@ title: Building a Large-scale Distributed Storage System Based on Raft
 author: ['Edward Huang']
 date: 2019-11-20
 summary: This post introduces the PingCAP team's firsthand experience in designing a large-scale distributed storage system based on the Raft consensus algorithm.
-tags: ['Engineering']
+tags: ['Distributed system', 'Raft']
 categories: ['Engineering']
 ---
 

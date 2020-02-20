@@ -3,8 +3,8 @@ title: TiDB Binlog Tutorial
 date: 2019-05-08
 author: ['Kolbe Kegel']
 summary: Learn to deploy TiDB Binlog with a simple TiDB cluster.
-tags: ['TiDB', 'Engineering']
-categories: ['Engineering']
+tags: ['Ecosystem tools', 'Tutorial']
+categories: ['Product']
 ---
 
 This tutorial will start with a very simple TiDB Binlog deployment with a single node of each component (Placement Driver, TiKV Server, TiDB Server, Pump, and Drainer), set up to push data into a MariaDB Server instance.

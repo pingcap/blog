@@ -2,8 +2,8 @@
 title: INSERT INTO tidb.hackathon_2019 VALUES ("Hack", "Fun", "TiDB Ecosystem")
 date: 2019-10-30
 summary: This post introduces the top 3 winners at TiDB Hackathon 2019 and the cozy and friendly environment of this meeting. 
-tags: ['TiDB', 'Open Source Community']
-categories: ['Open Source Community']
+tags: ['Hackathon', 'Community news']
+categories: ['Community']
 image: /images/blog/tidb-hackathon-2019.png
 --- 
 

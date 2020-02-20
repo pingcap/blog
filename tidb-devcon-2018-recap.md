@@ -2,7 +2,7 @@
 title: TiDB DevCon 2018 Recap - News, Latest Development, and Roadmap
 date: 2018-01-25
 summary: On January 20th, 2018, more than 200 coders, hackers, and techies streamed into Garage Café, a chic coffee shop in the heart of Beijing’s techhub, Zhongguancun. They were there to be part of TiDB DevCon 2018, a technology party for the developers, by the developers!
-tags: ['Community news', 'DevCon']
+tags: ['Community news', 'DevCon', 'Conference']
 categories: ['Community']
 ---
 

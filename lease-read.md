@@ -3,7 +3,7 @@ title: How TiKV Uses "Lease Read" to Guarantee High Performances, Strong Consist
 author: ['Siddon Tang']
 date: 2018-11-14
 summary: This post discusses Raft Log Read, `ReadIndex` Read, and Lease Read, and why TiKV adopts the Lease Read approach.
-tags: ['TiKV', 'Engineering']
+tags: ['TiKV', 'Consistency', 'Raft']
 categories: ['Engineering']
 ---
 
@@ -30,7 +30,7 @@ You can see that unlike reading through the Raft log, `ReadIndex` Read uses hear
 
 ## Lease Read
 
-In TiKV, we adopt a third and optimized way --  Lease Read -- another approach introduced in the Raft paper. When the leader sends a heartbeat, it records a timestamp `start`. When the majority of Regions in the group reply the heartbeat response, we think that the lease validity of the leader can last till `start` + `election timeout` / `clock drift bound`.
+In TiKV, we adopt a third and optimized way --  Lease Read -- another approach introduced in the Raft paper. When the leader sends a heartbeat, it records a timestamp `start`. When the majority of Regions in the group reply the heartbeat response, we think that the lease validity of the leader can last till `start` + `election timeout`/`clock drift bound`.
 
 The Lease Read implementation of TiKV is the same as that in the Raft paper in principle, with some optimizations included. In TiKV, the lease is updated through write operations instead of heartbeats. Since any write operation goes through Raft log, when we propose this write request, we record the current timestamp as `start` and wait for the corresponding `apply` before renewing the leader’s lease. A couple of additional implementation details worth noting:
 

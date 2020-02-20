@@ -3,7 +3,7 @@ title: 10x Performance Improvement for Expression Evaluation Made Possible by Ve
 author: ['Yuanjia Zhang']
 date: 2019-11-29
 summary: We vectorized 360+ built-in functions along with the TiDB community. Vectorized execution has greatly improved the expression evaluation performance. Some functions even achieved 10x performance. Here is our vectorization story. 
-tags: ['Engineering']
+tags: ['Query execution']
 categories: ['Engineering']
 image: /images/blog/vectorized-execution.png
 ---

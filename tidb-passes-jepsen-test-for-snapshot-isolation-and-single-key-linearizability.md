@@ -2,7 +2,7 @@
 title: TiDB Passes Jepsen Test for Snapshot Isolation and Single-Key Linearizability
 date: 2019-06-12
 summary: TiDB's first official Jepsen Test report is published. This post introduces some additional context to the test results and PingCAP's thoughts on what's next.
-tags: ['Engineering']
+tags: ['Jepsen test']
 categories: ['Engineering']
 ---
 
