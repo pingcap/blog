@@ -3,7 +3,7 @@ title: TiDB Internal (I) - Data Storage
 author: ['Li SHEN']
 date: 2017-07-11
 summary: This is the first one of three blogs to introduce TiDB internal.
-tags: ['TiDB', 'TiKV', 'Engineering', 'Golang', 'Rust', 'MySQL Scalability', 'HTAP']
+tags: ['TiKV', 'Raft', 'MVCC']
 aliases: ['/blog/2017/07/11/tidbinternal1/']
 categories: ['Engineering']
 ---
@@ -64,8 +64,8 @@ A data storage system should, first and foremost, determine the store model of d
 
 The following points need to be kept in mind:
 
-1.     This is a huge Map of Key-Value pairs.
-2.     In this Map, Key-Value pairs are ordered according to the Key’s binary sequence. We can Seek the position of a Key, and use the Next method to other Key-Value pairs, and these Key-Value pairs are all bigger than this one. 
+1. This is a huge Map of Key-Value pairs.
+2. In this Map, Key-Value pairs are ordered according to the Key’s binary sequence. We can Seek the position of a Key, and use the Next method to other Key-Value pairs, and these Key-Value pairs are all bigger than this one. 
 
 You might wonder the relation between the storage model that I’m talking about and the table in SQL. Here, I want to highlight: they are irrelevant.
 
@@ -82,9 +82,9 @@ Raft is a consensus algorithm and an equivalent to Paxos while Raft is easier to
 
 Raft is a consensus algorithm and offers three important functions:
 
-1.     Leader election
-2.     Membership change
-3.     Log replication
+1. Leader election
+2. Membership change
+3. Log replication
 
 TiKV uses Raft to replicate data and each data change will be recorded as a Raft log. Through the log replication function of Raft, data is safely and reliably synchronized to multiple nodes of the Raft group.
 
@@ -167,6 +167,6 @@ It is noted that as for multiple versions of a Key, we put the bigger number fir
 Transaction of TiKV adopts the Percolator model and has lots of optimizations. I don’t want to dive deep since you can read the paper and our articles(Currently in Chinese). What I want to say is that transaction in TiKV uses the optimistic lock. During the execution process, it will not detect write conflict. Only in the commit phase will it detect conflicts. The transaction that finishes committing earlier will be written successfully while the other would retry. If the write conflict of the business is not serious, the performance of this model is very good. For example, it works well to randomly update some rows of data in a large table. However, if the write conflict is severe, the performance would be bad. Take counter as an extreme example. The situation that many clients update a few rows at the same time leads to serious conflicts and numerous invalid retry.
  
 #### <span id="misc">Miscellaneous</span>
-Up to now,  I have introduced the basic concept and some details of TiKV, the layered structure of this distributed and transactional Key-Value engine and how to implement multi-datacenter disaster recovery. I’ll introduce how to construct the SQL layer on top of the storage model of Key-Value in the next article.
+Up to now, I have introduced the basic concept and some details of TiKV, the layered structure of this distributed and transactional Key-Value engine and how to implement multi-datacenter disaster recovery. I’ll introduce how to construct the SQL layer on top of the storage model of Key-Value in the next article.
 
 [Back to the top](#top)

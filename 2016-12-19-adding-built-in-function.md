@@ -2,9 +2,9 @@
 title: Adding Built-in Functions
 date: 2016-12-19
 summary: TiDB code is updated and the procedure of adding built-in functions is greatly simplified. This document describes how to add built-in functions to TiDB.
-tags: ['TiDB', 'Engineering', 'Golang']
+tags: ['How to', 'SQL engine']
 aliases: ['/blog/2016/12/19/adding-built-in-function/']
-categories: ['Engineering']
+categories: ['Community']
 ---
 
 This document describes how to add built-in functions to TiDB.
@@ -23,7 +23,7 @@ For parsing, it is redundant work because you should know how to write YACC comm
 
 As for evaluation, it should be finished in the TiDB expression evaluation framework. Each built-in function is considered as an expression indicated by `ScalarFunction` and obtains the corresponding function type and function signature through the function name and parameters to evaluate. 
 
-The procedure discussed above is complicated for users who are not familiar with TiDB. We have finished syntax parsing and function signature confirmation of most unimplemented functions. But implementation is left empty. In other words, locating and completing the  empty implementation makes a Pull Request (PR).
+The procedure discussed above is complicated for users who are not familiar with TiDB. We have finished syntax parsing and function signature confirmation of most unimplemented functions. But implementation is left empty. In other words, locating and completing the empty implementation makes a Pull Request (PR).
 
 ### The procedure to add a built-in function
 

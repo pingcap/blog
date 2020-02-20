@@ -3,9 +3,9 @@ title: TiDB Best Practices
 author: ['Li Shen']
 date: 2017-07-24
 summary: This article summarizes some best practices in using TiDB, mainly including SQL usage, OLAP/OLTP optimization techniques and especially TiDB's exclusive optimization switches.
-tags: ['TiDB', 'Engineering', 'Golang', 'MySQL Scalability', 'HTAP']
+tags: ['Best practice']
 aliases: ['/blog/2017/07/24/tidbbestpractice/']
-categories: ['Engineering']
+categories: ['Product']
 ---
 
 <span id="top"></span>

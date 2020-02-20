@@ -3,7 +3,7 @@ title: MVCC in TiKV
 author: ['Ivan Yang']
 date: 2016-11-17
 summary: This document gives an overview of MVCC implementation in TiKV.
-tags: ['TiKV', 'Engineering', 'Rust']
+tags: ['TiKV', 'MVCC']
 aliases: ['/blog/2016/11/17/mvcc-in-tikv/']
 categories: ['Engineering']
 ---

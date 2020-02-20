@@ -3,8 +3,8 @@ title: Introduction to Analytics Queries for the MySQL DBA
 author: ['Morgan Tocker']
 date: 2019-03-28
 summary: This post introduces some simple use cases of analytics queries where a MySQL DBA can expand their repertoire and answer some basic business questions by writing SQL queries with window functions.
-tags: ['HTAP', 'MySQL Scalability']
-categories: ['HTAP']
+tags: ['MySQL', 'How to']
+categories: ['Product']
 ---
 
 If you come to [TiDB](https://github.com/pingcap/tidb), an open source NewSQL database, from a MySQL background, you are likely comfortable with transaction processing workloads, but analytics may be new to you.

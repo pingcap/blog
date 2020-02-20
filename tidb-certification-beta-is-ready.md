@@ -3,8 +3,8 @@ title: TiDB Certification (Beta) is Ready
 author: ['Morgan Tocker']
 date: 2019-03-12
 summary: The official TiDB Certification is now available in beta and an online exam is ready for you to sign up.
-tags: ['MySQL Scalability', 'HTAP', 'Open Source Community', 'TiDB Academy']
-categories: ['Open Source Community']
+tags: ['TiDB Academy']
+categories: ['Community']
 ---
 
 ![TiDB Academy](media/tidb-academy-logo.png)

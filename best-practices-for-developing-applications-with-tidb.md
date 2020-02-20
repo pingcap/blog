@@ -3,8 +3,8 @@ title: Best Practices for Developing Applications with TiDB
 date: 2019-06-19
 author: ['Tianshuang Qin']
 summary: This article shows how to efficiently develop high-quality applications with TiDB, an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads and can serve as a scale-out MySQL database without manual sharding.
-tags: ['MySQL Scalability']
-categories: ['MySQL Scalability']
+tags: ['Best practice', 'How to']
+categories: ['Product']
 ---
 
 ## 1. Introduction: target audiences and why this blog exists

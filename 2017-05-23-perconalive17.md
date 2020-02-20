@@ -3,9 +3,9 @@ title: A Brief Introduction of TiDB
 author: ['Ed Huang']
 date: 2017-05-23
 summary: This is the speech Edward Huang gave at Percona Live Open Source Database Conference 2017.
-tags: ['TiDB', 'Engineering', 'Golang', 'MySQL Scalability', 'HTAP', 'Open Source Community']
+tags: ['Architecture', 'TiKV', 'Distributed system']
 aliases: ['/blog/2017/05/23/perconalive17/']
-categories: ['MySQL Scalability']
+categories: ['Product']
 ---
 
 This is the speech Edward Huang gave at Percona Live - Open Source Database Conference 2017.

@@ -3,8 +3,8 @@ title: Distributed Systems Training in Go and Rust
 date: 2019-06-20
 author: ['Brian Anderson']
 summary: PingCAP has made a talent plan for training and/or evaluating students, new employees, and new contributors to TiDB and TiKV. This blog post gives a brief overview of training courses for this plan on writing distributed systems in Go and Rust.
-tags: ['Engineering', 'Open Source Community']
-categories: ['Open Source Community']
+tags: ['Go', 'Rust', 'Distributed system']
+categories: ['Community']
 ---
 
 At PingCAP we love the [Go] and [Rust] programming languages. They are the
