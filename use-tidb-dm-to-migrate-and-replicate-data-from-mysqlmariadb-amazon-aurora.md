@@ -3,8 +3,8 @@ title: "Tutorial: Use TiDB DM to Migrate and Replicate Data from MySQL, MariaDB 
 date: 2019-05-23
 author: ['Kolbe Kegel']
 summary: Learn to migrate and replicate data from MySQL, MariaDB and Amazon Aurora using TiDB Data Migration.
-tags: ['TiDB', 'Engineering']
-categories: ['Engineering']
+tags: ['Tutorial', 'Ecosystem tools']
+categories: ['Product']
 ---
 
 Earlier this year, Team PingCAP open-sourced TiDB [Data Migration (DM)](https://github.com/pingcap/dm), an integrated data transfer and replication management platform that supports full data migration and incremental data replication from MySQL or MariaDB instances, or Amazon Aurora, into a TiDB cluster.

@@ -3,7 +3,7 @@ title: Safety First! Common Safety Pitfalls in Distributed Databases Found by Je
 date: 2019-09-18
 author: ['Ana Hobden']
 summary: This post introduces why Jepsen is important to the distributed database industry, how it works, common issues found, how we use Jepsen with TiDB, and a short summary of all problems Jepsen has found.
-tags: ['Engineering']
+tags: ['Jepsen test', 'Distributed system']
 categories: ['Engineering']
 image: /images/blog/jepsen-offers-system-wide-approach-to-testing-databases-at-scale.png
 ---

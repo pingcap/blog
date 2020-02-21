@@ -3,8 +3,8 @@ title: Doubling System Read Throughput with Only 26 Lines of Code
 author: ['Edward Huang']
 date: 2020-02-05
 summary: The Follower Read feature lets any follower replica in a Region serve a read request under the premise of strongly consistent reads. It reduces the load on the Raft leader and improves the read throughput of the TiDB cluster. Read this post to learn more. 
-tags: ['Engineering']
-categories: ['Engineering']
+tags: ['Raft', 'TiKV']
+categories: ['Product']
 image: /images/blog/follower-read-load-balancing-consistent-read.png
 ---
 

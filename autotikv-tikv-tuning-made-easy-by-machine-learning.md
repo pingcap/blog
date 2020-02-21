@@ -3,7 +3,7 @@ title: "AutoTiKV: TiKV Tuning Made Easy by Machine Learning"
 author: ['Yuanli Wang']
 date: 2019-12-27
 summary: AutoTiKV is a machine-learning-based tuning tool that helps decrease tuning costs and make life easier for DBAs. This post shows AutoTiKV's design, its machine learning model, and the automatic tuning workflow.
-tags: ['Engineering']
+tags: ['Performance tuning', 'TiKV']
 categories: ['Engineering']
 image: /images/blog/database-performance-tuning.png
 ---
