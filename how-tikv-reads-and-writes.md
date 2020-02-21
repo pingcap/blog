@@ -3,7 +3,7 @@ title: How TiKV Reads and Writes
 author: ['Siddon Tang']
 date: 2020-01-11
 summary: This post details how TiKV, as a distributed database, stores the data contained in a write request and how it retrieves the corresponding data with consistency guaranteed.
-tags: ['Engineering']
+tags: ['TiKV', 'Distributed system', 'Raft']
 categories: ['Engineering']
 image: /images/blog/how-tikv-reads-and-writes.png
 ---

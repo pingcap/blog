@@ -2,10 +2,10 @@
 title: 'BookMyShow.com: More Uptime, 30% Less Operational Cost with TiDB'
 date: 2019-03-15
 summary: With TiDB, BookMyShow has experienced increased uptime and availability, since TiDB automatically partitions and distributes data across the cluster. Meanwhile, operational and maintenance cost has been reduced by 30%. No engineer needs to be fully dedicated to database operations anymore. This post will introduce why BookMyShow chose TiDB over Greenplum by illustrating how TiDB solved their pain points.
-tags: ['MySQL Scalability', 'Engineering', 'Success Story']
-categories: ['MySQL Scalability']
+tags: ['Consistency']
 url: /success-stories/tidb-in-bookmyshow/
 customer: BookMyShow
+customerCategory: Internet
 ---
 
 Since 2007, BookMyShow has made it easy for entertainment-seekers in India to buy tickets for movies, sporting events, plays, concerts, and more. As India's largest e-commerce site for booking entertainment tickets online, it has a total user base of [more than 50 million in over 650 cities and towns](http://www.forbesindia.com/article/leaderboard/bookmyshow-eyes-the-big-picture/49657/1), and holds a lion's share of the market in the country's online ticketing space, processing millions of transactions a week. 

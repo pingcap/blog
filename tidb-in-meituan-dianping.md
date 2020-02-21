@@ -3,8 +3,7 @@ title: TiDB, the Key to a Better Life for Meituan-Dianping’s 290 Million Month
 author: ['Yinggang Zhao', 'Kun Li', 'Changjun Piao']
 date: 2018-12-06
 summary: As our business grew quickly, we were overwhelmed trying to tackle the mounting data until we found TiDB, a MySQL-compatible NewSQL hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Now we can harness our data with more confidence than ever before and provide better services for our users to enjoy a better life. 
-tags: ['TiDB','Success Story']
-categories: ['MySQL Scalability']
+tags: ['MySQL', 'Scalability', 'Consistency']
 url: /success-stories/tidb-in-meituan-dianping/
 customer: Meituan-Dianping
 customerCategory: Internet
@@ -236,6 +235,7 @@ What’s more, the PingCAP engineers and support team are very professional, ded
 ## What’s Next
 
 We plan to deploy TiDB in more and more application systems and grow together with TiDB. At present, three DBAs from Meituan-Dianping and several storage experts are fully committed to collaborating with PingCAP on the underlying storage, computing mechanism in the middle layer, access to the service layer, data model selection of the storage plans, and so on.
+
 In the long term, we will build a mightier ecosystem together with PingCAP. Here are some of our initiatives:
 
 - **TitanDB**
