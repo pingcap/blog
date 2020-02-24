@@ -5,6 +5,7 @@ summary: With TiDB, BookMyShow has experienced increased uptime and availability
 tags: ['MySQL Scalability', 'Engineering', 'Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-bookmyshow/
+customerCategory: Internet
 customer: BookMyShow
 ---
 
