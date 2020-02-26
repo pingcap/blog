@@ -8,6 +8,7 @@ categories: ['Engineering']
 image: /images/blog/early-impressions-of-go-from-a-rust-programmer.jpg
 ---
 
+![Early impressions of Go from a Rust programmer](media/early-impressions-of-go-from-a-rust-programmer.jpg)
 
 I've been using [Go](https://en.wikipedia.org/wiki/Go_(programming_language)) for the past few weeks. It's my first time using Go for a large (-ish), serious project. I've previously looked at Go a lot and played with examples and toy programs when researching features for [Rust](https://en.wikipedia.org/wiki/Rust_(programming_language)). Real programming is a very different experience.
 
