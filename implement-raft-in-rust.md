@@ -97,32 +97,50 @@ Other important fields like `check_quorum` and `pre_vote` are used to avoid the 
 
 ### Step 2: Drive and Run the Raft node
 
-Now that you have created a Raft node, the next step is to drive and run the Raft node. There three steps to this process:
+Now that you have created a Raft node, the next step is to drive and run the Raft node. Here is an example ported from [raft-rs/examples](https://github.com/tikv/raft-rs/tree/master/examples/five_mem_node):
 
-1. You need a timer to run the Raft node regularly. See the following example for using Rust channel `recv_timeout`:
-
-    ```rust
-    let mut t = Instant::now();
-    let mut timeout = Duration::from_millis(100);
-
+```rust
+let mut tick_timeout = Duration::from_mills(100);
+let start_tick = Instant::now();
+loop {
     loop {
-        match receiver.recv_timeout(timeout) {
-            Ok(...) => (),
-            Err(RecvTimeoutError::Timeout) => (),
+        // Step raft messages.
+        match receiver.recv_timeout(tick_timeout) {
+            Ok(msg_or_command) => {
+                match msg_or_command {
+                    RaftMessage(msg) => raft.step(msg),
+                    RaftCommand { proposal, callback } => {
+                        // Save the proposal ID and its associated callback.
+                        context.insert(proposal.get_id(), callback);
+                        raft.propose(proposal);
+                    }
+                }
+                tick_timeout -= start_tick.elapsed();
+                break;
+            }
+            Err(RecvTimeoutError::Timeout) => {
+                // Tick the raft.
+                start_tick = Instant::now();
+                tick_timeout = Duration::from_mills(100);
+                raft.tick();
+                break;
+            }
             Err(RecvTimeoutError::Disconnected) => return,
         }
-        let d = t.elaspsed();
-        if d >= timeout {
-            t = Instant::now();
-            timeout = Duration::from_millis(100);
-            // We drive Raft every 100ms.
-            r.tick();
-        } else {
-            timeout -= d;
-        }
     }
-    ```
-    As is shown in the above example, the Raft node is driven to run every 100 ms set by the `tick` function.
+
+    if raft.has_ready() {
+        // Handle readies from the raft.
+        handle_raft_ready(raft.ready());
+    }
+}
+```
+
+There are three steps to this process before `handle_raft_ready`:
+
+1. You can call the `step` function when you receive the Raft messages from other nodes. 
+
+    Calling `Raft::step` will changes memory state of the `Raft`.
 
 2. Use the `propose` function to drive the Raft node when the client sends a request to the Raft server. You can call `propose` to add the request to the Raft log explicitly.
 
@@ -130,24 +148,9 @@ Now that you have created a Raft node, the next step is to drive and run the Raf
   
     One simple way is to use a unique ID for the client request, and save the associated callback function in a hash map. When the log entry is applied, we can get the ID from the decoded entry, call the corresponding callback, and notify the client. 
 
-3. You can call the `step` function when you receive the Raft messages from other nodes. 
+3. You need a timer to run the Raft node regularly. In the example we use Rust channel `recv_timeout`.
 
-    Here is a simple example to use `propose` and `step`:
-
-    ```rust
-    let mut cbs = HashMap::new();
-    loop {
-        match receiver.recv_timeout(d) {
-            Ok(Msg::Propose { id, callback }) => {
-                cbs.insert(id, callback);
-                r.propose(vec![id], false).unwrap();
-            }
-            Ok(Msg::Raft(m)) => r.step(m).unwrap(),
-            ...
-        }
-    ...
-    }
-    ```
+    As is shown in the above example, the Raft node is driven to run every 100 ms set by the `tick` function.
 
 In the above example, we use a channel to receive the `propose` and `step` messages. We only propose the request ID to the Raft log. In your own practice, you can embed the ID in your request and propose the encoded binary request data. 
 
