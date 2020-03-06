@@ -52,7 +52,7 @@ Before you start hacking on the challenge tasks, here are some preparations for 
 1. Create a GitHub account. See [Join GitHub](https://github.com/join) for more information.
 2. [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) in your local environment.
 3. Configure your Git to access GitHub. See [Set up Git](https://help.github.com/en/github/getting-started-with-github/set-up-git) for more information.
-4. Read through the [Challenge Process]([https://github.com/pingcap/community/blob/master/challenge-programs/challenge-program-season-2.md](https://github.com/pingcap/community/blob/master/challenge-programs/challenge-program-season-2.md)) document. 
+4. Read through the [Challenge Process](https://github.com/pingcap/community/blob/master/challenge-programs/challenge-program-season-2.md) document. 
 
 ## How to participate
 
