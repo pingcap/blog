@@ -162,7 +162,7 @@ For some social-related applications at Shopee, their peak traffic during a big 
 
 What if the whole Redis cluster goes down? We have two solutions:
 
-* Make the application directly read and write to the database. This may affect the performance, but it keeps the integrity of most data.** **Some data-critical applications tend to adopt this solution.
+* Make the application directly read and write to the database. This may affect the performance, but it keeps the integrity of most data. Some data-critical applications tend to adopt this solution.
 * Switch traffic to a new Redis cluster to resume the service and then start to accumulate data. Also, it's possible to run another application to load some old data from the database to Redis. Some applications have high concurrent operations but can tolerate data loss. They can adopt this solution.
 
 #### Writing to the database and then the cache
