@@ -30,7 +30,7 @@ In this article, I'll discuss:
 * [Our database selection strategy](#our-database-selection-strategy)
 * [Factors to consider when choosing a database](#factors-to-consider-when-choosing-a-database)
 * [To shard or not to shard?](#to-shard-or-not-to-shard)
-* [Our lessons learned in database selection](#our-lessons-learned-in-database-selection)
+* [Our lessons learned in database selection](#lessons-learned-in-database-selection)
 * [How we're using TiDB at Shopee](#how-were-using-tidb-at-shopee)
 
 ## Which databases are we using at Shopee?
