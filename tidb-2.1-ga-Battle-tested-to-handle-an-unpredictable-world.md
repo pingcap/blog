@@ -88,7 +88,7 @@ We loathe benchmark-eting. It’s misleading to users and customers to cherry-pi
 
 ### OLTP with Sysbench
 
-In order to improve performance on typical OLTP workloads, which is what many of our users have, we engineered many optimizations in TiDB’s parser and cost-based optimizer to speed up Point Select operations. When you access your data via Unique Key or Primary Key using 2.1, you will see a 50% performance improvement over 2.0. You can find the details and reproduce [the benchmark here](https://github.com/pingcap/docs/blob/master/v2.1/benchmark/sysbench-v3.md). 
+In order to improve performance on typical OLTP workloads, which is what many of our users have, we engineered many optimizations in TiDB’s parser and cost-based optimizer to speed up Point Select operations. When you access your data via Unique Key or Primary Key using 2.1, you will see a 50% performance improvement over 2.0. You can find the details and reproduce [the benchmark here](https://pingcap.com/docs/v2.1/benchmark/sysbench-v3/). 
 
 ![Point select benchmark](media/point-select-benchmark.png)
 
@@ -96,7 +96,7 @@ In order to improve performance on typical OLTP workloads, which is what many of
 
 As a HTAP database, constantly improving in TiDB’s performance on OLAP workloads is always a high priority. In 2.1, we’ve made significant strides in this direction.
 
-Back when we released 2.0 in April, we published a TPC-H Scale 50 benchmark [comparing 2.0 with 1.0](https://github.com/pingcap/docs/blob/master/v2.1/benchmark/tpch.md), which showed improvements on all queries, including ones that couldn’t even run on 1.0. However, query 17 and 18 were quite slow.
+Back when we released 2.0 in April, we published a TPC-H Scale 50 benchmark [comparing 2.0 with 1.0](https://github.com/pingcap/docs/blob/release-2.1/benchmark/tpch.md), which showed improvements on all queries, including ones that couldn’t even run on 1.0. However, query 17 and 18 were quite slow.
 
 Now with 2.1 ready for GA, we compared it with 2.0 using the same benchmark and observed significant performance improvements on query 17 and 18 (see graph below, Y-axis is performance time per second, so lower the better), as well as improvements on all other queries across the board. This performance boost is due to improvements in TiDB’s CBO and executor, plus optimization in TiKV’s range scan capabilities.
 
