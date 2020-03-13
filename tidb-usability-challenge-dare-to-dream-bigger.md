@@ -34,6 +34,7 @@ Here's what's new in this season:
     * [Backup&Restore](https://github.com/pingcap/br/projects/1)
     * [client-rust](https://github.com/tikv/client-rust/projects/3)
     * [tidb-dashboard](https://github.com/pingcap-incubator/tidb-dashboard/projects/17)
+    * [tiup](https://github.com/pingcap-incubator/tiup/projects/1)
     * and more to come!
 
 * **Bountiful prizes**
