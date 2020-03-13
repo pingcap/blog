@@ -27,7 +27,7 @@ See the following selected list of optimizations in TiDB 3.0 for stability:
 
 ## Significant performance improvements in Sysbench and TPC-C benchmarks 
 
-For TiDB 3.0 GA, Sysbench results show that the Point Select, Update Index, and Update Non-Index performance are all about 1.5 times that of TiDB 2.1, and the TPC-C performance is 4.5 times as good, as shown in the below snapshots. Check out the complete [Sysbench result](https://github.com/pingcap/docs/blob/master/v3.0/benchmark/sysbench-v4.md) and the [TPC-C performance result](https://github.com/pingcap/docs/blob/master/v3.0/benchmark/tpcc.md). For how to reproduce these results, see [How to Test TiDB Using Sysbench](https://github.com/pingcap/docs/blob/master/v3.0/benchmark/how-to-run-sysbench.md) and [TiDB TPC-C Performance Test Report -- v3.0 vs. v2.1](https://github.com/pingcap/docs/blob/master/v3.0/benchmark/tpcc.md).
+For TiDB 3.0 GA, Sysbench results show that the Point Select, Update Index, and Update Non-Index performance are all about 1.5 times that of TiDB 2.1, and the TPC-C performance is 4.5 times as good, as shown in the below snapshots. Check out the complete [Sysbench result](https://pingcap.com/docs/v3.0/benchmark/sysbench-v4/) and the [TPC-C performance result](https://pingcap.com/docs/v3.0/benchmark/tpcc/). For how to reproduce these results, see [How to Test TiDB Using Sysbench](https://pingcap.com/docs/stable/benchmark/how-to-run-sysbench/) and [TiDB TPC-C Performance Test Report -- v3.0 vs. v2.1](https://pingcap.com/docs/v3.0/benchmark/tpcc/).
 
 ![Figure 1: OLTP Point Select in Sysbench and TiDB 2.1](media/oltp-point-select-in-sysbench-and-tidb-2.1.png)
 <div class="caption-center"> Figure 1: OLTP Point Select in Sysbench and TiDB 2.1 </div>

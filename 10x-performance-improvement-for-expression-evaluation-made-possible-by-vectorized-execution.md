@@ -20,7 +20,7 @@ At the end of 2017, we performed three optimizations on the TiDB SQL execution e
 * Changed the once-per-tuple iteration (the Volcano model) to a once-per-batch iteration (1024 tuples). See [PR #5178](https://github.com/pingcap/tidb/pull/5178).
 * Optimized various query operators based on the principles of vectorized query execution. See [PR #5184](https://github.com/pingcap/tidb/pull/5184).
 
-Benefited by these optimizations, [TiDB 2.0](https://pingcap.com/blog/tidb-2-0-announcement/) significantly boosted analytical query performance, compared with TiDB 1.0. For information on the TPC-H benchmark we used, see [TiDB TPC-H 50G Performance Test Report](https://github.com/pingcap/docs/blob/master/v2.1-legacy/benchmark/tpch.md).
+Benefited by these optimizations, [TiDB 2.0](https://pingcap.com/blog/tidb-2-0-announcement/) significantly boosted analytical query performance, compared with TiDB 1.0. For information on the TPC-H benchmark we used, see [TiDB TPC-H 50G Performance Test Report](https://github.com/pingcap/docs/blob/release-2.1/benchmark/tpch.md).
 
 Later, we released [TiDB 2.1](https://pingcap.com/blog/tidb-2.1-ga-Battle-tested-to-handle-an-unpredictable-world/) and [TiDB 3.0](https://pingcap.com/blog/tidb-3.0-announcement/), and our vectorized execution engine has become more stable. We're now developing TiDB 4.0, which includes vectorizing expressions to further improve TiDB's performance.
 

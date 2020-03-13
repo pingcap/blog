@@ -64,7 +64,7 @@ Admittedly, there is always room for improvement in our documentation. Thanks to
 
 > **Comment from Jepsen report:** "The documentation is therefore somewhat confusing: some of its descriptions of repeatable read actually refer to repeatable read, and other parts refer to snapshot isolation."		
 		
-- **Fix:** We have updated our [transactional isolation](https://github.com/pingcap/docs/blob/master/dev/reference/transactions/transaction-isolation.md#difference-between-tidb-and-ansi-repeatable-read) documentation to state that "TiDB allows some phantoms (P3), but does not allow strict phantoms (A3)" to clear the inconsistency implied in our documentation. 
+- **Fix:** We have updated our [transactional isolation](https://pingcap.com/docs/dev/reference/transactions/transaction-isolation/#difference-between-tidb-and-ansi-repeatable-read) documentation to state that "TiDB allows some phantoms (P3), but does not allow strict phantoms (A3)" to clear the inconsistency implied in our documentation. 
 
 > **Comments from Jepsen report:** "TiDB's automatic transaction retry mechanism was documented, but poorly'", "The documentation for auto-retries was titled "Description of optimistic transactions", and it simply said that the automatic-retry mechanism "cannot guarantee the final result is as expected" — but did not describe how."
 
