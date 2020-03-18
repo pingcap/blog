@@ -60,7 +60,7 @@ Before moving forward, make sure you have [Git](https://git-scm.com/) and [Docke
     source ~/.bash_profile
     ```
 
-**Notes:**
+**Note:**
 
 * Depending on your network, these steps might take a few minutes.
 * If you see an error message like this:
