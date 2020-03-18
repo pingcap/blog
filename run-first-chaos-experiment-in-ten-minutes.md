@@ -12,7 +12,7 @@ image: /images/blog/run-first-chaos-experiment-in-ten-minutes.png
 
 Chaos Engineering is a way to test a production software system's robustness by simulating unusual or disruptive conditions. For many people, however, the transition from learning Chaos Engineering to practicing it on their own systems is daunting. It sounds like one of those big ideas that require a fully-equipped team to plan ahead. Well, it doesn't have to be. To get started with chaos experimenting, you may be just one suitable platform away.
 
-[Chaos Mesh](https://github.com/pingcap/chaos-mesh) is an **easy-to-use**, open-source, cloud-native Chaos Engineering platform that orchestrates chaos in Kubernetes environments. This 10-minute tutorial will help you quickly get started with Chaos Engineering and run your first chaos experiment with Chaos Mesh.  
+[Chaos Mesh](https://github.com/pingcap/chaos-mesh) is an **easy-to-use**, open-source, cloud-native Chaos Engineering platform that orchestrates chaos in Kubernetes environments. This 10-minute tutorial will help you quickly get started with Chaos Engineering and run your first chaos experiment with Chaos Mesh.
 
 For more information about Chaos Mesh, refer to our [previous article ](https://pingcap.com/blog/chaos-mesh-your-chaos-engineering-solution-for-system-resiliency-on-kubernetes/)or the [chaos-mesh project](https://github.com/pingcap/chaos-mesh) on GitHub.
 
@@ -25,8 +25,6 @@ The following clip shows the process of installing Chaos Mesh, deploying web-sho
 ![The whole process of the chaos experiment](media/whole-process-of-chaos-experiment.gif)
 <div class="caption-center"> The whole process of the chaos experiment </div>
 
-The whole process of the chaos experiment
-
 Now it's your turn! It's time to get your hands dirty.
 
 ## Let's get started!
@@ -35,7 +33,7 @@ For our simple experiment, we use Kubernetes in the Docker ([Kind](https://kind.
 
 ### Prepare the environment
 
-Before moving forward, make sure you have [Git](https://git-scm.com/) and [Docker](https://www.docker.com/) installed on your local computer, with Docker up and running. For macOS,  it's recommended to allocate at least 6 CPU cores to Docker. For details, see [Docker configuration for Mac](https://docs.docker.com/docker-for-mac/#advanced).
+Before moving forward, make sure you have [Git](https://git-scm.com/) and [Docker](https://www.docker.com/) installed on your local computer, with Docker up and running. For macOS, it's recommended to allocate at least 6 CPU cores to Docker. For details, see [Docker configuration for Mac](https://docs.docker.com/docker-for-mac/#advanced).
 
 1. Get Chaos Mesh:
 
@@ -93,7 +91,7 @@ The next step is to deploy the application for testing. In our case here, we cho
 
     **Note:**
 
-    If your local computer cannot pull images from `<docker.io>`, use the `<local gcr.io>` mirror and execute  `./deploy.sh --docker-mirror` instead. 
+    If your local computer cannot pull images from `<docker.io>`, use the `<local gcr.io>` mirror and execute `./deploy.sh --docker-mirror` instead. 
 
 2. Access the web-show application. From your web browser, go to `http://localhost:8081`.
 
