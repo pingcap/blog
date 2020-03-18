@@ -57,7 +57,7 @@ Before moving forward, make sure you have [Git](https://git-scm.com/) and [Docke
 3. Set the system environment variable:
 
     ```bash
-    source ~ /.bash_profile
+    source ~/.bash_profile
     ```
 
 **Notes:**
@@ -91,7 +91,7 @@ The next step is to deploy the application for testing. In our case here, we cho
 
     **Note:**
 
-    If your local computer cannot pull images from `<docker.io>`, use the `<local gcr.io>` mirror and execute `./deploy.sh --docker-mirror` instead. 
+    If your local computer cannot pull images from `docker.io`, use the `local gcr.io` mirror and execute `./deploy.sh --docker-mirror` instead. 
 
 2. Access the web-show application. From your web browser, go to `http://localhost:8081`.
 
@@ -177,7 +177,7 @@ kind delete cluster --name=kind
 
 **Note:**
 
-If you encounter the `kind: command not found` error, execute `source ~ /.bash_profile` command first and then delete the Kubernetes clusters.
+If you encounter the `kind: command not found` error, execute `source ~/.bash_profile` command first and then delete the Kubernetes clusters.
 
 ## Cool! What's next?
 
