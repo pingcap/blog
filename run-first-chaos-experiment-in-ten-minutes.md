@@ -50,9 +50,9 @@ Before moving forward, make sure you have [Git](https://git-scm.com/) and [Docke
 
     `install.sh` is an automated shell script that checks your environment, installs Kind, launches Kubernetes clusters locally, and deploys Chaos Mesh. To see the detailed description of `install.sh`, you can include the `--help ` option.
 
-    **Note:**
-
-    If your local computer cannot pull images from `docker.io` or `gcr.io`, use the local gcr.io mirror and execute `./install.sh --local kind --docker-mirror` instead.
+    > **Note:**
+    >
+    > If your local computer cannot pull images from `docker.io` or `gcr.io`, use the local gcr.io mirror and execute `./install.sh --local kind --docker-mirror` instead.
 
 3. Set the system environment variable:
 
@@ -60,20 +60,20 @@ Before moving forward, make sure you have [Git](https://git-scm.com/) and [Docke
     source ~/.bash_profile
     ```
 
-**Note:**
-
-* Depending on your network, these steps might take a few minutes.
-* If you see an error message like this:
-    
-    ```bash
-    ERROR: failed to create cluster: failed to generate kubeadm config content: failed to get kubernetes version from node: failed to get file: command "docker exec --privileged kind-control-plane cat /kind/version" failed with error: exit status 1
-    ```
-
-    increase the available resources for Docker on your local computer and execute the following command:
-
-    ```bash
-    ./install.sh --local kind --force-local-kube
-    ```
+> **Note:**
+>
+> * Depending on your network, these steps might take a few minutes.
+> * If you see an error message like this:
+>  
+>     ```bash
+>     ERROR: failed to create cluster: failed to generate kubeadm config content: failed to get kubernetes version from node: failed to get file: command "docker exec --privileged kind-control-plane cat /kind/version" failed with error: exit status 1
+>     ```
+>
+>     increase the available resources for Docker on your local computer and execute the following command:
+>
+>     ```bash
+>     ./install.sh --local kind --force-local-kube
+>     ```
 
 When the process completes you will see a message indicating Chaos Mesh is successfully installed.
 
@@ -89,9 +89,9 @@ The next step is to deploy the application for testing. In our case here, we cho
     ./deploy.sh 
     ``` 
 
-    **Note:**
-
-    If your local computer cannot pull images from `docker.io`, use the `local gcr.io` mirror and execute `./deploy.sh --docker-mirror` instead. 
+    > **Note:**
+    >
+    > If your local computer cannot pull images from `docker.io`, use the `local gcr.io` mirror and execute `./deploy.sh --docker-mirror` instead. 
 
 2. Access the web-show application. From your web browser, go to `http://localhost:8081`.
 
@@ -175,9 +175,9 @@ After you're done with the chaos experiment, execute the following command to de
 kind delete cluster --name=kind
 ```
 
-**Note:**
-
-If you encounter the `kind: command not found` error, execute `source ~/.bash_profile` command first and then delete the Kubernetes clusters.
+> **Note:**
+>
+> If you encounter the `kind: command not found` error, execute `source ~/.bash_profile` command first and then delete the Kubernetes clusters.
 
 ## Cool! What's next?
 
