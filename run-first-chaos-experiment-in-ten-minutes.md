@@ -52,7 +52,7 @@ Before moving forward, make sure you have [Git](https://git-scm.com/) and [Docke
 
     **Note:**
 
-    If your local computer cannot pull images from `<docker.io>` or `<gcr.io>`, use the local gcr.io mirror and execute `./install.sh --local kind --docker-mirror` instead.
+    If your local computer cannot pull images from `docker.io` or `gcr.io`, use the local gcr.io mirror and execute `./install.sh --local kind --docker-mirror` instead.
 
 3. Set the system environment variable:
 
