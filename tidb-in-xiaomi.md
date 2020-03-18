@@ -56,7 +56,7 @@ It has the following core features:
 - ACID compliance where all your data is consistent.
 - High availability of all your data as guaranteed by TiDB's implementation of the Raft consensus algorithm.
 
-## Our Paint Point
+## Our Pain Point
 
 Before using TiDB, our team was managing our core business data on a standalone MySQL on disks with 2.6 TB capacity. As data volume surged, bottlenecks began to form. We noticed significant performance degradation and lack of availability in storage capacity, while [DDL](https://en.wikipedia.org/wiki/Data_definition_language) (data definition language) operations on large tables simply could not be performed.
 
