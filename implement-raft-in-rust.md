@@ -6,6 +6,7 @@ summary: As an open-source distributed scalable HTAP database, TiDB uses the Raf
 tags: ['TiDB', 'Rust', 'Raft', 'Engineering']
 categories: ['Engineering']
 ---
+<!-- markdownlint-disable -->
 
 ![Implement Raft in Rust](media/implement-raft-in-rust.jpg)
 
@@ -140,7 +141,7 @@ There are three steps to this process before `handle_raft_ready`:
 
 1. You can call the `step` function when you receive the Raft messages from other nodes. 
 
-    Calling `Raft::step` will changes memory state of the `Raft`.
+    Calling `Raft::step` will change the memory state of `Raft`.
 
 2. Use the `propose` function to drive the Raft node when the client sends a request to the Raft server. You can call `propose` to add the request to the Raft log explicitly.
 
@@ -148,7 +149,7 @@ There are three steps to this process before `handle_raft_ready`:
   
     One simple way is to use a unique ID for the client request, and save the associated callback function in a hash map. When the log entry is applied, we can get the ID from the decoded entry, call the corresponding callback, and notify the client. 
 
-3. You need a timer to run the Raft node regularly. In the example we use Rust channel `recv_timeout`.
+3. You need a timer to run the Raft node regularly. In the above example, we used Rust channel `recv_timeout`.
 
     As is shown in the above example, the Raft node is driven to run every 100 ms set by the `tick` function.
 
