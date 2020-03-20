@@ -43,9 +43,9 @@ For TiDB 3.0 GA, Sysbench results show that the Point Select, Update Index, and 
 
 ## Evolving to HTAP
 
-As you know, TiDB is an open-source NewSQL Hybrid Transactional and Analytical Processing (HTAP) database with MySQL compatibility, and one of the most popular and [active database products on GitHub](https://github.com/pingcap/tidb). Our architecture is modular by design in order to provide a level of flexibility that's necessary to process both OLTP and OLAP workloads performantly in the same distributed database system. Prior to 3.0, OLAP performance on our storage layer TiKV (now a [CNCF incubation-level member project](https://www.cncf.io/blog/2019/05/21/toc-votes-to-move-tikv-into-cncf-incubator/)), is limited by the fact that it is a row-based key-value store. Thus, we are introducing a new storage component that's columnar-based, called TiFlash (currently in beta), that sits alongside TiKV. 
+TiDB is an open-source NewSQL Hybrid Transactional and Analytical Processing (HTAP) database with MySQL compatibility, and one of the most popular and [active database products on GitHub](https://github.com/pingcap/tidb). Our architecture is modular by design in order to provide a level of flexibility that's necessary to process both OLTP and OLAP workloads performantly in the same distributed database system. Prior to 3.0, OLAP performance on our storage layer TiKV (now a [CNCF incubation-level member project](https://www.cncf.io/blog/2019/05/21/toc-votes-to-move-tikv-into-cncf-incubator/)), is limited by the fact that it is a row-based key-value store. Thus, we are introducing a new storage component that's columnar-based, called TiFlash (currently in beta), that sits alongside TiKV. 
 
-The way TiFlash works in a nutshell is: data continues to be replicated using the Raft consensus protocol but now an extra, non-voting replica (called Raft Learner) is made per each Raft group and sits in TiFlash purely for the purpose of faster data analytics and for better resource isolation between OLTP workloads and OLAP workloads. Live transactional data is made available almost immediately and near real-time for fast analysis, all data is still kept strongly consistent throughout the entire TiDB system, and there's no need to manage an ETL pipeline anymore.
+TiFlash continues to be replicated using the Raft consensus protocol but now an extra, non-voting replica (called Raft Learner) is made per each Raft group and sits in TiFlash purely for the purpose of faster data analytics and for better resource isolation between OLTP workloads and OLAP workloads. Live transactional data is made available almost immediately and near real-time for fast analysis. All data is still kept strongly consistent throughout the entire TiDB system, and there's no need to manage an ETL pipeline to a column store anymore.
 	
 ![Figure 5: the TiDB HTAP architecture](media/tidb-htap-architecture-1.png)
 <div class="caption-center"> Figure 5: the TiDB HTAP architecture </div>
@@ -54,7 +54,7 @@ We will write more deep dive blog posts on TiFlash soon, but the evolution of th
 
 ## Other Features and Improvements
 	
-Besides the features we have described above and those we mentioned in [TiDB 3.0 Beta: Stability at Scale](https://pingcap.com/blog/tidb-3.0-beta-stability-at-scale/), there are many other features and improvements in 3.0 GA that I can't jam-pack into this single blog post, but we will do deep dives on all of them, so you will have a full understanding of the implementation and motivation behind each of them. Here are the highlights:
+Besides the features we mentioned in [TiDB 3.0 Beta: Stability at Scale](https://pingcap.com/blog/tidb-3.0-beta-stability-at-scale/), there are many other features and improvements in 3.0 GA that I can't jam-pack into this single blog post, but we will do deep dives on all of them in the future. Here are the highlights:
 
 - Role-based access control (RBAC) is now available in TiDB 3.0 as an experimental feature to secure your system with a simple "user-role-privilege" access control model. 
 
