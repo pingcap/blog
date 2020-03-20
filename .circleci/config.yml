@@ -24,10 +24,11 @@ jobs:
             git fetch upstream
             markdownlint $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*')
 
-      - run:
-          name: "Check links"
-          command: |
-            hack/verify-links.sh
+            # unstable in circle ci, disable temporarily 
+            #- run:
+            #name: "Check links"
+            #command: |
+            #hack/verify-links.sh
 
 workflows:
   version: 2
