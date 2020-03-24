@@ -5,10 +5,10 @@ date: 2020-03-06
 summary: TiDB Challenge Program is a series community program to bring TiDB to a new level in terms of stability, performance, and usability. With amazing improvements in performance in season 1 last year, we are now pleased to announce that season 2 is ready for you.
 tags: ['Community news']
 categories: ['Open Source Community']
-image: /images/blog/tidb-usability-challenge.png
+image: /images/blog/tidb-usability-challenge.jpg
 ---
 
-![TiDB Usability Challenge](media/tidb-usability-challenge.png)
+![TiDB Usability Challenge](media/tidb-usability-challenge.jpg)
 
 In community we trust! As the TiDB community expands and the TiDB project evolves, we're inspired to see contributors joining us and demonstrating their passion and pursuit of the open-source spirit. To get more people involved and included, we launched the TiDB Challenge Program, a series community program to bring TiDB to a new level in terms of stability, performance, and usability. With some amazing improvements in performance in season 1 last year, we are now pleased to announce that season 2 is ready for you.
 
@@ -53,7 +53,7 @@ Before you start hacking on the challenge tasks, here are some preparations for 
 1. Create a GitHub account. See [Join GitHub](https://github.com/join) for more information.
 2. [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) in your local environment.
 3. Configure your Git to access GitHub. See [Set up Git](https://help.github.com/en/github/getting-started-with-github/set-up-git) for more information.
-4. Read through the [Challenge Process](https://github.com/pingcap/community/blob/master/challenge-programs/challenge-program-season-2.md) document. 
+4. Read through the [Challenge Process](https://github.com/pingcap/community/blob/master/challenge-programs/challenge-program-season-2.md) document.
 
 ## How to participate
 
@@ -61,19 +61,19 @@ You can participate as an individual or team up. However, in both two cases, you
 
 > **Note:**
 >
->- Up to three members are allowed in a team.
->- Teams that include PingCAP employees will be marked with a star (*). Their challenge points will not be included in the final ranking, but are valid for gift redemption.
->- To change the signup information, you need to close the original signup issue and open a new one to sign up again. Editing on the original issue is now allowed.
+> * Up to three members are allowed in a team.
+> * Teams that include PingCAP employees will be marked with a star (*). Their challenge points will not be included in the final ranking, but are valid for gift redemption.
+> * To change the signup information, you need to close the original signup issue and open a new one to sign up again. Editing on the original issue is now allowed.
 
 ## Learning materials
 
 We have prepared some learning materials to help you quickly get familiar with our projects and get started with hacking:
 
-- [TiDB documentation](https://pingcap.com/docs/) - concepts, user guide, and reference documents for TiDB.
-- [TiKV documentation](https://tikv.org/docs/3.0/concepts/overview/) - concepts, user guide, and reference documents for TiKV.
-- [Chaos Mesh documentation](https://github.com/pingcap/chaos-mesh/wiki) - user guide, and development guide for Chaos Mesh.
-- [PingCAP Talent Plan](https://github.com/pingcap/talent-plan) - a series of training courses about writing distributed systems in Go and Rust with no previous experience of TiDB or TiKV required.
-- [Awesome Database Learning](https://github.com/pingcap/awesome-database-learning) - a list of learning materials to help you understand databases internals, including but not limited to: papers, blogs, courses, and talks.
+* [TiDB documentation](https://pingcap.com/docs/) - concepts, user guide, and reference documents for TiDB.
+* [TiKV documentation](https://tikv.org/docs/3.0/concepts/overview/) - concepts, user guide, and reference documents for TiKV.
+* [Chaos Mesh documentation](https://github.com/pingcap/chaos-mesh/wiki) - user guide, and development guide for Chaos Mesh.
+* [PingCAP Talent Plan](https://github.com/pingcap/talent-plan) - a series of training courses about writing distributed systems in Go and Rust with no previous experience of TiDB or TiKV required.
+* [Awesome Database Learning](https://github.com/pingcap/awesome-database-learning) - a list of learning materials to help you understand databases internals, including but not limited to: papers, blogs, courses, and talks.
 
 ## FAQs
 
@@ -81,16 +81,16 @@ We have prepared some learning materials to help you quickly get familiar with o
 
 **Answer:** To change the registration information, you need to close the original registration issue and open another issue for registration. Editing on the original issue is not supported for the time being. There are three cases of changes in points after the registration information is changed:
 
-- Increasing or decreasing of team members will not affect the total points of the team;
-- The individual points of new members joining the team will be frozen to the state before joining the team, and the points earned after joining the team will be owned by the team;
-- Participants who leave the team and rejoin as individuals do not inherit team points.
+* Increasing or decreasing of team members will not affect the total points of the team;
+* The individual points of new members joining the team will be frozen to the state before joining the team, and the points earned after joining the team will be owned by the team;
+* Participants who leave the team and rejoin as individuals do not inherit team points.
 
 **Q2:** How do I discard/change the issue I have claimed?
 
 **Answer:**
 
-- To discard an issue: Reply to "give-up-challenge" under the issue.
-- To change your claimed issue: Firstly discard the current issue as described above, and then claim a new issue.
+* To discard an issue: Reply to "give-up-challenge" under the issue.
+* To change your claimed issue: Firstly discard the current issue as described above, and then claim a new issue.
 
 **Q3:** Can I invite PingCAP's internal employees to team up?
 

@@ -3,7 +3,7 @@ title: Remote Work - Part 2
 author: ['Nick Cameron']
 date: 2020-02-14
 summary: Nick Cameron has nearly ten-year experience of remote work. In this post, he discusses communication in remote work.
-tags: ['remote work']
+tags: ['Remote work']
 categories: ['Open Source Community']
 image: /images/blog/remote-work-part-2.png
 ---

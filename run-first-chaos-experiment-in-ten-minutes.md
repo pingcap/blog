@@ -5,16 +5,16 @@ date: 2020-03-18
 summary: In this 10-minute tutorial, we will help you to quickly get started with Chaos Engineering and run your first chaos experiment with Chaos Mesh.
 tags: ['Chaos Mesh', 'How to']
 categories: ['Engineering']
-image: /images/blog/run-first-chaos-experiment-in-ten-minutes.png
+image: /images/blog/run-first-chaos-experiment-in-ten-minutes.jpg
 ---
 
-![Run your first chaos experiment in 10 minutes](media/run-first-chaos-experiment-in-ten-minutes.png)
+![Run your first chaos experiment in 10 minutes](media/run-first-chaos-experiment-in-ten-minutes.jpg)
 
 Chaos Engineering is a way to test a production software system's robustness by simulating unusual or disruptive conditions. For many people, however, the transition from learning Chaos Engineering to practicing it on their own systems is daunting. It sounds like one of those big ideas that require a fully-equipped team to plan ahead. Well, it doesn't have to be. To get started with chaos experimenting, you may be just one suitable platform away.
 
 [Chaos Mesh](https://github.com/pingcap/chaos-mesh) is an **easy-to-use**, open-source, cloud-native Chaos Engineering platform that orchestrates chaos in Kubernetes environments. This 10-minute tutorial will help you quickly get started with Chaos Engineering and run your first chaos experiment with Chaos Mesh.
 
-For more information about Chaos Mesh, refer to our [previous article ](https://pingcap.com/blog/chaos-mesh-your-chaos-engineering-solution-for-system-resiliency-on-kubernetes/)or the [chaos-mesh project](https://github.com/pingcap/chaos-mesh) on GitHub.
+For more information about Chaos Mesh, refer to our [previous article](https://pingcap.com/blog/chaos-mesh-your-chaos-engineering-solution-for-system-resiliency-on-kubernetes/)or the [chaos-mesh project](https://github.com/pingcap/chaos-mesh) on GitHub.
 
 ## A preview of our little experiment
 
@@ -45,8 +45,8 @@ Before moving forward, make sure you have [Git](https://git-scm.com/) and [Docke
 2. Install Chaos Mesh with the `install.sh` script:
 
     ```bash
-    ./install.sh --local kind 
-    ``` 
+    ./install.sh --local kind
+    ```
 
     `install.sh` is an automated shell script that checks your environment, installs Kind, launches Kubernetes clusters locally, and deploys Chaos Mesh. To see the detailed description of `install.sh`, you can include the `--help ` option.
 
@@ -84,10 +84,10 @@ The next step is to deploy the application for testing. In our case here, we cho
 1. Deploy web-show with the `deploy.sh` script:
 
     ```bash 
-    # Make sure you are in the Chaos Mesh directory 
-    cd examples/web-show && 
-    ./deploy.sh 
-    ``` 
+    # Make sure you are in the Chaos Mesh directory
+    cd examples/web-show &&
+    ./deploy.sh
+    ```
 
     > **Note:**
     >
@@ -123,7 +123,7 @@ spec:
   duration: "30s"
   scheduler:
     cron: "@every 60s"
-``` 
+```
 
 For detailed descriptions of NetworkChaos actions, see [Chaos Mesh wiki](https://github.com/pingcap/chaos-mesh/wiki/Network-Chaos). Here, we just rephrase the configuration as:
 
@@ -145,7 +145,7 @@ To start NetworkChaos, do the following:
     From the line graph, you can tell that there is a 10 ms network delay every 60 seconds.
 
 ![Using Chaos Mesh to insert delays in web-show](media/using-chaos-mesh-to-insert-delays-in-web-show.png)
-<div class="caption-center"> Using Chaos Mesh to insert delays in web-show </div> 
+<div class="caption-center"> Using Chaos Mesh to insert delays in web-show </div>
 
 Congratulations! You just stirred up a little bit of chaos. If you are intrigued and want to try out more chaos experiments with Chaos Mesh, check out [examples/web-show](https://github.com/pingcap/chaos-mesh/tree/master/examples/web-show).
 
