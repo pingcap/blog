@@ -14,7 +14,7 @@ Chaos Engineering is a way to test a production software system's robustness by 
 
 [Chaos Mesh](https://github.com/pingcap/chaos-mesh) is an **easy-to-use**, open-source, cloud-native Chaos Engineering platform that orchestrates chaos in Kubernetes environments. This 10-minute tutorial will help you quickly get started with Chaos Engineering and run your first chaos experiment with Chaos Mesh.
 
-For more information about Chaos Mesh, refer to our [previous article](https://pingcap.com/blog/chaos-mesh-your-chaos-engineering-solution-for-system-resiliency-on-kubernetes/)or the [chaos-mesh project](https://github.com/pingcap/chaos-mesh) on GitHub.
+For more information about Chaos Mesh, refer to our [previous article](https://pingcap.com/blog/chaos-mesh-your-chaos-engineering-solution-for-system-resiliency-on-kubernetes/) or the [chaos-mesh project](https://github.com/pingcap/chaos-mesh) on GitHub.
 
 ## A preview of our little experiment
 
