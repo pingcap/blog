@@ -43,7 +43,7 @@ TiKV is a distributed, transactional, key-value database written in Rust. Taking
 > * [Graphviz](https://www.graphviz.org/download/)
 > * [The Go client](https://golang.org/doc/install/source)
 
-Assume that TiKV exports protobuf files via [http://127.0.0.1:22039/](http://127.0.0.1:22039/).
+Assume that TiKV exports protobuf files via `http://127.0.0.1:22039/`.
 
 1. Sample the program and download a protobuf file. In this example, pprof samples the program for 50 seconds:
 
@@ -60,7 +60,7 @@ Assume that TiKV exports protobuf files via [http://127.0.0.1:22039/](http://127
     go tool pprof -http=:8080 some.pb
     ```
 
-3. Go to [http://localhost:8080](http://localhost:8080), and you can see the graph of stack traces:
+3. Go to `http://localhost:8080`, and you can see the graph of stack traces:
 
 ![Graph of stack traces](media/graph-of-stack-traces.png)
 <div class="caption-center"> Graph of stack traces </div>
