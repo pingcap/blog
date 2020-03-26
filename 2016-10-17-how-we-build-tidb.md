@@ -12,29 +12,28 @@ categories: ['Engineering']
 
 The slides are [here](https://www.percona.com/live/plam16/sessions/how-we-build-tidb).
 
-
 + [Speaker introduction](#1)
 + [Why another database?](#2)
 + [What to build?](#3)
 + [How to design?](#4)
-	+ [The principles or the philosophy](#5)
-		+ [Disaster recovery](#6)
-		+ [Easy to use](#7)
-		+ [The community and ecosystem](#8)
-	+ [Loose coupling – the logical architecture](#9)
-	+ [The alternatives](#10)
+  + [The principles or the philosophy](#5)
+    + [Disaster recovery](#6)
+    + [Easy to use](#7)
+    + [The community and ecosystem](#8)
+  + [Loose coupling – the logical architecture](#9)
+  + [The alternatives](#10)
 + [How to develop](#11)
-	+ [The architecture](#12)
-	+ [TiKV core technologies](#13)
-		+ [TiKV software stack](#14)
-		+ [Placement Driver](#15)
-		+ [Raft](#16)
-		+ [MVCC](#17)
-		+ [Transaction](#18)
-	+ [TiDB core technologies](#19)
-		+ [Mapping table data to Key-Value store](#20)
-		+ [Predicate push-down](#21)
-		+ [Schema changes](#22)
+  + [The architecture](#12)
+  + [TiKV core technologies](#13)
+    + [TiKV software stack](#14)
+    + [Placement Driver](#15)
+    + [Raft](#16)
+    + [MVCC](#17)
+    + [Transaction](#18)
+  + [TiDB core technologies](#19)
+    + [Mapping table data to Key-Value store](#20)
+    + [Predicate push-down](#21)
+    + [Schema changes](#22)
 + [How to test?](#23)
 + [The future plan](#24)
 
@@ -179,7 +178,7 @@ In the next few slides, I am going to talk about design decisions about using th
 
 [Back to the top](#top)
 
-#### Atomic clocks / GPS clocks VS TimeStamp Allocator
+### Atomic clocks / GPS clocks VS TimeStamp Allocator
 
 If you&#39;ve read the Spanner paper, you might know that Spanner has TrueTime API, which uses the atomic clocks and GPS receivers to keep the time consistent between different data centers.
 
@@ -193,19 +192,19 @@ The pros of using the Timestamp Allocator are its easy implementation and no dep
 
 [Back to the top](#top)
 
-#### Distributed file system VS RocksDB
+### Distributed file system VS RocksDB
 
 Spanner uses Colossus File System, the successor to the Google File System (GFS), as its distributed file system. But in TiKV, we don&#39;t depend on any distributed file system. We use RocksDB. RocksDB is an embeddable persistent key-value store for fast storage. The primary design point for RocksDB is its great performance for server workloads. It&#39;s easy for tuning Read, Write and Space Amplification. The pros lie in that it&#39;s very simple, very fast and easy to tune. However, it&#39;s not easy to work with Kubernetes properly.
 
 [Back to the top](#top)
 
-#### Paxos VS Raft
+### Paxos VS Raft
 
 The next choice we have made is to use the Raft consensus algorithm instead of Paxos. The key features of Raft are: Strong leader, leader election and membership changes. Our Raft implementation is ported from etcd. The pros are that it&#39;s easy to understand and implement, widely used and very well tested. As for Cons, I didn&#39;t see any real cons.
 
 [Back to the top](#top)
 
-#### C++ VS Go &amp; Rust
+### C++ VS Go &amp; Rust
 
 As for the programming languages, we are using Go for TiDB and Rust for TiKV. We chose Go because it&#39;s very good for fast development and concurrency, and Rust for high quality and performance. As for the Cons, there are not as many third-party libraries.
 
@@ -345,27 +344,28 @@ Speak of Transaction, It&#39;s mainly a two-phase commit protocol with some prac
 Let&#39;s see an example: If Bob wants transfer 7 dollars to Joe.
 
 1. Initial state: Joe has 2 dollars in his account, Bob has 10 dollars.
-	![Transaction example 1](media/how-we-build-tidb-10.png)
+
+   ![Transaction example 1](media/how-we-build-tidb-10.png)
 
 2. The transfer transaction begins by locking Bob&#39;s account by writing the lock column. This lock is the primary for the transaction. The transaction also writes data at its start timestamp, 7.
 
-	![Transaction example 2](media/how-we-build-tidb-11.png)
+   ![Transaction example 2](media/how-we-build-tidb-11.png)
 
 3. The transaction now locks Joe&#39;s account and writes Joe&#39;s new balance. The lock is secondary for the transaction and contains a reference to the primary lock; So we can use this secondary lock to find the primary lock.
 
-	![Transaction example 3](media/how-we-build-tidb-12.png)
+   ![Transaction example 3](media/how-we-build-tidb-12.png)
 
 4. The transaction has now reached the commit point: it erases the primary lock and replaces it with a write record at a new timestamp (called the commit timestamp): 8. The write record contains a pointer to the timestamp where the data is stored. Future readers of the column &quot;bal&quot; in row &quot;Bob&quot; will see the value $3.
 
-	![Transaction example 4](media/how-we-build-tidb-13.png)
+   ![Transaction example 4](media/how-we-build-tidb-13.png)
 
 5. The transaction completes by adding write records and deleting locks at the secondary cells. In this case, there is only one secondary: Joe.
 
-	![Transaction example 5](media/how-we-build-tidb-14.png)
+   ![Transaction example 5](media/how-we-build-tidb-14.png)
 
-	So this is how it looks like when the transaction is done.
+   So this is how it looks like when the transaction is done.
 
-	![Transaction example 6](media/how-we-build-tidb-15.png)
+   ![Transaction example 6](media/how-we-build-tidb-15.png)
 
 [Back to the top](#top)
 
@@ -426,7 +426,7 @@ The main features of TiDB that impact schema changes are:
 - Distributed
   - An instance of TiDB consists of many individual TiDB servers
 - Relational schema
-  -  Each TiDB server has a copy of a relational schema that describes tables, columns, indexes, and constraints.
+  - Each TiDB server has a copy of a relational schema that describes tables, columns, indexes, and constraints.
   - Any modification to the schema requires a distributed schema change to update all servers.
 - Shared data storage
   - All TiDB servers in all datacenters have access to all data stored in TiKV.

@@ -63,13 +63,13 @@ With our applications' traffic and data volume growing rapidly, our standalone M
 
 * **Capacity**
 
-    A standalone MySQL instance has limited storage space. To maintain the existing architecture, we had to delete and rotate old data to release space. 
+    A standalone MySQL instance has limited storage space. To maintain the existing architecture, we had to delete and rotate old data to release space.
 
     For example, a single table stored more than 700 GB of data because we needed to persist game users' purchase orders. With more users jumping in, the generated data surged, and the standalone MySQL instance would reach its storage limit.
 
 * **Performance**
 
-    Our largest single MySQL table stored 1.5 billion rows of data. With such a large number of rows, the read and write performance were severely affected. 
+    Our largest single MySQL table stored 1.5 billion rows of data. With such a large number of rows, the read and write performance were severely affected.
 
     When we persisted the purchase orders' data, we also had to ensure that online users could query the data in real time. The standalone MySQL servers could not deliver a satisfactory query performance.
 
@@ -83,14 +83,14 @@ With our applications' traffic and data volume growing rapidly, our standalone M
 
 * **Data barriers**
 
-    We deployed databases independently for different game products. Data was scattered on data silos (that is, isolated islands of data), which made it difficult to gain insights from data analysis. When performing cross-product calculations, we needed to maintain multiple heterogeneous data sources, and the methods to access these sources were complicated. 
+    We deployed databases independently for different game products. Data was scattered on data silos (that is, isolated islands of data), which made it difficult to gain insights from data analysis. When performing cross-product calculations, we needed to maintain multiple heterogeneous data sources, and the methods to access these sources were complicated.
 
 ![Data silos](media/data-silos.png)
-<div class="caption-center"> Data silos </div> 
+<div class="caption-center"> Data silos </div>
 
 ## New database exploration
 
-In this section, I'll describe the ideal database for our applications, and what we did to find it. 
+In this section, I'll describe the ideal database for our applications, and what we did to find it.
 
 ### The ideal database for our applications
 
@@ -164,7 +164,7 @@ In MySQL clusters of two different versions—5.7.25 and 8.0.12—we performed w
 ![Results of testing MySQL clusters of different node sizes](media/results-of-testing-mysql-clusters-of-different-node-sizes.png)
 <div class="caption-center"> Results of testing MySQL clusters of different node sizes </div>  
 
-The tests showed that a multi-node MySQL cluster performed about 30% worse under write workloads than a standalone MySQL node. Other read and write tests had similar results. 
+The tests showed that a multi-node MySQL cluster performed about 30% worse under write workloads than a standalone MySQL node. Other read and write tests had similar results.
 
 We tested MySQL with middleware solutions, and this architecture didn't meet our expectations. To sum up, we did not adopt these solutions or the MySQL sharding solution for two reasons:
 
@@ -247,10 +247,10 @@ Conclusion:
     Note: The above is the testing result for TiDB 2.0.5. In July 2019, PingCAP announced that [TiDB 3.0 reached general availability](https://pingcap.com/blog/tidb-3.0-announcement/), achieving a major performance boost. Our recent tests showed that in most scenarios TiDB 3.0's performance was multiple times better than TiDB 2.1. The following test results compare TiDB 3.0.3 and TiDB 2.1.15 in the areas of peak [online transaction processing](https://en.wikipedia.org/wiki/Online_transaction_processing) (OLTP) and [TPC Benchmark C](http://www.tpc.org/tpcc/) (TPC-C):
 
 ![Peak OLTP performance comparison](media/peak-oltp-performance-comparison.png)
-<div class="caption-center"> Peak OLTP performance comparison </div> 
+<div class="caption-center"> Peak OLTP performance comparison </div>
 
 ![TPC-C performance comparison](media/tpc-c-performance-comparison.png)
-<div class="caption-center"> TPC-C performance comparison </div> 
+<div class="caption-center"> TPC-C performance comparison </div>
 
 * CRDB is compatible with the PostgreSQL protocol. If we migrate our application architecture to CRDB, we have to change the protocol, which is complicated and costly.
 
@@ -360,7 +360,7 @@ It seemed like TiDB has a competitive edge over the others. Then, we listed what
 
 * **Horizontal scalability brings large capacity storage and lower operation costs.**
 
-    TiDB expands storage simply by adding new nodes. The database can elastically scale out in real time without taking any node offline. This makes our infrastructure capacity planning much easier and more cost-effective than traditional relational databases that only scale vertically. In addition, our database administrators are finally free from the drudgery of frequently purging older data from MySQL. 
+    TiDB expands storage simply by adding new nodes. The database can elastically scale out in real time without taking any node offline. This makes our infrastructure capacity planning much easier and more cost-effective than traditional relational databases that only scale vertically. In addition, our database administrators are finally free from the drudgery of frequently purging older data from MySQL.
 
 * **Horizontal scalability makes storing data in a large database pool and big data mining possible.**
 
@@ -393,7 +393,7 @@ Throughout our journey with TiDB, we've used multiple versions for testing or pr
 We deploy the TiDB cluster in a highly-layered structure as shown below. [NGINX](https://www.nginx.com/) is used for load balancing in the front end.
 
 ![TiDB architecture for billing applications](media/tidb-architecture-for-billing-applications.png)
-<div class="caption-center"> TiDB architecture for billing applications </div> 
+<div class="caption-center"> TiDB architecture for billing applications </div>
 
 Inside the TiDB cluster, there are three main components:
 

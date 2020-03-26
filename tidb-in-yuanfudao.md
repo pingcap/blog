@@ -23,19 +23,19 @@ yuanfudao.com’s business scenario requires the following features from its bac
 
 In the early stage of solution evaluation and selection, yuanfudao.com considered the standalone MySQL solution but then gave up the idea because of the following reasons:
 
-+ They perceived that with the fast development of their business, the data storage capacity and concurrency stress would soon hit the processing bottleneck of a standalone database. 
++ They perceived that with the fast development of their business, the data storage capacity and concurrency stress would soon hit the processing bottleneck of a standalone database.
 
 + If adding a sharding solution to MySQL, the sharding key must be specified, which would not support cross-shard distributed transactions. Not to mention that the proxy solution is intrusive to the business tier and developers must know clearly the partitioning rules, which makes it unable to achieve transparency.
 
-+ Sharding is difficult to implement cross-shard aggregate queries, such as correlated query, subquery and group-by aggregation of the whole table. In these business scenarios, the query complexity is passed on to the application developers. Even though some middleware can implement simple `join` support, there is still no way to guarantee the correctness of these queries. 
++ Sharding is difficult to implement cross-shard aggregate queries, such as correlated query, subquery and group-by aggregation of the whole table. In these business scenarios, the query complexity is passed on to the application developers. Even though some middleware can implement simple `join` support, there is still no way to guarantee the correctness of these queries.
 
-+ The broadcasting solution cannot scale and the overhead would be huge when the cluster becomes larger. 
++ The broadcasting solution cannot scale and the overhead would be huge when the cluster becomes larger.
 
-+ For a business with a relatively large data volume, the problem of locking table for DDL on traditional RDBMS would be serious with a quite long lock time. If using some third-party tools like `gh-ost` to implement non-blocking DDL, the extra space overhead would be large and manual intervention would still be needed to guarantee the data consistency. What might make things worse is that the system might jitter during the switch process. It is safe to say that the maintenance complexity will increase exponentially with more and more machines while the scaling complexity is directly passed on to DBA. 
++ For a business with a relatively large data volume, the problem of locking table for DDL on traditional RDBMS would be serious with a quite long lock time. If using some third-party tools like `gh-ost` to implement non-blocking DDL, the extra space overhead would be large and manual intervention would still be needed to guarantee the data consistency. What might make things worse is that the system might jitter during the switch process. It is safe to say that the maintenance complexity will increase exponentially with more and more machines while the scaling complexity is directly passed on to DBA.
 
 In the end, the backend developers of yuanfudao.com decided to use a distributed storage solution and after researching quite a few community solutions, they found TiDB, a distributed relational database.
 
-TiDB is an open source distributed Hybrid Transactional/Analytical Processing (HTAP) database. It features horizontal scalability, strong consistency, and high availability. Users can regard TiDB as a standalone database with an infinite storage capacity. TiDB is nonintrusive to business and can elegantly replace the traditional sharding solutions such as database middleware and database sharding while at the same time maintaining the ACID properties of transactions. Instead of paying too much attention to the details of database scaling, developers are freed to focus on business development, which greatly improves the R&D productivity. 
+TiDB is an open source distributed Hybrid Transactional/Analytical Processing (HTAP) database. It features horizontal scalability, strong consistency, and high availability. Users can regard TiDB as a standalone database with an infinite storage capacity. TiDB is nonintrusive to business and can elegantly replace the traditional sharding solutions such as database middleware and database sharding while at the same time maintaining the ACID properties of transactions. Instead of paying too much attention to the details of database scaling, developers are freed to focus on business development, which greatly improves the R&D productivity.
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('How TiDB tackles fast data growth and complex queries for yuanfudao.com', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -79,7 +79,6 @@ The following table outlines the difference between MySQL sharding solutions and
   </tr>
 </table>
 
-
 (Comparison between TiDB and traditional MySQL sharding solutions)
 
 TiDB cluster consists of three components: TiDB Server, TiKV Server, and PD Server.
@@ -87,9 +86,9 @@ TiDB cluster consists of three components: TiDB Server, TiKV Server, and PD Serv
 ![TiDB architecture](media/tidb-architecture.png)
 <div class="caption-center"> The Overall Architecture of TiDB </div>
 
-TiDB Server is responsible for processing SQL request. When the business grows, adding more TiDB Server nodes can improve the entire processing capacity and offer a higher throughput. 
+TiDB Server is responsible for processing SQL request. When the business grows, adding more TiDB Server nodes can improve the entire processing capacity and offer a higher throughput.
 
-TiKV is responsible for storing data. When the data volume grows, deploying more TiKV Server nodes can directly increase the data storage capacity. 
+TiKV is responsible for storing data. When the data volume grows, deploying more TiKV Server nodes can directly increase the data storage capacity.
 
 PD schedules among the TiKV nodes in Regions and migrates a portion of data to the newly-added node. Therefore, in the early stage, users can deploy a few service instances and add more TiKV or TiDB instances if needed, depending on the data volume.
 

@@ -9,7 +9,7 @@ categories: ['Engineering']
 
 This tutorial will start with a very simple TiDB Binlog deployment with a single node of each component (Placement Driver, TiKV Server, TiDB Server, Pump, and Drainer), set up to push data into a MariaDB Server instance.
 
-This tutorial is targeted toward users who have some familiarity with the [TiDB Architecture](https://pingcap.com/docs/v3.0/architecture/), who may have already set up a TiDB cluster (though that is not mandatory), and who wants to gain hands-on familiarity with the features and functionality of TiDB Binlog. This tutorial is a good way to "kick the tires" of TiDB Binlog and to familiarize yourself with the concepts of its architecture. 
+This tutorial is targeted toward users who have some familiarity with the [TiDB Architecture](https://pingcap.com/docs/v3.0/architecture/), who may have already set up a TiDB cluster (though that is not mandatory), and who wants to gain hands-on familiarity with the features and functionality of TiDB Binlog. This tutorial is a good way to "kick the tires" of TiDB Binlog and to familiarize yourself with the concepts of its architecture.
 
 > **Warning:**
 >
@@ -25,7 +25,7 @@ You can use TiDB Binlog for incremental backups, to replicate data from one TiDB
 
 TiDB Binlog is particularly useful when you migrate data from MySQL or MariaDB to TiDB, in which case you may use the TiDB DM (Data Migration) platform to get data from a MySQL/MariaDB cluster into TiDB, and then use TiDB Binlog to keep a separate, downstream MySQL/MariaDB instance/cluster in sync with your TiDB cluster. TiDB Binlog enables application traffic to TiDB to be pushed to a downstream MySQL or MariaDB instance/cluster, which reduces the risk of a migration to TiDB because you can easily revert the application to MySQL or MariaDB without downtime or data loss.
 
-See TiDB Binlog Cluster Overview](https://pingcap.com/docs/v3.0/reference/tidb-binlog/overview/) for more information.
+See TiDB Binlog Cluster Overview](<https://pingcap.com/docs/v3.0/reference/tidb-binlog/overview/)> for more information.
 
 ## Architecture
 
@@ -69,7 +69,7 @@ First, let's populate the config files we'll use:
 
 ```bash
 printf > pd.toml %s\\n 'log-file="pd.log"' 'data-dir="pd.data"'
-printf > tikv.toml %s\\n 'log-file="tikv.log"' '[storage]' 'data-dir="tikv.data"' '[pd]' 'endpoints=["127.0.0.1:2379"]' '[rocksdb]' max-open-files=1024 '[raftdb]' max-open-files=1024 
+printf > tikv.toml %s\\n 'log-file="tikv.log"' '[storage]' 'data-dir="tikv.data"' '[pd]' 'endpoints=["127.0.0.1:2379"]' '[rocksdb]' max-open-files=1024 '[raftdb]' max-open-files=1024
 printf > pump.toml %s\\n 'log-file="pump.log"' 'data-dir="pump.data"' 'addr="127.0.0.1:8250"' 'advertise-addr="127.0.0.1:8250"' 'pd-urls="http://127.0.0.1:2379"'
 printf > tidb.toml %s\\n 'store="tikv"' 'path="127.0.0.1:2379"' '[log.file]' 'filename="tidb.log"' '[binlog]' 'enable=true'
 printf > drainer.toml %s\\n 'log-file="drainer.log"' '[syncer]' 'db-type="mysql"' '[syncer.to]' 'host="127.0.0.1"' 'user="root"' 'password=""' 'port=3306'
@@ -373,7 +373,7 @@ The main use of `binlogctl` in this tutorial is likely to be in the event of a c
 There are 3 solutions to that issue:
 
 1. Stop Drainer using `binlogctl` instead of killing the process:
-    
+
     ```
     ./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=drainers
     ./bin/binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=offline-drainer --node-id=localhost.localdomain:8249

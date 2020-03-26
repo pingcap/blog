@@ -47,6 +47,7 @@ So how to scale your relational database is a pain point of the entire industry.
 [Back to the top](#top)
 
 ## <span id="goal">TiDB goal</span>
+
 And there comes TiDB, when we were designing TiDB, we want to achieve the following goals:
 
 * Make sharding and data movement transparent to users so that developers can focus on application development.
@@ -59,9 +60,7 @@ And there comes TiDB, when we were designing TiDB, we want to achieve the follow
 
 * Open source, of course.
 
-
 During the first section, I’ll talk about the technical overview of TiDB and TiKV project, including the storage layer, a brief walk through our distributed sql engine, and some tools for community users to migrate from MySQL to TiDB and vice versa. Secondly, I’ll introduce some real world cases and benchmarks. We got several users in China, which have already used TiDB in production for over 3 months. And in the end, I’ll do a quick demo of setting up a TiDB-cluster and have some queries on it.
-
 
 ## <span id="architecture">Architecture</span>
 
@@ -91,7 +90,7 @@ So what is Raft? Raft is a consensus algorithm that equals to Multi-Paxos in fau
 
 The middle layer is MVCC, Multiversion concurrency control. The top two layers are transaction and grpc API. The API here is the transactional KV API.
 
-TiKV is written in Rust and the reason is that the storage layer is performance-critical and stability is first-class citizen of course. We only got c/c++ in the past, and now we have rust. Rust is great for infrastructure system software like database, operation system… Without any extra cost for GC, runtime and high performance. Another great thing is that Rust does a lot of innovation works to prevent memory leaks and data race, which means a lot to us. 
+TiKV is written in Rust and the reason is that the storage layer is performance-critical and stability is first-class citizen of course. We only got c/c++ in the past, and now we have rust. Rust is great for infrastructure system software like database, operation system… Without any extra cost for GC, runtime and high performance. Another great thing is that Rust does a lot of innovation works to prevent memory leaks and data race, which means a lot to us.
 
 Now we know that the actual data is stored in RocksDB. But how exactly is data organized inside of the RocksDB instances? The answer is by Regions.
 
@@ -107,7 +106,7 @@ Let’s take a look at the diagram here: The data is split into a set of continu
 
 In each RocksDB instance, as I just mentioned, there are several regions and each region is replicated to other instances by Raft. The replicas of the same Region, Region 4 for example, make a Raft group.
 
-The metadata of the raft groups is stored in Placement Driver, and of course, placement driver is a cluster, replicates the metadata by Raft, too. 
+The metadata of the raft groups is stored in Placement Driver, and of course, placement driver is a cluster, replicates the metadata by Raft, too.
 
 In TiKV, we adopt a multi-raft model. What’s multi-raft? It’s a way to split and merge regions dynamically, and of course, safely. We name this approach "safe split/merge".
 
@@ -208,7 +207,7 @@ The plan works well in a stand-alone database, but what happens in a distributed
 
 This is the physical plan of the SQL statement. The SQL layer and the storage layer, TiKV, work together. Some predicates and aggregators is pushed down to TiKV and then sent the partial result back to TiDB for final aggregation.
 
-There are several advantages in this approach: First, there are more nodes involved in the computing and therefore, the computing becomes faster. Second, the network transmission is greatly reduced because after filtering and aggregation, the computing can easily access the data because the data is close. 
+There are several advantages in this approach: First, there are more nodes involved in the computing and therefore, the computing becomes faster. Second, the network transmission is greatly reduced because after filtering and aggregation, the computing can easily access the data because the data is close.
 
 [Back to the top](#top)
 
@@ -222,7 +221,7 @@ For this query, optimizer may choose hashjoin, because HashJoin performs well in
 
 To join the tables mentioned in the previous query, TiKV reads the tables in parallel. When reading the smaller table, TiKV starts to build a Hash Table in memory. When reading the bigger table, the data is sent to several Join Workers. When the Hash Table is finished, all the Join Workers will be notified to start Join in stream and output the Joined Table.
 
-TiDB’s SQL layer currently supports 3 kinds of distributed join type, hashjoin / sort merge join (when the optimizer thinks even the smallest table is too large to fit in memory and the predicates contains indexed column, optimizer would choose sort merge join) / index lookup join. 
+TiDB’s SQL layer currently supports 3 kinds of distributed join type, hashjoin / sort merge join (when the optimizer thinks even the smallest table is too large to fit in memory and the predicates contains indexed column, optimizer would choose sort merge join) / index lookup join.
 
 [Back to the top](#top)
 
@@ -246,7 +245,7 @@ For data migration, we don’t have our own tool. We use Mydumper/Loader for dat
 
 ## <span id="usecase">Use cases</span>
 
-Currently, there are about 20 customers using our products in production environments and more than 200 PoC users contacting us or trying our products. 
+Currently, there are about 20 customers using our products in production environments and more than 200 PoC users contacting us or trying our products.
 
 ![Ad-hoc OLAP](media/image_13.png)
 
@@ -259,6 +258,7 @@ Another customer is using TiDB as the drop-in replacement for MySQL for OLTP wor
 [Back to the top](#top)
 
 ## <span id="sysbench">Sysbench</span>
+
 Let’s see some Sysbench results for Read and Insert in the next few slides. Here are the details of the system that we are using.
 
 ![System details](media/image_15.png)
@@ -292,4 +292,3 @@ The final section of my speech is our roadmap to the future:
 Once again, we are honored to attend this conference and I hope that there will be more excellent databases. Thank you so much!
 
 [Back to the top](#top)
-

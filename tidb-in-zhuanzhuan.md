@@ -13,7 +13,7 @@ customerCategory: Internet
 
 **Industry:** E-commerce
 
-**Authors:** Xuan Sun (Chief Architect at Zhuan Zhuan), Dong Chen (Senior Engineer at Zhuan Zhuan) and Haodong Ji (Senior Database Administrator at Zhuan Zhuan) 
+**Authors:** Xuan Sun (Chief Architect at Zhuan Zhuan), Dong Chen (Senior Engineer at Zhuan Zhuan) and Haodong Ji (Senior Database Administrator at Zhuan Zhuan)
 
 The [Letgo](https://us.letgo.com/en) of China, Zhuan Zhuan is a mobile app that enables our 100 million users to engage in “recommerce,” the e-commerce of buying and selling of second-hand goods ranging from smartphones and clothes to furniture and baby gear. Co-invested by [58.com Inc.](https://www.crunchbase.com/organization/58-com), the leading online classifieds and listings website in China, and the internet services giant [Tencent](https://www.tencent.com/en-us/), our platform has experienced tremendous growth since its launch in 2015.
 
@@ -28,11 +28,11 @@ Currently, we have deployed TiDB in multiple clusters for the messaging and risk
 
 Previously, our main solution for the backend system was MySQL, with MongoDB supporting a small number of applications. Although this solution could basically meet our demand, some problems arose as our business grew:
 
-1. Our data grew quickly, but it was difficult to rapidly scale the storage capacity horizontally in MySQL. 
+1. Our data grew quickly, but it was difficult to rapidly scale the storage capacity horizontally in MySQL.
 
 2. With a massive data volume that keeps increasing, MySQL created a heavy workload for the operations team when performing Data Definition Language (DDL) operations.
 
-3. To handle the service access performance under large data volume, we had to use more MySQL shardings, which made the application logic much heavier and more complicated. Meanwhile, to meet the multi-dimensional query demand, we always needed to introduce extra storage or sacrifice some performance, thus blocking the rapid iteration of our product. 
+3. To handle the service access performance under large data volume, we had to use more MySQL shardings, which made the application logic much heavier and more complicated. Meanwhile, to meet the multi-dimensional query demand, we always needed to introduce extra storage or sacrifice some performance, thus blocking the rapid iteration of our product.
 
 4. Due to the regular MySQL Master-Slave (M-S) failover design, application access was often unavailable. If a node failed, it took a long time to recover because of the massive data volume. But the M-S architecture could only guarantee high availability using extra components and through Master-Slave switch, and during the switch process, as the system needed to ensure the state of the Master database, the election of the new Master, and the issue of the new routing, application access got interrupted.
 
@@ -85,7 +85,7 @@ There are several key application tables in the messaging service, including the
 
 #### Migration Process
 
-**Step 1: Test TiDB.** 
+**Step 1: Test TiDB.**
 
 First, we simulated the online data and requests, then executed a lot of feature and performance tests for the Contact List Table. We also migrated one copy of the data and traffic from the online production environment to the offline testing environment and tested TiDB on the real traffic. For the migration work, we used the self-developed message queue, in which the data is converted into access requests and sent to the TiDB testing cluster. By analyzing the logs of production and testing data access modules, we were able to make a preliminary judgment about whether TiDB can process application requests well. It turned out that TiDB completely met the needs of the messaging service—but that wasn’t the end of it.
 
@@ -102,9 +102,9 @@ Our DBA staff deployed the TiDB cluster as the slave of MySQL’s instances and 
 3. One-week observation period.
 4. Stop the write operation of MySQL, and from that point, the application traffic is completely migrated to TiDB.
 
-The most important part of the migration process is ensuring the consistency of the two databases. Only then can the read-write traffic be migrated back to MySQL at any moment, if necessary, without affecting the application logic. 
+The most important part of the migration process is ensuring the consistency of the two databases. Only then can the read-write traffic be migrated back to MySQL at any moment, if necessary, without affecting the application logic.
 
-The double-write solution is similar to the traffic migration testing described above. We use the notice queue to migrate one copy of the write traffic; TiDB accesses the queue data in the module and then writes to the database. But this method cannot guarantee the atomicity of the two writing operations. 
+The double-write solution is similar to the traffic migration testing described above. We use the notice queue to migrate one copy of the write traffic; TiDB accesses the queue data in the module and then writes to the database. But this method cannot guarantee the atomicity of the two writing operations.
 
 Therefore, we needed a more rigorous solution. The message queue of Zhuan Zhuan also supports message transactions and can guarantee the atomicity of local operations and sending messages. With this feature along with the asynchronous compensation mechanism (scan logs offline and if write requests fail, revise the data), we can ensure that each message is successfully consumed and the result of each write into the two databases is the same. In this way, the data consistency between MySQL and TiDB is guaranteed.
 
@@ -140,7 +140,7 @@ Since we adopted TiDB, the service interface of the application logic layer hasn
 
 In the process of migrating the messaging application from MySQL to TiDB, we did come across some issues. But they were quickly resolved with the support of the PingCAP team. Here are the outcomes of two of the main ones.
 
-1. As a distributed database, TiDB has a lock mechanism that is quite different from that of MySQL. We have a scenario with high concurrency: Records may get updated several times, and the updates may even happen at the same time. We use the unique index of MySQL to guarantee the uniqueness of a certain Key value. But if the application request uses the default value, lots of unique indexes will be hit, meaning numerous requests will update the same record. 
+1. As a distributed database, TiDB has a lock mechanism that is quite different from that of MySQL. We have a scenario with high concurrency: Records may get updated several times, and the updates may even happen at the same time. We use the unique index of MySQL to guarantee the uniqueness of a certain Key value. But if the application request uses the default value, lots of unique indexes will be hit, meaning numerous requests will update the same record.
 
     As there is no performance issue in MySQL, the application hasn’t made any optimization. But when we used this scenario to test TiDB, we found that the database output a large number of retry logs. The reason? TiDB’s use of optimistic locking. Dozens of seconds of request latency occurred in the application, and lots of requests in the queue were discarded. The problem was finally solved when we optimized the application by filtering out the requests using the default value. We’ve learned that in 2.0 RC 5, adjusting `retry_limit` is another effective method to solve this problem.
 

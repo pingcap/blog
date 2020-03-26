@@ -21,7 +21,7 @@ PingCAP’s flagship product, TiDB, is a hybrid transactional and analytical pro
 
 As one of the leading open source HTAP databases in the industry, TiDB has been adopted by more than 300 companies, from banking and e-commerce, to fintech, gaming, and travel. Its distributed transactional key-value storage component, TiKV, was recently accepted as a [Cloud Native Computing Foundation project](https://www.cncf.io/blog/2018/08/28/cncf-to-host-tikv-in-the-sandbox/).
 
-"After three years of hard work, rapid product development, and cutting-edge engineering, PingCAP and its open source community have made the promise of an HTAP database a reality. We are excited to support the future growth of this amazing team," says Yonggang Cong, Vice President and Managing Director of FOSUN. 
+"After three years of hard work, rapid product development, and cutting-edge engineering, PingCAP and its open source community have made the promise of an HTAP database a reality. We are excited to support the future growth of this amazing team," says Yonggang Cong, Vice President and Managing Director of FOSUN.
 
 "The database industry has always been a competitive arena, and PingCAP has secured a prominent spot in this crowded field by becoming the go-to solution for many large-scale Internet companies and financial services enterprises in China," says Richard Liu, Managing Director of Morningside Venture Capital. “Thus, we are glad to grow with PingCAP and continue building the TiDB ecosystem together.”
 

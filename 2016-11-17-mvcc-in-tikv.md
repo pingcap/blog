@@ -128,4 +128,3 @@ Here comes the core of the transaction model for TiKV, which is MVCC powered by 
 #### Garbage collector
 
 It is easy to predict that there will be more and more MVCC versions if there is no [Garbage Collector](https://github.com/pingcap/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/mvcc/txn.rs#L143) to remove the invalid versions. But we cannot simply remove all the versions before a safe point, for there may be only one version for a key, which must be kept. In TiKV, if there is any `Put` or `Delete` records before the safe point, then all the latter writes can be deleted; otherwise only `Delete`, `Rollback` and `Lock` will be deleted.
-

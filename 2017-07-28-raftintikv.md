@@ -16,9 +16,9 @@ categories: ['Engineering']
 
 + [Architecture](#arch)
 + [Raft](#raft)
-	- [Storage](#storage)
-	- [Config](#config)
-	- [RawNode](#raw)
+  - [Storage](#storage)
+  - [Config](#config)
+  - [RawNode](#raw)
 
 ## <span id="arch">Architecture</span>
 
@@ -97,7 +97,7 @@ pub struct RaftState {
 ```
 message HardState {
 
-	optional unit64 term    = 1;
+ optional unit64 term    = 1;
 
 optional unit64 vote    = 2;
 
@@ -107,7 +107,7 @@ optional unit64 commit  = 3;
 
 message ConfState {
 
-	repeated unit64 nodes   = 1;
+ repeated unit64 nodes   = 1;
 
 }
 
@@ -119,7 +119,7 @@ message ConfState {
 
 + which node was voted
 
-+ the log index that is already committed. 
++ the log index that is already committed.
 
 `ConfState` saves all node ID information of the Raft cluster.
 
@@ -129,7 +129,7 @@ When calling relevant logic of Raft from outside, users need to handle the persi
 
 `term`, `first_index` and `last_index` **refers to getting the current term, the smallest and the last log index respectively.
 
-`snapshot`: Get a snapshot of the current Storage. Sometimes, the amount of the current Storage is large and it takes time to create a snapshot. Then we have to asynchronously create it in another thread, so that the current Raft thread will not be clocked. At this time, the system can return `SnapshotTemporarilyUnavailable` error so that Raft will know snapshot is being prepared and will try again after a while. 
+`snapshot`: Get a snapshot of the current Storage. Sometimes, the amount of the current Storage is large and it takes time to create a snapshot. Then we have to asynchronously create it in another thread, so that the current Raft thread will not be clocked. At this time, the system can return `SnapshotTemporarilyUnavailable` error so that Raft will know snapshot is being prepared and will try again after a while.
 
 Note that the above Storage interface is just for Raft. But actually we also use this Storage to store data like Raft log and so we need to provide other interfaces, such as `MemStorage` in Raft storage.rs for testing. You can refer to `MemStorage` to implement your Storage.
 
@@ -147,17 +147,17 @@ Before using Raft, we need to know some relevant configuration of Raft. Below ar
 ```
 pub struct Config {
 
-	pub id: u64,
+ pub id: u64,
 
-	pub election_tick: usize,
+ pub election_tick: usize,
 
-	pub heartbeat_tick: usize,
+ pub heartbeat_tick: usize,
 
-	pub applied: u64,
+ pub applied: u64,
 
-	pub max_size_per_msg: u64,
+ pub max_size_per_msg: u64,
 
-	pub max_inflight_msgs: usize,
+ pub max_inflight_msgs: usize,
 
 }
 ```
@@ -209,17 +209,17 @@ As for `RawNode`, we should emphasize the `ready` concept and below is its defin
 ```
 pub struct Ready  {
 
-	pub ss: Option<SoftState>,
+ pub ss: Option<SoftState>,
 
-	pub hs: Option<HardState>,
+ pub hs: Option<HardState>,
 
-	pub entries: Vec<Entry>,
+ pub entries: Vec<Entry>,
 
-	pub snapshot: Snapshot,
+ pub snapshot: Snapshot,
 
-	pub committed_entries: Vec<Entry>,
+ pub committed_entries: Vec<Entry>,
 
-	pub messages: Vec<Message>,	
+ pub messages: Vec<Message>,
 
 }
 ```

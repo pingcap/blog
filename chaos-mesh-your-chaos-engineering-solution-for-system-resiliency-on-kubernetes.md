@@ -14,15 +14,15 @@ image: /images/blog/chaos-engineering.png
 
 In the world of distributed computing, faults can happen to your clusters unpredictably any time, anywhere. Traditionally we have unit tests and integration tests that guarantee a system is production ready, but these cover just the tip of the iceberg as clusters scale, complexities amount, and data volumes increase by PB levels. To better identify system vulnerabilities and improve resilience, Netflix invented [Chaos Monkey](https://netflix.github.io/chaosmonkey/) and injects various types of faults into the infrastructure and business systems. This is how Chaos Engineering was originated.
 
-At [PingCAP](https://pingcap.com/), we are facing the same problem while building [TiDB](https://github.com/pingcap/tidb), an open source distributed NewSQL database. To be fault tolerant, or resilient holds especially true us, because the most important asset for any database users, the data itself, is at stake. To ensure resilience, we started [practicing Chaos Engineering](https://pingcap.com/blog/chaos-practice-in-tidb/) internally in our testing framework from a very early stage. However, as TiDB grew, so did the testing requirements. We realized that we needed a universal chaos testing platform, not just for TiDB, but also for other distributed systems. 
+At [PingCAP](https://pingcap.com/), we are facing the same problem while building [TiDB](https://github.com/pingcap/tidb), an open source distributed NewSQL database. To be fault tolerant, or resilient holds especially true us, because the most important asset for any database users, the data itself, is at stake. To ensure resilience, we started [practicing Chaos Engineering](https://pingcap.com/blog/chaos-practice-in-tidb/) internally in our testing framework from a very early stage. However, as TiDB grew, so did the testing requirements. We realized that we needed a universal chaos testing platform, not just for TiDB, but also for other distributed systems.
 
 Therefore, we present to you Chaos Mesh, a cloud-native Chaos Engineering platform that orchestrates chaos experiments on Kubernetes environments. It's an open source project available at [https://github.com/pingcap/chaos-mesh](https://github.com/pingcap/chaos-mesh).
 
-In the following sections, I will share with you what Chaos Mesh is, how we design and implement it, and finally I will show you how you can use it in your environment. 
+In the following sections, I will share with you what Chaos Mesh is, how we design and implement it, and finally I will show you how you can use it in your environment.
 
 ## What can Chaos Mesh do?
 
-Chaos Mesh is a versatile Chaos Engineering platform that features all-around fault injection methods for complex systems on Kubernetes, covering faults in Pod, network, file system, and even the kernel. 
+Chaos Mesh is a versatile Chaos Engineering platform that features all-around fault injection methods for complex systems on Kubernetes, covering faults in Pod, network, file system, and even the kernel.
 
 Here is an example of how we use Chaos Mesh to locate a TiDB system bug. In this example, we simulate Pod downtime with our distributed storage engine ([TiKV](https://pingcap.com/docs/stable/architecture/#tikv-server)) and observe changes in queries per second (QPS). Regularly, if one TiKV node is down, the QPS may experience a transient jitter before it returns to the level before the failure. This is how we guarantee high availability.
 
@@ -36,10 +36,10 @@ As you can see from the dashboard:
 
 After some diagnosis, we found the TiDB cluster version under test (V3.0.1) had some tricky issues when handling TiKV downtimes. We resolved these issues in later versions.
 
-But Chaos Mesh can do a lot more than just simulate downtime. It also includes these fault injection methods: 
+But Chaos Mesh can do a lot more than just simulate downtime. It also includes these fault injection methods:
 
 - **pod-kill:** Simulates Kubernetes Pods being killed
-- **pod-failure:** Simulates Kubernetes Pods being continuously unavailable 
+- **pod-failure:** Simulates Kubernetes Pods being continuously unavailable
 - **network-delay:** Simulates network delay
 - **network-loss:** Simulates network packet loss
 - **network-duplication:** Simulates network packet duplication
@@ -50,7 +50,7 @@ But Chaos Mesh can do a lot more than just simulate downtime. It also includes t
 
 ## Design principles
 
-We designed Chaos Mesh to be easy to use, scalable, and designed for Kubernetes. 
+We designed Chaos Mesh to be easy to use, scalable, and designed for Kubernetes.
 
 ### Easy to use
 
@@ -59,7 +59,7 @@ To be easy to use, Chaos Mesh must:
 * Require no special dependencies, so that it can be deployed directly on Kubernetes clusters, including [Minikube](https://github.com/kubernetes/minikube).
 * Require no modification to the deployment logic of the system under test (SUT), so that chaos experiments can be performed in a production environment.
 * Easily orchestrate fault injection behaviors in chaos experiments, and easily view experiment status and results. You should also be able to quickly rollback injected failures.
-* Hide underlying implementation details so that users can focus on orchestrating the chaos experiments. 
+* Hide underlying implementation details so that users can focus on orchestrating the chaos experiments.
 
 ### Scalable
 
@@ -107,21 +107,21 @@ This code does the following:
 
 For more details on CRD objects such as NetworkChaos and IOChaos, see the [Chaos-mesh documentation](https://github.com/pingcap/chaos-mesh).
 
-## How does Chaos Mesh work? 
+## How does Chaos Mesh work?
 
-With the CRD design settled, let's look at the big picture on how Chaos Mesh works. The following major components are involved: 
+With the CRD design settled, let's look at the big picture on how Chaos Mesh works. The following major components are involved:
 
 - **controller-manager**
 
-    Acts as the platform's "brain." It manages the life cycle of CRD objects and schedules chaos experiments. It has object controllers for scheduling CRD object instances, and the [admission-webhooks](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) controller dynamically injects sidecar containers into Pods. 
+    Acts as the platform's "brain." It manages the life cycle of CRD objects and schedules chaos experiments. It has object controllers for scheduling CRD object instances, and the [admission-webhooks](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) controller dynamically injects sidecar containers into Pods.
 
-- **chaos-daemon** 
+- **chaos-daemon**
 
     Runs as a privileged daemonset that can operate network devices on the node and Cgroup.
 
 - **sidecar**
 
-    Runs as a special type of container that is dynamically injected into the target Pod by the admission-webhooks. For example, the `chaosfs` sidecar container runs a fuse-daemon to hijack the I/O operation of the application container. 
+    Runs as a special type of container that is dynamically injected into the target Pod by the admission-webhooks. For example, the `chaosfs` sidecar container runs a fuse-daemon to hijack the I/O operation of the application container.
 
 ![Chaos Mesh workflow](media/chaos-mesh-workflow.png)
 <div class="caption-center"> Chaos Mesh workflow </div>
@@ -139,7 +139,7 @@ Here is how these components streamline a chaos experiment:
 
 ## Running chaos
 
-The above sections introduce how we design Chaos Mesh and how it works. Now let's get down to business and show you how to use Chaos Mesh. Note that the chaos testing time may vary depending on the complexity of the application to be tested and the test scheduling rules defined in the CRD. 
+The above sections introduce how we design Chaos Mesh and how it works. Now let's get down to business and show you how to use Chaos Mesh. Note that the chaos testing time may vary depending on the complexity of the application to be tested and the test scheduling rules defined in the CRD.
 
 ### Preparing the environment
 
@@ -148,11 +148,11 @@ Chaos Mesh runs on Kubernetes v1.12 or later. Helm, a Kubernetes package managem
 1. Make sure you have a Kubernetes cluster. If you do, skip to step 2; otherwise, start one locally using the script provided by Chaos Mesh:
 
     ```bash
-    // install kind 
+    // install kind
     curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/download/v0.6.1/kind-$(uname)-amd64
     chmod +x ./kind
-    mv ./kind /some-dir-in-your-PATH/kind 
-    
+    mv ./kind /some-dir-in-your-PATH/kind
+
     // get script
     git clone https://github.com/pingcap/chaos-mesh
     cd chaos-mesh
@@ -190,8 +190,8 @@ You can define your own chaos experiments through the YAML file method, which pr
 
 **Note:** For illustration purposes, we use TiDB as our system under test. You can use a target system of your choice, and modify the YAML file accordingly.
 
-1. Deploy a TiDB cluster named `chaos-demo-1`. You can use [TiDB Operator](https://github.com/pingcap/tidb-operator) to deploy TiDB. 
-2. Create the YAML file named `kill-tikv.yaml` and add the following content: 
+1. Deploy a TiDB cluster named `chaos-demo-1`. You can use [TiDB Operator](https://github.com/pingcap/tidb-operator) to deploy TiDB.
+2. Create the YAML file named `kill-tikv.yaml` and add the following content:
 
     ```yml
     apiVersion: pingcap.com/v1alpha1
@@ -209,7 +209,7 @@ You can define your own chaos experiments through the YAML file method, which pr
           "app.kubernetes.io/component": "tikv"
       scheduler:
         cron: "@every 1m"
-    ``` 
+    ```
 
 3. Save the file.
 4. To start chaos, `kubectl apply -f kill-tikv.yaml`.
@@ -223,7 +223,7 @@ We use a sysbench program to monitor the real-time QPS changes in the TiDB clust
 
 For more YAML file examples, see <https://github.com/pingcap/chaos-mesh/tree/master/examples>.
 
-### Running chaos using the Kubernetes API 
+### Running chaos using the Kubernetes API
 
 Chaos Mesh uses CRD to define chaos objects, so you can manipulate CRD objects directly through the Kubernetes API. This way, it is very convenient to apply Chaos Mesh to your own applications with customized test scenarios and automated chaos experiments.
 
@@ -235,14 +235,14 @@ The following is a Chaos Mesh sample script using the Kubernetes API:
 import (
     "context"
 
-	"github.com/pingcap/chaos-mesh/api/v1alpha1"
+ "github.com/pingcap/chaos-mesh/api/v1alpha1"
     "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
 func main() {
   ...
   delay := &chaosv1alpha1.NetworkChaos{
-		Spec: chaosv1alpha1.NetworkChaosSpec{...},
+  Spec: chaosv1alpha1.NetworkChaosSpec{...},
       }
       k8sClient := client.New(conf, client.Options{ Scheme: scheme.Scheme })
   k8sClient.Create(context.TODO(), delay)
@@ -252,11 +252,11 @@ func main() {
 
 ## What does the future hold?
 
-In this article, we introduced you to Chaos Mesh, our open source cloud-native Chaos Engineering platform. There are still many pieces in progress, with more details to unveil regarding the design, use cases, and development. Stay tuned. 
+In this article, we introduced you to Chaos Mesh, our open source cloud-native Chaos Engineering platform. There are still many pieces in progress, with more details to unveil regarding the design, use cases, and development. Stay tuned.
 
 Open sourcing is just a starting point. In addition to the infrastructure-level chaos experiments introduced in previous sections, we are in the process of supporting a wider range of fault types of finer granularity, such as:
 
-* Injecting errors at the system call and kernel levels with the assistance of eBPF and other tools 
+* Injecting errors at the system call and kernel levels with the assistance of eBPF and other tools
 * Injecting specific error types into the application function and statement levels by integrating [failpoint](https://github.com/pingcap/failpoint), which will cover scenarios that are otherwise impossible with conventional injection methods
 
 Moving forward, we will continuously improve the Chaos Mesh Dashboard, so that users can easily see if and how their online businesses are impacted by fault injections. In addition, our roadmap includes an easy-to-use fault orchestration interface. We're planning other cool features, such as Chaos Mesh Verifier and Chaos Mesh Cloud.

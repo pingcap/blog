@@ -11,7 +11,7 @@ If you come to [TiDB](https://github.com/pingcap/tidb), an open source NewSQL da
 
 I know in my case, as someone who's spent more than 15 years in the MySQL world, while I can explain how redo log flushing works in InnoDB, only until recently did it become natural for me to write a simple query with a window function.
 
-So in this post, I want to go through some simple use cases where a MySQL DBA can expand their *repertoire* and answer some basic business questions by writing SQL queries with window functions. This knowledge could add a lot of value, especially if you work at a company that doesn't yet have a full-fledged data science team, but is already doing some analytics. 
+So in this post, I want to go through some simple use cases where a MySQL DBA can expand their *repertoire* and answer some basic business questions by writing SQL queries with window functions. This knowledge could add a lot of value, especially if you work at a company that doesn't yet have a full-fledged data science team, but is already doing some analytics.
 
 Our sample data set will be the 30 years of USA flight on-time statistics [loaded](https://github.com/Percona-Lab/ontime-airline-performance) into [TiDB 3.0 BETA](https://pingcap.com/blog/tidb-3.0-beta-stability-at-scale/).
 
@@ -179,7 +179,7 @@ By looking only at the average, we wouldn't see the fact that a person in series
 
 I use this example to prove a point, but it is actually **even worse** in the case of our flight statistics data. An early arrival will subtract from the average, which resulted in some of the averages in the first result even being negative!
 
-A more statistically sound approach would be to know how many times a customer had a frustrating experience, for example how many times is the ArrDelay greater than 30 minutes? What about greater than 4 hours? Here's the query for that: 
+A more statistically sound approach would be to know how many times a customer had a frustrating experience, for example how many times is the ArrDelay greater than 30 minutes? What about greater than 4 hours? Here's the query for that:
 
 ```
 SELECT
@@ -444,4 +444,4 @@ When we look at these numbers, the results are not so impressive. All airlines r
 
 In this post, I tried to show how to write elegant queries that provide analytics processing that help deliver value to your organization beyond the standard responsibilities of a MySQL DBA. My hope is that you can use *a similar query* at work to, for example, find issues in your business that are at high risks, or customer service cases that could be analyzed to improve user experience. The possibilities are endless.
 
-We have really just scratched the surface with basic window functions though; there is a lot more to offer! Stay tuned for future blog posts that expand on this subject. 
+We have really just scratched the surface with basic window functions though; there is a lot more to offer! Stay tuned for future blog posts that expand on this subject.

@@ -13,7 +13,7 @@ In this 5-minute tutorial, we will show you how to spin up a standard TiDB clust
 
 Ready? Let’s get started!
 
-# Setting Up
+## Setting Up
 
 Before we start deploying TiDB, we’ll need a few things first: `wget`, Git, Docker, and a MySQL client. If you don’t have them installed already, here are the instructions to get them.
 
@@ -66,7 +66,7 @@ Before we start deploying TiDB, we’ll need a few things first: `wget`, Git, Do
   </section>
 </main>
 
-# Spin up a TiDB cluster
+## Spin up a TiDB cluster
 
 Now that Docker is set up, let's deploy TiDB!
 
@@ -105,9 +105,9 @@ To check if your deployment is successful:
     >
     > If you are deploying TiDB on a remote machine rather than a local PC, go to `http://<remote host's IP address>:3000` instead to access the Grafana monitoring dashboard.
 
-    * Go to `Home` and click on the pull down menu to see dashboards of different TiDB components: TiDB, TiKV, PD, entire cluster.
+  * Go to `Home` and click on the pull down menu to see dashboards of different TiDB components: TiDB, TiKV, PD, entire cluster.
 
-    * You will see a dashboard full of panels and stats on your current TiDB cluster. Feel free to play around in Grafana, e.g. `TiDB-Cluster-TiKV`, or `TiDB-Cluster-PD`.
+  * You will see a dashboard full of panels and stats on your current TiDB cluster. Feel free to play around in Grafana, e.g. `TiDB-Cluster-TiKV`, or `TiDB-Cluster-PD`.
 
 ![Grafana display of TiKV metrics](media/grafana_display_of_tikv_metrics.png)
 
@@ -115,9 +115,9 @@ To check if your deployment is successful:
 
 * Now go to TiDB-vision at [http://localhost:8010](http://localhost:8010) (TiDB-vision is a cluster visualization tool to see data transfer and load-balancing inside your cluster).
 
-    * You can see a ring of 3 [TiKV](http://bit.ly/tikv_repo_publication) nodes. TiKV applies the Raft consensus protocol to provide strong consistency and high availability. Light grey blocks are empty spaces, dark grey blocks are Raft followers, and dark green blocks are Raft leaders. If you see flashing green bands, that represent communications between TiKV nodes.
+  * You can see a ring of 3 [TiKV](http://bit.ly/tikv_repo_publication) nodes. TiKV applies the Raft consensus protocol to provide strong consistency and high availability. Light grey blocks are empty spaces, dark grey blocks are Raft followers, and dark green blocks are Raft leaders. If you see flashing green bands, that represent communications between TiKV nodes.
 
-    * It looks something like this:
+  * It looks something like this:
 
 ![TiDB-vision](media/tidb_vision.png)
 
@@ -128,7 +128,7 @@ To check if your deployment is successful:
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How To Spin Up an HTAP Database in 5 Minutes with TiDB + TiSpark', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
-# Test TiDB compatibility with MySQL
+## Test TiDB compatibility with MySQL
 
 As we mentioned, TiDB is MySQL compatible. You can use TiDB as MySQL slaves with instant horizontal scalability. That’s how many innovative tech companies, like [Mobike](https://pingcap.com/blog/Use-Case-TiDB-in-Mobike/), use TiDB.
 
@@ -155,12 +155,12 @@ To test out this MySQL compatibility:
 ```bash
 Server version: 5.7.10-TiDB-v2.0.0-rc.4-31
 ```
+
 ![TiDB Compatibility with MySQL](media/test_tidb_compatibility_with_mysql.png)
 
 <div class="caption-center"> The Compatibility of TiDB with MySQL </div>
 
-
-# Let’s get some data!
+## Let’s get some data!
 
 Now we will grab some sample data that we can play around with.
 
@@ -182,6 +182,7 @@ Now we will grab some sample data that we can play around with.
     cd tispark-sample-data
     ./sample_data.sh
     ```
+
     This will take a few seconds.
 
 4. Go back to your MySQL client window or tab, and see what’s in there:
@@ -192,14 +193,14 @@ Now we will grab some sample data that we can play around with.
 
     **Result:** You can see the `TPCH_001` database on the list. That’s the sample data we just ported over.
 
-	![Imported data](media/imported_data.png)
+ ![Imported data](media/imported_data.png)
 
     Now let’s go into `TPCH_001`:
 
-	```sql
-	USE TPCH_001;
-	SHOW TABLES;
-	```
+ ```sql
+ USE TPCH_001;
+ SHOW TABLES;
+ ```
 
     **Result:** You can see all the tables in `TPCH_001`, like `NATION`, `ORDERS`, etc.
 
@@ -213,7 +214,7 @@ Now we will grab some sample data that we can play around with.
 
 ![The records in the NATION table](media/the_records_in_the_nation_table.png)
 
-# Launch TiSpark
+## Launch TiSpark
 
 Now let’s launch TiSpark, the last missing piece of our hybrid database puzzle.
 
@@ -248,7 +249,7 @@ Now let’s launch TiSpark, the last missing piece of our hybrid database puzzle
 
     ![What’s in the NATION table in Spark](media/whats_in_the_nation_table_in_spark.png)
 
-# Let’s get hybrid!
+## Let’s get hybrid!
 
 Now, let’s go back to the MySQL tab or window, make some changes to our tables, and see if the changes show up on the TiSpark side.
 
@@ -277,7 +278,7 @@ Now, let’s go back to the MySQL tab or window, make some changes to our tables
 
 You can see that both the MySQL and TiSpark clients return the same results -- fresh data for you to do analytics on right away. Voila!
 
-# Summary
+## Summary
 
 With this simple deployment of TiDB on your local machine, you now have a functioning Hybrid Transactional and Analytical processing (HTAP) database. You can continue to make changes to the data in your MySQL client (simulating transactional workloads) and analyze the data with those changes in TiSpark (simulating real-time analytics).
 

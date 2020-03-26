@@ -25,7 +25,7 @@ In this post, I'll deep dive into how [TiKV](https://tikv.org/), an open-source 
 
 ## Our pain points
 
-JD Cloud's OSS provides a full range of products including file upload, storage, download, distribution, and online processing. We aim to offer a safe, stable, massive, and convenient object storage service for users. 
+JD Cloud's OSS provides a full range of products including file upload, storage, download, distribution, and online processing. We aim to offer a safe, stable, massive, and convenient object storage service for users.
 
 In this section, I'll elaborate on challenges we encountered in storing OSS metadata and our exploration to redesign the metadata storage system.
 
@@ -34,7 +34,7 @@ In this section, I'll elaborate on challenges we encountered in storing OSS meta
 As shown in the figure below, we previously used MySQL to store OSS metadata (such as image size). Metadata was grouped in buckets, which are similar to namespaces.  
 
 ![Original OSS metadata storage system based on MySQL](media/original-oss-metadata-storage-system-based-on-mysql.png)
-<div class="caption-center"> Original OSS metadata storage system based on MySQL </div> 
+<div class="caption-center"> Original OSS metadata storage system based on MySQL </div>
 
 Many similar systems use such a design. But facing business growth with metadata booming, we were plagued by the following challenges:
 
@@ -44,7 +44,7 @@ Many similar systems use such a design. But facing business growth with metadata
 
 * **The number of objects in a single bucket _unexpectedly_ increased rapidly**.
 
-    In the early days, we had a small number of metadata. We might need only four buckets to store them. But as our business developed, the metadata surged at an unanticipated rate, so we needed to redivide the metadata into 400 buckets. 
+    In the early days, we had a small number of metadata. We might need only four buckets to store them. But as our business developed, the metadata surged at an unanticipated rate, so we needed to redivide the metadata into 400 buckets.
 
     In this case, we had to rehash and rebalance data. However, the data rehashing process was very complicated and troublesome.
 
@@ -57,9 +57,9 @@ Many similar systems use such a design. But facing business growth with metadata
 To conquer the difficulties mentioned above, we redesigned our metadata storage system as shown in the following figure:
 
 ![Redesigning the OSS metadata storage system](media/redesigning-the-oss-metadata-storage-system.png)
-<div class="caption-center"> Redesigning the OSS metadata storage system </div> 
+<div class="caption-center"> Redesigning the OSS metadata storage system </div>
 
-The core technique of this solution was making the most data static, because static data was easy to store, migrate, and split. Every day, we made the data written on the previous day static, and merged the static data into the historical data. 
+The core technique of this solution was making the most data static, because static data was easy to store, migrate, and split. Every day, we made the data written on the previous day static, and merged the static data into the historical data.
 
 However, as the following diagram reveals, this solution had two problems:
 
@@ -68,7 +68,7 @@ However, as the following diagram reveals, this solution had two problems:
 * Data scheduling was inflexible, which made system maintenance more difficult.
 
 ![Complexity of the metadata storage system](media/complexity-of-the-metadata-storage-system.png)
-<div class="caption-center"> Complexity of the metadata storage system </div> 
+<div class="caption-center"> Complexity of the metadata storage system </div>
 
 Therefore, we began to look for a new solution: a **globally ordered key-value** store with **great storage capacity** and **elastic scalability**. Finally, we found TiKV, and it turns out it's a perfect match for storing enormous amounts of data.
 
@@ -95,7 +95,7 @@ TiKV connect to clients. To understand how TiKV works, you need to understand so
 
 * Raft group: A Raft group consists of the replicas of the same Region on different nodes.
 
-* Placement Driver (PD): PD schedules the load balancing of the data among different TiKV nodes. 
+* Placement Driver (PD): PD schedules the load balancing of the data among different TiKV nodes.
 
 ### TiKV's features
 
@@ -123,7 +123,7 @@ After we investigated many database products, we chose TiKV because it has the f
 
 * TiKV supports a globally-ordered key-value store, and it is easy to horizontally scale. This fulfills the requirements for metadata storage of our OSS.
 
-* Through rigorous tests, TiKV demonstrates excellent performance that meets the demands of our application. 
+* Through rigorous tests, TiKV demonstrates excellent performance that meets the demands of our application.
 
 * TiKV boasts an active community, with complete [documentation](https://tikv.org/docs/3.0/concepts/overview/) and ecosystem [tools](https://tikv.org/docs/3.0/reference/tools/introduction/).
 
@@ -139,16 +139,16 @@ Besides the advantages above, TiKV also passed our tests, including:
 
 * **The fault injection test.** Engineers specializing in data storage tend to focus more on system behavior in abnormal conditions rather than on performance status. In addition, distributed storage is more complex than standalone storage. Thus, we simulated various machine, disk, and network faults. We even randomly combined these faults and triggered abnormalities in the system to test the system behavior.
 
-* **The staging environment test.** Before we deployed TiKV to production on a large scale, we ran TiKV on some production applications that were less important. Then, we collected some issues and problems that could be optimized. 
+* **The staging environment test.** Before we deployed TiKV to production on a large scale, we ran TiKV on some production applications that were less important. Then, we collected some issues and problems that could be optimized.
 
 The test results showed that TiKV met our requirements for system performance and security. Then, we applied TiKV in our OSS metadata storage system, as shown in the following figure:
 
 ![OSS metadata storage system based on TiKV](media/oss-metadata-storage-system-based-on-tikv.png)
-<div class="caption-center"> OSS metadata storage system based on TiKV </div> 
+<div class="caption-center"> OSS metadata storage system based on TiKV </div>
 
 ## Migrating data from MySQL to TiKV
 
-Many TiDB users have migrated data from MySQL to TiDB, but far fewer have migrated data to TiKV. We gained firsthand experience in data migration from MySQL to TiKV. 
+Many TiDB users have migrated data from MySQL to TiDB, but far fewer have migrated data to TiKV. We gained firsthand experience in data migration from MySQL to TiKV.
 
 This section covers how we migrated data from MySQL to TiKV, including our migration policy, the traffic switch process, and how we verified data.
 
@@ -157,7 +157,7 @@ This section covers how we migrated data from MySQL to TiKV, including our migra
 The following figure shows our data migration policy:
 
 ![Data migration policy](media/data-migration-policy.png)
-<div class="caption-center"> Data migration policy </div> 
+<div class="caption-center"> Data migration policy </div>
 
 The key points of this policy are as follows:
 
@@ -165,7 +165,7 @@ The key points of this policy are as follows:
 
 * We set the existing data read-only and migrated this data to TiKV. During the migrating process, the incremental data was directly written to TiKV.
 
-* Every day, we set the incremental data generated on the previous day to be static, and compared this data in TiKV to that in MySQL for data verification. If a doublewrite failed, we would use the data in MySQL. 
+* Every day, we set the incremental data generated on the previous day to be static, and compared this data in TiKV to that in MySQL for data verification. If a doublewrite failed, we would use the data in MySQL.
 
 ### Traffic switching
 
@@ -207,7 +207,7 @@ We are now testing TiKV 3.0, and expect to deploy it to the production environme
 
 ## What's next
 
-Thanks to the horizontal scalability of TiKV, we can deal with an enormous amount of OSS metadata in a storage architecture that is simpler than before. 
+Thanks to the horizontal scalability of TiKV, we can deal with an enormous amount of OSS metadata in a storage architecture that is simpler than before.
 
 In the future, we'll optimize TiKV in the following ways:
 

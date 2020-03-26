@@ -10,9 +10,9 @@ image: /images/blog/why-benchmarking-distributed-databases-is-so-hard-1.png
 
 ![Why Benchmarking Distributed Databases Is So Hard](media/why-benchmarking-distributed-databases-is-so-hard-2.png)
 
-At KubeCon+CloudNativeCon Europe 2019, [Iqbal Farabi](https://www.linkedin.com/in/iqbal-farabi-02756923/) and [Tara Baskara](https://www.linkedin.com/in/tara-baskara-5050003b/) from [GO-JEK](https://www.go-jek.com/) presented their findings on experiments to benchmark various cloud native databases, such as Vitess, CockroachDB, FoundationDB, TiDB, YugaByte DB, etc. They applied the following filters to the list: 
+At KubeCon+CloudNativeCon Europe 2019, [Iqbal Farabi](https://www.linkedin.com/in/iqbal-farabi-02756923/) and [Tara Baskara](https://www.linkedin.com/in/tara-baskara-5050003b/) from [GO-JEK](https://www.go-jek.com/) presented their findings on experiments to benchmark various cloud native databases, such as Vitess, CockroachDB, FoundationDB, TiDB, YugaByte DB, etc. They applied the following filters to the list:
 
-- Open source 
+- Open source
 - Operational database
 - ACID compliance
 - Provides SQL-like API
@@ -20,16 +20,16 @@ At KubeCon+CloudNativeCon Europe 2019, [Iqbal Farabi](https://www.linkedin.com/i
 The result was the following list of databases to benchmark:
 
 - [CockroachDB](https://github.com/cockroachdb/cockroach)
-- [TiDB](https://github.com/pingcap/tidb) 
+- [TiDB](https://github.com/pingcap/tidb)
 - [YugaByte DB](https://github.com/YugaByte/yugabyte-db)
 
 For the database benchmarking, they used [go-ycsb](https://github.com/pingcap/go-ycsb), a Go port of Yahoo! Cloud System Benchmark (YCSB) from PingCAP. Feel free to check out the [video recording](https://youtu.be/cz-eHwqtyvU) and [slides](https://static.sched.com/hosted_files/kccnceu19/22/Benchmarking%20Cloud%20Native%20Database%20Running%20on%20Kubernetes.pdf).
 
-We highly appreciate the great work from Iqbal Farabi and Tara Baskara. Their presentation about benchmarking cloud native databases is a great one, and we believe it could benefit the entire cloud native and open source database community. 
+We highly appreciate the great work from Iqbal Farabi and Tara Baskara. Their presentation about benchmarking cloud native databases is a great one, and we believe it could benefit the entire cloud native and open source database community.
 
 However, in the TiDB part of the presentation, the benchmark results were not ideal. We tried to reproduce what’s in the slide, but because there was some unclear information about the setup and configuration, we have got very different benchmark results. If you are interested in our results, feel free to email: info@pingcap.com. As a next step, we will work closely with Iqbal Farabi and Tara Baskara to update the results.
 
-In the meantime, their work got us into thinking: why is it so hard to benchmark distributed databases? As mentioned by <antirez> in [Why we don't have benchmarks comparing Redis with other DBs](http://antirez.com/news/85), you can see how choosing an unrealistic deployment and workload for a benchmark can easily impact the reaction to the results. 
+In the meantime, their work got us into thinking: why is it so hard to benchmark distributed databases? As mentioned by <antirez> in [Why we don't have benchmarks comparing Redis with other DBs](http://antirez.com/news/85), you can see how choosing an unrealistic deployment and workload for a benchmark can easily impact the reaction to the results.
 
 If you're an avid reader of distributed system news like we are, you've probably seen your share of benchmarks. You've also probably stopped taking them at face value.
 
@@ -148,7 +148,7 @@ Being convincing also involves accepting your weaknesses. A benchmark result whe
 
 Before we even get started on making a benchmark, we need to Read Those Fricking Manuals™ for each of the databases we'd like to benchmark, as well as each of the tools or workloads we want to benchmark. Understand what the tools are good at, and what they're bad at.
 
-Numbers that are just numbers mean nothing  — you must have an understanding of what you have benchmarked, and what the results mean. You should ensure that the benchmark configurations, specs, and topologies are all realistic and appropriate for the situation. 
+Numbers that are just numbers mean nothing  — you must have an understanding of what you have benchmarked, and what the results mean. You should ensure that the benchmark configurations, specs, and topologies are all realistic and appropriate for the situation.
 
 Pay attention to tuning guides or recommended deployment options. If possible, use official deployment tools like [TiDB Ansible](https://github.com/pingcap/tidb-ansible) or [TiDB Operator](https://github.com/pingcap/tidb-operator/), because they often are built to handle things like essential OS configuration.
 

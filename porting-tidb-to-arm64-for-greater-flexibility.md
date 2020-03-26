@@ -7,7 +7,7 @@ tags: ['Engineering']
 categories: ['Engineering']
 ---
 
-The Intel x86-64 is the most widely used processor in server architectures. However, [ARM](https://en.wikipedia.org/wiki/ARM_architecture), previously known as Advanced RISC Machine, is attracting more and more attention, and many companies have migrated their products from x86-64 to ARM. 
+The Intel x86-64 is the most widely used processor in server architectures. However, [ARM](https://en.wikipedia.org/wiki/ARM_architecture), previously known as Advanced RISC Machine, is attracting more and more attention, and many companies have migrated their products from x86-64 to ARM.
 
 At PingCAP, we also want to run [TiDB](https://en.wikipedia.org/wiki/TiDB) on ARM. This article describes how we compiled and benchmarked TiDB on the Amazon Web Services (AWS) ARM64 platform.
 
@@ -40,11 +40,11 @@ By the way, there is a [script](https://gist.github.com/siddontang/3a35473437bc4
 
 ## Benchmarking the TiDB ARM64 and x86-64 versions
 
-After we built our TiDB version for ARM64, we benchmarked it to compare its performance with the same configuration on x86-64. 
+After we built our TiDB version for ARM64, we benchmarked it to compare its performance with the same configuration on x86-64.
 
-We used [Yahoo! Cloud Serving Benchmark (YCSB)](https://github.com/pingcap/go-ycsb) for our benchmarking software. 
+We used [Yahoo! Cloud Serving Benchmark (YCSB)](https://github.com/pingcap/go-ycsb) for our benchmarking software.
 
-We used two machines for our test setup: one ARM64 machine with 16 cores and 32 GB RAM, and one x86-64 machine with 16 cores and 32 GB RAM. On each machine, we started one PD instance and one TiKV instance with default configurations. 
+We used two machines for our test setup: one ARM64 machine with 16 cores and 32 GB RAM, and one x86-64 machine with 16 cores and 32 GB RAM. On each machine, we started one PD instance and one TiKV instance with default configurations.
 
 Note: We only use the go-ycsb Raw mode to benchmark TiKV, not TiDB.
 
@@ -70,7 +70,7 @@ sudo sh -c 'echo fe00 > /sys/class/net/eth0/queues/rx-1/rps_cpus'
 
 The result was better on ARM64, but CPU 0 and 8 were still the bottleneck. Specifically, the bottleneck was caused by the network interrupt handling. We’ll try to optimize it later.
 
-You can see that CPUs run more evenly on x86-64 than on ARM64. 
+You can see that CPUs run more evenly on x86-64 than on ARM64.
 
 ![CPUs run more evenly on x86-64 than on ARM64](media/cpus-run-more-evenly-on-x86-64-than-on-arm64.png)
 

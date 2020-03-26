@@ -20,15 +20,15 @@ When we need to analyze a Rust program's performance, we often think about [perf
 
 However, perf doesn't perfectly support programs written in Rust. For example, it doesn't understand Rust's closures. Therefore, symbols for the stack information in the visualization are complex.
 
-To collect profiling statistics for Rust programs like [TiKV](https://github.com/tikv/tikv), we developed [pprof-rs](https://github.com/tikv/pprof-rs), which samples, analyzes, and visualizes performance data in one step. We integrated pprof-rs in TiKV's `status_server`, which outputs monitoring information. 
+To collect profiling statistics for Rust programs like [TiKV](https://github.com/tikv/tikv), we developed [pprof-rs](https://github.com/tikv/pprof-rs), which samples, analyzes, and visualizes performance data in one step. We integrated pprof-rs in TiKV's `status_server`, which outputs monitoring information.
 
-Because pprof-rs uses the same data format as the Go tool [pprof](https://golang.org/pkg/net/http/pprof/), we can use pprof, to visualize TiKV's profiling data. This makes it easier for developers and online users to find TiKV's performance bottlenecks. 
+Because pprof-rs uses the same data format as the Go tool [pprof](https://golang.org/pkg/net/http/pprof/), we can use pprof, to visualize TiKV's profiling data. This makes it easier for developers and online users to find TiKV's performance bottlenecks.
 
-In this post, I'll share how we use pprof to visualize TiKV's profiling data to help quickly locate TiKV's performance bottlenecks online. If you also write Rust programs, you can introduce pprof-rs into your projects to help analyze your programs' performance online. 
+In this post, I'll share how we use pprof to visualize TiKV's profiling data to help quickly locate TiKV's performance bottlenecks online. If you also write Rust programs, you can introduce pprof-rs into your projects to help analyze your programs' performance online.
 
 ## Why the protobuf format?
 
-[pprof](https://github.com/google/pprof) is a tool that analyzes and visualizes profiling data. It profiles data in the [Protocol Buffers](https://github.com/google/pprof/blob/master/proto/profile.proto) (protobuf) format. Protobuf is Google's data interchange format and helps serialize structured data. 
+[pprof](https://github.com/google/pprof) is a tool that analyzes and visualizes profiling data. It profiles data in the [Protocol Buffers](https://github.com/google/pprof/blob/master/proto/profile.proto) (protobuf) format. Protobuf is Google's data interchange format and helps serialize structured data.
 
 If we want to obtain detailed profiling data for a comprehensive analysis or use other community tools for profiling diagnosis, a program-readable file format is essential. pprof-rs outputs files in the protobuf format. Thus, we can use other tools that depend on this format for profiling analysis.
 
@@ -36,8 +36,8 @@ If we want to obtain detailed profiling data for a comprehensive analysis or use
 
 TiKV is a distributed, transactional, key-value database written in Rust. Taking it as an example, let's see how to use pprof to visualize a Rust program's profiling data:
 
-> **Note:** 
-> 
+> **Note:**
+>
 > Before you start, make sure that you've installed the following in the environment:
 >
 > * [Graphviz](https://www.graphviz.org/download/)
@@ -80,6 +80,6 @@ go tool pprof -ignore threadpool -http=:8080 some.pb
 
 ## Conclusion
 
-It has long been a problem to locate Rust programs' performance bottlenecks online. By integrating pprof-rs in TiKV, we can use the Go tool pprof to visualize TiKV's profiling data. This helps you quickly locate TiKV's performance issues in the production environment. Meanwhile, pprof can directly output a flame graph via HTTP requests. 
+It has long been a problem to locate Rust programs' performance bottlenecks online. By integrating pprof-rs in TiKV, we can use the Go tool pprof to visualize TiKV's profiling data. This helps you quickly locate TiKV's performance issues in the production environment. Meanwhile, pprof can directly output a flame graph via HTTP requests.
 
 If you introduce pprof-rs into your Rust-written programs, you can use pprof to visualize your programs' profiling data online. If you're interested in [pprof-rs](https://github.com/tikv/pprof-rs), give it a try.

@@ -28,7 +28,7 @@ As the first GA version, TiDB Operator 1.0 has the following highlights.
 
 ### Easier TiDB operation and maintenance
 
-Because TiDB is a relatively complex distributed system, you often need professional knowledge to deploy, operate, and maintain TiDB clusters. 
+Because TiDB is a relatively complex distributed system, you often need professional knowledge to deploy, operate, and maintain TiDB clusters.
 
 To make these tasks easier, we developed TiDB Operator. It injects professional TiDB operation and maintenance knowledge into Kubernetes through custom resources, custom controllers, and the scheduler extender, and lets you manage TiDB clusters through Kubernetes' declarative API style.
 
@@ -40,19 +40,19 @@ To ensure that all the automatic operations and maintenance are stable and relia
 
 ### Support for multiple cloud platforms
 
-TiDB Operator provides Terraform deployment scripts so you can deploy TiDB clusters on Amazon Web Services (AWS), Google Cloud, and Alibaba Cloud. With these scripts, you can create a Kubernetes cluster and deploy one or more production TiDB clusters on it within 20 minutes. 
+TiDB Operator provides Terraform deployment scripts so you can deploy TiDB clusters on Amazon Web Services (AWS), Google Cloud, and Alibaba Cloud. With these scripts, you can create a Kubernetes cluster and deploy one or more production TiDB clusters on it within 20 minutes.
 
 As you manage the cluster, the Terraform script not only operates the TiDB cluster but also operates related cloud resources at the same time. For example, when you scale out a TiDB cluster, the Terraform script automatically creates more cloud servers to satisfy the resource requirements after scaling.
 
 ## Try TiDB Operator
 
-Currently, you can use TiDB Operator to quickly deploy a TiDB cluster on 
+Currently, you can use TiDB Operator to quickly deploy a TiDB cluster on
 
 * [AWS EKS (Elastic Kubernetes Service)](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/deploy/aws-eks/)
 * [GKE (Google Kubernetes Engine)](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/get-started/deploy-tidb-from-kubernetes-gke/)
 * [Alibaba Cloud ACK (Container Service for Kubernetes)](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/deploy/alibaba-cloud/)
 
-You can also learn how to [deploy a TiDB cluster on general Kubernetes clusters](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/deploy/general-kubernetes/) and try [TiDB Operator](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/deploy/tidb-operator/) on any Kubernetes cluster. 
+You can also learn how to [deploy a TiDB cluster on general Kubernetes clusters](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/deploy/general-kubernetes/) and try [TiDB Operator](https://pingcap.com/docs/v3.0/tidb-in-kubernetes/deploy/tidb-operator/) on any Kubernetes cluster.
 
 TiDB Operator is also available on OperatoHub.io, check out [TiDB Operator](https://operatorhub.io/operator/tidb-operator).
 

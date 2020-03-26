@@ -9,7 +9,7 @@ categories: ['Engineering']
 
 ## Introduction
 
-[Titan](https://github.com/pingcap/rocksdb/tree/titan-5.15) is a RocksDB plugin for key-value separation, inspired by [WiscKey](https://www.usenix.org/system/files/conference/fast16/fast16-papers-lu.pdf), a paper issued in USENIX FAST 2016. It's available for preview in TiDB 3.0. The goal of Titan is to reduce write amplification in RocksDB when using large values. 
+[Titan](https://github.com/pingcap/rocksdb/tree/titan-5.15) is a RocksDB plugin for key-value separation, inspired by [WiscKey](https://www.usenix.org/system/files/conference/fast16/fast16-papers-lu.pdf), a paper issued in USENIX FAST 2016. It's available for preview in TiDB 3.0. The goal of Titan is to reduce write amplification in RocksDB when using large values.
 
 WiscKey is specifically designed for solid-state drives (SSDs). WiscKey separates keys from values, which generates random I/O that is not well suited for hard drives. Our internal testing indicates that when the value size in Key-Value pairs is large, Titan performs better than RocksDB in write, update, and point read scenarios. However, according to [RUM Conjecture](http://daslab.seas.harvard.edu/rum-conjecture/), improvements achieved in one are usually at the cost of another. The same is true with Titan -- it gets a higher write performance by sacrificing storage space and range query performance. As the price of SSDs continues to decrease, we believe this trade-off will be more and more meaningful.
 
@@ -19,7 +19,7 @@ As a child project of TiKV, Titan's first design goal is to be compatible with R
 
 - Reduce write amplification by separating values from the log-structured merge-tree (LSM tree) and storing them independently.
 - Seamlessly upgrade RocksDB instances to Titan. The upgrade will not require human intervention and will not impact online services.
-- Achieve 100% compatibility with all RocksDB features used by the current TiKV. 
+- Achieve 100% compatibility with all RocksDB features used by the current TiKV.
 - Minimize invasive changes to RocksDB to ensure an easier RocksDB upgrade to Titan.
 
 ## Architecture and implementation
@@ -29,7 +29,7 @@ The following figure shows the basic Titan architecture:
 ![Titan architecture](media/titan-architecture.png)
 
 Figure 1. During flush and compaction operations, Titan separates values from the LSM tree. The advantage of this approach is that the write process is consistent with RocksDB, which reduces the chance of invasive changes to RocksDB.
-	
+
 Titan core components include BlobFile, TitanTableBuilder, Version, and Garbage Collection (GC). We will dive into each of these components in the following sections.
 
 ### BlobFile
@@ -52,9 +52,9 @@ TitanTableBuilder is the key to achieving Key-Value separation. As you may know,
 
 ![TitanTableBuilder workflow](media/titantablebuilder-workflow.png)
 
-Figure 3. TitanTableBuilder determines the Key-Pair value size, and based on that, decides whether to separate the value from the Key-Value pair and store it in the blob file. 
+Figure 3. TitanTableBuilder determines the Key-Pair value size, and based on that, decides whether to separate the value from the Key-Value pair and store it in the blob file.
 
-- If the value size is greater than or equal to min_blob_size, TitanTableBuilder separates the value and stores it in the blob file. TitanTableBuilder also generates an index and writes it into the SST. 
+- If the value size is greater than or equal to min_blob_size, TitanTableBuilder separates the value and stores it in the blob file. TitanTableBuilder also generates an index and writes it into the SST.
 - If the value size is less than min_blob_size, TitanTableBuilder writes the value directly into the SST.
 
 Titan's design differs greatly from [Badger](https://github.com/dgraph-io/badger), which converts the Write-Ahead Log (WAL) into a Vlog to save overhead for a single flush. There are two main reasons why Titan takes a different approach:
@@ -64,11 +64,11 @@ Titan's design differs greatly from [Badger](https://github.com/dgraph-io/badger
 
 ### Version
 
-Titan uses Version to refer to a valid blob file at a specific point of time. We draw this data management method from LevelDB. The core concept behind this method is Multi-version Concurrency Control ([MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control)). The advantage of this approach is that it allows concurrent reads with no locking required when a file is added or deleted. Each time a file is added or deleted, Titan generates a new version. Before each read, Titan gets the latest version. 
+Titan uses Version to refer to a valid blob file at a specific point of time. We draw this data management method from LevelDB. The core concept behind this method is Multi-version Concurrency Control ([MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control)). The advantage of this approach is that it allows concurrent reads with no locking required when a file is added or deleted. Each time a file is added or deleted, Titan generates a new version. Before each read, Titan gets the latest version.
 
 ![VersionSet](media/versionset.png)
 
-Figure 4. New and old versions form a head-to-tail bidirectional linked list. VersionSet manages all versions, with a **current** pointer that points to the latest version. 
+Figure 4. New and old versions form a head-to-tail bidirectional linked list. VersionSet manages all versions, with a **current** pointer that points to the latest version.
 
 ### Garbage Collection
 
@@ -85,7 +85,7 @@ RocksDB let's us use BlobFileSizeCollector, a custom table property collector, t
 
 ![BlobFileSizeCollector workflow and data formats](media/blobfilesizecollector-workflow-and-data-formats.png)
 
-Figure 5. On the left is the SST index format. The first column is the blob file ID; the second column is the offset for the blob record in the blob file; the third column is the blob record size. 
+Figure 5. On the left is the SST index format. The first column is the blob file ID; the second column is the offset for the blob record in the blob file; the third column is the blob record size.
 
 On the right is the BlobFileSizeProperties format. Each line represents a blob file and how much data is saved in this blob file. The first column is the blob file ID; the second column is the size of the data.
 
@@ -111,13 +111,13 @@ Before each compaction, we pick a set of blob files as our candidates as describ
 2. Traverse all keys in A, and accumulate sizes of blob records with outdated keys as *d*.
 3. *r= d/a.* If r>= discardable_ratio, perform GC on this blob file, or else do not perform GC on it.
 
-As mentioned in the previous section, there is a discardable size maintained in memory for each blob file. If the proportion of this value to the size of the blob file is greater than or equal to discardable_ratio, no Sample calculation is needed for this blob file. 
+As mentioned in the previous section, there is a discardable size maintained in memory for each blob file. If the proportion of this value to the size of the blob file is greater than or equal to discardable_ratio, no Sample calculation is needed for this blob file.
 
 ## Benchmark test
 
 We used [go-ycsb](https://github.com/pingcap/go-ycsb), a GO port of [YCSB](https://github.com/brianfrankcooper/YCSB), to test TiKV's performance in Transaction mode respectively on RocksDB and Titan. In this section, I will briefly describe our test methods and results. Because the length of this article is limited, we can only pick two typical value sizes for elaboration. Our next article will include a more detailed test analysis and report.
 
-### Test environment   
+### Test environment
 
 - CPU: Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz（40 cores）
 - Memory: 128 GB（TiKV memory usage is limited under 32 GB via Cgroup）
@@ -144,7 +144,7 @@ The test focused on the following common scenarios:
 
 ![Data loading performance](media/data-loading-performance.png)
 
-Figure 7. Data Loading Performance: Titan's performance is 70% higher than RocksDB in write scenarios. The gap becomes more evident as the value size increases. It's worth noting that data is first written into the Raft Log before the KV Engine, which dilutes Titan's performance. If we use both Titan's API and RocksDB API nakedly for the test instead of first going through TiKV's API, the performance gap is even bigger. 
+Figure 7. Data Loading Performance: Titan's performance is 70% higher than RocksDB in write scenarios. The gap becomes more evident as the value size increases. It's worth noting that data is first written into the Raft Log before the KV Engine, which dilutes Titan's performance. If we use both Titan's API and RocksDB API nakedly for the test instead of first going through TiKV's API, the performance gap is even bigger.
 
 ![Update performance](media/update-performance.png)
 
@@ -152,7 +152,7 @@ Figure 8. Update Performance: Titan's performance in update scenarios is 180% hi
 
 ![Output size](media/output-size.png)
 
-Figure 9. Output Size: Titan has a slightly higher space amplification than RocksDB. This is mostly a result of the write amplification caused by storage overhead for keys in the blob file. As the number of keys is reduced, this gap drops a little. 
+Figure 9. Output Size: Titan has a slightly higher space amplification than RocksDB. This is mostly a result of the write amplification caused by storage overhead for keys in the blob file. As the number of keys is reduced, this gap drops a little.
 
 ![Random key lookup](media/random-key-lookup.png)
 
@@ -171,7 +171,7 @@ Since day one, our primary design goal has been compatibility with RocksDB. Ther
 - Merge
 - SingleDelete
 
-All other APIs except the Open interface share consistent parameters and return values with RocksDB. Existing projects only require minor changes to upgrade RocksDB instances smoothly to Titan. However, it is noteworthy that Titan does not support rollback to RocksDB. 
+All other APIs except the Open interface share consistent parameters and return values with RocksDB. Existing projects only require minor changes to upgrade RocksDB instances smoothly to Titan. However, it is noteworthy that Titan does not support rollback to RocksDB.
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('Titan: A RocksDB Plugin to Reduce Write Amplification', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -183,7 +183,7 @@ All other APIs except the Open interface share consistent parameters and return 
 ### Create a database
 
 To create a database, use one of the following methods:
- 
+
 ```
 #include <assert>
 #include "rocksdb/utilities/titandb/db.h"
@@ -195,7 +195,7 @@ options.create_if_missing = true;
 rocksdb::Status status =
 rocksdb::titandb::TitanDB::Open(options, "/tmp/testdb", &db);
  (status.ok());
-	…
+ …
 ```
 
 or
@@ -212,7 +212,7 @@ column_families.push_back(rocksdb::titandb::TitanCFDescriptor(
     kDefaultColumnFamilyName, rocksdb::titandb::TitanCFOptions()));
 // Open the new one, too
 column_families.push_back(rocksdb::titandb::TitanCFDescriptor(
-	"new_cf", rocksdb::titandb::TitanCFOptions()));
+ "new_cf", rocksdb::titandb::TitanCFOptions()));
 std::vector<ColumnFamilyHandle*> handles;
 s = rocksdb::titandb::TitanDB::Open(rocksdb::titandb::TitanDBOptions(), kDBPath, column_families, &handles, &db);
 assert(s.ok());
@@ -224,7 +224,7 @@ Like RocksDB, Titan uses `rocksdb::Status` as the default return value for most 
 
 ```
 rocksdb::Status s = ...;
-	if (!s.ok()) cerr << s.ToString() << endl;
+ if (!s.ok()) cerr << s.ToString() << endl;
 ```
 
 ### Destroy a database
@@ -254,7 +254,7 @@ Note: After you enable Titan, you cannot roll back to RocksDB.
 
 Our test indicates a low I/O utilization when performing range queries with Titan, which explains the performance gap compared to RocksDB. This is why we believe that there is great room for optimization on Titan's Iterator. The simplest method is to choose a more radical prefetch technique or use parallel prefetching for better Iterator performance.
 
-### GC speed control and auto-adjustment 
+### GC speed control and auto-adjustment
 
 Generally, an overly low GC speed can lead to severe space amplification, while an overly fast GC speed has a negative effect on queries per second (QPS) and service latency. Titan currently supports automatic GC, which aims to limit GC speed to a certain extent by reducing concurrency and batch size. However, due to an unstable amount of blob records in each blob file, if blob records become overly crowded, the write requests of the business may still be congested when the corresponding valid keys are updated back to the LSM tree. To achieve fine-grained control over the GC speed, we intend to use the [Token Bucket](https://en.wikipedia.org/wiki/Token_bucket) algorithm to limit the number of keys that GC can update within a specified period of time. This decreases GC's impact on QPS and latency and ensures a more stable service.
 
@@ -262,4 +262,4 @@ On the other hand, we are investigating algorithms that could adjust GC speed au
 
 ### API to identify key's existence
 
-In certain scenarios, TiKV only needs to identify whether a key exists or not instead of reading its value. We learned that after we separate values from the LSM tree, the latter becomes much smaller, and we can cache more indexes, filters, and datablocks in memory. Retrieving a key requires little or no I/O. By providing such an API, we could greatly improve performance. 
+In certain scenarios, TiKV only needs to identify whether a key exists or not instead of reading its value. We learned that after we separate values from the LSM tree, the latter becomes much smaller, and we can cache more indexes, filters, and datablocks in memory. Retrieving a key requires little or no I/O. By providing such an API, we could greatly improve performance.

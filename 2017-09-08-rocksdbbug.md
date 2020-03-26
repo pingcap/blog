@@ -13,6 +13,7 @@ categories: ['Engineering']
 Data was corrupted. A cluster panicked. The crime scene was compromised. What happened? Detective Huang (huachao@pingcap.com) went all lengths to locate the criminal and solved it once and for all.
 
 ## Background
+
 As a distributed open source HTAP database, [TiDB](https://github.com/pingcap/tidb) uses [TiKV](https://github.com/pingcap/tikv) as its storage engine. Inside TiKV, we use RocksDB as the local storage. RocksDB is a great project. It's mature, fast, tunable, and widely used in very large scale production environments. We have been working very closely with the RocksDB team. Recently, we found a bug in the DeleteRange feature in RocksDB.
 
 Before we begin, let's introduce some basic knowledge about RocksDB first.
@@ -91,6 +92,7 @@ Now we know how to delete a key in RocksDB, but what if we want to delete a rang
 ```
 (a,1,PUT),(b,2,PUT),(c,3,PUT),(c,4,DELETE),(a,5,DELETE),(b,6,DELETE)
 ```
+
 In the table, it looks like:
 <table>
   <tr>
@@ -140,6 +142,7 @@ Let's see how the DeleteRange feature from RocksDB comes to rescue. In the above
 ```
 (a,1,PUT),(b,2,PUT),(c,3,PUT),(c,4,DELETE),([a,c),5,DELETE_RANGE)
 ```
+
 In the table, it looks like:
 <table>
   <tr>
@@ -174,7 +177,7 @@ In the table, it looks like:
   </tr>
 </table>
 
-Now, if we try to get "a", we will encounter the `DELETE_RANGE` first, and return that "a" is not found. That's good, we don't need to scan all data anymore, and the size of a DeleteRange entry can be ignored in face of a large range. So we planned to use the DeleteRange feature in TiKV and started to test it. 
+Now, if we try to get "a", we will encounter the `DELETE_RANGE` first, and return that "a" is not found. That's good, we don't need to scan all data anymore, and the size of a DeleteRange entry can be ignored in face of a large range. So we planned to use the DeleteRange feature in TiKV and started to test it.
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('How We Found a Data Corruption Bug in RocksDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -190,6 +193,7 @@ Everything worked great until one of our test clusters panicked?
 The panicked cluster, which we named it Cluster A, was running a branch with the DeleteRange feature, so that's why we started hunting the DeleteRange bug.
 
 [Back to the top](#top)
+
 ### Round 1
 
 There are 4 TiKV instances KV1, KV2, KV3, and KV4 in Cluster A, and the consistency check showed that we had an abnormal replica R2 in KV2, and two normal replicas R1 and R3 in KV1 and KV3. We used tikv-ctl to print out the diff of R2 and R1 to see what's wrong. The diff showed that R2 had lost some ranges of data, and some deleted data reappeared too. Since we were testing the DeleteRange branch in this cluster, we guessed that this could happen if a DeleteRange entry dropped some entries in a wrong way during the compaction.
@@ -202,7 +206,7 @@ So we decided to deploy another test cluster, which we called it Cluster B, and 
 
 ### Round 2
 
-A few days later, Cluster B panicked again, so we were given another chance to hunt, let's go. This time, we protected the crime scene very well and made a backup before doing anything. 
+A few days later, Cluster B panicked again, so we were given another chance to hunt, let's go. This time, we protected the crime scene very well and made a backup before doing anything.
 
 The consistency check showed that we had an abnormal replica R3 in KV3, and two normal replicas R1 and R2 in KV1 and KV2. And yep, tikv-ctl showed that R3 had lost some data. The log of the abnormal KV3 showed a similar situation that R3 sent a snapshot to R1 in 13:42:59, and panicked in 14:01:34. This time we had the fresh `LOG` and `MANIFEST` files, we started to cross-reference them between 13:42:49~14:01:34. But there were a lot of files deleted and added  during the compaction at the time, it's still hard to find out what's wrong.
 
@@ -210,7 +214,7 @@ Luckily, we noticed in the `MANIFEST` file that something was wrong in Level-1 o
 
 1. Files in Level-1 should be sorted by their smallest and largest keys, and should not overlap with each other. **But file 185808 was overlapped with the file before and after it.**
 
-2. The file's smallest key must be smaller than its largest key. **But file 185830's smallest key was larger than its largest key.** 
+2. The file's smallest key must be smaller than its largest key. **But file 185830's smallest key was larger than its largest key.**
 
 ![Issues for Files 185808 and 185830](media/rocksdbbug0.png)
 
@@ -240,13 +244,12 @@ Finally, we narrowed down to a DeleteRange function in RocksDB and reviewed it a
 
 The RocksDB team reacted quickly and released a bugfix version for us, we highly appreciate that. However, it turns out the DeleteRange feature cannot work well with another delete files in range feature we are using now (see [issue: overlapped files of delete range](https://github.com/facebook/rocksdb/issues/2833)), and both the features are kind of dangerous, so we still need to wait and test them thoroughly.
 
-RocksDB plays a significant role in TiKV, thanks for the support from the RocksDB team and their great work. We are happy to help to improve the stability and performance in the future. 
+RocksDB plays a significant role in TiKV, thanks for the support from the RocksDB team and their great work. We are happy to help to improve the stability and performance in the future.
 
 ### Lessons learned:
 
 1. Protect your crime scene well. Some bugs are hard to reproduce, so seize every opportunity.
 2. Collect more evidence before diving into the details. It's inefficient to hunt with no clear direction. What's worse is that it's easy to go too deep in a wrong direction.
 3. It's important to test new features (especially those with high risks) carefully under different conditions, some bugs rarely happen but can be destructive. Time tries truth.
-
 
 [Back to the top](#top)

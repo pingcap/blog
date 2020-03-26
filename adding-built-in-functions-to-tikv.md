@@ -10,7 +10,7 @@ This guide is intended to show how you can land your first Pull Request (PR) in 
 
 [TiDB](https://github.com/pingcap/tidb) ("Ti" = Titanium) is an open-source distributed scalable Hybrid Transactional and Analytical Processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built by the company PingCAP (that’s us!) and its active open-source community (that’s you!). It’s designed to provide infinite horizontal scalability, strong consistency, and high availability with MySQL compatibility. It serves as a one-stop data warehouse for both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workloads.
 
-What powers this experience is [TiKV](https://github.com/pingcap/tikv), a distributed transactional key-value store (all built in Rust!), which is now deployed in more than 200 companies in production (see the [constantly-updated list of adopters](https://pingcap.com/docs/adopters)). One key reason why TiDB can process complex SQL queries so quickly is a Coprocessor API layer between TiDB and TiKV, which takes advantage of the distributed nature of a distributed database to "push down" partial queries in parallel, where partial results are generated and reassembled for the client. This is a key differentiator between TiDB and other distributed databases. 
+What powers this experience is [TiKV](https://github.com/pingcap/tikv), a distributed transactional key-value store (all built in Rust!), which is now deployed in more than 200 companies in production (see the [constantly-updated list of adopters](https://pingcap.com/docs/adopters)). One key reason why TiDB can process complex SQL queries so quickly is a Coprocessor API layer between TiDB and TiKV, which takes advantage of the distributed nature of a distributed database to "push down" partial queries in parallel, where partial results are generated and reassembled for the client. This is a key differentiator between TiDB and other distributed databases.
 
 So far, TiDB can only push down some simple expressions to TiKV to be processed, e.g. fetching the value in a column and doing comparison or arithmetic operations on simple data structures. To get more juice out of distributed computing resources, we need to include more expressions to push down. The first type is MySQL built-in functions. How do we accomplish that in short order? That’s where *you*--our intrepid systems hacker, Rust lover, and distributed system geek--come in!
 
@@ -30,7 +30,7 @@ After TiKV receives these subtask expressions, the following steps are performed
 
 2. Use the predicate specified in the `where` clause to filter data.
 
-3. If the data passes the filter predicate, the aggregation result will be computed. 
+3. If the data passes the filter predicate, the aggregation result will be computed.
 
 After different TiKV nodes compute and return results of their respective subtasks, they are returned to TiDB. TiDB then aggregates on all the results sent from TiKV and sends the final result to the client.
 
@@ -50,18 +50,18 @@ Take [`MultiplyIntUnsigned`](https://github.com/pingcap/tikv/pull/3277) as an ex
 
 ### Step 3: Define the function
 
-1. The name of the file where the built-in function exists in TiKV should correspond to the same name in TiDB. 
+1. The name of the file where the built-in function exists in TiKV should correspond to the same name in TiDB.
 
     For example, since all the pushdown files in the [`expression`](https://github.com/pingcap/tidb/tree/master/expression) directory in TiDB are named `builtin_XXX`, in TiKV the corresponding file name should be `builtin_XXX.rs`. In this example, the current function is in the [builtin_arithmetic.go](https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532) file in TiDB, so the function should be placed in [builtin_arithmetic.rs](https://github.com/tikv/tikv/blob/master/components/tidb_query/src/expr/builtin_arithmetic.rs) in TiKV.
 
     **Note:** If the corresponding file in TiKV does not exist, you need to create a new file in the corresponding directory with the same name as in TiDB.
 
-2. The function name should follow the Rust snake_case naming conventions. 
+2. The function name should follow the Rust snake_case naming conventions.
 
     For this example, `MultiplyIntUnsigned` will be defined as `multiply_int_unsigned`.
 
 3. For the return value, you can refer to the `Eval` functions which are implemented in TiDB and their corresponding return value types, as shown in the following table:
-    
+
     | `Eval` Function in TiDB       | Return Value Type in TiKV|
     | ------------- |:-------------|
     | evalInt    | Result\<Option\<i64\>\> |
@@ -71,7 +71,6 @@ Take [`MultiplyIntUnsigned`](https://github.com/pingcap/tikv/pull/3277) as an ex
     | evalTime    | Result\<Option\<Cow\<'a, Time\>\>\> |
     | evalDuration    | Result\<Option\<Cow\<'a, Duration\>\>\> |
     | evalJSON    | Result\<Option\<Cow\<'a, Json\>\>\> |
-    
 
     Thus, in TiDB’s `builtinArithmeticMultiplyIntUnsignedSig`, it implements the `evalInt` method, so the return value type of this function `multiply_int_unsigned` should be `Result<Option<i64>>`.
 

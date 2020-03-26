@@ -73,6 +73,7 @@ Currently, we are replacing MongoDB with TiDB as MongoDB is not easy to use, exp
 ## Feedbacks from TiDB
 
 TiDB helps GAEA in the following aspects:
+
 1. TiDB supports many push-down expressions and makes full use of the computing resources of TiKV’s multiple instances and therefore, accelerates the computing speed. At the same time, TiDB filters as much unnecessary data as possible and reduces the network overhead.
 
 2. TiDB supports HashJoin by default and tries hard to parallelize operators, making full use of the computing resources of the entire cluster.

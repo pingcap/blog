@@ -7,7 +7,7 @@ tags: ['Engineering']
 categories: ['Engineering']
 ---
 
-In recent years, building **a large-scale distributed storage system** has become a hot topic. Distributed consensus algorithms like [Paxos](https://en.wikipedia.org/wiki/Paxos_(computer_science)) and [Raft](https://raft.github.io/) are the focus of many technical articles. But those articles tend to be introductory, describing the basics of the algorithm and log replication. They seldom cover how to build a large-scale distributed storage system based on the distributed consensus algorithm. 
+In recent years, building **a large-scale distributed storage system** has become a hot topic. Distributed consensus algorithms like [Paxos](https://en.wikipedia.org/wiki/Paxos_(computer_science)) and [Raft](https://raft.github.io/) are the focus of many technical articles. But those articles tend to be introductory, describing the basics of the algorithm and log replication. They seldom cover how to build a large-scale distributed storage system based on the distributed consensus algorithm.
 
 Since April 2015, we [PingCAP](https://pingcap.com/en/) have been building [TiKV](https://github.com/tikv/tikv), a large-scale open source distributed database based on Raft. It's the core storage component of [TiDB](https://github.com/pingcap/tidb), an open source distributed NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Earlier in 2019, we conducted an official Jepsen test on TiDB, and [the Jepsen test report](https://jepsen.io/analyses/tidb-2.1.7) was published in June 2019. In July the same year, we announced that [TiDB 3.0 reached general availability](https://pingcap.com/blog/tidb-3.0-announcement/), delivering stability at scale and performance boost.
 
@@ -15,7 +15,7 @@ In this article, I'd like to share some of our firsthand experience in **designi
 
 ## Scaling a distributed storage system
 
-The first thing I want to talk about is scaling. The core of a distributed storage system is nothing more than two points: one is the sharding strategy, and the other is metadata storage. Keeping applications transparent and consistent in the sharding process is crucial to a storage system with elastic scalability. 
+The first thing I want to talk about is scaling. The core of a distributed storage system is nothing more than two points: one is the sharding strategy, and the other is metadata storage. Keeping applications transparent and consistent in the sharding process is crucial to a storage system with elastic scalability.
 
 If a storage system only has a static data sharding strategy, it is hard to elastically scale with application transparency. Such systems include MySQL static routing middleware like [Cobar](https://github.com/alibaba/cobar), Redis middleware like [Twemproxy](https://github.com/twitter/twemproxy/), and so on. All these systems are difficult to scale seamlessly.
 
@@ -23,21 +23,21 @@ Before moving on to elastic scalability, I'd like to talk about several sharding
 
 ### Sharding strategies for distributed databases
 
-Sharding is a database partitioning strategy that splits your datasets into smaller parts and stores them in different physical nodes. The unit for data movement and balance is a sharding unit. Each physical node in the cluster stores several sharding units. 
+Sharding is a database partitioning strategy that splits your datasets into smaller parts and stores them in different physical nodes. The unit for data movement and balance is a sharding unit. Each physical node in the cluster stores several sharding units.
 
 Two commonly-used sharding strategies are range-based sharding and hash-based sharding. The choice of the sharding strategy changes according to different types of systems. A typical example is the data distribution of a Hadoop Distributed File System (HDFS) DataNode, shown in Figure 1 (source: [Distributed Systems: GFS/HDFS/Spanner](http://energystudy.synergylabs.org/courses/15-440-Fall2017/lectures/16-gfs_hdfs_spanner.pdf)).
 
 ![Data distribution of HDFS DataNode](media/data-distribution-of-hdfs-dataNode.png)
-<div class="caption-center"> Figure 1. Data distribution of HDFS DataNode </div> 
+<div class="caption-center"> Figure 1. Data distribution of HDFS DataNode </div>
 
 #### Range-based sharding
 
-Range-based sharding assumes that all keys in the database system can be put in order, and it takes a continuous section of keys as a sharding unit. 
+Range-based sharding assumes that all keys in the database system can be put in order, and it takes a continuous section of keys as a sharding unit.
 
-It's very common to sort keys in order. HBase keys are sorted in byte order, while MySQL keys are sorted in auto-increment ID order. For some storage engines, the order is natural. In the case of both log-structured merge-tree (LSM-Tree) and B-Tree, keys are naturally in order. 
+It's very common to sort keys in order. HBase keys are sorted in byte order, while MySQL keys are sorted in auto-increment ID order. For some storage engines, the order is natural. In the case of both log-structured merge-tree (LSM-Tree) and B-Tree, keys are naturally in order.
 
 ![Range-based sharding for data partitioning](media/range-based-sharding-for-data-partitioning.png)
-<div class="caption-center"> Figure 2. Range-based sharding for data partitioning </div> 
+<div class="caption-center"> Figure 2. Range-based sharding for data partitioning </div>
 
 In Figure 2 (source: [MongoDB uses range-based sharding to partition data](https://docs.mongodb.com/manual/core/ranged-sharding/)), the key space is divided into (minKey, maxKey). Each sharding unit (chunk) is a section of continuous keys. The advantage of range-based sharding is that the adjacent data has a high probability of being together (such as the data with a common prefix), which can well support operations like `range scan`. For example, HBase Region is a typical range-based sharding strategy.
 
@@ -50,7 +50,7 @@ Hash-based sharding processes keys using a hash function and then uses the resul
 Contrary to range-based sharding, where all keys can be put in order, hash-based sharding has the advantage that keys are distributed almost randomly, so the distribution is even. As a result, it is more friendly to systems with heavy write workloads and read workloads that are almost all random. This is because the write pressure can be evenly distributed in the cluster. But apparently, operations like `range scan` are almost impossible.
 
 ![Hash-based sharding for data partitioning](media/hash-based-sharding-for-data-partitioning.png)
-<div class="caption-center"> Figure 3. Hash-based sharding for data partitioning </div> 
+<div class="caption-center"> Figure 3. Hash-based sharding for data partitioning </div>
 
 Some typical examples of hash-based sharding are [Cassandra Consistent hashing](https://docs.datastax.com/en/archived/cassandra/2.1/cassandra/architecture/architectureDataDistributeHashing_c.html), presharding of Redis Cluster and [Codis](https://github.com/CodisLabs/codis), and [Twemproxy consistent hashing](https://github.com/twitter/twemproxy/blob/master/README.md#features).
 
@@ -77,7 +77,7 @@ However, this replication solution matters a lot for a large-scale storage syste
 In TiKV, each range shard is called a Region. Because we need to support scanning and the stored data generally has a relational table schema, we want the data of the same table to be as close as possible. Each Region in TiKV uses the Raft algorithm to ensure data security and high availability on multiple physical nodes.
 
 ![Raft group in distributed database TiKV](media/raft-group-in-distributed-database-tikv.png)
-<div class="caption-center"> Figure 4. Raft group in distributed database TiKV </div> 
+<div class="caption-center"> Figure 4. Raft group in distributed database TiKV </div>
 
 Several open source Raft implementations, including [etcd](https://coreos.com/etcd/), [LogCabin](https://github.com/logcabin/logcabin), [raft-rs](https://github.com/pingcap/raft-rs) and [Consul](https://www.consul.io/), are just implementations of a single Raft group, which cannot be used to store a large amount of data. So the major use case for these implementations is configuration management. After all, the more participating nodes in a single Raft group, the worse the performance. If physical nodes cannot be added horizontally, the system has no way to scale.
 
@@ -85,9 +85,9 @@ If you use multiple Raft groups, which can be combined with the sharding strateg
 
 TiKV divides data into Regions according to the key range. When a Region becomes too large (the current limit is 96 MB), it splits into two new ones. This splitting happens on all physical nodes where the Region is located. The newly-generated replicas of the Region constitute a new Raft group.
 
-Then here comes two questions: 
+Then here comes two questions:
 
-* How do we ensure that the split operation is securely executed on each replica of this Region? 
+* How do we ensure that the split operation is securely executed on each replica of this Region?
 * How do we guarantee application transparency?
 
 <div class="trackable-btns">
@@ -107,7 +107,7 @@ The solution is relatively easy. You can use the following approach, which is ex
 
 4. Let the new Region go through the Raft election process. As an alternative, you can use the original leader and let the other nodes where this new Region is located send heartbeats directly.
 
-The split process is coupled with network isolation, which can lead to very complicated cases. For example, assume that there are two nodes named A and B, and the Region leader is on node A: 
+The split process is coupled with network isolation, which can lead to very complicated cases. For example, assume that there are two nodes named A and B, and the Region leader is on node A:
 
 1. The leader initiates a Region split request: Region 1 [a, d) → the new Region 1 [a, b) + Region 2 [b, d). Node A first sends the heartbeat of Region 2 to node B. Node A also sends a snapshot of Region 2 to node B because there hasn't been any Region 2 information on node B.
 
@@ -129,7 +129,7 @@ These steps are the standard Raft configuration change process. In TiKV, the imp
 
 1. The `conf change` operation is only executed after the `conf change` log is applied.
 
-2. To avoid a disjoint majority, a Region group can only handle one conf change operation each time. This has been mentioned in [Diego Ongaro's paper "Consensus: Bridging Theory and Practice"](https://www.google.com/url?q=https://github.com/ongardie/dissertation/blob/master/online-trim.pdf?raw%3Dtrue&sa=D&ust=1562069112724000&usg=AFQjCNFJ0gqDMqK93RKVqVk5BeOK1NHCFw) (2014). 
+2. To avoid a disjoint majority, a Region group can only handle one conf change operation each time. This has been mentioned in [Diego Ongaro's paper "Consensus: Bridging Theory and Practice"](https://www.google.com/url?q=https://github.com/ongardie/dissertation/blob/master/online-trim.pdf?raw%3Dtrue&sa=D&ust=1562069112724000&usg=AFQjCNFJ0gqDMqK93RKVqVk5BeOK1NHCFw) (2014).
 
 The process in TiKV can guarantee correctness and is also relatively simple to implement.
 
@@ -188,9 +188,9 @@ However, you might have noticed that there is still a problem. If the cluster ha
 
 For example, some Regions re-initiate elections and splits after they are split, but another isolated batch of nodes still sends the obsolete information to PD through heartbeats. So for one Region, either of two nodes might say that it's the leader, and the Region doesn't know whom to trust.
 
-In TiKV, we use an epoch mechanism. With this mechanism, changes are marked with two logical clocks: one is the Raft's configuration change version, and the other is the Region version. For each configuration change, the configuration change version automatically increases. Similarly, for each Region change such as splitting or merging, the Region version automatically increases, too. 
+In TiKV, we use an epoch mechanism. With this mechanism, changes are marked with two logical clocks: one is the Raft's configuration change version, and the other is the Region version. For each configuration change, the configuration change version automatically increases. Similarly, for each Region change such as splitting or merging, the Region version automatically increases, too.
 
-The previous section mentions that a split process with network isolation might result in complicated cases. The epoch mechanism we discuss here is the solution to the example case described above. 
+The previous section mentions that a split process with network isolation might result in complicated cases. The epoch mechanism we discuss here is the solution to the example case described above.
 
 The epoch strategy that PD adopts is to get the larger value by comparing the logical clock values of two nodes. PD first compares values of the Region version of two nodes. If the values are the same, PD compares the values of the configuration change version. The node with a larger configuration change version must have the newer information.
 

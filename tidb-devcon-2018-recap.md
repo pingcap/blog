@@ -22,24 +22,23 @@ At this party, the team behind TiDB announced exciting news, shared the project�
 
 *PingCAP co-founder and CEO, Max Liu, giving the opening address at TiDB DevCon 2018*
 
-
 <!-- TOC -->
 
 - [Team](#team)
 - [Community](#community)
 - [Partners](#partners)
 - [TiDB 1.1 Alpha Release](#tidb-11-alpha-release)
-    - [Performance & latency](#performance--latency)
-    - [TiDB Lightning](#tidb-lightning)
+  - [Performance & latency](#performance--latency)
+  - [TiDB Lightning](#tidb-lightning)
 - [Tools and Ecosystem](#tools-and-ecosystem)
-    - [TiDB deployment](#tidb-deployment)
-    - [Import & Export Tools](#import--export-tools)
-        - [TiDB Syncer](#tidb-syncer)
-        - [TiDB Binlog](#tidb-binlog)
-        - [TiDB Lightning](#tidb-lightning-1)
-    - [Wormhole--Enterprise synchronization tool](#wormhole--enterprise-synchronization-tool)
-    - [TiDB Insight](#tidb-insight)
-    - [Monitoring & Alerting](#monitoring--alerting)
+  - [TiDB deployment](#tidb-deployment)
+  - [Import & Export Tools](#import--export-tools)
+    - [TiDB Syncer](#tidb-syncer)
+    - [TiDB Binlog](#tidb-binlog)
+    - [TiDB Lightning](#tidb-lightning-1)
+  - [Wormhole--Enterprise synchronization tool](#wormhole--enterprise-synchronization-tool)
+  - [TiDB Insight](#tidb-insight)
+  - [Monitoring & Alerting](#monitoring--alerting)
 - [2018 Roadmap](#2018-roadmap)
 
 <!-- /TOC -->
@@ -56,9 +55,9 @@ The team behind TiDB, PingCAP, grew from 35 members in 2016 to almost 90 members
 * More than 200 users are running TiDB in production environments, 50 times more than 2016.
 * Three distinguished TiDB contributors were recognized as TiDB committers. For more information about how to join the TiDB community, see [TiDB Community repo](https://github.com/pingcap/community) and [How to become a TiDB committer](https://github.com/pingcap/community#how-do-i-become-a-committer).
     ![Ed Huang and three contributors](media/huang-and-three-contributors.png)
-    
+
     *PingCAP co-founder & CTO, Ed Huang (left), recognizing three distinguished TiDB contributors as TiDB committer*
-    
+
 ## Partners
 
 Designed to be a cloud-native HTAP database, TiDB has been fully integrated and available on [UCloud](https://www.ucloud.cn/) and [Tencent Cloud](https://cloud.tencent.com/product/tidb). Close partnerships with other public cloud vendors will be announced soon. Stay tuned!
@@ -137,6 +136,7 @@ TiDB Binlog is a tool designed to help users to synchronize data to downstream d
 
 *Binlog*
 
+<!-- markdownlint-disable MD024 -->
 #### TiDB Lightning
 
 TiDB Lightning is a high-speed data importing tool, customized for TiDB:
@@ -156,8 +156,8 @@ Wormhole is an enterprise edition tool for data synchronization. It contains the
 * Pre-checking
 * Lightweight ETL in real-time
 * Cloud DB integration with:
-    * AliCloud RDS
-    * TencentCloud CDB
+  * AliCloud RDS
+  * TencentCloud CDB
 
 ![Wormhole--Enterprise synchronization tool](media/wormhole-enterprise-synchronization-tool.png)
 
@@ -181,7 +181,7 @@ The TiDB monitoring system collects metrics from TiDB cluster and is integrated 
 
 ## 2018 Roadmap
 
-After recapping all the news and developments from an exciting and productive 2017, PingCAP co-founder and CEO, Max Liu, unveiled TiDB’s 2018 roadmap. 
+After recapping all the news and developments from an exciting and productive 2017, PingCAP co-founder and CEO, Max Liu, unveiled TiDB’s 2018 roadmap.
 
 ![2018 roadmap](media/2018-roadmap.png)
 
@@ -198,7 +198,6 @@ After recapping all the news and developments from an exciting and productive 20
 * Window function (2018 Q4)
 
 Last but not least, we want to thank all the attendees for braving the cold to participate in the first (but definitely not the last) TiDB DevCon, all the speakers from our customer companies to share their use cases and best practices, and all the amazing contributors to the vibrant and growing TiDB community. We know you have big hopes for 2018; we won’t let you down.  
-
 
 ![DevCon 2018 group photo](media/group-photo.png)
 

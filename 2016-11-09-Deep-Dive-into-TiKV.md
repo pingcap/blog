@@ -9,7 +9,8 @@ categories: ['Engineering']
 
 <span id="top"><span>
 
-# Table of Content
+## Table of Content
+
 - [About TiKV](#about-tikv)
 - [Architecture](#architecture)
 - [Protocol](#protocol)
@@ -18,15 +19,15 @@ categories: ['Engineering']
 - [Transaction](#transaction)
 - [Coprocessor](#coprocessor)
 - [Key processes analysis](#key-processes-analysis)
-	- [Key-Value operation](#key-value-operation)
-	- [Membership Change](#membership-change)
-	- [Split](#split)
+  - [Key-Value operation](#key-value-operation)
+  - [Membership Change](#membership-change)
+  - [Split](#split)
 
-# About TiKV
+## About TiKV
 
-TiKV (The pronunciation is: /'taɪkeɪvi:/ tai-K-V, etymology: titanium) is a distributed Key-Value database which is based on the design of Google Spanner, F1, and HBase, but it is much simpler without dependency on any distributed file system. 
+TiKV (The pronunciation is: /'taɪkeɪvi:/ tai-K-V, etymology: titanium) is a distributed Key-Value database which is based on the design of Google Spanner, F1, and HBase, but it is much simpler without dependency on any distributed file system.
 
-# Architecture
+## Architecture
 
 ![TiKV architecture](media/tikv-architecture.png)
 
@@ -38,20 +39,19 @@ TiKV (The pronunciation is: /'taɪkeɪvi:/ tai-K-V, etymology: titanium) is a di
 
 * Region: Region is the basic unit of Key-Value data movement and corresponds to a data range in a Store. Each Region is replicated to multiple Nodes. These multiple replicas form a Raft group. A replica of a Region is called a Peer.
 
-# Protocol
+## Protocol
 
 TiKV uses the [Protocol Buffer](https://developers.google.com/protocol-buffers/) protocol for interactions among different components. Because Rust doesn’t support [gRPC](http://www.grpc.io/) for the time being, we use our own protocol in the following format:
 
 ```
-Message: Header + Payload 
+Message: Header + Payload
 
 Header: | 0xdaf4(2 bytes magic value) | 0x01(version 2 bytes) | msg\_len(4 bytes) | msg\_id(8 bytes) |
 ```
 
-
 The data of Protocol Buffer is stored in the Payload part of the message. At the Network level, we will first read the 16-byte Header. According to the message length (`msg_len`) information in the Header, we calculate the actual length of the message, and then read the corresponding data and decode it.
 
-The interaction protocol of TiKV is in the  [`kvproto`](https://github.com/pingcap/kvproto) project and the protocol to support push-down is in the [`tipb`](https://github.com/pingcap/tipb) project. Here, let’s focused on the `kvproto` project only. 
+The interaction protocol of TiKV is in the  [`kvproto`](https://github.com/pingcap/kvproto) project and the protocol to support push-down is in the [`tipb`](https://github.com/pingcap/tipb) project. Here, let’s focused on the `kvproto` project only.
 
 About the protocol files in the `kvproto` project:
 
@@ -73,7 +73,7 @@ There are following ways for external applications to connect to TiKV:
 
 [Back to the Top](#top)
 
-# Raft
+## Raft
 
 TiKV uses the Raft algorithm to ensure the data consistency in the distributed systems. For more information, see [The Raft Consensus Algorithm](https://raft.github.io/).
 
@@ -88,26 +88,26 @@ See the following details about how to use Raft:
 ```rust
     // initial_state returns the information about HardState and ConfState in Storage
     fn initial_state(&self) -> Result<RaftState>;
-    
+
     // return the log entries in the [low, high] range
     fn entries(&self, low: u64, high: u64, max_size: u64) -> Result<Vec<Entry>>;
-    
+
     // get the term of the log entry according to the corresponding log index
     fn term(&self, idx: u64) -> Result<u64>;
-    
+
     // get the index from the first log entry at the current position
     fn first_index(&self) -> Result<u64>;
-    
+
     // get the index from the last log entry at the current position
     fn last_index(&self) -> Result<u64>;
-    
+
     // generate a current snapshot
     fn snapshot(&self) -> Result<Snapshot>;
 ```
 
-2. Create a raw node object and pass the corresponding configuration and customized storage instance to the object. About the configuration, we need to pay attention to `election_tick` and `heartbeat_tick`. Some of the Raft logics step by periodical ticks. For every Tick, the Leader will decide if the frequency of the heartbeat elapsing exceeds the frequency of the `heartbeat_tick`. If it does, the Leader will send heartbeats to the Followers and reset the elapse. For a Follower, if the frequency of the election elapsing exceeds the frequency of the `election_tick`, the Follower will initiate an election. 
+2. Create a raw node object and pass the corresponding configuration and customized storage instance to the object. About the configuration, we need to pay attention to `election_tick` and `heartbeat_tick`. Some of the Raft logics step by periodical ticks. For every Tick, the Leader will decide if the frequency of the heartbeat elapsing exceeds the frequency of the `heartbeat_tick`. If it does, the Leader will send heartbeats to the Followers and reset the elapse. For a Follower, if the frequency of the election elapsing exceeds the frequency of the `election_tick`, the Follower will initiate an election.
 
-3. After a raw node is created, the tick interface of the raw node will be called periodically (like every 100ms) and drives the internal Raft Step function. 
+3. After a raw node is created, the tick interface of the raw node will be called periodically (like every 100ms) and drives the internal Raft Step function.
 
 4. If data is to be written by Raft, the Propose interface is called directly. The parameters of the Propose interface is an arbitrary binary data which means that Raft doesn’t care the exact data content that is replicated by it. It is completely up to the external logics as how to handle the data.
 
@@ -121,7 +121,6 @@ See the following details about how to use Raft:
     + The part that needs to be sent to other Raft nodes, which are messages.
     + The part that needs to be applied to other state machines, which are committed_entries.
 
-
 After handling the Ready status, the Advance function needs be called to inform Raft of the next Ready process.
 
 In TiKV, Raft is used through [mio](https://github.com/carllerche/mio) as in the following process:
@@ -132,7 +131,7 @@ In TiKV, Raft is used through [mio](https://github.com/carllerche/mio) as in the
 
 3. Decide if a Raft is ready in the mio tick callback (**Note:** The mio tick is called at the end of each event loop, which is different from the Raft tick.). If it is ready,  proceed with the Ready process.
 
-In the descriptions above, we covered how to use one Raft only. But in TiKV, we have multiple Raft groups. These Raft groups are independent to each other and therefore can be processed following the same approach. 
+In the descriptions above, we covered how to use one Raft only. But in TiKV, we have multiple Raft groups. These Raft groups are independent to each other and therefore can be processed following the same approach.
 
 In TiKV, each Raft group corresponds to a Region. At the very beginning, there is only one Region in TiKV which is in charge of the range (-inf, +inf). As more data comes in and the Region reaches its threshold (64 MB currently), the Region is split into two Regions. Because all the data in TiKV are sorted according to the key, it is very convenient to choose a Split Key to split the Region. See [Split](#split) for the detailed splitting process.
 
@@ -145,7 +144,7 @@ Of course, where there is Split, there is Merge. If there are very few data in t
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('A Deep Dive into TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
-# Placement Driver
+## Placement Driver
 
 Placement Driver (PD) is in charge of the managing and scheduling of the whole TiKV cluster. It is a central service and we have to ensure that it is highly available and stable.
 
@@ -153,7 +152,7 @@ The first issue to be resolved is the single point of failure of PD. Our solutio
 
 The second issue is the consistency of the data stored in PD. If one PD is down, how to ensure that the new elected PD has the consistent data? This is also resolved by putting PD data in etcd. Because etcd is a distributed consistent Key-Value store, it helps us ensure the consistency of the data stored in it. When the new PD is started, it only needs to load data from etcd.
 
-At first, we used the independent external etcd service, but now we have embedded PD in etcd, which means, PD itself is an etcd. The embedment makes it simpler to deploy because there is one service less. The embedment also makes it more convenient for PD and etcd to customize and therefore improve the performance. 
+At first, we used the independent external etcd service, but now we have embedded PD in etcd, which means, PD itself is an etcd. The embedment makes it simpler to deploy because there is one service less. The embedment also makes it more convenient for PD and etcd to customize and therefore improve the performance.
 
 The current functions of PD are as follows:
 
@@ -166,10 +165,10 @@ The current functions of PD are as follows:
     1). The heartbeat triggering: Regions report the current state to PD periodically. If PD finds that there are not enough or too much replicas in one Region, PD informs this Region to initiate membership change.
 
     2). The regular triggering: PD checks if the whole system needs scheduling on a regular bases. If PD finds out that there is not enough space on a certain Store or that there are too many leader Regions on a certain Store and the load is too high, PD will select a Region from the Store and move the replicas to another Store.
-    
+
 [Back to the Top](#top)
 
-# Transaction
+## Transaction
 
 The transaction model in TiKV is inspired by [Google Percolator](http://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/36726.pdf) and [Themis from Xiaomi](https://github.com/XiaoMi/themis) with the following optimizations:
 
@@ -194,16 +193,16 @@ Let’s see how a transaction is executed:
     2). When `Prewrite` finishes, a new timestamp is obtained from TSO and is set as commitTS.
 
     3). During the Commit phase, requests are sent to the TiKV servers with `PrimaryKey`. The process of how TiKV handles commit is to clean up the Locks from the PrimaryKey phase and write corresponding commit records with commitTS. When the `PrimaryKey` commit finishes, the transaction is committed. The Locks that remain on other Keys can get the commit state and the corresponding commitTS by retrieving the state of the `Primarykey`. But in order to reduce the cost of cleaning up Locks afterwards, the practical practice is to submit all the Keys that are involved in the transaction asynchronously on the backend.
-    
+
 [Back to the Top](#top)
 
-# Coprocessor 
+## Coprocessor
 
-Similar to HBase, TiKV provides the Coprocessor support. But for the time being, Coprocessor cannot be dynamically loaded, it has to be statically compiled to the code. 
+Similar to HBase, TiKV provides the Coprocessor support. But for the time being, Coprocessor cannot be dynamically loaded, it has to be statically compiled to the code.
 
 Currently, the Coprocessor in TiKV is mainly used in two situations, Split and push-down, both to serve TiDB.
 
-1. For Split, before the Region split requests are truly proposed, the split key needs to be checked if it is legal. For example, for a Row in TiDB, there are many versions of it in TiKV, such as V1, V2, and V3, V3 being the latest version. Assuming that V2 is the selected split key, then the data of the Row might be split to two different Regions, which means the data in the Row cannot be handled atomically. Therefore, the Split Coprocessor will adjust the split key to V1. In this way, the data in this Row is still in the same Region during the splitting. 
+1. For Split, before the Region split requests are truly proposed, the split key needs to be checked if it is legal. For example, for a Row in TiDB, there are many versions of it in TiKV, such as V1, V2, and V3, V3 being the latest version. Assuming that V2 is the selected split key, then the data of the Row might be split to two different Regions, which means the data in the Row cannot be handled atomically. Therefore, the Split Coprocessor will adjust the split key to V1. In this way, the data in this Row is still in the same Region during the splitting.
 
 2. For push-down, the Coprocessor is used to improve the performance of TiDB. For some operations like select count(*), there is no need for TiDB to get data from row to row first and then count. The quicker way is that TiDB pushes down these operations to the corresponding TiKV nodes, the TiKV nodes do the computing and then TiDB consolidates the final results.
 
@@ -211,17 +210,17 @@ Let’s take an example of `select count(*) from t1` to show how a complete push
 
 1. After TiDB parses the SQL statement, based on the range of the t1 table, TiDB finds out that all the data of t1 are in Region 1 and Region 2 on TiKV, so TiDB sends the push-down commands to Region 1 and Region 2.
 
-2. After Region 1 and Region 2 receive the push-down commands, they get a snapshot of their data separately by using the Raft process. 
+2. After Region 1 and Region 2 receive the push-down commands, they get a snapshot of their data separately by using the Raft process.
 
-3. Region 1 and Region 2 traverse their snapshots to get the corresponding data and and calculate `count()`. 
+3. Region 1 and Region 2 traverse their snapshots to get the corresponding data and and calculate `count()`.
 
 4. Each Region returns the result of `count()` to TiDB and TiDB consolidates and outputs the total result.
 
 [Back to the Top](#top)
 
-# Key processes analysis
+## Key processes analysis
 
-## Key-Value operation
+### Key-Value operation
 
 When a request of Get or Put is sent to TiKV, how does TiKV process it?
 
@@ -253,7 +252,7 @@ These optimizations are mentioned in the Raft paper and they have been supported
 
 [Back to the Top](#top)
 
-## Membership Change
+### Membership Change
 
 To ensure the data safety, there are multiple replicas on different stores. Each replica is another replica’s Peer. If there aren’t enough replicas for a certain Region, we will add new replicas; on the contrary, if the numbers of the replicas for a certain Region exceeds the threshold, we will remove some replicas.
 
@@ -263,7 +262,7 @@ In TiKV, the change of the Region replicas are completed by the Raft Membership 
 
 2. When PD receives the heartbeats, it will check if the number of the replicas of this Region is consistent with the setup. Assuming there are only two replicas in this Region but it’s three replicas in the setup, PD will find an appropriate Store and return the ChangePeer command to the Region.
 
-3. After the Region receives the ChangePeer command, if it finds it necessary to add replica to another Store, it will submit a ChangePeer request through the Raft process. When the log is applied, the new peer information will be updated in the Region meta and then the Membership Change completes. 
+3. After the Region receives the ChangePeer command, if it finds it necessary to add replica to another Store, it will submit a ChangePeer request through the Raft process. When the log is applied, the new peer information will be updated in the Region meta and then the Membership Change completes.
 
 It should be noted that even if the Membership Change completes, it only means that the Replica information is added to the meta by the Region. Later if the Leader finds that if there is no data in the new Follower, it will send snapshot to it.
 
@@ -271,9 +270,9 @@ It should also be noted that the Membership Change implementation in TiKV and et
 
 [Back to the Top](#top)
 
-## Split
+### Split
 
-At the very beginning, there is only one Region. As data grows, the Region needs to be split. 
+At the very beginning, there is only one Region. As data grows, the Region needs to be split.
 
 Within TiKV, if a Region splits, there will be two new Regions, which we call them the Left Region and the Right Region. The Left Region will use all the IDs of the old Region. We can assume that the Region just changes its range. The Right Region will get a new ID through PD. Here is a simple example:
 

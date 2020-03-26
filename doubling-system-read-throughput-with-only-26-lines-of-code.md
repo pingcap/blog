@@ -10,21 +10,21 @@ image: /images/blog/follower-read-load-balancing-consistent-read.png
 
 ![Doubling System Read Throughput with Only 26 Lines of Code](media/follower-read-load-balancing-consistent-read.png)
 
-On Dec 20, 2019, we released [TiDB 3.1 Beta](https://pingcap.com/docs/v3.1/releases/3.1.0-beta/). In this version, [TiDB](https://en.wikipedia.org/wiki/TiDB) introduced two significant features, [Follower Read](https://pingcap.com/docs/v3.1/reference/performance/follower-read/) and [Backup & Restore (BR)](https://pingcap.com/docs/v3.1/how-to/maintain/backup-and-restore/br/), and enriched [optimizer hints](https://pingcap.com/docs/v3.1/reference/performance/optimizer-hints/). 
+On Dec 20, 2019, we released [TiDB 3.1 Beta](https://pingcap.com/docs/v3.1/releases/3.1.0-beta/). In this version, [TiDB](https://en.wikipedia.org/wiki/TiDB) introduced two significant features, [Follower Read](https://pingcap.com/docs/v3.1/reference/performance/follower-read/) and [Backup & Restore (BR)](https://pingcap.com/docs/v3.1/how-to/maintain/backup-and-restore/br/), and enriched [optimizer hints](https://pingcap.com/docs/v3.1/reference/performance/optimizer-hints/).
 
-For TiDB 3.1 Beta, Follower Read is a highlight open-source feature. To understand how important this feature is, you’ll need a bit of background. TiDB’s storage engine, [TiKV](https://pingcap.com/docs/v3.1/architecture/#tikv-server), stores data in basic units called [Regions](https://pingcap.com/docs/v3.1/glossary/#regionpeerraft-group). Multiple replicas of a Region form a [Raft group](https://pingcap.com/docs/v3.1/glossary/#regionpeerraft-group). When a read hotspot appears in a Region, the Region [leader](https://pingcap.com/docs/v3.1/glossary/#leaderfollowerlearner) can become a read bottleneck for the entire system. In this situation, enabling the Follower Read feature can significantly reduce the load on the leader and improve the read throughput of the whole system by balancing the load among multiple [followers](https://pingcap.com/docs/v3.1/glossary/#leaderfollowerlearner). 
+For TiDB 3.1 Beta, Follower Read is a highlight open-source feature. To understand how important this feature is, you’ll need a bit of background. TiDB’s storage engine, [TiKV](https://pingcap.com/docs/v3.1/architecture/#tikv-server), stores data in basic units called [Regions](https://pingcap.com/docs/v3.1/glossary/#regionpeerraft-group). Multiple replicas of a Region form a [Raft group](https://pingcap.com/docs/v3.1/glossary/#regionpeerraft-group). When a read hotspot appears in a Region, the Region [leader](https://pingcap.com/docs/v3.1/glossary/#leaderfollowerlearner) can become a read bottleneck for the entire system. In this situation, enabling the Follower Read feature can significantly reduce the load on the leader and improve the read throughput of the whole system by balancing the load among multiple [followers](https://pingcap.com/docs/v3.1/glossary/#leaderfollowerlearner).
 
 We wrote only [26 lines of code](https://github.com/tikv/tikv/pull/5051) to implement Follower Read. In our benchmark test, when this feature was enabled, we could roughly double the read throughput of the entire system.
 
-In this post, I’ll guide you through why we introduced Follower Read, how we implement it, and our future plans for it. 
+In this post, I’ll guide you through why we introduced Follower Read, how we implement it, and our future plans for it.
 
 Note that this post assumes that you have some basic knowledge of the [Raft consensus algorithm](https://raft.github.io/) and [TiDB’s architecture](https://pingcap.com/docs/v3.1/architecture/).
 
 ## What is Follower Read
 
-[The Follower Read feature](https://pingcap.com/docs/v3.1/reference/performance/follower-read/#overview) lets any follower replica in a Region serve a read request under the premise of [strongly consistent reads](https://pingcap.com/docs/v3.1/reference/performance/follower-read/#strongly-consistent-reads). 
+[The Follower Read feature](https://pingcap.com/docs/v3.1/reference/performance/follower-read/#overview) lets any follower replica in a Region serve a read request under the premise of [strongly consistent reads](https://pingcap.com/docs/v3.1/reference/performance/follower-read/#strongly-consistent-reads).
 
-This feature improves the throughput of the TiDB cluster and reduces the load on the Raft leader. It contains a series of load balancing mechanisms that offload TiKV read loads from the leader replica to the follower replicas in a Region. 
+This feature improves the throughput of the TiDB cluster and reduces the load on the Raft leader. It contains a series of load balancing mechanisms that offload TiKV read loads from the leader replica to the follower replicas in a Region.
 
 TiKV's Follower Read implementation guarantees the linearizability of single-row data reading. Combined with [snapshot isolation](https://en.wikipedia.org/wiki/Snapshot_isolation) in TiDB, this implementation also provides users with strongly consistent reads.
 
@@ -41,17 +41,17 @@ TiKV uses the Raft algorithm to guarantee data consistency. The goal of TiKV is 
 
 TiKV divides data into Regions. By default, each Region has three replicas and these Region replicas form a Raft group. As data writes increase, if the size of the Region or the number of keys reaches a threshold, a [Region Split](https://pingcap.com/docs/v3.1/glossary/#region-split) occurs. Conversely, if data is deleted and the size of a Region or the amount of keys shrinks, we can use Region Merge to merge smaller adjacent Regions. This relieves some stress on Raftstore.
 
-### The problem with the TiKV architecture   
+### The problem with the TiKV architecture
 
-The Raft algorithm achieves consensus via an elected leader. A server in a Raft group is either a leader or a follower, and, if a leader is unavailable, it can be a candidate in an election. The leader replicates logs to the followers. 
+The Raft algorithm achieves consensus via an elected leader. A server in a Raft group is either a leader or a follower, and, if a leader is unavailable, it can be a candidate in an election. The leader replicates logs to the followers.
 
 Although TiKV can spread Regions evenly on each node, only the leader can provide external services. The other two followers only receive the data replicated from the leader, or vote to elect a Raft leader when doing a failover. Simply put, at the Region level, **only the leader deals with heavy workloads, while followers are maintained as cold standbys**.
 
 Sometimes when there is some hot data, the resources of the Region leader's machine are fully occupied. Although we can forcibly split the Region and then move the data to another machine, this operation always lags, and the calculation resources of followers are not used.
 
-Here comes a question: can we handle the client's read request on followers? If yes, we can relieve the load on the leader. 
+Here comes a question: can we handle the client's read request on followers? If yes, we can relieve the load on the leader.
 
-The solution is Follower Read. 
+The solution is Follower Read.
 
 ## How we implement Follower Read
 
@@ -73,7 +73,7 @@ In fact, in trivial Raft implementation, even if the leader handles all loads, t
 
 The quorum reads mechanism helps solve this problem, but it might consume a lot of resources or take too long. Can we improve its effectiveness? The crucial issue is that the old leader is not sure whether it is the latest leader. Therefore, we need a method for the leader to confirm its leader state. This method is called the _`ReadIndex` algorithm_. It works as follows:
 
-1.  When the current leader processes a read request, the system records the current leader's latest committed index.
+1. When the current leader processes a read request, the system records the current leader's latest committed index.
 
 2. The current leader ensures that it's still the leader by sending a heartbeat to the quorum.
 
@@ -87,15 +87,15 @@ This section shows how we implement Follower Read and some of this feature's iss
 
 #### The current implementation of Follower Read
 
-How do we ensure that we can read the latest data on followers? Maybe you'll consider this common policy: the request is forwarded to the leader, and then the leader returns the latest committed data. The follower is used as a proxy. The idea is simple and safe to implement. 
+How do we ensure that we can read the latest data on followers? Maybe you'll consider this common policy: the request is forwarded to the leader, and then the leader returns the latest committed data. The follower is used as a proxy. The idea is simple and safe to implement.
 
 You can also optimize this policy. The leader only needs to tell followers the latest committed index, because in any case, even if a follower hasn't stored this log locally, the log is applied locally sooner or later.
 
 Based on this thought, TiDB currently implements the Follower Read feature this way:
 
-1. When the client sends a read request to a follower, the follower requests the leader's committed index. 
+1. When the client sends a read request to a follower, the follower requests the leader's committed index.
 
-2. After the follower gets the leader's latest committed index and applies the index to itself, the follower returns this entry to the client. 
+2. After the follower gets the leader's latest committed index and applies the index to itself, the follower returns this entry to the client.
 
 #### Issues for Follower Read
 
@@ -147,7 +147,7 @@ We performed raw key-value (KV) scan tests. By adjusting the number of scan keys
 
 ### Test results
 
-#### Scenario #1 
+#### Scenario #1
 
 Scenario description: The follower and the client were in the same data center (DC). The leader was in a data center in another region. The leader served read requests.
 
@@ -226,7 +226,7 @@ Test results:
   </tr>
 </table>
 
-Result analysis: 
+Result analysis:
 
 When the latency between the client and TiKV increased, due to the sliding window mechanism, the corresponding TCP connection bandwidth decreased. When the data volume was large, we even observed a lot of `DeadlineExceeded` logs.
 
@@ -315,7 +315,7 @@ Result analysis:
 
 Follower Read reduced cross-DC traffic. Thus, it avoided the impact of the TCP sliding window mechanism on a high-latency network. When the amount of data in a request was small, the impact on the cross-DC latency was big. When the amount of data in a request was big, the impact on the cross-DC latency was small. In this case, when Follower Read was enabled, read throughput did not change very much.
 
-#### Scenario #3 
+#### Scenario #3
 
 Scenario description: The leader and the client were on the same node. The leader served read requests.
 
@@ -394,11 +394,11 @@ Test results:
   </tr>
 </table>
 
-Result analysis: 
+Result analysis:
 
 The client had higher latency than TiKV. We ran netstat and found that there were many packets in the TCP Send-Q. This means that the TCP sliding window mechanism limited the bandwidth.
 
-#### Scenario #4 
+#### Scenario #4
 
 Scenario description: The leader, client, and follower were in the same data center. The follower served read requests.
 
@@ -487,25 +487,25 @@ This feature seems simple, but it's really important. In the future, we'll use i
 
 ### Strategies for varied-heat data
 
-You might ask me a question: if I run a large query on a table, will it affect the ongoing [online transaction processing](https://en.wikipedia.org/wiki/Online_transaction_processing) (OLTP) transaction？Although we have an I/O priority queue built in TiKV, which prioritizes important OLTP requests, it still consumes the resources of the machine with the leader state. 
+You might ask me a question: if I run a large query on a table, will it affect the ongoing [online transaction processing](https://en.wikipedia.org/wiki/Online_transaction_processing) (OLTP) transaction？Although we have an I/O priority queue built in TiKV, which prioritizes important OLTP requests, it still consumes the resources of the machine with the leader state.
 
 A corner case is a small hot table with many more read operations than write operations. Although hot data is cached in memory, when the data is extremely hot, a CPU or network I/O bottleneck occurs.
 
-Our previous post [TiDB Internal (III) - Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/) mentions that we use a separate component called [Placement Driver](https://pingcap.com/docs/v3.1/architecture/#placement-driver-server) (PD) to schedule and load-balance Regions in the TiKV cluster. Currently, the scheduling work is limited to splitting, merging, and moving Regions, and transferring the leader. But in the near future, TiDB will be able to dynamically use different replica strategies for data of different heat degrees. 
+Our previous post [TiDB Internal (III) - Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/) mentions that we use a separate component called [Placement Driver](https://pingcap.com/docs/v3.1/architecture/#placement-driver-server) (PD) to schedule and load-balance Regions in the TiKV cluster. Currently, the scheduling work is limited to splitting, merging, and moving Regions, and transferring the leader. But in the near future, TiDB will be able to dynamically use different replica strategies for data of different heat degrees.
 
 For example, if we find a small table extremely hot, PD can quickly let TiKV dynamically create multiple (more than three) read-only replicas of this data, and use the Follower Read feature to divert the load from the leader. When the load pressure is mitigated, the read-only replicas are destroyed. Because each Region in TiKV is small (96 MB by default), TiDB can be very flexible and lightweight when doing this.
 
 ### Local Read based on Follower Read
 
-Currently, even though TiDB is deployed across data centers and distributes data replicas among these data centers, it is the leader that provides services for each piece of data. This means that applications need to be as close to the leader as possible. Therefore, we usually recommend that users deploy applications in a single data center, and then make PD focus leaders on this data center to process read and write requests faster. Raft is only used to achieve high availability across data centers. 
+Currently, even though TiDB is deployed across data centers and distributes data replicas among these data centers, it is the leader that provides services for each piece of data. This means that applications need to be as close to the leader as possible. Therefore, we usually recommend that users deploy applications in a single data center, and then make PD focus leaders on this data center to process read and write requests faster. Raft is only used to achieve high availability across data centers.
 
 For some read requests, if we can process these requests on a nearby node, we can reduce the read latency and improve read throughput.
 
-As mentioned above, the current implementation of Follower Read does little to reduce read latency. Can we get the local committed log without asking the leader? Yes, in some cases. 
+As mentioned above, the current implementation of Follower Read does little to reduce read latency. Can we get the local committed log without asking the leader? Yes, in some cases.
 
-As we discussed in our previous post [MVCC in TiKV](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/), TiDB uses [multi-version concurrency control](https://en.wikipedia.org/wiki/Multiversion_concurrency_control) (MVCC) to control transaction concurrency. Each entry has a unique, monotonically increasing version number. 
+As we discussed in our previous post [MVCC in TiKV](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/), TiDB uses [multi-version concurrency control](https://en.wikipedia.org/wiki/Multiversion_concurrency_control) (MVCC) to control transaction concurrency. Each entry has a unique, monotonically increasing version number.
 
-Next, we'll combine Follower Read with MVCC. If the version number of the data in the latest committed log on the local node is greater than that of the transaction initiated by the client, the system returns the data in the latest committed log on the local node. This won't violate the [atomicity, consistency, isolation, durability](https://en.wikipedia.org/wiki/ACID) (ACID) properties of transactions. 
+Next, we'll combine Follower Read with MVCC. If the version number of the data in the latest committed log on the local node is greater than that of the transaction initiated by the client, the system returns the data in the latest committed log on the local node. This won't violate the [atomicity, consistency, isolation, durability](https://en.wikipedia.org/wiki/ACID) (ACID) properties of transactions.
 
 In addition, for some scenarios where data consistency is not a strict requirement, it makes sense to directly support reads of low isolation level in the future. When TiDB supports reads of low isolation level, its performance might improve dramatically.
 
