@@ -20,7 +20,7 @@ For more information about Chaos Mesh, refer to our [previous article](https://p
 
 Chaos experiments are similar to experiments we do in a science class. It's perfectly fine to stimulate turbulent situations in a controlled environment. In our case here, we will be simulating network chaos on a small web application called [web-show](https://github.com/chaos-mesh/web-show). To visualize the chaos effect, web-show records the latency from its pod to the kube-controller pod (under the namespace of `kube-system`) every 10 seconds.
 
-The following clip shows the process of installing Chaos Mesh, deploying web-show, and creating the chaos experiment within a few commands: 
+The following clip shows the process of installing Chaos Mesh, deploying web-show, and creating the chaos experiment within a few commands:
 
 ![The whole process of the chaos experiment](media/whole-process-of-chaos-experiment.gif)
 <div class="caption-center"> The whole process of the chaos experiment </div>
@@ -48,7 +48,7 @@ Before moving forward, make sure you have [Git](https://git-scm.com/) and [Docke
     ./install.sh --local kind
     ```
 
-    `install.sh` is an automated shell script that checks your environment, installs Kind, launches Kubernetes clusters locally, and deploys Chaos Mesh. To see the detailed description of `install.sh`, you can include the `--help ` option.
+    `install.sh` is an automated shell script that checks your environment, installs Kind, launches Kubernetes clusters locally, and deploys Chaos Mesh. To see the detailed description of `install.sh`, you can include the `--help` option.
 
     > **Note:**
     >
@@ -83,7 +83,7 @@ The next step is to deploy the application for testing. In our case here, we cho
 
 1. Deploy web-show with the `deploy.sh` script:
 
-    ```bash 
+    ```bash
     # Make sure you are in the Chaos Mesh directory
     cd examples/web-show &&
     ./deploy.sh
@@ -91,7 +91,7 @@ The next step is to deploy the application for testing. In our case here, we cho
 
     > **Note:**
     >
-    > If your local computer cannot pull images from `docker.io`, use the `local gcr.io` mirror and execute `./deploy.sh --docker-mirror` instead. 
+    > If your local computer cannot pull images from `docker.io`, use the `local gcr.io` mirror and execute `./deploy.sh --docker-mirror` instead.
 
 2. Access the web-show application. From your web browser, go to `http://localhost:8081`.
 
@@ -129,13 +129,13 @@ For detailed descriptions of NetworkChaos actions, see [Chaos Mesh wiki](https:/
 
 * target: `web-show`
 * mission: inject a `10ms` network delay every `60s`
-* attack duration: `30s` each time 
+* attack duration: `30s` each time
 
 To start NetworkChaos, do the following:
 
 1. Run `network-delay.yaml`:
 
-    ```bash 
+    ```bash
     # Make sure you are in the chaos-mesh/examples/web-show directory
     kubectl apply -f network-delay.yaml
     ```
@@ -169,7 +169,7 @@ From the line graph, you can see the network latency level is back to normal.
 
 ### Delete Kubernetes clusters
 
-After you're done with the chaos experiment, execute the following command to delete the Kubernetes clusters: 
+After you're done with the chaos experiment, execute the following command to delete the Kubernetes clusters:
 
 ```bash
 kind delete cluster --name=kind

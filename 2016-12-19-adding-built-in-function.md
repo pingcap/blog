@@ -17,11 +17,11 @@ This document describes how to add built-in functions to TiDB.
 
 How is the SQL statement executed in TiDB?
 
-The SQL statement is parsed to an abstract syntax tree (AST) by the parser first and then uses Query Optimizer to generate an execution plan. The plan can then be executed to get the result. This process involves how to access the data in the table, and how to filter, calculate, sort, aggregate, and distinct the data, etc. For a built-in function, the most important part is to parse and to evaluate. 
+The SQL statement is parsed to an abstract syntax tree (AST) by the parser first and then uses Query Optimizer to generate an execution plan. The plan can then be executed to get the result. This process involves how to access the data in the table, and how to filter, calculate, sort, aggregate, and distinct the data, etc. For a built-in function, the most important part is to parse and to evaluate.
 
-For parsing, it is redundant work because you should know how to write YACC commands and how to modify TiDB syntax parser. But we have finished this work for you and syntax parsing of most built-in functions is done. 
+For parsing, it is redundant work because you should know how to write YACC commands and how to modify TiDB syntax parser. But we have finished this work for you and syntax parsing of most built-in functions is done.
 
-As for evaluation, it should be finished in the TiDB expression evaluation framework. Each built-in function is considered as an expression indicated by `ScalarFunction` and obtains the corresponding function type and function signature through the function name and parameters to evaluate. 
+As for evaluation, it should be finished in the TiDB expression evaluation framework. Each built-in function is considered as an expression indicated by `ScalarFunction` and obtains the corresponding function type and function signature through the function name and parameters to evaluate.
 
 The procedure discussed above is complicated for users who are not familiar with TiDB. We have finished syntax parsing and function signature confirmation of most unimplemented functions. But implementation is left empty. In other words, locating and completing the  empty implementation makes a Pull Request (PR).
 
@@ -41,9 +41,9 @@ The following procedure describes how to add a built-in function.
         }
         ```
 
-2. Implement the function signature. 
+2. Implement the function signature.
 
-    This step is to implement `eval`. For the function features, see MySQL documentation. For the specific implementation method, see the method of implemented functions. 
+    This step is to implement `eval`. For the function features, see MySQL documentation. For the specific implementation method, see the method of implemented functions.
 
 3. Add the type inference information to the `typeinferer` file.
 
@@ -53,7 +53,7 @@ The following procedure describes how to add a built-in function.
 
 4. Add a unit test case.
 
-    Add a unit test case for the function to the `expression` directory. Add a unit test case of `typeinferer` to the `plan/typeinferer_test.go` file. 
+    Add a unit test case for the function to the `expression` directory. Add a unit test case of `typeinferer` to the `plan/typeinferer_test.go` file.
 
 5. Run the `make dev` command and make sure all the test cases can pass.
 
@@ -81,7 +81,7 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2781/files) to add 
         if arg.IsNull() {
             return d, nil
         }
-        // The type of the argument value is changed. See "util/types/datum.go" for the function implementation.    
+        // The type of the argument value is changed. See "util/types/datum.go" for the function implementation.
         bin, err := arg.ToBytes()
         if err != nil {
             return d, errors.Trace(err)
@@ -94,7 +94,7 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2781/files) to add 
         return d, nil
     }
     ```
-    
+
 2. Add a unit test case for the function implementation. See `expression/builtin_encryption_test.go`:
 
     ```
@@ -130,9 +130,9 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2781/files) to add 
         c.Assert(crypt.IsNull(), IsTrue)
     }
     ```
-    
+
     > **Note:** Besides conventional cases, you had better add some exceptional cases in which, for example, the input value is "nil" or the arguments of various types.
-      
+
 3. Add the type inference information and the test case. See `plan/typeinferer.go` and `plan/typeinferer_test.go`:
 
     ```
@@ -140,8 +140,8 @@ Take the [Pull Request](https://github.com/pingcap/tidb/pull/2781/files) to add 
         tp = types.NewFieldType(mysql.TypeVarString)
         chs = v.defaultCharset
         tp.Flen = 40
-    ``` 
-    
+    ```
+
     ```
         {`sha1(123)`, mysql.TypeVarString, "utf8"},
         {`sha(123)`, mysql.TypeVarString, "utf8"},

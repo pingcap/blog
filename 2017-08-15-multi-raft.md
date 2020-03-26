@@ -11,14 +11,14 @@ categories: ['Engineering']
 
 <span id="top"> </span>
 
-+   [Placement Driver](#placement-driver)
-+   [Raftstore](#raftstore)
-    -   [Region](#region)
-    -   [RocksDB / Keys Prefix](#rocksdb-keys-prefix)
-    -   [Peer Storage](#peer-storage)
-    -   [Peer](#peer)
-    -   [Multi-raft](#multi-raft)
-+   [Summary](#summary)
++ [Placement Driver](#placement-driver)
++ [Raftstore](#raftstore)
+  - [Region](#region)
+  - [RocksDB / Keys Prefix](#rocksdb-keys-prefix)
+  - [Peer Storage](#peer-storage)
+  - [Peer](#peer)
+  - [Multi-raft](#multi-raft)
++ [Summary](#summary)
 
 ## Placement Driver
 
@@ -82,9 +82,9 @@ message Region {
 
 }
 
-message Peer {      
+message Peer {
 
-    optional uint64 id          = 1 [(gogoproto.nullable) = false]; 
+    optional uint64 id          = 1 [(gogoproto.nullable) = false];
 
     optional uint64 store_id    = 2 [(gogoproto.nullable) = false];
 
@@ -291,12 +291,10 @@ After each `EventLoop`, i.e. inside the tick call-back of mio, Store will perfor
 
 2. If `WriteBatch` succeeds, it will then call `post_raft_ready_append` successively, mainly for the Follower to send message. (Leader’s message has been completed in `handle_raft_ready_append`)
 
-3. Then, Store successively calls `handle_raft_ready_apply` and committed entries related to `apply` and then calls the final result of `on_ready_result`. 
-
+3. Then, Store successively calls `handle_raft_ready_apply` and committed entries related to `apply` and then calls the final result of `on_ready_result`.
 
 ## Summary
 
 In this blog, I’ve shared the details about Multi-raft, one of TiKV’s key technologies. In the subsequent sections, we will introduce Transaction, Coprocessor, and how Placement Drivers schedules the entire cluster. Stay tuned!
 
 [Back to the top](#top)
-

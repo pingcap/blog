@@ -1,14 +1,20 @@
+# PingCAP Blog
+
+## Front Matter Example
+
+```yaml
 ---
-draft: true
+title: Blog Title
+author: ['Author']
+date: yyyy-mm-dd
+summary: Blog Summary
+tags: ['tag1', 'tag2']
+categories: ['category']
+image: /images/blog/...
 ---
+```
 
-<!-- markdownlint-disable MD013 -->
-
-<!-- markdownlint-disable MD040 -->
-
-# blog
-
-## meta data
+## Metadata
 
 - title
 - author
@@ -24,7 +30,7 @@ draft: true
 
 ## For SEO and social media share
 
-- image: /images/pingcap-opengraph.jpg
+- image: /images/blogs/...
 
 > This is used to show the thumbnail shown in the social media platform.
 
@@ -32,13 +38,8 @@ draft: true
 
 > This is for the description shown in the social media platform.
 
-```
----
-title: Blog Title
-author: ['Author']
-date: yyyy-mm-dd
-summary: Blog Summary
-tags: ['Tag1', 'Tag2']
-categories: ['category']
----
-```
+## Lint
+
+We use [https://github.com/DavidAnson/markdownlint](https://github.com/DavidAnson/markdownlint) to lint all `.md` files.
+
+To better check while writing, you can use [vscode](https://code.visualstudio.com/) + [vscode-markdownlint extension for VS Code](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint).

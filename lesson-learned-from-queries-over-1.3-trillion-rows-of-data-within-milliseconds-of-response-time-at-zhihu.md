@@ -14,19 +14,19 @@ customerCategory: Internet
 
 **Author:** Xiaoguang Sun (Backend Search Manager at Zhihu, TiKV Project Maintainer)
 
-[Zhihu](https://en.wikipedia.org/wiki/Zhihu), which means "Do you know?" in classical Chinese, is the Quora of China: a question-and-answer website where all kinds of questions are created, answered, edited, and organized by the community of its users. As [China's biggest knowledge sharing platform](https://walkthechat.com/zhihu-chinas-largest-qa-platform-content-marketers-dream/), we currently have 220 million registered users, and 30 million questions with more than 130 million answers on the site. In August 2018, we announced that we had raised [$270 million in series E funding](https://technode.com/2018/08/08/zhihu-series-e-funding/). 
+[Zhihu](https://en.wikipedia.org/wiki/Zhihu), which means "Do you know?" in classical Chinese, is the Quora of China: a question-and-answer website where all kinds of questions are created, answered, edited, and organized by the community of its users. As [China's biggest knowledge sharing platform](https://walkthechat.com/zhihu-chinas-largest-qa-platform-content-marketers-dream/), we currently have 220 million registered users, and 30 million questions with more than 130 million answers on the site. In August 2018, we announced that we had raised [$270 million in series E funding](https://technode.com/2018/08/08/zhihu-series-e-funding/).
 
-As our business boomed, the data size of our applications grew out of hand. About 1.3 trillion rows of data were stored in our Moneta application (which stores posts users have already read). With approximately 100 billion rows of data accruing each month and growing, this number will reach 3 trillion in two years. We faced severe challenges in scaling our backend system while maintaining good user experience. 
+As our business boomed, the data size of our applications grew out of hand. About 1.3 trillion rows of data were stored in our Moneta application (which stores posts users have already read). With approximately 100 billion rows of data accruing each month and growing, this number will reach 3 trillion in two years. We faced severe challenges in scaling our backend system while maintaining good user experience.
 
 In this post, I'll dive deep into how we managed to keep milliseconds of query response time over such a large amount of data and how TiDB, an open source MySQL-compatible NewSQL Hybrid Transactional/Analytical Processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, empowered us to get real-time insights into our data. I'll introduce why we chose TiDB, how we are using it, what we learned and best practice and some thoughts about the future.
 
 ## Our pain points
 
-This section covers the architecture for our Moneta application, and the solution we tried to build an ideal architecture, and reveals that **database scalability** is our major pain point. 
+This section covers the architecture for our Moneta application, and the solution we tried to build an ideal architecture, and reveals that **database scalability** is our major pain point.
 
 ### System architecture requirements
 
-Zhihu's Post Feed service is a crucial system through which users are exposed to content posted on the site. **The Moneta application** in the backend stores the posts users have read, and filters out these posts in the post stream of Zhihu's Recommendations page. 
+Zhihu's Post Feed service is a crucial system through which users are exposed to content posted on the site. **The Moneta application** in the backend stores the posts users have read, and filters out these posts in the post stream of Zhihu's Recommendations page.
 
 The Moneta application has the following characteristics:
 
@@ -49,7 +49,7 @@ To build an ideal architecture with the features above, we incorporated three ke
 
 * Proxy. This forwards users' requests to available nodes, and ensures the high availability of the system.
 * Cache. This temporarily deals with requests in memory, so we don't always need to process requests in the database. This improves system performance.
-* Storage. Before using TiDB, we managed our business data on standalone MySQL. As data volume surged, the standalone MySQL system wasn't enough. Then we adopted the solution of MySQL sharding and Master High Availability Manager ([MHA](https://github.com/yoshinorim/mha4mysql-manager)), but this solution was undesirable when 100 billion new records flooded into our database each month. 
+* Storage. Before using TiDB, we managed our business data on standalone MySQL. As data volume surged, the standalone MySQL system wasn't enough. Then we adopted the solution of MySQL sharding and Master High Availability Manager ([MHA](https://github.com/yoshinorim/mha4mysql-manager)), but this solution was undesirable when 100 billion new records flooded into our database each month.
 
 ### Shortcomings of MySQL sharding and MHA
 
@@ -58,7 +58,7 @@ MySQL sharding and MHA is not a good solution, because both MySQL sharding and M
 #### Shortcomings of MySQL sharding
 
 * The application code becomes complicated and difficult to maintain.
-* It is troublesome to change the existing sharding key. 
+* It is troublesome to change the existing sharding key.
 * Upgrading the application logic affects application usability.
 
 #### Shortcomings of MHA
@@ -67,9 +67,9 @@ MySQL sharding and MHA is not a good solution, because both MySQL sharding and M
 * MHA only monitors the master database.
 * To configure MHA, we need to configure passwordless Secure Shell ([SSH](https://en.wikipedia.org/wiki/Secure_Shell)). This may lead to potential security risks.
 * MHA doesn't provide the read load balancing feature for the slave server.
-* MHA can only monitor whether the master server (instead of the slave master) is available. 
+* MHA can only monitor whether the master server (instead of the slave master) is available.
 
-Database scalability was still the weak point of the overall system until we found TiDB and migrated data from MySQL to TiDB. 
+Database scalability was still the weak point of the overall system until we found TiDB and migrated data from MySQL to TiDB.
 
 ## What is TiDB?
 
@@ -83,7 +83,7 @@ Inside the TiDB platform, the main components are as follows:
 * **[TiDB server](https://github.com/pingcap/tidb)** is a stateless SQL layer that processes users' SQL queries, accesses data in the storage layer, and returns the corresponding results to the application. It is MySQL-compatible and sits on top of TiKV.
 * **[TiKV server](https://github.com/pingcap/tikv)** is the distributed transactional key-value storage layer where the data persists. It uses the [Raft](https://raft.github.io/) consensus protocol for replication to ensure strong data consistency and high availability.
 * **[TiSpark](https://github.com/pingcap/tispark)** cluster also sits on top of TiKV. It is an Apache Spark plugin that works with the TiDB platform to support complex Online Analytical Processing (OLAP) queries for business intelligence (BI) analysts and data scientists.
-* **[Placement Driver (PD) server](https://github.com/pingcap/pd)** is a metadata cluster powered by [etcd](https://github.com/etcd-io/etcd) that manages and schedules TiKV. 
+* **[Placement Driver (PD) server](https://github.com/pingcap/pd)** is a metadata cluster powered by [etcd](https://github.com/etcd-io/etcd) that manages and schedules TiKV.
 
 Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://pingcap.com/docs/tools/syncer/) and [TiDB Data Migration](https://github.com/pingcap/dm) for seamless migration from MySQL, and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), for collecting the logical changes made to a TiDB cluster and providing incremental backup and replication to the downstream (TiDB, Kafka, or MySQL).
 
@@ -114,12 +114,12 @@ We deployed TiDB in our system, and the overall architecture of the Moneta appli
 
 * The top layer: stateless and scalable client APIs and proxies. These components are easy to scale out.
 * The middle layer: soft-state components, and layered Redis caches as the main part. When services break down, these components can self-recover services via restoring data saved in the TiDB cluster.
-* The bottom layer: the TiDB cluster stores all the stateful data. Its components are highly available, and if a node crashes, it can self-recover its service. 
+* The bottom layer: the TiDB cluster stores all the stateful data. Its components are highly available, and if a node crashes, it can self-recover its service.
 
 ![TiDB architecture in Zhihu's Moneta application](media/tidb-architecture-in-zhihu's-moneta-application.png)
 <div class="caption-center"> TiDB architecture in Zhihu's Moneta application </div>
 
-In this system, all the components are self-recoverable, and the entire system has a global failure monitoring mechanism. We then use [Kubernetes](https://en.wikipedia.org/wiki/Kubernetes) to orchestrate the entire system to guarantee high availability of the service as a whole. 
+In this system, all the components are self-recoverable, and the entire system has a global failure monitoring mechanism. We then use [Kubernetes](https://en.wikipedia.org/wiki/Kubernetes) to orchestrate the entire system to guarantee high availability of the service as a whole.
 
 ### TiDB's performance metrics
 
@@ -140,7 +140,7 @@ As an example, take a set of performance metrics for the Moneta application in J
 * **The 99th percentile response time was about 25 ms, and the 999th percentile response time was about 50 ms**. In fact, the average response time is far less than these figures, even for long-tail queries that demand a stable response time.
 
 ![99th percentile response time](media/99th-percentile-response-time.png)
-<div class="caption-center"> The 99th percentile response time </div> 
+<div class="caption-center"> The 99th percentile response time </div>
 
 ![999th percentile response time](media/999th-percentile-response-time.png)
 <div class="caption-center"> The 999th percentile response time </div>
@@ -151,13 +151,13 @@ Our migration to TiDB wasn't without a hitch. Here we'd like to share some lesso
 
 ### Importing data faster
 
-We used [TiDB Data Migration](https://github.com/pingcap/dm) (DM) to collect MySQL incremental binlog files and then used [TiDB Lightning](https://github.com/pingcap/tidb-lightning) to fast import the data to the TiDB cluster. 
+We used [TiDB Data Migration](https://github.com/pingcap/dm) (DM) to collect MySQL incremental binlog files and then used [TiDB Lightning](https://github.com/pingcap/tidb-lightning) to fast import the data to the TiDB cluster.
 
 To our surprise, it only took four days to import these 1.1 trillion records to TiDB. If we logically wrote the data into the system, it might have taken a month or more. We could have imported the data even faster if we had more hardware resources.
 
 ### Reducing query latency
 
-After we finished the migration, we tested a small amount of read traffic. When the Moneta application first went online, we found that the query latency didn't meet our requirement. To solve the latency issue, we worked with the PingCAP engineers to tune system performance. 
+After we finished the migration, we tested a small amount of read traffic. When the Moneta application first went online, we found that the query latency didn't meet our requirement. To solve the latency issue, we worked with the PingCAP engineers to tune system performance.
 
 During this process, we accumulated precious experience:
 
@@ -179,11 +179,11 @@ At Zhihu, the anti-spam and Moneta applications are architected the same way. We
 
 **Titan reduced latency**
 
-The anti-spam application has always been tormented with high latency of both queries and writes. 
+The anti-spam application has always been tormented with high latency of both queries and writes.
 
-We heard that TiDB 3.0 would introduce Titan, a key-value storage engine, to reduce write amplification in [RocksDB](https://en.wikipedia.org/wiki/RocksDB) (the underlying storage engine in TiKV) when using large values. 
+We heard that TiDB 3.0 would introduce Titan, a key-value storage engine, to reduce write amplification in [RocksDB](https://en.wikipedia.org/wiki/RocksDB) (the underlying storage engine in TiKV) when using large values.
 
-To give this feature a try, we enabled Titan after TiDB 3.0.0-rc.2 was released. The following figure shows the latency for writes and queries respectively, compared to that of RocksDB and Titan: 
+To give this feature a try, we enabled Titan after TiDB 3.0.0-rc.2 was released. The following figure shows the latency for writes and queries respectively, compared to that of RocksDB and Titan:
 
 ![Latency for writes and queries](media/latency-for-writes-and-queries-respectively.png)
 <div class="caption-center"> Latency for writes and queries </div>
@@ -210,7 +210,7 @@ As mentioned above, we had written quite a few SQL hints to make the query optim
 
 #### TiFlash
 
-At [TiDB DevCon 2019](https://pingcap.com/blog/tidb-3.0-beta-stability-at-scale/), I first heard about TiFlash, an extended analytical engine for TiDB. It uses the column-oriented storage technique to achieve a high data compression rate, and it applies the extended Raft consensus algorithm in data replication to ensure data security. 
+At [TiDB DevCon 2019](https://pingcap.com/blog/tidb-3.0-beta-stability-at-scale/), I first heard about TiFlash, an extended analytical engine for TiDB. It uses the column-oriented storage technique to achieve a high data compression rate, and it applies the extended Raft consensus algorithm in data replication to ensure data security.
 
 Because we have massive data with high write throughput, we can't afford to use ETL every day to replicate data to [Hadoop](https://en.wikipedia.org/wiki/Apache_Hadoop) for analysis. But with TiFlash, we're optimistic that we can easily analyze our tremendous data volume.
 
@@ -222,6 +222,6 @@ Because TiDB 3.0 can send and receive Raft messages in batch, and it can process
 
 ## What's next
 
-TiDB is a **MySQL-compatible** database, so we can use it just as we used MySQL. Owing to TiDB's **horizontal scalability**, now we can freely scale our database even when we have more than one trillion records to cope with. Besides, TiDB's **high availability** and **excellent performance** have also strengthened our system. 
+TiDB is a **MySQL-compatible** database, so we can use it just as we used MySQL. Owing to TiDB's **horizontal scalability**, now we can freely scale our database even when we have more than one trillion records to cope with. Besides, TiDB's **high availability** and **excellent performance** have also strengthened our system.
 
 Up to now, we've used quite a few open-source software in our applications. We also learned a lot about handling our system problems with TiDB. We decided to participate in developing open source tools, and participate in the long term growth of the community. Based on our joint efforts with PingCAP, TiDB will become more powerful and robust.

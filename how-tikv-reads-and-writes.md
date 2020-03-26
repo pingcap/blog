@@ -107,7 +107,6 @@ A TiKV store contains multiple Regions. In Raft RocksDB, we use the Region ID as
 2_N-> Log {b = N}
 ```
 
-
 Because we slice the key according to range, we use the key to save directly, similar to the following:
 
 ```
@@ -224,12 +223,12 @@ TiKV is a distributed KV store. On top of it companies are building databases th
 
 ```sql
 CREATE TABLE t1 {
-	id BIGINT PRIMARY KEY,
-	name VARCHAR (1024),
-	age BIGINT,
-	content BLOB,
-	UNIQUE (name),
-	INDEX (age),
+ id BIGINT PRIMARY KEY,
+ name VARCHAR (1024),
+ age BIGINT,
+ content BLOB,
+ UNIQUE (name),
+ INDEX (age),
 }
 ```
 

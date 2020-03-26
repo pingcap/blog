@@ -16,7 +16,7 @@ Traditionally, transactional and analytical data are managed in separate systems
 
 In 2014, [Gartner Inc.](https://en.wikipedia.org/wiki/Gartner) coined a term: [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)), short for **Hybrid Transactional/Analytical Processing**. An HTAP database aims to break the wall between transaction processing and analytics. In 2015, we at [PingCAP](https://pingcap.com/en/) began to develop [TiDB](https://en.wikipedia.org/wiki/TiDB), an open-source MySQL-compatible HTAP database, to meet both OLTP and OLAP requirements in a single system. To further strengthen our OLAP capabilities, we're now building TiFlash, an extended analytical engine and a columnar store for TiDB, which has currently increased the scan performance for massive data by four to nine times.
 
-A TiDB database that incorporated TiFlash lets users perform **real-time analytics**, which means analyzing data immediately after that data enters the system. In such case, there is a near-zero latency between data ingestion and processing. By exploiting real-time data to power predictive analytics, enterprises can identify emerging marketing opportunities or make business decisions as soon as data comes in. This way, they can stay ahead of fierce market competition. 
+A TiDB database that incorporated TiFlash lets users perform **real-time analytics**, which means analyzing data immediately after that data enters the system. In such case, there is a near-zero latency between data ingestion and processing. By exploiting real-time data to power predictive analytics, enterprises can identify emerging marketing opportunities or make business decisions as soon as data comes in. This way, they can stay ahead of fierce market competition.
 
 In this post, I'll deep dive into why we need an HTAP database like TiDB, what TiFlash is, and how TiFlash fuels TiDB to evolve into a true HTAP database.
 
@@ -26,18 +26,18 @@ This section describes why OLTP and OLAP were originally separated and the disad
 
 ### Reasons for separating OLTP and OLAP systems
 
-Before the Internet data surge, the amount of data in enterprises was generally not large. Especially for the core business, a single standalone database was adequate to store the data. At that time, storage architectures were not complicated. We could run OLTP and OLAP workloads on the same database. 
+Before the Internet data surge, the amount of data in enterprises was generally not large. Especially for the core business, a single standalone database was adequate to store the data. At that time, storage architectures were not complicated. We could run OLTP and OLAP workloads on the same database.
 
 However, as the business became more complex, and the amount of data kept increasing, a notable problem occurred: it was difficult to process only OLTP requests in a standalone database, not to mention handling analytical queries simultaneously. **Running OLTP and OLAP tasks in the same database might cause might cause a huge impact on OLTP workloads.**
 
 We could use the master-slave model or sharding to relieve the problem, but it would be hard to implement application requirements.
 
-In this context, the big data technology represented by [Apache Hadoop](https://en.wikipedia.org/wiki/Apache_Hadoop) began to flourish. This technology builds a data analysis platform with many relatively inexpensive x86 machines, and uses parallel capabilities to solve computing problems of big data sets. In addition, architects **divide the storage system into two modules: online transactions and data analysis**. 
+In this context, the big data technology represented by [Apache Hadoop](https://en.wikipedia.org/wiki/Apache_Hadoop) began to flourish. This technology builds a data analysis platform with many relatively inexpensive x86 machines, and uses parallel capabilities to solve computing problems of big data sets. In addition, architects **divide the storage system into two modules: online transactions and data analysis**.
 
 As shown in the following figure, the application data is extracted by the ETL tool, and then imported into a data analysis platform. The application database focuses on OLTP workloads, and the analysis platform on OLAP workloads.
 
 ![Traditional data platform](media/traditional-data-platform.png)
-<div class="caption-center"> Traditional data platform </div> 
+<div class="caption-center"> Traditional data platform </div>
 
 ### Disadvantages of separating OLTP and OLAP systems
 
@@ -47,7 +47,7 @@ The traditional data platform's architecture seems perfect, but it has the follo
 
 * **It can't deliver real-time data analytics**. The more up-to-date the data is, the greater its value will be. Many application scenarios require the low latency of real-time data. For example, a risk monitoring system continuously analyzes data, and responds immediately after any risk occurs. But ETL is a periodic operation, and data for ETL is streamed once an hour or once a day. Thus, the data used for reporting is never the most up to date.
 
-* **It can't guarantee data consistency**. Consistency is an important concept in the database field, and the database transaction is used to ensure consistency. If data is stored in two different systems, it is difficult to ensure data consistency. The query result of the OLAP system can't correctly correspond to the online transaction. Then, these two systems can't cooperate well. For example, users can't access the data of the two systems simultaneously in a single transaction. 
+* **It can't guarantee data consistency**. Consistency is an important concept in the database field, and the database transaction is used to ensure consistency. If data is stored in two different systems, it is difficult to ensure data consistency. The query result of the OLAP system can't correctly correspond to the online transaction. Then, these two systems can't cooperate well. For example, users can't access the data of the two systems simultaneously in a single transaction.
 
 Because of the above limitations for the traditional data processing platform, we developed **TiDB**, an open-source MySQL-compatible HTAP database, which serves as a one-stop solution for both OLTP and OLAP. Our users needn't worry about the complex architecture of the data platform, or feel anxious when they have to select a product from various OLTP-specific and OLAP-specific options.
 
@@ -56,11 +56,11 @@ Because of the above limitations for the traditional data processing platform, w
 To build an HTAP database system like TiDB, we had to conquer several engineering problems. Building an HTAP system is a tough task due to the following reasons:
 
 * OLTP and OLAP systems have different design philosophies:
-    
-    * In OLTP scenarios, we focus on transaction correctness. Their performance metrics are [queries per second](https://en.wikipedia.org/wiki/Queries_per_second) (QPS) and latency. OLTP systems often deal with point writes or point selects.
-    * In OLAP scenarios, we're more concerned with the query throughput, the processing capability, and the costs for large batches of data. In many cases, to do an analytics query, the system must scan millions of rows of data, and join more than 10 tables.
 
-* OLTP systems usually use row-oriented storage (or row stores), like [InnoDB](https://en.wikipedia.org/wiki/InnoDB) and [RocksDB](https://en.wikipedia.org/wiki/RocksDB), while OLAP systems usually use column-oriented storage (or column stores). To implement these two in the same system, it's difficult for the architect to make tradeoffs between row stores and column stores. 
+  * In OLTP scenarios, we focus on transaction correctness. Their performance metrics are [queries per second](https://en.wikipedia.org/wiki/Queries_per_second) (QPS) and latency. OLTP systems often deal with point writes or point selects.
+  * In OLAP scenarios, we're more concerned with the query throughput, the processing capability, and the costs for large batches of data. In many cases, to do an analytics query, the system must scan millions of rows of data, and join more than 10 tables.
+
+* OLTP systems usually use row-oriented storage (or row stores), like [InnoDB](https://en.wikipedia.org/wiki/InnoDB) and [RocksDB](https://en.wikipedia.org/wiki/RocksDB), while OLAP systems usually use column-oriented storage (or column stores). To implement these two in the same system, it's difficult for the architect to make tradeoffs between row stores and column stores.
 
 * OLAP queries are resource-consuming. If they are not isolated well from OLTP queries, OLTP performance will be affected.
 
@@ -69,7 +69,7 @@ To build an HTAP database system like TiDB, we had to conquer several engineerin
 The TiDB platform is a collection of components that when used together become a NewSQL database with HTAP capabilities.
 
 ![TiDB platform architecture](media/tidb-platform-architecture.png)
-<div class="caption-center"> TiDB platform architecture </div> 
+<div class="caption-center"> TiDB platform architecture </div>
 
 Inside the TiDB platform, the main components are as follows:
 
@@ -85,18 +85,18 @@ Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansi
 
 ## Why we build TiFlash
 
-As an HTAP database, TiDB targets both OLTP and OLAP scenarios. TiDB is highly compatible with MySQL protocols, so it can be used as a linearly scalable MySQL. Its architecture design fulfills OLTP requirements. 
+As an HTAP database, TiDB targets both OLTP and OLAP scenarios. TiDB is highly compatible with MySQL protocols, so it can be used as a linearly scalable MySQL. Its architecture design fulfills OLTP requirements.
 
-In 2017, we released TiSpark, which directly accesses the data in TiKV (the storage layer of TiDB), and exploits the powerful computing capability of Apache Spark to boost TiDB's OLAP capability. 
+In 2017, we released TiSpark, which directly accesses the data in TiKV (the storage layer of TiDB), and exploits the powerful computing capability of Apache Spark to boost TiDB's OLAP capability.
 
 However, TiKV is designed specially for **OLTP scenarios**. It has a limited capability to extract and analyze large volumes of data. For many OLAP queries, column-oriented databases outperform row-oriented databases. Therefore, we introduced TiFlash to promote TiDB's OLAP capabilities and power TiDB to become a true HTAP database.
 
 ![TiFlash architecture](media/tiflash-architecture.png)
-<div class="caption-center"> TiFlash architecture </div> 
+<div class="caption-center"> TiFlash architecture </div>
 
 ## What is TiFlash
 
-TiFlash is an extended analytical engine for TiDB. 
+TiFlash is an extended analytical engine for TiDB.
 
 * TiFlash and TiKV nodes are deployed separately to store data. The computing nodes in the top layer, including TiSpark and TiDB nodes, can access TiKV and TiFlash.
 
@@ -110,18 +110,18 @@ TiFlash is an extended analytical engine for TiDB.
 
 * TiFlash has a high-performance computing capability, because it's partially based on the vectorized engine of [ClickHouse](https://en.wikipedia.org/wiki/ClickHouse).
 
-## TiFlash's internals 
+## TiFlash's internals
 
 This section shows details of TiFlash's core technologies, including column-oriented storage, low-cost data replication, strong consistency, and high frequency update support.
 
 ### Column-oriented storage
 
 ![Row-oriented storage vs. column-oriented storage](media/row-oriented-storage-vs-column-oriented-storage.png)
-<div class="caption-center"> Row-oriented storage vs. column-oriented storage </div> 
+<div class="caption-center"> Row-oriented storage vs. column-oriented storage </div>
 
 Generally, OLAP systems use column-oriented storage, and so does TiFlash. TiFlash performs scan operations 10 times faster than TiKV because the columnar format has the following characteristics:
 
-* Columns that are not needed for the query result are skipped. This provides better utilization of available I/O and CPU-memory bandwidth. 
+* Columns that are not needed for the query result are skipped. This provides better utilization of available I/O and CPU-memory bandwidth.
 
 * Data is stored by column. Thus, it's possible to achieve a high compression ratio and scan throughput.
 
@@ -132,26 +132,26 @@ Generally, OLAP systems use column-oriented storage, and so does TiFlash. TiFlas
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Delivering Real-time Analytics and True HTAP by Combining Columnstore and Rowstore', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
-In contrast, row-oriented storage is more suitable for OLTP scenarios, which are characterized by point query access patterns. In these scenarios, only a small amount of data must be read, and operations are performed at smaller I/O granularity. High QPS and low latencies can be implemented in most index-based queries. 
+In contrast, row-oriented storage is more suitable for OLTP scenarios, which are characterized by point query access patterns. In these scenarios, only a small amount of data must be read, and operations are performed at smaller I/O granularity. High QPS and low latencies can be implemented in most index-based queries.
 
-We have integrated TiFlash and TiKV inside TiDB, so users can choose which storage method to use. After data is written to TiKV, users determine whether to replicate the data (currently by table or database) to TiFlash to process analytic queries faster. 
+We have integrated TiFlash and TiKV inside TiDB, so users can choose which storage method to use. After data is written to TiKV, users determine whether to replicate the data (currently by table or database) to TiFlash to process analytic queries faster.
 
 ### Low-cost data replication
 
-Data replication is one of the most significant issues in distributed systems. TiKV is a storage layer in TiDB, and its data must be replicated to TiFlash in real time. We use the [Raft algorithm](https://raft.github.io/) to replicate data from TiKV to TiFlash. 
+Data replication is one of the most significant issues in distributed systems. TiKV is a storage layer in TiDB, and its data must be replicated to TiFlash in real time. We use the [Raft algorithm](https://raft.github.io/) to replicate data from TiKV to TiFlash.
 
 In a Raft group, TiFlash is a Raft learner instead of a Raft leader or follower, because TiFlash currently doesn't support direct writes from the SQL client (TiDB or TiSpark). We'll support this feature in the near future.
 
 ![Data replication for a Raft learner](media/data-replication-for-a-raft-learner.png)
-<div class="caption-center"> Data replication for a Raft learner </div> 
+<div class="caption-center"> Data replication for a Raft learner </div>
 
-To speed up data replication, replicating Raft logs from a leader to a follower or learner could be performed asynchronously. When a log entry is replicated to the majority of nodes (leader and followers), it is considered committed. 
+To speed up data replication, replicating Raft logs from a leader to a follower or learner could be performed asynchronously. When a log entry is replicated to the majority of nodes (leader and followers), it is considered committed.
 
 The majority doesn't include the learner. This means that writes don't need the learner's acknowledgement. Therefore, data on a learner node might be out of date. But as an advantage, this mechanism sharply reduces data replication overhead costs caused by introducing TiFlash. Note that if data replication latency is high, it indicates there might be network problems or machine write performance issues. If latency is high, an alert prompt displays to guide users about what to do next.
 
 ### Strong consistency
 
-As mentioned above, the leader node asynchronously replicates logs to learners. Then how to guarantee read consistency? Generally, logs on the leader node are the most up to date, so we read data only on this node. We can't directly read data on TiFlash, because it serves as a learner node in the Raft cluster, and its updates might be delayed. 
+As mentioned above, the leader node asynchronously replicates logs to learners. Then how to guarantee read consistency? Generally, logs on the leader node are the most up to date, so we read data only on this node. We can't directly read data on TiFlash, because it serves as a learner node in the Raft cluster, and its updates might be delayed.
 
 A Region is the basic unit for data storage, and multiple Region replicas form a Raft group. Based on the Raft log offset and global timestamp, we use the Raft follower/learner reads mechanism to support data reading on TiFlash nodes:
 
@@ -161,7 +161,7 @@ A Region is the basic unit for data storage, and multiple Region replicas form a
 
 3. For each unique key, the system selects all versions with the commit `ts` no greater than the read `ts`. Among these versions, the one with the latest committed `ts` is the version we should read.
 
-How does the learner know that the current Region replica is sufficiently new? The answer is: before reading data, the learner with its read `ts` sends a request to the leader to obtain the Raft log offset that ensures the Region replica is sufficiently new. 
+How does the learner know that the current Region replica is sufficiently new? The answer is: before reading data, the learner with its read `ts` sends a request to the leader to obtain the Raft log offset that ensures the Region replica is sufficiently new.
 
 ![Raft learner sends a request to the leader](media/raft-learner-sends-a-request-to-the-leader.png)
 <div class="caption-center"> Raft learner sends a request to the leader </div>
@@ -179,7 +179,7 @@ Currently, before the local Region replica is updated to sufficiently new, TiFla
 
 All changes on the TiKV table are replicated to TiFlash. When you replicate data between systems with different structures, it's natural to encounter thorny issues. One typical issue is how to replicate transactional updates in TiKV to TiFlash in real time. Generally, it's more difficult to update the columnar storage format than the row storage format due to the following reasons:
 
-* In the columnar storage format, chunks are usually used for compression. In general cases, column compression chunks are larger than row compression chunks, and might increase [write amplification](https://en.wikipedia.org/wiki/Write_amplification). 
+* In the columnar storage format, chunks are usually used for compression. In general cases, column compression chunks are larger than row compression chunks, and might increase [write amplification](https://en.wikipedia.org/wiki/Write_amplification).
 * Columnar storage can cause more small random I/O requests.
 * OLAP applications perform a lot of scans. When updates are frequent, it's difficult to ensure scan performance.
 
@@ -192,10 +192,10 @@ As a solution, TiFlash uses a storage engine similar to a [log-structured merge-
 
 Using TiFlash with TiDB lets you do the following:
 
-*   Use TiDB in more scenarios.
-*   Minimize the effects of OLAP applications on OLTP applications.
-*   Integrate TiFlash and TiKV for killer performance.
-*   Hide system complexity and simplify your application architecture. 
+* Use TiDB in more scenarios.
+* Minimize the effects of OLAP applications on OLTP applications.
+* Integrate TiFlash and TiKV for killer performance.
+* Hide system complexity and simplify your application architecture.
 
 ### Using TiDB in more scenarios
 
@@ -210,7 +210,7 @@ Because TiFlash is deployed independently from TiKV, it's possible to isolate ha
 ![Isolation of OLAP and OLTP applications](media/isolation-of-olap-and-oltp-applications.png)
 <div class="caption-center"> Isolation of OLAP and OLTP applications </div>
 
-In the TiDB system, both TiFlash and TiKV are the storage layer. However, when they start, they report different node labels to the managing component of the TiDB cluster (the Placement Driver). Based on the node label, TiDB routes requests of different types to the corresponding nodes. 
+In the TiDB system, both TiFlash and TiKV are the storage layer. However, when they start, they report different node labels to the managing component of the TiDB cluster (the Placement Driver). Based on the node label, TiDB routes requests of different types to the corresponding nodes.
 
 If users choose to have a clean isolation between transactional and analytical workloads, they can set configurations to guide TiDB which storage engine to read from. This ensures that heavy I/O requests and computing operations won't affect TiKV's OLTP applications.
 
@@ -232,7 +232,7 @@ TiFlash is iterating fast. Compared to the figure above, the latest version has 
 
 ### Hiding system complexity to simplify the application architecture
 
-To meet their application requirements, companies must often integrate multiple technologies.  However, this approach requires a complicated ETL pipeline to copy data from one or more sources to a destination system. It often takes a long time to finish an ETL process, and this hinders companies' ability to do real-time data analysis. 
+To meet their application requirements, companies must often integrate multiple technologies.  However, this approach requires a complicated ETL pipeline to copy data from one or more sources to a destination system. It often takes a long time to finish an ETL process, and this hinders companies' ability to do real-time data analysis.
 
 We've designed TiDB to hide system complexity and simply your application architecture.
 
@@ -241,7 +241,7 @@ We've designed TiDB to hide system complexity and simply your application archit
 
 ## What's next
 
-As a data analytics extension, TiFlash fosters TiDB's OLAP capabilities, and, accordingly, shapes TiDB into a true HTAP database. Our users can do predictive analytics using real-time data to make business decisions more quickly than their competitors. This gives them a crucial head start in the market. 
+As a data analytics extension, TiFlash fosters TiDB's OLAP capabilities, and, accordingly, shapes TiDB into a true HTAP database. Our users can do predictive analytics using real-time data to make business decisions more quickly than their competitors. This gives them a crucial head start in the market.
 
 We also plan to add [massive parallel processing](https://en.wikipedia.org/w/index.php?title=Massive_parallel_processing&redirect=no) (MPP) support and direct write support on the columnar engine without the need of a Raft learner.
 
@@ -263,8 +263,8 @@ If you're interested in TiFlash technologies, you can contact me at [weiwan@ping
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
 <script>
   hbspt.forms.create({
-	portalId: "4466002",
-	formId: "62420aae-0006-4369-8bdd-532b7469f9be"
+ portalId: "4466002",
+ formId: "62420aae-0006-4369-8bdd-532b7469f9be"
 });
 </script>
 </div>

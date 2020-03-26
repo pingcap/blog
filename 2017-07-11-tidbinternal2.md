@@ -25,18 +25,19 @@ From Li SHEN: shenli@pingcap.com
 My [last blog](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/) introduces the way that TiDB stores data, which is also the basic concepts of TiKV. In this article, I’ll elaborate on how TiDB uses the bottom layer Key-Value to store data, maps the relational model to the Key-Value model and performs SQL computing.
 
 ### <span id="map">Mapping the Relational Model to the Key-Value Model</span>
+
 Let’s simplify the Relational Model to be just about Table and the SQL statements. What we need to think about is how to store Table and run the SQL statements on top of the Key-Value structure.
 
 Assuming we have a Table as follows:
 
 ```
 CREATE TABLE User {
-   	ID int,
-   	Name varchar(20),
-   	Role varchar(20),
-   	Age int,
-   	PRIMARY KEY (ID),
-   	Key idxAge (age)
+    ID int,
+    Name varchar(20),
+    Role varchar(20),
+    Age int,
+    PRIMARY KEY (ID),
+    Key idxAge (age)
 };
 ```
 
@@ -54,8 +55,8 @@ Data can be stored either in rows or in columns, both have their advantages and 
 
 TiDB supports both the Primary Index and Secondary Index. The function of Index is for faster query, higher query performance, and the Constraints. There are two forms of query:
 
-+ Point query, which uses equivalent conditions such as Primary Key or Unique Key for a query, e.g. `select name from user where id=1;`, locating a certain row of data through index. 
-+ Range query, e.g. `select name from user where age > 30 and age < 35;`, querying the data that the age is between 30 and 35 through `idxAge`. 
++ Point query, which uses equivalent conditions such as Primary Key or Unique Key for a query, e.g. `select name from user where id=1;`, locating a certain row of data through index.
++ Range query, e.g. `select name from user where age > 30 and age < 35;`, querying the data that the age is between 30 and 35 through `idxAge`.
 There are two types of Indexes: Unique Index and Non-unique Index, both of which are supported by TiDB.
 
 After analyzing the characteristics of the data to be stored, let’s move on to what we need to do to manipulate the data, including the Insert/Update/Delete/Select statements.
@@ -64,14 +65,14 @@ After analyzing the characteristics of the data to be stored, let’s move on to
 + The `Update` statement updates Row and index data if necessary.
 + The `Delete` statement deletes both Row and index.
 + Among the four, the `Select` statement deals with the most complicated situation:
-	- Reading a row of data easily and quickly. In this case, each Row needs to have an ID (explicit or implicit).
-	- Continuously reading multiple rows of data, such as `Select * from user;`.
-	- Reading data through index, leveraging the index either in Point query or Range query.
+  - Reading a row of data easily and quickly. In this case, each Row needs to have an ID (explicit or implicit).
+  - Continuously reading multiple rows of data, such as `Select * from user;`.
+  - Reading data through index, leveraging the index either in Point query or Range query.
 
 A globally ordered and distributed Key-Value engine satisfies the above needs. The feature of being globally ordered helps us solve quite a few problems. Take the following as two examples:
 
-+ To get a row of data quickly. Assume that we can create a certain or some Keys, when locating this row, we’d be able to use the Seek method provided by TiKV to quickly locate this row of data. 
-+ To scan the whole table. If the table can be mapped to the Range of Key, then all data can be got by scanning from StartKey to EndKey. The way to manipulate Index data is similar. 
++ To get a row of data quickly. Assume that we can create a certain or some Keys, when locating this row, we’d be able to use the Seek method provided by TiKV to quickly locate this row of data.
++ To scan the whole table. If the table can be mapped to the Range of Key, then all data can be got by scanning from StartKey to EndKey. The way to manipulate Index data is similar.
 
 [Back to the top](#top)
 
@@ -105,9 +106,9 @@ In the above rules, all `xxPrefix` of the Keys are string constants with the fun
 
 ```
 var(
-   	tablePrefix     = []byte{'t'}
-   	recordPrefixSep = []byte("_r")
-   	indexPrefixSep  = []byte("_i")
+    tablePrefix     = []byte{'t'}
+    recordPrefixSep = []byte("_r")
+    indexPrefixSep  = []byte("_i")
 )
 ```
 
@@ -120,10 +121,10 @@ Note that the Key encoding solution of either Row or Index has the same prefix. 
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Internal (II) - Computing', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
-Now we take the previous requirements and TiDB’s mapping solution into consideration and verify the feasibility of the solution. 
+Now we take the previous requirements and TiDB’s mapping solution into consideration and verify the feasibility of the solution.
 
-1. Firstly, we transform Row and Index data into Key-Value data through the mapping solution and make sure that each row and each piece of index data has a unique Key. 
-2. Secondly, we can easily create the corresponding Key of some row or some piece of index by using this mapping solution as it is good for both Point query and Range query. 
+1. Firstly, we transform Row and Index data into Key-Value data through the mapping solution and make sure that each row and each piece of index data has a unique Key.
+2. Secondly, we can easily create the corresponding Key of some row or some piece of index by using this mapping solution as it is good for both Point query and Range query.
 3. Lastly, when ensuring some Constraints in the table, we can create and check the existence of a certain Key to determine whether the corresponding Constraint has been satisfied.
 
 Up to now, we’ve already covered how to map Table onto Key-Value. Here is one more case with the same table structure. Assume that the table has three rows of data:
@@ -157,7 +158,7 @@ The previous encoding rules help you to understand the above example. We hope th
 ### <span id="meta">Metadata Management</span>
 
 After explaining how data and index of a table is mapped to Key-Value, this section introduces the storage of metadata.
- 
+
 Both Database and Table have metadata, which refers to its definition and various attributes. All of this information needs to be persisted and stored in TiKV. Each Database/Table gets a unique ID and this ID serves as the unique identification. When encoding into Key-Value, this ID will be encoded in Key, with a prefix of m_. In this way, a Key is created and the corresponding Value stores the serialized metadata.
 
 Apart from this, a specialized Key-Value stores the version of the current Schema information. TiDB uses the Online Schema change algorithm of Google F1. A background thread constantly checks whether the Schema version stored on TiKV has changed. If so, it manages to get the updates within a certain period of time. For more detailed information, please refer to [The Implementation of Asynchronous Schema Change of TiDB (In Chinese)](https://github.com/ngaut/builddatabase/blob/master/f1/schema-change-implement.md).
@@ -180,7 +181,7 @@ The mapping solution from SQL to Key-Value shows how to store the relational dat
 
 The easiest way is to map the SQL query to Key-Value query through the mapping solution that I introduced in the last section, and then get the corresponding data through the Key-Value interface before executing any kind of operations.
 
-As for the statement `Select count(*) from user where name="TiDB";`, we need to read all the data in the table and then check if the Name field is TiDB. If so, return this row. The operation is transferred to the following Key-Value operation process: 
+As for the statement `Select count(*) from user where name="TiDB";`, we need to read all the data in the table and then check if the Name field is TiDB. If so, return this row. The operation is transferred to the following Key-Value operation process:
 
 + Create Key Range: As all RowIDs in a table are in the [0, MaxInt64) range, we use 0 and MaxInt64 and Row’s Key encoding rule to create a left-close-right-open interval, [StartKey, EndKey).
 + Scan Key Range: Read data in TiKV according to the Key Range previously created.
@@ -203,7 +204,7 @@ This solution works though it still has the following drawbacks:
 
 It is simple to avoid the above drawbacks.
 
-1. Firstly, we need to operate close to the storage nodes to stop massive RPC callings. 
+1. Firstly, we need to operate close to the storage nodes to stop massive RPC callings.
 2. Then we need to push down Filter to the storage nodes as well. In this case, only valid rows will be returned and meaningless network transmission will be avoided.
 3. Lastly, we can push down the Aggregate function and GroupBy for pre-aggregation. Each node only needs to return one Count value and then tidb-server Sums all the values.
 
@@ -214,6 +215,7 @@ The following sketch shows how data returns layer by layer:
 You can refer to [MPP and SMP in TiDB (in Chinese)](https://mp.weixin.qq.com/s?__biz=MzI3NDIxNTQyOQ==&mid=2247484187&idx=1&sn=90a7ce3e6db7946ef0b7609a64e3b423&chksm=eb162471dc61ad679fc359100e2f3a15d64dd458446241bff2169403642e60a95731c6716841&scene=4) to know how TiDB makes the SQL statement run faster.
 
 ### <span id="sqlarch">Architecture of the SQL Layer</span>
+
 The previous sections introduce some functions of the SQL layer and I hope you have a basic idea about how to process the SQL statement. Actually, TiDB’s SQL Layer is much complicated and has lots of modules and layers. The following diagram lists all important modules and the call relation:
 
 ![Architecture of the SQL Layer](media/sqlarchitecture.png)
@@ -223,8 +225,8 @@ The SQL requests will be sent directly or via a Load Balancer to tidb-server, wh
 [Back to the top](#top)
 
 ### <span id="summary">Summary</span>
+
 Up till now, we’ve known how data is stored and used for operation from the perspective of SQL. Information about the SQL layer, such as the principle of optimization and the detail of the distributed execution framework will be introduced in the future.
 In the next article, we will dwell on information about PD, especially the cluster management and schedule. This is an interesting part as you will see things that are invisible when using TiDB but important to the whole cluster.
 
 [Back to the top](#top)
-

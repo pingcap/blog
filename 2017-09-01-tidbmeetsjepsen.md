@@ -10,17 +10,16 @@ categories: ['Engineering']
 
 - [What is Jepsen?](#what-is-jepsen)
 - [How does Jepsen work?](#how-does-jepsen-work)
-    - [DB](#db)
-    - [Client](#client)
-    - [Checker](#checker)
-    - [Nemesis](#nemesis)
-    - [Generator](#generator)
+  - [DB](#db)
+  - [Client](#client)
+  - [Checker](#checker)
+  - [Nemesis](#nemesis)
+  - [Generator](#generator)
 - [Jepsen tests that TiDB goes through](#jepsen-tests-that-tidb-goes-through)
-    - [The `Bank` Test](#the-bank-test)
-    - [The `Set` Test](#the-set-test)
-    - [The `Register` Test](#the-register-test)
+  - [The `Bank` Test](#the-bank-test)
+  - [The `Set` Test](#the-set-test)
+  - [The `Register` Test](#the-register-test)
 - [Miscellaneous](#miscellaneous)
-
 
 ## What is Jepsen?
 
@@ -70,7 +69,7 @@ Generator, the event generator of Jepsen, interweaves the operations of Client w
 
 TiDB has gone through 3 Jepsen tests: `bank`, `set` and `register`.
 
-#### The `Bank` Test
+### The `Bank` Test
 
 The `Bank` Test is used for verifying snapshot isolation. This test simulates various transfers in a bank system and each initial bank system is as follows:
 
@@ -90,7 +89,7 @@ Below is a screenshot in a test:
 
 In snapshot isolation, all transfers should ensure that the total amount of all accounts in each moment should be the same. TiDB passed the test even if all kinds of nemesis have been introduced.
 
-#### The `Set` Test
+### The `Set` Test
 
 This test concurrently inserts many rows into a table from different nodes and performs a final read of all rows to verify their presence. At the same time, due to the introduction of Nemesis, it is normal that values that return time-out will or will not appear in this table.
 
@@ -100,7 +99,7 @@ Below is a screenshot in a test:
 
 Once again, TiDB passed the test.
 
-#### The `Register` Test
+### The `Register` Test
 
 It is easy to understand this test: create a table and insert a value. We will then regard this value as a register and concurrently execute the read, write and cas (compare and swap) operations to it from different nodes in the test.
 
@@ -113,4 +112,3 @@ Later, we use a series of action history produced by Jepsen (as shown above) for
 Each time when there is an update in the TiDB code, we will internally trigger continuous integration (CI) to execute Jepsen and use Jepsen to guarantee the data consistency of TiDB. If you are interested in distributed test and consistency verification, please join us.
 
 TiDB Jepsen: [https://github.com/pingcap/jepsen/tree/master/tidb](https://github.com/pingcap/jepsen/tree/master/tidb)
-

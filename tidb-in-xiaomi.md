@@ -11,21 +11,21 @@ customerCategory: Internet
 --- 
 
 **Industry:** Consumer Electronics
- 
+
 **Authors:** Liang Zhang (DBA team leader at Xiaomi), Youfei Pan (DBA at Xiaomi), and Biwen Wang (Software engineer at Xiaomi)
 
-[Xiaomi](https://en.wikipedia.org/wiki/Xiaomi) is a leading consumer electronics and software company and the [fourth-largest smartphone manufacturer](https://www.notebookcheck.net/IDC-Xiaomi-ends-Q1-2018-as-the-fourth-largest-smartphone-brand-in-the-world.301842.0.html) in the world, with market-leading positions in both China and India. 
+[Xiaomi](https://en.wikipedia.org/wiki/Xiaomi) is a leading consumer electronics and software company and the [fourth-largest smartphone manufacturer](https://www.notebookcheck.net/IDC-Xiaomi-ends-Q1-2018-as-the-fourth-largest-smartphone-brand-in-the-world.301842.0.html) in the world, with market-leading positions in both China and India.
 
 [MIUI](https://en.wikipedia.org/wiki/MIUI) (MI User Interface) is a mobile operating system developed by Xiaomi, based on Google's Android operating system. It supports various Xiaomi services and customized apps, such as Themes, Music, and its own App Store.
 
 ![The MIUI interface](media/miui-interface.png)
 <div class="caption-center"> Figure 1: MIUI interface </div>
- 
+
 As sales of Xiaomi smartphones continue to climb and the MIUI user base continues to grow, we as the Database Administration (DBA) team was having an increasingly hard time managing our MySQL database infrastructure. That is until we adopted [TiDB](http://bit.ly/tidb_repo_publication), an open source distributed hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database created and supported by [PingCAP](https://pingcap.com).
 
 Currently, TiDB is deployed in Xiaomi's production environment to service two applications: instant delivery and our third party ad network. These two workloads generate about 100 million read and write queries daily. We have plans to migrate additional workloads to TiDB in the future.
 
-In this post, we will show how we stress-tested TiDB during our evaluation, how we migrated data from MySQL to TiDB, and the issues and learning we encountered along the way. 
+In this post, we will show how we stress-tested TiDB during our evaluation, how we migrated data from MySQL to TiDB, and the issues and learning we encountered along the way.
 
 ## What Is TiDB?
 
@@ -51,8 +51,8 @@ Because of its component-based layered architecture, TiDB can be used as a singl
 
 It has the following core features:
 
-- Highly compatible with MySQL and users can easily enhance their current MySQL deployment with TiDB to power their applications without changing a single line of code in most cases and still benefit from the MySQL ecosystem. PingCAP is very transparent with aspects of MySQL that are not currently compatible in TiDB, which are all listed in [Compatibility with MySQL](https://pingcap.com/docs/v3.0/reference/mysql-compatibility/). 
-- Horizontal scalability achieved by simply by adding new nodes. Because the SQL processing layer (TiDB Server) and the storage layer (TiKV) are decoupled, you can scale each resource independently of each other. 
+- Highly compatible with MySQL and users can easily enhance their current MySQL deployment with TiDB to power their applications without changing a single line of code in most cases and still benefit from the MySQL ecosystem. PingCAP is very transparent with aspects of MySQL that are not currently compatible in TiDB, which are all listed in [Compatibility with MySQL](https://pingcap.com/docs/v3.0/reference/mysql-compatibility/).
+- Horizontal scalability achieved by simply by adding new nodes. Because the SQL processing layer (TiDB Server) and the storage layer (TiKV) are decoupled, you can scale each resource independently of each other.
 - ACID compliance where all your data is consistent.
 - High availability of all your data as guaranteed by TiDB's implementation of the Raft consensus algorithm.
 
@@ -62,7 +62,7 @@ Before using TiDB, our team was managing our core business data on a standalone 
 
 We initially chose to solve our scalability challenges via traditional MySQL manual sharding, but we found this solution undesirable in that:
 
-- **It is intrusive to the application code.** When sharding our database, we had to stop the on-going business, refactor the application code, and then migrate the data. 
+- **It is intrusive to the application code.** When sharding our database, we had to stop the on-going business, refactor the application code, and then migrate the data.
 - **It increases the maintenance costs for our team.** We had to continuously shard our database in different ways to keep up with growth. We used MySQL proxy and a middleware solution, but it was still difficult to implement cross-shard transactions and cross-shard aggregate queries, such as correlated query, subquery and group-by aggregation of the whole table.
 
 ## Stress Testing TiDB
@@ -121,7 +121,7 @@ Standard stress testing for the `INSERT` statement:
 ![Standard stress testing for the INSERT statement](media/standard-stress-testing-for-the-insert-statement.png)
 <div class="caption-center"> Figure 5: Standard stress testing for the INSERT statement </div>
 
-TiDB's performance results were able to meet our requirements, even though the system did have some stability issues when we dramatically increased our test workloads that far exceeded the real production environment. Therefore, we decided to use some read traffic in the MySQL slave as the canary traffic in TiDB. 
+TiDB's performance results were able to meet our requirements, even though the system did have some stability issues when we dramatically increased our test workloads that far exceeded the real production environment. Therefore, we decided to use some read traffic in the MySQL slave as the canary traffic in TiDB.
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('Powering the Xiaomi Mobile Lifestyle with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -149,11 +149,11 @@ Here is our experience with using Syncer:
 - Before using Syncer to synchronize data, check the user privilege, the binlog information, whether `server-id`, `log_bin`, and `binlog_format` is `ROW`, and whether `binlog_row_image` is `FULL`.
 - Enable the rigid mode of data validation and check the data and table schema before data migration.
 - Deploy the TiDB default monitoring system to observe data replication information.
-- For table shards to be replicated to the same TiDB cluster, check whether `route-rules`  can be used in the current scenario and whether the unique key and primary key conflict after data is merged. 
+- For table shards to be replicated to the same TiDB cluster, check whether `route-rules`  can be used in the current scenario and whether the unique key and primary key conflict after data is merged.
 
 ### Traffic Shifting
 
-Traffic that was shifted to TiDB included both read traffic and write traffic. Each time we shifted traffic, we observed the canary traffic for one to two weeks to observe any issues and conduct rollback if needed. 
+Traffic that was shifted to TiDB included both read traffic and write traffic. Each time we shifted traffic, we observed the canary traffic for one to two weeks to observe any issues and conduct rollback if needed.
 
 Our experience during traffic shifting:
 
@@ -164,18 +164,18 @@ Our experience during traffic shifting:
 
 ### Cluster Topology
 
-We deployed our 7-node TiDB cluster, with 3 nodes each deployed with one TiDB instance and one PD instance and 4 nodes each deployed with one TiKV instance. When a new application is added to our TiDB cluster, we add new TiKV nodes as needed to increase storage capacity. 
+We deployed our 7-node TiDB cluster, with 3 nodes each deployed with one TiDB instance and one PD instance and 4 nodes each deployed with one TiKV instance. When a new application is added to our TiDB cluster, we add new TiKV nodes as needed to increase storage capacity.
 
 ### Monitoring System
 
 TiDB uses [Prometheus](https://github.com/prometheus/prometheus) plus [Grafana](https://github.com/grafana/grafana) by default as the monitoring system stack. Prometheus is used to store the monitoring and performance metrics, and Grafana is used to visualize these metrics in a dashboard. This monitoring system also connects to [Open-Falcon](https://github.com/open-falcon) and running stably.
-       
+
 ![TiDB monitoring system in Xiaomi](media/tidb-monitoring-system-in-Xiaomi.png)
 <div class="caption-center"> Figure 7: TiDB monitoring system in Xiaomi </div>
 
 ## Advice for Other TiDB Users
 
-Although we have been happy with our production experience with TiDB so far, there were some challenges, which we'd like to share as advice for other TiDB users. First, there were a few issues like syntactic error message display and trouble with manual compacting TiKV Regions, which were fixed in TiDB version 2.1. 
+Although we have been happy with our production experience with TiDB so far, there were some challenges, which we'd like to share as advice for other TiDB users. First, there were a few issues like syntactic error message display and trouble with manual compacting TiKV Regions, which were fixed in TiDB version 2.1.
 
 Another problem was when we were adding index to large tables, related applications were disrupted. The initial workaround was to simply perform similar tasks during low peak periods, but now PingCAP has made additional improvements to TiDB to mitigate this issue by adding better control for operational priority and improving the concurrency of processing read and write traffic.
 
@@ -183,8 +183,8 @@ We also encountered write amplification with RocksDB that makes our storage usag
 
 ## What's Next
 
-With our initial success of using TiDB in the instant delivery and third party ad network applications, we have plans to migrate over more Xiaomi services in the MIUI ecosystem, many of which have similar technical characteristics. To better use our resources, we also plan to deploy an archival cluster for some data and use Syncer to support the archiving process. 
+With our initial success of using TiDB in the instant delivery and third party ad network applications, we have plans to migrate over more Xiaomi services in the MIUI ecosystem, many of which have similar technical characteristics. To better use our resources, we also plan to deploy an archival cluster for some data and use Syncer to support the archiving process.
 
-On top of the current OLTP-centric workload, we also plan to support more OLAP scenarios using TiSpark and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), for both online and offline analysis. 
+On top of the current OLTP-centric workload, we also plan to support more OLAP scenarios using TiSpark and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), for both online and offline analysis.
 
-We would like to thank PingCAP engineers for all their help, support, and professionalism during our data migration and deployment process. 
+We would like to thank PingCAP engineers for all their help, support, and professionalism during our data migration and deployment process.

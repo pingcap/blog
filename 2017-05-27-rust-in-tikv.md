@@ -27,7 +27,7 @@ This is the speech Siddon Tang gave at the 1st Rust Meetup in Beijing on April 1
 - [Scale out](#scale)
 - [A simple write flow](#write)
 - [Key technologies](#key)
-- [Future plan](#todo) 
+- [Future plan](#todo)
 
 ![Siddon Tang at the 1st Rust Meetup in Beijing](media/tangsir.jpg)
 
@@ -73,9 +73,9 @@ To develop a high performance service, C++ may be the best choice in most cases,
 
 At first, we considered using Go, but then gave up this idea. Go has GC which fixes many memory problems, but it might stop the running process sometimes. No matter how little time the stop takes, we can’t afford it. Go doesn’t solve the data race problem either. Even we can use double dash race in test or at runtime, this isn’t enough.
 
-Besides, although we can use Goroutine to write the concurrent logic easily, we still can’t neglect the runtime expenses of the scheduler. We met a problem a few days ago: we used multi goroutines to select the same context but found that the performance was terrible, so we had to use one sub context for one goroutine, then the performance became better. 
+Besides, although we can use Goroutine to write the concurrent logic easily, we still can’t neglect the runtime expenses of the scheduler. We met a problem a few days ago: we used multi goroutines to select the same context but found that the performance was terrible, so we had to use one sub context for one goroutine, then the performance became better.
 
-More seriously, CGO has heavy expenses, but we need to call RocksDB API without delay. For the above reasons, we didn’t choose Go even this is the favorite language in our team. 
+More seriously, CGO has heavy expenses, but we need to call RocksDB API without delay. For the above reasons, we didn’t choose Go even this is the favorite language in our team.
 
 [Back to the top](#top)
 
@@ -83,20 +83,19 @@ More seriously, CGO has heavy expenses, but we need to call RocksDB API without 
 
 ### But Rust...
 
-
-Rust is a system programming language,  maintained by Mozilla. It is a very powerful language, however, you can see the curve, the learning curve is very very steep. 
+Rust is a system programming language,  maintained by Mozilla. It is a very powerful language, however, you can see the curve, the learning curve is very very steep.
 
 ![Steep learning curve of Rust](media/curve.jpg)
 
 I have been using many programming languages, like C++, Go, python, lua, etc. and Rust is the hardest language for me to master. In PingCAP, we will let the new colleague spend at least one month to learn Rust, to struggle with the compiling errors, and then to rise above it. This would never happen for Go.  
 
-Besides, the compiling time is very long, even longer than C++. Each time when I type cargo build to start building TiKV, I can even do some pushups. 
+Besides, the compiling time is very long, even longer than C++. Each time when I type cargo build to start building TiKV, I can even do some pushups.
 
-Although Rust is around for a long time, it still lacks of libraries and tools, and some third projects have not been verified in production yet. These are all the risks for us. Most seriously, it is hard for us to find Rust programmer because only few know it in China, so we are always shorthanded. 
+Although Rust is around for a long time, it still lacks of libraries and tools, and some third projects have not been verified in production yet. These are all the risks for us. Most seriously, it is hard for us to find Rust programmer because only few know it in China, so we are always shorthanded.
 
 ### Then, Why Rust?
 
-Although Rust has the above disadvantages, its advantages are attractive for us too. Rust is memory safe, so we don’t need to worry about memory leak, or dangling pointer any more. 
+Although Rust has the above disadvantages, its advantages are attractive for us too. Rust is memory safe, so we don’t need to worry about memory leak, or dangling pointer any more.
 
 Rust is thread safe, so there won’t be any data race problem. All the safety are guaranteed by compiler. So in most cases, when the compiling passes, we are sure that we can run the program safely.
 
@@ -116,7 +115,7 @@ Rust has no GC expenses, so we won’t meet the "stop the world" problem. Callin
 ![TiKV timeline](media/timeline.jpg)
 
 Here you can see the TiKV timeline. We first began to develop TiKV January 1st, 2016, and made it open source on April 1st, 2016, and this is not a joke like Gmail at All April Fool's Day. TiKV was first used in production in October, 2016, when we had not even released a beta version. In November, 2016, we released the first beta version; then RC1 in December, 2016, RC2 in February, this year. Later we plan to release RC3 in April and the first GA version in June.
-					
+
 As you can see, the development of TiKV is very fast and the released versions of TiKV are stable. Choosing Rust has already been proved a correct decision. Thanks, Rust.
 
 ### <span id="architecture">TiKV Architecture </span>
@@ -128,10 +127,10 @@ Now let’s go deep into TiKV. You can see from the TiKV architecture that the h
 At the bottom layer, TiKV uses RocksDB, a high performance, persistent Key-Value store, as the backend storage engine.
 
 The next layer is Raft KV. TiKV uses the Raft to replicate data geographically. TiKV is designed to store tons of data which one Raft group can’t hold. So we split the data with ranges and use each range as an individual Raft group. We name this approach: Multi-Raft groups.
-					
+
 TiKV provides a simple Key-Value API including SET, GET, DELETE to let user use it just as any distributed Key-Value storage. The upper layer also uses these to support advanced functions.
 
-Above the Raft layer, it is MVCC. All the keys saved in TiKV must contain a globally unique timestamp, which is allocated by Placement Driver. TiKV uses it to support distributed transactions. 
+Above the Raft layer, it is MVCC. All the keys saved in TiKV must contain a globally unique timestamp, which is allocated by Placement Driver. TiKV uses it to support distributed transactions.
 
 On the top layer, it is the KV and coprocessor API layer for handling client requests.
 
@@ -141,7 +140,7 @@ On the top layer, it is the KV and coprocessor API layer for handling client req
 
 ![Multi-Raft](media/multi.jpg)
 
-Here is an example of Multi-Raft. 
+Here is an example of Multi-Raft.
 
 You can see that there are four TiKV nodes. Within each store, we have several regions. Region is the basic unit of data movement and is replicated by Raft. Each region is replicated to three nodes.  These three replicas of one Region make a Raft group.
 
@@ -151,9 +150,9 @@ You can see that there are four TiKV nodes. Within each store, we have several r
 
 ![Scale-out (initial state)](media/scale2.jpg)
 
-Here is an example of horizontal scalability. At first, we have four nodes, Node A has three regions, others have two regions. 
+Here is an example of horizontal scalability. At first, we have four nodes, Node A has three regions, others have two regions.
 
-Of course, Node A is busier than other nodes, and we want to reduce its stress. 
+Of course, Node A is busier than other nodes, and we want to reduce its stress.
 
 #### Scale-out (add new node)
 
@@ -165,11 +164,11 @@ So we add a new Node E, and begin to move the region 1 in Node A to Node E. But 
 
 ![Scale-out (balancing)](media/scale4.jpg)
 
-After that, the leader of region 1 is in Node B now, then we add a new replica of region 1 in Node E. 
+After that, the leader of region 1 is in Node B now, then we add a new replica of region 1 in Node E.
 
 ![Remove a replica from Node A](media/scale5.jpg)
 
-Then we remove the replica of region 1 from Node A. All these are executed by the Placement Driver automatically. What we only need is to add node, if we find the system is busy. Very easy, right? 
+Then we remove the replica of region 1 from Node A. All these are executed by the Placement Driver automatically. What we only need is to add node, if we find the system is busy. Very easy, right?
 
 [Back to the top](#top)
 
@@ -183,7 +182,7 @@ Here is a simple write flow: when a client sends a write request to TiKV, TiKV f
 
 Now let’s move on to the key technologies:
 
-For networking, we use a widely used protocol, Protocol Buffers, to serialize or unserialize data fastly. 
+For networking, we use a widely used protocol, Protocol Buffers, to serialize or unserialize data fastly.
 
 At first, we used **MIO** to build up the network framework. Although MIO encapsulates low level network handling, it is still a very basic library that we need to receive or send data manually, and to decode or encode our customized network protocol. It is not convenient actually. So from RC2, we have been refactoring networking with gRPC. The benefit of gRPC is very obvious. We don’t need to care how to handle network anymore, only focusing on our logic, and the code looks simple and clear. Meanwhile, users can build their own TiKV client with other programming languages easily. We have already been developing a TiKV client with Java.
 
@@ -191,7 +190,7 @@ For **asynchronous framework**. After receiving the request, TiKV dispatches the
 
 For **storage**, we use rust-rocksdb to access RocksDB.
 
-For **monitoring**, we wrote a rust client for Prometheus, and this client is recommended in the official wiki. For profiling, we use the jemallocator with enabling profile feature and use clippy to check our codes. 
+For **monitoring**, we wrote a rust client for Prometheus, and this client is recommended in the official wiki. For profiling, we use the jemallocator with enabling profile feature and use clippy to check our codes.
 
 [Back to the top](#top)
 
@@ -199,11 +198,11 @@ For **monitoring**, we wrote a rust client for Prometheus, and this client is re
 
 Ok, that’s what we have done and are doing. Here are what we will do in the future:
 
-* Make TiKV faster, like removing Box. we have used many boxes in TiKV to write code easily, this is not efficient. In our benchmark, dynamic dispatch is at least three times slower than static dispatch, so later we will use Trait Trait directly. 
+* Make TiKV faster, like removing Box. we have used many boxes in TiKV to write code easily, this is not efficient. In our benchmark, dynamic dispatch is at least three times slower than static dispatch, so later we will use Trait Trait directly.
 
 * Make TiKV more stable, like introducing Rust sanitizer.
 
-* Contribute more Rust open source modules, like raft library, open-tracing, etc. 
+* Contribute more Rust open source modules, like raft library, open-tracing, etc.
 
 * Participate in other Rust projects more deeply, like rust-gRPC
 

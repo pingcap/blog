@@ -36,12 +36,11 @@ Ethernet controller: Amazon.com, Inc. Elastic Network Adapter (ENA)
 
 Two RX/TX Channels, with 1024 ring size
 
-
 ## Reproduction
 
 To reproduce the environment consistently, we did the following:
 
-1. Set interrupt affinity and RPS. 
+1. Set interrupt affinity and RPS.
 
     ```
     grep eth0 /proc/interrupts | awk '{print $1}' | tr -d :
@@ -55,9 +54,9 @@ To reproduce the environment consistently, we did the following:
     sudo sh -c 'echo fe00 > /sys/class/net/eth0/queues/rx-1/rps_cpus'
     ```
 
-2.  Generate the workload using wrk + nginx.
+2. Generate the workload using wrk + nginx.
 
-3.  Confirm successful reproduction by monitoring the CPU and interrupts.
+3. Confirm successful reproduction by monitoring the CPU and interrupts.
 
     ```
     watch -d cat /proc/softirqs
@@ -109,9 +108,9 @@ static int ena_io_poll(struct napi_struct *napi, int budget)
 
 static int ena_clean_tx_irq(struct ena_ring *tx_ring, u32 budget)
 {
-		... ...
-		dev_kfree_skb(skb);
-		... ...
+  ... ...
+  dev_kfree_skb(skb);
+  ... ...
 }
 ```
 
@@ -119,8 +118,8 @@ It can be noted that the NIC driver responds to the transmit completion interrup
 
 ```
 struct tsq_tasklet {
-	struct tasklet_struct	tasklet;
-	struct list_head	head; /* queue of tcp sockets */
+ struct tasklet_struct tasklet;
+ struct list_head head; /* queue of tcp sockets */
 };
 static DEFINE_PER_CPU(struct tsq_tasklet, tsq_tasklet);
 
@@ -139,28 +138,28 @@ Then the TSQ tasklet is scheduled, and the data packets in the sock are sent in 
  */
 void tcp_wfree(struct sk_buff *skb)
 {
-	struct sock *sk = skb->sk;
-	struct tcp_sock *tp = tcp_sk(sk);
+ struct sock *sk = skb->sk;
+ struct tcp_sock *tp = tcp_sk(sk);
 
-	if (test_and_clear_bit(TSQ_THROTTLED, &tp->tsq_flags) &&
-	    !test_and_set_bit(TSQ_QUEUED, &tp->tsq_flags)) {
-		    unsigned long flags;
-		    struct tsq_tasklet *tsq;
+ if (test_and_clear_bit(TSQ_THROTTLED, &tp->tsq_flags) &&
+     !test_and_set_bit(TSQ_QUEUED, &tp->tsq_flags)) {
+      unsigned long flags;
+      struct tsq_tasklet *tsq;
 
-		    /* Keep a ref on socket.
-		     * This last ref will be released in tcp_tasklet_func()
-  		     */
-		    atomic_sub(skb->truesize - 1, &sk->sk_wmem_alloc);
+      /* Keep a ref on socket.
+       * This last ref will be released in tcp_tasklet_func()
+         */
+      atomic_sub(skb->truesize - 1, &sk->sk_wmem_alloc);
 
-		    /* queue this socket to tasklet queue */
-		    local_irq_save(flags);
-		    tsq = &__get_cpu_var(tsq_tasklet);
-		    list_add(&tp->tsq_node, &tsq->head);
-		    tasklet_schedule(&tsq->tasklet);
-		    local_irq_restore(flags);
-	} else {
-		    sock_wfree(skb);
-	}
+      /* queue this socket to tasklet queue */
+      local_irq_save(flags);
+      tsq = &__get_cpu_var(tsq_tasklet);
+      list_add(&tp->tsq_node, &tsq->head);
+      tasklet_schedule(&tsq->tasklet);
+      local_irq_restore(flags);
+ } else {
+      sock_wfree(skb);
+ }
 }
 ```
 
@@ -180,35 +179,35 @@ Now we can view the `tsq_tasklet_func` definition:
  */
 static void tcp_tasklet_func(unsigned long data)
 {
-	struct tsq_tasklet *tsq = (struct tsq_tasklet *)data;
-	LIST_HEAD(list);
-	unsigned long flags;
-	struct list_head *q, *n;
-	struct tcp_sock *tp;
-	struct sock *sk;
+ struct tsq_tasklet *tsq = (struct tsq_tasklet *)data;
+ LIST_HEAD(list);
+ unsigned long flags;
+ struct list_head *q, *n;
+ struct tcp_sock *tp;
+ struct sock *sk;
 
-	local_irq_save(flags);
-	list_splice_init(&tsq->head, &list);
-	local_irq_restore(flags);
+ local_irq_save(flags);
+ list_splice_init(&tsq->head, &list);
+ local_irq_restore(flags);
 
-	list_for_each_safe(q, n, &list) {
-		    tp = list_entry(q, struct tcp_sock, tsq_node);
-		    list_del(&tp->tsq_node);
+ list_for_each_safe(q, n, &list) {
+      tp = list_entry(q, struct tcp_sock, tsq_node);
+      list_del(&tp->tsq_node);
 
-		    sk = (struct sock *)tp;
-		    bh_lock_sock(sk);
+      sk = (struct sock *)tp;
+      bh_lock_sock(sk);
 
-		    if (!sock_owned_by_user(sk)) {
-			        tcp_tsq_handler(sk);
-		    } else {
-			        /* defer the work to tcp_release_cb() */
-			        set_bit(TCP_TSQ_DEFERRED, &tp->tsq_flags);
-		    }
-		    bh_unlock_sock(sk);
+      if (!sock_owned_by_user(sk)) {
+           tcp_tsq_handler(sk);
+      } else {
+           /* defer the work to tcp_release_cb() */
+           set_bit(TCP_TSQ_DEFERRED, &tp->tsq_flags);
+      }
+      bh_unlock_sock(sk);
 
-		    clear_bit(TSQ_QUEUED, &tp->tsq_flags);
-		    sk_free(sk);
-	}
+      clear_bit(TSQ_QUEUED, &tp->tsq_flags);
+      sk_free(sk);
+ }
 }
 ```
 
@@ -216,10 +215,10 @@ The core logic is:
 
 ```
 if (!sock_owned_by_user(sk)) {
-	    tcp_tsq_handler(sk);
+     tcp_tsq_handler(sk);
 } else {
         /* defer the work to tcp_release_cb() */
-	    set_bit(TCP_TSQ_DEFERRED, &tp->tsq_flags);
+     set_bit(TCP_TSQ_DEFERRED, &tp->tsq_flags);
 }
 ```
 
@@ -228,12 +227,12 @@ Sock processing is delayed if the sock is held by another user process; when the
 ```
 void tcp_release_cb(struct sock *sk)
 {
-	    struct tcp_sock *tp = tcp_sk(sk);
-	    unsigned long flags, nflags;
+     struct tcp_sock *tp = tcp_sk(sk);
+     unsigned long flags, nflags;
 
-	    ... ...
-	    if (flags & (1UL << TCP_TSQ_DEFERRED))
-		        tcp_tsq_handler(sk);
+     ... ...
+     if (flags & (1UL << TCP_TSQ_DEFERRED))
+          tcp_tsq_handler(sk);
     ... ...
 }
 ```
@@ -243,11 +242,11 @@ Otherwise, `tcp_tsq_handler` is called directly to send the data.
 ```
 static void tcp_tsq_handler(struct sock *sk)
 {
-	    if ((1 << sk->sk_state) &
-	        (TCPF_ESTABLISHED | TCPF_FIN_WAIT1 | TCPF_CLOSING |
-	         TCPF_CLOSE_WAIT  | TCPF_LAST_ACK))
-		        tcp_write_xmit(sk, tcp_current_mss(sk), tcp_sk(sk)->nonagle,
-			               0, GFP_ATOMIC);
+     if ((1 << sk->sk_state) &
+         (TCPF_ESTABLISHED | TCPF_FIN_WAIT1 | TCPF_CLOSING |
+          TCPF_CLOSE_WAIT  | TCPF_LAST_ACK))
+          tcp_write_xmit(sk, tcp_current_mss(sk), tcp_sk(sk)->nonagle,
+                  0, GFP_ATOMIC);
 }
 ```
 
@@ -274,11 +273,11 @@ Jul 17 07:30:50 ip-172-31-4-116 kernel: ctx: bh
 To wrap up, here is a summary of the execution flow above:
 
 ```
-Transmit completion IRQ handler  (IRQ ctx on CPU 0) 
+Transmit completion IRQ handler  (IRQ ctx on CPU 0)
     → raise napi_shedule (SOFTIRQ ctx on CPU 0)
         → NET_RX (SOFTIRQ ctx on CPU 0)
-            → ena_io_poll (driver in SOFTIRQ ctx on CPU 0) 
-                 → ena_clean_tx_irq (driver in SOFTIRQ ctx on CPU 0)   
+            → ena_io_poll (driver in SOFTIRQ ctx on CPU 0)
+                 → ena_clean_tx_irq (driver in SOFTIRQ ctx on CPU 0)
                      → dev_kfree_skb (in SOFTIRQ ctx on CPU 0)
                           → tcp_wfree (in SOFTIRQ ctx on CPU 0 DO TSQ flag CHECK)
                               → get TSQ tasklet from CPU 0 (per-cpu val)
@@ -304,4 +303,3 @@ Based on the observations and analysis in the previous section, we can conclude 
 - TCP small queues is a mechanism designed to fight bufferbloat. TCP Small Queues goal is to reduce number of TCP packets in `xmit` queues (qdisc & device queues), to reduce RTT and cwnd bias, part of the bufferbloat problem. See [TCP Small Queues](https://lwn.net/Articles/506237/).
 
 - [tcp: auto corking](https://lwn.net/Articles/576263/)
-

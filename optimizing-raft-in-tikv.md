@@ -11,7 +11,7 @@ Paxos or [Raft](https://raft.github.io/) is frequently used to ensure data consi
 
 Simple as Raft is, its performance is not ideal if we follow exactly the way introduced in the Paper. Therefore, optimizations are essential. This blog introduces how we optimize Raft to ensure its performance in TiKV. It presumes that the audience is very familiar with Raft algorithm and don’t need much explanation. (If not, please see [Raft in TiKV](https://pingcap.com/blog/2017-07-28-raftintikv/)).
 
-##  A simple Raft process
+## A simple Raft process
 
 Below is the simple Raft process:
 
@@ -92,10 +92,9 @@ We are also trying to append the Raft log in another thread at the same time. We
 
 ## Summary
 
-We will continuously optimize the Raft process in the future. And up to now, our hard work pays off as we have significant improvements in performance. But we know that there are more difficulties and challenges to resolve. We are looking forward to experienced experts who are good at performance optimization. If you have interest in our project and want to improve Raft, do not hesitate to contact us: [info@pingcap.com](mailto:info@pingcap.com). 
+We will continuously optimize the Raft process in the future. And up to now, our hard work pays off as we have significant improvements in performance. But we know that there are more difficulties and challenges to resolve. We are looking forward to experienced experts who are good at performance optimization. If you have interest in our project and want to improve Raft, do not hesitate to contact us: [info@pingcap.com](mailto:info@pingcap.com).
 
 ## Fore more information
 
 - [Raft in TiKV](https://pingcap.com/blog/2017-07-28-raftintikv/)
 - [The Design and Implementation of Multi-raft](https://pingcap.com/blog/2017-08-15-multi-raft/)
-
