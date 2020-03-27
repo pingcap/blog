@@ -12,11 +12,11 @@ image: /images/blog/how-we-compiled-a-golang-database-in-the-browser-using-webas
 
 As Queeny Jin mentioned in her article, [TiDB in the Browser: Running a Golang Database on WebAssembly](https://pingcap.com/blog/tidb-in-the-browser-running-a-golang-database-on-webassembly/), we compiled TiDB into an in-browser database using WebAssembly (Wasm). We’re very proud of this pilot project because it opens a door to an entirely new world for both Golang and Wasm:
 
-* It is probably the first Golang database that’s been compiled to Wasm. As “[Golang weekly (issue 287)](https://golangweekly.com/issues/287)” put it, “The author wonders if a database like TiDB written in Go can run in a web browser, what about other complex Go apps? Go’s WebAssembly future is looking quite positive.” 
+* It is probably the first Golang database that’s been compiled to Wasm. As “[Golang weekly (issue 287)](https://golangweekly.com/issues/287)” put it, “The author wonders if a database like TiDB written in Go can run in a web browser, what about other complex Go apps? Go’s WebAssembly future is looking quite positive.”
 
 * Besides [SQLite](https://github.com/kripken/sql.js/), Wasm has one more database example that can run inside the browser. As [Database Weekly (issue 279)](https://dbweekly.com/issues/279) put it, ”If a database like TiDB written in Go can run in the browser, what about other complex Go apps or other database systems?”
 
-What’s most exciting is that beginning database users now have an easy way to learn to write SQL statements or test new databases. They don’t have to download an entire database and go through the complex setup and configuration process to be able to write SQL. They can simply point their browser to [https://tour.tidb.io/](https://tour.tidb.io/), wait a few seconds for the TiDB database to load, and then start to write SQL statements. 
+What’s most exciting is that beginning database users now have an easy way to learn to write SQL statements or test new databases. They don’t have to download an entire database and go through the complex setup and configuration process to be able to write SQL. They can simply point their browser to [https://tour.tidb.io/](https://tour.tidb.io/), wait a few seconds for the TiDB database to load, and then start to write SQL statements.
 
 The time to experiment with SQL without pain has come. In fact, the community has started to hack on this project, and they’ve built a markdown-it plugin to run a TiDB Wasm instance on markdown. Now you can have an interactive playground to learn SQL in the browser: [https://github.com/imiskolee/tidb-wasm-markdown](https://github.com/imiskolee/tidb-wasm-markdown)
 
@@ -65,7 +65,7 @@ Going through the goleveldb code and the storage package led to the heartbreakin
 
 ![The goleveldb code and the storage package](media/goleveldb-code-and-the-storage-package.png)
 
-That's why we had the `undefined` error messages about `newFileLock`, `rename`, `syncDir`, etc. 
+That's why we had the `undefined` error messages about `newFileLock`, `rename`, `syncDir`, etc.
 
 As shown in the code below, we decided to add a `file_storage_js.go` file and leave those functions unimplemented:
 
@@ -73,28 +73,28 @@ As shown in the code below, we decided to add a `file_storage_js.go` file and le
 package storage
 
 import (
-	"os"
-	"syscall"
+ "os"
+ "syscall"
 )
 
 func newFileLock(path string, readOnly bool) (fl fileLock, err error) {
-	return nil, syscall.ENOTSUP
+ return nil, syscall.ENOTSUP
 }
 
 func setFileLock(f *os.File, readOnly, lock bool) error {
-	return syscall.ENOTSUP
+ return syscall.ENOTSUP
 }
 
 func rename(oldpath, newpath string) error {
-	return syscall.ENOTSUP
+ return syscall.ENOTSUP
 }
 
 func isErrInvalid(err error) bool {
-	return false
+ return false
 }
 
 func syncDir(name string) error {
-	return syscall.ENOTSUP
+ return syscall.ENOTSUP
 }
 ```
 
@@ -130,13 +130,13 @@ With this goal in mind, we did some homework. We found that even though `mathuti
 
 In this way, the `mathutil` directory provided all the functions in the original `mathutil` package. In addition, when compiling TiDB for other platforms (Linux), it could still go to the `mathutil_linux.go` file which led to the third-party libraries; when compiling TiDB for Wasm, it could go to the `mathutil_js.go` file.
 
-Compiling again: 
+Compiling again:
 
 ![TiDB could be compiled to an in-browser application](media/tidb-could-be-compiled-to-an-in-browser-application.png)
 
-Yay! We made it! The `main.wasm` is the compiled TiDB Wasm file we wanted, and it proves that TiDB could be compiled to an in-browser application. 
+Yay! We made it! The `main.wasm` is the compiled TiDB Wasm file we wanted, and it proves that TiDB could be compiled to an in-browser application.
 
-Ok. Now we have a compiled TiDB Wasm. Let’s run it, and see what comes out! 
+Ok. Now we have a compiled TiDB Wasm. Let’s run it, and see what comes out!
 
 Theoretically, because we were using `os.Stdin` as the input and the `os.Stdout` as the output, and we hadn't done anything with DOM yet, the output should be blank. However, TiDB outputs its log to `os.Stdout`, we expect a log message that TiDB started successfully. Unfortunately, this was what we got:
 
@@ -193,11 +193,11 @@ At this point, we had cleared all the technical blockers. Now it was time to get
 
 ### Question # 2: How can users input the SQL statements and get their results from the browser?
 
-We all know that browsers cannot let the web applications within them do dangerous things such as port listening and file operations. However, TiDB lets users start a client and connect to TiDB using MySQL statements ([mostly](https://pingcap.com/docs/stable/reference/mysql-compatibility/)), which means users need to listen on a certain port. We want our users to have a built-in TiDB client in the Wasm file together with the TiDB sever: When the browser loads the Wasm file, the client is launched immediately to allow users to input SQL statements and output the SQL results. 
+We all know that browsers cannot let the web applications within them do dangerous things such as port listening and file operations. However, TiDB lets users start a client and connect to TiDB using MySQL statements ([mostly](https://pingcap.com/docs/stable/reference/mysql-compatibility/)), which means users need to listen on a certain port. We want our users to have a built-in TiDB client in the Wasm file together with the TiDB sever: When the browser loads the Wasm file, the client is launched immediately to allow users to input SQL statements and output the SQL results.
 
 Here is what we did:
 
-1. Reuse what’s already in the TiDB test code. We looked through the test code in TiDB and [found the following](https://github.com/pingcap/tidb/search?q=MustQuery%28%22select+count%28*%29&unscoped_q=MustQuery%28%22select+count%28*%29): 
+1. Reuse what’s already in the TiDB test code. We looked through the test code in TiDB and [found the following](https://github.com/pingcap/tidb/search?q=MustQuery%28%22select+count%28*%29&unscoped_q=MustQuery%28%22select+count%28*%29):
 
     ```go
     result = tk.MustQuery("select count(*) from t group by d order by c")
@@ -252,7 +252,7 @@ Here is what we did:
 We now had an `Exec` function that could take SQL statements, output the result, and run in the browser. We also needed an SQL client to interact with the function. We considered the following options:
 
 * Use Golang to manipulate dom to implement this client.
-* Use Golang to expose the `Exec` function to the global, and find an existing SQL client/terminal in JavaScript(JS) to interact with the `Exec` function. 
+* Use Golang to expose the `Exec` function to the global, and find an existing SQL client/terminal in JavaScript(JS) to interact with the `Exec` function.
 
 Our current team members have limited front-end knowledge, so we chose the second approach. We found the `jquery.console.js` library, which required only a callback from the SQL, and our `Exec` fit right in.
 
@@ -283,11 +283,11 @@ Here are the specific steps:
 
 ### One more thing: taking in local files
 
-Our users now have an in-browser database where they can write SQL directly. However, there’s a small problem: they can only write one SQL statement at one time. 
+Our users now have an in-browser database where they can write SQL directly. However, there’s a small problem: they can only write one SQL statement at one time.
 
-Imagine if a user wanted to test the compatibility between TiDB and MySQL. It would be a nightmare to run the statements one by one. 
+Imagine if a user wanted to test the compatibility between TiDB and MySQL. It would be a nightmare to run the statements one by one.
 
-However, in TiDB we have features such as `load stats` and `load data` to read and load content from files into the databases, see [for more information](https://pingcap.com/docs-cn/v3.0/reference/sql/statements/load-data/). But as we mentioned earlier, this was not possible for a browser. 
+However, in TiDB we have features such as `load stats` and `load data` to read and load content from files into the databases, see [for more information](https://pingcap.com/docs-cn/v3.0/reference/sql/statements/load-data/). But as we mentioned earlier, this was not possible for a browser.
 
 To resolve this issue, we did the following:  
 

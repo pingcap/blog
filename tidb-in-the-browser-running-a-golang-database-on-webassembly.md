@@ -16,26 +16,26 @@ For TiDB, an open source database which supports pluggable storage engine, our c
 
 The Ti-Cool team was composed of:
 
-* [Joshua Zhou](https://github.com/lucklove) 
-* [Tony Lu](https://github.com/tonyluj) 
+* [Joshua Zhou](https://github.com/lucklove)
+* [Tony Lu](https://github.com/tonyluj)
 * [Minghua Tang](https://github.com/5kbpers)
 
 Now, you can run TiDB directly in a web browser. Just like this:
 
 ![Run TiDB directly in a web browser](media/run-tidb-in-a-web-browser.gif)
-<div class="caption-center"> Run TiDB in a web browser </div> 
+<div class="caption-center"> Run TiDB in a web browser </div>
 
 ## How can you try it?
 
 1. Open your favorite web browser. (We expect it to work on Firefox and Chromium based browsers like Chrome on Linux, Windows, and Mac, we are also testing other web browsers.) Navigate to [https://play.tidb.io](https://play.tidb.io).
- 
+
 2. Wait a few seconds for the TiDB database to load.
 
 3. You can start to write SQL statements, which are mostly MySQL statements because of TiDB's compatibility with MySQL (see the [unsupported features here](https://pingcap.com/docs/v3.0/reference/mysql-compatibility/#unsupported-features)).
 
 4. When you're done using TiDB, close your web browser tab. The database and the data you created just vanish into thin air like they never existed.
 
-Better yet, here is a preliminary playground you can try with TiDB documentation: [http://tour.tidb.io/](http://tour.tidb.io/) 
+Better yet, here is a preliminary playground you can try with TiDB documentation: [http://tour.tidb.io/](http://tour.tidb.io/)
 
 ## How is it possible?
 
@@ -59,7 +59,7 @@ As cool as it is, the tool has the following very important limitations, limitin
 
 * The tool currently cannot demonstrate multi-node TiDB deployments. This means you can't play with TiDB's titanium-solid resiliency, test doing rolling updates, or online scale-out and scale-in.
 
-* This project includes a GUI, and is not intended to be used as part of a web application. While it is possible to operate a Wasm runtime on a server, we still recommend you use our official deployment tools. Even though Wasm has near-native performance, the current implementation does not support multi-node clusters that are required for a production or workload testing deployment. 
+* This project includes a GUI, and is not intended to be used as part of a web application. While it is possible to operate a Wasm runtime on a server, we still recommend you use our official deployment tools. Even though Wasm has near-native performance, the current implementation does not support multi-node clusters that are required for a production or workload testing deployment.
 
 * [Let us know](https://github.com/pingcap/tidb/projects/27) if you find more issues and limitations!
 

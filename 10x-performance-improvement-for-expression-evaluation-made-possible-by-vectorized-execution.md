@@ -10,7 +10,7 @@ image: /images/blog/vectorized-execution.png
 
 ![Vectorized execution](media/vectorized-execution.png)
 
-The query execution engine plays an important role in database system performance. [TiDB](https://en.wikipedia.org/wiki/TiDB), an open-source MySQL-compatible [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)) (HTAP) database, implemented the widely-used [Volcano model](https://paperhub.s3.amazonaws.com/dace52a42c07f7f8348b08dc2b186061.pdf) to evaluate queries. Unfortunately, when querying a large dataset, the Volcano model caused high interpretation overhead and low CPU cache hit rates. 
+The query execution engine plays an important role in database system performance. [TiDB](https://en.wikipedia.org/wiki/TiDB), an open-source MySQL-compatible [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)) (HTAP) database, implemented the widely-used [Volcano model](https://paperhub.s3.amazonaws.com/dace52a42c07f7f8348b08dc2b186061.pdf) to evaluate queries. Unfortunately, when querying a large dataset, the Volcano model caused high interpretation overhead and low CPU cache hit rates.
 
 Inspired by the paper [MonetDB/X100: Hyper-Pipelining Query Execution](http://cidrdb.org/cidr2005/papers/P19.pdf), we began to employ vectorized execution in TiDB to improve query performance. (Besides this article, we also suggest you take Andy Pavlo's course on [Query Execution](https://www.youtube.com/watch?v=L5NhM7kw6Eg&list=PLSE8ODhjZXjbohkNBWQs_otTrBTrjyohi&index=12), which details principles about execution models and expression evaluation.)
 
@@ -36,12 +36,12 @@ Vectorized execution executes a sequential set of similar data items in memory u
 
 In this section, I'll use the TiDB expression `colA * 0.8 + colB` to show the overhead gap between row-based execution and vectorized execution.
 
-According to arithmetic operators and their operator precedence, TiDB parses this expression into an expression evaluation tree. 
+According to arithmetic operators and their operator precedence, TiDB parses this expression into an expression evaluation tree.
 
 In this tree, each non-leaf node represents an arithmetic operator, and the leaf node represents the data source. Each non-leaf node is either a constant (like `0.8`) or a field (like `colA`) in the table. The parent-child relationship between nodes indicates a computationally dependent relationship: the evaluation result of the child node is the input data for the parent node.
 
 ![An expression evaluation tree](media/an-expression-evaluation-tree.png)
-<div class="caption-center"> An expression evaluation tree </div> 
+<div class="caption-center"> An expression evaluation tree </div>
 
 The computing logic of each node can be abstracted as the following evaluation interface:
 
@@ -78,7 +78,7 @@ How much is the interpretation overhead for row-by-row iteration? Let's take a l
 The `builtinArithmeticMultiplyRealSig` function multiplies two floating-point numbers. The following code block describes the implementation of this function. The numbers on the right indicate the number of assembly instructions for the corresponding row, which are obtained after code assembling. Note that this block includes only rows that are iterated in normal conditions, and ignores logic for error processing.
 
 ```
-func (s *builtinArithmeticMultiplyRealSig) evalReal(row chunk.Row) (float64, bool, 
+func (s *builtinArithmeticMultiplyRealSig) evalReal(row chunk.Row) (float64, bool,
 error) {                                                                              9
   a, isNull, err := s.args[0].EvalReal(s.ctx, row)                                    27
   if isNull || err != nil {                                                           3
@@ -155,7 +155,7 @@ type Node interface {
 
 ## What does our vector-processing interface look like? Why?
 
-The real source code is not exactly the same as the model shown above. It looks like this: 
+The real source code is not exactly the same as the model shown above. It looks like this:
 
 ```
 type VecNode interface {
@@ -163,11 +163,11 @@ type VecNode interface {
 }
 ```
 
-You might wonder why. 
+You might wonder why.
 
 To explain the reason, let me briefly introduce TiDB's `Chunk` structure, which is the data representation in memory during the query execution phase.
 
-At the end of 2017, we were working on vector optimization and introduced the concept of a `Chunk`. A `Chunk` is composed of multiple columns. 
+At the end of 2017, we were working on vector optimization and introduced the concept of a `Chunk`. A `Chunk` is composed of multiple columns.
 
 There are two types of columns:  
 
@@ -182,13 +182,13 @@ No matter whether the data length is fixed or variable, data in columns are cont
 The following figure illustrates the new vector access interface we've recently introduced for `Chunk`s:
 
 ![New vector access interface](media/new-vector-access-interface.png)
-<div class="caption-center"> New vector access interface </div> 
+<div class="caption-center"> New vector access interface </div>
 
 * For fixed-length data, such as int64 numbers, the Golang `unsafe` package directly converts `Column.data` to `[]int64` in `Int64s() []int64`, and returns the result. The user who wants to read or modify `Column.data` can directly manipulate the array. This is the most efficient way to access fixed-length data.
 
 * For variable-length data, such as a string, we can use only `GetString(rowIdx int) string` to obtain the data in the corresponding row, and only append data to update it.  Randomly modifying an element in the variable-length data column involves moving all the subsequent data. This creates a heavy overhead. To improve the overall performance, this operation is not implemented in `Column`.
 
-Now that you understand the basics of TiDB `Chunk`s, let's come back to the interface design. 
+Now that you understand the basics of TiDB `Chunk`s, let's come back to the interface design.
 
 Based on the `Chunk` implementation and the Golang characteristics, we optimized the expression evaluation interface in these aspects:
 
@@ -207,7 +207,7 @@ Based on these optimizations, our expression vectorization evaluation interface 
 
 ## How do we implement vectorized execution?
 
-This section covers how to implement vectorized execution for functions. 
+This section covers how to implement vectorized execution for functions.
 
 Take `multiplyRealNode` as an example:
 
@@ -242,14 +242,14 @@ For this function:
 
 This implementation method diminishes the interpretation overhead by batch processing and is more beneficial to modern CPUs:
 
-* A vector of data is sequentially accessed. This reduces CPU cache misses. 
+* A vector of data is sequentially accessed. This reduces CPU cache misses.
 * Most of the computational work is within a simple loop. This facilitates CPU branch prediction and instruction pipelining.
 
 ## Benchmark comparison between vectorized execution and row-based execution
 
 In this section, I'll use the TiDB source code for benchmark testing and compare the performance before and after code vectorization.
 
-We use the same data (1024 rows formed by two columns of floating-point numbers) to respectively compute `col0 * 0.8 + col1` in two ways: row-based execution and vectorized execution. The results are as follows: 
+We use the same data (1024 rows formed by two columns of floating-point numbers) to respectively compute `col0 * 0.8 + col1` in two ways: row-based execution and vectorized execution. The results are as follows:
 
 ```
 BenchmarkVec-12           152166              7056 ns/op               0 B/op          0 allocs/op
@@ -266,12 +266,12 @@ The following figure compares the performance of various less than (`LT`) functi
 The following figure compares the performance of arithmetic functions before and after vectorization:
 
 ![Before-and-after performance comparison for arithmetic functions](media/performance-comparison-for-arithmetic-functions.png)
-<div class="caption-center"> Before-and-after performance comparison for arithmetic functions </div> 
+<div class="caption-center"> Before-and-after performance comparison for arithmetic functions </div>
 
 After we tested more than 300 vectorized functions, we found that **over 50% of these functions more than doubled their performance, and 18.7% of functions achieved 10x performance**.
 
 ![Performance improvement for vectorized functions_](media/performance-improvement-for-vectorized-functions.png)
-<div class="caption-center"> Performance improvement for vectorized functions </div> 
+<div class="caption-center"> Performance improvement for vectorized functions </div>
 
 ## How do we vectorize 360+ built-in functions?
 
@@ -338,7 +338,7 @@ func (b *builtinCastStringAsDurationSig) vectorized() bool {
 }
 ```
 
-Since then, we've been asking contributors to fill or refactor the functions they're interested in. 
+Since then, we've been asking contributors to fill or refactor the functions they're interested in.
 
 Reserving function interfaces can avoid conflicts caused by different pull requests simultaneously modifying the same document when merging code.
 
@@ -364,9 +364,8 @@ func BenchmarkVectorizedBuiltinArithmeticFunc(b *testing.B) {
 
 Next, they can run following two functions that we've written. Then, they can perform correctness and performance tests.
 
-
 ```
-> GO111MODULE=on go test -check.f TestVectorizedBuiltinArithmeticFunc                                              
+> GO111MODULE=on go test -check.f TestVectorizedBuiltinArithmeticFunc
 PASS: builtin_arithmetic_vec_test.go:30: testEvaluatorSuite.TestVectorizedBuiltinArithmeticFunc 0.002s
 OK: 1 passed
 PASS
@@ -381,7 +380,7 @@ ok      github.com/pingcap/tidb/expression      4.116s
 
 Both correctness and performance tests directly generate random data and compare the performance of vectorized execution and row-based execution.
 
-The two operations above help contributors easily vectorize our built-in functions. 
+The two operations above help contributors easily vectorize our built-in functions.
 
 With the community's help, we've vectorized more than 360 functions in just two months. During this period, our community contributors have filed 256 PRs.
 

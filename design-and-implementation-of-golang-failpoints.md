@@ -11,12 +11,12 @@ Generally, a large complex system consists of multiple components. To test this 
 
 Manual testing can be expensive or lack the fine-grained control we need. For example, it could be disastrous to simulate a network anomaly by plugging and unplugging the network cable in a distributed system or to simulate a disk failure by damaging the disks in a storage system. Therefore, we need some automated methods to perform deterministic fault testing.
 
-The [Failpoint project](https://github.com/pingcap/failpoint) was created just for this purpose. It is an implementation of [FreeBSD](https://en.wikipedia.org/wiki/FreeBSD) [failpoints](http://www.freebsd.org/cgi/man.cgi?query=fail) for Golang. Failpoints let us inject errors or abnormal behaviors into the code and trigger these abnormal behaviors by environment variables or code. A failpoint simulates error handling in various complex systems to improve their fault tolerance and stability. 
+The [Failpoint project](https://github.com/pingcap/failpoint) was created just for this purpose. It is an implementation of [FreeBSD](https://en.wikipedia.org/wiki/FreeBSD) [failpoints](http://www.freebsd.org/cgi/man.cgi?query=fail) for Golang. Failpoints let us inject errors or abnormal behaviors into the code and trigger these abnormal behaviors by environment variables or code. A failpoint simulates error handling in various complex systems to improve their fault tolerance and stability.
 
 You can use failpoints to simulate any error a component produces. Some typical application scenarios include the following:
 
 - Random service delays or unavailable services in the microservice architecture.
-- Increases in disk I/O latency, insufficient I/O throughput, and long times to persist data to the disk in the storage system. 
+- Increases in disk I/O latency, insufficient I/O throughput, and long times to persist data to the disk in the storage system.
 - Hotspots in the scheduling system and failure of executing some scheduling instructions.
 - A third party repeatedly requests the callback interface of a successful charge in the charging system.
 - Instability, framedrops, and high latency in a game player's network, and various anomalous inputs (plug-in requests) in game developing.
@@ -25,12 +25,12 @@ You can use failpoints to simulate any error a component produces. Some typical 
 
 Although the [etcd](https://github.com/etcd-io/etcd) team developed [gofail](https://github.com/etcd-io/gofail/) in 2016 that has greatly simplified fault injection, and we introduced gofail to perform fault injection testing in 2018, we still want to improve its features and make it easier to use. Therefore, we decided to invent a better "wheel."
 
-Before introducing our new wheel, let's first see how to use the old one. 
+Before introducing our new wheel, let's first see how to use the old one.
 
 ### How to use gofail?
 
 1. Inject a failpoint in the program by adding code comments.
-    
+
     ```
     // gofail: var FailIfImportedChunk int
     // if merger, ok := scp.merger.(*ChunkCheckpointMerger); ok && merger.Checksum.SumKVS() >= uint64(FailIfImportedChunk) {
@@ -54,9 +54,9 @@ Before introducing our new wheel, let's first see how to use the old one.
     ```
 
 2. Use the `gofail enable` command to convert the comments to code.
-    
+
     ```
-    if vFailIfImportedChunk, __fpErr := __fp_FailIfImportedChunk.Acquire(); __fpErr == nil { defer __fp_FailIfImportedChunk.Release(); FailIfImportedChunk, __fpTypeOK := vFailIfImportedChunk.(int); if !__fpTypeOK { goto __badTypeFailIfImportedChunk} 
+    if vFailIfImportedChunk, __fpErr := __fp_FailIfImportedChunk.Acquire(); __fpErr == nil { defer __fp_FailIfImportedChunk.Release(); FailIfImportedChunk, __fpTypeOK := vFailIfImportedChunk.(int); if !__fpTypeOK { goto __badTypeFailIfImportedChunk}
         if merger, ok := scp.merger.(*ChunkCheckpointMerger); ok && merger.Checksum.SumKVS() >= uint64(FailIfImportedChunk) {
             rc.checkpointsWg.Done()
             rc.checkpointsWg.Wait()
@@ -66,7 +66,7 @@ Before introducing our new wheel, let's first see how to use the old one.
 
     /* gofail-label */ RETURN1:
 
-    if vFailIfStatusBecomes, __fpErr := __fp_FailIfStatusBecomes.Acquire(); __fpErr == nil { defer __fp_FailIfStatusBecomes.Release(); FailIfStatusBecomes, __fpTypeOK := vFailIfStatusBecomes.(int); if !__fpTypeOK { goto __badTypeFailIfStatusBecomes} 
+    if vFailIfStatusBecomes, __fpErr := __fp_FailIfStatusBecomes.Acquire(); __fpErr == nil { defer __fp_FailIfStatusBecomes.Release(); FailIfStatusBecomes, __fpTypeOK := vFailIfStatusBecomes.(int); if !__fpTypeOK { goto __badTypeFailIfStatusBecomes}
         if merger, ok := scp.merger.(*StatusCheckpointMerger); ok && merger.EngineID >= 0 && int(merger.Status) == FailIfStatusBecomes {
             rc.checkpointsWg.Done()
             rc.checkpointsWg.Wait()
@@ -83,7 +83,7 @@ While using gofail, we encountered the following issues:
 
 - If we inject a failpoint in the program by modifying code comments and there is no compiler to detect errors, we may introduce errors in the code.
 - Our failpoints are globally valid. To shorten the time of automated testing, large projects usually introduce parallel testing. In this case, different parallel projects interfere with each other.
-- We need to write some hacking code to avoid unnecessary error logs. Taking the above code as an example, we must write `// goto RETURN2` and `// gofail: RETURN2:` with a blank line between them. (To understand the reason for this approach, review the above generated code.) 
+- We need to write some hacking code to avoid unnecessary error logs. Taking the above code as an example, we must write `// goto RETURN2` and `// gofail: RETURN2:` with a blank line between them. (To understand the reason for this approach, review the above generated code.)
 
 ## What kind of failpoints should we design?
 
@@ -114,9 +114,9 @@ We designed a failpoint based on the following principles:
 
 - The failpoint code shouldn't have extra overhead.
 
-    - It shouldn't affect the normal feature logic or be intrusive to any feature code.
-    - Injecting the failpoint code shouldn't lead to performance regression.
-    - The failpoint code can't appear in the finally released binary files. 
+  - It shouldn't affect the normal feature logic or be intrusive to any feature code.
+  - Injecting the failpoint code shouldn't lead to performance regression.
+  - The failpoint code can't appear in the finally released binary files.
 
 - The failpoint code should be easy to read and write, and can be checked by an introduced compiler.
 
@@ -130,13 +130,13 @@ We can use an abstract syntax tree ([AST](https://en.wikipedia.org/wiki/Abstract
 
 ![Failpoint rationale](media/failpoint-rationale.png)
 
-For any Golang source file, we can parse its syntax tree to traverse the whole syntax tree, find the injection points of all failpoints, and rewrite and convert the syntax tree to the logic we want. 
+For any Golang source file, we can parse its syntax tree to traverse the whole syntax tree, find the injection points of all failpoints, and rewrite and convert the syntax tree to the logic we want.
 
 ## Related concepts
 
 ### Failpoint
 
-A failpoint is a code snippet, and it is executed only when the corresponding failpoint name is activated. If we disable a failpoint using `failpoint.Disable("failpoint-name-for-demo")`, this failpoint isn't triggered. Failpoint code snippets aren't compiled in the final binary files. 
+A failpoint is a code snippet, and it is executed only when the corresponding failpoint name is activated. If we disable a failpoint using `failpoint.Disable("failpoint-name-for-demo")`, this failpoint isn't triggered. Failpoint code snippets aren't compiled in the final binary files.
 
 Look at the following example. Assume that we simulate the file system permission control:
 
@@ -170,10 +170,10 @@ func saveTo(path string) error {
 It marks the part that needs rewriting during the AST rewriting phase and has the following features:
 
 - Hints Rewriter to rewrite an equivalent `if` statement.
-    
-    - Parameters of the Marker function are used in the rewriting process.
-    - The Marker function is an empty function. It is inline in the compiling process and can then be eliminated.
-    - The failpoint injected in the Marker function is a closure. If the closure visits an external variable and the closure syntax allows capturing an external variable, compiling errors don't occur. The converted code is an `if` statement and no issues occur when this statement visits an external variable. Closure capturing is simply a way to validate the syntax and doesn't cause extra overhead.
+
+  - Parameters of the Marker function are used in the rewriting process.
+  - The Marker function is an empty function. It is inline in the compiling process and can then be eliminated.
+  - The failpoint injected in the Marker function is a closure. If the closure visits an external variable and the closure syntax allows capturing an external variable, compiling errors don't occur. The converted code is an `if` statement and no issues occur when this statement visits an external variable. Closure capturing is simply a way to validate the syntax and doesn't cause extra overhead.
 
 - It's easy to read and write.
 - It introduces compiler testing. If the Marker function parameters are incorrect, the program can't be compiled successfully. This ensures the correctness of converted code.
@@ -242,7 +242,7 @@ failpoint.Inject("mock-panic", func() error {
 })
 ```
 
-The best practice is as follows: 
+The best practice is as follows:
 
 ```
 failpoint.Inject("mock-panic", nil)
@@ -268,7 +268,7 @@ if ok, val := failpoint.EvalContext(ctx, _curpkg_("failpoint-name")); ok {
 }
 ```
 
-The following example shows how to use `failpoint.WithHook`: 
+The following example shows how to use `failpoint.WithHook`:
 
 ```
 func (s *dmlSuite) TestCRUDParallel() {
@@ -289,7 +289,7 @@ func (s *dmlSuite) TestCRUDParallel() {
         "fetch-tso-timeout": {},
     }
     dctx := failpoint.WithHook(context.Backgroud(), func(ctx context.Context, fpname string) bool {
-        _, found := deleteFailpoints[fpname] // Only disables failpoints. 
+        _, found := deleteFailpoints[fpname] // Only disables failpoints.
         return !found
     })
     // Other DML parallel test cases.
@@ -537,7 +537,7 @@ Actually, you can inject a failpoint anywhere you can call a function. Just imag
 
 In the generated code in Example #3 above, a `_curpkg_` call is added automatically in `failpoint-name`. Because the name is global, the package name is included in the final name of the failpoint to avoid naming conflicts.
 
-`_curpkg_` is like a macro and expands automatically using the package name in operation. You don't need to implement `_curpkg_` in your application, because `_curpkg_` is automatically generated and added when `failpoint-ctl` is enabled and `_curpkg_` is deleted when `failpoint-ctl` is disabled. 
+`_curpkg_` is like a macro and expands automatically using the package name in operation. You don't need to implement `_curpkg_` in your application, because `_curpkg_` is automatically generated and added when `failpoint-ctl` is enabled and `_curpkg_` is deleted when `failpoint-ctl` is disabled.
 
 ```
 package ddl // ddl's parent package is `github.com/pingcap/tidb`
@@ -553,7 +553,7 @@ Because all failpoints in the same package are in the same naming space, we need
 - A name in one package should be unique.
 - Use a self-descriptive name.
 
-We can activate a failpoint using an environment variable. 
+We can activate a failpoint using an environment variable.
 
 ```
 GO_FAILPOINTS="github.com/pingcap/tidb/ddl/renameTableErr=return(100);github.com/pingcap/tidb/planner/core/illegalPushDown=return(true);github.com/pingcap/pd/server/schedulers/balanceLeaderFailed=return(true)"
@@ -561,5 +561,5 @@ GO_FAILPOINTS="github.com/pingcap/tidb/ddl/renameTableErr=return(100);github.com
 
 ## Acknowledgement
 
-- Thanks to [gofail](https://github.com/etcd-io/gofail) for the initial implementation of failpoints. Inspired by them, we can traverse failpoints standing on the shoulders of giants. 
+- Thanks to [gofail](https://github.com/etcd-io/gofail) for the initial implementation of failpoints. Inspired by them, we can traverse failpoints standing on the shoulders of giants.
 - Thanks to FreeBSD for the [syntactic rules](https://www.freebsd.org/cgi/man.cgi?query=fail).

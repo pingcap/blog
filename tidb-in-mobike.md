@@ -11,8 +11,8 @@ customer: Mobike
 customerCategory: Internet
 ---
 
-**Industry:** Ridesharing 
-                 
+**Industry:** Ridesharing
+
 **Data Growth Rate:** ~30TB per day
 
 **Authors:** Chengjie Ding and Ming Hu (Infrastructure Platform Engineers at Mobike)
@@ -27,7 +27,7 @@ We have been using TiDB in our production environment since early 2017. Now we h
 
 Before we chose TiDB, we carefully evaluated MySQL and its sharding solutions. As a fast-growing startup looking to scale quickly, we found MySQL sharding solutions undesirable for the following reasons:
 
-- Standalone MySQL required us to archive data frequently. When the data size outgrew the capacity of a standalone MySQL, we had to shard the database and tables using middleware solutions, which was difficult to manage; 
+- Standalone MySQL required us to archive data frequently. When the data size outgrew the capacity of a standalone MySQL, we had to shard the database and tables using middleware solutions, which was difficult to manage;
 - Based on our previous experience with sharding, huge volumes of data often lead to a hung database, because it required frequent table structure updates to perform Data Definition Language (DDL) operations. This situation would negatively affect our application’s usability and even cause data inconsistency. In addition, we want the application logic to be upgraded more conveniently, despite of the service volume outburst and the changing service requirement, which cannot be done with sharding;
 - If we went with the sharding solution, when it’s time to shard the database, we had to stop the on-going business, refactored the application code, and then migrated the data. What made things worse, we must carefully and manually specify the sharding key because it controls how the data should be distributed across the shards and changing an existing sharding key could cause serious problems. Not to mention that sharding does not support cross-shard distributed transactions, or no guarantee of the strong consistency of transactions.
 
@@ -37,7 +37,7 @@ A new solution must be found to meet the following requirements:
 - Elastic scalability: We need to cope with the rapid data growth and the temporary traffic surge brought by on-demand marketing campaigns by increasing the capacity at the peak time and decrease it when the campaigns are over.
 - Support frequent correlated query and temporary query demands from the operational teams.
 
-Thankfully, TiDB more than fits the bill. 
+Thankfully, TiDB more than fits the bill.
 
 ## **Brief Overview of TiDB**
 
@@ -75,7 +75,7 @@ With TiDB, alert is sent to the administrators when the system detects a success
 
 As our data volume continues to grow exponentially, we need accessible and accurate real-time data analysis to keep our competitive edge vis-a-vis other bikesharing platforms. Before we implemented TiDB, we had several dozens MySQL clusters, some of which are sharded databases, while others are standalone instances. But MySQL was not designed for processing complicated queries against massive datasets, which made real-time data analysis all the more challenging.
 
-To meet this challenge, our initial plan was to synchronize data to Hive. We came up with two methods, but each had significant drawbacks: 
+To meet this challenge, our initial plan was to synchronize data to Hive. We came up with two methods, but each had significant drawbacks:
 
 1. Full volume synchronization on a daily basis. This method would result in high pressure for the online databases and consume huge amounts of Hive resource as time goes on.
 
@@ -133,11 +133,11 @@ While TiDB is a great product, there were some issues and challenges when using 
 
 As noted in the post, [TiDB Internal (I) - Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1/), TiKV is essentially a huge, ordered Key-Value Map. Data is stored and distributed in Regions. Each Region contains a continuous range of data. If one Region contains data from several tables or multiple hot Regions co-exist on one machine, a resource bottleneck emerges, hence the problem of resource isolation.
 
-This issue was carefully considered in TiDB’s design, which is why `HotRegionBalance` was designed into [Placement Driver ](https://pingcap.com/docs/overview/#tidb-introduction)(PD), a separate component that manages TiKV clusters, to avoid it. Yet, if there are multiple databases inside one cluster or multiple tables in one database, the probability of resource bottleneck will still increase, because the scheduling policy in PD is based on following assumptions:
+This issue was carefully considered in TiDB’s design, which is why `HotRegionBalance` was designed into [Placement Driver](https://pingcap.com/docs/overview/#tidb-introduction)(PD), a separate component that manages TiKV clusters, to avoid it. Yet, if there are multiple databases inside one cluster or multiple tables in one database, the probability of resource bottleneck will still increase, because the scheduling policy in PD is based on following assumptions:
 
 - Resource consumption of each Region is equal;
 - There is no correlation between different Regions;
-- Regions are distributed as evenly as possible among stores. 
+- Regions are distributed as evenly as possible among stores.
 
 To resolve this issue, we collaborated with the PingCAP team and accomplished the following optimizations:
 
@@ -159,9 +159,9 @@ It has been one year since we deployed TiDB in our production environment. In th
 
 The main benefits of TiDB include:
 
--  	**Flexible scalability.** Its scalability rivals that of NoSQL database. When the data size and the access traffic are on the rise, it can improve the system service support capability through horizontal scaling, while holding response latency stable.
-- 	**Usability.** TiDB is compatible with MySQL protocols, so it’s an easy drop-in solution that allow us to avoid sharding. Its interface is user-friendly, so our technicians can easily perform operations and backend administrations.
--	**Enterprise-Grade Support.** We can communicate with PingCAP support personnel and rely on them to provide quick responses and solutions to any of our issues.
+- **Flexible scalability.** Its scalability rivals that of NoSQL database. When the data size and the access traffic are on the rise, it can improve the system service support capability through horizontal scaling, while holding response latency stable.
+- **Usability.** TiDB is compatible with MySQL protocols, so it’s an easy drop-in solution that allow us to avoid sharding. Its interface is user-friendly, so our technicians can easily perform operations and backend administrations.
+- **Enterprise-Grade Support.** We can communicate with PingCAP support personnel and rely on them to provide quick responses and solutions to any of our issues.
 
 Our close cooperation with the PingCAP team and interaction with TiDB’s open-source community has also brought us substantial benefits and feedbacks, greatly reducing our code maintenance costs.
 

@@ -33,6 +33,7 @@ Subquery is a query within another SQL query. A common subquery is embedded with
 ```
 SELECT ID FROM (SELECT * FROM SRC) AS T
 ```
+
 The subexpressions in the `FROM` clauses can be processed very well by the general SQL optimizers. But when it comes to subqueries in the `WHERE` clause or the `SELECT` lists, it becomes very difficult to optimize because subqueries can be anywhere in the expression, e.g. in the `CASE...WHEN...` clauses.
 
 The subqueries that are not in the `FROM` clause are categorized as "correlated subquery" and "uncorrelated subquery". Correlated subquery refers to a subquery with columns from outer references, for example:
@@ -42,6 +43,7 @@ SELECT * FROM SRC WHERE
 
 EXISTS(SELECT * FROM TMP WHERE TMP.id = SRC.id)
 ```
+
 Uncorrelated subqueries can be pre-processed in the plan phase and be re-written to a constant. Therefore, this article is mainly focused on the optimization of correlated subqueries.
 
 Generally speaking, there are following three types of subqueries:
@@ -63,7 +65,7 @@ The semantics of the `Apply` operator is:
 R\ A^{\otimes}\ E = \bigcup\limits_{r\in R} (\\\{r\\\}\otimes E(r))
 \\]
 
-where `E` represents a parameterized subquery. In every execution, the `Apply` operator gets an `r` record from the `R` relation and sends `r` to `E` as a parameter for the &#x2297; operation of `r` and `E(r)`. &#x2297; is different based on different query types, usually it’s `SemiJoin` `∃`. 
+where `E` represents a parameterized subquery. In every execution, the `Apply` operator gets an `r` record from the `R` relation and sends `r` to `E` as a parameter for the &#x2297; operation of `r` and `E(r)`. &#x2297; is different based on different query types, usually it’s `SemiJoin` `∃`.
 
 For the following SQL statement:
 
@@ -72,6 +74,7 @@ SELECT * FROM SRC WHERE
 
 EXISTS(SELECT * FROM TMP WHERE TMP.id = SRC.id)
 ```
+
 the `Apply` operator representation is as follows:
 
 ![The `Apply` operator](media/apply1.png)
@@ -96,6 +99,7 @@ The `C` Projection is to transform NULL to false. But the more common practice i
 </div>
 
 ## Removing the correlation
+
 The introduction of the `Apply` operator enables us to remove the correlation of the subqueries. The two examples in the previous section can be transformed to:
 
 \\[
@@ -147,7 +151,7 @@ The two “CUSTKEY”s are the primary keys. When the statement is transformed t
 \sigma\_{1000000<X}(CUSTOMER\ A^\times\ \mathcal{G}^1\_{X=SUM(O\\\_PRICE)}(\sigma\_{O\\\_CUSTKEY=C\\\_CUSTKEY}ORDERS))
 \\]
 
-Because of the primary keys, according to rule (9), it can be transformed to the following: 
+Because of the primary keys, according to rule (9), it can be transformed to the following:
 
 \\[
 \sigma\_{1000000<X}\ \mathcal{G}_{C\\\_CUSTKEY,X = SUM(O\\\_PRICE)}(CUSTOMER\ A^{LOJ}\ \sigma\_{O\\\_CUSTKEY=C\\\_CUSTKEY}ORDERS)
@@ -171,6 +175,7 @@ Furthermore, based on the simplification of `OuterJoin`, the statement can be si
 Theoretically, the above 9 rules have solved the correlation removal problem. But is correlation removal the best solution for all the scenarios? The answer is no. If the results of the SQL statement are small and the subquery can use the index, then the best solution is to use correlated execution. The `Apply` operator can be optimized to `Segment Apply`, which is to sort the data of the outer table according to the correlated key. In this case, the keys that are within one group won't have to be executed multiple times. Of course, this is strongly related to the number of distinct values (NDV) of the correlated keys in the outer table. Therefore, the decision about whether to use correlation removal also depends on statistics. When it comes to this point,  the regular optimizer is no longer applicable.  Only the optimizer with the Volcano or Cascade Style can take both the logic equivalence rules and the cost-based optimization into consideration. Therefore, a perfect solution for subquery depends on an excellent optimizer framework.
 
 ## Aggregation and subquery
+
 In the previous section, the final statement is not completely optimized. The aggregation function above `OuterJoin` and `InnerJoin` can be pushed down[4]. If `OutJoin` cannot be simplified, the formal representation of the push-down rule is:
 
 \\[
@@ -184,9 +189,9 @@ The \\(\pi\_C\\) above `Join` is to convert NULL to the default value when the a
 + The aggregations in the \\(\mathcal{G}\\) function only uses the columns in `R`.
 
 It is very common to use aggregation functions together with subqueries. The general solution is to use the formal representation of `Apply`, and remove the correlation based on the rules, then apply the push-down rules of the aggregation function for further optimization.
-		
-
+  
 ## References
+
 [1] C. Galindo-Legaria and M. Joshi. “Orthogonal optimization of subqueries and aggregation”. In: _Proc. of the ACM SIGMOD Conf. on Management of Data (2001)_, pp. 571–581.
 
 [2] D. Maier, Q. Wang and L. Shapiro. _Algebraic unnesting of nested object queries_. Tech. rep. CSE-99-013. Oregon Graduate Institute, 1999.

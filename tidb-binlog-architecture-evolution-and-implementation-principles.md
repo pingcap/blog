@@ -108,7 +108,7 @@ message Binlog {
 
 For more details about binlog and the data structure definition, see [binlog.proto](https://github.com/pingcap/tipb/blob/535e1abaa330653c8955cb3484261ea9f229e926/proto/binlog/binlog.proto).
 
-In TiDB, `ts` (TSO, Timestamp Oracle) is a globally unique time service provided by Placement Driver (PD). It is converted from the physical time and the logic time. `start_ts` is the starting timestamp value of a transaction. `commit_ts` is the commit timestamp value of a transaction. 
+In TiDB, `ts` (TSO, Timestamp Oracle) is a globally unique time service provided by Placement Driver (PD). It is converted from the physical time and the logic time. `start_ts` is the starting timestamp value of a transaction. `commit_ts` is the commit timestamp value of a transaction.
 
 When a transaction is started, TiDB requests a timestamp from PD as the transaction `start_ts`. When the transaction is committed, TiDB requests a timestamp again from PD as the transaction `commit_ts`. This `commit_ts` is used to sort the binlog in Pump and Drainer.
 
@@ -182,7 +182,7 @@ sequence:
 Insert, Insert, Update, Update, DeleteRow, Insert
 ```
 
-From the above results, we can see that the order of data modification types saved in `sequence` is right the execution order of SQL statements. Detailed modification data is saved to the corresponding variable. 
+From the above results, we can see that the order of data modification types saved in `sequence` is right the execution order of SQL statements. Detailed modification data is saved to the corresponding variable.
 
 Before replicating the binlog data to the downstream, Drainer needs to convert the above data back into SQL statements.
 
@@ -258,7 +258,7 @@ After ensuring that the binlog is sent to available Pump instances, another prob
 
     Pump Client selects the Pump instance and sends the binlog to it in order, which means Pump Client selects the first Pump instance for the first time and then selects the second Pump instance for the second time.
 
-- Hash 
+- Hash
 
     Pump Client hashes the `start_ts` of the binlog and then selects the Pump instance corresponding to the hash value.
 

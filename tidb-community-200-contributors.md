@@ -25,11 +25,10 @@ Here are a few of my favorite contributions to highlight:
 
 While this achievement is worth celebrating, we know there are still lots of work ahead. Pull requests can be reviewed quicker, issues resolved faster, and documentation written clearer to make using and contributing to TiDB easier and more productive. We appreciate your patience, as we continue to improve the way we manage and grow the TiDB community.
 
-Your contributions--beyond just code, comments, and bug reports--tell an important story of how to prioritize the needs of a fast-growing open-source community and usebase, while managing the development of a system as complex as a distributed database. They inspire us to get up every morning with energy, passion, and focus on always doing what’s best for the community. 
+Your contributions--beyond just code, comments, and bug reports--tell an important story of how to prioritize the needs of a fast-growing open-source community and usebase, while managing the development of a system as complex as a distributed database. They inspire us to get up every morning with energy, passion, and focus on always doing what’s best for the community.
 
 So thank you again on behalf of everyone at PingCAP. You have helped make TiDB what it is today, and will continue to shape what TiDB will be tomorrow.
 
 With gratitude,
 
-Max 
-
+Max

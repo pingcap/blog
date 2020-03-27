@@ -26,20 +26,20 @@ Here's what's new in this season:
 
     Tasks in season 2 are divided into three levels: Easy/Medium/Hard, Each task corresponds to a certain number of challenge points. This time we've also optimized the grading system: **Newcomers for this challenge can get on board by completing easy tasks. Experienced players with more than 200 points in the corresponding repository can directly challenge medium and hard tasks.** There will be more tasks released from different TiDB-related projects in this season. Participants can choose whichever projects they are interested in:
 
-    * [TiDB](https://github.com/pingcap/tidb/projects/26) 
-    * [TiKV](https://github.com/tikv/tikv/projects/20)
-    * [PD](https://github.com/pingcap/pd/projects/2)
-    * [Chaos-Mesh](https://github.com/pingcap/chaos-mesh/projects/14)
-    * [Data Migration](https://github.com/pingcap/dm/projects/1)
-    * [Backup&Restore](https://github.com/pingcap/br/projects/1)
-    * [client-rust](https://github.com/tikv/client-rust/projects/3)
-    * [tidb-dashboard](https://github.com/pingcap-incubator/tidb-dashboard/projects/17)
-    * [tiup](https://github.com/pingcap-incubator/tiup/projects/1)
-    * and more to come!
+  * [TiDB](https://github.com/pingcap/tidb/projects/26)
+  * [TiKV](https://github.com/tikv/tikv/projects/20)
+  * [PD](https://github.com/pingcap/pd/projects/2)
+  * [Chaos-Mesh](https://github.com/pingcap/chaos-mesh/projects/14)
+  * [Data Migration](https://github.com/pingcap/dm/projects/1)
+  * [Backup&Restore](https://github.com/pingcap/br/projects/1)
+  * [client-rust](https://github.com/tikv/client-rust/projects/3)
+  * [tidb-dashboard](https://github.com/pingcap-incubator/tidb-dashboard/projects/17)
+  * [tiup](https://github.com/pingcap-incubator/tiup/projects/1)
+  * and more to come!
 
 * **Bountiful prizes**
 
-    Participants can earn challenge points by claiming tasks and redeem prizes at the end of the season. In this season, prizes are also upgraded! Of course, there will be PingCAP Contribution Prizes such as TiDB T-shirts, TiDB hoodies, North Face customized computer backpacks, and stationery sets. **This also is a great opportunity to win a one-year license for developer tools from JetBrains, the Honorary Seat at PingCAP DevCon, and a journey to Silicon Valley with plane tickets and hotel covered!** Besides, all participants will get a **Challenge Completed Badge** as long as you have completed one task or more. 
+    Participants can earn challenge points by claiming tasks and redeem prizes at the end of the season. In this season, prizes are also upgraded! Of course, there will be PingCAP Contribution Prizes such as TiDB T-shirts, TiDB hoodies, North Face customized computer backpacks, and stationery sets. **This also is a great opportunity to win a one-year license for developer tools from JetBrains, the Honorary Seat at PingCAP DevCon, and a journey to Silicon Valley with plane tickets and hotel covered!** Besides, all participants will get a **Challenge Completed Badge** as long as you have completed one task or more.
 
 ![Usability Challenge Program badge](media/usability-challenge-program-badge.png)
 <div class="caption-center"> Usability Challenge Program badge </div>
