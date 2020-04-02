@@ -31,7 +31,7 @@ To support our fast-growing business, we were in urgent need of a database which
 
 - **Horizontally scalable**
 - **Highly available**
-- **Compatible with MySQL** 
+- **Compatible with MySQL**
 
 TiDB checked all of those boxes, and in fact, its performance has exceeded our expectations.
 
@@ -46,7 +46,7 @@ Inside the TiDB Platform, there are several components:
 
 - **TiDB** cluster consists of stateless TiDB instances and serves as a stateless SQL layer that processes users’ SQL queries, accesses data in the storage layer, and returns corresponding results. It’s MySQL compatible and sits on top of TiKV.
 - [**TiKV**](https://github.com/pingcap/tikv) cluster, composed of TiKV instances, is the distributed transactional Key-Value storage layer where the data resides. Regardless of where the data comes from, it is stored in TiKV eventually. It uses the [Raft](https://raft.github.io/) consensus protocol for replication to ensure data consistency and disaster recovery.
-- [**TiSpark**](https://github.com/pingcap/tispark) cluster also sits on top of TiKV. It is an Apache Spark plugin that works with the TiDB platform to support complex OLAP queries for BI analysts and data scientists. 
+- [**TiSpark**](https://github.com/pingcap/tispark) cluster also sits on top of TiKV. It is an Apache Spark plugin that works with the TiDB platform to support complex OLAP queries for BI analysts and data scientists.
 
 The TiDB ecosystem also has a wealth of other enterprise-level tools, such as [Ansible scripts](https://github.com/pingcap/tidb-ansible) for quick deployment, [Syncer](https://pingcap.com/docs/tools/syncer/) for seamless migration from MySQL, Wormhole for migrating heterogeneous data, and [TiDB Binlog](https://github.com/pingcap/tidb-binlog), which is a tool to collect binlog files.
 
@@ -54,7 +54,7 @@ The TiDB ecosystem also has a wealth of other enterprise-level tools, such as [A
 
 ### Scenario 1: TiDB in Risk Monitoring Center
 
-The Risk Monitoring Center stores machine security statistics, including the traffic information from different dimensions such as per DC (data center), per IP address, per port, etc. To gain timely insights into the system status, some complex queries are performed by the application from time to time. 
+The Risk Monitoring Center stores machine security statistics, including the traffic information from different dimensions such as per DC (data center), per IP address, per port, etc. To gain timely insights into the system status, some complex queries are performed by the application from time to time.
 
 During the database evaluation process, we compared Apache Druid with TiDB and found:
 
@@ -80,13 +80,13 @@ The following issues occurred during our adoption of TiDB, but were quickly reso
 
 **Issue One:** Connection timeout.
 
-**Cause:** This issue arose because of the failure to select the optimal query plan due to obsolete statistical information. This is a common problem for relational databases. Two common workarounds are available: to collect statistical information manually or to use hint for plan execution. Both are extra workloads for the application developers. 
+**Cause:** This issue arose because of the failure to select the optimal query plan due to obsolete statistical information. This is a common problem for relational databases. Two common workarounds are available: to collect statistical information manually or to use hint for plan execution. Both are extra workloads for the application developers.
 
 **Solution:** This issue is fixed in the latest version of TiDB with improved statistics-collecting strategy and auto-analyze.
 
 **Issue Two:** Adding an index in the table took a long time.
 
-**Causes:** 
+**Causes:**
 
 - The DDL execution information was not updated in time. As a result, we got the obsolete information when checking the DDL operation progress.
 - In some cases, large Regions also took extra time to add indexes.
@@ -95,9 +95,9 @@ The following issues occurred during our adoption of TiDB, but were quickly reso
 
 #### TiDB in production
 
-- After we migrated to TiDB for the Risk Monitoring Center, we successfully upgraded the TiDB cluster and modified the parameters of TiKV nodes. Generally, these operations did not affect the online services. 
+- After we migrated to TiDB for the Risk Monitoring Center, we successfully upgraded the TiDB cluster and modified the parameters of TiKV nodes. Generally, these operations did not affect the online services.
 
-    During the upgrade of TiKV nodes, some errors occurred such as “Region is unavailable [try again later]” and “TiKV server timeout.” This was due to the lag of cache information, which is unavoidable in a distributed system. But it does not affect the services as long as the application has a retry mechanism. 
+    During the upgrade of TiKV nodes, some errors occurred such as “Region is unavailable [try again later]” and “TiKV server timeout.” This was due to the lag of cache information, which is unavoidable in a distributed system. But it does not affect the services as long as the application has a retry mechanism.
 
 - We are amazed by the fact that no matter how much the data increases (as shown in Figure 2), the response time remains stable, thanks to the automatic Region splitting strategy of TiKV (as shown in Figure 3), the storage layer of TiDB. Tables in TiDB are split automatically to several parts of equal size (96 MB by default but configurable) based on the data size of a table. These Regions are scheduled to various storage nodes by a series of complex schedule algorithms. For a specific query, however big its data size is, TiDB quickly locates the corresponding Region, guaranteeing timely query response.
 
@@ -115,7 +115,7 @@ The video transcoding database stores the historical data produced in transcodin
 
 **Solution:** To solve this problem, we deployed a TiDB cluster at the end of 2017 and migrated the data to the TiDB cluster through full and incremental import. This strategy ensured data consistency between the previous MySQL cluster and the newly-built TiDB cluster.  
 
-During the full import, we originally used Mydumper + [Loader](https://github.com/pingcap/docs/blob/master/v3.0/reference/tools/loader.md), a data migration tool developed by PingCAP. But we found that Loader was too slow for our needs.
+During the full import, we originally used Mydumper + [Loader](https://github.com/pingcap/tidb-enterprise-tools/tree/master/loader), a data migration tool developed by PingCAP. But we found that Loader was too slow for our needs.
 
 To fix this problem, PingCAP developed TiDB Lightning, which converted the data exported from Mydumper to SST files and imported the files to TiKV nodes. This way, data migration efficiency was improved greatly: 1T data could be migrated successfully in five or six hours. After video transcoding ran stably for a while, we switched all the traffic to the TiDB cluster and expanded our services. So far, it has run smoothly.
 
@@ -134,9 +134,9 @@ The following picture shows the TiDB Lightning architecture:
 In the user login information database project, we were confronted with some thorny problems—and all of them have been resolved with TiDB.
 
 - The data volume of this project was steadily increasing; as a result, the MySQL master-slave cluster would not be able to hold such massive data in the future.
-- As the data size of a single table was tremendous, we had to use sharding in the services, and thus the code of the application layer became complex and could not scale. 
+- As the data size of a single table was tremendous, we had to use sharding in the services, and thus the code of the application layer became complex and could not scale.
 
-After data was migrated to TiDB, we did not need sharding anymore, and the application codes have been simplified. 
+After data was migrated to TiDB, we did not need sharding anymore, and the application codes have been simplified.
 
 #### The migration process
 
@@ -147,7 +147,7 @@ The [Syncer](https://pingcap.com/docs/tools/syncer/) architecture is as follows:
 ![Figure 5: Syncer architecture](https://download.pingcap.com/images/success-stories/syncer-architecture-in-iqiyi.png)
 <div class="caption-center"> Figure 5: Syncer architecture </div>
 
-However, Syncer currently cannot display real-time delay information in Grafana. This is a drawback for the applications that are sensitive to synchronization delay. The good news is that PingCAP is working on this issue, and they have refactored Syncer to automatically deal with the primary key conflict of table partition. With Syncer and TiDB, users can quickly synchronize data from multiple MySQL clusters in real time.       
+However, Syncer currently cannot display real-time delay information in Grafana. This is a drawback for the applications that are sensitive to synchronization delay. The good news is that PingCAP is working on this issue, and they have refactored Syncer to automatically deal with the primary key conflict of table partition. With Syncer and TiDB, users can quickly synchronize data from multiple MySQL clusters in real time.
 We have two requirements for high availability of the database:
 
 - The service is still available even if the server goes down.
@@ -155,12 +155,12 @@ We have two requirements for high availability of the database:
 
 For these requirements, TiDB has the corresponding solutions:
 
-- The TiDB cluster is deployed in multiple data centers (as shown in the diagram below), guaranteeing that the online services will not be affected when any data center does not run normally. 
+- The TiDB cluster is deployed in multiple data centers (as shown in the diagram below), guaranteeing that the online services will not be affected when any data center does not run normally.
 - After each TiKV node is set with a label, the TiDB cluster gets a replica in each data center. The PD cluster will automatically schedule Regions and locate a proper replica for the Read operation; thus, the second requirement is satisfied.
 
 To ensure high availability during the data migration process, we used Drainer to synchronize the data in the TiDB cluster with the MySQL cluster. Drainer supports reverse synchronization by specifying the starting timestamp.
 
-![Figure 6: Deploying TiDB in multiple data centers](https://download.pingcap.com/images/success-stories/deploying-tidb-in-multiple-data-centers.png) 
+![Figure 6: Deploying TiDB in multiple data centers](https://download.pingcap.com/images/success-stories/deploying-tidb-in-multiple-data-centers.png)
 <div class="caption-center"> Figure 6: Deploying TiDB in multiple data centers </div>
 
 Throughout the process, the PingCAP team offered us timely and expert-level help. They helped us locate the issue and gave us constructive suggestions. We really appreciate their patience and dedicated support!
@@ -168,7 +168,7 @@ Throughout the process, the PingCAP team offered us timely and expert-level help
 ## Lessons Learned
 
 The most attractive features of TiDB are horizontal scalability and high availability.
-The data that a standalone database can hold is limited. If the policy of MySQL sharding + proxy is applied, the maintenance cost will go up whether the proxy is on the client or the server. 
+The data that a standalone database can hold is limited. If the policy of MySQL sharding + proxy is applied, the maintenance cost will go up whether the proxy is on the client or the server.
 
 What’s worse, the query efficiency fails to meet the performance demands in many scenarios. In addition, the proxy does not support transactions well and cannot guarantee data consistency.
 
@@ -176,6 +176,6 @@ TiDB is a perfect alternative for MySQL sharding + proxy solutions. With highly 
 
 ## Conclusion
 
-As our business grew exponentially, we were overwhelmed trying to handle the mounting data. After a careful and rigorous evaluation of TiDB, we found it to be a powerful database that’s growing in mindshare. We have now deployed TiDB in our production environment. Thanks to the horizontal scalability and high availability of TiDB, we no longer worry about data volume and can bring high-quality entertainment services to our users with more confidence than before. 
+As our business grew exponentially, we were overwhelmed trying to handle the mounting data. After a careful and rigorous evaluation of TiDB, we found it to be a powerful database that’s growing in mindshare. We have now deployed TiDB in our production environment. Thanks to the horizontal scalability and high availability of TiDB, we no longer worry about data volume and can bring high-quality entertainment services to our users with more confidence than before.
 
 In addition to its use in the applications mentioned above, TiDB is also being evaluated or tested in other applications at iQiyi. In some use cases, TiDB needs to handle a mixed scenario of OLTP and OLAP, and that is a good opportunity to put TiSpark to work. One area of development we’re interested in is getting TiDB Binlog, TiDB’s data synchronizing tool, to synchronize with [Kudu](https://en.wikipedia.org/wiki/Kudu) and [HBase](https://en.wikipedia.org/wiki/Apache_HBase) in addition to MySQL. To that end, we plan to invest more in TiDB and send some pull requests to [the TiDB community](https://github.com/pingcap/tidb). We believe that with its powerful technology and the professional and highly-motivated team behind it, TiDB will be embraced by companies in more and more industries in the future.

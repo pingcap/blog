@@ -6,9 +6,9 @@ tags: ['TiDB', 'Golang', 'Open Source Community']
 categories: ['Open Source Community']
 ---
 
-# PingCAP Plants its Seed in Silicon Valley
+## PingCAP Plants its Seed in Silicon Valley
 
-[PingCAP](https://pingcap.com), a cutting-edge distributed Hybrid Transactional/Analytical Processing (HTAP) database company, is excited to announce the opening of its Silicon Valley office, located at the [GSV Labs](http://gsvlabs.com/) in Redwood City, California. GSV (Global Silicon Valley) Labs is a global innovation platform that houses more than 170 startups, investors, and partners in its 60,000 square foot space in the heart of Silicon Valley. Its member startups work in a wide range of technologies and industries, from Big Data and healthcare, to VR and education. 
+[PingCAP](https://pingcap.com), a cutting-edge distributed Hybrid Transactional/Analytical Processing (HTAP) database company, is excited to announce the opening of its Silicon Valley office, located at the [GSV Labs](http://gsvlabs.com/) in Redwood City, California. GSV (Global Silicon Valley) Labs is a global innovation platform that houses more than 170 startups, investors, and partners in its 60,000 square foot space in the heart of Silicon Valley. Its member startups work in a wide range of technologies and industries, from Big Data and healthcare, to VR and education.
 
 ![GSV Location in the Silicon Valley](media/Silicon_Valley_Map_Unicorn.png)
 
@@ -18,7 +18,7 @@ categories: ['Open Source Community']
 
 ![GSV hall of fame](media/GSV_hall_of_fame.png)
 
-From day one, PingCAP was conceived and built to be a global technology company with global impact. With the [GA 1.0 release](https://pingcap.com/blog/2017-10-17-announcement/) of its flagship product [TiDB](https://github.com/pingcap/tidb) in October 2017, PingCAP has gained significant adoption in the APAC region from leading companies like [Mobike](https://www.crunchbase.com/organization/mobike) and [Gaea](http://www.gaea.com/en/). Opening a Silicon Valley office is a natural progression of its growth trajectory. 
+From day one, PingCAP was conceived and built to be a global technology company with global impact. With the [GA 1.0 release](https://pingcap.com/blog/2017-10-17-announcement/) of its flagship product [TiDB](https://github.com/pingcap/tidb) in October 2017, PingCAP has gained significant adoption in the APAC region from leading companies like [Mobike](https://www.crunchbase.com/organization/mobike) and [Gaea](http://www.gaea.com/en/). Opening a Silicon Valley office is a natural progression of its growth trajectory.
 
 *"Even before we wrote the first line of code, we wanted the impact of our vision to be global. That’s why we adopted the open source way from the beginning,"* said Max Liu, co-founder and CEO. *“I’m thrilled to be taking our first of many steps in pursuit of that mission.”*
 

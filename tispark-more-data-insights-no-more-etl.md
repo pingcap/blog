@@ -21,7 +21,7 @@ To make this possible, PingCAP and its open source contributors built [TiDB](htt
 
 (If you are interested in experiencing an HTAP database on your laptop with TiDB + TiSpark, check out this [5-minute tutorial](https://pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/) to spin up a cluster using Docker-Compose!)
 
-## So How Does TiSpark Work? 
+## So How Does TiSpark Work?
 
 TiSpark leverages the power and popularity of Apache [Spark](https://en.wikipedia.org/wiki/Apache_Spark) with TiKV to enhance TiDB's OLAP capabilities. Spark is a unified analytics engine that supports many big data use cases with a nice SQL interface (aka Spark SQL). TiDB from its very first day was built to be a relational SQL database with horizontal scalability; currently it's compatible with MySQL. While TiDB has a complex and powerful optimizer and coprocessor architecture to support ad-hoc OLAP queries using MySQL, it's even better to leverage a feature-rich engine like Spark to complete the missing piece in the HTAP puzzle. Thus, TiSpark was born.
 
@@ -30,11 +30,11 @@ TiSpark is a connector that supports the following features:
 - Complex calculation pushdown: this feature produces better performance by pushing down complex calculations to TiKV
 - Key-range pruning: examines the sorted keys in TiKV and only returns the results we need
 - Index support for:
-    - Clustered index/non-clustered index
-    - Index only query optimization
+  - Clustered index/non-clustered index
+  - Index only query optimization
 - Cost-based optimization for:
-    - Histogram support
-    - Index selection
+  - Histogram support
+  - Index selection
 
 Here's high-level overview of TiSpark's architecture:
 

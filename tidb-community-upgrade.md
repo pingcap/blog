@@ -26,9 +26,9 @@ The old community was mainly geared towards the TiDB Developer Group. The main r
 
 * Maintainer: The planner and designer of the project, with the right to merge branches into the master, generated from Committer. A Maintainer should:
 
-    - Demonstrate good judgment and sense of responsibility for the health of the subprojects
-    - Set up the technical direction directly or by delegating the responsibilities
-    - Make or approve design decisions for the subprojects
+  - Demonstrate good judgment and sense of responsibility for the health of the subprojects
+  - Set up the technical direction directly or by delegating the responsibilities
+  - Make or approve design decisions for the subprojects
 
 The TiDB user community has played an important role in product polishing and upgrading. However, it was obscured in the old community structure. In addition, the responsibilities for the roles in the developer community and the relationship between roles are relatively simple. Therefore, we decided to include the TiDB user community in the new community structure while providing the TiDB developer community with clearly defined roles, rights, and responsibilities. At the same time, some new roles and new organizations have been introduced. Let's take a closer look.
 
@@ -83,7 +83,7 @@ In addition, this picture also reflects the relationship between community roles
         >
         > TiDB requires at least 2 LGTMs for each PR to be merged into the development branch.
 
-3.  Tech Lead
+3. Tech Lead
     + The organizer of the SIG; responsible for the day-to-day operations including organizing meetings, answering questions, etc.
     + Tech Leads are responsible for the management and growth of the SIG. For now, the role is taken by PingCAP members, but is hopefully extended to community developers in the future.
 

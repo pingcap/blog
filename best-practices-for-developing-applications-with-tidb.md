@@ -11,17 +11,17 @@ categories: ['MySQL Scalability']
 
 Target audience: Database architects, database administrators, infrastructure engineers, or application developers.
 
-As an open source distributed database, in most cases, TiDB can serve as a scale-out MySQL database without manual sharding. However, because of its distributed nature, there are some differences between traditional relational databases like MySQL and TiDB. For detailed information, see [TiDB Compatibility with MySQL](https://pingcap.com/docs/dev/reference/mysql-compatibility/). 
+As an open source distributed database, in most cases, TiDB can serve as a scale-out MySQL database without manual sharding. However, because of its distributed nature, there are some differences between traditional relational databases like MySQL and TiDB. For detailed information, see [TiDB Compatibility with MySQL](https://pingcap.com/docs/dev/reference/mysql-compatibility/).
 
 This article shows you how to efficiently develop high-quality applications with TiDB. You'll get an in-depth look at several TiDB features that will save you hours of work and prevent some common coding errors. You'll also learn important best practices from the many TiDB users that have come before you.
 
-This article is also useful if you're migrating your current applications to TiDB. 
+This article is also useful if you're migrating your current applications to TiDB.
 
 ## 2. Transaction in TiDB and what it means to you
 
 This section is an in-depth look at transaction-related issues in TiDB and provides solutions to prevent or resolve them.
 
-### 2.1 Snapshot isolation in TiDB: Jepsen tested! And a few caveats 
+### 2.1 Snapshot isolation in TiDB: Jepsen tested! And a few caveats
 
 TiDB supports snapshot isolation (SI) as is shown in [TiDB Passes Jepsen Test for Snapshot Isolation and Single-Key Linearizability](https://pingcap.com/blog/tidb-passes-jepsen-test-for-snapshot-isolation-and-single-key-linearizability/). For more information about the TiDB transaction model and translation level, see [Transaction Model](https://pingcap.com/docs/dev/reference/transactions/transaction-model/) and [TiDB Transaction Isolation Levels](https://pingcap.com/docs/dev/reference/transactions/transaction-isolation/).
 
@@ -31,44 +31,44 @@ TiDB uses the optimistic locking mechanism. This means that TiDB automatically r
 
 `SELECT FOR UPDATE` is applied in hot record scenarios including the following:
 
-- Counter, in which the value of a field is continuously increased by 1. 
-- Seckilling, in which newly-advertised goods quickly sell out. 
+- Counter, in which the value of a field is continuously increased by 1.
+- Seckilling, in which newly-advertised goods quickly sell out.
 - Account balancing in some financial scenarios with "hot Region", in which the same row of data is modified concurrently.
 
 Generally, traditional standalone DBMSs use pessimistic locking to implement `SELECT FOR UPDATE`. After a transaction starts, they check locks. If the lock required by the transaction and the current lock on the data are incompatible, a lock wait occurs, and the transaction can be executed after the current lock is released. TiDB executes `SELECT FOR UPDATE` just like setting the lock wait time to 0 in a pessimistic locking system, and a transaction encountering lock conflicts fails to commit.
 
 To sum up, TiDB doesn't apply to scenarios where the same row of data is modified concurrently. Using `SELECT FOR UPDATE` in a transaction can guarantee data consistency, but only the transaction committed earliest among the concurrently-executed transactions can be executed successfully. TiDB rolls back the remaining requests.
 
-The best practice to handle a hot record scenario is to transfer and implement the counter feature in the cache (like Redis and Codis). 
+The best practice to handle a hot record scenario is to transfer and implement the counter feature in the cache (like Redis and Codis).
 
 In a database with pessimistic locking applied, the concurrent `SELECT FOR UPDATE` transactions queue up and are executed serially. Therefore, the performance is not good. However, handling the counter with the cache improves performance.
 
 ### 2.3 "Nested transaction"
 
-#### 2.3.1 Nested transactions in most RDBMS products 
+#### 2.3.1 Nested transactions in most RDBMS products
 
 According to the [ACID](https://en.wikipedia.org/wiki/ACID) (Atomicity, Consistency, Isolation, Durability) theory, concurrent transactions should be isolated from each other to avoid mutual interference. This means that transactions cannot be "nested."
 
 At the read committed (RC) isolation level, if multiple reads exist in the same transaction, the data is read each time the data is committed. When multiple transactions execute concurrently, multiple read results in a transaction may be very different. These are called "non-repeatable reads."
 
-Most RDBMS products use RC as the default isolation level. However, sometimes database application developers don't pay attention to the isolation level setting. They even treat non-repeatable reads as a feature, and develop applications based on "nested transactions." 
+Most RDBMS products use RC as the default isolation level. However, sometimes database application developers don't pay attention to the isolation level setting. They even treat non-repeatable reads as a feature, and develop applications based on "nested transactions."
 
-#### 2.3.2 Nested transaction model does not apply to TiDB 
+#### 2.3.2 Nested transaction model does not apply to TiDB
 
-This section gives an example to explain why the nested transaction model does not apply to TiDB. 
+This section gives an example to explain why the nested transaction model does not apply to TiDB.
 
 **2.3.2.1 Example for a set of nested transactions**
 
 The following diagram shows the implementation logic for a set of nested transactions. At the top, session 1 and session 2 are two sessions initiated by the application. Down the left side, T1- T8 constitute a timeline. The logic is as follows:
 
-1. The application opens session 1 at T1, and then performs a query. (Note that in the MySQL protocol, the first statement that follows `begin` and accesses the table data is the start of a transaction.) 
+1. The application opens session 1 at T1, and then performs a query. (Note that in the MySQL protocol, the first statement that follows `begin` and accesses the table data is the start of a transaction.)
 
-2. From T3 to T5, the application opens session 2, writes a row of data, and then commits the data. 
+2. From T3 to T5, the application opens session 2, writes a row of data, and then commits the data.
 
-3. The application continues to manipulate session 1. 
-    
+3. The application continues to manipulate session 1.
+
     1. At T6, it tries to update the data just written.
-    2. At T7, it commits the transaction opened at T2. 
+    2. At T7, it commits the transaction opened at T2.
     3. At T8, session 1 executes a query statement to check the `val` value of the corresponding row for `k=1` that is written by session 2 at T4.
 
 ![Nested transaction example](media/nested-transaction-example.png)
@@ -81,7 +81,7 @@ At the snapshot isolation (SI) or repeatable read (RR) isolation levels, the ret
 
 For these cases of nested transactions, if you only require that session 1 update the table after session 2 writes data into the table, you only need to control the application logic by adding a commit step after querying the statement at T2. This commits the query transaction in a timely manner. We then perform the rest of the steps on the timeline after T2.
 
-### 2.4 No support for the `PROPAGATION_NESTED` in the Java Spring Framework (relying on the savepoint mechanism) 
+### 2.4 No support for the `PROPAGATION_NESTED` in the Java Spring Framework (relying on the savepoint mechanism)
 
 The Java Spring Framework supports`PROPAGATION_NESTED` propagation, and it starts a nested transaction, which is a subtransaction started independently of the existing transaction. When a nested transaction starts, the database records a savepoint. If the nested transaction fails to be executed, the database rolls back the transaction to the savepoint status. The nested transaction is part of the outer transaction, and it is committed with the outer transaction. The following commands show a savepoint mechanism:
 
@@ -101,13 +101,13 @@ mysql> SELECT * FROM T2;
 +------+
 ```
 
-TiDB does not support the savepoint mechanism, and therefore it does not support the `PROPAGATION_NESTED` propagation behavior. If a `PROPAGATION_NESTED` propagation behavior is applied to an application based on the Java Spring Framework, you need to adjust the client by removing the nested transaction logic. 
+TiDB does not support the savepoint mechanism, and therefore it does not support the `PROPAGATION_NESTED` propagation behavior. If a `PROPAGATION_NESTED` propagation behavior is applied to an application based on the Java Spring Framework, you need to adjust the client by removing the nested transaction logic.
 
 ### 2.5 Large transactions
 
 TiKV, the storage engine of TiDB is based on RocksDB which adopts the log-structured merge-tree (LSM-tree). For large transactions in a log-based database, you must manually set the available log capacity to a larger value to prevent a single transaction from filling the log.
 
-TiDB sets a hard limit for the number of transactions. Due to the two-phase commit in TiDB, modifying data in large transactions might cause some problems. Therefore, to reduce this impact, TiDB sets a limit for the transaction size. 
+TiDB sets a hard limit for the number of transactions. Due to the two-phase commit in TiDB, modifying data in large transactions might cause some problems. Therefore, to reduce this impact, TiDB sets a limit for the transaction size.
 
 TiKV stores data in key-value pairs, and the transaction limit is based on the size and number of these pairs. One row of data a table in TiDB (or in the concept of other traditional relational databases) is mapped into a key-value pair, and so is an index. When a table has only two indexes, three key-value pairs are written to the database each time a row of data is inserted. Based on these assumptions, the transaction limit is as follows:
 
@@ -128,9 +128,9 @@ commit;
 ...
 ```
 
-## 3. Auto-increment IDs in TiDB: monotonically increasing but not necessarily increasing sequentially 
+## 3. Auto-increment IDs in TiDB: monotonically increasing but not necessarily increasing sequentially
 
-This section introduces allocating principles for auto-increment IDs in TiDB, the best practice for designing auto-increment IDs, and how to use auto-increment IDs in TiDB. 
+This section introduces allocating principles for auto-increment IDs in TiDB, the best practice for designing auto-increment IDs, and how to use auto-increment IDs in TiDB.
 
 ### 3.1 Allocating principles for auto-increment IDs in TiDB
 
@@ -148,7 +148,7 @@ In conclusion, the best practice for auto-increment ID design is:
 `auto_inc_id` bigint unsigned not null primary key auto_increment comment 'auto-increment ID'
 ```
 
-### 3.3 How to auto-increment IDs in TiDB 
+### 3.3 How to auto-increment IDs in TiDB
 
 As mentioned previously, auto-increment IDs are mostly designed as primary keys or unique indexes. You shouldn't manually assign values for auto-increment IDs. This may cause frequent update requests for maximum values of many global auto-increment IDs, thereby affecting write performance.
 
@@ -197,22 +197,22 @@ mysql> select * from autoid;
 
 ## 4. Constraints in TiDB
 
-This section describes constraints used in TiDB and digs deep into a constraint check issue in TiDB. 
+This section describes constraints used in TiDB and digs deep into a constraint check issue in TiDB.
 
 ### 4.1 Primary key and unique index
 
-TiDB uses primary keys and unique indexes as UNIQUE constraints for table data. This approach is similar to other database management systems. However, be aware of the following differences:	
+TiDB uses primary keys and unique indexes as UNIQUE constraints for table data. This approach is similar to other database management systems. However, be aware of the following differences:
 
 - In TiDB, when you create a table, you must state the primary key. As of the current version (V2.1.0 and earlier), after you create a table, you can't add, modify, or delete the primary key. This constraint doesn't affect unique indexes.
-- The `Drop Column` operation doesn't let you delete primary key columns. 
+- The `Drop Column` operation doesn't let you delete primary key columns.
 
 ### 4.2 Foreign keys, not supported by TiDB, but shown in `information_schema`
 
-TiDB doesn't support foreign keys. However as a reference, the parser imports them and shows the relations in the `information_schema`. You can only perform cascade operations on multiple tables with foreign keys within an application. 
+TiDB doesn't support foreign keys. However as a reference, the parser imports them and shows the relations in the `information_schema`. You can only perform cascade operations on multiple tables with foreign keys within an application.
 
-### 4.3 By default, `INSERT` only performs UNIQUE constraint check upon committing 
+### 4.3 By default, `INSERT` only performs UNIQUE constraint check upon committing
 
-TiDB adopts an optimistic transaction model. During the commit phase, TiDB tries to land all write operations into the storage engine, which makes a heavier commit load compared to other databases that use pessimistic transaction models. 
+TiDB adopts an optimistic transaction model. During the commit phase, TiDB tries to land all write operations into the storage engine, which makes a heavier commit load compared to other databases that use pessimistic transaction models.
 
 The following DML statements involve read operations on table data:
 
@@ -221,17 +221,17 @@ The following DML statements involve read operations on table data:
 - `MERGE/UPSERT` (not supported by TiDB)
 - `INSERT` (`INSERT IGNORE`, `INSERT ON DUPLICATE KEY UPDATE`, `INSERT IGNORE ON DUPLICATE KEY UPDATE`)
 
-When the table contains a primary key or a unique index, SQL semantics imply a UNIQUE constraint check of the table. This requires the verification to be performed once the DML statements above read the data. TiDB implements this requirement. 
+When the table contains a primary key or a unique index, SQL semantics imply a UNIQUE constraint check of the table. This requires the verification to be performed once the DML statements above read the data. TiDB implements this requirement.
 
 In DML, only `INSERT` statements are pure write operations. There are exceptions, however. The following special `INSERT` statements aren't pure writes:
 
 - `INSERT IGNORE`
 - `INSERT ON DUPLICATE KEY UPDATE`
 - `INSERT IGNORE ON DUPLICATE KEY UPDATE`
- 
-A primary key or a unique index on the table implies the SQL semantics in the INSERT statement to read the corresponding record in the table. If nothing is returned for the read. This line of the record is available for the write; if any data is returned, it means this line doesn't satisfy the UNIQUE constraint of the table. 
 
-To improve execution efficiency, TiDB doesn't compare the records in the table when it executes `INSERT` statements. Instead, it verifies that records are unique when it commits the transaction. This approach saves some read operations. The performance advantages are especially prominent when there are many records involved in the `INSERT` statement, such as a batch insert. 
+A primary key or a unique index on the table implies the SQL semantics in the INSERT statement to read the corresponding record in the table. If nothing is returned for the read. This line of the record is available for the write; if any data is returned, it means this line doesn't satisfy the UNIQUE constraint of the table.
+
+To improve execution efficiency, TiDB doesn't compare the records in the table when it executes `INSERT` statements. Instead, it verifies that records are unique when it commits the transaction. This approach saves some read operations. The performance advantages are especially prominent when there are many records involved in the `INSERT` statement, such as a batch insert.
 
 However, this implementation is not flawless. When there are too many write records in a single transaction, if there is any conflict of primary key or unique index between the data for write and existing data in the table, TiDB waits until the commit to report the error and rolls back the whole transaction. In the meantime, some applications may capture the information returned by the `INSERT` statement. Based on the captured information, TiDB determines subsequent execution logics for the application. By default, TiDB does not return errors for duplicate primary keys or unique indexes during the execution of the `INSERT` statement. This type of information is only returned upon `COMMIT`.
 
@@ -272,7 +272,7 @@ jdbc:mysql://192.168.1.20:4000/dbname?tidb_constraint_check_in_place=1
 
 This section describes how TiDB uses indexes and their current restrictions. It also describes how composite indexes are designed in TiDB.
 
-Indexes are also data that take up storage. Like the data in a table, indexes in TiDB are also stored as key-value (KV) pairs in the storage engine. An index row is a key-value pair. If we have a table with 10 indexes, 11 KV pairs are written each time we insert a row of data. 
+Indexes are also data that take up storage. Like the data in a table, indexes in TiDB are also stored as key-value (KV) pairs in the storage engine. An index row is a key-value pair. If we have a table with 10 indexes, 11 KV pairs are written each time we insert a row of data.
 
 TiDB supports primary key indexes, unique indexes, and secondary indexes. These indexes can be composed of either a single column or multiple columns (which is called a composite index).
 
@@ -293,7 +293,7 @@ like ‘%...'，like ‘%...%'，not like ‘%...'，not like ‘%...%'，<=>
 ```
 
 > **Note:**
-> 
+>
 > - The current version of TiDB (V2.1.0) hasn't implemented `<=>` so it can't use indexes as "is null."
 > - The current version of TiDB doesn't support using two indexes simultaneously in one table for the query against the same table. The related optimizations are still under development.
 
@@ -314,10 +314,10 @@ select a,b,c from tablename where a<predicate>'<value1>' and b<predicate>'<value
 
     ```sql
     select a,b,c from tablename where a=1 and b<5 and c='abc'
-    ```	
+    ```
 
 - If the predicate is `=` or `in` for both condition **a** and condition **b**, composite index (a,b,c)` can be used for condition **c**, for example:
-	 
+  
     ```sql
     select a,b,c from tablename where a in (1,2,3) and b=5 and c='abc'
     ```
@@ -330,11 +330,11 @@ select a,b,c from tablename where a<predicate>'<value1>' and b<predicate>'<value
 
     This is because in TiDB, if the front column in the composite index is used in a range query, queries in subsequent columns proceed as indexless scans within the filtered data of the previous column.
 
-To conclude, when you design composite indexes in TiDB, you should place columns with a high degree of discrimination in front as much as possible, and columns for frequent range queries in the back. 
-	
+To conclude, when you design composite indexes in TiDB, you should place columns with a high degree of discrimination in front as much as possible, and columns for frequent range queries in the back.
+
 Also, composite index `(a,b,c)` is available for the query structured as `select c, count(*) from tablename where a=1 and b=2 group by c`, and the `where` clause complies with the above principle.
 
-## 6. Write optimization in batch job scenarios 
+## 6. Write optimization in batch job scenarios
 
 Write-back in batch job scenarios is a general cause of write hotspots. TiKV is a range-based key-value system, where the key determines which Region is written. The value of a key depends on the following:
 
@@ -357,23 +357,23 @@ To mitigate the hotspot issue, you can configure `SHARD_ROW_ID_BITS`. The ROW ID
 
 ### 6.2 Partitioned table
 
-You can use a partitioned table to scatter the data from one table into multiple physical tables. With properly-designed partition rules, you can use the partitioned table to further avoid write hotspot issues. 
+You can use a partitioned table to scatter the data from one table into multiple physical tables. With properly-designed partition rules, you can use the partitioned table to further avoid write hotspot issues.
 
 ## 7. Some notes on SQL syntax
 
 This section describes some SQL syntax best practices in TiDB.
 
-### 7.1 `create table as select` is not supported 
+### 7.1 `create table as select` is not supported
 
 The current version of TiDB does not support the `create table as select …` statement. To achieve the same result, you must modify two statements in combination: `create table like …`and `insert into select …`. `create table like…` supports replicating the schema of the corresponding table.
 
-### 7.2 Use full `GROUP BY `to guarantee stable result sets
+### 7.2 Use full `GROUP BY`to guarantee stable result sets
 
-For convenience, if you disable `ONLY_FULL_GROUP_BY`, MySQL lets the `SELECT` substatement reference the nonaggregated fields that are not stated in the `GROUP BY` substatements. This makes a non-full `GROUP BY` syntax. In other databases, this is deemed a syntax error that may cause unstable result sets. 
+For convenience, if you disable `ONLY_FULL_GROUP_BY`, MySQL lets the `SELECT` substatement reference the nonaggregated fields that are not stated in the `GROUP BY` substatements. This makes a non-full `GROUP BY` syntax. In other databases, this is deemed a syntax error that may cause unstable result sets.
 
-In the following three SQL statements, the first one uses the full `GROUP BY` syntax, with all the fields referenced in the `SELECT` substatement stated in the `GROUP BY` substaments. It has the most stable result sets with three combinations of `class` and `stuname` fields. 
+In the following three SQL statements, the first one uses the full `GROUP BY` syntax, with all the fields referenced in the `SELECT` substatement stated in the `GROUP BY` substaments. It has the most stable result sets with three combinations of `class` and `stuname` fields.
 
-The second and third SQL statements are identical, but they yield different results. The statement only states a `class` field in the `GROUP BY` statement, so the result sets are only aggregated for `class`. Since there are two unique values for `class`, the result sets only contains two rows of data, while there are three combinations of `class` and `stuname` fields. Class 2018_CS_03 has two students, and there is no semantic restriction as to which one is returned for each execution. Either one is semantically expected. 
+The second and third SQL statements are identical, but they yield different results. The statement only states a `class` field in the `GROUP BY` statement, so the result sets are only aggregated for `class`. Since there are two unique values for `class`, the result sets only contains two rows of data, while there are three combinations of `class` and `stuname` fields. Class 2018_CS_03 has two students, and there is no semantic restriction as to which one is returned for each execution. Either one is semantically expected.
 
 ```
 mysql> select a.class, a.stuname, max(b.courscore) from stu_info a join stu_score b on a.stuno=b.stuno group by a.class, a.stuname order by a.class, a.stuname;
@@ -428,7 +428,7 @@ ERROR 1055 (42000): Expression #2 of ORDER BY is not in GROUP BY clause and cont
 
 ### 7.3 Use `ORDER BY` to guarantee the output sequence of result sets
 
-According to SQL semantics, you must use the `ORDER BY` syntax to output result sets in a specified sequence. For standalone databases, because the data are all stored on one server, results are stably returned when data is not reorganized. Some databases can still output result sets in the order of primary keys or indexes. TiDB is a distributed database where data is stored in multiple servers, and the TiDB server layer does not cache data. Therefore, the display order of the result sets for SQL statements without `ORDER BY` may be unpredictable. To output the result sets in sequence, explicitly add the fields for sorting in the `ORDER BY` clause, as defined by SQL semantics. 
+According to SQL semantics, you must use the `ORDER BY` syntax to output result sets in a specified sequence. For standalone databases, because the data are all stored on one server, results are stably returned when data is not reorganized. Some databases can still output result sets in the order of primary keys or indexes. TiDB is a distributed database where data is stored in multiple servers, and the TiDB server layer does not cache data. Therefore, the display order of the result sets for SQL statements without `ORDER BY` may be unpredictable. To output the result sets in sequence, explicitly add the fields for sorting in the `ORDER BY` clause, as defined by SQL semantics.
 
 In the following example, the user only adds one field in the `ORDER BY` clause. Therefore, TiDB sorts the results by this field only.
 

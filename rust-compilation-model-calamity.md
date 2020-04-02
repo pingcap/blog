@@ -37,9 +37,9 @@ In this episode:
 * [The spectre of poor Rust compile times at PingCAP](#the-spectre-of-poor-rust-compile-times-at-pingcap)
 * [Preview: the TiKV compile-time adventure so far](#preview-the-tikv-compile-time-adventure-so-far)
 * [Rust's designs for poor compilation time](#rusts-designs-for-poor-compilation-time)
-    * [Bootstrapping Rust](#bootstrapping-rust)
-    * [(Un)virtuous cycles](#unvirtuous-cycles)
-    * [Early decisions that favored run-time over compile-time](#early-decisions-that-favored-run-time-over-compile-time)
+  * [Bootstrapping Rust](#bootstrapping-rust)
+  * [(Un)virtuous cycles](#unvirtuous-cycles)
+  * [Early decisions that favored run-time over compile-time](#early-decisions-that-favored-run-time-over-compile-time)
 * [Recent work on Rust compile times](#recent-work-on-rust-compile-times)
 * [In the next episode](#in-the-next-episode)
 * [Thanks](#thanks)
@@ -63,7 +63,6 @@ The first entry in this series is just a story about the history of Rust with re
 ![Rust Compile Times for TiKV](media/rust-compile-times-tikv.svg)
 
 <div class="caption-center"> Rust Compile Times for TiKV </div>
-
 
 ## Rust's designs for poor compilation time
 
@@ -190,67 +189,67 @@ Looking at some of these in retrospect, I am tempted to think that "well, of cou
 The situation isn't hopeless. Not at all. There is always work going on to improve Rust compile times, and there are still many avenues to be explored. I'm hopeful that we'll continue to see improvements. Here is a selection of the activities I'm aware of from the last year or two. Thanks to everybody who helps with this problem.
 
 * The Rust compile-time [master issue](https://github.com/rust-lang/rust/issues/48547)
-    * Tracks various work to improve compile times
-    * Contains a great overview of factors that affect Rust compilation performance and potential mitigation strategies
+  * Tracks various work to improve compile times
+  * Contains a great overview of factors that affect Rust compilation performance and potential mitigation strategies
 * Pipelined compilation ([1](https://github.com/rust-lang/rust/issues/60988),[2](https://github.com/rust-lang/cargo/issues/6660),[3](https://internals.rust-lang.org/t/evaluating-pipelined-rustc-compilation/10199))
 
-    * Typechecks downstream crates in parallel with upstream codegen. Now on by default on the stable channel
-    * Developed by [@alexcrichton](https://github.com/alexcrichton) and [@nikomatsakis](https://github.com/nikomatsakis).
+  * Typechecks downstream crates in parallel with upstream codegen. Now on by default on the stable channel
+  * Developed by [@alexcrichton](https://github.com/alexcrichton) and [@nikomatsakis](https://github.com/nikomatsakis).
 * Parallel rustc ([1](https://internals.rust-lang.org/t/parallelizing-rustc-using-rayon/6606),[2](https://github.com/rust-lang/rust/issues/48685),[3](https://internals.rust-lang.org/t/help-test-parallel-rustc/11503/14))
 
-    * Runs analysis phases of the compiler in parallel. Not yet available on the stable channel
-    * Developed by [@Zoxc](https://github.com/Zoxc), [@michaelwoerister](https://github.com/michaelwoerister), [@oli-obk](http://github.com/oli-obk), and others
+  * Runs analysis phases of the compiler in parallel. Not yet available on the stable channel
+  * Developed by [@Zoxc](https://github.com/Zoxc), [@michaelwoerister](https://github.com/michaelwoerister), [@oli-obk](http://github.com/oli-obk), and others
 * [MIR-level constant propagation](https://blog.rust-lang.org/inside-rust/2019/12/02/const-prop-on-by-default.html)
-    * Performs constant propagation on MIR, which reduces duplicated LLVM work on monomorphized functions
-    * Developed by [@wesleywiser](https://github.com/wesleywiser)
+  * Performs constant propagation on MIR, which reduces duplicated LLVM work on monomorphized functions
+  * Developed by [@wesleywiser](https://github.com/wesleywiser)
 * [MIR optimizations](https://github.com/rust-lang/rust/pulls?q=mir-opt)
-    * Optimizing MIR should be faster than optimizeng monomorphized LLVM IR
-    * Not in stable compilers yet
-    * Developed by [@wesleywiser](https://github.com/wesleywiser) and others
+  * Optimizing MIR should be faster than optimizeng monomorphized LLVM IR
+  * Not in stable compilers yet
+  * Developed by [@wesleywiser](https://github.com/wesleywiser) and others
 * cargo build -Ztimings ([1](https://internals.rust-lang.org/t/exploring-crate-graph-build-times-with-cargo-build-ztimings/10975),[2](https://github.com/rust-lang/cargo/issues/7405))
 
-    * Collects and graphs information about cargo's parallel build timings
-    * Developed by [@ehuss](https://github.com/ehuss) and [@luser](https://github.com/luser)
+  * Collects and graphs information about cargo's parallel build timings
+  * Developed by [@ehuss](https://github.com/ehuss) and [@luser](https://github.com/luser)
 * rustc -Zself-profile ([1](https://rust-lang.github.io/rustc-guide/profiling.html),[2](https://github.com/rust-lang/rust/issues/58967),[3](https://github.com/rust-lang/rust/pull/51657))
 
-    * Generates detailed information about rustc's internal performance
-    * Developed by [@wesleywiser](https://github.com/wesleywiser) and [@michaelwoerister](https://github.com/michaelwoerister)
+  * Generates detailed information about rustc's internal performance
+  * Developed by [@wesleywiser](https://github.com/wesleywiser) and [@michaelwoerister](https://github.com/michaelwoerister)
 * [Shared monomorphizations](https://github.com/rust-lang/rust/issues/47317)
-    * Reduces code bloat by deduplicating monomorphizations that occur in multiple crates
-    * Enabled by default if the optimization level is less than 3.
-    * Developed by [@michaelwoerister](https://github.com/michaelwoerister)
+  * Reduces code bloat by deduplicating monomorphizations that occur in multiple crates
+  * Enabled by default if the optimization level is less than 3.
+  * Developed by [@michaelwoerister](https://github.com/michaelwoerister)
 * [Cranelift backend](https://www.reddit.com/r/rust/comments/enxgwh/cranelift_backend_for_rust/)
-    * Reduced debug compile times by used [cranelift](https://github.com/bytecodealliance/cranelift) for code generation.
-    * Developed by [@bjorn3](https://github.com/bjorn3)
+  * Reduced debug compile times by used [cranelift](https://github.com/bytecodealliance/cranelift) for code generation.
+  * Developed by [@bjorn3](https://github.com/bjorn3)
 * [perf.rust-lang.org](https://perf.rust-lang.org/)
-    * Rust's compile-time performance is tracked in detail. Benchmarks continue to be added.
-    * Developed by[@nrc](https://github.com/nrc), [@Mark-Simulacrum](https://github.com/Mark-Simulacrum), [@nnethercote](https://github.com/nnethercote) and many more
+  * Rust's compile-time performance is tracked in detail. Benchmarks continue to be added.
+  * Developed by[@nrc](https://github.com/nrc), [@Mark-Simulacrum](https://github.com/Mark-Simulacrum), [@nnethercote](https://github.com/nnethercote) and many more
 * [cargo-bloat](https://github.com/RazrFalcon/cargo-bloat)
-    * Finds what occupies the most space in binaries. Bloat is correlated with compile time
-    * Developed by [@RazrFalcon](https://github.com/RazrFalcon) and others
+  * Finds what occupies the most space in binaries. Bloat is correlated with compile time
+  * Developed by [@RazrFalcon](https://github.com/RazrFalcon) and others
 * [cargo-feature-analyst](https://github.com/psinghal20/cargo-feature-analyst)
-    * Finds unused features
-    * Developed by [@psinghal20](https://github.com/psinghal20)
+  * Finds unused features
+  * Developed by [@psinghal20](https://github.com/psinghal20)
 * [cargo-udeps](https://github.com/est31/cargo-udeps)
-    * Finds unused crates
-    * Developed by [@est31](https://github.com/est31)
+  * Finds unused crates
+  * Developed by [@est31](https://github.com/est31)
 * [twiggy](https://github.com/rustwasm/twiggy)
-    * Profiles code size, which is correlated with compile time
-    * Developed by [@fitzgen](https://github.com/fitzgen), [@data-pup](https://github.com/data-pup), and others
+  * Profiles code size, which is correlated with compile time
+  * Developed by [@fitzgen](https://github.com/fitzgen), [@data-pup](https://github.com/data-pup), and others
 * [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)
-    * A new language server for Rust with faster response time than the original [RLS](https://github.com/rust-lang/rls)
-    * Developed by [@matklad](https://github.com/matklad), [@flodiebold](https://github.com/flodiebold), [@kjeremy](https://github.com/kjeremy), and many others
+  * A new language server for Rust with faster response time than the original [RLS](https://github.com/rust-lang/rls)
+  * Developed by [@matklad](https://github.com/matklad), [@flodiebold](https://github.com/flodiebold), [@kjeremy](https://github.com/kjeremy), and many others
 * ["How to alleviate the pain of Rust compile times"](https://vfoley.xyz/rust-compile-speed-tips/)
-    * Blog post by vfoley
+  * Blog post by vfoley
 * ["Thoughts on Rust bloat"](https://raphlinus.github.io/rust/2019/08/21/rust-bloat.html)
-    * Blog post by [@raphlinus](https://github.com/raphlinus)
+  * Blog post by [@raphlinus](https://github.com/raphlinus)
 * Nicholas Nethercote's work on rustc optimization
 
-    * ["How to speed up the Rust compiler in 2019"](https://blog.mozilla.org/nnethercote/2019/07/17/how-to-speed-up-the-rust-compiler-in-2019/)
-    * ["The Rust compiler is still getting faster"](https://blog.mozilla.org/nnethercote/2019/07/25/the-rust-compiler-is-still-getting-faster/)
-    * ["Visualizing Rust compilation"](https://blog.mozilla.org/nnethercote/2019/10/10/visualizing-rust-compilation/)
-    * ["How to speed up the Rust compiler some more in 2019"](https://blog.mozilla.org/nnethercote/2019/10/11/how-to-speed-up-the-rust-compiler-some-more-in-2019/)
-    * ["How to speed up the Rust compiler one last time in 2019"](https://blog.mozilla.org/nnethercote/2019/12/11/how-to-speed-up-the-rust-compiler-one-last-time-in-2019/)
+  * ["How to speed up the Rust compiler in 2019"](https://blog.mozilla.org/nnethercote/2019/07/17/how-to-speed-up-the-rust-compiler-in-2019/)
+  * ["The Rust compiler is still getting faster"](https://blog.mozilla.org/nnethercote/2019/07/25/the-rust-compiler-is-still-getting-faster/)
+  * ["Visualizing Rust compilation"](https://blog.mozilla.org/nnethercote/2019/10/10/visualizing-rust-compilation/)
+  * ["How to speed up the Rust compiler some more in 2019"](https://blog.mozilla.org/nnethercote/2019/10/11/how-to-speed-up-the-rust-compiler-some-more-in-2019/)
+  * ["How to speed up the Rust compiler one last time in 2019"](https://blog.mozilla.org/nnethercote/2019/12/11/how-to-speed-up-the-rust-compiler-one-last-time-in-2019/)
 
 I apologize to any person or project I didn't credit.
 
