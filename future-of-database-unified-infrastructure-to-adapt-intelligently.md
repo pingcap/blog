@@ -2,7 +2,7 @@
 title: 'A Peek into the Future of Database: A Unified Infrastructure to Adapt Intelligently'
 author: ['Ed Huang']
 date: 2020-04-08
-summary: Today is PingCAP's 5-year birthday. In this post, Ed Huang, PingCAP' CTO, discusses about what he thinks the future holds for databases. 
+summary: Today is PingCAP's 5-year birthday. In this post, Ed Huang, PingCAP's CTO, discusses about what he thinks the future holds for databases. 
 tags: ['Announcement']
 categories: ['Open Source Community']
 image: /images/blog/future-of-atabase.png
@@ -26,7 +26,7 @@ When we first started, it was simple and straightforward: we want to build a bet
 
 If you think about it, everything we do nowadays is around data. Business owners, big or small, need data to know whether their decisions are sound and adaptive to the challenging markets; software engineers like me, regardless of roles or titles, build and maintain systems that live and breathe data.
 
-According to [Niklaus Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth), Programs = Algorithms + Data Structures. I dare to coin another equation: System = Application Logic* Data. Many architectural problems are caused by ill-designed data governance strategy, especially those challenges with data silos which could result in wasted resources and inhibited productivity. 
+According to [Niklaus Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth), Programs = Algorithms + Data Structures. I dare to coin another equation: System = Application Logic * Data. Many architectural problems are caused by ill-designed data governance strategy, especially those challenges with data silos which could result in wasted resources and inhibited productivity. 
 
 If only we could design the data governance strategy and the architecture to serve as a single and real-time source of truth, there would be no limitation on data storage capacity, no limitation on consistency, and hardly any manual operations and maintenance. The system and the applications on top of it could scale on-demand, perform real-time data analytics so the business can adapt to the world of uncertainties and sometimes even chaos.
 
