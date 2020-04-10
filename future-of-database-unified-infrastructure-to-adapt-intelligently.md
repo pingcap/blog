@@ -2,7 +2,7 @@
 title: 'A Peek into the Future of Database: A Unified Infrastructure to Adapt Intelligently'
 author: ['Ed Huang']
 date: 2020-04-08
-summary: Today is PingCAP's 5-year birthday. In this post, Ed Huang, PingCAP's CTO, discusses about what he thinks the future holds for databases. 
+summary: Today is PingCAP's 5-year birthday. In this post, Ed Huang, PingCAP's CTO, discusses about what he thinks the future holds for databases.
 tags: ['Announcement']
 categories: ['Open Source Community']
 image: /images/blog/future-of-atabase.png
@@ -14,19 +14,19 @@ Today is [PingCAP](https://pingcap.com/en/)'s 5-year birthday. The 5th anniversa
 
 I still remember that afternoon five years ago when Max, Dylan and I were picturing what the future of the database might be like. We planted a seed back then by starting up PingCAP to build the database we would want for ourselves, in the open-source way. Now the seed has grown from our inception to the database platform serving almost 1,000 production adopters and millions of people every day around the globe, thanks to hundreds of contributors all over the world.
 
-As the database technology continues to evolve, I would like to open a discussion about what I think the future holds for databases. 
+As the database technology continues to evolve, I would like to open a discussion about what I think the future holds for databases.
 
 **TL;DR:**
 
 The future of the database is about unification, adaptiveness, and intelligence. I believe when we face the uncertainties and the unpredictables in the future, we will have the **unified** infrastructure to **adapt intelligently**.
 
-When we first started, it was simple and straightforward: we want to build a better database. There was nothing fancy or magic about the technology, the algorithm or even the shared-nothing architecture we chose. What fascinated me is the possibility of building the infrastructure that could serve as the single source of truth so the applications and the businesses on top of it can adapt to the uncertainties. 
+When we first started, it was simple and straightforward: we want to build a better database. There was nothing fancy or magic about the technology, the algorithm or even the shared-nothing architecture we chose. What fascinated me is the possibility of building the infrastructure that could serve as the single source of truth so the applications and the businesses on top of it can adapt to the uncertainties.
 
-## It’s all around data. 
+## It’s all around data.
 
 If you think about it, everything we do nowadays is around data. Business owners, big or small, need data to know whether their decisions are sound and adaptive to the challenging markets; software engineers like me, regardless of roles or titles, build and maintain systems that live and breathe data.
 
-According to [Niklaus Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth), Programs = Algorithms + Data Structures. I dare to coin another equation: System = Application Logic * Data. Many architectural problems are caused by ill-designed data governance strategy, especially those challenges with data silos which could result in wasted resources and inhibited productivity. 
+According to [Niklaus Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth), Programs = Algorithms + Data Structures. I dare to coin another equation: System = Application Logic * Data. Many architectural problems are caused by ill-designed data governance strategy, especially those challenges with data silos which could result in wasted resources and inhibited productivity.
 
 If only we could design the data governance strategy and the architecture to serve as a single and real-time source of truth, there would be no limitation on data storage capacity, no limitation on consistency, and hardly any manual operations and maintenance. The system and the applications on top of it could scale on-demand, perform real-time data analytics so the business can adapt to the world of uncertainties and sometimes even chaos.
 
@@ -56,7 +56,7 @@ I believe the future of the database is a unified architecture whose storage sys
 
 About the new design paradigm:
 
-[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)) (hybrid transaction and analytical processing) was a term first coined by Gartner back in 2014 that describes an emerging architecture that breaks down the wall between transactional and analytical data workloads to enable businesses with real-time analytics. The traditional architecture usually separates OLTP and OLAP, each performs its own duties and is synchronized through an independent pipeline (sometimes with ETL). 
+[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)) (hybrid transaction and analytical processing) was a term first coined by Gartner back in 2014 that describes an emerging architecture that breaks down the wall between transactional and analytical data workloads to enable businesses with real-time analytics. The traditional architecture usually separates OLTP and OLAP, each performs its own duties and is synchronized through an independent pipeline (sometimes with ETL).
 
 ![Traditional architecture](media/traditional-architecture.png)
 <div class="caption-center"> The traditional architecture </div>
@@ -66,19 +66,19 @@ About the new design paradigm:
 
 On the surface, the HTAP system may only seem like a simple integration of the interfaces, but its meaning is far-reaching: 
 
-1. The details of data synchronization are hidden, which means that the database layer can decide how to synchronize data by itself. 
+1. The details of data synchronization are hidden, which means that the database layer can decide how to synchronize data by itself.
 2. Because the OLTP engine and the OLAP engine are in the same system, many details, such as transaction information, won’t be lost during the synchronization process. This means that the internal analysis system can do things that traditional separated OLAP systems can’t.
 3. For the application layer, one less system means a more unified experience and smaller learning and transforming cost.
 
 An ideal HTAP platform would be able to cover both of the OLTP and OLAP workloads. But to my knowledge, there is still a long way to go for the existing HTAP solutions. Some of them, like TiDB, may excel in OLTP and a portion of OLAP by working as a real-time data warehouse; others are better at handling complex OLAP queries but the OLTP capabilities are just not satisfactory.
 
-Over the last five years, we have established the prototype of this unified data platform and benefited a lot of our users and customers. The power of unification is still beyond imagination and we’ve become more capable and confident in turning the future we believe into reality.  
+Over the last five years, we have established the prototype of this unified data platform and benefited a lot of our users and customers. The power of unification is still beyond imagination and we’ve become more capable and confident in turning the future we believe into reality.
 
 ## Adaptiveness: adaptive scheduling would be the core capability of the future database
 
 Ever since the last decade, the biggest change in IT technology has been cloud computing, and this revolution is still in progress. What are the core capabilities of the cloud? One of the most important is that it’s elastic and adaptive. Allocating computing resources has become increasingly easy and on-demand.
 
-A good analogy is housing. We all need a place to stay, but making the best choice depends on your present needs. For example, if you go on vacation for a week, you don’t buy a house in the new city. You might rent a house or an apartment for the week, or if you want even more flexibility, you could book a hotel for the night. Allocating resources works the same way: we don’t have to pay in advance for "imaginary" business peaks. In the past, whether we purchased or rent servers, we needed to plan in advance and usually pay upfront. If the business peak never happened, we spent money on resources we didn’t need. The emergence of the cloud has turned elasticity into a fundamental capability of infrastructure; we add or remove resources as we need to, paying as we go. 
+A good analogy is housing. We all need a place to stay, but making the best choice depends on your present needs. For example, if you go on vacation for a week, you don’t buy a house in the new city. You might rent a house or an apartment for the week, or if you want even more flexibility, you could book a hotel for the night. Allocating resources works the same way: we don’t have to pay in advance for "imaginary" business peaks. In the past, whether we purchased or rent servers, we needed to plan in advance and usually pay upfront. If the business peak never happened, we spent money on resources we didn’t need. The emergence of the cloud has turned elasticity into a fundamental capability of infrastructure; we add or remove resources as we need to, paying as we go.
 
 I expect the same thing will happen with databases. Some people may wonder: all the new database solutions are claiming to be transparent horizontally scalable. It’s not the same. Adaptive scheduling is not just scalability. For example, 
 
@@ -92,7 +92,7 @@ Of course, just like the objective law of the development of everything, before 
 
 ## Would the next stage be intelligence?
 
-What’s next? I don’t know. But I believe that just as we don't understand the universe and the ocean, our understanding of data is at best superficial, not to mention they’re a lot of data we haven’t yet recorded. There must be a great mystery hidden in this massive amount of data, but what kind of insights we can obtain from it, or how we can use it to better our lives, I don’t know. I am willing to believe in a future where data can tell us all. 
+What’s next? I don’t know. But I believe that just as we don't understand the universe and the ocean, our understanding of data is at best superficial, not to mention they’re a lot of data we haven’t yet recorded. There must be a great mystery hidden in this massive amount of data, but what kind of insights we can obtain from it, or how we can use it to better our lives, I don’t know. I am willing to believe in a future where data can tell us all.
 
 I also believe that in the future:
 
@@ -104,6 +104,6 @@ Before I close, I want to thank our PingCAP team and the many members of our ope
 
 One of my favorite sayings is “Half of the ambition is patience.” Building a perfect database is not an overnight job, but I believe we are on the right path.
 
-All the past is the prologue. 
+All the past is the prologue.
 
 The future starts from now. Here I present you, [TiDB 4.0 release candidate](https://pingcap.com/docs/stable/releases/4.0.0-rc/), which I believe is the prototype of what the future database looks like. In the coming blog series, we will dive deep into how the 4.0 version of the TiDB platform empowers a unified infrastructure, enables the data architecture as well as the applications and business to adapt. Stay tuned!
