@@ -52,7 +52,7 @@ Take [`MultiplyIntUnsigned`](https://github.com/pingcap/tikv/pull/3277) as an ex
 
 1. The name of the file where the built-in function exists in TiKV should correspond to the same name in TiDB.
 
-    For example, since all the pushdown files in the [`expression`](https://github.com/pingcap/tidb/tree/master/expression) directory in TiDB are named `builtin_XXX`, in TiKV the corresponding file name should be `builtin_XXX.rs`. In this example, the current function is in the [builtin_arithmetic.go](https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532) file in TiDB, so the function should be placed in [builtin_arithmetic.rs](https://github.com/tikv/tikv/blob/master/components/tidb_query/src/expr/builtin_arithmetic.rs) in TiKV.
+    For example, since all the pushdown files in the [`expression`](https://github.com/pingcap/tidb/tree/master/expression) directory in TiDB are named `builtin_XXX`, in TiKV the corresponding file name should be `builtin_XXX.rs`. In this example, the current function is in the [builtin_arithmetic.go](https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532) file in TiDB, so the function should be placed in [builtin_arithmetic.rs](https://github.com/tikv/tikv/blob/master/components/tidb_query_normal_expr/src/builtin_arithmetic.rs) in TiKV.
 
     **Note:** If the corresponding file in TiKV does not exist, you need to create a new file in the corresponding directory with the same name as in TiDB.
 
@@ -177,7 +177,7 @@ In TiDB, there is a strict limit for the number of arguments in each built-in fu
 
 To add argument check:
 
-1. Go to [`scalar_function.rs`](https://github.com/tikv/tikv/blob/master/components/tidb_query/src/expr/scalar_function.rs ) in TiKV and find the `check_args` function of `ScalarFunc`.
+1. Go to [`scalar_function.rs`](https://github.com/tikv/tikv/blob/master/components/tidb_query_normal_expr/src/scalar_function.rs) in TiKV and find the `check_args` function of `ScalarFunc`.
 
 2. Add the check for the number of the expression arguments as the implemented signatures do.
 
@@ -188,15 +188,15 @@ To add argument check:
 
 ### Step 6: Add pushdown support
 
-TiKV calls the `eval` function to evaluate a row of data and the `eval` function executes the sub-function based on the returned value type. This operation is done in [`scalar_function.rs`](https://github.com/tikv/tikv/blob/master/components/tidb_query/src/expr/scalar_function.rs) by `dispatch_call`.
+TiKV calls the `eval` function to evaluate a row of data and the `eval` function executes the sub-function based on the returned value type. This operation is done in [`scalar_function.rs`](https://github.com/tikv/tikv/blob/master/components/tidb_query_normal_expr/src/scalar_function.rs) by `dispatch_call`.
 
 For our example function, `MultiplyIntUnsigned`, the final return value type is `Int`, so `INT_CALLS` can be found in `dispatch_call`. Then take the code of other signatures in `INT_CALLS` as reference and add `MultiplyIntUnsigned => multiply_int_unsigned`. It indicates that when the function signature `MultiplyIntUnsigned` is being parsed, the implemented function `multiply_int_unsigned` will be called. The pushdown logic of `MultiplyIntUnsigned` is now implemented.
 
 ### Step 7: Add at least one test
 
-1. Go to [`builtin_arithmetic.rs`](https://github.com/tikv/tikv/blob/master/components/tidb_query/src/expr/builtin_arithmetic.rs) where the `multiply_int_unsigned` function resides.
+1. Go to [`builtin_arithmetic.rs`](https://github.com/tikv/tikv/blob/master/components/tidb_query_normal_expr/src/builtin_arithmetic.rs) where the `multiply_int_unsigned` function resides.
 
-2. Add the unit test for the function signature in the `test` module which is at the end of [`builtin_arithmetic.rs`](https://github.com/tikv/tikv/blob/master/components/tidb_query/src/expr/builtin_arithmetic.rs). Make sure that the unit test covers all the code which is added above. You can see the related test code in TiDB for reference.
+2. Add the unit test for the function signature in the `test` module which is at the end of [`builtin_arithmetic.rs`](https://github.com/tikv/tikv/blob/master/components/tidb_query_normal_expr/src/builtin_arithmetic.rs). Make sure that the unit test covers all the code which is added above. You can see the related test code in TiDB for reference.
 
 For this example, the test code implemented in TiKV is as follows:
 
