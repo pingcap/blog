@@ -95,7 +95,7 @@ This section covers two new tools that we introduce in TiDB 4.0: [Backup & Resto
 
 Although TiDB uses three replicas by default to ensure high availability of data, many users, especially those in the financial and securities industries, hope that they can back up their data on a regular basis. If TiDB clusters are small, we can use traditional backup tools. But when the cluster data grows to tens or even hundreds of terabytes, we need to consider another way.
 
-**TiDB 4.0 provides [Backup & Restore](https://pingcap.com/docs/stable/reference/tools/tidb-lightning/overview/) (BR), a distributed backup and restore tool, which offers high backup and restore speeds for TiDB clusters and stores the data in your shared storage or AWS S3 on the cloud**. The larger the cluster size and the more TiKV instances, the faster BR's backup speed. In our test, BR backs up and restores a cluster with 10 TB of data at 1+ GB/s.
+**TiDB 4.0 provides [Backup & Restore](https://pingcap.com/docs/v3.1/reference/tools/br/br/) (BR), a distributed backup and restore tool, which offers high backup and restore speeds for TiDB clusters and stores the data in your shared storage or AWS S3 on the cloud**. The larger the cluster size and the more TiKV instances, the faster BR's backup speed. In our test, BR backs up and restores a cluster with 10 TB of data at 1+ GB/s.
 
 ### TiCDC for incremental replication
 
