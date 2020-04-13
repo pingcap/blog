@@ -38,7 +38,7 @@ Based on our requirements, we evaluated three options -- Greenplum, Apache Kudu,
 * **TiSpark** takes advantages of both the Apache Spark platform and TiDB to provide HTAP capabilities, serving as a one-stop solution for online transactions and analysis.
 * The **TiDB/TiSpark** open source community is thriving, which boosted our confidence in the future health and strength of this solution when making our decision.
 
-## Moving Forward with TiDB and TiSpark
+## Moving forward with TiDB and TiSpark
 
 TiDB is an open source distributed HTAP database, inspired by Google [Spanner](https://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf)/[F1](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/41344.pdf). It has the following core features:
 
