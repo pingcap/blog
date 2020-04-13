@@ -37,7 +37,7 @@ In this section, I’ll briefly introduce BR’s key features: horizontal scalab
 First, however, it’s helpful to learn a bit about [TiDB’s architecture](https://pingcap.com/docs/stable/architecture/). Inside the TiDB platform, the main components are as follows:
 
 * [TiDB server](https://pingcap.com/docs/stable/architecture/#tidb-server) is a stateless SQL layer.
-* [TiKV server](https://pingcap.com/docs/stable/architecture/#tikv-server)** **is the distributed transactional key-value storage layer where the data persists.
+* [TiKV server](https://pingcap.com/docs/stable/architecture/#tikv-server) is the distributed transactional key-value storage layer where the data persists.
 * [Placement Driver (PD) server](https://pingcap.com/docs/stable/architecture/#placement-driver-server) manages the cluster. 
 
 ![TiDB with Backup & Restore](media/tidb-with-backup-restore.png)
