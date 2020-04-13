@@ -3,7 +3,7 @@ title: The Hybrid Database Capturing Perishable Insights at Yiguo
 author: ['Ruixing Luo']
 date: 2018-06-22
 summary: As the largest B2C fresh produce online marketplace in China, serving close to 5 million users and 1,000+ enterprise customers, Yiguo.com uses TiDB to capture real-time insights from fresh transactional data to make timely and accurate business decisions. 
-tags: ['Real-time analytics', 'TiSpark']
+tags: ['Real-time analytics', 'HTAP', 'TiSpark']
 categories: ['MySQL Scalability']
 url: /success-stories/hybrid-database-capturing-perishable-insights-at-yiguo/
 customer: Yiguo.com
@@ -105,3 +105,5 @@ Our migration to TiDB/TiSpark was not without challenges. Here are some lessons 
 ## Conclusion
 
 TiDB and TiSpark together provide a scalable solution for both OLTP and OLAP workloads. TiDB and TiSpark have been adopted by many companies and proved to work well in many application scenarios. Moreover, TiDB and TiSpark reduces operation overhead and maintenance cost for our engineering team. The TiDB project has tremendous potential, and we hope it gains more adoption globally and serve as a critical piece of every company's infrastructure.
+
+*This post was originally published on [Datanami](https://www.datanami.com/2018/02/22/hybrid-database-capturing-perishable-insights-yiguo/).*
