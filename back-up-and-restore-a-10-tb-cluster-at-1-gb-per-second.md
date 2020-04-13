@@ -18,7 +18,7 @@ In this post, I’ll share how we use BR to improve backup and restore speeds fo
 
 ## Why Backup & Restore?
 
-TiDB is an open-source, MySQL-compatible, [NewSQL](NewSQL) database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)) (HTAP) workloads. Backup and restore has long been a challenging problem for large-scale TiDB clusters. Because data is distributed in different nodes, TiDB doesn’t have a consistent physical snapshot.
+TiDB is an open-source, MySQL-compatible, [NewSQL](https://en.wikipedia.org/wiki/NewSQL) database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)) (HTAP) workloads. Backup and restore has long been a challenging problem for large-scale TiDB clusters. Because data is distributed in different nodes, TiDB doesn’t have a consistent physical snapshot.
 
 Mydumper and myloader are widely used as backup and restore tools in the MySQL community. Since TiDB is [compatible with the MySQL protocol](https://pingcap.com/docs/stable/key-features/#mysql-compatible-syntax), we used them too.
 
