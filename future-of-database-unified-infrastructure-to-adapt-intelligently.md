@@ -22,7 +22,7 @@ The future of the database is about unification, adaptiveness, and intelligence.
 
 When we first started, it was simple and straightforward: we want to build a better database. There was nothing fancy or magic about the technology, the algorithm or even the shared-nothing architecture we chose. What fascinated me is the possibility of building the infrastructure that could serve as the single source of truth so the applications and the businesses on top of it can adapt to the uncertainties.
 
-## It’s all around data.
+## It's all around data.
 
 If you think about it, everything we do nowadays is around data. Business owners, big or small, need data to know whether their decisions are sound and adaptive to the challenging markets; software engineers like me, regardless of roles or titles, build and maintain systems that live and breathe data.
 
@@ -52,7 +52,7 @@ About the system architecture and database software stack:
 
 Traditionally, when business outgrows the single-server database, the database stack will become the bottleneck. All kinds of workarounds such as sharding and separation of the workloads are put into actions, some of which even become the norm. For many cases, these workarounds work but not without price: there are always some kind of trade-off, either from the application layer, or operational and human resource cost. For example, the complexity of maintaining 10 databases are not just 10x that of one database. Not to mention the extra challenges brought by data redundancy and heterogeneity.
 
-I believe the future of the database is a unified architecture whose storage system can cover most of the common use cases and has unlimited horizontal scalability. The biggest benefit of this architecture is that it’s so simple. It can easily adapt according to the situation. Only in this way, can we have a way to make the most of data and to predict the future accurately. It’s difficult for us to imagine changes in our business even one year from now. The old saying still holds true: “The only constant is change.” 
+I believe the future of the database is a unified architecture whose storage system can cover most of the common use cases and has unlimited horizontal scalability. The biggest benefit of this architecture is that it's so simple. It can easily adapt according to the situation. Only in this way, can we have a way to make the most of data and to predict the future accurately. It's difficult for us to imagine changes in our business even one year from now. The old saying still holds true: "The only constant is change." 
 
 About the new design paradigm:
 
@@ -67,20 +67,20 @@ About the new design paradigm:
 On the surface, the HTAP system may only seem like a simple integration of the interfaces, but its meaning is far-reaching: 
 
 1. The details of data synchronization are hidden, which means that the database layer can decide how to synchronize data by itself.
-2. Because the OLTP engine and the OLAP engine are in the same system, many details, such as transaction information, won’t be lost during the synchronization process. This means that the internal analysis system can do things that traditional separated OLAP systems can’t.
+2. Because the OLTP engine and the OLAP engine are in the same system, many details, such as transaction information, won't be lost during the synchronization process. This means that the internal analysis system can do things that traditional separated OLAP systems can't.
 3. For the application layer, one less system means a more unified experience and smaller learning and transforming cost.
 
 An ideal HTAP platform would be able to cover both of the OLTP and OLAP workloads. But to my knowledge, there is still a long way to go for the existing HTAP solutions. Some of them, like TiDB, may excel in OLTP and a portion of OLAP by working as a real-time data warehouse; others are better at handling complex OLAP queries but the OLTP capabilities are just not satisfactory.
 
-Over the last five years, we have established the prototype of this unified data platform and benefited a lot of our users and customers. The power of unification is still beyond imagination and we’ve become more capable and confident in turning the future we believe into reality.
+Over the last five years, we have established the prototype of this unified data platform and benefited a lot of our users and customers. The power of unification is still beyond imagination and we've become more capable and confident in turning the future we believe into reality.
 
 ## Adaptiveness: adaptive scheduling would be the core capability of the future database
 
-Ever since the last decade, the biggest change in IT technology has been cloud computing, and this revolution is still in progress. What are the core capabilities of the cloud? One of the most important is that it’s elastic and adaptive. Allocating computing resources has become increasingly easy and on-demand.
+Ever since the last decade, the biggest change in IT technology has been cloud computing, and this revolution is still in progress. What are the core capabilities of the cloud? One of the most important is that it's elastic and adaptive. Allocating computing resources has become increasingly easy and on-demand.
 
-A good analogy is housing. We all need a place to stay, but making the best choice depends on your present needs. For example, if you go on vacation for a week, you don’t buy a house in the new city. You might rent a house or an apartment for the week, or if you want even more flexibility, you could book a hotel for the night. Allocating resources works the same way: we don’t have to pay in advance for "imaginary" business peaks. In the past, whether we purchased or rent servers, we needed to plan in advance and usually pay upfront. If the business peak never happened, we spent money on resources we didn’t need. The emergence of the cloud has turned elasticity into a fundamental capability of infrastructure; we add or remove resources as we need to, paying as we go.
+A good analogy is housing. We all need a place to stay, but making the best choice depends on your present needs. For example, if you go on vacation for a week, you don't buy a house in the new city. You might rent a house or an apartment for the week, or if you want even more flexibility, you could book a hotel for the night. Allocating resources works the same way: we don't have to pay in advance for "imaginary" business peaks. In the past, whether we purchased or rent servers, we needed to plan in advance and usually pay upfront. If the business peak never happened, we spent money on resources we didn't need. The emergence of the cloud has turned elasticity into a fundamental capability of infrastructure; we add or remove resources as we need to, paying as we go.
 
-I expect the same thing will happen with databases. Some people may wonder: all the new database solutions are claiming to be transparent horizontally scalable. It’s not the same. Adaptive scheduling is not just scalability. For example, 
+I expect the same thing will happen with databases. Some people may wonder: all the new database solutions are claiming to be transparent horizontally scalable. It's not the same. Adaptive scheduling is not just scalability. For example, 
 
 * Can the database automatically identify the workload and scale out/in accordingly? Can it anticipate that the peak is coming, automatically purchases machines, creates more copies of the hot data and redistributes the data, and expands the capacity in advance? After the traffic peak, can the database automatically release the resources?
 * Can the database perceive the business characteristics and determine the data distribution according to the data access pattern? For example, if the data has obvious geographical features (users in China are likely to visit in China and users in the United States are in the United States), the database automatically places the data in different data centers based on how it is accessed.
@@ -88,11 +88,11 @@ I expect the same thing will happen with databases. Some people may wonder: all 
 
 Everything mentioned here relies on the "adaptive scheduling" capability. In the future, I believe that the cost of physical resources will continue to decrease. The result of the continued decline in the unit price of computing resources is that when storage costs and computing resources are no longer a problem, the issue will become "how to efficiently allocate resources." If efficient allocation is the goal, elastic scheduling is the core.
 
-Of course, just like the objective law of the development of everything, before you learn to run, you must first learn to walk. I believe that in the near future, we will see the emergence of databases with such capabilities. Let’s wait and see.
+Of course, just like the objective law of the development of everything, before you learn to run, you must first learn to walk. I believe that in the near future, we will see the emergence of databases with such capabilities. Let's wait and see.
 
 ## Would the next stage be intelligence?
 
-What’s next? I don’t know. But I believe that just as we don't understand the universe and the ocean, our understanding of data is at best superficial, not to mention they’re a lot of data we haven’t yet recorded. There must be a great mystery hidden in this massive amount of data, but what kind of insights we can obtain from it, or how we can use it to better our lives, I don’t know. I am willing to believe in a future where data can tell us all.
+What's next? I don't know. But I believe that just as we don't understand the universe and the ocean, our understanding of data is at best superficial, not to mention they're a lot of data we haven't yet recorded. There must be a great mystery hidden in this massive amount of data, but what kind of insights we can obtain from it, or how we can use it to better our lives, I don't know. I am willing to believe in a future where data can tell us all.
 
 I also believe that in the future:
 
@@ -100,9 +100,9 @@ I also believe that in the future:
 * Our data processing will no longer be fragmented, and any business system can easily store and obtain data.
 * When we face the uncertainties and the unpredictables in the future, we will have the **unified** infrastructure to **adapt intelligently**.
 
-Before I close, I want to thank our PingCAP team and the many members of our open source community. PingCAP may have started with just three people, but it took hundreds of you to make it what it is today. I’m grateful for the innumerable hours you have put in to develop and refine ideas, your careful and clear feedback, and the energy you have brought to your work year after year. Thank you!
+Before I close, I want to thank our PingCAP team and the many members of our open source community. PingCAP may have started with just three people, but it took hundreds of you to make it what it is today. I'm grateful for the innumerable hours you have put in to develop and refine ideas, your careful and clear feedback, and the energy you have brought to your work year after year. Thank you!
 
-One of my favorite sayings is “Half of the ambition is patience.” Building a perfect database is not an overnight job, but I believe we are on the right path.
+One of my favorite sayings is "Half of the ambition is patience." Building a perfect database is not an overnight job, but I believe we are on the right path.
 
 All the past is the prologue.
 
