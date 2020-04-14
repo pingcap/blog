@@ -10,7 +10,7 @@ image: /images/blog/quickly-back-up-and-restore-a-large-scale-cluster.png
 
 ![Quickly back up and restore a large-scale cluster](media/quickly-back-up-and-restore-a-large-scale-cluster.png)
 
-Backing up or restoring large-scale distributed databases is time-consuming. When it takes a lot of time to backup or restore a database, Garbage Collection might break the snapshot used in the backup or restore process. Thus, some changes might be missing. This threatens data security.
+Backing up or restoring large-scale distributed databases is time-consuming. When it takes a lot of time to backup or restore a database, Garbage Collection might break the snapshot used in the backup or restore process. Thus, some changes might be missing. This threatens data safety.
 
 As an open-source, distributed SQL database, [TiDB](https://en.wikipedia.org/wiki/TiDB) fulfills the requirement for **backing up and restoring large-scale clusters**. Our up-coming TiDB 4.0 release will introduce [Backup & Restore](https://github.com/pingcap/br) (BR), a distributed backup and restore tool, that offers **high backup and restore speeds**—1 GB/s or more for 10 TB of data.
 
