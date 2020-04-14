@@ -12,7 +12,7 @@ image: /images/blog/quickly-back-up-and-restore-a-large-scale-cluster.png
 
 Backing up or restoring large-scale distributed databases is time-consuming. When it takes a lot of time to backup or restore a database, Garbage Collection might break the snapshot used in the backup or restore process. Thus, some changes might be missing. This threatens data safety.
 
-As an open-source, distributed SQL database, [TiDB](https://en.wikipedia.org/wiki/TiDB) fulfills the requirement for **backing up and restoring large-scale clusters**. Our up-coming TiDB 4.0 release will introduce [Backup & Restore](https://github.com/pingcap/br) (BR), a distributed backup and restore tool, that offers **high backup and restore speeds**—1 GB/s or more for 10 TB of data.
+As an open-source, distributed SQL database, [TiDB](https://en.wikipedia.org/wiki/TiDB) fulfills the requirement for **backing up and restoring large-scale clusters**. [TiDB 4.0 release candidate (RC)](https://pingcap.com/docs/stable/reference/tools/br/br/) introduced [Backup & Restore](https://github.com/pingcap/br) (BR), a distributed backup and restore tool, that offers **high backup and restore speeds**—1 GB/s or more for 10 TB of data.
 
 In this post, I’ll share how we use BR to improve backup and restore speeds for large-scale TiDB clusters. If you specialize in database development, this post might inspire your backup and restore design work. If your application deals with huge amounts of data and you also attach great importance to data security and the efficiency of backup and restore, you can try [TiDB](https://pingcap.com/docs/stable/overview/) with [BR](https://pingcap.com/docs/v3.1/reference/tools/br/br/).
 
@@ -94,7 +94,7 @@ Here are some documents for your reference:
 * [The BR tool manual](https://pingcap.com/docs/v3.1/reference/tools/br/br/)
 * [Examples of BR backup and restore scenarios](https://pingcap.com/docs/v3.1/reference/tools/br/use-cases/)
 
-BR is still in the beta stage. If you find any problems using it, please feel free to [file an issue](https://github.com/pingcap/br/issues).
+BR is still in the beta stage and will be generally available in our upcoming TiDB 4.0, which is about to be released later this year. If you find any problems using it, please feel free to [file an issue](https://github.com/pingcap/br/issues).
 
 ## What’s next for Backup & Restore
 
