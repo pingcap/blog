@@ -16,11 +16,11 @@ customerCategory: E-Commerce
 
 [Yiguo.com](https://www.crunchbase.com/organization/shanghai-yiguo-electron-business) is a fresh produce e-commerce platform, serving close to 5 million users and more than 1,000 enterprise customers. We have long devoted ourselves to providing fresh food for ordinary consumers and gained increasing popularity since our founding in 2005. With a rapidly growing user base and data, we need a highly performant, horizontally scalable realtime database system that can support both [Online Transaction Processing (OLTP)](https://en.wikipedia.org/wiki/Online_transaction_processing) and [Online Analytical Processing (OLAP)](https://en.wikipedia.org/wiki/Online_analytical_processing) workloads, in order to make timely and accurate decisions to improve the quality of service to our users.
 
-Combining [TiDB](https://github.com/pingcap/tidb) and [TiSpark](https://github.com/pingcap/tispark), we got exactly that--a horizontally scalable, strongly consistent, and highly available data processing platform that supports both OLTP and OLAP workloads on quickly growing datasets in near real-time. By adopting TiDB and TiSpark, our applications now have a new competitive edge to deliver better services faster than ever before.   
+Combining [TiDB](https://github.com/pingcap/tidb) and [TiSpark](https://github.com/pingcap/tispark), we got exactly that--a horizontally scalable, strongly consistent, and highly available data processing platform that supports both OLTP and OLAP workloads on quickly growing datasets in near real-time. By adopting TiDB and TiSpark, our applications now have a new competitive edge to deliver better services faster than ever before.
 
 ## Our pain points
 
-Previously, our data analysis system was built on top of the Hadoop ecosystem and SQL Server. We ran a near real-time system on SQL Server in the very beginning, implemented by our developers through writing and maintaining corresponding stored procedures. Because the data size was not that large, SQL Server was enough to meet our demand. As our business and user base grows, the amount of data has also grown to a point beyond what SQL Server could handle, to provide timely and accurate decision making. Our existing system became a bottleneck, and we had to look for a new solution. 
+Previously, our data analysis system was built on top of the Hadoop ecosystem and SQL Server. We ran a near real-time system on SQL Server in the very beginning, implemented by our developers through writing and maintaining corresponding stored procedures. Because the data size was not that large, SQL Server was enough to meet our demand. As our business and user base grows, the amount of data has also grown to a point beyond what SQL Server could handle, to provide timely and accurate decision making. Our existing system became a bottleneck, and we had to look for a new solution.
 
 Our requirements for a new system are:
 
@@ -35,7 +35,7 @@ Based on our requirements, we evaluated three options -- Greenplum, Apache Kudu,
 * **[Greenplum](http://greenplum.org/)** is an [MPP (Massively Parallel Processing)](https://en.wikipedia.org/wiki/Massively_parallel) platform based on PostgreSQL. It is usually used in offline analysis scenarios where the number of concurrent transactions is not very high. However, for OLTP scenarios, our preliminary test showed that it had poor concurrent write performance compared to TiDB.
 * **[Apache Kudu](https://kudu.apache.org/)** is a columnar storage manager developed for the Hadoop platform that is widely adopted for real-time analytics. However, secondary indexes, which are not supported by Kudu, are very important for us to efficiently access data with attributes other than the primary key.
 * As a Hybrid Transactional/Analytical Processing (HTAP) database, **TiDB** eliminates the necessity to constantly move data between different databases and warehouses to support either transactional or analytical workloads. Thus, it enables real-time business analysis based on live transactional data instead of after-the-fact analysis, and instantly transforms raw data into insights for timely decision-making. 
-* **TiSpark** takes advantages of both the Apache Spark platform and TiDB to provide HTAP capabilities, serving as a one-stop solution for online transactions and analysis.
+* **TiSpark** takes advantages of both the Apache Spark platform and TiDB to provide HTAP capabilities,serving as a one-stop solution for online transactions and analysis.
 * The **TiDB/TiSpark** open source community is thriving, which boosted our confidence in the future health and strength of this solution when making our decision.
 
 ## Moving forward with TiDB and TiSpark
@@ -54,7 +54,7 @@ TiDB also has a wealth of other tools in its ecosystem, such as the Ansible scri
 
 ## Implementation overview
 
-In mid-October 2017, after careful design and rigorous testing, we migrated our real-time analysis system to TiDB/TiSpark in production. 
+In mid-October 2017, after careful design and rigorous testing, we migrated our real-time analysis system to TiDB/TiSpark in production.
 
 The architecture of our new system is as follows:
 
@@ -92,7 +92,7 @@ The success of our TiDB/TiSpark based real-time data warehouse platform gives us
 
 ## Lesson learned
 
-Our migration to TiDB/TiSpark was not without challenges. Here are some lessons learned: 
+Our migration to TiDB/TiSpark was not without challenges. Here are some lessons learned:
 
 1. It is highly recommended to use TiDB Ansible for deployment, upgrade and operations. In the test environment, we manually deployed TiDB using the binary package. It was easy, but the upgrade became troublesome after TiDB released its 1.0 version in October 2017. After consulting the TiDB support team, we re-deployed the 1.0 version using the TiDB Ansible scripts and the upgrade became much easier. Meanwhile, TiDB's Ansible scripts install Prometheus and Grafana monitoring components by default. TiDB provides a lot of excellent Grafana templates, which made monitoring and configuration much simpler.
 

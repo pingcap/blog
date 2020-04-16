@@ -10,13 +10,13 @@ image: /images/blog/easier-to-use-production-ready-htap-database.png
 
 ![An easier-to-use, production-ready HTAP database](media/easier-to-use-production-ready-htap-database.png)
 
-In a previous post, our CTO Ed Huang shared his thoughts about the [future of databases](https://pingcap.com/blog/future-of-database-unified-infrastructure-to-adapt-intelligently/). We're glad that we've always been on the journey to "building a better database." It has been more than nine months since we released [TiDB 3.0](https://pingcap.com/blog/tidb-3.0-announcement/). On April 8, PingCAP's fifth anniversary, we released the [first release candidate (RC) for our landmark TiDB 4.0](https://pingcap.com/docs/stable/releases/4.0.0-rc/). With a set of groundbreaking tools that makes TiDB easier to use than ever, TiDB 4.0 enhances its [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) capabilities and continues to solve issues for large-scale, distributed SQL databases. 
+In a previous post, our CTO Ed Huang shared his thoughts about the [future of databases](https://pingcap.com/blog/future-of-database-unified-infrastructure-to-adapt-intelligently/). We're glad that we've always been on the journey to "building a better database." It has been more than nine months since we released [TiDB 3.0](https://pingcap.com/blog/tidb-3.0-announcement/). On April 8, PingCAP's fifth anniversary, we released the [first release candidate (RC) for our landmark TiDB 4.0](https://pingcap.com/docs/stable/releases/4.0.0-rc/). With a set of groundbreaking tools that makes TiDB easier to use than ever, TiDB 4.0 enhances its [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) capabilities and continues to solve issues for large-scale, distributed SQL databases.
 
-In this post, I'll walk you through TiDB 4.0's highlights across its deployment, use, operations and maintenance, ecosystem, and cloud services. You're welcome to join us in [TiDB Community Slack](https://join.slack.com/t/tidbcommunity/shared_invite/enQtNzc0MzI4ODExMDc4LWYwYmIzMjZkYzJiNDUxMmZlN2FiMGJkZjAyMzQ5NGU0NGY0NzI3NTYwMjAyNGQ1N2I2ZjAxNzc1OGUwYWM0NzE) to give us advice or feedback on your user experience. 
+In this post, I'll walk you through TiDB 4.0's highlights across its deployment, use, operations and maintenance, ecosystem, and cloud services. You're welcome to join us in [TiDB Community Slack](https://join.slack.com/t/tidbcommunity/shared_invite/enQtNzc0MzI4ODExMDc4LWYwYmIzMjZkYzJiNDUxMmZlN2FiMGJkZjAyMzQ5NGU0NGY0NzI3NTYwMjAyNGQ1N2I2ZjAxNzc1OGUwYWM0NzE) to give us advice or feedback on your user experience.
 
 ## Get a TiDB cluster up using TiUP in only one minute
 
-**"How long does it take to deploy a TiDB cluster on a single machine? "** Previously, we actually had a hard time answering this question, but now we can proudly say, "**Just one minute**." 
+**"How long does it take to deploy a TiDB cluster on a single machine? "** Previously, we actually had a hard time answering this question, but now we can proudly say, "**Just one minute**."
 
 Why is it so fast? It's because **TiDB 4.0 will introduce [TiUP](https://github.com/pingcap-incubator/tiup), a component manager that streamlines installing, configuring, and managing a TiDB cluster into a few easy commands.**
 
@@ -30,7 +30,7 @@ To install a TiDB cluster for testing on a single machine, you only need to perf
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-2. Start a TiDB cluster on a single machine. Run `tiup playground`. 
+2. Start a TiDB cluster on a single machine. Run `tiup playground`.
 
 Then, you can connect a MySQL client to the TiDB cluster to begin your testing.
 
@@ -50,18 +50,18 @@ To deploy a TiDB cluster in a production environment:
 
 Now you can operate and maintain this cluster. For example, to start the cluster, you can run `tiup cluster start test`.
 
-What's more, you can use TiUP to manage TiDB ecosystem components and tools, like [TiFlash](https://pingcap.com/docs/stable/reference/tiflash/overview/). You can also add components or tools in TiUP. 
+What's more, you can use TiUP to manage TiDB ecosystem components and tools, like [TiFlash](https://pingcap.com/docs/stable/reference/tiflash/overview/). You can also add components or tools in TiUP.
 
 ## A one-stop solution for both OLTP and OLAP workloads
 
-Perhaps you're not sure whether your application scenario is [online analytical processing](https://en.wikipedia.org/wiki/Online_analytical_processing) (OLAP) or [online transaction processing](https://en.wikipedia.org/wiki/Online_transaction_processing) (OLTP), and you just want quick results from a single system for your application. This requirement seems challenging, but we're one step closer to getting it done. 
+Perhaps you're not sure whether your application scenario is [online analytical processing](https://en.wikipedia.org/wiki/Online_analytical_processing) (OLAP) or [online transaction processing](https://en.wikipedia.org/wiki/Online_transaction_processing) (OLTP), and you just want quick results from a single system for your application. This requirement seems challenging, but we're one step closer to getting it done.
 
 **TiDB 4.0 offers a one-stop solution for both OLTP and OLAP—TiDB plus [TiFlash](https://pingcap.com/docs/stable/reference/tiflash/overview/)—to handle HTAP workloads.**
 
 ![TiDB in the HTAP architecture with TiFlash nodes](media/tidb-with-tiflash.png)
 <div class="caption-center"> TiDB in the HTAP architecture with TiFlash nodes </div>
 
-In this HTAP framework, TiDB processes OLTP workloads while TiFlash processes OLAP workloads. 
+In this HTAP framework, TiDB processes OLTP workloads while TiFlash processes OLAP workloads.
 
 Compared with traditional [extract, transform, load](https://en.wikipedia.org/wiki/Extract,_transform,_load) (ETL) pipelines or other HTAP solutions, we have these advantages:
 
@@ -70,7 +70,7 @@ Compared with traditional [extract, transform, load](https://en.wikipedia.org/wi
 
 ## Observe the system to discover the unknowns
 
-Before TiDB 4.0, it could be difficult to efficiently troubleshoot system problems. 
+Before TiDB 4.0, it could be difficult to efficiently troubleshoot system problems.
 
 Database administrators (DBAs) needed to understand TiDB's basic architecture, get familiar with thousands of TiDB monitoring metrics, and gain experience in the field to ensure that when they encountered similar problems next time, they could fix them more quickly.
 
@@ -87,7 +87,7 @@ We've always believed that a picture is worth a thousand words and that we can d
 
 ## Fast backup and restore for 100+ TB data clusters
 
-TiDB 4.0 provides users with a complete set of ecological tools, such as TiUP, the deployment and maintenance tool mentioned above, [TiDB Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/), the data migration tool, and [TiDB Lightning](https://pingcap.com/docs/stable/reference/tools/tidb-lightning/overview/), the data import tool. These tools easily integrate TiDB with other ecosystems of users and offer users more high-value services. 
+TiDB 4.0 provides users with a complete set of ecological tools, such as TiUP, the deployment and maintenance tool mentioned above, [TiDB Data Migration](https://pingcap.com/docs/tidb-data-migration/stable/), the data migration tool, and [TiDB Lightning](https://pingcap.com/docs/stable/reference/tools/tidb-lightning/overview/), the data import tool. These tools easily integrate TiDB with other ecosystems of users and offer users more high-value services.
 
 This section covers two new tools that we introduce in TiDB 4.0: [Backup & Restore](https://github.com/pingcap/br) and [TiCDC](https://github.com/pingcap/ticdc).
 
@@ -148,7 +148,7 @@ The results:
 ![TPC-H 10 G benchmarks for TiDB 4.0](media/tpc-h-10-g-benchmarks.png)
 <div class="caption-center"> TPC-H 10 G benchmarks </div>
 
-### Sysbench benchmarks 
+### Sysbench benchmarks
 
 In the Sysbench test:
 
