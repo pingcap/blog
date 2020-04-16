@@ -32,13 +32,13 @@ In short, although we can use mydumper and Loader, they do not perfectly meet ou
 
 BR is a command-line tool for fast distributed backup and restore of the TiDB cluster data. Compared with [mydumper](https://pingcap.com/docs/v3.1/how-to/maintain/backup-and-restore/mydumper-lightning) and Loader, BR is more suitable for TiDB clusters with 1TB of data or more.
 
-In this section, I’ll briefly introduce BR’s key features: horizontal scalability and strong consistency. 
+In this section, I’ll briefly introduce BR’s key features: horizontal scalability and strong consistency.
 
 First, however, it’s helpful to learn a bit about [TiDB’s architecture](https://pingcap.com/docs/stable/architecture/). Inside the TiDB platform, the main components are as follows:
 
 * [TiDB server](https://pingcap.com/docs/stable/architecture/#tidb-server) is a stateless SQL layer.
 * [TiKV server](https://pingcap.com/docs/stable/architecture/#tikv-server) is the distributed transactional key-value storage layer where the data persists.
-* [Placement Driver (PD) server](https://pingcap.com/docs/stable/architecture/#placement-driver-server) manages the cluster. 
+* [Placement Driver (PD) server](https://pingcap.com/docs/stable/architecture/#placement-driver-server) manages the cluster.
 
 ![TiDB with Backup & Restore](media/tidb-with-backup-restore.png)
 <div class="caption-center"> TiDB with Backup & Restore </div>
@@ -63,7 +63,7 @@ As shown in the figures below, BR was able to back up a cluster with 10 TB of da
 
 BR restored the 10-TB data cluster at an average speed of 0.7 GB/s, an average of 150 MB/s for the five TiDB instances. BR's maximum store speed during the test was about 1.2 GB/s, with the maximum restore speed for each instance ranging from 247 MB/s to 268 MB/s.
 
-The following figures show the test’s backup and restore speeds. 
+The following figures show the test’s backup and restore speeds.
 
 ### Backup speed
 
@@ -87,7 +87,7 @@ At 1:00 and 1:15, index data are restored. Because index entries are short, the 
 
 ## Try Backup & Restore
 
-If you’re running a terabyte-scale TiDB cluster, and you want to quickly back up and restore data, give BR a try. 
+If you’re running a terabyte-scale TiDB cluster, and you want to quickly back up and restore data, give BR a try.
 
 Here are some documents for your reference:
 
@@ -100,7 +100,7 @@ BR is still in the beta stage and will be generally available in our upcoming Ti
 
 TiDB boasts an active open-source community. Thanks to our creative contributors and [PingCAP](https://pingcap.com/en/) engineers for adding the following features to BR. These features are under development:
 
-* Backup and restore for RawKV-modeTiKV 
+* Backup and restore for RawKV-modeTiKV
 
     [xinhua5](https://github.com/xinhua5) actively participated in the [RawKV Backup & Restore Project](https://github.com/pingcap/br/issues/86) that will let BR backup and restore RawKV-mode TiKV clusters.
 

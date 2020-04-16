@@ -39,7 +39,7 @@ Back when we started 5 years ago, it was impossible. Because as you can see, at 
 
 Specifically, these solutions are only applicable to certain data application scenarios. For complex applications and business requirements, you have to resort to multiple solutions to cover it all, resulting in walls between applications and complexity in the software stack. This somewhat explains the increasing popularity of data pipeline tools such as Kafka. If you want insights into your business, you would need these tools to bridge various data platforms. It could become really difficult if you want real-time data analytics unless you adopt stream-processing framework like Apache Flink, which poses further challenges in the flexibility in your entire architecture; if you go with offline data warehouse, you would not be able to harness the power of real-time situation awareness and the business decisions have to be based upon stale data.
 
-After 5 years of exploration and evolving, I believe it is possible. The way to the single and real-time source of truth is also what the future of data architecture looks like, which is: 
+After 5 years of exploration and evolving, I believe it is possible. The way to the single and real-time source of truth is also what the future of data architecture looks like, which is:
 
 ![The future of data architecture](media/the-future-of-data-architecture.png)
 <div class="caption-center"> The future of data architecture </div>
@@ -52,7 +52,7 @@ About the system architecture and database software stack:
 
 Traditionally, when business outgrows the single-server database, the database stack will become the bottleneck. All kinds of workarounds such as sharding and separation of the workloads are put into actions, some of which even become the norm. For many cases, these workarounds work but not without price: there are always some kind of trade-off, either from the application layer, or operational and human resource cost. For example, the complexity of maintaining 10 databases are not just 10x that of one database. Not to mention the extra challenges brought by data redundancy and heterogeneity.
 
-I believe the future of the database is a unified architecture whose storage system can cover most of the common use cases and has unlimited horizontal scalability. The biggest benefit of this architecture is that it's so simple. It can easily adapt according to the situation. Only in this way, can we have a way to make the most of data and to predict the future accurately. It's difficult for us to imagine changes in our business even one year from now. The old saying still holds true: "The only constant is change." 
+I believe the future of the database is a unified architecture whose storage system can cover most of the common use cases and has unlimited horizontal scalability. The biggest benefit of this architecture is that it's so simple. It can easily adapt according to the situation. Only in this way, can we have a way to make the most of data and to predict the future accurately. It's difficult for us to imagine changes in our business even one year from now. The old saying still holds true: "The only constant is change."
 
 About the new design paradigm:
 
@@ -64,7 +64,7 @@ About the new design paradigm:
 ![HTAP system](media/htap-system.png)
 <div class="caption-center"> The HTAP system </div>
 
-On the surface, the HTAP system may only seem like a simple integration of the interfaces, but its meaning is far-reaching: 
+On the surface, the HTAP system may only seem like a simple integration of the interfaces, but its meaning is far-reaching:
 
 1. The details of data synchronization are hidden, which means that the database layer can decide how to synchronize data by itself.
 2. Because the OLTP engine and the OLAP engine are in the same system, many details, such as transaction information, won't be lost during the synchronization process. This means that the internal analysis system can do things that traditional separated OLAP systems can't.
@@ -80,7 +80,7 @@ Ever since the last decade, the biggest change in IT technology has been cloud c
 
 A good analogy is housing. We all need a place to stay, but making the best choice depends on your present needs. For example, if you go on vacation for a week, you don't buy a house in the new city. You might rent a house or an apartment for the week, or if you want even more flexibility, you could book a hotel for the night. Allocating resources works the same way: we don't have to pay in advance for "imaginary" business peaks. In the past, whether we purchased or rent servers, we needed to plan in advance and usually pay upfront. If the business peak never happened, we spent money on resources we didn't need. The emergence of the cloud has turned elasticity into a fundamental capability of infrastructure; we add or remove resources as we need to, paying as we go.
 
-I expect the same thing will happen with databases. Some people may wonder: all the new database solutions are claiming to be transparent horizontally scalable. It's not the same. Adaptive scheduling is not just scalability. For example, 
+I expect the same thing will happen with databases. Some people may wonder: all the new database solutions are claiming to be transparent horizontally scalable. It's not the same. Adaptive scheduling is not just scalability. For example,
 
 * Can the database automatically identify the workload and scale out/in accordingly? Can it anticipate that the peak is coming, automatically purchases machines, creates more copies of the hot data and redistributes the data, and expands the capacity in advance? After the traffic peak, can the database automatically release the resources?
 * Can the database perceive the business characteristics and determine the data distribution according to the data access pattern? For example, if the data has obvious geographical features (users in China are likely to visit in China and users in the United States are in the United States), the database automatically places the data in different data centers based on how it is accessed.
