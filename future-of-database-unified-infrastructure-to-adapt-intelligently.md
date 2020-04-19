@@ -2,7 +2,7 @@
 title: 'A Peek into the Future of Database: A Unified Infrastructure to Adapt Intelligently'
 author: ['Ed Huang']
 date: 2020-04-08
-summary: Today is PingCAP's 5-year birthday. In this post, Ed Huang, PingCAP's CTO, discusses about what he thinks the future holds for databases.
+summary: Today is PingCAP's 5-year birthday. In this post, Ed Huang, PingCAP's CTO, discusses about what he thinks the future holds for databases. The future of the database is about unification, adaptiveness, and intelligence.
 tags: ['Announcement']
 categories: ['Open Source Community']
 image: /images/blog/future-of-atabase.png
@@ -80,7 +80,7 @@ Ever since the last decade, the biggest change in IT technology has been cloud c
 
 A good analogy is housing. We all need a place to stay, but making the best choice depends on your present needs. For example, if you go on vacation for a week, you don't buy a house in the new city. You might rent a house or an apartment for the week, or if you want even more flexibility, you could book a hotel for the night. Allocating resources works the same way: we don't have to pay in advance for "imaginary" business peaks. In the past, whether we purchased or rent servers, we needed to plan in advance and usually pay upfront. If the business peak never happened, we spent money on resources we didn't need. The emergence of the cloud has turned elasticity into a fundamental capability of infrastructure; we add or remove resources as we need to, paying as we go.
 
-I expect the same thing will happen with databases. Some people may wonder: all the new database solutions are claiming to be transparent horizontally scalable. It's not the same. Adaptive scheduling is not just scalability. For example,
+I expect the same thing will happen with databases. Some people may wonder: all the new database solutions are claiming to be transparently horizontally scalable. It's not the same. Adaptive scheduling is not just scalability. For example,
 
 * Can the database automatically identify the workload and scale out/in accordingly? Can it anticipate that the peak is coming, automatically purchases machines, creates more copies of the hot data and redistributes the data, and expands the capacity in advance? After the traffic peak, can the database automatically release the resources?
 * Can the database perceive the business characteristics and determine the data distribution according to the data access pattern? For example, if the data has obvious geographical features (users in China are likely to visit in China and users in the United States are in the United States), the database automatically places the data in different data centers based on how it is accessed.
