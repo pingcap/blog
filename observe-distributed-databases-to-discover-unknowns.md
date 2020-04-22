@@ -103,7 +103,7 @@ Similar to the way doctors use computed tomography (CT) to find the root causes 
 
 Many database companies face the problem of evaluating the database with a specific application. Traditionally, the information available to them is very limited and is usually obtained by asking questions such as the application's QPS, TPS, read/write ratio, data size, data distribution, table schema, and typical queries to application developers. In many cases, these metrics aren't known by the application developers or are too sensitive to share. As a result, **judging whether a database fits with an application is difficult**.
 
-With Key Visualizer, to evaluate whether TiDB matches an application, we only need to record production traffic and use Key Visualizer to observe the cluster status. In addition, Key Visualizer's visual report can **offer insights into applications and recommend improvements to the application.
+With Key Visualizer, to evaluate whether TiDB matches an application, we only need to record production traffic and use Key Visualizer to observe the cluster status. In addition, Key Visualizer's visual report can **offer insights into applications and recommend improvements to the application**.
 
 Here we would like to dive a bit deeper into the difference between monitoring and observing a system. Monitoring focuses on **known** metrics, such as CPU load, memory, TPS, and QPS. However, monitoring has limited value because it only reflects the system for specific scenarios, such as whether the system reaches its capacity. But as our systems become more and more complex, we need to **observe** a system that can discover the **unknowns**.
 
@@ -146,14 +146,14 @@ If you're interested in Key Visualizer, you can follow these steps to try it out
 
 1. Do one of the following:
 
-* If you've already deployed a TiDB cluster, launch [the master version](https://github.com/pingcap/pd) of Placement Driver (PD), the managing component of the entire cluster.
-* If you haven't deployed TiDB, [deploy TiDB with TiUP](https://tiup.io/) and run `tiup playground nightly` to start up a TiDB cluster.
+    * If you've already deployed a TiDB cluster, launch [the master version](https://github.com/pingcap/pd) of Placement Driver (PD), the managing component of the entire cluster.
+    * If you haven't deployed TiDB, [deploy TiDB with TiUP](https://tiup.io/) and run `tiup playground nightly` to start up a TiDB cluster.
 
-2. Go to `[http://PD_ADDRESS:2379/dashboard](http://PD_ADDRESS:2379/dashboard)` to get started with Key Visualizer.
+2. Go to `http://PD_ADDRESS:2379/dashboard` to get started with Key Visualizer.
 
 > **Note:**
 >
-> If you've modified PD's default port, you need to update the port for `[http://PD_ADDRESS:2379/dashboard](http://PD_ADDRESS:2379/dashboard)` to the actual PD port.
+> If you've modified PD's default port, you need to update the port for `http://PD_ADDRESS:2379/dashboard` to the actual PD port.
 
 ## Roadmap
 
