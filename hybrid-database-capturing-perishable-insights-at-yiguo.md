@@ -7,7 +7,7 @@ tags: ['Real-time analytics', 'HTAP', 'TiSpark']
 categories: ['MySQL Scalability']
 url: /success-stories/hybrid-database-capturing-perishable-insights-at-yiguo/
 customer: Yiguo.com
-customerCategory: E-Commerce
+customerCategory: Internet
 ---
 
 **Industry:** E-Commerce
