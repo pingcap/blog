@@ -51,7 +51,7 @@ Key Visualiser uses heatmaps to display read and write traffic volume. Here is a
 In the heatmap:
 
 * The x-axis represents time.
-* The y-axis represents the key ranges, with mappings between key ranges to tables and indices.
+* The y-axis represents the key ranges, with mappings between key ranges to tables and indexes.
 * The colors represent the read or write volume of key ranges. The brighter the color, the higher the read or write volume.
 
 The following examples demonstrate how to infer the heatmap's underlying workload.
