@@ -1,5 +1,5 @@
 ---
-title: 'X-Ray for Your Database'
+title: 'Key Visualizer: Observe Distributed Databases to Discover the Unknowns'
 author: [Xiangsheng Zheng, Di'an Luo, Wenxuan Shi, Ed Huang]
 date: 2020-04-22
 summary: Key Visualizer is a visual diagnostic tool that makes it easier to troubleshoot distributed SQL databases. Users can observe system health, quickly find hotspots in the cluster, and gain deep insights into applications.
