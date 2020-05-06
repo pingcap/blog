@@ -83,13 +83,13 @@ The following table has a list of men and women's first names:
 
 <table>
   <tr>
-   <td>No.
+   <td><strong>No.</strong>
    </td>
-   <td>Name
+   <td><strong>Name</strong>
    </td>
-   <td>Gender
+   <td><strong>Gender</strong>
    </td>
-   <td>...
+   <td><strong>...</strong>
    </td>
   </tr>
   <tr>
@@ -148,13 +148,13 @@ However, what happens if we insert a lot of "female Chris" records in a short pe
 
 <table>
   <tr>
-   <td>No.
+   <td><strong>No.</strong>
    </td>
-   <td>Name
+   <td><strong>Name</strong>
    </td>
-   <td>Gender
+   <td><strong>Gender</strong>
    </td>
-   <td>...
+   <td><strong>...</strong>
    </td>
   </tr>
   <tr>
@@ -198,7 +198,6 @@ However, what happens if we insert a lot of "female Chris" records in a short pe
    </td>
   </tr>
 </table>
-
 
 Now the selectivity of the `Name` index for the query above becomes pretty high, because there are a lot of "Chris" records. Now, the `Gender` index is more efficient, since there is only one "male Chris" in the table. 
 
