@@ -83,13 +83,13 @@ The following table has a list of men and women's first names:
 
 <table>
   <tr>
-   <td>No.
+   <td>**No.**
    </td>
-   <td>Name
+   <td>**Name**
    </td>
-   <td>Gender
+   <td>**Gender**
    </td>
-   <td>...
+   <td>**...**
    </td>
   </tr>
   <tr>
@@ -148,13 +148,13 @@ However, what happens if we insert a lot of "female Chris" records in a short pe
 
 <table>
   <tr>
-   <td>No.
+   <td>**No.**
    </td>
-   <td>Name
+   <td>**Name**
    </td>
-   <td>Gender
+   <td>**Gender**
    </td>
-   <td>...
+   <td>**...**
    </td>
   </tr>
   <tr>
@@ -214,7 +214,7 @@ In the case above, DBAs only need to execute the following command in the databa
 CREATE GLOBAL BINDING FOR 
     SELECT * FROM t WHERE Name = 'Chris' and Gender = ‘Male' 
 USING 
-    SELECT /*+ USE_INDEX(t, gender) */ * FROM t WHERE Name = 'Chris' and Gender = 'Male'
+    SELECT **/*+ USE_INDEX(t, gender) */** * FROM t WHERE Name = 'Chris' and Gender = 'Male'
 ```
 
 ### Execution plan evolution
