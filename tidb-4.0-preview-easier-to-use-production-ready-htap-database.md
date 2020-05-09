@@ -40,7 +40,7 @@ Then, you can connect a MySQL client to the TiDB cluster to begin your testing.
 
 To deploy a TiDB cluster in a production environment:
 
-1. Prepare the deployment topology. You can refer to this [example](https://github.com/pingcap-incubator/tiup-cluster/blob/master/topology.example.yaml) of a TiUP cluster.
+1. Prepare the deployment topology. You can refer to this [example](https://github.com/pingcap-incubator/tiup-cluster/blob/master/examples/topology.example.yaml) of a TiUP cluster.
 
 2. Deploy a TiDB cluster. Run the tiup-cluster command. This example deploys a TiDB v4.0.0-rc cluster named "test."
 
