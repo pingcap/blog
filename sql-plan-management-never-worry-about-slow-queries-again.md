@@ -16,7 +16,7 @@ We've done a lot of work on optimizer stability for [TiDB](https://pingcap.com/d
 
 Generally, you can address these issues by putting comments in the SQL queries ([optimizer hints](https://pingcap.com/docs/stable/reference/performance/optimizer-hints/)) to instruct the optimizer to select a certain SQL execution plan. But this approach is inconvenient, because you need to modify the SQL text and application code.
 
-[TiDB 4.0](https://pingcap.com/docs/stable/releases/4.0.0-rc/) introduces SQL Plan Management (SPM), **a mechanism that narrows down the optimizer's searching space to execution plans that are proven to perform well. SPM avoids performance degradation caused by unanticipated plan changes, and you don't have to change the application code.** 
+[TiDB 4.0](https://pingcap.com/docs/stable/releases/4.0.0-rc.1/) introduces SQL Plan Management (SPM), **a mechanism that narrows down the optimizer's searching space to execution plans that are proven to perform well. SPM avoids performance degradation caused by unanticipated plan changes, and you don't have to change the application code.** 
 
 In this post, I'll give an overview of SPM and use an example to demonstrate how SPM helps the optimizer automatically select efficient execution plans.
 
