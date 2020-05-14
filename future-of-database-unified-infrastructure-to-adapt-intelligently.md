@@ -106,4 +106,4 @@ One of my favorite sayings is "Half of the ambition is patience." Building a per
 
 All the past is the prologue.
 
-The future starts from now. Here I present you, [TiDB 4.0 release candidate](https://pingcap.com/docs/stable/releases/4.0.0-rc/), which I believe is the prototype of what the future database looks like. In the coming blog series, we will dive deep into how the 4.0 version of the TiDB platform empowers a unified infrastructure, enables the data architecture as well as the applications and business to adapt. Stay tuned!
+The future starts from now. Here I present you, [TiDB 4.0 release candidate](https://pingcap.com/docs/stable/releases/4.0.0-rc.1/), which I believe is the prototype of what the future database looks like. In the coming blog series, we will dive deep into how the 4.0 version of the TiDB platform empowers a unified infrastructure, enables the data architecture as well as the applications and business to adapt. Stay tuned!

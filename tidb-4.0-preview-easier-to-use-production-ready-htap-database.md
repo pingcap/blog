@@ -10,7 +10,7 @@ image: /images/blog/easier-to-use-production-ready-htap-database.png
 
 ![An easier-to-use, production-ready HTAP database](media/easier-to-use-production-ready-htap-database.png)
 
-In a previous post, our CTO Ed Huang shared his thoughts about the [future of databases](https://pingcap.com/blog/future-of-database-unified-infrastructure-to-adapt-intelligently/). We're glad that we've always been on the journey to "building a better database." It has been more than nine months since we released [TiDB 3.0](https://pingcap.com/blog/tidb-3.0-announcement/). On April 8, PingCAP's fifth anniversary, we released the [first release candidate (RC) for our landmark TiDB 4.0](https://pingcap.com/docs/stable/releases/4.0.0-rc/). With a set of groundbreaking tools that makes TiDB easier to use than ever, TiDB 4.0 enhances its [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) capabilities and continues to solve issues for large-scale, distributed SQL databases.
+In a previous post, our CTO Ed Huang shared his thoughts about the [future of databases](https://pingcap.com/blog/future-of-database-unified-infrastructure-to-adapt-intelligently/). We're glad that we've always been on the journey to "building a better database." It has been more than nine months since we released [TiDB 3.0](https://pingcap.com/blog/tidb-3.0-announcement/). On April 8, PingCAP's fifth anniversary, we released the first release candidate (RC) for our landmark TiDB 4.0. With a set of groundbreaking tools that makes TiDB easier to use than ever, TiDB 4.0 enhances its [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) capabilities and continues to solve issues for large-scale, distributed SQL databases.
 
 In this post, I'll walk you through TiDB 4.0's highlights across its deployment, use, operations and maintenance, ecosystem, and cloud services. You're welcome to join us in [TiDB Community Slack](https://join.slack.com/t/tidbcommunity/shared_invite/enQtNzc0MzI4ODExMDc4LWYwYmIzMjZkYzJiNDUxMmZlN2FiMGJkZjAyMzQ5NGU0NGY0NzI3NTYwMjAyNGQ1N2I2ZjAxNzc1OGUwYWM0NzE) to give us advice or feedback on your user experience.
 
@@ -164,6 +164,6 @@ The results:
 
 ## Try us out!
 
-This post describes only a few of the highlights in TiDB 4.0. For more features, see [TiDB 4.0 RC Release Notes](https://pingcap.com/docs/stable/releases/4.0.0-rc/).
+This post describes only a few of the highlights in TiDB 4.0. For more features, see [TiDB 4.0 RC.1 Release Notes](https://pingcap.com/docs/stable/releases/4.0.0-rc.1/).
 
 We hope you find TiDB 4.0 as exciting as we do, and that you'll try our release candidate. This release is also a big step forward for TiDB on its way to becoming "the future database." Our way ahead is challenging but also promising. On this adventurous journey, we'd like to thank our contributors and TiDB users. Without you, we couldn't have come so far. We believe that TiDB will grow more robust to power more enterprises in the future.
