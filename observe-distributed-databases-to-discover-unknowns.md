@@ -12,7 +12,7 @@ image: /images/blog/troubleshoot-cluster-issues.jpg
 
 Have you seen what a database workload "looks" like?
 
-A distributed database is a collection of multiple machines that are logically interconnected while physically spread over different sites in a computer network. **It's challenging to troubleshoot issues in a distributed database because the information about the system is scattered in different machines.** For this kind of system, we need a global view of the system and being able to observe the system to discover the unknown to answer the following questions. Can we quickly detect hotspots and potential risks? Can we visually monitor its runtime status? Can we find a way to predict whether a distributed database can run stably for a long time? 
+A distributed database is a collection of multiple machines that are logically interconnected while physically spread over different sites in a computer network. **It's challenging to troubleshoot issues in a distributed database because the information about the system is scattered in different machines.** For this kind of system, we need a global view of the system and being able to observe the system to discover the unknown to answer the following questions. Can we quickly detect hotspots and potential risks? Can we visually monitor its runtime status? Can we find a way to predict whether a distributed database can run stably for a long time?
 
 Google's Cloud Bigtable, a non-relational, NoSQL data storage system, has a diagnostic tool called [Key Visualizer](https://cloud.google.com/bigtable/docs/keyvis-overview), that generates visual reports to help users quickly identify hotspots. Could we develop a similar tool in open-source [NewSQL](https://en.wikipedia.org/wiki/NewSQL) distributed databases?
 
@@ -29,7 +29,7 @@ Since April 2015, we at [PingCAP](https://pingcap.com/en/) have been building [T
 
 In a TiDB cluster, if only a few nodes are busy while other nodes are not, this means hotspots exist in the cluster. As a distributed database, TiDB automatically moves data among nodes to balance the load within a cluster. But sometimes, when an application's workload suddenly increases, hotspots might occur and trigger a bottleneck in a node. In a distributed architecture, a single node's bottleneck could affect the performance of the whole cluster. Therefore, being able to quickly find the root cause of hotspots is a critical task for database operations. In subsequent blog posts, we will introduce features in TiDB to mitigate hotspots such as auto scaling and load-based splitting.
 
-For TiDB versions earlier than 4.0, diagnosing hotspot issues is tedious and time-consuming. The diagnostic process typically involves using various tools to examine different components and performing in-depth analysis of the application logic. Specifically, a DBA might: 
+For TiDB versions earlier than 4.0, diagnosing hotspot issues is tedious and time-consuming. The diagnostic process typically involves using various tools to examine different components and performing in-depth analysis of the application logic. Specifically, a DBA might:
 
 1. Check whether each node's CPU and I/O usage are balanced.
 
@@ -43,7 +43,7 @@ And this is only the beginning. Troubleshooting can be a lengthy process. Theref
 
 Key Visualizer is a visual diagnostic tool that lets users observe their TiDB cluster's read and write volume over time. Key Visualizer provides a graphical representation of application status. If you are concerned about data privacy, note that the data powering the Key Visualizer doesn't contain confidential information about the application.
 
-Key Visualiser uses heatmaps to display read and write traffic volume. Here is an example: 
+Key Visualiser uses heatmaps to display read and write traffic volume. Here is an example:
 
 ![Key Visualizer's heatmap](media/troubleshoot-distributed-database.jpg)
 <div class="caption-center"> Key Visualizer's heatmap </div>
@@ -83,13 +83,13 @@ We can use Key Visualizer to monitor the health of the cluster; however, it is w
 
 ### Allow users to observe the system and diagnose cluster issues
 
-**Key Visualizer lets users clearly observe the system's running status so that users, even not-so-experienced ones, can correctly diagnose system issues.** 
+**Key Visualizer lets users clearly observe the system's running status so that users, even not-so-experienced ones, can correctly diagnose system issues.**
 
 Traditionally, application developers and DBAs don't have a clear global view of the database workload. They use metrics like queries per second (QPS), transactions per second (TPS), query execution time, and machine loads (CPU, network, disk, etc.) to infer the running status of a database. What's more, in a distributed architecture, they have to dig through a massive number of metrics for useful information.
 
 Similar to the way doctors use computed tomography (CT) to find the root causes of symptoms, TiDB users can use Key Visualizer to directly observe the workload at the key-range level and have a clear view of it.
 
-### Offer deeper insights into applications 
+### Offer deeper insights into applications
 
 Many database companies face the problem of evaluating the database with a specific application. Traditionally, the information available to them is very limited and is usually obtained by asking questions such as the application's QPS, TPS, read/write ratio, data size, data distribution, table schema, and typical queries to application developers. In many cases, these metrics aren't known by the application developers or are too sensitive to share. As a result, **judging whether a database fits with an application is difficult**.
 

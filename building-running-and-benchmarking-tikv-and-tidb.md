@@ -14,7 +14,6 @@ image: /images/blog/building-running-benchmarking-tikv-tidb.jpg
 
 If you just want to run TiDB or TiKV, it is much easier to use [TiUP](https://pingcap.com/docs/stable/how-to/deploy/orchestrated/tiup/) or [Docker Compose](https://pingcap.com/docs/stable/how-to/get-started/deploy-tidb-from-docker-compose/).
 
-
 ## Building
 
 Assuming you want to run TiDB, you will need [TiDB](https://github.com/pingcap/tidb), [Placement Driver (PD)](https://github.com/pingcap/pd), and [TiKV](https://github.com/tikv/tikv). Clone each repo and run `make` in the root directory of each cloned repo. For TiKV `make` (and `make release`) produce an optimised build (you might want to use `make unportable_release` which permits more optimisations), but not the one we actually build for distribution. If you need that (fully optimised, but takes a long time to build), run `make dist_release`.
@@ -160,9 +159,9 @@ To run:
         cfg:default.paths.plugins=/usr/local/var/lib/grafana/plugins
     ```
 
-Then visit port 3000, e.g., http://127.0.0.1:3000.
+Then visit port 3000, e.g., <http://127.0.0.1:3000>.
 
-You'll need to add a data source for Prometheus, the URL will be something like http://127.0.0.1:9090.
+You'll need to add a data source for Prometheus, the URL will be something like <http://127.0.0.1:9090>.
 
 Then import a Grafana dashboard, some useful dashboards:
 
@@ -170,7 +169,6 @@ Then import a Grafana dashboard, some useful dashboards:
 * [PD](https://github.com/pingcap/tidb-ansible/tree/master/scripts/pd.json)
 * [TiKV details](https://github.com/pingcap/tidb-ansible/tree/master/scripts/tikv_details.json)
 * [TiKV trouble shooting](https://github.com/pingcap/tidb-ansible/tree/master/scripts/tikv_trouble_shooting.json)
-
 
 ## Benchmarking
 
