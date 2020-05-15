@@ -27,9 +27,9 @@ Before TiUP, setting up a TiDB cluster was a steep, uphill climb. A cluster cons
 * Startup sequence
 * Interactive port configurations
 
-For example, let's say we want to create a 10-instance local debugging cluster, with three PD instances, three TiDB instances, and four TiKV instances. Here are the startup parameters for the three PD instances. 
+For example, let's say we want to create a 10-instance local debugging cluster, with three PD instances, three TiDB instances, and four TiKV instances. Here are the startup parameters for the three PD instances.
 
-```
+```shell
 $ bin / pd-server --name = pd-0
 --data-dir = data / Rt1J27k / pd-0 / data
 --peer-urls = http: //127.0.0.1: 2380
@@ -44,7 +44,7 @@ $ bin / pd-server --name = pd-2
 --peer-urls = http: //127.0.0.1: 2383 --advertise- peer-urls = http: //127.0. 0.1: 2383 --client-urls = http: //127.0.0.1: 2384 --advertise-client-urls = http: //127.0.0.1: 2384 --log-file = data / Rt1J27k / pd-2 / pd .log --initial-cluster = pd-0
 ```
 
-Even if you're a TiDB expert, deciphering these intricate commands isn't easy. And these are just the commands for the PD instances. We haven't gotten to TiDB, TiKV, and the monitoring components. 
+Even if you're a TiDB expert, deciphering these intricate commands isn't easy. And these are just the commands for the PD instances. We haven't gotten to TiDB, TiKV, and the monitoring components.
 
 Let's say you make it through this first challenge and manage to build the cluster. Now you face a second challenge: how do you get data into the cluster so you can run some tests? You need to use the [TiDB Data Migration (DM)](https://github.com/pingcap/dm) component, but where can you download these tools? How do you use them?
 
@@ -55,52 +55,52 @@ You start to wonder: do you want to experience the latest trend of distributed d
 TiUP simplifies cluster installation and configuration. It:
 
 * Distributes all the components of the TiDB ecosystem. You get everything you need to install TiDB in one place. No more searching for and downloading "missing pieces" online.
-* Organizes components into a consistent user experience. TiUP uses one set of simple commands and one basic syntax. You don't need to learn a set of commands for each component. 
+* Organizes components into a consistent user experience. TiUP uses one set of simple commands and one basic syntax. You don't need to learn a set of commands for each component.
 
 To get started, let's install TiUP. Navigate to the [TiUP home page](https://tiup.io/). There, you'll see a two-line shell script.
 
 The first command installs TiUP.
 
-```
-$ curl --proto '= https' --tlsv1.2 -sSf https: / /tiup-mirrors.pingcap.com/install.sh | sh
+```shell
+curl --proto '= https' --tlsv1.2 -sSf https: / /tiup-mirrors.pingcap.com/install.sh | sh
 ```
 
-The second runs a single-machine cluster. 
+The second runs a single-machine cluster.
 
-```
-$ tiup playground
+```shell
+tiup playground
 ```
 
 Let's modify the second command to set up the cluster we mentioned earlier (three PD instances, three TiDB instances, and four TiKV instances). See how much easier it is.
 
 1. Launch the cluster.
 
-    ```
-    $ tiup playground --pd 3 --db 3 --kv 4 
+    ```shell
+    tiup playground --pd 3 --db 3 --kv 4
     ```
 
 2. While the cluster launches, configure monitoring.
 
-    ```
-    $ tiup playground --pd 3 --db 3 --kv 4 --monitor
+    ```shell
+    tiup playground --pd 3 --db 3 --kv 4 --monitor
     ```
 
-3. Start a TiDB cluster version that you want to run. 
+3. Start a TiDB cluster version that you want to run.
 
-    ```
-    $ tiup playground v3.0.10
+    ```shell
+    tiup playground v3.0.10
     ```
 
 4. Specify that TiUP will use the latest release version (v4.0.0-rc) so you get the most up-to-date features. This command specifies that this set of features is called "example-features." You can then use this tag to assign this set of features to clients.
 
-    ```
-    $ tiup --tag example-features playground v4.0.0-rc
+    ```shell
+    tiup --tag example-features playground v4.0.0-rc
     ```
 
 5. Connect to the cluster that you've just started. The following command connects a client to the playground cluster. `example-features` is the tag you gave to the playground, and the client automatically connects to this tag corresponding to TiUP.
 
-    ```
-    $ tiup client example-features
+    ```shell
+    tiup client example-features
     ```
 
 ## What else can TiUP do?
@@ -123,7 +123,7 @@ Over time, we'll enhance TiUP to include more tried-and-tested tools from the Ti
 
 * TPC-C performance benchmarking (`tiup bench tpcc`)
 * TPC-H performance benchmarking (`tiup bench tpch`)
-* Integrated cluster tools for one-stop production cluster maintenance and scaling in or out (`tiup cluster`) 
-We've open-sourced the [TiUP project](https://github.com/pingcap-incubator/tiup), and we look forward to working with the community to improve this ecosystem and to develop new components to cover various use cases. The community can share their own achievements and empower users with the same needs by writing components that cover dedicated scenarios. You're welcome to join the [TiDB Community on Slack](http://suo.im/5BmPAe) to give us advice or feedback on your user experience. 
+* Integrated cluster tools for one-stop production cluster maintenance and scaling in or out (`tiup cluster`)
+We've open-sourced the [TiUP project](https://github.com/pingcap-incubator/tiup), and we look forward to working with the community to improve this ecosystem and to develop new components to cover various use cases. The community can share their own achievements and empower users with the same needs by writing components that cover dedicated scenarios. You're welcome to join the [TiDB Community on Slack](http://suo.im/5BmPAe) to give us advice or feedback on your user experience.
 
 _*App Store is a trademark of Apple Inc., registered in the U.S. and other countries._

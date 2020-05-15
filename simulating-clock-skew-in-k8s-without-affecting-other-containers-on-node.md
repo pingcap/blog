@@ -10,7 +10,7 @@ image: /images/blog/clock-sync-chaos-engineering-k8s.jpg
 
 ![Clock synchronization in distributed system](media/clock-sync-chaos-engineering-k8s.jpg)
 
-[Chaos Mesh™](https://github.com/pingcap/chaos-mesh), an easy-to-use, open-source, cloud-native chaos engineering platform for Kubernetes (K8s), has a new feature, TimeChaos, which simulates the [clock skew](https://en.wikipedia.org/wiki/Clock_skew#On_a_network) phenomenon. Usually, when we modify clocks in a container, we want a [minimized blast radius](https://learning.oreilly.com/library/view/chaos-engineering/9781491988459/ch07.html), and we don't want the change to affect the other containers on the node. In reality, however, implementing this can be harder than you think. How does Chaos Mesh solve this problem? 
+[Chaos Mesh™](https://github.com/pingcap/chaos-mesh), an easy-to-use, open-source, cloud-native chaos engineering platform for Kubernetes (K8s), has a new feature, TimeChaos, which simulates the [clock skew](https://en.wikipedia.org/wiki/Clock_skew#On_a_network) phenomenon. Usually, when we modify clocks in a container, we want a [minimized blast radius](https://learning.oreilly.com/library/view/chaos-engineering/9781491988459/ch07.html), and we don't want the change to affect the other containers on the node. In reality, however, implementing this can be harder than you think. How does Chaos Mesh solve this problem?
 
 In this post, I'll describe how we hacked through different approaches of clock skew and how TimeChaos in Chaos Mesh enables time to swing freely in containers.
 
@@ -20,9 +20,9 @@ Clock skew refers to the time difference between clocks on nodes within a networ
 
 Currently, there are well-recognized [solutions to synchronize clocks](https://pingcap.com/blog/Time-in-Distributed-Systems/), but without proper testing, you can never be sure that your implementation is solid.
 
-Then how can we test global snapshot consistency in a distributed system? The answer is obvious: we can simulate clock skew to test whether distributed systems can keep a consistent global snapshot under abnormal clock conditions. Some testing tools support simulating clock skew in containers, but they have an impact on physical nodes. 
+Then how can we test global snapshot consistency in a distributed system? The answer is obvious: we can simulate clock skew to test whether distributed systems can keep a consistent global snapshot under abnormal clock conditions. Some testing tools support simulating clock skew in containers, but they have an impact on physical nodes.
 
-[TimeChaos](https://github.com/pingcap/chaos-mesh/wiki/Time-Chaos) is a tool that **simulates clock skew in containers to test how it impacts your application without affecting the whole node**. This way, we can precisely identify the potential consequences of clock skew and take measures accordingly. 
+[TimeChaos](https://github.com/pingcap/chaos-mesh/wiki/Time-Chaos) is a tool that **simulates clock skew in containers to test how it impacts your application without affecting the whole node**. This way, we can precisely identify the potential consequences of clock skew and take measures accordingly.
 
 ## Various approaches for simulating clock skew we've explored
 
@@ -30,16 +30,16 @@ Reviewing the existing choices, we know clearly that they cannot be applied to C
 
 Then how are we supposed to tackle this problem? Well, the first thing that comes into our mind is finding solutions in the kernel using [Berkeley Packet Filter](https://en.wikipedia.org/wiki/Berkeley_Packet_Filter) (BPF).
 
-### `LD_PRELOAD` 
+### `LD_PRELOAD`
 
-`LD_PRELOAD` is a Linux environment variable that lets you define which dynamic link library is loaded before the program execution. 
+`LD_PRELOAD` is a Linux environment variable that lets you define which dynamic link library is loaded before the program execution.
 
 This variable has two advantages:
 
 * We can call our own functions without being aware of the source code.
 * We can inject code into other programs to achieve specific purposes.
 
-For some languages that use applications to call the time function in glibc, such as Rust and C, using `LD_PRELOAD` is enough to simulate clock skew. But things are trickier for Golang. Because languages such as Golang directly parse virtual Dynamic Shared Object ([vDSO](http://man7.org/linux/man-pages/man7/vdso.7.html)), a mechanism to speed up system calls. To obtain the time function address, we can't simply use `LD_PRELOAD` to intercept the glic interface. Therefore, `LD_PRELOAD` is not our solution. 
+For some languages that use applications to call the time function in glibc, such as Rust and C, using `LD_PRELOAD` is enough to simulate clock skew. But things are trickier for Golang. Because languages such as Golang directly parse virtual Dynamic Shared Object ([vDSO](http://man7.org/linux/man-pages/man7/vdso.7.html)), a mechanism to speed up system calls. To obtain the time function address, we can't simply use `LD_PRELOAD` to intercept the glic interface. Therefore, `LD_PRELOAD` is not our solution.
 
 ### Use BPF to modify the return value of `clock_gettime` system call
 
@@ -51,7 +51,7 @@ Thankfully, we determined that if the system kernel version is 4.18 or later, an
 
 ## TimeChaos, our final hack
 
-From the previous section, we know that programs usually get the system time by calling `clock_gettime`. In our case, `clock_gettime` uses vDSO to speed up the calling process, so we cannot use `LD_PRELOAD` to hack the `clock_gettime` system calls. 
+From the previous section, we know that programs usually get the system time by calling `clock_gettime`. In our case, `clock_gettime` uses vDSO to speed up the calling process, so we cannot use `LD_PRELOAD` to hack the `clock_gettime` system calls.
 
 We figured out the cause; then what's the solution? Start from vDSO. If we can redirect the address that stores the `clock_gettime` return value in vDSO to an address we define, we can solve the problem.
 
@@ -126,7 +126,7 @@ spec:
     cron: "@every 1m"
 ```
 
-During this test, Chaos Mesh injects TimeChaos into a chosen PD Pod every 1 millisecond for 10 seconds. Within the duration, the time acquired by PD will have a 600 second offset from the actual time. For further details, see [Chaos Mesh Wiki](https://github.com/pingcap/chaos-mesh/wiki/Time-Chaos). 
+During this test, Chaos Mesh injects TimeChaos into a chosen PD Pod every 1 millisecond for 10 seconds. Within the duration, the time acquired by PD will have a 600 second offset from the actual time. For further details, see [Chaos Mesh Wiki](https://github.com/pingcap/chaos-mesh/wiki/Time-Chaos).
 
 Let's create a TimeChaos experiment using the `kubectl apply` command:
 

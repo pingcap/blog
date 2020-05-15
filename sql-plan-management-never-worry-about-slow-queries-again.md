@@ -12,11 +12,11 @@ image: /images/blog/never-worry-about-slow-queries.jpg
 
 The SQL execution plan is a critical factor that affects SQL statement performance. The stability of the SQL execution plan heavily influences the entire cluster's performance. If a relational database's optimizer chooses a wrong execution plan for a query, it usually has a negative impact on the system; for example, operations might take longer to respond or the database might get overloaded.
 
-We've done a lot of work on optimizer stability for [TiDB](https://pingcap.com/docs/stable/), an open-source, distributed, [NewSQL](https://en.wikipedia.org/wiki/NewSQL) database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads. However, SQL execution plans are affected by various factors. The execution plan may encounter unanticipated changes. As a result, the execution time might be too long. 
+We've done a lot of work on optimizer stability for [TiDB](https://pingcap.com/docs/stable/), an open-source, distributed, [NewSQL](https://en.wikipedia.org/wiki/NewSQL) database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads. However, SQL execution plans are affected by various factors. The execution plan may encounter unanticipated changes. As a result, the execution time might be too long.
 
 Generally, you can address these issues by putting comments in the SQL queries ([optimizer hints](https://pingcap.com/docs/stable/reference/performance/optimizer-hints/)) to instruct the optimizer to select a certain SQL execution plan. But this approach is inconvenient, because you need to modify the SQL text and application code.
 
-[TiDB 4.0](https://pingcap.com/docs/stable/releases/4.0.0-rc.1/) introduces SQL Plan Management (SPM), **a mechanism that narrows down the optimizer's searching space to execution plans that are proven to perform well. SPM avoids performance degradation caused by unanticipated plan changes, and you don't have to change the application code.** 
+[TiDB 4.0](https://pingcap.com/docs/stable/releases/4.0.0-rc.1/) introduces SQL Plan Management (SPM), **a mechanism that narrows down the optimizer's searching space to execution plans that are proven to perform well. SPM avoids performance degradation caused by unanticipated plan changes, and you don't have to change the application code.**
 
 In this post, I'll give an overview of SPM and use an example to demonstrate how SPM helps the optimizer automatically select efficient execution plans.
 
@@ -40,7 +40,7 @@ Due to the shortcomings above, TiDB 4.0 introduces a new mechanism, SQL Plan Man
 
 **SQL Plan Management is a no-application-intrusion mechanism to constrain the searching space of the optimizer to the execution plans that have been proved to have good performance.**
 
-In TiDB 4.0, SPM supports: 
+In TiDB 4.0, SPM supports:
 
 * Manually creating bindings for SQL statements
 * Automatically creating bindings for SQL statements
@@ -66,7 +66,7 @@ Note that if an SQL statement appears only once, you don't need to create a bind
 
 As statistics or the table schema definition changes, the originally-bound execution plan might be no longer optimal. In TiDB 4.0, bindings can automatically evolve to adapt to changes.
 
-SPM evolves bindings by experimenting with alternative execution plans in the background. If it detects a better execution plan, SPM adds this new plan to the binding list. For the subsequent SQL queries, the optimizer will also take this new plan into consideration. 
+SPM evolves bindings by experimenting with alternative execution plans in the background. If it detects a better execution plan, SPM adds this new plan to the binding list. For the subsequent SQL queries, the optimizer will also take this new plan into consideration.
 
 Note that this feature uses few system resources. SPM performs its "experiments" during a predefined time period, which is usually when network activity is low.
 
@@ -77,7 +77,7 @@ To enable automatically evolving bindings, set `set global tidb_evolve_plan_base
 
 ## How SPM can speed up your queries
 
-Now that we have a basic idea of SPM, let's see how SPM can speed up your queries. 
+Now that we have a basic idea of SPM, let's see how SPM can speed up your queries.
 
 The following table has a list of men and women's first names:
 
@@ -199,7 +199,7 @@ However, what happens if we insert a lot of "female Chris" records in a short pe
   </tr>
 </table>
 
-Now the selectivity of the `Name` index for the query above becomes pretty high, because there are a lot of "Chris" records. Now, the `Gender` index is more efficient, since there is only one "male Chris" in the table. 
+Now the selectivity of the `Name` index for the query above becomes pretty high, because there are a lot of "Chris" records. Now, the `Gender` index is more efficient, since there is only one "male Chris" in the table.
 
 If the statistics are not updated in time to reflect these sudden data changes, the optimizer would likely use the `Name` index as an access method for the query. This would result in a slow query.
 
@@ -210,15 +210,15 @@ As mentioned above, SPM lets you use a new SQL syntax `CREATE BINDING FOR …(qu
 In the case above, DBAs only need to execute the following command in the database:
 
 ```
-CREATE GLOBAL BINDING FOR 
-    SELECT * FROM t WHERE Name = 'Chris' and Gender = ‘Male' 
-USING 
+CREATE GLOBAL BINDING FOR
+    SELECT * FROM t WHERE Name = 'Chris' and Gender = ‘Male'
+USING
     SELECT /*+ USE_INDEX(t, gender) */ * FROM t WHERE Name = 'Chris' and Gender = 'Male'
 ```
 
 ### Execution plan evolution
 
-In the example above, the data distribution might change again later, and the SQL optimizer might sense this change and find a better execution plan for the query; namely, using the `Name` index as the access method. But what if this execution plan is not in the binding list? 
+In the example above, the data distribution might change again later, and the SQL optimizer might sense this change and find a better execution plan for the query; namely, using the `Name` index as the access method. But what if this execution plan is not in the binding list?
 
 As we mentioned previously, TiDB 4.0's SPM uses a mechanism called binding evolution to solve this problem. To enable binding evolution, run `SQL> SET GLOBAL tidb_evolve_plan_baselines = on;`.
 
@@ -226,4 +226,4 @@ As we mentioned previously, TiDB 4.0's SPM uses a mechanism called binding evolu
 
 Previously, TiDB users could use optimizer hints to instruct the optimizer to select a certain execution plan, but they needed to modify the SQL text and application code. To solve this issue, TiDB 4.0 introduces SQL Plan Management, which lets the optimizer automatically manage execution plans and choose execution plans that are proven to perform well. This approach prevents slowdowns in the database resulting from unexpected plan changes, and, best of all, you don't have to modify the application code.
 
-If you're interested in SPM, you can give it a try in the [TiDB 4.0 release candidate](https://pingcap.com/docs/stable/releases/4.0.0-rc/). You're welcome to join the [TiDB Community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=blog-en) to give us advice or feedback on your experience.
+If you're interested in SPM, you can give it a try in the [TiDB 4.0 release candidate](https://pingcap.com/docs/stable/releases/4.0.0-rc.1/). You're welcome to join the [TiDB Community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=blog-en) to give us advice or feedback on your experience.

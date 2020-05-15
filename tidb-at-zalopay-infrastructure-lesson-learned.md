@@ -217,7 +217,7 @@ Here is a comparison of the strongest candidate - MySQL - with TiDB (reference [
    </td>
   </tr>
   <tr>
-   <td>Replication methods 
+   <td>Replication methods
    </td>
    <td>Master-master replication, Master-slave replication
    </td>

@@ -13,7 +13,7 @@ customerCategory: Internet
 
 **Industry:** E-Commerce
 
-**Author:** Chunhui Liu and Chao Hong (Database Administrators at Shopee)
+**Authors:** Chunhui Liu and Chao Hong (Database Administrators at Shopee)
 
 ![Choosing right database for your applications](media/choosing-right-database-for-your-applications.png)
 

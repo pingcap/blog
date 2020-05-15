@@ -167,7 +167,7 @@ The optimizations discussed above are not final implementations. In addition to 
 
 * **Reducing the latency for interactive read transactions to one RTT**
 
-    After we optimized Follower Read, we reduced the latency of a _non-interactive _read transaction from two RTTs to one RTT. However, in an interactive read transaction, the ranges involved aren't known until the  transaction starts. Also, we can't predict the `read_index` for each range involved in a read request. Therefore, we can only handle the first read request and `get_tso` in parallel. Thus, N+1 RTTs is reduced to N RTT(s), where N is the number of read statements for interactive transactions.
+    After we optimized Follower Read, we reduced the latency of a _non-interactive_ read transaction from two RTTs to one RTT. However, in an interactive read transaction, the ranges involved aren't known until the  transaction starts. Also, we can't predict the `read_index` for each range involved in a read request. Therefore, we can only handle the first read request and `get_tso` in parallel. Thus, N+1 RTTs is reduced to N RTT(s), where N is the number of read statements for interactive transactions.
 
     We can also reduce the latency for read transaction to one RTT if we do the following:
 
