@@ -14,7 +14,7 @@ image: /images/blog/cdc-in-database.jpg
 
 Therefore, it's time for a change: TiDB 4.0 introduces [change data capture](https://en.wikipedia.org/wiki/Change_data_capture) for TiDB or [TiCDC](https://pingcap.com/docs/dev/ticdc/ticdc-overview/). This feature replicates TiDB's incremental changes to downstream platforms by subscribing to change logs in TiKV (TiDB's storage engine). It also provides [TiCDC Open Protocol](https://pingcap.com/docs/dev/ticdc/ticdc-open-protocol/ ) to support other systems that subscribe to TiKV's data changes. 
 
-One of the hallmarks of TiCDC is its low latency. In this context, "latency" means the amount of time it takes for data that is written to TiDB to be dispatched to a downstream platform, such as MySQL or Kafka. With **high data reliability** and **horizontal scalability** features, TiCDC provides **high-availability **replication services for 100 TB clusters **with only milliseconds of latency**.
+One of the hallmarks of TiCDC is its low latency. In this context, "latency" means the amount of time it takes for data that is written to TiDB to be dispatched to a downstream platform, such as MySQL or Kafka. With **high data reliability** and **horizontal scalability** features, TiCDC provides **high-availability** replication services for 100 TB clusters **with only milliseconds of latency**.
 
 In this post, I'll deep dive into why we built TiCDC and how we implement its key features. If you'd like to try TiCDC, you can get it [here](https://pingcap.com/docs/stable/releases/release-4.0.0-rc.2/).
 
