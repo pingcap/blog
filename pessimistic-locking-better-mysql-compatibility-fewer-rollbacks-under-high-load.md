@@ -12,7 +12,7 @@ image: /images/blog/pessimistic-locking.jpg
 
 For distributed database designs, [concurrency control](https://en.wikipedia.org/wiki/Concurrency_control) is a critical issue. It's used to maintain the consistency of a distributed database in a concurrent environment.
 
-Since 2015, we at [PingCAP](https://pingcap.com/en/) have been building [TiDB](https://pingcap.com/docs/stable/overview/), an open-source, MySQL-compatible, distributed SQL database. When MySQL users use TiDB, they don't need to modify much application code and can onboard TiDB more easily. It's known that MySQL uses pessimistic locking as its concurrency control method to ensure data consistency. *TiDB supports pessimistic locking, which improves TiDB’s compatibility with MySQL and reduces transaction rollback rates in high-conflict scenarios.* Before TiDB 4.0, pessimistic locking was an experimental feature. Now we’ve improved its performance, stability, and compatibility with MySQL. Pessimistic locking becomes generally available in TiDB 4.0.
+Since 2015, we at [PingCAP](https://pingcap.com/en/) have been building [TiDB](https://pingcap.com/docs/stable/overview/), an open-source, MySQL-compatible, distributed SQL database. When MySQL users use TiDB, they don't need to modify much application code and can onboard TiDB more easily. It's known that MySQL uses pessimistic locking as its concurrency control method to ensure data consistency. **TiDB supports pessimistic locking, which improves TiDB’s compatibility with MySQL and reduces transaction rollback rates in high-conflict scenarios.** Before TiDB 4.0, pessimistic locking was an experimental feature. Now we’ve improved its performance, stability, and compatibility with MySQL. Pessimistic locking becomes generally available in TiDB 4.0.
 
 In this post, I'll explain what pessimistic locking is, how it behaves, and how it differs from the MySQL version of pessimistic locking. 
 
@@ -408,6 +408,6 @@ MySQL tries to lock the data in `(SELECT a FROM t2 WHERE b=7)`, so it fails with
 
 ## Looking ahead
 
-Since it began, TiDB has been known for supporting high-performance distributed transactions. This article introduces an important new feature in TiDB 4.0: pessimistic locking. In our future posts, we'll deep dive into TiDB pessimistic locking's implementation principles and performance tuning. Stay tuned.
+Since it began, TiDB has been known for supporting high-performance distributed transactions. With improvements in stability and functionality in TiDB 4.0, we finally remove the experimental label for pessimistic locking, making it a generally available feature. In our future posts, we'll deep dive into TiDB pessimistic locking's implementation principles and performance tuning. Stay tuned.
 
 TiDB's transaction model continues to improve. If you're interested, you can help build this cutting-edge distributed transaction model along with us. You're welcome to try our pessimistic locking in the [TiDB 4.0 release candidate](https://pingcap.com/docs/stable/releases/release-4.0.0-rc.2/) and join [our Transaction Special Interest Group (SIG) on Slack](https://slack.tidb.io/invite?team=tikv-wg&channel=transaction-sig&ref=pingcap-blog), or contact [transaction-group@pingcap.com](mailto:transaction-group@pingcap.com) to give us your feedback.
