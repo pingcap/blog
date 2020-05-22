@@ -117,13 +117,13 @@ In the table below, assume that we have set the global `tidb_txn_mode` = 'pessim
    </td>
    <td>> UPDATE test SET v = v + 1 WHERE k = 1;
 <p>
-block...
+<span style="color: red;">block...</span>
    </td>
   </tr>
   <tr>
    <td>> COMMIT;
    </td>
-   <td>Query OK, 1 row affected (0.00 sec)
+   <td><span style="color: red;">Query OK, 1 row affected (0.00 sec)</span>
    </td>
   </tr>
   <tr>
@@ -131,7 +131,7 @@ block...
    </td>
    <td>> COMMIT;
 <p>
-Query OK, 0 row affected (0.00 sec)
+<span style="color: red;">Query OK, 0 row affected (0.00 sec)</span>
    </td>
   </tr>
 </table>
@@ -255,7 +255,7 @@ Here's how a similar case looks in the database:
    </td>
    <td><strong>> UPDATE test SET v = 2 WHERE k = 1;</strong>
 <p>
-<strong>ERROR 1213 (40001): Deadlock found when trying to get lock; try restarting transaction</strong>
+<strong><span style="color: red;">ERROR 1213 (40001): Deadlock found when trying to get lock; try restarting transaction</span></strong>
    </td>
   </tr>
   <tr>
@@ -306,7 +306,7 @@ Query OK, 0 rows affected (0.00 sec)
 <p>
 mysql> SELECT * FROM t WHERE id>=10 AND id&lt;11 FOR UPDATE;
 <p>
-Empty set (0.00 sec)
+<span style="color: red;">Empty set (0.00 sec)</span>
    </td>
    <td>
    </td>
@@ -324,7 +324,7 @@ Query OK, 0 rows affected (0.00 sec)
 <p>
 > SELECT * FROM t WHERE id>=10 AND id&lt;11 FOR UPDATE;
 <p>
-// block
+<span style="color: red;">// block</span>
    </td>
    <td>> BEGIN;
 <p>
@@ -334,7 +334,7 @@ Query OK, 0 rows affected (0.00 sec)
 <p>
 > SELECT * FROM t WHERE id>=10 AND id&lt;11 FOR UPDATE;
 <p>
-Empty set (0.00 sec)
+<span style="color: red;">Empty set (0.00 sec)</span>
    </td>
   </tr>
 </table>
