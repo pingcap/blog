@@ -2,7 +2,7 @@
 title: 'Pessimistic Locking: Better MySQL Compatibility, Fewer Rollbacks Under High Load'
 author: [Shirly Wu]
 date: 2020-05-22
-summary: TiDB 4.0 introduces pessimistic locking to improve its compatibility with MySQL and reduce transaction rollback rates in high conflict scenarios. Now you can use TiDB in more scenarios.
+summary: With improvements in stability and functionality in TiDB 4.0, we finally remove the experimental label for pessimistic locking, making it a generally available feature. See how pessimistic locking behaves in TiDB.
 tags: ['Transaction', 'Distributed SQL database', 'MySQL compatibility']
 categories: ['Engineering']
 image: /images/blog/pessimistic-locking.jpg
@@ -12,7 +12,7 @@ image: /images/blog/pessimistic-locking.jpg
 
 For distributed database designs, [concurrency control](https://en.wikipedia.org/wiki/Concurrency_control) is a critical issue. It's used to maintain the consistency of a distributed database in a concurrent environment.
 
-Since 2015, we at [PingCAP](https://pingcap.com/en/) have been building [TiDB](https://pingcap.com/docs/stable/overview/), an open-source, MySQL-compatible, distributed SQL database. When MySQL users use TiDB, they don't need to modify much application code and can onboard TiDB more easily. It's known that MySQL uses pessimistic locking as its concurrency control method to ensure data consistency. Now **TiDB 4.0 introduces pessimistic locking to improve its compatibility with MySQL and reduce transaction rollback rates in high-conflict scenarios**.
+Since 2015, we at [PingCAP](https://pingcap.com/en/) have been building [TiDB](https://pingcap.com/docs/stable/overview/), an open-source, MySQL-compatible, distributed SQL database. When MySQL users use TiDB, they don't need to modify much application code and can onboard TiDB more easily. It's known that MySQL uses pessimistic locking as its concurrency control method to ensure data consistency. *TiDB supports pessimistic locking, which improves TiDB’s compatibility with MySQL and reduces transaction rollback rates in high-conflict scenarios.* Before TiDB 4.0, pessimistic locking was an experimental feature. Now we’ve improved its performance, stability, and compatibility with MySQL. Pessimistic locking becomes generally available in TiDB 4.0.
 
 In this post, I'll explain what pessimistic locking is, how it behaves, and how it differs from the MySQL version of pessimistic locking. 
 
@@ -26,7 +26,7 @@ A database has two locking mechanisms:
 Pessimistic locking can solve some of the issues caused by optimistic locking. TiDB now implements both pessimistic locking and optimistic locking, which means:
 
 * **Transaction commits in TiDB won't fail due to locking issues.**
-* **MySQL users can use TiDB more easily.** MySQL supports pessimistic locking by default. Now TiDB also supports pessimistic locking, so MySQL users don't need to modify the application code to get started with TiDB. 
+* **MySQL users can use TiDB more easily.** MySQL supports pessimistic locking by default. Now TiDB also supports pessimistic locking, so MySQL users don't need to modify much application code to get started with TiDB. 
 
 To help you better understand the two locking models, let's take online shopping as an analogy.
 
@@ -270,7 +270,7 @@ In the example above, Sessions A and B meet a deadlock. In this case, TiDB's dea
 
 ## Comparison with MySQL InnoDB
 
-As a distributed SQL database, TiDB tries to maintain protocol compatibility with MySQL to benefit the majority of MySQL users. However, TiDB and MySQL differ in implementation. TiDB is not 100% compatible with MySQL in some details. For a complete list of incompatible behaviors between TiDB 4.0 and MySQL, see [Differences with MySQL InnoDB](https://pingcap.com/docs/dev/pessimistic-transaction/#difference-with-mysql-innodb).
+As a distributed SQL database, TiDB tries to maintain protocol compatibility with MySQL to benefit the majority of MySQL users. However, TiDB and MySQL differ in implementation. TiDB is not 100% compatible with MySQL in some details. For a complete list of incompatible behaviors between TiDB and MySQL, see [Differences with MySQL InnoDB](https://pingcap.com/docs/dev/pessimistic-transaction/#difference-with-mysql-innodb).
 
 Here, I'll briefly discuss these differences:
 
