@@ -32,7 +32,7 @@ In this post, we'll walk you through the dashboards's main widgets: Key Visualiz
 
 As our [previous post](https://pingcap.com/blog/observe-distributed-databases-to-discover-unknowns/) described, Key Visualizer is a visual diagnostic widget that lets you observe your TiDB cluster's read and write volume over time and gain deep insights into your applications. It provides a graphical representation of application status. If you are concerned about data privacy, note that the data powering the Key Visualizer doesn't contain confidential information about the application.
 
-![Diagnose performance issues](media/troubleshoot-cluster-issues.gif)
+![Diagnose performance issues](media/key-viz.gif)
 <div class="caption-center"> Key Visualizer </div>
 
 ## SQL statement analysis
