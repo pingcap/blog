@@ -103,8 +103,8 @@ As our [previous post](https://pingcap.com/blog/get-tidb-cluster-up-in-only-one-
 
 1. Use TiUP to start the nightly version of the test cluster on your local Mac or Linux machine:
 
-    ```
-    $ tiup playground nightly --monitor
+    ```shell
+    tiup playground nightly --monitor
     ```
 
 2. Visit [http://127.0.0.1:2379/dashboard](http://127.0.0.1:2379/dashboard) to try TiDB Dashboard.
