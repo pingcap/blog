@@ -2,22 +2,22 @@
 title: 'How We Achieved 40 K QPS and 20+ Billion Rows of Data in a Single Scale-out Cluster'
 author: ['Can Cui']
 date: 2019-12-11
-summary: As the business developed, standalone MySQL couldn't meet JD Cloud's OSS metadata storage requirements. This post introduces how TiKV empowered JD Cloud to manage huge amounts of OSS metadata with a simple and horizontally scalable architecture.
-image: /images/blog/replacing-mysql-with-a-horizontally-scaling-database.png
+summary: As the business developed, standalone MySQL couldn't meet JD Cloud & AI's OSS metadata storage requirements. This post introduces how TiKV empowered JD Cloud & AI to manage huge amounts of OSS metadata with a simple and horizontally scalable architecture.
+image: /images/blog/replacing-mysql-with-a-horizontally-scaling-database.jpg
 tags: ['TiKV','Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/lesson-learned-from-40-k-qps-and-20-billion-rows-of-data-in-a-single-scale-out-cluster/
-customer: JD Cloud
+customer: JD Cloud & AI
 customerCategory: Internet
 ---
 
 **Industry:** Cloud Computing
 
-**Author:** Can Cui (Infrastructure Specialist at JD Cloud)
+**Author:** Can Cui (Infrastructure Specialist at JD Cloud & AI)
 
-![Replacing MySQL with a horizontally scaling database](media/replacing-mysql-with-a-horizontally-scaling-database.png)
+![Replacing MySQL with a horizontally scaling database](media/replacing-mysql-with-a-horizontally-scaling-database.jpg)
 
-[JD Cloud](https://www.crunchbase.com/organization/jd-cloud), owned by [JD.com](https://en.wikipedia.org/wiki/JD.com) ([China's largest online retailer](http://corporate.jd.com/home)), is a full-service cloud computing platform and integrated cloud service provider. Like Microsoft Azure, we deliver comprehensive cloud computing services ranging from infrastructure building and strategic consulting to business platform development and operations. By November, 2018, we had achieved technical innovation in more than 120 cloud computing products and services, exceeding 330 thousand registered users. In 2018, Forrester, the world-renowned research and advisory firm, evaluated our product capacity, strategic layout, marketing performance, and other factors, and recognized JD Cloud as a "[Strong Performer](https://www.jdcloud.com/en/news/detail/376)."
+[JD Cloud & AI](https://www.jdcloud.com/en/) is a smart technology provider under JD Group and is built upon JD Group's business expertise and technological accumulations in areas such as artificial intelligence, big data, cloud computing and the internet of things. It has established a technology ecosystem that delivers unmatched customer value through comprehensive services spanning from foundational platform building to business consultation and planning, business platform construction and operations and maintenance, and is driven by industry leading products that enable smart and digital enterprises and governments through solutions across a wide variety of scenarios.
 
 Our [Object Storage Service](https://www.jdcloud.com/en/products/object-storage-service) (OSS) provides cloud storage services of high availability, low cost, and strong security for enterprises and individual developers. Previously, we used MySQL to store OSS metadata. But as the metadata grew rapidly, standalone MySQL couldn't meet our storage requirements. In the future, we expect to hit 100 billion or even 1 trillion rows. We faced severe challenges in storing unprecedented amounts of data that kept soaring.
 
@@ -25,7 +25,7 @@ In this post, I'll deep dive into how [TiKV](https://tikv.org/), an open-source 
 
 ## Our pain points
 
-JD Cloud's OSS provides a full range of products including file upload, storage, download, distribution, and online processing. We aim to offer a safe, stable, massive, and convenient object storage service for users.
+JD Cloud & AI's OSS provides a full range of products including file upload, storage, download, distribution, and online processing. We aim to offer a safe, stable, massive, and convenient object storage service for users.
 
 In this section, I'll elaborate on challenges we encountered in storing OSS metadata and our exploration to redesign the metadata storage system.
 
