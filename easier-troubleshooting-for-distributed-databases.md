@@ -51,7 +51,7 @@ With this information, you can analyze which types of SQL statements take too lo
 
 ## Slow query viewing
 
-TiDB Dashboard can list the slow queries on your cluster. It displays each query's SQL statement, its execution end time, query latency, and maximum memory usage.
+TiDB Dashboard can list the slow queries in your cluster. It displays each query's SQL statement, its execution end time, query latency, and maximum memory usage.
 
 ![Slow query viewing](media/slow-queries.gif)
 <div class="caption-center"> Slow query viewing </div>
