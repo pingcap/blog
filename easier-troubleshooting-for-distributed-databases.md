@@ -35,7 +35,7 @@ As our [previous post](https://pingcap.com/blog/observe-distributed-databases-to
 ![Diagnose performance issues](media/key-viz.gif)
 <div class="caption-center"> Key Visualizer </div>
 
-For more details, see the doc [here](https://pingcap.com/docs/stable/key-visualizer-monitoring-tool/).
+For more details, see the document [here](https://pingcap.com/docs/stable/key-visualizer-monitoring-tool/).
 
 ## SQL statement analysis
 
