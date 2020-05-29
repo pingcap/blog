@@ -136,7 +136,9 @@ The following table has a list of men and women's first names:
 
 We've built indexes on columns `Name` and `Gender`. To find the man's name Chris, we use the following query:
 
-```
+{{< copyable "sql" >}}
+
+```sql
 SELECT * FROM t WHERE Name = ‘Chris' and Gender = 'Male'
 ```
 
@@ -209,7 +211,9 @@ As mentioned above, SPM lets you use a new SQL syntax `CREATE BINDING FOR …(qu
 
 In the case above, DBAs only need to execute the following command in the database:
 
-```
+{{< copyable "sql" >}}
+
+```sql
 CREATE GLOBAL BINDING FOR
     SELECT * FROM t WHERE Name = 'Chris' and Gender = ‘Male'
 USING
