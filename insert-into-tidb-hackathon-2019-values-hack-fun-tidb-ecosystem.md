@@ -13,7 +13,7 @@ The weekend of Oct. 26 and 27 saw a bunch of hackers and geeks gather in three P
 
 During the two days of hacking, we were amazed to see 37 awesome projects from 37 teams. Great new ideas sparkled in the TiDB universe, and it was hard to decide which team would win the trophy.
 
-Our PingCAP customers will benefit from all this hacking because the theme of this year’s event was "Improve." Some participants worked to improve TiDB’s performance, usability or functionality. Other hackers focused on improving the efficiency of TiDB Ecosystem tools.
+Our PingCAP customers will benefit from all this hacking because the theme of this year's event was "Improve." Some participants worked to improve TiDB's performance, usability or functionality. Other hackers focused on improving the efficiency of TiDB Ecosystem tools.
 
 We were glad to see the participants contribute their ideas not only from the perspective of database developers but also to put themselves in the shoes of users. Demos rocked, and the audience continued to "WOW" through each presentation.
 
@@ -28,10 +28,10 @@ So without further ado, here are the top 3 winners!
 
 **Comment:** There are following issues in [TiKV](https://tikv.org/) could use some improvements:
 
-* TiKV (TiDB’s storage engine) has too many thread pools. If you switch among threads too frequently, performance declines.
+* TiKV (TiDB's storage engine) has too many thread pools. If you switch among threads too frequently, performance declines.
 * Big queries impact small queries.
 
-A successful solution would minimize the number of thread pools and also ensure that if a thread pool schedules big and small queries, the small queries perform well. In this project, our hackers created a self-adaptive unified thread pool in TiKV to process read requests. This approach greatly improved TiKV/TiDB's performance, and, predictably reduced the impact of big queries on small queries. One of their team members, Yilin, was inspired by [Multilevel feedback queue](https://en.wikipedia.org/wiki/Multilevel_feedback_queue) and took advantage of Rust [`juliex`](https://github.com/withoutboats/juliex) crate to create their own thread pool. Along with his classmates, they came out with Thread Pool Protocol, and we’re amazed by the actual testing results: the performance of Sysbench `POINT SELECT` is greatly improved by 60% while QPS remains stable!
+A successful solution would minimize the number of thread pools and also ensure that if a thread pool schedules big and small queries, the small queries perform well. In this project, our hackers created a self-adaptive unified thread pool in TiKV to process read requests. This approach greatly improved TiKV/TiDB's performance, and, predictably reduced the impact of big queries on small queries. One of their team members, Yilin, was inspired by [Multilevel feedback queue](https://en.wikipedia.org/wiki/Multilevel_feedback_queue) and took advantage of Rust [`juliex`](https://github.com/withoutboats/juliex) crate to create their own thread pool. Along with his classmates, they came out with Thread Pool Protocol, and we're amazed by the actual testing results: the performance of Sysbench `POINT SELECT` is greatly improved by 60% while QPS remains stable!
 
 This project won the praise of all the judges, and we are looking forward to the actual realization of this project.
 
@@ -50,7 +50,7 @@ This project won the praise of all the judges, and we are looking forward to the
 
 **Project:** tidb-wasm: Run TiDB Inside Your Browser (and everywhere)
 
-**Comments:** User experience matters. This project leverages [WebAssembly](https://en.wikipedia.org/wiki/WebAssembly) (wasm) technology and lets users run TiDB in their browser. We’ve been interested in WebAssembly since it appeared, and this project inspires us to make a TiDB playground and embed it on our official website. So in the future, if you’re interested in learning more about TiDB (or even MySQL), you can get on your browser and get your hands dirty.
+**Comments:** User experience matters. This project leverages [WebAssembly](https://en.wikipedia.org/wiki/WebAssembly) (wasm) technology and lets users run TiDB in their browser. We've been interested in WebAssembly since it appeared, and this project inspires us to make a TiDB playground and embed it on our official website. So in the future, if you're interested in learning more about TiDB (or even MySQL), you can get on your browser and get your hands dirty.
 
 [Slides](https://cdn2.hubspot.net/hubfs/4466002/tidb-wasm.pdf) are here!
 
@@ -96,7 +96,7 @@ At 10:00 a.m, 2019 TiDB Hackathon officially launched! Happy Hacking, folks!
 ![And hacking in Guangzhou, too!](media/hacking-in-guangzhou.png)
 <div class="caption-center"> And hacking in Guangzhou, too! </div>
 
-Hackathon is more than a coding competition. It’s a great opportunity for you to meet more like-minded friends in a free and cozy environment. And we definitely followed the hackathon tradition: pizza, beer, and swag!
+Hackathon is more than a coding competition. It's a great opportunity for you to meet more like-minded friends in a free and cozy environment. And we definitely followed the hackathon tradition: pizza, beer, and swag!
 
 ![Pizza and crayfish](media/pizza-and-crayfish.png)
 <div class="caption-center"> Pizza and crayfish </div>
@@ -107,13 +107,13 @@ Hackathon is more than a coding competition. It’s a great opportunity for you 
 ![TiDB Hackathon 2019 swag](media/tidb-hackathon-2019-swag.png)
 <div class="caption-center"> TiDB Hackathon 2019 swag </div>
 
-To accelerate participants’ performance, we had mentors standing by field questions and provide inspiration. What a great way to share technical knowledge!
+To accelerate participants' performance, we had mentors standing by field questions and provide inspiration. What a great way to share technical knowledge!
 
 ![A mentor sharing technical knowledge](media/a-mentor-sharing-technical-knowledge.png)
 <div class="caption-center"> A mentor sharing technical knowledge </div>
 
-## What’s next
+## What's next
 
-Stay tuned to this blog, because our winning teams are going to share more details of their excellent project. If you’re interested in one of the projects, you’re warmly welcomed to join in our open-source community. [Slack](https://pingcap.com/tidbslack) channel is always open for you to contact our engineers. Want to contribute your ideas to the next Hackathon? Feel free to shoot a DM to our [Twitter](https://twitter.com/PingCAP).
+Stay tuned to this blog, because our winning teams are going to share more details of their excellent project. If you're interested in one of the projects, you're warmly welcomed to join in our open-source community. [Slack](https://pingcap.com/tidbslack) channel is always open for you to contact our engineers. Want to contribute your ideas to the next Hackathon? Feel free to shoot a DM to our [Twitter](https://twitter.com/PingCAP).
 
 See you next year!

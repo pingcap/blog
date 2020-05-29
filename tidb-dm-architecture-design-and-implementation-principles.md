@@ -37,7 +37,7 @@ TiDB DM consists of three components: DM-master, DM-worker, and dmctl. It suppor
 
 ## Implementation principles
 
-Now, I’ll introduce TiDB DM’s implementation principles in detail.
+Now, I'll introduce TiDB DM's implementation principles in detail.
 
 ### Data migration process
 
@@ -61,7 +61,7 @@ In each DM-worker node, dumper, loader, relay, syncer (binlog replication) and o
     1. Relay is used as a slave of the upstream MySQL to fetch the binlog that is persisted in the local storage as the relay log.
     2. Syncer reads and parses the relay log to build SQL statements, and then replicates these SQL statements to the downstream TiDB.
 
-This process is similar to the master-slave replication in MySQL. But the main difference is in TiDB DM, the persisted relay log in the local storage can be used simultaneously by multiple syncer units of different subtasks, which avoids multiple tasks’ repeatedly fetching the binlog from the upstream MySQL.
+This process is similar to the master-slave replication in MySQL. But the main difference is in TiDB DM, the persisted relay log in the local storage can be used simultaneously by multiple syncer units of different subtasks, which avoids multiple tasks' repeatedly fetching the binlog from the upstream MySQL.
 
 ### Concurrency model
 
@@ -75,7 +75,7 @@ In order to accelerate data migration, TiDB DM applies the concurrency model in 
 
     ![Concurrency model of Loader](media/concurrency-model-of-loader.png)
 
-During the data exporting process with Mydumper, a single table can be split into multiple SQL files with `--chunk-filesize` and other parameters. Each of these SQL files corresponds to a static snapshot data of the upstream MySQL at a specific moment and no correlation exists between two SQL files. So when importing the data with loader, you can directly start multiple worker goroutines in a loader unit and each worker goroutine reads to-be-imported SQL files independently and concurrently and applies them into downside streaming. That’s to say, loader loads data concurrently at the level of the SQL file. In task configuration,TiDB DM controls the number of worker goroutines with the `pool-size` parameter in the loader unit.
+During the data exporting process with Mydumper, a single table can be split into multiple SQL files with `--chunk-filesize` and other parameters. Each of these SQL files corresponds to a static snapshot data of the upstream MySQL at a specific moment and no correlation exists between two SQL files. So when importing the data with loader, you can directly start multiple worker goroutines in a loader unit and each worker goroutine reads to-be-imported SQL files independently and concurrently and applies them into downside streaming. That's to say, loader loads data concurrently at the level of the SQL file. In task configuration,TiDB DM controls the number of worker goroutines with the `pool-size` parameter in the loader unit.
 
 **For incremental data replication**
 
@@ -89,7 +89,7 @@ Syncer reads and parses the local relay log in a stream, which is executed seria
 
 At the other end of the channel, the worker goroutine concurrently fetches the job from the corresponding channel and replicates the job to the downstream TiDB.
 
-That’s to say, Syncer imports data concurrently at the level of the binlog event. In task allocation, TiDB DM controls the number of worker goroutines with the worker-count parameter in the syncer unit.
+That's to say, Syncer imports data concurrently at the level of the binlog event. In task allocation, TiDB DM controls the number of worker goroutines with the worker-count parameter in the syncer unit.
 
 However, some limitations exist in this process as follows:
 
@@ -112,7 +112,7 @@ This section introduces some features of TiDB DM for supporting replicating data
 
 #### Table router
 
-Let’s start with an example as shown in the diagram below:
+Let's start with an example as shown in the diagram below:
 
 ![Table router example](media/table-router-example.png)
 
@@ -136,7 +136,7 @@ name-of-router-rule:
 - `target-schema`: the name of the target schema. The data matched will be routed into this schema.
 - `target-table`: the name of the target table. The data that matches the schema name and table name are routed to this table in the `target-schema`.
 
-Now let’s take a look at the internals of TiDB DM:
+Now let's take a look at the internals of TiDB DM:
 
 1. We build the trie structure based on `schema-pattern`/`table-pattern` and store the rules in the trie nodes.
 2. If there is any SQL statement that needs to be synchronized to the downstream, we can query `trie` to obtain the corresponding rules via the schema name and table name in the upstream, and replace the original schema name and table name in the SQL statement based on the rules.
@@ -149,7 +149,7 @@ Now let’s take a look at the internals of TiDB DM:
 
 #### Column mapping
 
-With the table router feature, we can implement the basic function of replicating data from sharded tables. But in a database, auto-increment columns are widely used as the primary keys. If multiple primary keys of the sharded tables in the upstream generate their numbers automatically and independently, a conflict between primary keys might occur and result in the data mismatch after merging and synchronizing them into the downstream. Let’s see another example as follows:
+With the table router feature, we can implement the basic function of replicating data from sharded tables. But in a database, auto-increment columns are widely used as the primary keys. If multiple primary keys of the sharded tables in the upstream generate their numbers automatically and independently, a conflict between primary keys might occur and result in the data mismatch after merging and synchronizing them into the downstream. Let's see another example as follows:
 
 ![Column mapping example](media/column-mapping-example.png)
 
@@ -202,7 +202,7 @@ For the detailed implementation of the column mapping, see [column-mapping pkg s
 
 #### Sharding DDL
 
-With the table router and column mapping function, we can replicate DML statements from sharded tables in a smooth manner. But in the process of incrementally replicating data, if DDL statements are executed on the upstream sharded tables that are waiting for merging, then an error might occur. Let’s see a simple example of executing DDL statements on the sharded tables.
+With the table router and column mapping function, we can replicate DML statements from sharded tables in a smooth manner. But in the process of incrementally replicating data, if DDL statements are executed on the upstream sharded tables that are waiting for merging, then an error might occur. Let's see a simple example of executing DDL statements on the sharded tables.
 
 ![Sharding DDL example](media/sharding-ddl-example.png)
 
@@ -216,7 +216,7 @@ Now, suppose that the binlog data received from the two upstream sharded tables 
 4. At point `t3`, the sharding DDL events on instance 2 are received.
 5. From point `t4` on, the two sharded tables receive the DML events from `schema V2` on instance 2 as well.
 
-Suppose that we do no operation to the DDL of the sharded tables during data replication. When the DDL of Instance 1 is replicated to downstream, the table structure of downstream will be changed to `schema V2`. But DM-worker still receives the DML of `schema V1` during the period between `t2` and `t3`. When DM-worker tries to replicate the DML of `schema V1` to downstream, the inconsistency between the DML and the table structure may lead to error and data cannot be replicated correctly. Let’s look at the example above again to see how we handle the DDL replication when merging tables in TiDB DM.
+Suppose that we do no operation to the DDL of the sharded tables during data replication. When the DDL of Instance 1 is replicated to downstream, the table structure of downstream will be changed to `schema V2`. But DM-worker still receives the DML of `schema V1` during the period between `t2` and `t3`. When DM-worker tries to replicate the DML of `schema V1` to downstream, the inconsistency between the DML and the table structure may lead to error and data cannot be replicated correctly. Let's look at the example above again to see how we handle the DDL replication when merging tables in TiDB DM.
 
 ![DDL replication example](media/ddl-replication-example.png)
 

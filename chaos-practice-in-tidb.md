@@ -19,17 +19,17 @@ Ever since Netflix invented [Chaos Monkey](https://en.wikipedia.org/wiki/Chaos_M
 
 Typically, we write as many unit tests as we can to ensure all of our logics are covered, build sufficient integration tests to guarantee that our system can work well with other components, and do performance tests to improve the handling of millions of requests.
 
-Unfortunately, that’s not enough for a distributed system. No matter how many unit, integration, or performance tests we do, we still can’t guarantee that our system can withstand the unpredictability of in-production environment. We may meet disk failures, machine power lost, network isolation, and that’s just the tip of the iceberg. To make distributed systems like TiDB more robust, we need a method to simulate unpredictable failures and test our responses to these failures. That’s why we need Chaos Monkey.
+Unfortunately, that's not enough for a distributed system. No matter how many unit, integration, or performance tests we do, we still can't guarantee that our system can withstand the unpredictability of in-production environment. We may meet disk failures, machine power lost, network isolation, and that's just the tip of the iceberg. To make distributed systems like TiDB more robust, we need a method to simulate unpredictable failures and test our responses to these failures. That's why we need Chaos Monkey.
 
 ## How to get "Chaotic"
 
 Not only did Netflix invent Chaos, it also introduced the concept of "Chaos Engineering," which is a methodical way to uncover system-level weaknesses. There are some core [principles](http://principlesofchaos.org/) of the Chaos Engineering, as well as a whole book on [Chaos Engineering](http://www.oreilly.com/webops-perf/free/chaos-engineering.csp).
 
-In TiDB, we apply Chaos Engineering to observe the state of our system, make hypothesis, conduct experiments, and verify those hypothesis with real results. We adhere to the principles, but also add our own flavors. Here’s our 5-step Chaos methodology:
+In TiDB, we apply Chaos Engineering to observe the state of our system, make hypothesis, conduct experiments, and verify those hypothesis with real results. We adhere to the principles, but also add our own flavors. Here's our 5-step Chaos methodology:
 
 1. Use [Prometheus](https://prometheus.io/) as the monitoring tool to observe the status and behaviors of a TiDB cluster and collect the metrics of a stable cluster to establish a proxy for what a stable system looks like;
 
-2. Make a list of hypothesis of certain failure scenarios and what we expect to happen. One example in TiDB’s case: If we isolate one [TiKV](http://bit.ly/tikv_repo_publication) (the distributed key-value storage layer of TiDB) node from the cluster, the QPS (Queries Per Second) should drop, but will soon recover to another stable state.
+2. Make a list of hypothesis of certain failure scenarios and what we expect to happen. One example in TiDB's case: If we isolate one [TiKV](http://bit.ly/tikv_repo_publication) (the distributed key-value storage layer of TiDB) node from the cluster, the QPS (Queries Per Second) should drop, but will soon recover to another stable state.
 
 3. Pick a hypothesis from our list;
 
@@ -37,7 +37,7 @@ In TiDB, we apply Chaos Engineering to observe the state of our system, make hyp
 
 5. Rinse and repeat on another hypothesis from our list and automate the process.
 
-One of the advanced principles in Chaos Engineering is to run experiments in a production environment. Before deploying TiDB for our users, we have to ensure it’s battle-tested. However, we can’t perform these experiments in our customers’ production environment, because they entrust TiDB with their most mission-critical data. What we *can* do is create our own "battlefield,"--an internal production environment.
+One of the advanced principles in Chaos Engineering is to run experiments in a production environment. Before deploying TiDB for our users, we have to ensure it's battle-tested. However, we can't perform these experiments in our customers' production environment, because they entrust TiDB with their most mission-critical data. What we *can* do is create our own "battlefield,"--an internal production environment.
 
 Currently, we are using TiDB to power [Jira](https://www.atlassian.com/software/jira) for our internal issues tracking and project management work, "eating our own dog food," so to speak. With this setup, we can run Chaos experiments on Jira. Without any warning, we would inject faults to jeopardize all aspects of the Jira system while our own employees are using it for their daily tasks, in order to simulate a series of cascading “accidents” to identify possible system loopholes. We call this practice “military drill,” and it occurs frequently during our daily operations. In the following sections, I will walk through how we do fault injection and automate the process.
 
@@ -73,7 +73,7 @@ Currently, we are using TiDB to power [Jira](https://www.atlassian.com/software/
 
 ### Kernel Fault Injection
 
-A popular fault injection tool is the Fault Injection Framework that’s included in the Linux kernel, which developers can use to implement simple fault injection to test device drivers. For more accurate fault injections, e.g. returning error when a user reads a file, or allocating failure in `malloc`, we use the following fault injection process:
+A popular fault injection tool is the Fault Injection Framework that's included in the Linux kernel, which developers can use to implement simple fault injection to test device drivers. For more accurate fault injections, e.g. returning error when a user reads a file, or allocating failure in `malloc`, we use the following fault injection process:
 
 1. Rebuild the kernel with the framework enabled
 
@@ -111,7 +111,7 @@ A popular fault injection tool is the Fault Injection Framework that’s include
  > cp linux-3.10.1.tar.xz linux-3.10.1.tar.xz.6
  > cp: cannot create regular file 'linux-3.10.1.tar.xz.6': Cannot allocate memory
 
-Although the Linux kernel’s Fault Injection Framework is powerful, we have to rebuild the kernel because some users won’t enable it in their production environment.
+Although the Linux kernel's Fault Injection Framework is powerful, we have to rebuild the kernel because some users won't enable it in their production environment.
 
 ### SystemTap
 
@@ -199,7 +199,7 @@ We have set up a Clojure library to test TiDB, and you can read the details here
 
 ## Automatic Chaos: Schrodinger
 
-The tools or platforms we’ve mentioned so far are all publicly available tools to help you put Chaos into your system. But for testing TiDB, we needed to automate all these tests to improve both efficiency and coverage. That’s what drove us to create Schrodinger.
+The tools or platforms we've mentioned so far are all publicly available tools to help you put Chaos into your system. But for testing TiDB, we needed to automate all these tests to improve both efficiency and coverage. That's what drove us to create Schrodinger.
 
 In 2015, when we first began to develop TiDB, everytime we committed a feature, we would do the following:
 
@@ -215,11 +215,11 @@ In 2015, when we first began to develop TiDB, everytime we committed a feature, 
 
 6. Clean up everything and release the machines after all tests are finished.
 
-As you can see, all these tasks involved manual and tedious operations. When the TiDB code base grew, many tests needed to run concurrently. The manual way simply couldn’t scale.
+As you can see, all these tasks involved manual and tedious operations. When the TiDB code base grew, many tests needed to run concurrently. The manual way simply couldn't scale.
 
 To solve this problem, we built Schrodinger, a test platform that performs Chaos Engineering automatically. All we needed to do was configure Schrodinger to perform the specific testing tasks, and it would take it from there.
 
-Schrodinger is based on Kubernetes (K8s), so we don’t depend on physical machines anymore. K8s will hide the machine-level details and help us schedule the right job to the right machines.
+Schrodinger is based on Kubernetes (K8s), so we don't depend on physical machines anymore. K8s will hide the machine-level details and help us schedule the right job to the right machines.
 
 ![Shrodinger Architecture on K8s](media/shrodinger-architecture-on-k8s.PNG)
 <div class="caption-center"> Shrodinger Architecture on K8s </div>
@@ -268,8 +268,8 @@ Besides the fault injection and Chaos Engineering practices, we are also using [
 
 ## Final Thoughts
 
-From the moment we started to build TiDB, we decided to use Chaos to test it. As I’ve shown, Chaos is a great way to detect systematic uncertainty in a distributed system and build confidence in the system’s resiliency. We firmly believe that a proper and thoughtful application of Chaos Engineering will determine the success of a distributed system.
+From the moment we started to build TiDB, we decided to use Chaos to test it. As I've shown, Chaos is a great way to detect systematic uncertainty in a distributed system and build confidence in the system's resiliency. We firmly believe that a proper and thoughtful application of Chaos Engineering will determine the success of a distributed system.
 
-If you are interested in Chaos Engineering, please don’t hesitate to contact me at [**tl@pingcap.com**](mailto:tl@pingcap.com).
+If you are interested in Chaos Engineering, please don't hesitate to contact me at [**tl@pingcap.com**](mailto:tl@pingcap.com).
 
 Originally published at [**The New Stack**](https://thenewstack.io/chaos-tools-and-techniques-for-testing-the-tidb-distributed-newsql-database/).

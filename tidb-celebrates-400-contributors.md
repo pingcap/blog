@@ -25,7 +25,7 @@ Ever since writing the first line of code of TiDB in May 2015, I have witnessed 
 ![TiDB contributor growth](media/tidb-contributor-growth.jpg)
 <div class="caption-center"> TiDB contributor growth </div>
 
-Let’s take a look back upon the highlights that have shaped TiDB since September 2019:
+Let's take a look back upon the highlights that have shaped TiDB since September 2019:
 
 * [@iamzhoug37](https://github.com/iamzhoug37) (from Meituan-Dianping) supported SQL binding, which enables the optimizer to choose the correct execution plan without modifying user SQL statements when statistics are outdated.
 * [@hailanwhu](https://github.com/hailanwhu) (from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University)) supported the Index Merge operator, which enables TiDB SQL Optimizer to choose more than one index to retrieve data from the storage layer. This improved the performance and robustness of query execution.

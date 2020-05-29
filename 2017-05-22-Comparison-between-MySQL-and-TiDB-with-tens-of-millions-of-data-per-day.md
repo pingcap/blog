@@ -28,9 +28,9 @@ Considering the amount of data and for a simplified implementation, GAEA chose t
 
 ## Look for new solutions
 
-However, with the growth of business, GaeaAD receives more than tens of millions of rows of data per day and the amount multiplies during peak hours. Obviously, database has become a bottleneck. And at the moment, GAEA’s entire technical framework encounters three problems:
+However, with the growth of business, GaeaAD receives more than tens of millions of rows of data per day and the amount multiplies during peak hours. Obviously, database has become a bottleneck. And at the moment, GAEA's entire technical framework encounters three problems:
 
-1. The time needed for a single match has increased to over 2 minutes from about 10 seconds. The slowest aggregation query, even takes 20 minutes to complete. This imposes a serious challenge on timeliness. What’s worse, one of the drawbacks of MySQL is the query time increases with the amount of data. Therefore, the larger the data volume, the slower the query.
+1. The time needed for a single match has increased to over 2 minutes from about 10 seconds. The slowest aggregation query, even takes 20 minutes to complete. This imposes a serious challenge on timeliness. What's worse, one of the drawbacks of MySQL is the query time increases with the amount of data. Therefore, the larger the data volume, the slower the query.
 
 2. With the accumulation of historical data, the amount of data stored in a single table soon reaches a hundred million rows. At that time, the read/write capabilities of the single table are close to its limit.
 
@@ -58,13 +58,13 @@ In the process of test deployment, we used the Syncer tool, provided by TiDB, to
 The GaeaAD system works well for more than half a year since it has come online in October, 2016. Based on the hands-on experience, we summarized the following benefits brought by TiDB:
 ![TiDB in GAEA](media/gaea 2.png)
 
-We replaced the highly-available MySQL RDS with the 3-node TiDB cluster. The average time needed for a single match reduces to about 30 seconds from over 2 minutes, and it even reaches to 10 seconds or so with the continuous optimization of TiDB’s engineers. In addition, we found that TiDB has superior advantages and outperforms MySQL especially when the data volume is large. We guess this owes to the existence of TiDB’s self-developed distributed SQL Optimizer. But when it comes to a small amount of data, this advantage is not that prominent because of the internal communication cost.
+We replaced the highly-available MySQL RDS with the 3-node TiDB cluster. The average time needed for a single match reduces to about 30 seconds from over 2 minutes, and it even reaches to 10 seconds or so with the continuous optimization of TiDB's engineers. In addition, we found that TiDB has superior advantages and outperforms MySQL especially when the data volume is large. We guess this owes to the existence of TiDB's self-developed distributed SQL Optimizer. But when it comes to a small amount of data, this advantage is not that prominent because of the internal communication cost.
 ![Comparison between the query time of TiDB and MySQL](media/gaea 3.png)
 (A comparison between the query time of TiDB and MySQL in cases of different amounts of data)
 
-1. TiDB supports automatic Sharding. The business side doesn’t need to split tables and TiDB no longer sets the Sharding key or partition table as a traditional database middleware product. Storage of the bottom layer automatically spreads across clusters according to the data distribution. The capacity and performance can be scaled horizontally through adding more nodes, greatly reducing the maintenance cost.
+1. TiDB supports automatic Sharding. The business side doesn't need to split tables and TiDB no longer sets the Sharding key or partition table as a traditional database middleware product. Storage of the bottom layer automatically spreads across clusters according to the data distribution. The capacity and performance can be scaled horizontally through adding more nodes, greatly reducing the maintenance cost.
 
-2. TiDB supports ongoing rolling upgrades. Up to now, we have about 10 online upgrades and never experienced one interrupt, which shows TiDB’s excellent availability.
+2. TiDB supports ongoing rolling upgrades. Up to now, we have about 10 online upgrades and never experienced one interrupt, which shows TiDB's excellent availability.
 
 3. TiDB supports the mutual backup with MySQL. This function solves the transition problem in business migration.
 
@@ -74,7 +74,7 @@ Currently, we are replacing MongoDB with TiDB as MongoDB is not easy to use, exp
 
 TiDB helps GAEA in the following aspects:
 
-1. TiDB supports many push-down expressions and makes full use of the computing resources of TiKV’s multiple instances and therefore, accelerates the computing speed. At the same time, TiDB filters as much unnecessary data as possible and reduces the network overhead.
+1. TiDB supports many push-down expressions and makes full use of the computing resources of TiKV's multiple instances and therefore, accelerates the computing speed. At the same time, TiDB filters as much unnecessary data as possible and reduces the network overhead.
 
 2. TiDB supports HashJoin by default and tries hard to parallelize operators, making full use of the computing resources of the entire cluster.
 
@@ -82,4 +82,4 @@ TiDB helps GAEA in the following aspects:
 
 **About the author:**
 
-LIU Xuan, the senior development engineer of GAEA’s data platform, is responsible for the real-time data business and the data flow field. Graduated from College of Computer Science and Electronic Engineering of Hunan University, LIU was Baidu’s senior operation & maintenance engineer and was responsible for the database creating and maintenance of Search Service Group (SSG).
+LIU Xuan, the senior development engineer of GAEA's data platform, is responsible for the real-time data business and the data flow field. Graduated from College of Computer Science and Electronic Engineering of Hunan University, LIU was Baidu's senior operation & maintenance engineer and was responsible for the database creating and maintenance of Search Service Group (SSG).

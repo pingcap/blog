@@ -34,7 +34,7 @@ At the Hackathon, we built a bot that helps us quickly locate several bugs in Ti
 This bot was built based on the following techniques:
 
 * **SQL fuzzing** to randomly generate a large number of SQL queries as the test cases for the TiDB database
-* **Dynamic binary instrumentation** to instrument TiDB‘s source code and collect execution traces of these SQL queries
+* **Dynamic binary instrumentation** to instrument TiDB's source code and collect execution traces of these SQL queries
 * **Statistical debugging** to analyze TiDB source code's participation in the passed and failed test cases
 * **Visualization** to graphically map the potentially faulty lines of code in the source files
 

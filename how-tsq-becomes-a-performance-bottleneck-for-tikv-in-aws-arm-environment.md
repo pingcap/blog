@@ -95,7 +95,7 @@ Jul 17 07:30:50 ip-172-31-4-116 kernel: comm: ksoftirqd/0, pid: 7, state: 0
 Jul 17 07:30:50 ip-172-31-4-116 kernel: ctx: bh
 ```
 
-As can be seen from the trace information, the `ksoftirqd` thread running in the lower half of the interrupt is processing the `NET_RX` soft interrupt, attempting to initiate the tasklet scheduling. Let’s take a look at the NIC driver code (version 2.0.1k not found, so here we used version 2.0.2 instead).
+As can be seen from the trace information, the `ksoftirqd` thread running in the lower half of the interrupt is processing the `NET_RX` soft interrupt, attempting to initiate the tasklet scheduling. Let's take a look at the NIC driver code (version 2.0.1k not found, so here we used version 2.0.2 instead).
 
 ```
 static int ena_io_poll(struct napi_struct *napi, int budget)
@@ -290,7 +290,7 @@ Next time CPU 0's SOTRIRQ scheduled:
     → run tsq_tasklet_func (on CPU 0)
 ```
 
-ENA’s NIC hardware queue only contains 2 hard interrupts, which means only two TSQ tasklets are allowed to work according to the above process. Therefore, when the network load is high, the corresponding CPU cores become performance bottlenecks.
+ENA's NIC hardware queue only contains 2 hard interrupts, which means only two TSQ tasklets are allowed to work according to the above process. Therefore, when the network load is high, the corresponding CPU cores become performance bottlenecks.
 
 ## Conclusion
 

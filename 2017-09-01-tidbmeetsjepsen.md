@@ -23,7 +23,7 @@ categories: ['Engineering']
 
 ## What is Jepsen?
 
-Written by [Kyle Kingsbury](https://aphyr.com/about) in Clojure. Jepsen is a test framework for distributed systems verification. Kingsbury has used it to verify the consistency of many famous distributed systems (etcd, ZooKeeper, CockroachDB, etc.) and found multiple bugs in some of these systems. The verification process and reflections on the consistency verification are presented in the [author’s blog](https://aphyr.com/tags/jepsen).
+Written by [Kyle Kingsbury](https://aphyr.com/about) in Clojure. Jepsen is a test framework for distributed systems verification. Kingsbury has used it to verify the consistency of many famous distributed systems (etcd, ZooKeeper, CockroachDB, etc.) and found multiple bugs in some of these systems. The verification process and reflections on the consistency verification are presented in the [author's blog](https://aphyr.com/tags/jepsen).
 
 ## How does Jepsen work?
 

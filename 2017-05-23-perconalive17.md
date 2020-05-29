@@ -32,15 +32,15 @@ This is the speech Edward Huang gave at Percona Live - Open Source Database Conf
 
 As one of the three co-founders of PingCAP, I feel honored that PingCAP was once again invited to the Percona Live Conference.
 
-Last year, our CEO Max Liu has introduced TiDB and TiKV to the public. He mainly focused on how we build TiDB and also formulated a future plan of our projects. This time, I’ll draw a detailed picture of TiDB to help you understand how it works.
+Last year, our CEO Max Liu has introduced TiDB and TiKV to the public. He mainly focused on how we build TiDB and also formulated a future plan of our projects. This time, I'll draw a detailed picture of TiDB to help you understand how it works.
 
-First of all, I’d like to introduce myself. My name is Edward Huang, an infrastructure software engineer and the CTO of PingCAP.
+First of all, I'd like to introduce myself. My name is Edward Huang, an infrastructure software engineer and the CTO of PingCAP.
 
 Up to now, I have worked on three projects, Codis, a proxy-based redis cluster solution which is very popular in China , TiDB and TiKV, a NewSQL database, our topic today. All of them are open source and many people benefit from them, especially in China. And I prefer languages such as Golang, Python, and Rust. By the way, we are using Golang and Rust in our projects (TiDB is written in Go and TiKV uses Rust).
 
 ## <span id="what">What would you do when…</span>
 
-And first of all I want to ask a question: what would you do when your RDBMS is becoming the bottleneck of your application? Maybe most of you guys may have experienced the following situations. In the old days, all you can do is to either refactor your application or use database middleware, something like mysql proxy. But once you decide to use the sharding solution, you will never get rid of sharding key and say goodbye to complex query as it’s a one-way path.
+And first of all I want to ask a question: what would you do when your RDBMS is becoming the bottleneck of your application? Maybe most of you guys may have experienced the following situations. In the old days, all you can do is to either refactor your application or use database middleware, something like mysql proxy. But once you decide to use the sharding solution, you will never get rid of sharding key and say goodbye to complex query as it's a one-way path.
 
 So how to scale your relational database is a pain point of the entire industry.
 
@@ -60,7 +60,7 @@ And there comes TiDB, when we were designing TiDB, we want to achieve the follow
 
 * Open source, of course.
 
-During the first section, I’ll talk about the technical overview of TiDB and TiKV project, including the storage layer, a brief walk through our distributed sql engine, and some tools for community users to migrate from MySQL to TiDB and vice versa. Secondly, I’ll introduce some real world cases and benchmarks. We got several users in China, which have already used TiDB in production for over 3 months. And in the end, I’ll do a quick demo of setting up a TiDB-cluster and have some queries on it.
+During the first section, I'll talk about the technical overview of TiDB and TiKV project, including the storage layer, a brief walk through our distributed sql engine, and some tools for community users to migrate from MySQL to TiDB and vice versa. Secondly, I'll introduce some real world cases and benchmarks. We got several users in China, which have already used TiDB in production for over 3 months. And in the end, I'll do a quick demo of setting up a TiDB-cluster and have some queries on it.
 
 ## <span id="architecture">Architecture</span>
 
@@ -72,21 +72,21 @@ In this diagram, there are three components: the SQL layer, which is TiDB; the d
 
 These three components communicate with each other through gRPC.
 
-* TiDB server is stateless. It doesn’t store data and it is for computing only. It translates user’s SQL statement and generates the query plan, which presents as the rpc calls of TiKV.
+* TiDB server is stateless. It doesn't store data and it is for computing only. It translates user's SQL statement and generates the query plan, which presents as the rpc calls of TiKV.
 
-* TiKV is a distributed key value database, acting as the underlying storage layer of TiDB and it’s the place where data is actually stored. This layer uses Raft consensus algorithm to replicate data and guarantee data safety. And TiKV also implements a distributed computing mechanism so that the sql layer would be able to do something like predicate push down or aggregate push down.
+* TiKV is a distributed key value database, acting as the underlying storage layer of TiDB and it's the place where data is actually stored. This layer uses Raft consensus algorithm to replicate data and guarantee data safety. And TiKV also implements a distributed computing mechanism so that the sql layer would be able to do something like predicate push down or aggregate push down.
 
-* Placement Driver is the managing component of the entire cluster and it stores the metadata, handles timestamp allocation request for ACID transaction, just like the TrueTime for Spanner, but we don’t have the hardware. What’s more, it’s controlling the data movement for dynamic workload balance and failover.
+* Placement Driver is the managing component of the entire cluster and it stores the metadata, handles timestamp allocation request for ACID transaction, just like the TrueTime for Spanner, but we don't have the hardware. What's more, it's controlling the data movement for dynamic workload balance and failover.
 
 [Back to the top](#top)
 
 ## <span id="stack">Storage stack </span>
 
-Let’s dive deep into the storage stack of TiKV.
+Let's dive deep into the storage stack of TiKV.
 
 As mentioned earlier, TiKV is the underlying storage layer where data is actually stored. More specifically, data is stored in RocksDB locally, which is the bottom layer of the TiKV architecture as you can see from this diagram. On top of RocksDB, we build a Raft layer.
 
-So what is Raft? Raft is a consensus algorithm that equals to Multi-Paxos in fault-tolerance and performance. It has several key features such as leader election, auto failover and membership changes. And Raft ensures that data is safely replicated. We have exposed the Raw Key Value API at this layer. If you want a scalable, highly available kv database, and don’t care about cross-row ACID transaction, you can use the Raw Key Value API for higher performance.
+So what is Raft? Raft is a consensus algorithm that equals to Multi-Paxos in fault-tolerance and performance. It has several key features such as leader election, auto failover and membership changes. And Raft ensures that data is safely replicated. We have exposed the Raw Key Value API at this layer. If you want a scalable, highly available kv database, and don't care about cross-row ACID transaction, you can use the Raw Key Value API for higher performance.
 
 The middle layer is MVCC, Multiversion concurrency control. The top two layers are transaction and grpc API. The API here is the transactional KV API.
 
@@ -102,13 +102,13 @@ Region is a set of continuous key-value pairs in byte-order.
 
 ## <span id="split">Safe split</span>
 
-Let’s take a look at the diagram here: The data is split into a set of continuous key-value pairs which we name them from a to z. Region 1 stores "a" to “e”, Region 2 “f” to “j”, Region 3 “k” to “o”, etc. As region is a logical concept, all the regions in a physical node share the same rocksdb instance.
+Let's take a look at the diagram here: The data is split into a set of continuous key-value pairs which we name them from a to z. Region 1 stores "a" to “e”, Region 2 “f” to “j”, Region 3 “k” to “o”, etc. As region is a logical concept, all the regions in a physical node share the same rocksdb instance.
 
 In each RocksDB instance, as I just mentioned, there are several regions and each region is replicated to other instances by Raft. The replicas of the same Region, Region 4 for example, make a Raft group.
 
 The metadata of the raft groups is stored in Placement Driver, and of course, placement driver is a cluster, replicates the metadata by Raft, too.
 
-In TiKV, we adopt a multi-raft model. What’s multi-raft? It’s a way to split and merge regions dynamically, and of course, safely. We name this approach "safe split/merge".
+In TiKV, we adopt a multi-raft model. What's multi-raft? It's a way to split and merge regions dynamically, and of course, safely. We name this approach "safe split/merge".
 
 For example, Region 1 from "a" to “e” is safely split into Region 1.1 “a” to “c” and Region 1.2 “d” to “e”, we need to guarantee no data is lost during the split.
 
@@ -120,7 +120,7 @@ This is the initial state for Region 1. You can see there is a Raft group with t
 
 However, there comes a situation that there are too much data in Region 1 and it needs to be split.
 
-It’s easy if there is only one Region 1, but in this case, we have three replicas. How can all the replicas be split safely? The answer is also Raft. Let’s see how it works.
+It's easy if there is only one Region 1, but in this case, we have three replicas. How can all the replicas be split safely? The answer is also Raft. Let's see how it works.
 
 ![Step 2 of Region splitting](media/image_3.png)
 
@@ -138,11 +138,11 @@ And finally, once the split-log is committed, all the replicas in the Raft group
 
 ## <span id="scale">Scale out</span>
 
-We‘ve talked about split. Now let’s see how TiKV scales out. Our project is as scalable as NoSQL system, which means you can easily increase the capacity or balance the workload by adding more machines.
+We've talked about split. Now let's see how TiKV scales out. Our project is as scalable as NoSQL system, which means you can easily increase the capacity or balance the workload by adding more machines.
 
 ![Initial state of the scaling-out process](media/image_6.png)
 
-In this diagram, we have 4 physical nodes, namely Node A, Node B, Node C, and Node D. And we have 3 regions, Region 1, Region 2 and Region 3. We can see that there are 3 regions on Node A. Let’s say that Node A encountered a capacity problem, maybe disk is almost full.
+In this diagram, we have 4 physical nodes, namely Node A, Node B, Node C, and Node D. And we have 3 regions, Region 1, Region 2 and Region 3. We can see that there are 3 regions on Node A. Let's say that Node A encountered a capacity problem, maybe disk is almost full.
 
 To balance the data, we add a new node, Node E. The first step is to transfer the leadership from the replica of Region 1 on Node A to the replica on Node B.
 
@@ -163,7 +163,7 @@ This is how TiKV scales out.
 
 ## <span id="transaction">ACID transaction</span>
 
-Our transaction model is inspired by Google’s Percolator. It’s mainly a decentralized 2-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign increasing timestamp for each transaction.
+Our transaction model is inspired by Google's Percolator. It's mainly a decentralized 2-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign increasing timestamp for each transaction.
 
 TiKV employs an optimistic transaction model and only locks data in the final 2 phase commit stage, which is the time that client call Commit() function. In order to deal with the lock problem when reading/writing data in the 2pc stage, TiKV adds a simple Scheduler layer in the storage node to queue locally before returning to the client for retry. In this way, the network overhead is reduced.
 
@@ -183,7 +183,7 @@ Distributed join will be covered later.
 
 ![TiDB SQL layer overview](media/image_8.png)
 
-This diagram shows the architecture of the SQL layer. Let’s take a look and see how the process works.
+This diagram shows the architecture of the SQL layer. Let's take a look and see how the process works.
 
 The client sends SQL to the Protocol Layer. Within the life cycle of a connection, we need to maintain the connection context and decode the protocol to get the structured request which will be further processed in the SQL core Layer.
 
@@ -197,11 +197,11 @@ There are also other crucial components like Privilege Manager, Schema Manager, 
 
 ## <span id="query">What Happens behind a query<span>
 
-We have talked about the process. Let’s see an example to show what’s going on behind a query. Assuming we have a schema with two fields and an index. Now we need to run the following query: SELECT COUNT(c1) FROM t WHERE c1 > 10 AND c2 = ‘percona’;
+We have talked about the process. Let's see an example to show what's going on behind a query. Assuming we have a schema with two fields and an index. Now we need to run the following query: SELECT COUNT(c1) FROM t WHERE c1 > 10 AND c2 = 'percona';
 
-This is a very simple statement and it’s easy to make the logical plan and the physical plan. Note that when it comes to the physical plan, you should calculate the query cost of the plan, which is the cost-based optimization that you’ve been quite familiar with.
+This is a very simple statement and it's easy to make the logical plan and the physical plan. Note that when it comes to the physical plan, you should calculate the query cost of the plan, which is the cost-based optimization that you've been quite familiar with.
 
-The plan works well in a stand-alone database, but what happens in a distributed database that needs distributed computing in most cases? Let’s see the next slide to show how the SQL statement is executed in TiDB.
+The plan works well in a stand-alone database, but what happens in a distributed database that needs distributed computing in most cases? Let's see the next slide to show how the SQL statement is executed in TiDB.
 
 ![Query plan in TiDB](media/image_9.png)
 
@@ -213,7 +213,7 @@ There are several advantages in this approach: First, there are more nodes invol
 
 ## <span id="hashjoin">Distributed join (HashJoin)</span>
 
-Now, let’s see a little more complex query: we have two tables, left and right. Now I write a simple join query, let’s see what happens behind a join.
+Now, let's see a little more complex query: we have two tables, left and right. Now I write a simple join query, let's see what happens behind a join.
 
 ![Distributed join (hash join)](media/image_10.png)
 
@@ -221,7 +221,7 @@ For this query, optimizer may choose hashjoin, because HashJoin performs well in
 
 To join the tables mentioned in the previous query, TiKV reads the tables in parallel. When reading the smaller table, TiKV starts to build a Hash Table in memory. When reading the bigger table, the data is sent to several Join Workers. When the Hash Table is finished, all the Join Workers will be notified to start Join in stream and output the Joined Table.
 
-TiDB’s SQL layer currently supports 3 kinds of distributed join type, hashjoin / sort merge join (when the optimizer thinks even the smallest table is too large to fit in memory and the predicates contains indexed column, optimizer would choose sort merge join) / index lookup join.
+TiDB's SQL layer currently supports 3 kinds of distributed join type, hashjoin / sort merge join (when the optimizer thinks even the smallest table is too large to fit in memory and the predicates contains indexed column, optimizer would choose sort merge join) / index lookup join.
 
 [Back to the top](#top)
 
@@ -237,9 +237,9 @@ It is hook up as a MySQL replica: we have a MySQL master with binlog enabled and
 
 ![TiDB Binlog](media/image_12.png)
 
-On the other hand, TiDB can output binlogs too. We build TiDB Binlog toolset to make it possible for 3rd party applications synchronize data from TiDB cluster. As TiDB-server is distributed, binlog pumper should be deployed in every TiDB-server instance and send it to a component we called ‘Cistern’. Cistern will sort the transactions by TransactionID (aka. timestamp) in a short period of time, and output as protobuf for downstream application.
+On the other hand, TiDB can output binlogs too. We build TiDB Binlog toolset to make it possible for 3rd party applications synchronize data from TiDB cluster. As TiDB-server is distributed, binlog pumper should be deployed in every TiDB-server instance and send it to a component we called 'Cistern'. Cistern will sort the transactions by TransactionID (aka. timestamp) in a short period of time, and output as protobuf for downstream application.
 
-For data migration, we don’t have our own tool. We use Mydumper/Loader for data backup and restore in parallel. you can use Mydumper to export data from MySQL and MyLoader to import the data into TiDB.
+For data migration, we don't have our own tool. We use Mydumper/Loader for data backup and restore in parallel. you can use Mydumper to export data from MySQL and MyLoader to import the data into TiDB.
 
 [Back to the top](#top)
 
@@ -249,7 +249,7 @@ Currently, there are about 20 customers using our products in production environ
 
 ![Ad-hoc OLAP](media/image_13.png)
 
-Let’s compare the query elapse between TiDB and MySQL. As you can see from the above diagram, for the ad-hoc OLAP with 8 queries, the time that MySQL takes is almost 4 times more than that of a 3-node TiDB.
+Let's compare the query elapse between TiDB and MySQL. As you can see from the above diagram, for the ad-hoc OLAP with 8 queries, the time that MySQL takes is almost 4 times more than that of a 3-node TiDB.
 
 ![Distributed OLTP](media/image_14.png)
 
@@ -259,7 +259,7 @@ Another customer is using TiDB as the drop-in replacement for MySQL for OLTP wor
 
 ## <span id="sysbench">Sysbench</span>
 
-Let’s see some Sysbench results for Read and Insert in the next few slides. Here are the details of the system that we are using.
+Let's see some Sysbench results for Read and Insert in the next few slides. Here are the details of the system that we are using.
 
 ![System details](media/image_15.png)
 

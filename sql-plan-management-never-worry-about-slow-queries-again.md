@@ -139,7 +139,7 @@ We've built indexes on columns `Name` and `Gender`. To find the man's name Chris
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM t WHERE Name = ‘Chris' and Gender = 'Male'
+SELECT * FROM t WHERE Name = 'Chris' and Gender = 'Male'
 ```
 
 ### Without SQL Plan Management
@@ -215,7 +215,7 @@ In the case above, DBAs only need to execute the following command in the databa
 
 ```sql
 CREATE GLOBAL BINDING FOR
-    SELECT * FROM t WHERE Name = 'Chris' and Gender = ‘Male'
+    SELECT * FROM t WHERE Name = 'Chris' and Gender = 'Male'
 USING
     SELECT /*+ USE_INDEX(t, gender) */ * FROM t WHERE Name = 'Chris' and Gender = 'Male'
 ```

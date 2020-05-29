@@ -39,7 +39,7 @@ While it is possible to combine these into a single program like Loader, we chos
 1. Importer works closely with TiKV, while Lightning works closely with TiDB. Each component of the Toolset uses some part of the latter as libraries. This causes a linguistic mismatch between the two parts as TiKV is written in Rust and TiDB is written in Go. It is much easier to develop them as independent programs instead, and let the KV pairs be transmitted via gRPC.
 2. Having separate Lightning and Importer also gives more flexibility in horizontal scaling, for example, allowing multiple Lightning instances to stream to the same Importer.
 
-Below we’ll go through the internals of each component.
+Below we'll go through the internals of each component.
 
 ### Lightning
 
@@ -93,7 +93,7 @@ The checksum of a table is computed by hashing its KV pairs. Since the KV pairs 
 
 In TiDB, we implement the checksum by computing the CRC64 of each KV pair, and then XOR all values together. In addition to the XOR of CRC64, we also compute the number of KV pairs and total size of KV pairs (both are commutative and associative) to further reduce the rate of raising conflicts. In the future, we may include more contemporary hash algorithms if performance allows.
 
-## What’s Ahead
+## What's Ahead
 
 This article shows us that TiDB Lightning improves the import speed by skipping some complicated, time-consuming operations and thus makes it suitable for initializing a big database. Our team still has many items on our roadmap to make TiDB Lightning better.
 

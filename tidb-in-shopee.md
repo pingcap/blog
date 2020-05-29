@@ -16,7 +16,7 @@ customerCategory: Internet
 
 [Shopee](https://en.wikipedia.org/wiki/Shopee) is the leading e-commerce platform in Southeast Asia and Taiwan. It is a platform tailored for the region, providing customers with an easy, secure and fast online shopping experience through strong payment and logistical support.
 
-Shopee aims to continually enhance its platform and become the region’s e-commerce destination of choice. Shopee has a wide selection of product categories ranging from consumer electronics to home & living, health & beauty, baby & toys, fashion and fitness equipment.
+Shopee aims to continually enhance its platform and become the region's e-commerce destination of choice. Shopee has a wide selection of product categories ranging from consumer electronics to home & living, health & beauty, baby & toys, fashion and fitness equipment.
 
 Shopee, a Sea company, was first launched in Singapore in 2015, and has since expanded its reach to Malaysia, Thailand, Taiwan, Indonesia, Vietnam and the Philippines. Sea is a leader in digital entertainment, e-commerce and digital financial services across Greater Southeast Asia. Sea's mission is to better the lives of consumers and small businesses with technology, and is listed on the NYSE under the symbol SE.
 
@@ -36,7 +36,7 @@ TiDB in a nutshell is a platform comprised of multiple components that when used
 
 Inside the TiDB platform, the main components are as follows:
 
-- [**TiDB Server**](https://github.com/pingcap/tidb) is a stateless SQL layer that processes users’ SQL queries, accesses data in the storage layer, and returns corresponding results to the application. It is MySQL compatible and sits on top of TiKV.
+- [**TiDB Server**](https://github.com/pingcap/tidb) is a stateless SQL layer that processes users' SQL queries, accesses data in the storage layer, and returns corresponding results to the application. It is MySQL compatible and sits on top of TiKV.
 - [**TiKV**](https://github.com/pingcap/tikv) is the distributed transactional Key-Value storage layer where the data persists. It uses the [Raft](https://raft.github.io/) consensus protocol for replication to ensure strong data consistency and high availability.
 - [**TiSpark**](https://github.com/pingcap/tispark) cluster also sits on top of TiKV. It is an Apache Spark plugin that works with the TiDB platform to support complex OLAP queries for BI analysts and data scientists.
 - [**Placement Driver (PD)**](https://github.com/pingcap/pd): A metadata cluster powered by [etcd](https://github.com/etcd-io/etcd) that manages and schedules TiKV.
@@ -70,7 +70,7 @@ Before choosing TiDB, we carefully researched and compared the pros and cons of 
 
 - **The application code becomes complex and difficult to maintain.** We code in Golang and Python and have deployed MySQL in several systems of Shopee. To support the new sharding rules, each system would need more code refactoring.
 - **Changing existing sharding key is troublesome.** We must specify sharding key manually and carefully because it controls how the data is distributed across the shards. Changing an existing sharding key might lead to serious problems. In addition, cross-shard distributed transactions would not be supported.
-- **Upgrading application logic affects application usability.** Mounting data often triggers a hung database, because it demands frequent table schema changes to perform [DDL](https://en.wikipedia.org/wiki/Data_definition_language) (Data Definition Language) operations. This impacts our application’s usability and even causes data inconsistency.
+- **Upgrading application logic affects application usability.** Mounting data often triggers a hung database, because it demands frequent table schema changes to perform [DDL](https://en.wikipedia.org/wiki/Data_definition_language) (Data Definition Language) operations. This impacts our application's usability and even causes data inconsistency.
 
 ### TiDB
 
@@ -151,11 +151,11 @@ Although the data size has grown eightfold over the past 6 months, the whole clu
 
 While we have been happy with our experience with TiDB, the adoption was not without challenges. One issue we have encountered is that after adding new nodes to an existing TiKV cluster to expand our storage capacity, it took a long time to rebalance data -- roughly 24 hours to rebalance about 1TB of new data. Thus, to better prepare for this bottleneck, we would usually do this scaling a few days before any of our promotional campaigns when we know traffic will spike, and closely monitor the progress of data rebalancing. We also recommend setting the scheduling related parameters in PD to a larger value.
 
-Another issue is that TiDB’s MySQL compatibility is not fully complete; for example, TiDB does not currently support the `SHOW CREATE USER` syntax, which is related to MySQL user privilege. Instead, we have to read the system table (mysql.user) to check the basic information of a database account. The good thing is the PingCAP team is very transparent about MySQL features that are [currently not supported](https://pingcap.com/docs/v3.0/reference/mysql-compatibility) in TiDB, and is responsive to our requests -- a [pull request](https://github.com/pingcap/tidb/issues/7733) is already filed for this particular issue.
+Another issue is that TiDB's MySQL compatibility is not fully complete; for example, TiDB does not currently support the `SHOW CREATE USER` syntax, which is related to MySQL user privilege. Instead, we have to read the system table (mysql.user) to check the basic information of a database account. The good thing is the PingCAP team is very transparent about MySQL features that are [currently not supported](https://pingcap.com/docs/v3.0/reference/mysql-compatibility) in TiDB, and is responsive to our requests -- a [pull request](https://github.com/pingcap/tidb/issues/7733) is already filed for this particular issue.
 
-## What’s Next
+## What's Next
 
-With one year’s worth of TiDB experience under our belt, we feel confident in TiDB’s potential and have plans to expand its usage inside Shopee’s infrastructure in the following ways.
+With one year's worth of TiDB experience under our belt, we feel confident in TiDB's potential and have plans to expand its usage inside Shopee's infrastructure in the following ways.
 
 - Currently, our TiDB clusters serve large amounts of non-transactional data. We plan to evaluate the migration of some transactional data from MySQL to TiDB.
 

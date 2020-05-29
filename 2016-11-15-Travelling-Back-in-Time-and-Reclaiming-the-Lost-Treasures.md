@@ -36,7 +36,7 @@ set @@tidb_snapshot = ""
 
 which sets the `tidb_snapshot` variable to be an empty string.
 
-It doesn’t matter even if there are Schema changes after the set time in history because TiDB will use the Schema of the set time in history for the SQL request.
+It doesn't matter even if there are Schema changes after the set time in history because TiDB will use the Schema of the set time in history for the SQL request.
 
 ### Comparing the History Read feature in TiDB with the similar features in other databases
 
@@ -44,7 +44,7 @@ There is no such feature in MySQL. In other databases such as Oracle and Postgre
 
 Compared with the similar features of other databases, the History Read feature in TiDB has the following advantages:
 
-- It is supported by default in the system. If it is not supported by default, usually we won’t create a Temporal Table on purpose. But when we actually need it, it might not there.
+- It is supported by default in the system. If it is not supported by default, usually we won't create a Temporal Table on purpose. But when we actually need it, it might not there.
 - It is very easy to use. No extra table or special grammar is needed.
 - It provides a global snapshot instead of a view from individual table.
 - Even if operations like Drop Table and Drop Database are executed, old data can still be retrieved in TiDB.
@@ -80,7 +80,7 @@ You might wonder that if all the versions are kept, will the space occupied by t
 
 #### The Garbage Collection (GC) mechanism in TiDB
 
-TiDB collects garbage periodically and removes the data versions that are too old from RockDB. Therefore, the space occupied by the data won’t inflate indefinitely.
+TiDB collects garbage periodically and removes the data versions that are too old from RockDB. Therefore, the space occupied by the data won't inflate indefinitely.
 
 Then how old will the data to be removed? The expiration time of the GC is controlled by configuring a parameter. You can set it to be 10 mins, 1 hour, 1 day or never.
 Therefore the History Read feature of TiDB is limited and only the data after the GC expiration time can be read. You might want to set the time to be as long as possible but this is not without any cost. The longer the expiration time, the more space will be occupied, and the Read performance will degrade. It depends on the business type and requirements as to how to configure the expiration time. If the data is very important and data safety is the top priority or there are very few data updates, it is recommended to set the expiration time to be long; if the data is not very important and the data updates are very frequent, it is recommended to set the expiration time to be short.

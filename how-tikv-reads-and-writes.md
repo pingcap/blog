@@ -138,11 +138,11 @@ PD also provides the global timing service. In the Percolator transaction model,
 
 ## Read and write in TiKV
 
-Now that you learn about the basics, let’s get down to the real businesses of read and write in TiKV. TiKV provides two sets of APIs for data operations, namely RawKV and Transactional KV (TxnKV). This section introduces how read and write in TiKV are processed using these two APIs.
+Now that you learn about the basics, let's get down to the real businesses of read and write in TiKV. TiKV provides two sets of APIs for data operations, namely RawKV and Transactional KV (TxnKV). This section introduces how read and write in TiKV are processed using these two APIs.
 
 ## RawKV
 
-RowKV API is a lower-level key-value API for interacting directly with individual key-value pairs. This is used when your application doesn’t require data access for distributed transactions or multi-version concurrency control (MVCC).
+RowKV API is a lower-level key-value API for interacting directly with individual key-value pairs. This is used when your application doesn't require data access for distributed transactions or multi-version concurrency control (MVCC).
 
 ### Write with RawKV
 

@@ -12,13 +12,13 @@ image: /images/blog/follower-read-load-balancing-consistent-read.png
 
 On Dec 20, 2019, we released [TiDB 3.1 Beta](https://pingcap.com/docs/v3.1/releases/3.1.0-beta/). In this version, [TiDB](https://en.wikipedia.org/wiki/TiDB) introduced two significant features, [Follower Read](https://pingcap.com/docs/v3.1/reference/performance/follower-read/) and [Backup & Restore (BR)](https://pingcap.com/docs/v3.1/how-to/maintain/backup-and-restore/br/), and enriched [optimizer hints](https://pingcap.com/docs/v3.1/reference/performance/optimizer-hints/).
 
-For TiDB 3.1 Beta, Follower Read is a highlight open-source feature. To understand how important this feature is, you’ll need a bit of background. TiDB’s storage engine, [TiKV](https://pingcap.com/docs/v3.1/architecture/#tikv-server), stores data in basic units called [Regions](https://pingcap.com/docs/v3.1/glossary/#regionpeerraft-group). Multiple replicas of a Region form a [Raft group](https://pingcap.com/docs/v3.1/glossary/#regionpeerraft-group). When a read hotspot appears in a Region, the Region [leader](https://pingcap.com/docs/v3.1/glossary/#leaderfollowerlearner) can become a read bottleneck for the entire system. In this situation, enabling the Follower Read feature can significantly reduce the load on the leader and improve the read throughput of the whole system by balancing the load among multiple [followers](https://pingcap.com/docs/v3.1/glossary/#leaderfollowerlearner).
+For TiDB 3.1 Beta, Follower Read is a highlight open-source feature. To understand how important this feature is, you'll need a bit of background. TiDB's storage engine, [TiKV](https://pingcap.com/docs/v3.1/architecture/#tikv-server), stores data in basic units called [Regions](https://pingcap.com/docs/v3.1/glossary/#regionpeerraft-group). Multiple replicas of a Region form a [Raft group](https://pingcap.com/docs/v3.1/glossary/#regionpeerraft-group). When a read hotspot appears in a Region, the Region [leader](https://pingcap.com/docs/v3.1/glossary/#leaderfollowerlearner) can become a read bottleneck for the entire system. In this situation, enabling the Follower Read feature can significantly reduce the load on the leader and improve the read throughput of the whole system by balancing the load among multiple [followers](https://pingcap.com/docs/v3.1/glossary/#leaderfollowerlearner).
 
 We wrote only [26 lines of code](https://github.com/tikv/tikv/pull/5051) to implement Follower Read. In our benchmark test, when this feature was enabled, we could roughly double the read throughput of the entire system.
 
-In this post, I’ll guide you through why we introduced Follower Read, how we implement it, and our future plans for it.
+In this post, I'll guide you through why we introduced Follower Read, how we implement it, and our future plans for it.
 
-Note that this post assumes that you have some basic knowledge of the [Raft consensus algorithm](https://raft.github.io/) and [TiDB’s architecture](https://pingcap.com/docs/v3.1/architecture/).
+Note that this post assumes that you have some basic knowledge of the [Raft consensus algorithm](https://raft.github.io/) and [TiDB's architecture](https://pingcap.com/docs/v3.1/architecture/).
 
 ## What is Follower Read
 

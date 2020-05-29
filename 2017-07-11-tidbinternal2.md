@@ -22,11 +22,11 @@ From Li SHEN: shenli@pingcap.com
 + [Architecture of the SQL Layer](#sqlarch)
 + [Summary](#summary)
 
-My [last blog](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/) introduces the way that TiDB stores data, which is also the basic concepts of TiKV. In this article, I’ll elaborate on how TiDB uses the bottom layer Key-Value to store data, maps the relational model to the Key-Value model and performs SQL computing.
+My [last blog](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/) introduces the way that TiDB stores data, which is also the basic concepts of TiKV. In this article, I'll elaborate on how TiDB uses the bottom layer Key-Value to store data, maps the relational model to the Key-Value model and performs SQL computing.
 
 ### <span id="map">Mapping the Relational Model to the Key-Value Model</span>
 
-Let’s simplify the Relational Model to be just about Table and the SQL statements. What we need to think about is how to store Table and run the SQL statements on top of the Key-Value structure.
+Let's simplify the Relational Model to be just about Table and the SQL statements. What we need to think about is how to store Table and run the SQL statements on top of the Key-Value structure.
 
 Assuming we have a Table as follows:
 
@@ -59,7 +59,7 @@ TiDB supports both the Primary Index and Secondary Index. The function of Index 
 + Range query, e.g. `select name from user where age > 30 and age < 35;`, querying the data that the age is between 30 and 35 through `idxAge`.
 There are two types of Indexes: Unique Index and Non-unique Index, both of which are supported by TiDB.
 
-After analyzing the characteristics of the data to be stored, let’s move on to what we need to do to manipulate the data, including the Insert/Update/Delete/Select statements.
+After analyzing the characteristics of the data to be stored, let's move on to what we need to do to manipulate the data, including the Insert/Update/Delete/Select statements.
 
 + The `Insert` statement writes Row into Key-Value and creates the index data.
 + The `Update` statement updates Row and index data if necessary.
@@ -71,12 +71,12 @@ After analyzing the characteristics of the data to be stored, let’s move on to
 
 A globally ordered and distributed Key-Value engine satisfies the above needs. The feature of being globally ordered helps us solve quite a few problems. Take the following as two examples:
 
-+ To get a row of data quickly. Assume that we can create a certain or some Keys, when locating this row, we’d be able to use the Seek method provided by TiKV to quickly locate this row of data.
++ To get a row of data quickly. Assume that we can create a certain or some Keys, when locating this row, we'd be able to use the Seek method provided by TiKV to quickly locate this row of data.
 + To scan the whole table. If the table can be mapped to the Range of Key, then all data can be got by scanning from StartKey to EndKey. The way to manipulate Index data is similar.
 
 [Back to the top](#top)
 
-Now let’s see how this works in TiDB.
+Now let's see how this works in TiDB.
 
 TiDB allocates a `TableID` to each table, an `IndexID` to each index, and a `RowID` to each row. If the table has an integer Primary Key, then the value will be used as the `RowID`. The `TableID` is unique in the whole cluster while the `IndexID/RowID` unique in the table. All of these ID are int64.
 Each row of data is encoded into a Key-Value pair according to the following rule:
@@ -94,7 +94,7 @@ Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue
 Value: rowID
 ```
 
-The above encoding rule applies to Unique Index while it cannot create a unique Key for Non-unique Index. The reason is that the `tablePrefix{tableID}_indexPrefixSep{indexID}` of an Index is the same. It’s possible that the `ColumnsValue of` multiple rows is also the same. Therefore, we’ve made some changes to encode the Non-unique Index:
+The above encoding rule applies to Unique Index while it cannot create a unique Key for Non-unique Index. The reason is that the `tablePrefix{tableID}_indexPrefixSep{indexID}` of an Index is the same. It's possible that the `ColumnsValue of` multiple rows is also the same. Therefore, we've made some changes to encode the Non-unique Index:
 
 ```
 Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue_rowID
@@ -121,13 +121,13 @@ Note that the Key encoding solution of either Row or Index has the same prefix. 
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Internal (II) - Computing', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
-Now we take the previous requirements and TiDB’s mapping solution into consideration and verify the feasibility of the solution.
+Now we take the previous requirements and TiDB's mapping solution into consideration and verify the feasibility of the solution.
 
 1. Firstly, we transform Row and Index data into Key-Value data through the mapping solution and make sure that each row and each piece of index data has a unique Key.
 2. Secondly, we can easily create the corresponding Key of some row or some piece of index by using this mapping solution as it is good for both Point query and Range query.
 3. Lastly, when ensuring some Constraints in the table, we can create and check the existence of a certain Key to determine whether the corresponding Constraint has been satisfied.
 
-Up to now, we’ve already covered how to map Table onto Key-Value. Here is one more case with the same table structure. Assume that the table has three rows of data:
+Up to now, we've already covered how to map Table onto Key-Value. Here is one more case with the same table structure. Assume that the table has three rows of data:
 
 ```
 1, "TiDB", "SQL Layer", 10
@@ -183,7 +183,7 @@ The easiest way is to map the SQL query to Key-Value query through the mapping s
 
 As for the statement `Select count(*) from user where name="TiDB";`, we need to read all the data in the table and then check if the Name field is TiDB. If so, return this row. The operation is transferred to the following Key-Value operation process:
 
-+ Create Key Range: As all RowIDs in a table are in the [0, MaxInt64) range, we use 0 and MaxInt64 and Row’s Key encoding rule to create a left-close-right-open interval, [StartKey, EndKey).
++ Create Key Range: As all RowIDs in a table are in the [0, MaxInt64) range, we use 0 and MaxInt64 and Row's Key encoding rule to create a left-close-right-open interval, [StartKey, EndKey).
 + Scan Key Range: Read data in TiKV according to the Key Range previously created.
 + Filter the data: Evaluate the name="TiDB" expression when reading each row of data. If the result is true, return to this row. If not, skip this row.
 + Evaluate Count: For each row that meets the requirement, add up to the Count value.
@@ -195,7 +195,7 @@ See the following diagram for the process:
 This solution works though it still has the following drawbacks:
 
 1. When scanning data, each row needs to be read from TiKV through Key-Value operation. Therefore, there is at least one RPC overhead. The overhead becomes huge if there is a large amount of data to be scanned.
-2. It is not applicable to all rows. Data that doesn’t meet the conditions doesn’t need to be read.
+2. It is not applicable to all rows. Data that doesn't meet the conditions doesn't need to be read.
 3. The value of the rows that meet the conditions is meaningless. What we need here is just the number of rows.
 
 [Back to the top](#top)
@@ -216,7 +216,7 @@ You can refer to [MPP and SMP in TiDB (in Chinese)](https://mp.weixin.qq.com/s?_
 
 ### <span id="sqlarch">Architecture of the SQL Layer</span>
 
-The previous sections introduce some functions of the SQL layer and I hope you have a basic idea about how to process the SQL statement. Actually, TiDB’s SQL Layer is much complicated and has lots of modules and layers. The following diagram lists all important modules and the call relation:
+The previous sections introduce some functions of the SQL layer and I hope you have a basic idea about how to process the SQL statement. Actually, TiDB's SQL Layer is much complicated and has lots of modules and layers. The following diagram lists all important modules and the call relation:
 
 ![Architecture of the SQL Layer](media/sqlarchitecture.png)
 
@@ -226,7 +226,7 @@ The SQL requests will be sent directly or via a Load Balancer to tidb-server, wh
 
 ### <span id="summary">Summary</span>
 
-Up till now, we’ve known how data is stored and used for operation from the perspective of SQL. Information about the SQL layer, such as the principle of optimization and the detail of the distributed execution framework will be introduced in the future.
+Up till now, we've known how data is stored and used for operation from the perspective of SQL. Information about the SQL layer, such as the principle of optimization and the detail of the distributed execution framework will be introduced in the future.
 In the next article, we will dwell on information about PD, especially the cluster management and schedule. This is an interesting part as you will see things that are invisible when using TiDB but important to the whole cluster.
 
 [Back to the top](#top)

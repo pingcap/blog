@@ -52,19 +52,19 @@ What I will talk about today is as follows:
 
 ## Why did we choose RocksDB?
 
-OK, let’s begin. Why did we decided to use RocksDB instead of LevelDB, WiredTiger, or any other engines. Why? I have a long list of reasons:
+OK, let's begin. Why did we decided to use RocksDB instead of LevelDB, WiredTiger, or any other engines. Why? I have a long list of reasons:
 
-* First of all, RocksDB is fast. We can keep high write/read speed even there’s a lot of data in a single instance.
+* First of all, RocksDB is fast. We can keep high write/read speed even there's a lot of data in a single instance.
 
 * And of course, RocksDB is stable. I know that RocksDB team does lots of stress tests to guarantee the stability；
 
-* And it’s easy to be embedded. We can call RocksDB’s C API in Rust directly through FFI, because TiKV is written in Rust.
+* And it's easy to be embedded. We can call RocksDB's C API in Rust directly through FFI, because TiKV is written in Rust.
 
 * Not to mention that it has many useful features. We can use them directly in production to improve the performance.
 
 * In addition, RocksDB is still in fast development. Many cool features are added, and the performance is being improved continuously.
 
-* What’s more, RocksDB has an very active community. If we have questions, we can easily ask for help. Many RocksDB team members and us are even WeChat (a very popular IM tool in China) friends, we can talk to each other directly.
+* What's more, RocksDB has an very active community. If we have questions, we can easily ask for help. Many RocksDB team members and us are even WeChat (a very popular IM tool in China) friends, we can talk to each other directly.
 
 [Back to the top](#top)
 
@@ -131,7 +131,7 @@ Although the final calculated total size is approximate, it is more effective, w
 
 ![Table Property for GC Check](media/tablecheck.png)
 
-We use multiple versions for a key, and will remove the old keys periodically. But we don’t know whether we need to do GC in a range or not, in the past, we simply scanned all the data.
+We use multiple versions for a key, and will remove the old keys periodically. But we don't know whether we need to do GC in a range or not, in the past, we simply scanned all the data.
 
 However, since we only need to do GC before a specified safe point, and most keys have only one version, scanning these keys every time is wasteful.
 
@@ -165,7 +165,7 @@ We are not only using RocksDB, we also do our best to contribute to the communit
 
 * [#2743](https://github.com/facebook/rocksdb/issues/2743): delete range and memtable prefix bloom filter bug
 
-Thank goodness, we haven’t found any of our users meet these problems in production.
+Thank goodness, we haven't found any of our users meet these problems in production.
 
 We also added features and fixed some bugs, like these. Because TiKV can only call the RocksDB C API, we also add many missing C APIs for RocksDB.
 
@@ -181,6 +181,6 @@ We also added features and fixed some bugs, like these. Because TiKV can only ca
 
 In the future, we are planning DeleteRange API, which is a very useful for us. But now we found some bugs [2752](https://github.com/facebook/rocksdb/issues/2752) and [2833](https://github.com/facebook/rocksdb/issues/2833), we are trying our best to fix them, of course, together with the RocksDB team.
 
-And we will try to use BLOB DB when it’s stable. On the other hand, we will also try different memtable types to speed up the insert performance, and use partitioned indexes and filters for SATA disks.
+And we will try to use BLOB DB when it's stable. On the other hand, we will also try different memtable types to speed up the insert performance, and use partitioned indexes and filters for SATA disks.
 
 [Back to the top](#top)

@@ -22,7 +22,7 @@ categories: ['Engineering']
 
 ## <span id="arch">Architecture</span>
 
-Below is TiKV’s overall architecture:
+Below is TiKV's overall architecture:
 
 ![TiKV architecture](media/TiKV_ Architecture.png)
 
@@ -40,7 +40,7 @@ Below is TiKV’s overall architecture:
 
 TiKV uses the Raft algorithm to implement the strong consistency of data in a distributed environment. For detailed information about Raft, please refer to the paper [In Search of an Understandable Consensus Algorithm](https://web.stanford.edu/~ouster/cgi-bin/papers/raft-atc14) and [the official website](https://raft.github.io/). Simply put, Raft is a model of replication log + State Machine. We can only write through a Leader and the Leader will replicate the command to its Followers in the form of log. When the majority of nodes in the cluster receive this log, this log has been committed and can be applied into the State Machine.
 
-TiKV’s Raft mainly migrates etcd Raft and supports all functions of Raft, including:
+TiKV's Raft mainly migrates etcd Raft and supports all functions of Raft, including:
 
 + Leader election
 
@@ -50,7 +50,7 @@ TiKV’s Raft mainly migrates etcd Raft and supports all functions of Raft, incl
 
 + Linearizable / Lease read
 
-Note that how TiKV and etcd process membership change is different from what is in the Raft paper. TiKV’s membership change will take effect only when the log is applied. The main purpose is for a simple implementation. But it will be risky if we only have two nodes. Since we have to remove one node from inside and if a Follower has not received the log entry of `ConfChange`, the Leader will go down and be unrecoverable, then the whole cluster will be down. Therefore, it is recommended that users deploy 3 or more odd number of nodes.
+Note that how TiKV and etcd process membership change is different from what is in the Raft paper. TiKV's membership change will take effect only when the log is applied. The main purpose is for a simple implementation. But it will be risky if we only have two nodes. Since we have to remove one node from inside and if a Follower has not received the log entry of `ConfChange`, the Leader will go down and be unrecoverable, then the whole cluster will be down. Therefore, it is recommended that users deploy 3 or more odd number of nodes.
 
 The Raft library is independent and users can directly embed it into their applications. What they need to do is to process storage and message sending. This article will briefly introduce how to use Raft and you can find the code under the directory of TiKV source code /src/raft.
 
@@ -76,7 +76,7 @@ pub trait Storage {
 }
 ```
 
-We need to implement our Storage trait and I’ll elaborate on the implication of each interface:
+We need to implement our Storage trait and I'll elaborate on the implication of each interface:
 
 `initial_state`: Call this interface when initializing Raft Storage and it will return `RaftState`, whose definition is shown below:
 
@@ -164,7 +164,7 @@ pub struct Config {
 
 `id`: The unique identification of the Raft node. Within a Raft cluster, `id` has to be unique. Inside TiKV, the global uniqueness of `id` is guaranteed through PD.
 
-`election_tick`: When a Follower hasn’t received the message sent by its Leader after the `election_tick` time, then there will be a new election and TiKV uses 50 as the default.
+`election_tick`: When a Follower hasn't received the message sent by its Leader after the `election_tick` time, then there will be a new election and TiKV uses 50 as the default.
 
 `heartbeat_tick`: The Leader sends a heartbeat message to its Follower every `hearbeat_tick`. The default value is 10.
 
@@ -174,7 +174,7 @@ pub struct Config {
 
 `max_inflight_msgs`: Limit the maximum number of in-flight message in replication. The default value is 256.
 
-Here is the detailed implication of tick: TiKV’s Raft is timing-driven. Assume that we call the Raft tick once every 100ms and when we call the tick times of `headtbeat_tick`, the Leader will send heartbeats to its Follower.
+Here is the detailed implication of tick: TiKV's Raft is timing-driven. Assume that we call the Raft tick once every 100ms and when we call the tick times of `headtbeat_tick`, the Leader will send heartbeats to its Follower.
 
 [Back to the top](#top)
 
@@ -186,7 +186,7 @@ We use Raft through RawNode and below is its constructor:
 pub fn new(config: &Config, sotre: T, peers: &[peer]) -> Result<RawNode<T>>
 ```
 
-We need to define Raft’s Config and then pass an implemented Storage. The `peers` parameter is just used for testing and it will not be passed. After creating the `RawNode` object, we can use Raft. Below are some functions that we pay attention to:
+We need to define Raft's Config and then pass an implemented Storage. The `peers` parameter is just used for testing and it will not be passed. After creating the `RawNode` object, we can use Raft. Below are some functions that we pay attention to:
 
 `tick`: We use the tick function to drive Raft regularly. In TiKV, we call tick once every 100ms.
 
@@ -202,7 +202,7 @@ We need to define Raft’s Config and then pass an implemented Storage. The `pee
 
 `apply_conf_change`: When a log of `ConfChange` is applied successfully, we need to actively call this driven Raft.
 
-`advance`: Tell Raft that `ready` has been processed and it’s time to start successive iterations.
+`advance`: Tell Raft that `ready` has been processed and it's time to start successive iterations.
 
 As for `RawNode`, we should emphasize the `ready` concept and below is its definition:
 

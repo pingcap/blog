@@ -53,7 +53,7 @@ First, let's take a look at the [`expression/builtin_string.go`](https://github.
 
  1). Infer the return value type of the `LEGNTH` function according to MySQL rules.
 
- 2). Generate function signature based on the number & type of parameters, and return value type of the `LENGTH` function. Because the `LENGTH` function only has one number & type of parameters, and return value type, we don’t need to define a type for the new function signature. Instead, we modified the existing `builtinLengthSig`, so that it could be **composite with `baseIntBuiltinFunc`, which means that the return value type in the given function signature is int.**
+ 2). Generate function signature based on the number & type of parameters, and return value type of the `LENGTH` function. Because the `LENGTH` function only has one number & type of parameters, and return value type, we don't need to define a type for the new function signature. Instead, we modified the existing `builtinLengthSig`, so that it could be **composite with `baseIntBuiltinFunc`, which means that the return value type in the given function signature is int.**
 
  ```go
  type builtinLengthSig struct {
@@ -100,7 +100,7 @@ First, let's take a look at the [`expression/builtin_string.go`](https://github.
 
 #### <span id="move"> Refine the existing `TestLength()` method:</span>
 
-Moving on to [`expression/builtin_string_test.go`](https://github.com/pingcap/tidb/blob/master/expression/builtin_string_test.go), let’s refine the existing `TestLength()` method:
+Moving on to [`expression/builtin_string_test.go`](https://github.com/pingcap/tidb/blob/master/expression/builtin_string_test.go), let's refine the existing `TestLength()` method:
 
 ```go
 func (s *testEvaluatorSuite) TestLength(c *C) {
@@ -152,7 +152,7 @@ func (s *testEvaluatorSuite) TestLength(c *C) {
 
 #### <span id="final"> Test the implementation of `LENGTH` at the SQL level </span>
 
-Finally let’s look at [`executor/executor_test.go`](https://github.com/pingcap/tidb/blob/master/expression/evaluator_test.go) and test the implementation of `LENGTH` at the SQL level:
+Finally let's look at [`executor/executor_test.go`](https://github.com/pingcap/tidb/blob/master/expression/evaluator_test.go) and test the implementation of `LENGTH` at the SQL level:
 
 ```go
 // Tests for string built-in functions can be added in the following method:
@@ -164,7 +164,7 @@ func (s *testSuite) TestStringBuiltin(c *C) {
     tk := testkit.NewTestKit(c, s.store)
     tk.MustExec("use test")
     // for length
-    // It’s best that these tests can also cover different scenarios:
+    // It's best that these tests can also cover different scenarios:
     tk.MustExec("drop table if exists t")
     tk.MustExec("create table t(a int, b double, c datetime, d time, e char(20), f bit(10))")
     tk.MustExec(`insert into t values(1, 1.1, "2017-01-01 12:01:01", "12:01:01", "abcdef", 0b10101)`)
@@ -228,11 +228,11 @@ The refactored framework has two advantages:
 1. In the compiling phase, we use the existing information on expression types to generate the expression with parameter types that match the evaluation rules. This way, no extra branch judgment about the parameter types are needed in the executing phase.
 2. Only the original data types are involved in the evaluation, thus avoiding the time and capacity cost by Datum.
 
-Let’s go back to the previous example, in the **compiling phase**, the generated expression tree is shown in the following graph. For expressions that do not match the function parameters types, we add the `cast` function for type conversion:
+Let's go back to the previous example, in the **compiling phase**, the generated expression tree is shown in the following graph. For expressions that do not match the function parameters types, we add the `cast` function for type conversion:
 
 ![Add the `cast` function for type conversion](media/after_reconstruction.png)
 
-In this way, in the **executing phase**, for every `ScalarFunction`, it is guaranteed that all of its parameter types match the data types in the given expression evaluation, and we don’t need to check and convert parameter types repeatedly.
+In this way, in the **executing phase**, for every `ScalarFunction`, it is guaranteed that all of its parameter types match the data types in the given expression evaluation, and we don't need to check and convert parameter types repeatedly.
 
 ### <span id="app"> Appendix </span>
 

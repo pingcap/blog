@@ -14,7 +14,7 @@ customerCategory: Internet
 
 **Author:** Boshuai Zhu (Senior Infrastructure Engineer at iQiyi)
 
-[iQiyi](https://en.wikipedia.org/wiki/IQiyi), formerly Qiyi, is the Netflix of China: the country’s [largest online video-on-demand platform](https://www.thewrap.com/paramount-signs-licensing-deal-with-chinas-largest-online-video-platform-iqiyi/). With “Always Fun, Always Fine” as our brand’s motto, we are committed to providing users with high-resolution, authentic media content including movies, TV dramas, variety shows, documentaries, animations and travel programs. On March 29, 2018, our company IPO’ed on the NASDAQ and raised $2.25 billion.
+[iQiyi](https://en.wikipedia.org/wiki/IQiyi), formerly Qiyi, is the Netflix of China: the country's [largest online video-on-demand platform](https://www.thewrap.com/paramount-signs-licensing-deal-with-chinas-largest-online-video-platform-iqiyi/). With “Always Fun, Always Fine” as our brand's motto, we are committed to providing users with high-resolution, authentic media content including movies, TV dramas, variety shows, documentaries, animations and travel programs. On March 29, 2018, our company IPO'ed on the NASDAQ and raised $2.25 billion.
 
 Since our business has grown rapidly, our data size has also soared. This has placed enormous pressure on our backend system, especially the MySQL cluster. We experienced the suffocating pain of tackling immense data until we found [TiDB](http://bit.ly/tidb_repo_publication), a MySQL-compatible NewSQL hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built and supported by PingCAP. Finally, we can properly manage our data.
 
@@ -44,7 +44,7 @@ TiDB is an open source, NewSQL, scalable hybrid transactional and analytical pro
 
 Inside the TiDB Platform, there are several components:
 
-- **TiDB** cluster consists of stateless TiDB instances and serves as a stateless SQL layer that processes users’ SQL queries, accesses data in the storage layer, and returns corresponding results. It’s MySQL compatible and sits on top of TiKV.
+- **TiDB** cluster consists of stateless TiDB instances and serves as a stateless SQL layer that processes users' SQL queries, accesses data in the storage layer, and returns corresponding results. It's MySQL compatible and sits on top of TiKV.
 - [**TiKV**](https://github.com/pingcap/tikv) cluster, composed of TiKV instances, is the distributed transactional Key-Value storage layer where the data resides. Regardless of where the data comes from, it is stored in TiKV eventually. It uses the [Raft](https://raft.github.io/) consensus protocol for replication to ensure data consistency and disaster recovery.
 - [**TiSpark**](https://github.com/pingcap/tispark) cluster also sits on top of TiKV. It is an Apache Spark plugin that works with the TiDB platform to support complex OLAP queries for BI analysts and data scientists.
 
@@ -170,12 +170,12 @@ Throughout the process, the PingCAP team offered us timely and expert-level help
 The most attractive features of TiDB are horizontal scalability and high availability.
 The data that a standalone database can hold is limited. If the policy of MySQL sharding + proxy is applied, the maintenance cost will go up whether the proxy is on the client or the server.
 
-What’s worse, the query efficiency fails to meet the performance demands in many scenarios. In addition, the proxy does not support transactions well and cannot guarantee data consistency.
+What's worse, the query efficiency fails to meet the performance demands in many scenarios. In addition, the proxy does not support transactions well and cannot guarantee data consistency.
 
 TiDB is a perfect alternative for MySQL sharding + proxy solutions. With highly available service and data and horizontal scalability, TiDB effectively solves many problems triggered by a huge surge in the amount of data. The more data there is, the more TiDB outperforms MySQL.
 
 ## Conclusion
 
-As our business grew exponentially, we were overwhelmed trying to handle the mounting data. After a careful and rigorous evaluation of TiDB, we found it to be a powerful database that’s growing in mindshare. We have now deployed TiDB in our production environment. Thanks to the horizontal scalability and high availability of TiDB, we no longer worry about data volume and can bring high-quality entertainment services to our users with more confidence than before.
+As our business grew exponentially, we were overwhelmed trying to handle the mounting data. After a careful and rigorous evaluation of TiDB, we found it to be a powerful database that's growing in mindshare. We have now deployed TiDB in our production environment. Thanks to the horizontal scalability and high availability of TiDB, we no longer worry about data volume and can bring high-quality entertainment services to our users with more confidence than before.
 
-In addition to its use in the applications mentioned above, TiDB is also being evaluated or tested in other applications at iQiyi. In some use cases, TiDB needs to handle a mixed scenario of OLTP and OLAP, and that is a good opportunity to put TiSpark to work. One area of development we’re interested in is getting TiDB Binlog, TiDB’s data synchronizing tool, to synchronize with [Kudu](https://en.wikipedia.org/wiki/Kudu) and [HBase](https://en.wikipedia.org/wiki/Apache_HBase) in addition to MySQL. To that end, we plan to invest more in TiDB and send some pull requests to [the TiDB community](https://github.com/pingcap/tidb). We believe that with its powerful technology and the professional and highly-motivated team behind it, TiDB will be embraced by companies in more and more industries in the future.
+In addition to its use in the applications mentioned above, TiDB is also being evaluated or tested in other applications at iQiyi. In some use cases, TiDB needs to handle a mixed scenario of OLTP and OLAP, and that is a good opportunity to put TiSpark to work. One area of development we're interested in is getting TiDB Binlog, TiDB's data synchronizing tool, to synchronize with [Kudu](https://en.wikipedia.org/wiki/Kudu) and [HBase](https://en.wikipedia.org/wiki/Apache_HBase) in addition to MySQL. To that end, we plan to invest more in TiDB and send some pull requests to [the TiDB community](https://github.com/pingcap/tidb). We believe that with its powerful technology and the professional and highly-motivated team behind it, TiDB will be embraced by companies in more and more industries in the future.

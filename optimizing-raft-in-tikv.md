@@ -9,7 +9,7 @@ categories: ['Engineering']
 
 Paxos or [Raft](https://raft.github.io/) is frequently used to ensure data consistency in the distributed databases. But Paxos is known for its complexity and is rather difficult to understand while Raft is very simple. Therefore, a lot of emerging databases tend to use Raft as the consensus algorithm at its bottom layer. [TiKV](https://github.com/pingcap/tikv) is no exception.
 
-Simple as Raft is, its performance is not ideal if we follow exactly the way introduced in the Paper. Therefore, optimizations are essential. This blog introduces how we optimize Raft to ensure its performance in TiKV. It presumes that the audience is very familiar with Raft algorithm and don’t need much explanation. (If not, please see [Raft in TiKV](https://pingcap.com/blog/2017-07-28-raftintikv/)).
+Simple as Raft is, its performance is not ideal if we follow exactly the way introduced in the Paper. Therefore, optimizations are essential. This blog introduces how we optimize Raft to ensure its performance in TiKV. It presumes that the audience is very familiar with Raft algorithm and don't need much explanation. (If not, please see [Raft in TiKV](https://pingcap.com/blog/2017-07-28-raftintikv/)).
 
 ## A simple Raft process
 
@@ -39,7 +39,7 @@ If we merely use batch, the Leader couldn't proceed to the subsequent flow until
 
 We can execute the 2nd and 3rd steps of the above simple Raft process in parallel. In other words, the Leader can send logs to the Followers in parallel before appending logs. The reason is that in Raft if a log is appended by the majority of nodes, we consider the log committed. Thus, even if the Leader cannot append the log and goes panic after it sends a log to its Follower, the log can still be considered committed as long as `N/2 + 1` followers have received and appended the log. The log will then be applied successfully.
 
-Since appending log involves disk writing and overhead, we’d better make the Follower receive log and append as quickly as possible when the Leader is writing to the disk.
+Since appending log involves disk writing and overhead, we'd better make the Follower receive log and append as quickly as possible when the Leader is writing to the disk.
 
 Note that though the Leader can send the log to the Follower before appending log, the Follower cannot tell the Leader that it has successfully appended this log in advance. If the Follower does so but fails, the Leader will still think that the log has been committed. In this case, the system might be at the risk of data loss.
 
@@ -78,7 +78,7 @@ Below is a Snapshot process in the current implementation:
 
 3. The Follower receives the snapshot file, reads it and writes to RocksDB in batches.
 
-If there are multiple Followers of the Raft Group processing the snapshot file within one node, RocksDB’s write load will be huge, which easily leads to the condition that the whole write process slows down or stalls when RocksDB struggles to cope with so many compactions.
+If there are multiple Followers of the Raft Group processing the snapshot file within one node, RocksDB's write load will be huge, which easily leads to the condition that the whole write process slows down or stalls when RocksDB struggles to cope with so many compactions.
 
 Fortunately, RocksDB offers the [SST](https://github.com/facebook/rocksdb/wiki/Creating-and-Ingesting-SST-files) mechanism, with which we can directly create an SST snapshot file. Then the Follower loads the SST file to RocksDB  by calling `DB::IngestExternalFile()` and passes the file paths as a vector of `std::string`. For more information, see [Ingesting SST files](https://github.com/facebook/rocksdb/wiki/Creating-and-Ingesting-SST-files#ingesting-sst-files).
 
@@ -86,7 +86,7 @@ Fortunately, RocksDB offers the [SST](https://github.com/facebook/rocksdb/wiki/C
 
 TiKV uses `ReadIndex` and Lease Read to optimize the Raft Read operation, but these two operations are performed within the Raft thread, which is the same as the appended log process of Raft. However fast the appended log is written to RocksDB, this process still delays Lease Read.
 
-Thus, currently, we are trying to asynchronously implement Lease Read in another thread. We’ll move the Leader Lease judgment to another thread, and the thread in Raft will update Lease regularly through messages. In this way, we can guarantee that the write process of Raft will not influence that of read.
+Thus, currently, we are trying to asynchronously implement Lease Read in another thread. We'll move the Leader Lease judgment to another thread, and the thread in Raft will update Lease regularly through messages. In this way, we can guarantee that the write process of Raft will not influence that of read.
 
 We are also trying to append the Raft log in another thread at the same time. We will compare the performance of the two approaches and choose the better one later.  
 

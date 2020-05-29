@@ -14,13 +14,13 @@ Consensus is one of the most important challenges in designing and building dist
 
 Ever since the Raft Consensus Algorithm was created by Diego Ongaro and John Ousterhout, it has gained wide popularity in [many organizations](https://raft.github.io/#implementations), who are using it to develop consistent distributed services with high availability. For example, [CoreOS](https://coreos.com/) uses it to build [etcd](https://github.com/coreos/etcd), a popular key-value store which helps users save critical data. [HashiCorp](https://www.hashicorp.com/) uses it to build [Consul](https://www.consul.io/), which helps make service discovery and configuration easy.
 
-When we began to build TiKV, we researched and investigated many Raft implementations. We eventually decided to go with etcd’s Raft implementation and built our own [Raft](https://github.com/pingcap/raft-rs) using [Rust](https://www.rust-lang.org/), a systems programming language that runs blazing fast, prevents segfaults, and guarantees thread safety. Although etcd’s Raft implementation is written in Go, it has a simple API with no specific Go feature, thus can be easily ported to Rust.
+When we began to build TiKV, we researched and investigated many Raft implementations. We eventually decided to go with etcd's Raft implementation and built our own [Raft](https://github.com/pingcap/raft-rs) using [Rust](https://www.rust-lang.org/), a systems programming language that runs blazing fast, prevents segfaults, and guarantees thread safety. Although etcd's Raft implementation is written in Go, it has a simple API with no specific Go feature, thus can be easily ported to Rust.
 
-Since TiKV was open sourced on April 1, 2016, its Raft module has been running stably in many companies’ production environment. So we decided to abstract the Raft module away as an independent library and released it as a crate, [raft-rs](https://github.com/pingcap/raft-rs), to help the Rust community create their own consistent services using this easy to understand consensus algorithm. In the following sections, I will introduce what is raft-rs and how to use it.
+Since TiKV was open sourced on April 1, 2016, its Raft module has been running stably in many companies' production environment. So we decided to abstract the Raft module away as an independent library and released it as a crate, [raft-rs](https://github.com/pingcap/raft-rs), to help the Rust community create their own consistent services using this easy to understand consensus algorithm. In the following sections, I will introduce what is raft-rs and how to use it.
 
 ## Design
 
-In this post, I won’t cover the ins-and-outs of the Raft algorithm in detail, since there are many good resources that already cover that topic. Before we dive into raft-rs, let’s walk through its design first.
+In this post, I won't cover the ins-and-outs of the Raft algorithm in detail, since there are many good resources that already cover that topic. Before we dive into raft-rs, let's walk through its design first.
 
 As you probably already know, Raft replicates the state machine through logs. If we can ensure all the machines have the same sequence of logs, after applying all logs in order, the state machine will reach a consistent state.
 
@@ -74,7 +74,7 @@ After we create the Raft Storage, the next step is to use `RawNode::new()` to cr
 
 * `id`: the unique ID of the node in the cluster, which must be unique;
 
-* `election_tick`: how many ticks the follower re-campaigns if it doesn’t receive any message from the leader;
+* `election_tick`: how many ticks the follower re-campaigns if it doesn't receive any message from the leader;
 
 * `heartbeat_tick`: how many ticks the leader sends the heartbeat to the followers to keep alive;
 
@@ -86,7 +86,7 @@ After we create the Raft Storage, the next step is to use `RawNode::new()` to cr
 
 * `election_tick` must be larger than `heartbeat_tick`. If our tick interval is 100 ms, we can use 10 for `election_tick` and 3 for `heartbeat_tick`, which means the leader will send heartbeat to the followers every 300 ms and the follower will re-campaign without receiving any messages after 1 second.
 
-* The `read_only_option` enables you to choose the linearizability mode or the lease mode to read data. If you don’t care about the read consistency and want a higher read performance, you can use the lease mode.
+* The `read_only_option` enables you to choose the linearizability mode or the lease mode to read data. If you don't care about the read consistency and want a higher read performance, you can use the lease mode.
 
 Other important fields like `check_quorum` and `pre_vote` are used to avoid the disturbance and make the cluster more stable. I will explain them in detail in another article later.
 
