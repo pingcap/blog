@@ -10,31 +10,31 @@ image: /images/blog/how-we-compiled-a-golang-database-in-the-browser-using-webas
 
 ![How we compiled a Golang database in the browser using WebAssembly](media/how-we-compiled-a-golang-database-in-the-browser-using-webassembly.png)
 
-As Queeny Jin mentioned in her article, [TiDB in the Browser: Running a Golang Database on WebAssembly](https://pingcap.com/blog/tidb-in-the-browser-running-a-golang-database-on-webassembly/), we compiled TiDB into an in-browser database using WebAssembly (Wasm). We’re very proud of this pilot project because it opens a door to an entirely new world for both Golang and Wasm:
+As Queeny Jin mentioned in her article, [TiDB in the Browser: Running a Golang Database on WebAssembly](https://pingcap.com/blog/tidb-in-the-browser-running-a-golang-database-on-webassembly/), we compiled TiDB into an in-browser database using WebAssembly (Wasm). We're very proud of this pilot project because it opens a door to an entirely new world for both Golang and Wasm:
 
-* It is probably the first Golang database that’s been compiled to Wasm. As “[Golang weekly (issue 287)](https://golangweekly.com/issues/287)” put it, “The author wonders if a database like TiDB written in Go can run in a web browser, what about other complex Go apps? Go’s WebAssembly future is looking quite positive.”
+* It is probably the first Golang database that's been compiled to Wasm. As “[Golang weekly (issue 287)](https://golangweekly.com/issues/287)” put it, “The author wonders if a database like TiDB written in Go can run in a web browser, what about other complex Go apps? Go's WebAssembly future is looking quite positive.”
 
 * Besides [SQLite](https://github.com/kripken/sql.js/), Wasm has one more database example that can run inside the browser. As [Database Weekly (issue 279)](https://dbweekly.com/issues/279) put it, ”If a database like TiDB written in Go can run in the browser, what about other complex Go apps or other database systems?”
 
-What’s most exciting is that beginning database users now have an easy way to learn to write SQL statements or test new databases. They don’t have to download an entire database and go through the complex setup and configuration process to be able to write SQL. They can simply point their browser to [https://tour.tidb.io/](https://tour.tidb.io/), wait a few seconds for the TiDB database to load, and then start to write SQL statements.
+What's most exciting is that beginning database users now have an easy way to learn to write SQL statements or test new databases. They don't have to download an entire database and go through the complex setup and configuration process to be able to write SQL. They can simply point their browser to [https://tour.tidb.io/](https://tour.tidb.io/), wait a few seconds for the TiDB database to load, and then start to write SQL statements.
 
-The time to experiment with SQL without pain has come. In fact, the community has started to hack on this project, and they’ve built a markdown-it plugin to run a TiDB Wasm instance on markdown. Now you can have an interactive playground to learn SQL in the browser: [https://github.com/imiskolee/tidb-wasm-markdown](https://github.com/imiskolee/tidb-wasm-markdown)
+The time to experiment with SQL without pain has come. In fact, the community has started to hack on this project, and they've built a markdown-it plugin to run a TiDB Wasm instance on markdown. Now you can have an interactive playground to learn SQL in the browser: [https://github.com/imiskolee/tidb-wasm-markdown](https://github.com/imiskolee/tidb-wasm-markdown)
 
 The source code for this project is in [PR: #13069 - support compiling tidb to wasm](https://github.com/pingcap/tidb/pull/13069). You are welcome to join us!
 
-The rest of this blog will dive deep into how and why we built an in-browser database. By the end of the article, you’ll know how to reproduce it yourself, create your own projects, and get inspired.
+The rest of this blog will dive deep into how and why we built an in-browser database. By the end of the article, you'll know how to reproduce it yourself, create your own projects, and get inspired.
 
 **TL;DR**
 
-## _Want to make your own Golang apps run in a browser? Here’s what we learned ..._
+## _Want to make your own Golang apps run in a browser? Here's what we learned ..._
 
 _We had a lot of fun—and learned a lot—from our little adventure at TiDB Hackathon 2019. If you want to make your own Golang applications run in a browser, here are some suggestions:_
 
-* _As [WebAssembly Weekly - Issue #100](https://wasmweekly.news/issue-100/) mentioned, "WebAssembly support for Go applications is very much in its infancy.” For example, Golang hasn't fully supported WASI, and goleveldb doesn’t support Wasm/js. Be discreet before you go too deep, and clearly understand the use cases for your application._
+* _As [WebAssembly Weekly - Issue #100](https://wasmweekly.news/issue-100/) mentioned, "WebAssembly support for Go applications is very much in its infancy.” For example, Golang hasn't fully supported WASI, and goleveldb doesn't support Wasm/js. Be discreet before you go too deep, and clearly understand the use cases for your application._
 
-* _Make sure your application doesn't have third-party platform-specific dependencies that can’t be compiled to Wasm._
+* _Make sure your application doesn't have third-party platform-specific dependencies that can't be compiled to Wasm._
 
-* _Browsers don’t allow port listening and file operations, so you’ll have to work around those limitations._
+* _Browsers don't allow port listening and file operations, so you'll have to work around those limitations._
 
 ## Why an in-browser database?
 
@@ -42,26 +42,26 @@ The idea came to us when we were planning our TiDB Hackathon 2019. The goal of p
 
 ## How we made it possible?
 
-It’s a hackathon, so we hack, of course. =)
+It's a hackathon, so we hack, of course. =)
 
-Let’s take a look at our goal again: building an in-browser TiDB database. Breaking it down, we got a few questions to answer:
+Let's take a look at our goal again: building an in-browser TiDB database. Breaking it down, we got a few questions to answer:
 
 1. Can TiDB be compiled to an in-browser application? If yes, how?
 2. How can users input the SQL statements and get their results just from the browser?
 
-Let’s find out.
+Let's find out.
 
 ### Question #1: Can TiDB be compiled to an in-browser application? If yes, how?
 
 **What we knew:** TiDB is written in Golang, and Go 1.11 added a port to WebAssembly.
 
-**What we didn’t know:** Does TiDB include any platform-specific libraries that can’t be compiled to Wasm?
+**What we didn't know:** Does TiDB include any platform-specific libraries that can't be compiled to Wasm?
 
 We started our adventure of compiling TiDB to Wasm by following [getting started with WebAssembly](https://github.com/golang/go/wiki/WebAssembly#getting-started). Here was our first setback:
 
 ![Getting started with WebAssembly](media/getting-started-with-webassembly.png)
 
-Going through the goleveldb code and the storage package led to the heartbreaking fact that even though it had implementations for most platforms, it didn’t have one for Wasm:
+Going through the goleveldb code and the storage package led to the heartbreaking fact that even though it had implementations for most platforms, it didn't have one for Wasm:
 
 ![The goleveldb code and the storage package](media/goleveldb-code-and-the-storage-package.png)
 
@@ -104,7 +104,7 @@ We compiled the code again and got this:
 
 Um... What does `missing function body` mean?
 
-Diving deep into the code, we found that there were function declarations in the `arith_decl.go` file but the functions weren’t implemented in the system-specific files.
+Diving deep into the code, we found that there were function declarations in the `arith_decl.go` file but the functions weren't implemented in the system-specific files.
 
 This problem was similar to the one we had before, and we could solve it the same way, except there was a  problem: this code belonged to a third-party library and was not in our control. Besides, TiDB did not depend on the library directly—it depended on the `mathutil` library which depended on the `bigfft` library, and neither of these libraries was in our control. Two plans came to our minds:
 
@@ -112,7 +112,7 @@ This problem was similar to the one we had before, and we could solve it the sam
 
 * Plan 2. Clone the `mathutil` and `bigfft` libraries, add the functions and leave them unimplemented, and change the TiDB dependency to our cloned libraries.
 
-Plan 1 was quickly ruled out because we couldn’t do it in time for the hackathon, not to mention we had no idea whether the maintainers of these two projects would approve our changes and merge them.
+Plan 1 was quickly ruled out because we couldn't do it in time for the hackathon, not to mention we had no idea whether the maintainers of these two projects would approve our changes and merge them.
 
 Plan 2 had its own problem because it meant we would probably detach ourselves from the upstreams.
 
@@ -136,7 +136,7 @@ Compiling again:
 
 Yay! We made it! The `main.wasm` is the compiled TiDB Wasm file we wanted, and it proves that TiDB could be compiled to an in-browser application.
 
-Ok. Now we have a compiled TiDB Wasm. Let’s run it, and see what comes out!
+Ok. Now we have a compiled TiDB Wasm. Let's run it, and see what comes out!
 
 Theoretically, because we were using `os.Stdin` as the input and the `os.Stdout` as the output, and we hadn't done anything with DOM yet, the output should be blank. However, TiDB outputs its log to `os.Stdout`, we expect a log message that TiDB started successfully. Unfortunately, this was what we got:
 
@@ -197,7 +197,7 @@ We all know that browsers cannot let the web applications within them do dangero
 
 Here is what we did:
 
-1. Reuse what’s already in the TiDB test code. We looked through the test code in TiDB and [found the following](https://github.com/pingcap/tidb/search?q=MustQuery%28%22select+count%28*%29&unscoped_q=MustQuery%28%22select+count%28*%29):
+1. Reuse what's already in the TiDB test code. We looked through the test code in TiDB and [found the following](https://github.com/pingcap/tidb/search?q=MustQuery%28%22select+count%28*%29&unscoped_q=MustQuery%28%22select+count%28*%29):
 
     ```go
     result = tk.MustQuery("select count(*) from t group by d order by c")
@@ -283,7 +283,7 @@ Here are the specific steps:
 
 ### One more thing: taking in local files
 
-Our users now have an in-browser database where they can write SQL directly. However, there’s a small problem: they can only write one SQL statement at one time.
+Our users now have an in-browser database where they can write SQL directly. However, there's a small problem: they can only write one SQL statement at one time.
 
 Imagine if a user wanted to test the compatibility between TiDB and MySQL. It would be a nightmare to run the statements one by one.
 
@@ -291,7 +291,7 @@ However, in TiDB we have features such as `load stats` and `load data` to read a
 
 To resolve this issue, we did the following:  
 
-1. Opened the browser’s `upload` window so users could choose a file and upload it to TiDB:
+1. Opened the browser's `upload` window so users could choose a file and upload it to TiDB:
 
     ```go
     js.Global().Get("upload").Invoke(js.FuncOf(func(this js.Value, args []js.Value) interface{} {
@@ -339,7 +339,7 @@ To resolve this issue, we did the following:
 
     ![The result](media/the-result.png)
 
-## What’s next
+## What's next
 
 Because of the limited time in Hackathon, TiDB Wasm could only serve as a pilot project. If you use TiDB Wasm, keep in mind these [caveats](https://pingcap.com/blog/tidb-in-the-browser-running-a-golang-database-on-webassembly/#what-are-the-limitations). We also have a lot more work to do, including the following:
 
@@ -347,7 +347,7 @@ Because of the limited time in Hackathon, TiDB Wasm could only serve as a pilot 
 
 * Apply P2P technologies such as WebRTC to provide service to other browsers. We believe there will be more and more applications migrating to Wasm and many of them will need databases like TiDB Wasm.
 
-* Make the Wasm files smaller. The current files are almost 80 MB and occupy too much memory. This is not friendly to browser. (Thanks a lot to [Syrus Akbary](https://github.com/syrusakbary) for compiling TiDB to WASI; it’s a pity that it’s too large to run on any runtime.)
+* Make the Wasm files smaller. The current files are almost 80 MB and occupy too much memory. This is not friendly to browser. (Thanks a lot to [Syrus Akbary](https://github.com/syrusakbary) for compiling TiDB to WASI; it's a pity that it's too large to run on any runtime.)
 
 * Publish TiDB to WAPM and run it in [WebAssembly shell](https://webassembly.sh/).
 

@@ -11,11 +11,11 @@ categories: ['HTAP']
 
 In this 5-minute tutorial, we will show you how to spin up a standard TiDB cluster using Docker Compose on your local computer, so you can get a taste of its hybrid power, before using it for work or your own project in production. A standard TiDB cluster includes TiDB (MySQL compatible stateless SQL layer), [TiKV](http://bit.ly/tikv_repo_publication) (a distributed transactional key-value store where the data is stored), and [TiSpark](https://github.com/pingcap/tispark) (an Apache Spark plug-in that powers complex analytical queries within the TiDB ecosystem).
 
-Ready? Let’s get started!
+Ready? Let's get started!
 
 ## Setting Up
 
-Before we start deploying TiDB, we’ll need a few things first: `wget`, Git, Docker, and a MySQL client. If you don’t have them installed already, here are the instructions to get them.
+Before we start deploying TiDB, we'll need a few things first: `wget`, Git, Docker, and a MySQL client. If you don't have them installed already, here are the instructions to get them.
 
 <main class="tabs">
   <input id="tabMacOS" type="radio" name="tabs" value="macOSContent" checked>
@@ -130,13 +130,13 @@ To check if your deployment is successful:
 
 ## Test TiDB compatibility with MySQL
 
-As we mentioned, TiDB is MySQL compatible. You can use TiDB as MySQL slaves with instant horizontal scalability. That’s how many innovative tech companies, like [Mobike](https://pingcap.com/blog/Use-Case-TiDB-in-Mobike/), use TiDB.
+As we mentioned, TiDB is MySQL compatible. You can use TiDB as MySQL slaves with instant horizontal scalability. That's how many innovative tech companies, like [Mobike](https://pingcap.com/blog/Use-Case-TiDB-in-Mobike/), use TiDB.
 
 To test out this MySQL compatibility:
 
 1. Keep the `tidb-docker-compose` running, and launch a new Terminal tab or window.
 
-2. Add MySQL to the path (if you haven’t already):
+2. Add MySQL to the path (if you haven't already):
 
     ```bash
     export PATH=${PATH}:/usr/local/mysql/bin
@@ -160,7 +160,7 @@ Server version: 5.7.10-TiDB-v2.0.0-rc.4-31
 
 <div class="caption-center"> The Compatibility of TiDB with MySQL </div>
 
-## Let’s get some data!
+## Let's get some data!
 
 Now we will grab some sample data that we can play around with.
 
@@ -185,17 +185,17 @@ Now we will grab some sample data that we can play around with.
 
     This will take a few seconds.
 
-4. Go back to your MySQL client window or tab, and see what’s in there:
+4. Go back to your MySQL client window or tab, and see what's in there:
 
     ```sql
     SHOW DATABASES;
     ```
 
-    **Result:** You can see the `TPCH_001` database on the list. That’s the sample data we just ported over.
+    **Result:** You can see the `TPCH_001` database on the list. That's the sample data we just ported over.
 
  ![Imported data](media/imported_data.png)
 
-    Now let’s go into `TPCH_001`:
+    Now let's go into `TPCH_001`:
 
  ```sql
  USE TPCH_001;
@@ -204,19 +204,19 @@ Now we will grab some sample data that we can play around with.
 
     **Result:** You can see all the tables in `TPCH_001`, like `NATION`, `ORDERS`, etc.
 
-5. Let’s see what’s in the `NATION` table:
+5. Let's see what's in the `NATION` table:
 
     ```sql
     SELECT * FROM NATION;
     ```
 
-**Result:** You’ll see a list of countries with some keys and comments.
+**Result:** You'll see a list of countries with some keys and comments.
 
 ![The records in the NATION table](media/the_records_in_the_nation_table.png)
 
 ## Launch TiSpark
 
-Now let’s launch TiSpark, the last missing piece of our hybrid database puzzle.
+Now let's launch TiSpark, the last missing piece of our hybrid database puzzle.
 
 1. In the same window where you downloaded TiSpark sample data (or open a new tab), go back to the `tidb-docker-compose` directory.
 
@@ -239,7 +239,7 @@ Now let’s launch TiSpark, the last missing piece of our hybrid database puzzle
     It looks something like this:
     ![Bind TiSpark to this Spark instance](media/bind_tispark_to_this_spark_instance.png)
 
-4. Now, let’s see what’s in the `NATION` table (should be the same as what we saw on our MySQL client):
+4. Now, let's see what's in the `NATION` table (should be the same as what we saw on our MySQL client):
 
     ```java
     spark.sql("select * from nation").show(30);
@@ -247,11 +247,11 @@ Now let’s launch TiSpark, the last missing piece of our hybrid database puzzle
 
     **Result:**
 
-    ![What’s in the NATION table in Spark](media/whats_in_the_nation_table_in_spark.png)
+    ![What's in the NATION table in Spark](media/whats_in_the_nation_table_in_spark.png)
 
-## Let’s get hybrid!
+## Let's get hybrid!
 
-Now, let’s go back to the MySQL tab or window, make some changes to our tables, and see if the changes show up on the TiSpark side.
+Now, let's go back to the MySQL tab or window, make some changes to our tables, and see if the changes show up on the TiSpark side.
 
 1. In the MySQL client, try this `UPDATE`:
 
@@ -282,4 +282,4 @@ You can see that both the MySQL and TiSpark clients return the same results -- f
 
 With this simple deployment of TiDB on your local machine, you now have a functioning Hybrid Transactional and Analytical processing (HTAP) database. You can continue to make changes to the data in your MySQL client (simulating transactional workloads) and analyze the data with those changes in TiSpark (simulating real-time analytics).
 
-Of course, launching TiDB on your local machine is purely for experimental purposes. If you are interested in trying out TiDB for your production environment, send us a note: [info@pingcap.com](mailto:info@pingcap.com) or reach out on [our website](https://pingcap.com/en/). We’d be happy to help you!
+Of course, launching TiDB on your local machine is purely for experimental purposes. If you are interested in trying out TiDB for your production environment, send us a note: [info@pingcap.com](mailto:info@pingcap.com) or reach out on [our website](https://pingcap.com/en/). We'd be happy to help you!

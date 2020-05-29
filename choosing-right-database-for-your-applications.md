@@ -79,7 +79,7 @@ When we're choosing a database from a variety of products, we ask ourselves:
 
     You might think that 1,000 writes per second is too low a threshold. We set it to 1,000 because:
 
-  * Before we put an application into production, our estimate might be inaccurate. In normal conditions, we have 1,000 writes per second. But when we‘re running a big sales promotion campaign, the write QPS may jump to 10,000 writes per second. It's better to set a conservative reference value.
+  * Before we put an application into production, our estimate might be inaccurate. In normal conditions, we have 1,000 writes per second. But when we're running a big sales promotion campaign, the write QPS may jump to 10,000 writes per second. It's better to set a conservative reference value.
   * We allow the R&D team to use large text fields. When the length of a single row increases to a certain point, the write performance for the master database and the replication performance for the slave database may be drastically slower. Thus, we can't expect a high write rate for a single node.
 
 * **Does the application require that the 99th percentile response time be within one millisecond (ms)?**
@@ -145,7 +145,7 @@ TiDB is a good choice for data archiving. Theoretically, a TiDB cluster can infi
 
 You may wonder what happens when MySQL's data size hits 1 TB, and disk space is scarce. Can we double the disk space and increase the memory capacity to win more time for engineers to shard a database?
 
-Actually, when a database has terabyte-scale data, it might be difficult to implement database sharding for an application that has been there for a long time. If it‘s possible to archive old data to maintain the data volume at a stable level (but the database still stores terabytes of data), we can also upgrade hardware to improve database performance.
+Actually, when a database has terabyte-scale data, it might be difficult to implement database sharding for an application that has been there for a long time. If it's possible to archive old data to maintain the data volume at a stable level (but the database still stores terabytes of data), we can also upgrade hardware to improve database performance.
 
 ### Using Redis to smooth peak traffic
 

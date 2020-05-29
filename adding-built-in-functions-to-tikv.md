@@ -1,26 +1,26 @@
 ---
 title: Landing Your First Rust Pull Request in TiKV
 date: 2018-08-03
-summary: This guide is intended to show how you can land your first Pull Request (PR) in Rust to contribute to TiKV in less than 30 minutes. But before we do that, here’s some helpful background.
+summary: This guide is intended to show how you can land your first Pull Request (PR) in Rust to contribute to TiKV in less than 30 minutes. But before we do that, here's some helpful background.
 tags: ['TiKV', 'Community', 'Rust']
 categories: ['Open Source Community']
 ---
 
-This guide is intended to show how you can land your first Pull Request (PR) in Rust to contribute to TiKV in less than 30 minutes. But before we do that, here’s some helpful background.
+This guide is intended to show how you can land your first Pull Request (PR) in Rust to contribute to TiKV in less than 30 minutes. But before we do that, here's some helpful background.
 
-[TiDB](https://github.com/pingcap/tidb) ("Ti" = Titanium) is an open-source distributed scalable Hybrid Transactional and Analytical Processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built by the company PingCAP (that’s us!) and its active open-source community (that’s you!). It’s designed to provide infinite horizontal scalability, strong consistency, and high availability with MySQL compatibility. It serves as a one-stop data warehouse for both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workloads.
+[TiDB](https://github.com/pingcap/tidb) ("Ti" = Titanium) is an open-source distributed scalable Hybrid Transactional and Analytical Processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built by the company PingCAP (that's us!) and its active open-source community (that's you!). It's designed to provide infinite horizontal scalability, strong consistency, and high availability with MySQL compatibility. It serves as a one-stop data warehouse for both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workloads.
 
 What powers this experience is [TiKV](https://github.com/pingcap/tikv), a distributed transactional key-value store (all built in Rust!), which is now deployed in more than 200 companies in production (see the [constantly-updated list of adopters](https://pingcap.com/docs/adopters)). One key reason why TiDB can process complex SQL queries so quickly is a Coprocessor API layer between TiDB and TiKV, which takes advantage of the distributed nature of a distributed database to "push down" partial queries in parallel, where partial results are generated and reassembled for the client. This is a key differentiator between TiDB and other distributed databases.
 
-So far, TiDB can only push down some simple expressions to TiKV to be processed, e.g. fetching the value in a column and doing comparison or arithmetic operations on simple data structures. To get more juice out of distributed computing resources, we need to include more expressions to push down. The first type is MySQL built-in functions. How do we accomplish that in short order? That’s where *you*--our intrepid systems hacker, Rust lover, and distributed system geek--come in!
+So far, TiDB can only push down some simple expressions to TiKV to be processed, e.g. fetching the value in a column and doing comparison or arithmetic operations on simple data structures. To get more juice out of distributed computing resources, we need to include more expressions to push down. The first type is MySQL built-in functions. How do we accomplish that in short order? That's where *you*--our intrepid systems hacker, Rust lover, and distributed system geek--come in!
 
-So follow along this guide to contribute a built-in MySQL function to TiKV in Rust in 30 minutes. And when you do, you will receive some special gifts from us reserved just for our beloved contributors, as a small token of our gratitude. Let’s get started!
+So follow along this guide to contribute a built-in MySQL function to TiKV in Rust in 30 minutes. And when you do, you will receive some special gifts from us reserved just for our beloved contributors, as a small token of our gratitude. Let's get started!
 
 ## How the Coprocessor Works
 
-Before diving into our step-by-step guide on how to contribute, it’s worth understanding how TiDB’s Coprocessor works at a high-level. After TiDB receives a SQL statement, it parses the statement into an abstract syntax tree (AST), then generates an optimal execution plan using its Cost-Based Optimizer. (Learn more details on how TiDB generates a query plan [HERE](https://pingcap.com/docs/sql/understanding-the-query-execution-plan/).) The execution plan is split into multiple subtasks and the Coprocessor API pushes down these subtasks to different TiKV nodes to be processed in parallel.
+Before diving into our step-by-step guide on how to contribute, it's worth understanding how TiDB's Coprocessor works at a high-level. After TiDB receives a SQL statement, it parses the statement into an abstract syntax tree (AST), then generates an optimal execution plan using its Cost-Based Optimizer. (Learn more details on how TiDB generates a query plan [HERE](https://pingcap.com/docs/sql/understanding-the-query-execution-plan/).) The execution plan is split into multiple subtasks and the Coprocessor API pushes down these subtasks to different TiKV nodes to be processed in parallel.
 
-Here’s an illustration on how a statement like `select count(*) from t where a + b > 5` gets pushed down:
+Here's an illustration on how a statement like `select count(*) from t where a + b > 5` gets pushed down:
 
 ![Pushing Down a Statement](/media/pushing-down-a-statement.png)
 
@@ -36,7 +36,7 @@ After different TiKV nodes compute and return results of their respective subtas
 
 ## How to add a MySQL built-in function to TiKV
 
-Now that you have an overview of how Coprocessor in TiDB/TiKV works, here’s how to contribute MySQL built-in functions to further strengthen TiKV’s coprocessing power!
+Now that you have an overview of how Coprocessor in TiDB/TiKV works, here's how to contribute MySQL built-in functions to further strengthen TiKV's coprocessing power!
 
 ### Step 1: Select a function for pushdown
 
@@ -72,7 +72,7 @@ Take [`MultiplyIntUnsigned`](https://github.com/pingcap/tikv/pull/3277) as an ex
     | evalDuration    | Result\<Option\<Cow\<'a, Duration\>\>\> |
     | evalJSON    | Result\<Option\<Cow\<'a, Json\>\>\> |
 
-    Thus, in TiDB’s `builtinArithmeticMultiplyIntUnsignedSig`, it implements the `evalInt` method, so the return value type of this function `multiply_int_unsigned` should be `Result<Option<i64>>`.
+    Thus, in TiDB's `builtinArithmeticMultiplyIntUnsignedSig`, it implements the `evalInt` method, so the return value type of this function `multiply_int_unsigned` should be `Result<Option<i64>>`.
 
 4. All the arguments of the `builtin-in` function should be consistent with that of the `eval` function of the expression:
 
@@ -306,4 +306,4 @@ After you finish the above steps, you can file a PR for TiKV! After we merge, yo
 
 ### Wrapping Up
 
-We hope this guide provides an easy entry point to contributing to our Coprocessor, one of TiDB and TiKV’s core features. If you run into any issues or problems with this guide, please let us know on our [Twitter](https://twitter.com/PingCAP), [Reddit](https://www.reddit.com/r/tidb), [Stack Overflow](https://stackoverflow.com/questions/tagged/tikv), or [Google Group](https://groups.google.com/forum/#!forum/tidb-user). Look forward to seeing your PR, and once it’s merged, expect a special gift of gratitude from our team!
+We hope this guide provides an easy entry point to contributing to our Coprocessor, one of TiDB and TiKV's core features. If you run into any issues or problems with this guide, please let us know on our [Twitter](https://twitter.com/PingCAP), [Reddit](https://www.reddit.com/r/tidb), [Stack Overflow](https://stackoverflow.com/questions/tagged/tikv), or [Google Group](https://groups.google.com/forum/#!forum/tidb-user). Look forward to seeing your PR, and once it's merged, expect a special gift of gratitude from our team!

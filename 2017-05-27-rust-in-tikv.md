@@ -37,9 +37,9 @@ Before we begin, let me introduce myself. My name is Siddon Tang, the Chief Arch
 
 At first, I will explain the reason why we chose Rust to develop TiKV, then show you the architecture of TiKV briefly and the key technologies. In the end, I will introduce what we plan to do in the future.
 
-### <span id="what">What’s TiKV?</span>
+### <span id="what">What's TiKV?</span>
 
-All right, let’s begin. First,  what is TiKV. TiKV is a distributed Key-Value database with the following features:
+All right, let's begin. First,  what is TiKV. TiKV is a distributed Key-Value database with the following features:
 
 * **Geo-replication:** We use Raft and Placement Driver to replicate data geographically to guarantee data safety.
 
@@ -59,7 +59,7 @@ As you see, TiKV has many powerful features. To develop these features, we also 
 
 * **Fast speed:** We take the performance of TiKV very seriously, so we need a language which runs very fast at runtime.
 
-* **Memory safety**: As a program that is going to run for a long time, we don’t want to meet any memory problem, such as dangling pointer, memory leak, etc…
+* **Memory safety**: As a program that is going to run for a long time, we don't want to meet any memory problem, such as dangling pointer, memory leak, etc…
 
 * **Thread safety**: We must guarantee data consistency all the time, so any data race problem must be avoided.
 
@@ -67,15 +67,15 @@ As you see, TiKV has many powerful features. To develop these features, we also 
 
 ### <span id="c">Why not C++? </span>
 
-To develop a high performance service, C++ may be the best choice in most cases, but we didn’t choose it. We figured we might spend too much time avoiding the memory problem or the data race problem. Moreover, C++ has no official package manager and that makes the maintaining and compiling third dependences very troublesome and difficult, resulting in a long development cycle.
+To develop a high performance service, C++ may be the best choice in most cases, but we didn't choose it. We figured we might spend too much time avoiding the memory problem or the data race problem. Moreover, C++ has no official package manager and that makes the maintaining and compiling third dependences very troublesome and difficult, resulting in a long development cycle.
 
 ### <span id="go">Why not Go? </span>
 
-At first, we considered using Go, but then gave up this idea. Go has GC which fixes many memory problems, but it might stop the running process sometimes. No matter how little time the stop takes, we can’t afford it. Go doesn’t solve the data race problem either. Even we can use double dash race in test or at runtime, this isn’t enough.
+At first, we considered using Go, but then gave up this idea. Go has GC which fixes many memory problems, but it might stop the running process sometimes. No matter how little time the stop takes, we can't afford it. Go doesn't solve the data race problem either. Even we can use double dash race in test or at runtime, this isn't enough.
 
-Besides, although we can use Goroutine to write the concurrent logic easily, we still can’t neglect the runtime expenses of the scheduler. We met a problem a few days ago: we used multi goroutines to select the same context but found that the performance was terrible, so we had to use one sub context for one goroutine, then the performance became better.
+Besides, although we can use Goroutine to write the concurrent logic easily, we still can't neglect the runtime expenses of the scheduler. We met a problem a few days ago: we used multi goroutines to select the same context but found that the performance was terrible, so we had to use one sub context for one goroutine, then the performance became better.
 
-More seriously, CGO has heavy expenses, but we need to call RocksDB API without delay. For the above reasons, we didn’t choose Go even this is the favorite language in our team.
+More seriously, CGO has heavy expenses, but we need to call RocksDB API without delay. For the above reasons, we didn't choose Go even this is the favorite language in our team.
 
 [Back to the top](#top)
 
@@ -95,11 +95,11 @@ Although Rust is around for a long time, it still lacks of libraries and tools, 
 
 ### Then, Why Rust?
 
-Although Rust has the above disadvantages, its advantages are attractive for us too. Rust is memory safe, so we don’t need to worry about memory leak, or dangling pointer any more.
+Although Rust has the above disadvantages, its advantages are attractive for us too. Rust is memory safe, so we don't need to worry about memory leak, or dangling pointer any more.
 
-Rust is thread safe, so there won’t be any data race problem. All the safety are guaranteed by compiler. So in most cases, when the compiling passes, we are sure that we can run the program safely.
+Rust is thread safe, so there won't be any data race problem. All the safety are guaranteed by compiler. So in most cases, when the compiling passes, we are sure that we can run the program safely.
 
-Rust has no GC expenses, so we won’t meet the "stop the world" problem. Calling C through FFI is very fast, so we don’t worry the performance reduction when calling the RocksDB API. At last, Rust has an official package manager, Cargo, we can find many libraries and use them directly.
+Rust has no GC expenses, so we won't meet the "stop the world" problem. Calling C through FFI is very fast, so we don't worry the performance reduction when calling the RocksDB API. At last, Rust has an official package manager, Cargo, we can find many libraries and use them directly.
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('Rust in TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -122,11 +122,11 @@ As you can see, the development of TiKV is very fast and the released versions o
 
 ![TiKV architecture](media/kvarchi.jpg)
 
-Now let’s go deep into TiKV. You can see from the TiKV architecture that the hierarchy of TiKV is clear and easy to understand.
+Now let's go deep into TiKV. You can see from the TiKV architecture that the hierarchy of TiKV is clear and easy to understand.
 
 At the bottom layer, TiKV uses RocksDB, a high performance, persistent Key-Value store, as the backend storage engine.
 
-The next layer is Raft KV. TiKV uses the Raft to replicate data geographically. TiKV is designed to store tons of data which one Raft group can’t hold. So we split the data with ranges and use each range as an individual Raft group. We name this approach: Multi-Raft groups.
+The next layer is Raft KV. TiKV uses the Raft to replicate data geographically. TiKV is designed to store tons of data which one Raft group can't hold. So we split the data with ranges and use each range as an individual Raft group. We name this approach: Multi-Raft groups.
 
 TiKV provides a simple Key-Value API including SET, GET, DELETE to let user use it just as any distributed Key-Value storage. The upper layer also uses these to support advanced functions.
 
@@ -180,11 +180,11 @@ Here is a simple write flow: when a client sends a write request to TiKV, TiKV f
 
 ### <span id="key">Key technologies </span>
 
-Now let’s move on to the key technologies:
+Now let's move on to the key technologies:
 
 For networking, we use a widely used protocol, Protocol Buffers, to serialize or unserialize data fastly.
 
-At first, we used **MIO** to build up the network framework. Although MIO encapsulates low level network handling, it is still a very basic library that we need to receive or send data manually, and to decode or encode our customized network protocol. It is not convenient actually. So from RC2, we have been refactoring networking with gRPC. The benefit of gRPC is very obvious. We don’t need to care how to handle network anymore, only focusing on our logic, and the code looks simple and clear. Meanwhile, users can build their own TiKV client with other programming languages easily. We have already been developing a TiKV client with Java.
+At first, we used **MIO** to build up the network framework. Although MIO encapsulates low level network handling, it is still a very basic library that we need to receive or send data manually, and to decode or encode our customized network protocol. It is not convenient actually. So from RC2, we have been refactoring networking with gRPC. The benefit of gRPC is very obvious. We don't need to care how to handle network anymore, only focusing on our logic, and the code looks simple and clear. Meanwhile, users can build their own TiKV client with other programming languages easily. We have already been developing a TiKV client with Java.
 
 For **asynchronous framework**. After receiving the request, TiKV dispatches the request to different threads to handle it asynchronously. At first, we used the MIO plus callback to handle the asynchronous request, but callback may break the code logic, and it is hard to read and write correctly, so now we have been refactoring with tokio-core and futures, and we think this style is more modern for Rust in the future. Sometimes, we also use the thread pool to dispatch simple tasks, and we will use futures-cpupool later.
 
@@ -196,7 +196,7 @@ For **monitoring**, we wrote a rust client for Prometheus, and this client is re
 
 ### <span id="todo">TODO...</span>
 
-Ok, that’s what we have done and are doing. Here are what we will do in the future:
+Ok, that's what we have done and are doing. Here are what we will do in the future:
 
 * Make TiKV faster, like removing Box. we have used many boxes in TiKV to write code easily, this is not efficient. In our benchmark, dynamic dispatch is at least three times slower than static dispatch, so later we will use Trait Trait directly.
 

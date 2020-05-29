@@ -1,5 +1,5 @@
 ---
-title: Blitzscaling the Largest Dockless Bikesharing Platform with TiDB’s Help
+title: Blitzscaling the Largest Dockless Bikesharing Platform with TiDB's Help
 author: ['Chengjie Ding', 'Ming Hu']
 date: 2018-04-03
 summary: Mobike has been using the TiDB database in the production environment since early 2017. Now they have deployed TiDB in multiple clusters with close to 100 nodes, handling dozens of TBs of data for different application scenarios. This post will provide a deep dive on why Mobike chose TiDB over MySQL and its sharding solutions by illustrating how TiDB solves their pain points.
@@ -17,7 +17,7 @@ customerCategory: Internet
 
 **Authors:** Chengjie Ding and Ming Hu (Infrastructure Platform Engineers at Mobike)
 
-[Mobike](https://www.crunchbase.com/organization/mobike) is the world’s first and largest dockless bike-sharing provider, serving over 200 million users in 200 cities across the world, operating over 9 million smart bikes. It’s an affordable and convenient way of transportation for short urban trips, with a patented bike design with a smart lock system and a mobile app. We handle more than 30 million rides for our users every single day.
+[Mobike](https://www.crunchbase.com/organization/mobike) is the world's first and largest dockless bike-sharing provider, serving over 200 million users in 200 cities across the world, operating over 9 million smart bikes. It's an affordable and convenient way of transportation for short urban trips, with a patented bike design with a smart lock system and a mobile app. We handle more than 30 million rides for our users every single day.
 
 The system behind the Mobike app collects over 30 TB of data daily from bikes equipped with GPS and IoT connected devices. The unprecedented growth in data volume and concurrency pose immense challenges on our backend system, especially our database. Thanks to [TiDB](http://bit.ly/tidb_repo_publication), a distributed hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database built by the [PingCAP](https://pingcap.com) team, not only are we equipped with a solution that can elastically scale out horizontally, but we are also empowered to obtain insights from "fresh" data to support real-time decision-making. The vibrant TiDB open-source community also allows us to deploy and operate around the world without vendor lock-in. Now, we can easily support the rapid growth in our business and data without worrying about infrastructure.
 
@@ -28,8 +28,8 @@ We have been using TiDB in our production environment since early 2017. Now we h
 Before we chose TiDB, we carefully evaluated MySQL and its sharding solutions. As a fast-growing startup looking to scale quickly, we found MySQL sharding solutions undesirable for the following reasons:
 
 - Standalone MySQL required us to archive data frequently. When the data size outgrew the capacity of a standalone MySQL, we had to shard the database and tables using middleware solutions, which was difficult to manage;
-- Based on our previous experience with sharding, huge volumes of data often lead to a hung database, because it required frequent table structure updates to perform Data Definition Language (DDL) operations. This situation would negatively affect our application’s usability and even cause data inconsistency. In addition, we want the application logic to be upgraded more conveniently, despite of the service volume outburst and the changing service requirement, which cannot be done with sharding;
-- If we went with the sharding solution, when it’s time to shard the database, we had to stop the on-going business, refactored the application code, and then migrated the data. What made things worse, we must carefully and manually specify the sharding key because it controls how the data should be distributed across the shards and changing an existing sharding key could cause serious problems. Not to mention that sharding does not support cross-shard distributed transactions, or no guarantee of the strong consistency of transactions.
+- Based on our previous experience with sharding, huge volumes of data often lead to a hung database, because it required frequent table structure updates to perform Data Definition Language (DDL) operations. This situation would negatively affect our application's usability and even cause data inconsistency. In addition, we want the application logic to be upgraded more conveniently, despite of the service volume outburst and the changing service requirement, which cannot be done with sharding;
+- If we went with the sharding solution, when it's time to shard the database, we had to stop the on-going business, refactored the application code, and then migrated the data. What made things worse, we must carefully and manually specify the sharding key because it controls how the data should be distributed across the shards and changing an existing sharding key could cause serious problems. Not to mention that sharding does not support cross-shard distributed transactions, or no guarantee of the strong consistency of transactions.
 
 A new solution must be found to meet the following requirements:
 
@@ -51,7 +51,7 @@ TiDB has the following core features:
 
 Inside the TiDB project, there are several components:
 
-1. TiDB cluster consists of **stateless TiDB instances** and serves as a stateless SQL layer that processes users’ SQL queries, accesses data in the storage layer, and returns corresponding results.
+1. TiDB cluster consists of **stateless TiDB instances** and serves as a stateless SQL layer that processes users' SQL queries, accesses data in the storage layer, and returns corresponding results.
 
 2. [TiKV](https://github.com/pingcap/tikv) cluster, composed of **TiKV instances**, is the distributed transactional Key-Value storage where the data resides. Regardless of whether the data comes, it is stored in TiKV eventually. It uses the [Raft](https://raft.github.io/) protocol for replication to ensure data consistency and disaster recovery.
 
@@ -79,7 +79,7 @@ To meet this challenge, our initial plan was to synchronize data to Hive. We cam
 
 1. Full volume synchronization on a daily basis. This method would result in high pressure for the online databases and consume huge amounts of Hive resource as time goes on.
 
-2. Incremental synchronization on a daily basis. This approach was complex, given that the daily differences should be merged with the preceding day’s data, because HDFS does not support an `update` operation. The advantage of this method was that if the data size is large, incremental synchronization is faster and saves more space than full synchronization. The disadvantage is that incremental synchronization occupies a lot of Hadoop’s computing resources, which affects the system’s stability.
+2. Incremental synchronization on a daily basis. This approach was complex, given that the daily differences should be merged with the preceding day's data, because HDFS does not support an `update` operation. The advantage of this method was that if the data size is large, incremental synchronization is faster and saves more space than full synchronization. The disadvantage is that incremental synchronization occupies a lot of Hadoop's computing resources, which affects the system's stability.
 
 Instead with TiDB, real-time data synchronization can be performed from multiple MySQL instances with tools designed specifically for the MySQL ecosystem. Syncer, which we mentioned before, enabled us to synchronize our TiDB cluster with various MySQL instances and the sharded MySQL clusters. TiDB supports the `update` operation, so it does not have the same issues Hive has. With TiSpark in the mix, which is a thin layer built for running Apache Spark on top of TiDB/TiKV, we can leverage Spark to quickly run complex OLAP queries immediately after data is imported to TiDB.
 
@@ -100,18 +100,18 @@ With a rapidly growing user base, data from Mobike Store soared. We estimate tha
 - Handle high concurrency during peak hours and when special promotional campaigns are running;
 - No service interruption even as our core business grows and evolves.
 
-Based on our internal test results, TiDB is well-suited to support Mobike Store’s infrastructural needs. When the data volume in a table exceeds 50 million rows, TiDB shows considerable superiority over MySQL. TiDB’s native horizontal scalability enables us to increase our capacity elastically. It also supports online DDL, which facilitates the constant iterations of services like Mobike Store well--even though as the application changes, there is no need to halt the service.
+Based on our internal test results, TiDB is well-suited to support Mobike Store's infrastructural needs. When the data volume in a table exceeds 50 million rows, TiDB shows considerable superiority over MySQL. TiDB's native horizontal scalability enables us to increase our capacity elastically. It also supports online DDL, which facilitates the constant iterations of services like Mobike Store well--even though as the application changes, there is no need to halt the service.
 
 Since we deployed TiDB, the data size for OLTP in Mobike Store has reached tens of billions of rows and operation has been smooth, with timely and professional support from the PingCAP team.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Blitzscaling the Largest Dockless Bikesharing Platform with TiDB’s Help', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
-    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Blitzscaling the Largest Dockless Bikesharing Platform with TiDB’s Help', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+    <a href="/download" onclick="trackViews('Blitzscaling the Largest Dockless Bikesharing Platform with TiDB's Help', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Blitzscaling the Largest Dockless Bikesharing Platform with TiDB's Help', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
 ### **Case 4: The Log Collection Database**
 
-To enable instant insights for real-time decision-making, Mobike keeps and analyzes logs from all kinds of data sources, such as parking histories and notifications when bikes are successfully unlocked. Because of this large log data volume, we care a lot about a database’s scalability, as well as cross-database analysis capacity.
+To enable instant insights for real-time decision-making, Mobike keeps and analyzes logs from all kinds of data sources, such as parking histories and notifications when bikes are successfully unlocked. Because of this large log data volume, we care a lot about a database's scalability, as well as cross-database analysis capacity.
 
 Before TiDB, we had the following problems:
 
@@ -133,7 +133,7 @@ While TiDB is a great product, there were some issues and challenges when using 
 
 As noted in the post, [TiDB Internal (I) - Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1/), TiKV is essentially a huge, ordered Key-Value Map. Data is stored and distributed in Regions. Each Region contains a continuous range of data. If one Region contains data from several tables or multiple hot Regions co-exist on one machine, a resource bottleneck emerges, hence the problem of resource isolation.
 
-This issue was carefully considered in TiDB’s design, which is why `HotRegionBalance` was designed into [Placement Driver](https://pingcap.com/docs/overview/#tidb-introduction)(PD), a separate component that manages TiKV clusters, to avoid it. Yet, if there are multiple databases inside one cluster or multiple tables in one database, the probability of resource bottleneck will still increase, because the scheduling policy in PD is based on following assumptions:
+This issue was carefully considered in TiDB's design, which is why `HotRegionBalance` was designed into [Placement Driver](https://pingcap.com/docs/overview/#tidb-introduction)(PD), a separate component that manages TiKV clusters, to avoid it. Yet, if there are multiple databases inside one cluster or multiple tables in one database, the probability of resource bottleneck will still increase, because the scheduling policy in PD is based on following assumptions:
 
 - Resource consumption of each Region is equal;
 - There is no correlation between different Regions;
@@ -160,10 +160,10 @@ It has been one year since we deployed TiDB in our production environment. In th
 The main benefits of TiDB include:
 
 - **Flexible scalability.** Its scalability rivals that of NoSQL database. When the data size and the access traffic are on the rise, it can improve the system service support capability through horizontal scaling, while holding response latency stable.
-- **Usability.** TiDB is compatible with MySQL protocols, so it’s an easy drop-in solution that allow us to avoid sharding. Its interface is user-friendly, so our technicians can easily perform operations and backend administrations.
+- **Usability.** TiDB is compatible with MySQL protocols, so it's an easy drop-in solution that allow us to avoid sharding. Its interface is user-friendly, so our technicians can easily perform operations and backend administrations.
 - **Enterprise-Grade Support.** We can communicate with PingCAP support personnel and rely on them to provide quick responses and solutions to any of our issues.
 
-Our close cooperation with the PingCAP team and interaction with TiDB’s open-source community has also brought us substantial benefits and feedbacks, greatly reducing our code maintenance costs.
+Our close cooperation with the PingCAP team and interaction with TiDB's open-source community has also brought us substantial benefits and feedbacks, greatly reducing our code maintenance costs.
 
 In the future, we plan to continue working closely with PingCAP to strengthen the management tools we are developing, implement TiDB even deeper into our infrastructure, and apply TiDB more widely inside Mobike.
 

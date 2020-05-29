@@ -107,7 +107,7 @@ Schedule depends on the information gathering of the whole cluster. Simply put, 
 - the number of offline Replicas
 - data reading/writing speed
 
-Through these two kinds of heartbeats, PD gathers the information of the whole cluster and then makes decisions. What’s more, PD makes more accurate decisions by getting extra information through the management interface. For example, when the heartbeat of a Store is interrupted, PD has no idea whether it is temporarily or permanently. PD can only waits for a period of time (30 minutes by default); if there is still no heartbeat, PD considers that the Store has been offline and it needs to move all Regions on the Store away. However, if an Operations staff manually offline a machine, he needs to tell PD through its management interface that the Store is unavailable. In this case, PD will immediately move all Regions on the Store away.
+Through these two kinds of heartbeats, PD gathers the information of the whole cluster and then makes decisions. What's more, PD makes more accurate decisions by getting extra information through the management interface. For example, when the heartbeat of a Store is interrupted, PD has no idea whether it is temporarily or permanently. PD can only waits for a period of time (30 minutes by default); if there is still no heartbeat, PD considers that the Store has been offline and it needs to move all Regions on the Store away. However, if an Operations staff manually offline a machine, he needs to tell PD through its management interface that the Store is unavailable. In this case, PD will immediately move all Regions on the Store away.
 
 [Back to the top](#top)
 
@@ -117,7 +117,7 @@ After gathering information, PD needs some policies to draw up a concrete schedu
 
 1. The number of Replica in a Region should be correct
 
- When PD finds that the number of Replica for a Region doesn’t meet the requirement through the heartbeat of a Region Leader, it modifies the number through the Add/Remove Replica operations. This might occur when:
+ When PD finds that the number of Replica for a Region doesn't meet the requirement through the heartbeat of a Region Leader, it modifies the number through the Add/Remove Replica operations. This might occur when:
 
 + a node drops and loses all data, leading to the lack of Replica in some Regions.
 + a dropped node functions again and automatically joins in the cluster. In this case, there is a redundant Replica and needs to be removed.
@@ -160,13 +160,13 @@ As the data storage capacity of each replica is fixed, if we maintain the balanc
 
 ## <span id="implementation">The implementation of Scheduling</span>
 
-Now let’s see the schedule process.
+Now let's see the schedule process.
 
 PD gets the detail data of the cluster by constantly gathering information through heartbeats of Store or Leader. Based on this information and the schedule policies, PD generates the operating sequence, and then checks whether there is an operation to be performed on this Region when receiving a heartbeat sent by the Region Leader. PD returns the upcoming operation to Region Leader through the reply message of the heartbeat and then monitors the execution result in the next heartbeat. These operations are just suggestions to Region Leader, which are not guaranteed to be executed. It is the Region Leader that decides to whether and when to execute according to its current state.
 
 ## <span id="summary">Summary</span>
 
-This blog discloses information you might not find elsewhere. We hope that you’ve had a better understanding about what needs to be considered to build a distributed storage system for scheduling and how to decouple policies and implementation to support a more flexible expansion of policy.
+This blog discloses information you might not find elsewhere. We hope that you've had a better understanding about what needs to be considered to build a distributed storage system for scheduling and how to decouple policies and implementation to support a more flexible expansion of policy.
 
 We hope these three blogs ([Data Storage](https://pingcap.github.io/blog/2017/07/11/tidbinternal1), [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2), and [Scheduling](https://pingcap.github.io/blog/2017/07/20/tidbinternal3)) can help you understand the basic concepts and implementation principles of TiDB. In the future, more blogs about TiDB from code to architecture are on their way!
 

@@ -68,7 +68,7 @@ sudo sh -c 'echo fe > /sys/class/net/eth0/queues/rx-0/rps_cpus'
 sudo sh -c 'echo fe00 > /sys/class/net/eth0/queues/rx-1/rps_cpus'
 ```
 
-The result was better on ARM64, but CPU 0 and 8 were still the bottleneck. Specifically, the bottleneck was caused by the network interrupt handling. We’ll try to optimize it later.
+The result was better on ARM64, but CPU 0 and 8 were still the bottleneck. Specifically, the bottleneck was caused by the network interrupt handling. We'll try to optimize it later.
 
 You can see that CPUs run more evenly on x86-64 than on ARM64.
 

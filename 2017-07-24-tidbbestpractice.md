@@ -57,7 +57,7 @@ TiDB provides complete distributed transactions and the model has some optimizat
 
 + Optimistic Lock
 
- TiDB’s transaction model uses the optimistic lock and will not detect conflicts until the commit phase. If there are conflicts, retry the transaction. But this model is inefficient if the conflict is severe because operations before retry are invalid and need to repeat. Assume that the database is used as a counter. High access concurrency might lead to severe conflicts, resulting in multiple retries or even timeouts. Therefore, in the scenario of severe conflicts, it is recommended to solve problems at the system architecture level, such as placing counter in Redis. Nonetheless, the optimistic lock model is efficient if the access conflict is not very severe.
+ TiDB's transaction model uses the optimistic lock and will not detect conflicts until the commit phase. If there are conflicts, retry the transaction. But this model is inefficient if the conflict is severe because operations before retry are invalid and need to repeat. Assume that the database is used as a counter. High access concurrency might lead to severe conflicts, resulting in multiple retries or even timeouts. Therefore, in the scenario of severe conflicts, it is recommended to solve problems at the system architecture level, such as placing counter in Redis. Nonetheless, the optimistic lock model is efficient if the access conflict is not very severe.
 
 + Transaction Size Limits
 
@@ -98,7 +98,7 @@ TiDB supports the complete secondary indexes which are also global indexes. Many
 
 + The more secondary indexes, the better?
 
- Secondary indexes can speed up query, but adding an index has side effects. In the last section, we’ve introduced the storage model of index. For each additional index, there will be one more Key-Value when inserting a piece of data. Therefore, the more indexes, the slower the writing speed and the more space it takes up. In addition, too many indexes will influence the runtime of the optimizer. And inappropriate index will mislead the optimizer. Thus, the more secondary indexes is not necessarily the better.
+ Secondary indexes can speed up query, but adding an index has side effects. In the last section, we've introduced the storage model of index. For each additional index, there will be one more Key-Value when inserting a piece of data. Therefore, the more indexes, the slower the writing speed and the more space it takes up. In addition, too many indexes will influence the runtime of the optimizer. And inappropriate index will mislead the optimizer. Thus, the more secondary indexes is not necessarily the better.
 
 + Which columns should create indexes?
 
@@ -120,15 +120,15 @@ If the query involves lots of rows, scanning index proceeds concurrently. When t
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Best Practices', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
-The following two conditions don’t have the problem of two accesses:
+The following two conditions don't have the problem of two accesses:
 
-+ Columns of the index have already met the query requirement. Assume that the `c` Column on the `t` Table has an index and the query is: `select c from t where c > 10;`. At this time, all needed data can be obtained if accessing the index. We call this condition Covering Index. But if you focus more on the query performance, you can put a portion of columns that don’t need to be filtered but need to be returned in the query result into index, creating composite index. Take `select c1, c2 from t where c1 > 10;` as an example. You can optimize this query by creating composite index `Index c12 (c1, c2)`.
++ Columns of the index have already met the query requirement. Assume that the `c` Column on the `t` Table has an index and the query is: `select c from t where c > 10;`. At this time, all needed data can be obtained if accessing the index. We call this condition Covering Index. But if you focus more on the query performance, you can put a portion of columns that don't need to be filtered but need to be returned in the query result into index, creating composite index. Take `select c1, c2 from t where c1 > 10;` as an example. You can optimize this query by creating composite index `Index c12 (c1, c2)`.
 
 + The Primary Key of table is integer. In this case, TiDB will use the value of Primary Key as row ID. Thus, if the query criterion is on PK, you can directly construct the range of the row ID, scan Table data, and get the result.
 
 + Query concurrency
 
- As data is distributed across many Regions, TiDB makes query concurrently. But the concurrency by default is not high in case it consumes lots of system resources. Besides, as for the OLTP query, it doesn’t involve a large amount of data and the low concurrency is enough. But for the OLAP Query, the concurrency is high and TiDB modifies the query concurrency through System Variable.
+ As data is distributed across many Regions, TiDB makes query concurrently. But the concurrency by default is not high in case it consumes lots of system resources. Besides, as for the OLTP query, it doesn't involve a large amount of data and the low concurrency is enough. But for the OLAP Query, the concurrency is high and TiDB modifies the query concurrency through System Variable.
 
 - [tidb\_distsql\_scan\_concurrency](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-distsql-scan-concurrency):
  The concurrency of scanning data, including scanning the Table and index data.
@@ -139,7 +139,7 @@ The following two conditions don’t have the problem of two accesses:
 
 + Ensure the order of results through index
 
- Index cannot only be used to filter data, but also to sort data. Firstly, get row IDs according to the index order. Then return the row content according to the return order of row IDs. In this way, the return results are ordered according to the index column. I’ve mentioned that the model of scanning index and getting Row is parallel + Pipeline. If Row is returned according to the index order, a high concurrency between two queries will not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [tidb\_index\_serial\_scan\_concurrency](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-index-serial-scan-concurrency) variable.
+ Index cannot only be used to filter data, but also to sort data. Firstly, get row IDs according to the index order. Then return the row content according to the return order of row IDs. In this way, the return results are ordered according to the index column. I've mentioned that the model of scanning index and getting Row is parallel + Pipeline. If Row is returned according to the index order, a high concurrency between two queries will not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [tidb\_index\_serial\_scan\_concurrency](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-index-serial-scan-concurrency) variable.
 
 + Reverse index scan
 
@@ -149,7 +149,7 @@ The following two conditions don’t have the problem of two accesses:
 
 ## <span id="practice"> Scenarios and Practices </span>
 
-In the last section, we discussed some basic implementation mechanisms of TiDB and their influence on usage. Let’s start from specific usage scenarios and operation practices. We’ll go through from deployment to business supporting.
+In the last section, we discussed some basic implementation mechanisms of TiDB and their influence on usage. Let's start from specific usage scenarios and operation practices. We'll go through from deployment to business supporting.
 
 ### <span id="deploy"> Deployment</span>
 
@@ -163,7 +163,7 @@ If there is a Unique Key and if the business end can ensure that there is no con
 
 `SET @@session.tidb_skip_constraint_check=1;`
 
-In order to improve the write performance, you can tune TiKV’s parameters as stated in [this document](https://pingcap.com/docs/op-guide/tune-tikv/).
+In order to improve the write performance, you can tune TiKV's parameters as stated in [this document](https://pingcap.com/docs/op-guide/tune-tikv/).
 
 Please pay extra attention to this parameter:
 
@@ -211,7 +211,7 @@ For query requirements and specific statements, please refer to [this statement]
 
 You can control the concurrency of SQL execution through the `SET` statement and the selection of the `Join` operator through `Hint`.
 
-In addition, you can also use MySQL’s standard index selection, the `Hint` syntax: control the optimizer to select index through `Use Index/Ignore Index hint`.
+In addition, you can also use MySQL's standard index selection, the `Hint` syntax: control the optimizer to select index through `Use Index/Ignore Index hint`.
 
 If the business scenario needs both OLTP and OLAP, you can send the TP request and AP request to different tidb-servers, diminishing the impact of AP business on TP. It is recommended to use high-end machines (e.g. more processor cores, larger memory, etc.) for the tidb-server that carries AP business.
 
@@ -219,7 +219,7 @@ If the business scenario needs both OLTP and OLAP, you can send the TP request a
 
 TiDB uses [Grafana+Prometheus to monitor the system state](https://pingcap.com/docs/op-guide/monitor-overview/). The monitoring system is automatically deployed and configured if using TiDB Ansible.
 
-There are lots of items in the monitoring system, the majority of which are for TiDB developers. There is no need to understand these items but for an in-depth knowledge of the source code. We’ve picked out some items that are related to business or to the state of system key components in a separate panel for users.
+There are lots of items in the monitoring system, the majority of which are for TiDB developers. There is no need to understand these items but for an in-depth knowledge of the source code. We've picked out some items that are related to business or to the state of system key components in a separate panel for users.
 
 In addition to monitoring, you can also view the system logs. The three components of TiDB, `tidb-server`, `tikv-server` and `pd-server`, each has a `--log-file` parameter. If this parameter has been configured when initiating, logs will be stored in the file configured by the parameter and Log files are automatically archived on a daily basis. If the `--log-file` parameter has not been configured, log will be output to stderr.
 
@@ -236,7 +236,7 @@ For more information, see [our website](https://pingcap.com/en/) and our [Techni
 Simply put, TiDB can be used in the following scenarios:
 
 + The amount of data is too large for a standalone database
-+ Don’t want to use the sharding solutions
++ Don't want to use the sharding solutions
 + The access mode has no obvious hotspot
 + Transactions, strong consistency, and disaster recovery
 

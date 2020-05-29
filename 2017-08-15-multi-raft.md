@@ -56,7 +56,7 @@ The problem of Range is that a Region may probably become a performance hotspot 
 
 To sum up, we use Range for data sharding in TiKV and split them into multiple Raft Groups, each of which is called a Region.
 
-Below is the protocol definition of Region’s protbuf:
+Below is the protocol definition of Region's protbuf:
 
 ```
 
@@ -92,23 +92,23 @@ message Peer {
 
 ```
 
-**`region_epoch`**: When a Region adds or deletes Peer or splits, we think that this Region’s epoch has changed. RegionEpoch’s `conf_ver` increases during ConfChange while `version` increases during split/merge.
+**`region_epoch`**: When a Region adds or deletes Peer or splits, we think that this Region's epoch has changed. RegionEpoch's `conf_ver` increases during ConfChange while `version` increases during split/merge.
 
-**`id`**: Region’s only indication and PD allocates it in a globally unique way.
+**`id`**: Region's only indication and PD allocates it in a globally unique way.
 
 **`start_key`**, **`end_key`**: Stand for the range of this Region [start_key, end_key). To the very first region, start and end key are both empty, and TiKV handles it in a special way internally.
 
-**`peers`**: The node information included in the current Region. To a Raft Group, we usually have three replicas, each of which is a Peer. Peer’s `id` is also globally allocated by PD and `store_id` indicates the Store of this Peer.
+**`peers`**: The node information included in the current Region. To a Raft Group, we usually have three replicas, each of which is a Peer. Peer's `id` is also globally allocated by PD and `store_id` indicates the Store of this Peer.
 
 [Back to the top](#top)
 
 ### RocksDB / Keys Prefix
 
-In terms of actual data storage, whether it’s Raft Metadata, Log or the data in State Machine, we store them inside a RocksDB instance. More information about RocksDB, please refer to [the RocksDB project on GitHub](https://github.com/facebook/rocksdb).
+In terms of actual data storage, whether it's Raft Metadata, Log or the data in State Machine, we store them inside a RocksDB instance. More information about RocksDB, please refer to [the RocksDB project on GitHub](https://github.com/facebook/rocksdb).
 
 We use different prefixes to differentiate data of Raft and State Machine. For detailed information, please refer to [keys/src/lib.rs](https://github.com/tikv/tikv/blob/master/components/keys/src/lib.rs). As for the actual data of State Machine, we add "z" as the prefix and for other metadata stored locally, including Raft, we use the 0x01 prefix.
 
-I want to highlight the Key format of some important metadata and I’ll skip the first 0x01 prefix.
+I want to highlight the Key format of some important metadata and I'll skip the first 0x01 prefix.
 
 + 0x01: To store `StoreIdent`. Before initializing this Store, we store information like its Cluster ID and Store ID into this key.
 
@@ -168,7 +168,7 @@ message RegionLocalState {
 
 **`RaftApplyState`:** Used to store the last Log index that Raft applies and some truncated Log information.
 
-**`RegionLocalStaste`:** Used to store Region information and the corresponding Peer state on this Store. `Normal` indicates that this Peer is normal, `Applying` means this Peer hasn’t finished the `apply snapshot` operation and `Tombstone` shows that this Peer has been removed from Region and cannot join in Raft Group.
+**`RegionLocalStaste`:** Used to store Region information and the corresponding Peer state on this Store. `Normal` indicates that this Peer is normal, `Applying` means this Peer hasn't finished the `apply snapshot` operation and `Tombstone` shows that this Peer has been removed from Region and cannot join in Raft Group.
 
 [Back to the top](#top)
 
@@ -193,7 +193,7 @@ The value of both `RAFT_INIT_LOG_TERM` and `RAFT_INIT_LOG_INDEX` is 5 (as long a
 
 2. Create passively: When a Region adds a Peer replica and this `ConfChange` command has been applied, the Leader will send a Message to the Store of this newly-added Peer. When the Store receives this Message and confirms its legality, and finds that there is no corresponding Peer, it will create a corresponding Peer. However, at that time, this Peer is an uninitialized and any information of its Region is unknown to us, so we use 0 to initialize its Log Term and Index. Leader then will know this Follower has no data (there exists a Log notch from 0 to 5) and it will directly send snapshot to this Follower.
 
-3. Create when splitting: When a Region splits into two Regions, one of the Regions will inherit the metadata before splitting and just modify its Range while the other will create relevant meta information. The corresponding Peer of this newly-created Region and the initial Log Term and Index is also 5. The reason is that by then Leader and Follower both have the latest data and don’t need snapshot. (Note: Actually, the Split process is much more complicated and the situation of sending snapshot may occur. But I’m not going to elaborate in this article.)
+3. Create when splitting: When a Region splits into two Regions, one of the Regions will inherit the metadata before splitting and just modify its Range while the other will create relevant meta information. The corresponding Peer of this newly-created Region and the initial Log Term and Index is also 5. The reason is that by then Leader and Follower both have the latest data and don't need snapshot. (Note: Actually, the Split process is much more complicated and the situation of sending snapshot may occur. But I'm not going to elaborate in this article.)
 
 Then you need to pay attention to snapshot. Both generating and applying snapshot are time-consuming operations. `PeerStore` will only synchronize the meta information related to the snapshot to avoid the situation that the whole Raft thread will get stuck and obstruct the subsequent Raft process. Instead, `PeerStore` asynchronously performs snapshot on another thread and it maintains the state of snapshot:
 
@@ -241,21 +241,21 @@ Peer encapsulates `Raft RawNode`. Those `Propose` and `ready` operations towards
 
 The `propose` function of Peer is the interface of the external Client command. Peer will determine the type of this command:
 
-+ If it’s a read-only operation and Leader is still within the validity period of lease, Leader will provide local read directly without going through Raft.
++ If it's a read-only operation and Leader is still within the validity period of lease, Leader will provide local read directly without going through Raft.
 
-+ If it’s a Transfer Leader operation, Peer will first of all determine whether it is still Leader and whether the log of the Follower that needs to be the new Leader is latest. If so, Peer will call RawNode’s `transfer_leader` command.
++ If it's a Transfer Leader operation, Peer will first of all determine whether it is still Leader and whether the log of the Follower that needs to be the new Leader is latest. If so, Peer will call RawNode's `transfer_leader` command.
 
-+ If it’s a Change Peer operation, Peer will call RawNode’s `propose_conf_change` command.
++ If it's a Change Peer operation, Peer will call RawNode's `propose_conf_change` command.
 
-+ For other operations, Peer will directly call RawNode’s `propose` command.
++ For other operations, Peer will directly call RawNode's `propose` command.
 
 Before `propose`, Peer will also store the corresponding callback into `PendingCmd`. When the corresponding log has been applied, it will call the corresponding callback through the unique UUID in the command and return the corresponding result to Client.
 
-Peer’s `handle_raft_ready` functions also require extra attention. We’ve mentioned that in the previous Raft session, when a `RawNode` is ready, we need to do a series of process to the data in `ready`, including writing entries into Storage, sending messages, applying `committed_entries`, `advance`, etc. All of these are done in the `handle_raft_ready` functions of Peer.
+Peer's `handle_raft_ready` functions also require extra attention. We've mentioned that in the previous Raft session, when a `RawNode` is ready, we need to do a series of process to the data in `ready`, including writing entries into Storage, sending messages, applying `committed_entries`, `advance`, etc. All of these are done in the `handle_raft_ready` functions of Peer.
 
 As for `committed_entries`, Peer will parse the actual command, call the corresponding process and execute the corresponding function. For example, for `exec_admin_cmd`, Peer executes administering commands like `ConfChange` and `Split`; for `exec_write_cmd`, it executes the common data operation commands towards State Machine. To guarantee the data consistency, Peer will only store the modified data into `WriteBatch` of RocksDB when executing and then atomically write in RocksDB. It cannot modify the corresponding memory metadata unless the write operation is successful. If it fails, we will directly go panic to guarantee the data integrity.
 
-When Peer is handling `ready`, we pass in a `Transport` object for Peer to send message. Below is the definition of the Transport’s trait:
+When Peer is handling `ready`, we pass in a `Transport` object for Peer to send message. Below is the definition of the Transport's trait:
 
 ```
 
@@ -289,12 +289,12 @@ After each `EventLoop`, i.e. inside the tick call-back of mio, Store will perfor
 
 1. Store traverses all the ready Peers and calls `handle_raft_ready_append`. We will use a `WriteBatch` to handle all ready append data and store the corresponding result at the same time.
 
-2. If `WriteBatch` succeeds, it will then call `post_raft_ready_append` successively, mainly for the Follower to send message. (Leader’s message has been completed in `handle_raft_ready_append`)
+2. If `WriteBatch` succeeds, it will then call `post_raft_ready_append` successively, mainly for the Follower to send message. (Leader's message has been completed in `handle_raft_ready_append`)
 
 3. Then, Store successively calls `handle_raft_ready_apply` and committed entries related to `apply` and then calls the final result of `on_ready_result`.
 
 ## Summary
 
-In this blog, I’ve shared the details about Multi-raft, one of TiKV’s key technologies. In the subsequent sections, we will introduce Transaction, Coprocessor, and how Placement Drivers schedules the entire cluster. Stay tuned!
+In this blog, I've shared the details about Multi-raft, one of TiKV's key technologies. In the subsequent sections, we will introduce Transaction, Coprocessor, and how Placement Drivers schedules the entire cluster. Stay tuned!
 
 [Back to the top](#top)

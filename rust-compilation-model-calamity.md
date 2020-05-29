@@ -96,7 +96,7 @@ This was (and probably is) typical of other Rust developers too. I still do the 
 
 So, historically, how bad have Rust compile times been? A simple barometer here is to see how Rust's self-hosting times have changed over the years, which is the time it takes Rust to build itself. Rust building itself is not directly comparable to Rust building other projects, for a variety of reasons, but I think it will be illustrative.
 
-The [first Rust compiler](https://gist.github.com/brson/31b6f8c5467b050779ce9aa05d41aa84/edit), from 2010, called rustboot, was written in OCaml, and it's ultimate purpose was to build a second compiler, rustc, written in Rust, and begin the self-hosting bootstrap cycle. In addition to being written in Rust, rustc would also use [LLVM](https://llvm.org/) as its backend for generating machine code, instead of rustboot’s hand-written x86 code-generator.
+The [first Rust compiler](https://gist.github.com/brson/31b6f8c5467b050779ce9aa05d41aa84/edit), from 2010, called rustboot, was written in OCaml, and it's ultimate purpose was to build a second compiler, rustc, written in Rust, and begin the self-hosting bootstrap cycle. In addition to being written in Rust, rustc would also use [LLVM](https://llvm.org/) as its backend for generating machine code, instead of rustboot's hand-written x86 code-generator.
 
 Rust needed to become self-hosting as a means of "dog-fooding" the language — writing the Rust compiler in Rust meant that the Rust authors needed to use their own language to write practical software early in the language design process. It was hoped that self-hosting could lead to a useful and practical language.
 
@@ -111,7 +111,7 @@ This is where the long, gruelling history of Rust's tragic compile times began, 
 > I wanted to share historic self-hosting times here, but after many hours and obstacles attempting to build Rust revisions from 2011, I finally gave up and decided I just had to publish this piece without them. Instead, here are some madeup numbers:
 >
 >* _7 femto-bunnies_ - rustboot building Rust prior to being retired
->* _49 kilo-hamsters_ - rustc building Rust immediately after rustboot’s retirement
+>* _49 kilo-hamsters_ - rustc building Rust immediately after rustboot's retirement
 >* _188 giga-sloths_ - rustc building Rust in 2020
 
 Anyway, last time I bootstrapped Rust a few months ago, it took over five hours.

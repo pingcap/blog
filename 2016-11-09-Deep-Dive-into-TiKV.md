@@ -41,7 +41,7 @@ TiKV (The pronunciation is: /'taɪkeɪvi:/ tai-K-V, etymology: titanium) is a di
 
 ## Protocol
 
-TiKV uses the [Protocol Buffer](https://developers.google.com/protocol-buffers/) protocol for interactions among different components. Because Rust doesn’t support [gRPC](http://www.grpc.io/) for the time being, we use our own protocol in the following format:
+TiKV uses the [Protocol Buffer](https://developers.google.com/protocol-buffers/) protocol for interactions among different components. Because Rust doesn't support [gRPC](http://www.grpc.io/) for the time being, we use our own protocol in the following format:
 
 ```
 Message: Header + Payload
@@ -51,7 +51,7 @@ Header: | 0xdaf4(2 bytes magic value) | 0x01(version 2 bytes) | msg\_len(4 bytes
 
 The data of Protocol Buffer is stored in the Payload part of the message. At the Network level, we will first read the 16-byte Header. According to the message length (`msg_len`) information in the Header, we calculate the actual length of the message, and then read the corresponding data and decode it.
 
-The interaction protocol of TiKV is in the  [`kvproto`](https://github.com/pingcap/kvproto) project and the protocol to support push-down is in the [`tipb`](https://github.com/pingcap/tipb) project. Here, let’s focused on the `kvproto` project only.
+The interaction protocol of TiKV is in the  [`kvproto`](https://github.com/pingcap/kvproto) project and the protocol to support push-down is in the [`tipb`](https://github.com/pingcap/tipb) project. Here, let's focused on the `kvproto` project only.
 
 About the protocol files in the `kvproto` project:
 
@@ -109,7 +109,7 @@ See the following details about how to use Raft:
 
 3. After a raw node is created, the tick interface of the raw node will be called periodically (like every 100ms) and drives the internal Raft Step function.
 
-4. If data is to be written by Raft, the Propose interface is called directly. The parameters of the Propose interface is an arbitrary binary data which means that Raft doesn’t care the exact data content that is replicated by it. It is completely up to the external logics as how to handle the data.
+4. If data is to be written by Raft, the Propose interface is called directly. The parameters of the Propose interface is an arbitrary binary data which means that Raft doesn't care the exact data content that is replicated by it. It is completely up to the external logics as how to handle the data.
 
 5. If it is to process the membership changes, the `propose_conf_change` interface of the raw node can be called to send a ConfChange object to add/remove a certain node.
 
@@ -174,17 +174,17 @@ The transaction model in TiKV is inspired by [Google Percolator](http://static.g
 
 1. For a system that is similar to Percolator, there needs to be a globally unique time service, which is called Timestamp Oracle (TSO), to allocate a monotonic increasing timestamp. The functions of TSO are provided in PD in TiKV. The generation of TSO in PD is purely memory operations and stores the TSO information in etcd on a regular base to ensure that TSO is still  monotonic increasing even after PD restarts.
 
-2. Compared with Percolator where the information such as Lock is stored by adding extra column to a specific row, TiKV uses a column family (CF) in RocksDB to handle all the information related to Lock. For massive data, there aren’t many row Locks for simultaneous transactions. So the Lock processing speed can be improved significantly by placing it in an extra and optimized CF.
+2. Compared with Percolator where the information such as Lock is stored by adding extra column to a specific row, TiKV uses a column family (CF) in RocksDB to handle all the information related to Lock. For massive data, there aren't many row Locks for simultaneous transactions. So the Lock processing speed can be improved significantly by placing it in an extra and optimized CF.
 
 3. Another advantage about using an extra CF is that we can easily clean up the remaining Locks. If the Lock of a row is acquired by a transaction but is not cleaned up because of crashed threads or other reasons, and there are no more following-up transactions to visit this Lock, the Lock is left behind. We can easily discover and clean up these Locks by scanning the CF.
 
 The implementation of the distributed transaction depends on the TSO service and the client that encapsulates corresponding transactional algorithm which is implemented in TiDB. The monotonic increasing timestamp can set the time series for concurrent transactions and the external clients can act as a coordinator to resolve the conflicts and unexpected terminations of the transactions.
 
-Let’s see how a transaction is executed:
+Let's see how a transaction is executed:
 
 1. The transaction starts. When the transaction starts, the client must obtain the current timestamp (startTS) from TSO. Because TSO guarantees the monotonic increasing of the timestamp, startTS can be used to identify the time series of the transaction.
 
-2. The transaction is in progress. During a transaction, all the read operations must carry `startTS` while they send RPC requests to TiKV and TiKV uses MVCC to make sure to return the data that is written before `startTS`. For the write operations, TiKV uses optimistic concurrency control which means the actual data is cached on the clients rather than written to the servers assuming that the current transaction doesn’t affect other transactions.  
+2. The transaction is in progress. During a transaction, all the read operations must carry `startTS` while they send RPC requests to TiKV and TiKV uses MVCC to make sure to return the data that is written before `startTS`. For the write operations, TiKV uses optimistic concurrency control which means the actual data is cached on the clients rather than written to the servers assuming that the current transaction doesn't affect other transactions.  
 
 3. The transaction commits. TiKV uses a 2-phase commit algorithm. Its difference from the common 2-phase commit is that there is no independent transaction manager. The commit state of a transaction is identified by the commit state of the `PrimaryKey` which is selected from one of the to-be-committed keys.
 
@@ -206,7 +206,7 @@ Currently, the Coprocessor in TiKV is mainly used in two situations, Split and p
 
 2. For push-down, the Coprocessor is used to improve the performance of TiDB. For some operations like select count(*), there is no need for TiDB to get data from row to row first and then count. The quicker way is that TiDB pushes down these operations to the corresponding TiKV nodes, the TiKV nodes do the computing and then TiDB consolidates the final results.
 
-Let’s take an example of `select count(*) from t1` to show how a complete push-down process works:
+Let's take an example of `select count(*) from t1` to show how a complete push-down process works:
 
 1. After TiDB parses the SQL statement, based on the range of the t1 table, TiDB finds out that all the data of t1 are in Region 1 and Region 2 on TiKV, so TiDB sends the push-down commands to Region 1 and Region 2.
 
@@ -224,9 +224,9 @@ Let’s take an example of `select count(*) from t1` to show how a complete push
 
 When a request of Get or Put is sent to TiKV, how does TiKV process it?
 
-As mentioned earlier, TiKV provides features such as simple Key-Value, transactional Key-Value and push-down. But no matter it’s transactional Key-Value or push-down, it will be transformed to simple Key-Value operations in TiKV. Therefore, let’s take an example of simple Key-Value operations to show how TiKV processes a request. As for how TiKV implements transaction Key-Value and push-down support, let’s cover that later.
+As mentioned earlier, TiKV provides features such as simple Key-Value, transactional Key-Value and push-down. But no matter it's transactional Key-Value or push-down, it will be transformed to simple Key-Value operations in TiKV. Therefore, let's take an example of simple Key-Value operations to show how TiKV processes a request. As for how TiKV implements transaction Key-Value and push-down support, let's cover that later.
 
-Let’s take `Put` as an example to show how a complete Key-Value process works:
+Let's take `Put` as an example to show how a complete Key-Value process works:
 
 1. The client sends a `Put` command to TiKV, such as `put k1 v1`. First, the client gets the Region ID for the k1 key and the leader of the Region peers from PD. Second, the client sends the Put request to the corresponding TiKV node.
 
@@ -254,19 +254,19 @@ These optimizations are mentioned in the Raft paper and they have been supported
 
 ### Membership Change
 
-To ensure the data safety, there are multiple replicas on different stores. Each replica is another replica’s Peer. If there aren’t enough replicas for a certain Region, we will add new replicas; on the contrary, if the numbers of the replicas for a certain Region exceeds the threshold, we will remove some replicas.
+To ensure the data safety, there are multiple replicas on different stores. Each replica is another replica's Peer. If there aren't enough replicas for a certain Region, we will add new replicas; on the contrary, if the numbers of the replicas for a certain Region exceeds the threshold, we will remove some replicas.
 
-In TiKV, the change of the Region replicas are completed by the Raft Membership Change. But how and when a Region changes its membership is scheduled by PD. Let’s take adding a Replica as an example to show how the whole process works:
+In TiKV, the change of the Region replicas are completed by the Raft Membership Change. But how and when a Region changes its membership is scheduled by PD. Let's take adding a Replica as an example to show how the whole process works:
 
 1. A Region sends heartbeats to PD regularly. The heartbeats include the relative information about this Region, such as the information of the peers.
 
-2. When PD receives the heartbeats, it will check if the number of the replicas of this Region is consistent with the setup. Assuming there are only two replicas in this Region but it’s three replicas in the setup, PD will find an appropriate Store and return the ChangePeer command to the Region.
+2. When PD receives the heartbeats, it will check if the number of the replicas of this Region is consistent with the setup. Assuming there are only two replicas in this Region but it's three replicas in the setup, PD will find an appropriate Store and return the ChangePeer command to the Region.
 
 3. After the Region receives the ChangePeer command, if it finds it necessary to add replica to another Store, it will submit a ChangePeer request through the Raft process. When the log is applied, the new peer information will be updated in the Region meta and then the Membership Change completes.
 
 It should be noted that even if the Membership Change completes, it only means that the Replica information is added to the meta by the Region. Later if the Leader finds that if there is no data in the new Follower, it will send snapshot to it.
 
-It should also be noted that the Membership Change implementation in TiKV and etcd is different from what’s in the Raft paper. In the Raft paper, if a new peer is added, it is added to the Region meta at the Propose command. But to simplify, TiKV and etcd don’t add the peer information to the Region meta until the log is applied.
+It should also be noted that the Membership Change implementation in TiKV and etcd is different from what's in the Raft paper. In the Raft paper, if a new peer is added, it is added to the Region meta at the Propose command. But to simplify, TiKV and etcd don't add the peer information to the Region meta until the log is applied.
 
 [Back to the Top](#top)
 

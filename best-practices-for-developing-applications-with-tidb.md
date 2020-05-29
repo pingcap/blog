@@ -281,7 +281,7 @@ The current version of TiDB (V2.1.0) doesn't support bi-directional indexes, ful
 TiDB lets you use indexes when the query predicate is among the following:
 
 ```
-=, >, <, >=, <=, like ‘...%', not like ‘...%', in, not in, <>, !=, is null, is not null
+=, >, <, >=, <=, like '...%', not like '...%', in, not in, <>, !=, is null, is not null
 ```
 
 The optimizer determines whether to use indexes.
@@ -289,7 +289,7 @@ The optimizer determines whether to use indexes.
 You can't use an index when the query predicate is among the following:
 
 ```
-like ‘%...'，like ‘%...%'，not like ‘%...'，not like ‘%...%'，<=>
+like '%...'，like '%...%'，not like '%...'，not like '%...%'，<=>
 ```
 
 > **Note:**

@@ -27,7 +27,7 @@ For the database benchmarking, they used [go-ycsb](https://github.com/pingcap/go
 
 We highly appreciate the great work from Iqbal Farabi and Tara Baskara. Their presentation about benchmarking cloud native databases is a great one, and we believe it could benefit the entire cloud native and open source database community.
 
-However, in the TiDB part of the presentation, the benchmark results were not ideal. We tried to reproduce what’s in the slide, but because there was some unclear information about the setup and configuration, we have got very different benchmark results. If you are interested in our results, feel free to email: info@pingcap.com. As a next step, we will work closely with Iqbal Farabi and Tara Baskara to update the results.
+However, in the TiDB part of the presentation, the benchmark results were not ideal. We tried to reproduce what's in the slide, but because there was some unclear information about the setup and configuration, we have got very different benchmark results. If you are interested in our results, feel free to email: info@pingcap.com. As a next step, we will work closely with Iqbal Farabi and Tara Baskara to update the results.
 
 In the meantime, their work got us into thinking: why is it so hard to benchmark distributed databases? As mentioned by <antirez> in [Why we don't have benchmarks comparing Redis with other DBs](http://antirez.com/news/85), you can see how choosing an unrealistic deployment and workload for a benchmark can easily impact the reaction to the results.
 

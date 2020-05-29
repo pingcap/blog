@@ -1,12 +1,12 @@
 ---
 title: TiDB DevCon 2018 Recap - News, Latest Development, and Roadmap
 date: 2018-01-25
-summary: On January 20th, 2018, more than 200 coders, hackers, and techies streamed into Garage Café, a chic coffee shop in the heart of Beijing’s techhub, Zhongguancun. They were there to be part of TiDB DevCon 2018, a technology party for the developers, by the developers!
+summary: On January 20th, 2018, more than 200 coders, hackers, and techies streamed into Garage Café, a chic coffee shop in the heart of Beijing's techhub, Zhongguancun. They were there to be part of TiDB DevCon 2018, a technology party for the developers, by the developers!
 tags: ['TiDB', 'Community', 'Golang']
 categories: ['Open Source Community']
 ---
 
-On January 20th, 2018, a chilly Saturday in the middle of the winter, more than 200 coders, hackers, and techies streamed into Garage Café, a chic coffee shop in the heart of Beijing’s techhub, Zhongguancun. They weren’t there to get coffee. They weren’t there to stay warm. They were there to be part of TiDB DevCon 2018, a technology party for the developers, by the developers.
+On January 20th, 2018, a chilly Saturday in the middle of the winter, more than 200 coders, hackers, and techies streamed into Garage Café, a chic coffee shop in the heart of Beijing's techhub, Zhongguancun. They weren't there to get coffee. They weren't there to stay warm. They were there to be part of TiDB DevCon 2018, a technology party for the developers, by the developers.
 
 ![Attendees-signing-in](media/attendees-signing-in.png)
 
@@ -16,7 +16,7 @@ On January 20th, 2018, a chilly Saturday in the middle of the winter, more than 
 
 *A packed audience at TiDB DevCon 2018*
 
-At this party, the team behind TiDB announced exciting news, shared the project’s latest development, and unveiled the future plans of the TiDB project. Here are some important news and highlights:
+At this party, the team behind TiDB announced exciting news, shared the project's latest development, and unveiled the future plans of the TiDB project. Here are some important news and highlights:
 
 ![Max Liu](media/max-liu-talk.png)
 
@@ -62,7 +62,7 @@ The team behind TiDB, PingCAP, grew from 35 members in 2016 to almost 90 members
 
 Designed to be a cloud-native HTAP database, TiDB has been fully integrated and available on [UCloud](https://www.ucloud.cn/) and [Tencent Cloud](https://cloud.tencent.com/product/tidb). Close partnerships with other public cloud vendors will be announced soon. Stay tuned!
 
-Some of TiDB’s largest customers, [Mobike](https://www.crunchbase.com/organization/mobike), [Toutiao](https://www.crunchbase.com/organization/toutiao), [SpeedyCloud](https://www.crunchbase.com/organization/speedycloud), [Qunar.com](https://www.crunchbase.com/organization/qunar-com), [Ele.me](https://www.crunchbase.com/organization/ele-me), also shared their use cases and best practices:
+Some of TiDB's largest customers, [Mobike](https://www.crunchbase.com/organization/mobike), [Toutiao](https://www.crunchbase.com/organization/toutiao), [SpeedyCloud](https://www.crunchbase.com/organization/speedycloud), [Qunar.com](https://www.crunchbase.com/organization/qunar-com), [Ele.me](https://www.crunchbase.com/organization/ele-me), also shared their use cases and best practices:
 
 ![Mobike](media/mobike-database-team-manager.png)
 
@@ -181,11 +181,11 @@ The TiDB monitoring system collects metrics from TiDB cluster and is integrated 
 
 ## 2018 Roadmap
 
-After recapping all the news and developments from an exciting and productive 2017, PingCAP co-founder and CEO, Max Liu, unveiled TiDB’s 2018 roadmap.
+After recapping all the news and developments from an exciting and productive 2017, PingCAP co-founder and CEO, Max Liu, unveiled TiDB's 2018 roadmap.
 
 ![2018 roadmap](media/2018-roadmap.png)
 
-*PingCAP co-founder and CEO, Max Liu, sharing TiDB’s 2018 roadmap*
+*PingCAP co-founder and CEO, Max Liu, sharing TiDB's 2018 roadmap*
 
 * Region level SQL query cache (2018 Q1)
 * View (2018 Q1)
@@ -197,7 +197,7 @@ After recapping all the news and developments from an exciting and productive 20
 * Geo-Index (2018 Q4-2019 Q1)
 * Window function (2018 Q4)
 
-Last but not least, we want to thank all the attendees for braving the cold to participate in the first (but definitely not the last) TiDB DevCon, all the speakers from our customer companies to share their use cases and best practices, and all the amazing contributors to the vibrant and growing TiDB community. We know you have big hopes for 2018; we won’t let you down.  
+Last but not least, we want to thank all the attendees for braving the cold to participate in the first (but definitely not the last) TiDB DevCon, all the speakers from our customer companies to share their use cases and best practices, and all the amazing contributors to the vibrant and growing TiDB community. We know you have big hopes for 2018; we won't let you down.  
 
 ![DevCon 2018 group photo](media/group-photo.png)
 

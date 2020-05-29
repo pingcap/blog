@@ -69,7 +69,7 @@ Since the biggest characteristic of this version of TiDB Binlog is that multiple
 
 ## Implementation
 
-Now, I’ll introduce the implementation principles of the cluster version of TiDB Binlog.
+Now, I'll introduce the implementation principles of the cluster version of TiDB Binlog.
 
 ### Binlog
 
@@ -142,7 +142,7 @@ message TableMutation {
 
 #### Storing data changes to binlog
 
-I’ll use an example to explain how binlog stores data changes.
+I'll use an example to explain how binlog stores data changes.
 
 Assume that the table schema is:
 
@@ -298,7 +298,7 @@ For example, Pump1 and Pump2 already exist in the cluster, and Drainer reads the
 
 ![Drainer](media/tidb-binlog-drainer.png)
 
-The binlog stored by Pump1 is `{1, 3, 5, 7, 9}`, and the binlog stored by Pump2 is `{2, 4, 6, 10}`. Drainer gets the binlog from the two Pump instances. Assuming that the binlog `{1, 2, 3, 4, 5, 6, 7}` have been read so far and the position of the processed binlog is 7, at this time, Pump3 joins the cluster and reports its online information to PD. It takes some time for Dainer to obtain the information from PD that Pump3 goes online. Let’s assume that Pump3 directly provides the writing binlog service without notifying Drainer and writes the binlog `{8, 12}`. During this period, Drainer continues to read the binlog of Pump1 and Pump2 and doesn’t recognize Pump3 until it has read the binlog `{9}`. Then Drainer adds Pump3 to the merging and sorting list. At this time, the binlog `{8}` of Pump3 is lost. To avoid this issue, Pump3 needs to notify Drainer that it goes online. After receiving the notification, Drainer will add Pump3 to the merging and sorting list and returns a successful feedback to Pump3, and only then can Pump3 provide the writing binlog service.
+The binlog stored by Pump1 is `{1, 3, 5, 7, 9}`, and the binlog stored by Pump2 is `{2, 4, 6, 10}`. Drainer gets the binlog from the two Pump instances. Assuming that the binlog `{1, 2, 3, 4, 5, 6, 7}` have been read so far and the position of the processed binlog is 7, at this time, Pump3 joins the cluster and reports its online information to PD. It takes some time for Dainer to obtain the information from PD that Pump3 goes online. Let's assume that Pump3 directly provides the writing binlog service without notifying Drainer and writes the binlog `{8, 12}`. During this period, Drainer continues to read the binlog of Pump1 and Pump2 and doesn't recognize Pump3 until it has read the binlog `{9}`. Then Drainer adds Pump3 to the merging and sorting list. At this time, the binlog `{8}` of Pump3 is lost. To avoid this issue, Pump3 needs to notify Drainer that it goes online. After receiving the notification, Drainer will add Pump3 to the merging and sorting list and returns a successful feedback to Pump3, and only then can Pump3 provide the writing binlog service.
 
 Drainer merges and sorts the binlog in the way described as above and advances the position of synchronization. However, the following issue might be encountered: Drainer cannot continue to merge and sort the binlog when a certain Pump receives no binlog data during a period of time for some special reasons. This is just like we walk with two legs but one of them cannot move, so you cannot keep moving forward. To avoid this issue, we introduce the fake binlog mechanism mentioned above. Pump generates a fake binlog every specified time. Even if some Pump instances receives no binlog data, we can still ensure that the binlog is merged and sorted normally.
 
@@ -337,4 +337,4 @@ The SQL statements are shown above and `id` is the primary key of the table. The
 
 ## Conclusion
 
-As an important tool in the TiDB ecosystem, TiDB Binlog is being used more and more often by our customers. It’s a key focus of our development team and we’ll continue to improve its reliability, stability, and usability.
+As an important tool in the TiDB ecosystem, TiDB Binlog is being used more and more often by our customers. It's a key focus of our development team and we'll continue to improve its reliability, stability, and usability.

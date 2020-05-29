@@ -13,9 +13,9 @@ Yuanfudao.com is an online tutoring service targeting the K-12 educational segme
 
 So far, the Yuanfudao APPs have more than 1.16 million paying users and provide live tutoring courses of English and Math Olympiad to the elementary users, as well as all the subjects for secondary school students. With yuanfudao.com, students from every corner of China can enjoy high-quality courses from top teachers at home.
 
-The enormous amount of data in the question bank, the audio and video learning materials, and all the user data and log call for a high level of storage and processing capacity of yuanfudao.com’s backend system.
+The enormous amount of data in the question bank, the audio and video learning materials, and all the user data and log call for a high level of storage and processing capacity of yuanfudao.com's backend system.
 
-yuanfudao.com’s business scenario requires the following features from its backend system:
+yuanfudao.com's business scenario requires the following features from its backend system:
 
 + The storage system should be able to scale out flexibly to serve the large data volume and rapid data growth.
 + Be able to meet the complex queries and BI related requirements, and can perform real-time analysis based on indexes like cities and channels.

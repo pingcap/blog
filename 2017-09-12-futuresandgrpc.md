@@ -50,13 +50,13 @@ This is the speech Tang Liu (tl@pingcap.com) gave at the Bay Area Rust Meetup Au
 
 Hi everyone! I am very glad to join the meetup here. Thanks, the Rust team.
 
-Today I will talk about the Futures and gRPC in Rust. Before we start, let me introduce myself briefly. My name is Siddon Tang, and siddontang on Github, chief engineer at PingCAP. I have been working on the next generation SQL database, [TiDB](https://github.com/pingcap/tidb), and a distributed key-value store, [TiKV](https://github.com/pingcap/tikv). By the way, TiKV is also written in Rust. I’m also an open source lover, and have some open source projects, such as LedisDB, go-mysql, go-mysql-elasticsearch, rust-prometheus, etc.
+Today I will talk about the Futures and gRPC in Rust. Before we start, let me introduce myself briefly. My name is Siddon Tang, and siddontang on Github, chief engineer at PingCAP. I have been working on the next generation SQL database, [TiDB](https://github.com/pingcap/tidb), and a distributed key-value store, [TiKV](https://github.com/pingcap/tikv). By the way, TiKV is also written in Rust. I'm also an open source lover, and have some open source projects, such as LedisDB, go-mysql, go-mysql-elasticsearch, rust-prometheus, etc.
 
 Today, I will first discuss Async briefly, then I will introduce Futures in Rust. Of course, you guys here are very familiar with them, so I will just go through it quickly. Then I will talk about gRPC, and in the end, I will show you how we use futures to wrap the gRPC in Rust.
 
 ## Async Programming
 
-Let’s begin. About Async.
+Let's begin. About Async.
 
 ### Why not Sync?
 
@@ -64,7 +64,7 @@ The first thing is why not Sync. As we all know, the Sync programming is easier.
 
 ![Why not Sync?](media/why-not-sync.png)
 
-But if we want to support a high performance service, such as a database, Sync is not enough. Sync I/O can block the execution, which reduces the performance. Although we can use threads, but thread is heavy and wastes system resources. What’s more, frequent thread switching is inefficient and causes the performance to reduce seriously.
+But if we want to support a high performance service, such as a database, Sync is not enough. Sync I/O can block the execution, which reduces the performance. Although we can use threads, but thread is heavy and wastes system resources. What's more, frequent thread switching is inefficient and causes the performance to reduce seriously.
 
 ### Why Async?
 
@@ -72,7 +72,7 @@ So we chose Async.
 
 ![Why Async?](media/why-async.png)
 
-There is no blocking in Async programming, so we don’t have to wait the slow I/O and can do other things. When the I/O is ready, the system can notify us and we can handle it again. This is very efficient and therefore, the performance is high. But as you can see, the Async way is much more complex and it is hard to write the code correctly. The code logic is split into pieces when the I/O is not ready and we have to switch to do other things.
+There is no blocking in Async programming, so we don't have to wait the slow I/O and can do other things. When the I/O is ready, the system can notify us and we can handle it again. This is very efficient and therefore, the performance is high. But as you can see, the Async way is much more complex and it is hard to write the code correctly. The code logic is split into pieces when the I/O is not ready and we have to switch to do other things.
 
 #### Callback Hell
 
@@ -109,7 +109,7 @@ let future = do_async( future() )
 future.wait();
 ```
 
-Some languages don’t provide coroutine, but we can have another workaround, which is future. Future is a kind-of promise. When we begin to resolve a future, the result of the future may not be ready now and cannot be retrieved now, but after the future is performed later, we can get the result again.
+Some languages don't provide coroutine, but we can have another workaround, which is future. Future is a kind-of promise. When we begin to resolve a future, the result of the future may not be ready now and cannot be retrieved now, but after the future is performed later, we can get the result again.
 
 You can wait the future to be finished, and multiple futures can be combined into a future chain.
 
@@ -119,7 +119,7 @@ So what about futures in Rust?
 
 In Rust, future has already been supported by [Alex](https://github.com/alexcrichton). Thanks, Alex!  
 
-Based on the Rust trait, the future is zero cost, which means that you don’t need to do extra heap allocation or dynamic dispatch. Future is easy to use, you can combine many futures into a chain, and use the combinator like an Iterator API.
+Based on the Rust trait, the future is zero cost, which means that you don't need to do extra heap allocation or dynamic dispatch. Future is easy to use, you can combine many futures into a chain, and use the combinator like an Iterator API.
 
 The future is demand-driven, not callback, you should poll the future explicitly to check whether the future is ready or not. No callback can also avoid the heap allocation, and we can cancel the future easily too.
 
@@ -236,11 +236,11 @@ executor.poll(f);
 
 If the future is not ready, we can use task `current` to get a task handle. We can use task `notify` to wake up the task when it is ready, and the `executor` should poll the future again.
 
-That’s all about the Rust futures for today.
+That's all about the Rust futures for today.
 
 ## gRPC
 
-Now let’s talk about gRPC.
+Now let's talk about gRPC.
 
 If you want to develop a service, the first thing you need to decide is how the client communicates with your service. You may implement your own protocol and RPC. Although it is efficient, it is not common. You may also use RESTful API based on HTTP protocol directly, but if you care about high performance and need to provide many APIs, it is not convenient.
 
@@ -260,7 +260,7 @@ HTTP/2 also supports priority, so we can serve the important request first. HTTP
 
 The gRPC uses HTTP/2 headers to pass the own headers of gRPC. It uses the HTTP/2 data frame to transfer data and maps the service name and method in the HTTP/2 path. Of course, the HTTP/2 content length is application gRPC plus proto.
 
-That’s a brief introduction of gRPC. Let’s go on.
+That's a brief introduction of gRPC. Let's go on.
 
 ## Combine Futures and gRPC
 
@@ -409,7 +409,7 @@ So for the client side, we return a sink plus stream. And for the server side, w
 
 ## Unary Future Implementation
 
-Using future, sink and stream can wrap the C gRPC core API easily. Let’s dive in deep. I will use the client unary as an example, to see how we combine the future and gRPC.
+Using future, sink and stream can wrap the C gRPC core API easily. Let's dive in deep. I will use the client unary as an example, to see how we combine the future and gRPC.
 
 ### Client Unary
 
