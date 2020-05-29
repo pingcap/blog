@@ -35,6 +35,8 @@ As our [previous post](https://pingcap.com/blog/observe-distributed-databases-to
 ![Diagnose performance issues](media/key-viz.gif)
 <div class="caption-center"> Key Visualizer </div>
 
+For more details, see the doc [here](https://pingcap.com/docs/stable/key-visualizer-monitoring-tool/).
+
 ## SQL statement analysis
 
 For SQL statement performance issues, TiDB Dashboard provides the SQL statement analysis widget to monitor SQL statements. Statements that only differ in parameters are considered to be of the same type. TiDB Dashboard displays information for each type of SQL statement such as:
@@ -103,6 +105,8 @@ As our [previous post](https://pingcap.com/blog/get-tidb-cluster-up-in-only-one-
 
 1. Use TiUP to start the nightly version of the test cluster on your local Mac or Linux machine:
 
+    {{< copyable "shell-regular" >}}
+    
     ```shell
     tiup playground nightly --monitor
     ```
