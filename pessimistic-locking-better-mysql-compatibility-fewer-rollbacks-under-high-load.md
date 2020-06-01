@@ -1,6 +1,6 @@
 ---
 title: 'Pessimistic Locking: Better MySQL Compatibility, Fewer Rollbacks Under High Load'
-author: [Shirly Wu]
+author: [Transaction team]
 date: 2020-05-22
 summary: With improvements in stability and functionality in TiDB 4.0, we finally remove the experimental label for pessimistic locking, making it a generally available feature. See how pessimistic locking behaves in TiDB.
 tags: ['Transaction', 'Distributed SQL database', 'MySQL compatibility']
@@ -10,7 +10,7 @@ image: /images/blog/pessimistic-locking.jpg
 
 ![Concurrency control in database](media/pessimistic-locking.jpg)
 
-For distributed database designs, [concurrency control](https://en.wikipedia.org/wiki/Concurrency_control) is a critical issue. It's used to maintain the consistency of a distributed database in a concurrent environment.
+It's critical for modern distributed databases to provide fully ACID transactions. Distributed transactions require some form of concurrency control to guarantee that transactions are executed serially. The choice of concurrency control algorithm affects transaction restrictions and performance under high contention. That's why we did something about it.
 
 Since 2015, we at [PingCAP](https://pingcap.com/en/) have been building [TiDB](https://pingcap.com/docs/stable/overview/), an open-source, MySQL-compatible, distributed SQL database. When MySQL users use TiDB, they don't need to modify much application code and can onboard TiDB more easily. It's known that MySQL uses pessimistic locking as its concurrency control method to ensure data consistency. **TiDB supports pessimistic locking, which improves TiDB's compatibility with MySQL and reduces transaction rollback rates in high-conflict scenarios.** Before TiDB 4.0, pessimistic locking was an experimental feature. Now we've improved its performance, stability, and compatibility with MySQL. Pessimistic locking becomes generally available in TiDB 4.0.
 
@@ -18,14 +18,14 @@ In this post, I'll explain what pessimistic locking is, how it behaves, and how 
 
 ## What is pessimistic locking?
 
-A database has two locking mechanisms:
+There are two common concurrency control mechanisms in the database field:
 
-* **Optimistic locking**, also known as [optimistic concurrency control](https://en.wikipedia.org/wiki/Optimistic_concurrency_control) (OCC), allows multiple transactions to modify data without interfering with each other. While a transaction is running, the data that will be edited isn't locked. Before a transaction commits, optimistic locking checks whether a conflicting modification exists. If a conflict exists, the committing transaction is rolled back.
-* **Pessimistic locking** is also called [two-phase locking](https://en.wikipedia.org/wiki/Two-phase_locking) (2PL). When a transaction is modifying data, pessimistic locking applies a lock to the data so other transactions can't access the same data. After the transaction commits, the lock is released. (Don't confuse 2PL with two-phase commit (2PC), which TiDB uses for all transactions.)
+* **[Optimistic concurrency control](https://en.wikipedia.org/wiki/Optimistic_concurrency_control) (OCC)** allows multiple transactions to modify data without interfering with each other. While a transaction is running, the data that will be edited isn't locked. Before a transaction commits, optimistic concurrency control checks whether a conflicting modification exists. If a conflict exists, the committing transaction is rolled back.
+* **Pessimistic concurrency control**: when a transaction is modifying data, pessimistic locking applies a lock to the data so other transactions can't access the same data. After the transaction commits, the lock is released.
 
-Pessimistic locking can solve some of the issues caused by optimistic locking. TiDB now implements both pessimistic locking and optimistic locking, which means:
+Pessimistic concurrency control can solve some of the issues caused by optimistic concurrency control. TiDB now implements both pessimistic and optimistic concurrency control mechanisms, which means:
 
-* **Transaction commits in TiDB won't fail due to locking issues.**
+* **Transaction commits in TiDB won't fail due to locking issues except deadlocks.**
 * **MySQL users can use TiDB more easily.** MySQL supports pessimistic locking by default. Now TiDB also supports pessimistic locking, so MySQL users don't need to modify much application code to get started with TiDB. 
 
 To help you better understand the two locking models, let's take online shopping as an analogy.
@@ -59,11 +59,11 @@ Assume that there are two websites where you can shop online. To complete an ord
   </tr>
 </table>
 
-In this case, Website A uses optimistic locking, while Website B uses pessimistic locking.
+In this case, Website A uses optimistic concurrency control, while Website B uses pessimistic locking.
 
-### Optimistic locking in online shopping
+### Optimistic concurrency control in online shopping
 
-Website A uses optimistic locking. If you try to buy something, you can quickly add items to your shopping cart, but:
+Website A uses optimistic concurrency control. If you try to buy something, you can quickly add items to your shopping cart, but:
 
 * You might fail to place an order.
 * If other people place an order for the same item before you, the inventory changes. You may encounter a conflict and have to reorder.
@@ -77,7 +77,6 @@ If you shop on Website B, you get this kind of experience:
 
 * When you click "Add to Cart", the system responds a little slower.
 * If you successfully add an item to your shopping cart, you'll succeed in placing an order.
-* If an item you want to buy is out of stock, after a while you might find it comes back in stock. 
 
 ## TiDB's pessimistic locking behavior
 
