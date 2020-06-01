@@ -10,7 +10,7 @@ image: /images/blog/pessimistic-locking.jpg
 
 ![Concurrency control in database](media/pessimistic-locking.jpg)
 
-It's critical for modern distributed databases to provide fully ACID transactions. Distributed transactions require some form of concurrency control to guarantee serializability. The choice of concurrency control algorithm affects transaction restrictions and performance under high contention. That's why we did something about it.
+It's critical for modern distributed databases to provide fully ACID transactions. Distributed transactions require some form of concurrency control to guarantee that transactions are executed serially. The choice of concurrency control algorithm affects transaction restrictions and performance under high contention. That's why we did something about it.
 
 Since 2015, we at [PingCAP](https://pingcap.com/en/) have been building [TiDB](https://pingcap.com/docs/stable/overview/), an open-source, MySQL-compatible, distributed SQL database. When MySQL users use TiDB, they don't need to modify much application code and can onboard TiDB more easily. It's known that MySQL uses pessimistic locking as its concurrency control method to ensure data consistency. **TiDB supports pessimistic locking, which improves TiDB's compatibility with MySQL and reduces transaction rollback rates in high-conflict scenarios.** Before TiDB 4.0, pessimistic locking was an experimental feature. Now we've improved its performance, stability, and compatibility with MySQL. Pessimistic locking becomes generally available in TiDB 4.0.
 
