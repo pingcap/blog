@@ -76,7 +76,7 @@ Hardware configurations:
 </table>
 
 
-For configuration parameters and test steps, see this document (to add a link).
+For configuration parameters and test steps, see [this document](https://pingcap.com/docs/stable/benchmark/v4.0-performance-benchmarking-with-tpcc/).
 
 Here are the TPC-C test results: 
 
@@ -193,7 +193,7 @@ Hardware configurations:
 </table>
 
 
-For configuration parameters and test steps, see this document (to add a link). 
+For configuration parameters and test steps, see [this document](https://pingcap.com/docs/stable/benchmark/v4.0-performance-benchmarking-with-tpch/). 
 
 Here are the TPC-H test results:
 
