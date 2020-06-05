@@ -131,7 +131,7 @@ Inspired by the pipeline model in the paper [X-Engine: An Optimized Storage Engi
 
 ## TPC-H performance improved by 100%
 
-We ran TPC-H queries on TiDB 3.0.13 and TiDB 4.0 to compare their OLAP capabilities, and we found that** TiDB's query performance notably improved—about 100% on average**.
+We ran TPC-H queries on TiDB 3.0.13 and TiDB 4.0 to compare their OLAP capabilities, and we found that **TiDB's query performance notably improved—about 100% on average**.
 
 Because TiDB 4.0 introduces [TiFlash](https://pingcap.com/docs/stable/tiflash/tiflash-overview/) to strengthen TiDB's HTAP capabilities, our test objects were:
 
