@@ -2,7 +2,7 @@
 title: Generics and Compile-Time in Rust
 author: ['Brian Anderson']
 date: 2020-06-15
-summary: In the second episode of the Rust Compile time series, Brian Anderson, one of Rust's original authors, talks about monomorphization, using the TiKV project as a case study.
+summary: This is the second episode of the Rust Compile time series. Brian Anderson, one of Rust's original authors, talks about monomorphization, using the TiKV project as a case study.
 tags: ['Engineering']
 categories: ['Engineering']
 image: /images/blog/rust-compile-time-adventures.png
