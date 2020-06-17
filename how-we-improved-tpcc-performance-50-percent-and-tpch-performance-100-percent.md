@@ -81,7 +81,7 @@ For configuration parameters and test steps, see [this document](https://pingcap
 Here are the TPC-C test results: 
 
 ![TiDB 3.0.13 vs. 4.0 for TPC-C](media/tidb-3.0.13-vs-4.0-tpc-c.jpg)
-<div class="caption-center"> TiDB 3.0.13 vs. 4.0 for TPC-C benchmarks (Higher is better) </div>
+<div class="caption-center"> TiDB 3.0.13 vs. 4.0 for TPC-C benchmarks (higher is better) </div>
 
 We achieved this result because we optimized TiDB's pessimistic transactions, the Raft thread model, and RocksDB's write throughput.
 
@@ -198,7 +198,7 @@ For configuration parameters and test steps, see [this document](https://pingcap
 Here are the TPC-H test results:
 
 ![TiDB 3.0.13 vs. 4.0 for TPC-H benchmarks](media/tidb-3.0.13-vs-4.0-for-tpc-h.jpg)
-<div class="caption-center"> TiDB 3.0.13 vs. 4.0 for TPC-H benchmarks (Lower is better) </div>
+<div class="caption-center"> TiDB 3.0.13 vs. 4.0 for TPC-H benchmarks (lower is better) </div>
 
 The TPC-H test results presented in a table are as follows. From the statistics, we can see that nearly all test queries were faster in TiDB 4.0.
 
@@ -647,7 +647,7 @@ TiDB 4.0's query performance achieves noteworthy improvement because we introduc
 
 ### TiDB's Chunk structure
 
-As [our previous](https://pingcap.com/blog/10x-performance-improvement-for-expression-evaluation-made-possible-by-vectorized-execution/#what-does-our-vector-processing-interface-look-like-why) post described, at the end of 2017, we introduced the concept of a “Chunk.” A Chunk is composed of multiple columns.
+As [our previous](https://pingcap.com/blog/10x-performance-improvement-for-expression-evaluation-made-possible-by-vectorized-execution/#what-does-our-vector-processing-interface-look-like-why) post described, at the end of 2017, we introduced the concept of a "Chunk." A Chunk is composed of multiple columns.
 
 There are two types of columns:
 
