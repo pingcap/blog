@@ -58,6 +58,7 @@ This feature is new in TiDB 4.0. We believe it will be the cornerstone of many p
 Compared with version 3.0, TiDB 4.0 has achieved a significant performance boost. For OLTP scenarios, the Sysbench and TPC-C benchmarks have improved by 30% to 50%. For OLAP scenarios, the TPC-H performance has increased by about 100% on average over a set of 22 queries. In addition, TiFlash greatly enhances TiDB's real-time analytics capabilities without affecting OLTP tasks.
 
 **TiDB versions to compare:**
+
 TiDB 3.0.13 vs. TiDB 4.0.0
 
 **Hardware configuration:**
