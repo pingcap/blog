@@ -16,7 +16,7 @@ Today, I'm proud to announce that TiDB 4.0 has reached general availability (GA)
 
 The first half of 2020 has seen a world of uncertainty and unpredictability, and it's high time for IT technology to keep up, especially for databases because it's the foundation of every business in the world. In a previous post, our CTO Ed Huang shared his thoughts about the [future of databases](https://pingcap.com/blog/future-of-database-unified-infrastructure-to-adapt-intelligently/). We believe that the future of the database is about unification, adaptiveness, and intelligence. As you may have seen in our [TiDB 4.0 preview](https://pingcap.com/blog/tidb-4.0-preview-easier-to-use-production-ready-htap-database/), our new release is a big step closer to achieving that vision. 
 
-TiDB 4.0 has made great progress in its stability, ease of use, performance, and cloud-native services. New features in version 4.0 also let TiDB support more application scenarios and many of our users have been testing and adopting the 4.0 version in their production environment. Now we believe the TiDB 4.0 GA version has become the right database solution to prepare you for the unpredictable world.
+TiDB 4.0 has made great progress in its stability, ease of use, performance, and cloud-native services. New features in version 4.0 also let TiDB support more application scenarios and many of our users have been testing and adopting the 4.0 version in their production environments. Now we believe the TiDB 4.0 GA version has become the right database solution to prepare you for the unpredictable world.
 
 ## What can TiDB 4.0 do for you?
 
