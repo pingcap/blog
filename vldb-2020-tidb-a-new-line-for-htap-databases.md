@@ -20,7 +20,7 @@ _<span style="font-size: 18px;">Reviewer, Proceedings of the VLDB Endowment</spa
 
 At [PingCAP](https://pingcap.com/), our goal is to build a database that is a single, real-time source of truth so that the applications and the businesses on top of it can adapt to uncertainty. As we built [TiDB](https://pingcap.com/docs/stable/overview/), we benefited from databases and distributed systems research such as Raft and Spanner. Along the journey, we've developed some novel ideas, and we are thrilled to contribute them back to the academic community.
 
-A group of our engineers have summarized what we've learned in a new research paper, "TiDB: A Raft-based HTAP Database." In this paper, we propose TiDB as a Hybrid Transactional and Analytical Processing (HTAP) database，a "one size fits many" solution for OLTP and OLAP applications.
+A group of our engineers have summarized what we've learned in a new research paper, "TiDB: A Raft-based HTAP Database." In this paper, we propose TiDB as a Hybrid Transactional and Analytical Processing (HTAP) database, a "one size fits many" solution for OLTP and OLAP applications.
 
 HTAP databases require processing transactional and analytical queries in isolation to remove the interference between them. To achieve this, it is necessary to maintain different replicas of data specified for the two types of queries. To this end, we propose extending replicated state machine-based consensus algorithms to provide consistent replicas for HTAP workloads. Based on this novel idea, we present a Raft-based HTAP database: TiDB. 
 
