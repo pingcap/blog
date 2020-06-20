@@ -4,13 +4,9 @@ author: [PingCAP]
 date: 2020-06-19
 summary: 'PingCAP will publish a research paper "TiDB: A Raft-based HTAP Database" in the August issue of the Proceedings of the VLDB Endowment. The reviewer believes that this paper will start a new line of research and products.' 
 tags: ['HTAP', 'VLDB']
-categories: ['MySQL Scalability']
-image: /images/blog/raft-based-htap-database.jpg
+categories: ['HTAP']
 ---
 
-![A Raft-based HTAP database](media/raft-based-htap-database.jpg)
-
----
 
 _<span style="font-size: 20px;">"The paper is going to start a new line of research and products."</span>_
 
