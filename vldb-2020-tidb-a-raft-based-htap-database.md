@@ -5,10 +5,10 @@ date: 2020-06-19
 summary: 'PingCAP will publish a research paper "TiDB: A Raft-based HTAP Database" in the August issue of the Proceedings of the VLDB Endowment.' 
 tags: ['HTAP', 'VLDB']
 categories: ['HTAP']
-image: /images/blog/raft-based-htap-database.jpg
+image: /images/blog/a-raft-based-htap-database.jpg
 ---
 
-![A Raft-based HTAP database](media/raft-based-htap-database.jpg)
+![A Raft-based HTAP database](media/a-raft-based-htap-database.jpg)
 
 At [PingCAP](https://pingcap.com/), our goal is to build a database that is a single, real-time source of truth so that the applications and the businesses on top of it can adapt to uncertainty. As we built [TiDB](https://pingcap.com/docs/stable/overview/), we benefited from databases and distributed systems research such as Raft and Spanner. Along the journey, we've developed some novel ideas, and we are thrilled to contribute them back to the academic community.
 
