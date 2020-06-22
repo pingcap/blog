@@ -6,6 +6,7 @@ summary: 'PingCAP will publish a research paper "TiDB: A Raft-based HTAP Databas
 tags: ['HTAP', 'VLDB']
 categories: ['HTAP']
 image: /images/blog/a-raft-based-htap-database.jpg
+aliases: ['/blog/vldb-2020-tidb-a-new-line-for-htap-databases/']
 ---
 
 ![A Raft-based HTAP database](media/a-raft-based-htap-database.jpg)
