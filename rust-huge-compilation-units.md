@@ -2,7 +2,7 @@
 title: Rust's Huge Compilation Units
 author: ['Brian Anderson']
 date: 2020-06-22
-summary: In the third episode of the Rust Compile Time series, Brian Anderson, one of Rust's original authors, talks about compilation units.
+summary: The third episode of the Rust Compile Time series discusses why Rust's compilation units are so big and how that affects compile times.
 tags: ['Engineering', 'TiKV', 'Rust']
 categories: ['Engineering']
 image: /images/blog/rust-compile-time-adventures.png
