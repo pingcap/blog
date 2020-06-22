@@ -89,7 +89,7 @@ Rust crates being daggish are mostly due to fundamental reasons of type checking
 
 In preparation for this blog I asked a few people if they could recall the reasons why Rust crates must form a DAG, and [Graydon] gave a typically thorough and authoritative answer:
 
-[Graydon]: github.com/graydon/
+[Graydon]: https://github.com/graydon
 
 > graydon: Prohibits mutual recursion between definitions across crates, allowing both an obvious deterministic bottom-up build schedule without needing to do some fixpoint iteration or separate declarations from definitions
 and enables phases that need to traverse a complete definition, like typechecking, to happen crate-at-a-time (enabling _some_ degree of incrementality / parallelism).
