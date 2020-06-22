@@ -3,7 +3,7 @@ title: "TiDB: Architecture and Use Cases of A Cloud-Native NewSQL Database"
 author: ['Kevin Xu']
 date: 2018-11-02
 summary: This post provides a macro-level overview of TiDB and is the main reference content for readers to orient and dig deeper into other TiDB subjects.
-tags: ['Cloud-native', 'Cloud', 'HTAP', 'Kubernetes', 'Architecture']
+tags: ['Cloud', 'HTAP', 'Kubernetes', 'Architecture']
 categories: ['Product']
 ---
 
