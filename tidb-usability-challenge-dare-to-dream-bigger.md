@@ -4,7 +4,7 @@ author: ['PingCAP']
 date: 2020-03-06
 summary: TiDB Challenge Program is a series community program to bring TiDB to a new level in terms of stability, performance, and usability. With amazing improvements in performance in season 1 last year, we are now pleased to announce that season 2 is ready for you.
 tags: ['Community news']
-categories: ['Open Source Community']
+categories: ['Community']
 image: /images/blog/tidb-usability-challenge.jpg
 ---
 

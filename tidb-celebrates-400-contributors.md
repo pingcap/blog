@@ -4,7 +4,7 @@ author: ['Edward Huang']
 date: 2020-03-05
 summary: The TiDB repository reaches the 400th contributor milestone. All our honors and achievements belong to the TiDB community, our beloved contributors, and distinguished committers.
 tags: ['Community news']
-categories: ['Open Source Community']
+categories: ['Community']
 image: /images/blog/tidb-celebrates-400-contributors.jpg
 ---
 

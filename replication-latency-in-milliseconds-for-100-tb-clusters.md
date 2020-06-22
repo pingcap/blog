@@ -4,7 +4,7 @@ author: [Fei Yang]
 date: 2020-05-20
 summary: TiDB 4.0 introduces TiCDC, an open-source feature that replicates TiDB's incremental changes to downstream platforms. It shows only millisecond replication latency for 100+ TB clusters.
 tags: ['Ecosystem tools', 'Benchmark']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/cdc-in-database.jpg
 ---
 

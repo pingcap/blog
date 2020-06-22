@@ -4,7 +4,7 @@ author: [Siddon Tang]
 date: 2020-06-17
 summary: TiDB 4.0 has reached general availability. It's an elastic, real-time Hybrid Transactional/Analytical Processing (HTAP) database, and, best of all, it's now ready for the cloud.
 tags: ['Release', 'Benchmark', 'HTAP', 'Cloud-native']
-categories: ['MySQL Scalability']
+categories: ['Product']
 image: /images/blog/htap-cloud-native-database.jpg
 ---
 

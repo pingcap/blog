@@ -4,7 +4,7 @@ author: [Kenan Yao, Ed Huang, Haibin Xie]
 date: 2020-05-06
 summary: This post introduces how SQL Plan Management helps the optimizer automatically select efficient execution plans to prevent performance regressions caused by unexpected plan changes.
 tags: ['Query execution', 'SQL engine']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/never-worry-about-slow-queries.jpg
 ---
 

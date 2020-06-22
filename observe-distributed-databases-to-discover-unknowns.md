@@ -4,7 +4,7 @@ author: [Xiangsheng Zheng, Di'an Luo, Wenxuan Shi, Ed Huang]
 date: 2020-04-22
 summary: Key Visualizer is a visual diagnostic tool that makes it easier to troubleshoot distributed SQL databases. Users can observe system health, quickly find hotspots in the cluster, and gain deep insights into applications.
 tags: ['Troubleshooting', 'Distributed SQL database']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/troubleshoot-cluster-issues.jpg
 ---
 
