@@ -6,6 +6,7 @@ summary: The third episode of the Rust Compile Time series discusses why Rust's 
 tags: ['Engineering', 'TiKV', 'Rust']
 categories: ['Engineering']
 image: /images/blog/rust-compile-time-adventures.png
+aliases: ['/blog/Rust-s-Huge-Compilation-Units/']
 ---
 
 ![Rust huge compilation units](media/rust-compile-time-adventures.png)
