@@ -14,7 +14,7 @@ Today, we are thrilled to announce the beta release of TiDB Cloud, the fully-man
 
 ## TiDB as you know, ready for cloud
 
-TiDB is the first open-source, NewSQL, [hybrid transactional and analytical processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) database in the market that's available for public, private, or hybrid cloud environments. It features horizontal scalability, strong consistency, and high availability with MySQL compatibility.
+TiDB is the industry-leading open-source, NewSQL, [hybrid transactional and analytical processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) database in the market that's available for public, private, or hybrid cloud environments. It features horizontal scalability, strong consistency, and high availability with MySQL compatibility.
 
 During the past 5 years, TiDB has powered the businesses of around 1,000 companies in production, during which our core team at PingCAP have accumulated a wealth of expertise in architecting, tuning, and operating a distributed database in the on-premise setting. With the user base booming and TiDB maturing, we are ready to deliver the expertise and experience to the cloud.
 
@@ -32,7 +32,7 @@ TiDB Cloud is a comprehensive, fully-managed solution, where the PingCAP team wi
 
 * Any cloud, no vendor lock-in
 
-    Designed with customer’s best interest and portability in mind, TiDB Cloud allows its customers to use the cloud infrastructure of their choice, without fear of being locked-in by a single cloud vendor.
+    TiDB Cloud allows its customers to use the cloud infrastructure of their choice, without fear of being locked-in by a single cloud vendor.
 
 * Always up-to-date with the best TiDB features
 
@@ -48,6 +48,6 @@ TiDB Cloud is immediately available on Amazon Web Service (AWS) and Google Cloud
 
 ## Getting started today
 
-Ready to give TiDB Cloud a try? Click [here](https://pingcap.com/products/tidbcloud/trial). Early beta users will get $4,500 worth of credits with access to full power of TiDB Enterprise features.
+Ready to give TiDB Cloud a try? Click [here](https://pingcap.com/products/tidbcloud/trial). Early beta users will get $4,500 worth of credits with full benefits of TiDB Enterprise Subscription.
 
 To learn more about TiDB Cloud, check out our [documentation](https://docs.pingcap.com/tidbcloud/beta). Our upcoming webinar will also give you a detailed product introduction and demo. More exciting updates on the way, so stay tuned!
