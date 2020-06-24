@@ -198,7 +198,7 @@ TiDB is [highly compatible with the MySQL syntax](https://pingcap.com/docs/stabl
 
 ## How we're using TiDB at Shopee
 
-[TiDB](https://pingcap.com/docs/stable/overview/) is an open-source NewSQL database that supports HTAP workloads. It's MySQL compatible and features horizontal scalability, strong consistency, and high availability. See [its architecture](https://pingcap.com/docs/stable/overview/).
+[TiDB](https://docs.pingcap.com/tidb/v4.0/overview) is an open-source NewSQL database that supports HTAP workloads. It's MySQL compatible and features horizontal scalability, strong consistency, and high availability. See [its architecture](https://docs.pingcap.com/tidb/v4.0/architecture).
 
 This section gives an overview of the TiDB cluster status at Shopee and the scenarios in which we use TiDB.
 

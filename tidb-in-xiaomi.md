@@ -51,7 +51,7 @@ Because of its component-based layered architecture, TiDB can be used as a singl
 
 It has the following core features:
 
-- Highly compatible with MySQL and users can easily enhance their current MySQL deployment with TiDB to power their applications without changing a single line of code in most cases and still benefit from the MySQL ecosystem. PingCAP is very transparent with aspects of MySQL that are not currently compatible in TiDB, which are all listed in [Compatibility with MySQL](https://pingcap.com/docs/v3.0/reference/mysql-compatibility/).
+- Highly compatible with MySQL and users can easily enhance their current MySQL deployment with TiDB to power their applications without changing a single line of code in most cases and still benefit from the MySQL ecosystem. PingCAP is very transparent with aspects of MySQL that are not currently compatible in TiDB, which are all listed in [Compatibility with MySQL](https://docs.pingcap.com/tidb/v4.0/mysql-compatibility).
 - Horizontal scalability achieved by simply by adding new nodes. Because the SQL processing layer (TiDB Server) and the storage layer (TiKV) are decoupled, you can scale each resource independently of each other.
 - ACID compliance where all your data is consistent.
 - High availability of all your data as guaranteed by TiDB's implementation of the Raft consensus algorithm.

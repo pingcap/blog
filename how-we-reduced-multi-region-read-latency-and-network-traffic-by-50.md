@@ -36,7 +36,7 @@ In the figure, the two dotted boxes indicate two DCs.
 The box on the left is the primary DC in City A. This DC deploys the following:
 
 * Some [TiDB servers](https://pingcap.com/docs/stable/architecture/#tidb-server) (the SQL layer for the cluster)
-* The majority of [TiKV servers](https://pingcap.com/docs/stable/architecture/#tikv-server) (the underlying storage engine for [TiDB](https://pingcap.com/docs/stable/overview/))
+* The majority of [TiKV servers](https://pingcap.com/docs/stable/architecture/#tikv-server) (the underlying storage engine for [TiDB](https://docs.pingcap.com/tidb/v4.0/overview))
 * The [Placement Driver (PD) servers](https://pingcap.com/docs/stable/architecture/#placement-driver-server) (the managing component of the entire cluster)
 * The [leader](https://pingcap.com/docs/v3.1/glossary/#leaderfollowerlearner) replica for a Raft range
 

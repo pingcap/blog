@@ -30,7 +30,7 @@ TiDB 4.0 is a real-time HTAP, truly elastic, cloud-native database, which meets 
 
 TiDB 4.0 is a one-stop solution for both Online Transaction Processing (OLTP) and Online Analytical Processing (OLAP) applications to process HTAP workloads. Even if you are not sure whether your application is OLTP or OLAP, you can efficiently run your application on TiDB.  
 
-[TiFlash](https://pingcap.com/docs/stable/tiflash/tiflash-overview/) is an extended analytical engine and columnar store for TiDB. **A TiDB database that incorporates TiFlash lets you perform real-time HTAP analytics**.
+[TiFlash](https://docs.pingcap.com/tidb/v4.0/tiflash-overview) is an extended analytical engine and columnar store for TiDB. **A TiDB database that incorporates TiFlash lets you perform real-time HTAP analytics**.
 
 ![TiDB in the HTAP architecture with TiFlash](media/tidb-with-tiflash.png)
 <div class="caption-center"> TiDB in the HTAP architecture with TiFlash </div>

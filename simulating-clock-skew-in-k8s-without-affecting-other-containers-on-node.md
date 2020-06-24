@@ -98,7 +98,7 @@ If you are interested in the details, see the [Chaos Mesh GitHub repository](htt
 
 ## Simulating clock skew on a distributed SQL database
 
-Statistics speak volumes. Here we're going to try TimeChaos on [TiDB](https://pingcap.com/docs/stable/overview/), an open source, [NewSQL](https://en.wikipedia.org/wiki/NewSQL), distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) workloads, to see if the chaos testing can really work.
+Statistics speak volumes. Here we're going to try TimeChaos on [TiDB](https://docs.pingcap.com/tidb/v4.0/overview), an open source, [NewSQL](https://en.wikipedia.org/wiki/NewSQL), distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) workloads, to see if the chaos testing can really work.
 
 TiDB uses a centralized service Timestamp Oracle (TSO) to obtain the globally consistent version number, and to ensure that the transaction version number increases monotonically. The TSO service is managed by the Placement Driver (PD) component. Therefore, we choose a random PD node and inject TimeChaos regularly, each with a 10-millisecond-backward clock skew. Let's see if TiDB can meet the challenge.
 

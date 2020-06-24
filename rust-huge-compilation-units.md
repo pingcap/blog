@@ -16,7 +16,7 @@ The Rust programming language compiles fast software slowly.
 In this series we explore Rust's compile times within the context of [TiKV], the key-value store behind the [TiDB] database.
 
 [TiKV]: https://github.com/tikv/tikv
-[TiDB]: https://pingcap.com/docs/stable/overview/
+[TiDB]: https://docs.pingcap.com/tidb/v4.0/overview
 
 &nbsp;
 

@@ -31,7 +31,7 @@ ZaloPay ranked as the 3rd payment application of the year at the 2018 Tech Award
 
 ## What is TiDB?
 
-[TiDB](https://pingcap.com/docs/stable/overview/) is developed and supported primarily by [PingCAP](https://pingcap.com/) Ltd. and licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+[TiDB](https://docs.pingcap.com/tidb/v4.0/overview) is developed and supported primarily by [PingCAP](https://pingcap.com/) Ltd. and licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
 TiDB ("Ti" stands for Titanium) is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability.
 
@@ -319,9 +319,9 @@ Because we don't have much experience with TiDB, we made a significant miscalcul
 
 TiDB acts as a MySQL 5.7 server and supports MySQL protocol and a majority of MySQL syntax. You can use all of the existing MySQL client's libraries. In many cases, you won't need to change a single line of code in your application.
 
-But, as you may already know, "act like" isn't the same meaning as "totally like" Because TiDB is built from scratch, not a MySQL fork, a new TiDB user might not carefully read the whole documentation, thinking that TiDB syntax is completely like MySQL syntax. Sometimes, you may meet up with some unexpected limitations with it when you do complex queries, or when you use interface tools for MySQL native like MySQL Workbench... or when you try to backup and restore TiDB with mysqldump (which isn't recommended). ... If you encounter any issues, take a look at [toolkits](https://pingcap.com/docs/stable/reference/tools/user-guide/) (Mydumper, Syncer, Loader, TiDB Lighting,...) that PingCAP has optimized for TiDB.
+But, as you may already know, "act like" isn't the same meaning as "totally like" Because TiDB is built from scratch, not a MySQL fork, a new TiDB user might not carefully read the whole documentation, thinking that TiDB syntax is completely like MySQL syntax. Sometimes, you may meet up with some unexpected limitations with it when you do complex queries, or when you use interface tools for MySQL native like MySQL Workbench... or when you try to backup and restore TiDB with mysqldump (which isn't recommended). ... If you encounter any issues, take a look at [toolkits](https://docs.pingcap.com/tidb/v4.0/ecosystem-tool-user-guide) (Mydumper, Syncer, Loader, TiDB Lighting,...) that PingCAP has optimized for TiDB.
 
-TL;DR: TiDB server acts like MySQL 5.7 server, but is not entirely equivalent with MySQL. Just make sure you know what you are doing when you use tools or run SQL queries (which run well with MySQL). Also check out the list of [known compatibility differences](https://pingcap.com/docs/v3.0/reference/mysql-compatibility/). If necessary, use PingCAP's optimized [toolkits](https://pingcap.com/docs/stable/reference/tools/user-guide/) to interact with TiDB.
+TL;DR: TiDB server acts like MySQL 5.7 server, but is not entirely equivalent with MySQL. Just make sure you know what you are doing when you use tools or run SQL queries (which run well with MySQL). Also check out the list of [known compatibility differences](https://docs.pingcap.com/tidb/v4.0/mysql-compatibility). If necessary, use PingCAP's optimized [toolkits](https://docs.pingcap.com/tidb/v4.0/ecosystem-tool-user-guide) to interact with TiDB.
 
 ## Postscript
 
