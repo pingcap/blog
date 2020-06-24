@@ -8,6 +8,7 @@ categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-shopee/
 customer: Shopee
 customerCategory: Internet
+notShowOnLogoWall: true
 --- 
 
 **Industry:** E-Commerce
