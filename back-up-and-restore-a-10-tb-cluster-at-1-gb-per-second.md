@@ -14,7 +14,7 @@ Backing up or restoring large-scale distributed databases is time-consuming. Whe
 
 As an open-source, distributed SQL database, [TiDB](https://en.wikipedia.org/wiki/TiDB) fulfills the requirement for **backing up and restoring large-scale clusters**. [TiDB 4.0 release candidate (RC)](https://pingcap.com/docs/stable/reference/tools/br/br/) introduced [Backup & Restore](https://github.com/pingcap/br) (BR), a distributed backup and restore tool, that offers **high backup and restore speeds**—1 GB/s or more for 10 TB of data.
 
-In this post, I'll share how we use BR to improve backup and restore speeds for large-scale TiDB clusters. If you specialize in database development, this post might inspire your backup and restore design work. If your application deals with huge amounts of data and you also attach great importance to data security and the efficiency of backup and restore, you can try [TiDB](https://pingcap.com/docs/stable/overview/) with [BR](https://pingcap.com/docs/v3.1/reference/tools/br/br/).
+In this post, I'll share how we use BR to improve backup and restore speeds for large-scale TiDB clusters. If you specialize in database development, this post might inspire your backup and restore design work. If your application deals with huge amounts of data and you also attach great importance to data security and the efficiency of backup and restore, you can try [TiDB](https://docs.pingcap.com/tidb/v4.0/overview) with [BR](https://pingcap.com/docs/v3.1/reference/tools/br/br/).
 
 ## Why Backup & Restore?
 
@@ -34,7 +34,7 @@ BR is a command-line tool for fast distributed backup and restore of the TiDB cl
 
 In this section, I'll briefly introduce BR's key features: horizontal scalability and strong consistency.
 
-First, however, it's helpful to learn a bit about [TiDB's architecture](https://pingcap.com/docs/stable/architecture/). Inside the TiDB platform, the main components are as follows:
+First, however, it's helpful to learn a bit about [TiDB's architecture](https://docs.pingcap.com/tidb/v4.0/architecture). Inside the TiDB platform, the main components are as follows:
 
 * [TiDB server](https://pingcap.com/docs/stable/architecture/#tidb-server) is a stateless SQL layer.
 * [TiKV server](https://pingcap.com/docs/stable/architecture/#tikv-server) is the distributed transactional key-value storage layer where the data persists.

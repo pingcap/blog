@@ -18,7 +18,7 @@ We wrote only [26 lines of code](https://github.com/tikv/tikv/pull/5051) to impl
 
 In this post, I'll guide you through why we introduced Follower Read, how we implement it, and our future plans for it.
 
-Note that this post assumes that you have some basic knowledge of the [Raft consensus algorithm](https://raft.github.io/) and [TiDB's architecture](https://pingcap.com/docs/v3.1/architecture/).
+Note that this post assumes that you have some basic knowledge of the [Raft consensus algorithm](https://raft.github.io/) and [TiDB's architecture](https://docs.pingcap.com/tidb/v4.0/architecture).
 
 ## What is Follower Read
 

@@ -31,7 +31,7 @@ Now, you can run TiDB directly in a web browser. Just like this:
 
 2. Wait a few seconds for the TiDB database to load.
 
-3. You can start to write SQL statements, which are mostly MySQL statements because of TiDB's compatibility with MySQL (see the [unsupported features here](https://pingcap.com/docs/v3.0/reference/mysql-compatibility/#unsupported-features)).
+3. You can start to write SQL statements, which are mostly MySQL statements because of TiDB's compatibility with MySQL (see the [unsupported features here](https://docs.pingcap.com/tidb/v4.0/mysql-compatibility#unsupported-features)).
 
 4. When you're done using TiDB, close your web browser tab. The database and the data you created just vanish into thin air like they never existed.
 
@@ -51,7 +51,7 @@ You must be wondering how we did it. Well, we stand on the shoulders of giants. 
 
 As cool as it is, the tool has the following very important limitations, limiting its current use cases:
 
-* TiDB-Wasm includes TiDB server only. TiDB is the stateless MySQL component of the TiDB platform (check other components in the [TiDB Architecture](https://pingcap.com/docs/v3.0/architecture/)). Compiled to Wasm, this tool is **only** suitable for experimenting with SQL and testing out TiDB compatibility with MySQL queries.
+* TiDB-Wasm includes TiDB server only. TiDB is the stateless MySQL component of the TiDB platform (check other components in the [TiDB Architecture](https://docs.pingcap.com/tidb/v4.0/architecture)). Compiled to Wasm, this tool is **only** suitable for experimenting with SQL and testing out TiDB compatibility with MySQL queries.
 
 * The Wasm binary file is close to 70 MB and compressed to 13 MB. The database and the data you create in TiDB-Wasm are written to memory, and therefore consume a lot of memory resources.  
 
