@@ -10,7 +10,7 @@ image: /images/blog/future-of-atabase.png
 
 ![Future of Database](media/future-of-atabase.png)
 
-Today is [PingCAP](https://pingcap.com/en/)'s 5-year birthday. The 5th anniversary seems to be the perfect time to look back and look forward.
+Today is [PingCAP](https://pingcap.com/)'s 5-year birthday. The 5th anniversary seems to be the perfect time to look back and look forward.
 
 I still remember that afternoon five years ago when Max, Dylan and I were picturing what the future of the database might be like. We planted a seed back then by starting up PingCAP to build the database we would want for ourselves, in the open-source way. Now the seed has grown from our inception to the database platform serving almost 1,000 production adopters and millions of people every day around the globe, thanks to hundreds of contributors all over the world.
 

@@ -26,7 +26,7 @@ Modern computer programs are so large and complex that designing a way to easily
 
 ## The bug tracking bot we built
 
-At the Hackathon, we built a bot that helps us quickly locate several bugs in TiDB's source code. (BTW, for those who don't know [TiDB](https://pingcap.com/en/)—it's an open-source distributed SQL database written in Go.) Below, you can see how our bot highlights potentially faulty areas in the code. The higher the failure rate, the darker the color; the higher the failure count, the brighter the block.
+At the Hackathon, we built a bot that helps us quickly locate several bugs in TiDB's source code. (BTW, for those who don't know [TiDB](https://pingcap.com/)—it's an open-source distributed SQL database written in Go.) Below, you can see how our bot highlights potentially faulty areas in the code. The higher the failure rate, the darker the color; the higher the failure count, the brighter the block.
 
 ![Bug test](media/bug-test.gif)
 <div class="caption-center"> Colored code blocks with their "failure rate" and "failure count" highlighted </div>

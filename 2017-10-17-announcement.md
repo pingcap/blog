@@ -39,7 +39,7 @@ TiDB is analogous to a single-machine RDBMS. You can start a transaction that cr
 
 Evolve TiDB schemas as your requirement changes. You can add new columns and indexes without stopping or affecting your ongoing operations.
 
-[Try TiDB Now!](https://pingcap.com/doc-QUICKSTART)
+[Try TiDB Now!](https://docs.pingcap.com/tidb/dev/quick-start-with-tidb)
 
 ### Use cases
 

@@ -25,7 +25,7 @@ In this post, we'll do a deep dive on what Key Visualizer is, how it works, how 
 
 ## Why Key Visualizer?
 
-Since April 2015, we at [PingCAP](https://pingcap.com/en/) have been building [TiDB](https://github.com/pingcap/tidb), an open-source distributed SQL database that supports [hybrid transactional and analytical processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) workloads.
+Since April 2015, we at [PingCAP](https://pingcap.com/) have been building [TiDB](https://github.com/pingcap/tidb), an open-source distributed SQL database that supports [hybrid transactional and analytical processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) workloads.
 
 In a TiDB cluster, if only a few nodes are busy while other nodes are not, this means hotspots exist in the cluster. As a distributed database, TiDB automatically moves data among nodes to balance the load within a cluster. But sometimes, when an application's workload suddenly increases, hotspots might occur and trigger a bottleneck in a node. In a distributed architecture, a single node's bottleneck could affect the performance of the whole cluster. Therefore, being able to quickly find the root cause of hotspots is a critical task for database operations. In subsequent blog posts, we will introduce features in TiDB to mitigate hotspots such as auto scaling and load-based splitting.
 

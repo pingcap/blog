@@ -17,7 +17,7 @@ However, this architecture has two limitations:
 * **High read latency**. Generally, the cross-region network round trip time (RTT) is dozens or even hundreds of milliseconds (ms).
 * Cross-region network facilities involve **high hardware costs**. Besides, the service capability for existing facilities is not strong enough. Therefore, **the performance for distributed databases is not high**. Building or leasing a private network across regions is expensive, and the bandwidth is limited. In a multi-region active-active architecture, replicating data among multiple regions can cause a bottleneck.
 
-At [PingCAP](https://pingcap.com/en/)'s [TiDB Hackathon 2019](https://pingcap.com/blog/insert-into-tidb-hackathon-2019-values-hack-fun-tidb-ecosystem/), we had fun hacking a project to mitigate these issues. We used the [Raft algorithm](https://raft.github.io/) to mitigate [TiDB](https://en.wikipedia.org/wiki/TiDB) multi-region latency, and we were able to optimize the following:
+At [PingCAP](https://pingcap.com/)'s [TiDB Hackathon 2019](https://pingcap.com/blog/insert-into-tidb-hackathon-2019-values-hack-fun-tidb-ecosystem/), we had fun hacking a project to mitigate these issues. We used the [Raft algorithm](https://raft.github.io/) to mitigate [TiDB](https://en.wikipedia.org/wiki/TiDB) multi-region latency, and we were able to optimize the following:
 
 * **The read latency for multi-region SQL queries dropped by 50%.**
 * **The number of cross-region messages decreased by 50%. This means the network traffic was reduced by half.**

@@ -356,7 +356,7 @@ It seemed like TiDB has a competitive edge over the others. Then, we listed what
 
 * **MySQL compatibility saves application migration efforts and costs.**
 
-    TiDB is highly compatible with MySQL and supports indexes (including secondary indexes) and ACID transactions. It also has an ecosystem of tools such as [Syncer](https://pingcap.com/docs/stable/reference/tools/syncer/) and [TiDB Data Migration](https://pingcap.com/docs/stable/reference/tools/data-migration/overview/) (TiDB DM) for seamless migration from MySQL.
+    TiDB is highly compatible with MySQL and supports indexes (including secondary indexes) and ACID transactions. It also has an ecosystem of tools such as [Syncer](https://pingcap.com/docs/stable/reference/tools/syncer/) and [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/dev/overview) (TiDB DM) for seamless migration from MySQL.
 
 * **Horizontal scalability brings large capacity storage and lower operation costs.**
 
@@ -430,7 +430,7 @@ Inside the TiDB cluster, there are three main components:
 88 instances
 <p>
 38 Syncer real-time replication streams (will upgrade to
-<a href="https://pingcap.com/docs/stable/reference/tools/data-migration/overview/">TiDB Data Migration</a>)
+<a href="https://docs.pingcap.com/tidb-data-migration/dev/overview">TiDB Data Migration</a>)
    </td>
   </tr>
   <tr>

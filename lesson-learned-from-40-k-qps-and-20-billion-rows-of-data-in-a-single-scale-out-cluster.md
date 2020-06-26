@@ -74,7 +74,7 @@ Therefore, we began to look for a new solution: a **globally ordered key-value**
 
 ## What is TiKV
 
-TiKV is a distributed transactional key-value (KV) database originally created by [PingCAP](https://pingcap.com/en) to complement [TiDB](https://en.wikipedia.org/wiki/TiDB), an open-source MySQL-compatible NewSQL [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)) (HTAP) database.
+TiKV is a distributed transactional key-value (KV) database originally created by [PingCAP](https://pingcap.com) to complement [TiDB](https://en.wikipedia.org/wiki/TiDB), an open-source MySQL-compatible NewSQL [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)) (HTAP) database.
 
 As an incubating project of [Cloud Native Computing Foundation](https://en.wikipedia.org/wiki/Linux_Foundation#Cloud_Native_Computing_Foundation) (CNCF), TiKV is intended to fill the role of a unifying distributed storage layer. TiKV excels at working with large amounts of data by supporting petabyte-scale deployments spanning trillions of rows.
 

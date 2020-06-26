@@ -19,7 +19,7 @@ customerCategory: Internet
 
 [Shopee](https://en.wikipedia.org/wiki/Shopee) is the leading e-commerce platform in Southeast Asia and Taiwan. It is a platform tailored for the region, providing customers with an easy, secure, and fast online shopping experience through strong payment and logistical support.
 
-As our business boomed, our team faced severe challenges in scaling our back-end system to meet the demand. Our [previous article](https://pingcap.com/success-stories/tidb-in-shopee/) introduces how we use [TiDB](https://en.wikipedia.org/wiki/TiDB), an open-source, MySQL-compatible, [hybrid transactional and analytical processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)) (HTAP) database, to scale-out our system so that we can deliver better service for our users without worrying about database capacity.
+As our business boomed, our team faced severe challenges in scaling our back-end system to meet the demand. Our [previous article](https://pingcap.com/case-studies/tidb-in-shopee/) introduces how we use [TiDB](https://en.wikipedia.org/wiki/TiDB), an open-source, MySQL-compatible, [hybrid transactional and analytical processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP)) (HTAP) database, to scale-out our system so that we can deliver better service for our users without worrying about database capacity.
 
 There are so many databases available in the market. How do you choose the right one? In this post, I'll share our thoughts with you. I hope this post can help you when you're comparing multiple databases and looking for the right fit for your application.
 

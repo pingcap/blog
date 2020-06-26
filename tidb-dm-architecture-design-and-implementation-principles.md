@@ -321,7 +321,7 @@ name-of-bwl-rule:
       tbl-name: "t2"
 ```
 
-Only part of the configuration options are used in the sample above. For complete configuration options and their definitions, see the [user documentation](https://pingcap.com/docs//tools/dm/data-synchronization-features/#black-and-white-table-lists) for this feature. The rule used in TiDB DM is similar to the master-slave filter rule in MySQL, so you can also refer to [Evaluation of Database-Level Replication and Binary Logging Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html) and [Evaluation of Table-Level Replication Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html).
+Only part of the configuration options are used in the sample above. For complete configuration options and their definitions, see the [user documentation](https://docs.pingcap.com/tidb-data-migration/dev/feature-overview/#black-and-white-table-lists) for this feature. The rule used in TiDB DM is similar to the master-slave filter rule in MySQL, so you can also refer to [Evaluation of Database-Level Replication and Binary Logging Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html) and [Evaluation of Table-Level Replication Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html).
 
 For the Loader unit, after getting the schema name and table name by parsing the SQL file name, it identifies the configured black and white list rule. If the result indicates no replication is required, the entire SQL file will be ignored. For the Syncer unit, after getting the schema name and table name by parsing the binlog file, it identifies the configured black and white list rule. If the result indicates no replication is required, the corresponding binlog event data will be ignored.
 
@@ -342,7 +342,7 @@ name-of-filter-rule:
 ​    action: Ignore
 ```
 
-The matching pattern of the rule is similar to [table routing](https://pingcap.com/docs//tools/dm/data-synchronization-features/#table-routing) and [column mapping](https://pingcap.com/docs//tools/dm/data-synchronization-features/#column-mapping). For detailed configurations, see the user documentation for the feature.
+The matching pattern of the rule is similar to [table routing](https://docs.pingcap.com/tidb-data-migration/dev/feature-overview/#table-routing) and [column mapping](https://docs.pingcap.com/tidb-data-migration/dev/feature-overview/#column-mapping). For detailed configurations, see the user documentation for the feature.
 
 To implement this, after getting the schema name, table name, and binlog event type, the TiDB DM processing unit will identify the configured rule, and decide whether to filter based on the action configuration. For detailed implementation of the filter function, see [binlog-filter pkg](https://github.com/pingcap/tidb-tools/tree/master/pkg/binlog-filter) under TiDB-tools.
 
