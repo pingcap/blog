@@ -49,7 +49,7 @@ Our second talk was by Wish Shi, another one of our database engineers, who intr
 
 Brussels wasn't our only stop. Reaching local communities is part of our global strategy, so we always try to attend local meetups during long trips whenever schedules allow. This time the folks at [Giant Swarm](https://giantswarm.io/) graciously hosted us in Cologne, Germany, where I gave a talk to the [local Kubernetes + Docker meetup](https://www.meetup.com/Kubernetes-Meetup-Cologne/events/258123715/) on how we leverage the Operator pattern to run TiDB in the cloud. Since the Operator pattern is relatively new but [gaining prominence](https://thenewstack.io/databases-operators-bring-stateful-workloads-to-kubernetes/), the audience was engaged and appreciative that we came all this way to share our learning.
 
-After my talk, over pizza and more beer (German beer this time), I learned about the lively local tech scene -- a sizable insurance technology community, enterprise companies like Giant Swarm, and fellow open-source database company ArangoDB. It was also awesome to see big TiDB user, [Mobike](https://pingcap.com/success-stories/tidb-in-mobike/), on every busy street corner of Cologne.
+After my talk, over pizza and more beer (German beer this time), I learned about the lively local tech scene -- a sizable insurance technology community, enterprise companies like Giant Swarm, and fellow open-source database company ArangoDB. It was also awesome to see big TiDB user, [Mobike](https://pingcap.com/case-studies/tidb-in-mobike/), on every busy street corner of Cologne.
 
 ![Mobike on the streets of Cologne, Germany](media/mobike-on-the-streets-of-cologne-germany.png)
 <div class="caption-center"> Mobike on the streets of Cologne, Germany </div>

@@ -219,7 +219,7 @@ Refer to the [Percolator](#percolator) section for detailed write process with t
 
 ### SQL Key Mapping between TiDB and TiKV
 
-TiKV is a distributed KV store. On top of it companies are building databases that speak different dialects. How can they use TiKV to do this? Let's take a look at [TiDB](https://pingcap.com/en/), a distributed relational database from PingCAP that speaks the MySQL protocol. You may wonder how a relational table is mapped to key-value. Take the following table:
+TiKV is a distributed KV store. On top of it companies are building databases that speak different dialects. How can they use TiKV to do this? Let's take a look at [TiDB](https://pingcap.com/), a distributed relational database from PingCAP that speaks the MySQL protocol. You may wonder how a relational table is mapped to key-value. Take the following table:
 
 ```sql
 CREATE TABLE t1 {

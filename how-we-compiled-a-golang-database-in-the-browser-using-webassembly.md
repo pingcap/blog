@@ -287,7 +287,7 @@ Our users now have an in-browser database where they can write SQL directly. How
 
 Imagine if a user wanted to test the compatibility between TiDB and MySQL. It would be a nightmare to run the statements one by one.
 
-However, in TiDB we have features such as `load stats` and `load data` to read and load content from files into the databases, see [for more information](https://pingcap.com/docs-cn/v3.0/reference/sql/statements/load-data/). But as we mentioned earlier, this was not possible for a browser.
+However, in TiDB we have features such as `load stats` and `load data` to read and load content from files into the databases, see [for more information](https://pingcap.com/docs/v3.0/reference/sql/statements/load-data/). But as we mentioned earlier, this was not possible for a browser.
 
 To resolve this issue, we did the following:  
 

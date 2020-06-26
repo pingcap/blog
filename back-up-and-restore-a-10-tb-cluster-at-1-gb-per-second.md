@@ -98,7 +98,7 @@ BR is still in the beta stage and will be generally available in our upcoming Ti
 
 ## What's next for Backup & Restore
 
-TiDB boasts an active open-source community. Thanks to our creative contributors and [PingCAP](https://pingcap.com/en/) engineers for adding the following features to BR. These features are under development:
+TiDB boasts an active open-source community. Thanks to our creative contributors and [PingCAP](https://pingcap.com/) engineers for adding the following features to BR. These features are under development:
 
 * Backup and restore for RawKV-modeTiKV
 

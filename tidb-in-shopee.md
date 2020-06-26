@@ -24,7 +24,7 @@ Shopee, a Sea company, was first launched in Singapore in 2015, and has since ex
 ![The Shopee website](media/the-shopee-website.png)
 <div class="caption-center"> Figure 1: The Shopee website </div>
 
-As our business boomed, our team faced severe challenges in scaling our backend system to meet the demand. Fortunately, we found [TiDB](https://en.wikipedia.org/wiki/TiDB), a MySQL-compatible NewSQL hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built and supported by [PingCAP](https://pingcap.com/en/) and its open-source community. Now we can provide better service and experience for our users without worrying about our database capacity.
+As our business boomed, our team faced severe challenges in scaling our backend system to meet the demand. Fortunately, we found [TiDB](https://en.wikipedia.org/wiki/TiDB), a MySQL-compatible NewSQL hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built and supported by [PingCAP](https://pingcap.com/) and its open-source community. Now we can provide better service and experience for our users without worrying about our database capacity.
 
 Currently, we have deployed two TiDB clusters totalling 60 nodes in our risk control and audit log systems. In this post, we will elaborate on why we chose TiDB, how we are using it, and our future plan for TiDB inside our infrastructure.
 

@@ -104,7 +104,7 @@ Another optimization we've implemented is aggregation pushdown. TiSpark will rew
 
 ## Why Use TiSpark?
 
-Because TiDB as a whole is a distributed NewSQL database, storing data sizes that are far larger than what can be stored in a single machine, it's natural to layer a distributed compute engine like Spark on top of it. Without TiSpark, you would need do things the old way: do a daily dump of all your data into a Hadoop/Hive cluster or another data warehouse before you can analyze it--a situation many of our customers like [Mobike](https://pingcap.com/blog/Use-Case-TiDB-in-Mobike/) avoided by adopting TiDB with TiSpark. If you want to run queries on “fresh” data, not stale ones that are at least one day old, then TiSpark shines. Plus, you no longer need to manage and maintain any ETL pipelines, saving your team lots of time, resources, and headaches.
+Because TiDB as a whole is a distributed NewSQL database, storing data sizes that are far larger than what can be stored in a single machine, it's natural to layer a distributed compute engine like Spark on top of it. Without TiSpark, you would need do things the old way: do a daily dump of all your data into a Hadoop/Hive cluster or another data warehouse before you can analyze it--a situation many of our customers like [Mobike](https://pingcap.com/case-studies/tidb-in-mobike) avoided by adopting TiDB with TiSpark. If you want to run queries on “fresh” data, not stale ones that are at least one day old, then TiSpark shines. Plus, you no longer need to manage and maintain any ETL pipelines, saving your team lots of time, resources, and headaches.
 
 ## What's Next?
 

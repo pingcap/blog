@@ -130,7 +130,7 @@ To check if your deployment is successful:
 
 ## Test TiDB compatibility with MySQL
 
-As we mentioned, TiDB is MySQL compatible. You can use TiDB as MySQL slaves with instant horizontal scalability. That's how many innovative tech companies, like [Mobike](https://pingcap.com/blog/Use-Case-TiDB-in-Mobike/), use TiDB.
+As we mentioned, TiDB is MySQL compatible. You can use TiDB as MySQL slaves with instant horizontal scalability. That's how many innovative tech companies, like [Mobike](https://pingcap.com/case-studies/tidb-in-mobike), use TiDB.
 
 To test out this MySQL compatibility:
 
@@ -282,4 +282,4 @@ You can see that both the MySQL and TiSpark clients return the same results -- f
 
 With this simple deployment of TiDB on your local machine, you now have a functioning Hybrid Transactional and Analytical processing (HTAP) database. You can continue to make changes to the data in your MySQL client (simulating transactional workloads) and analyze the data with those changes in TiSpark (simulating real-time analytics).
 
-Of course, launching TiDB on your local machine is purely for experimental purposes. If you are interested in trying out TiDB for your production environment, send us a note: [info@pingcap.com](mailto:info@pingcap.com) or reach out on [our website](https://pingcap.com/en/). We'd be happy to help you!
+Of course, launching TiDB on your local machine is purely for experimental purposes. If you are interested in trying out TiDB for your production environment, send us a note: [info@pingcap.com](mailto:info@pingcap.com) or reach out on [our website](https://pingcap.com/). We'd be happy to help you!

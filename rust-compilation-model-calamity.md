@@ -46,7 +46,7 @@ In this episode:
 
 ## The spectre of poor Rust compile times at PingCAP
 
-At [PingCAP](https://pingcap.com/en/), my colleagues use Rust to write [TiKV](https://github.com/tikv/tikv/), the storage node of [TiDB](https://github.com/pingcap/tidb), our distributed database. They do this because they want this most important node in the system to be fast and reliable by construction, at least to the greatest extent reasonable.
+At [PingCAP](https://pingcap.com/), my colleagues use Rust to write [TiKV](https://github.com/tikv/tikv/), the storage node of [TiDB](https://github.com/pingcap/tidb), our distributed database. They do this because they want this most important node in the system to be fast and reliable by construction, at least to the greatest extent reasonable.
 
 It was mostly a great decision, and most people internally are mostly happy about it.
 

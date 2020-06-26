@@ -263,6 +263,6 @@ Moving forward, we will continuously improve the Chaos Mesh Dashboard, so that u
 
 If any of these sound interesting to you, join us in building a world class Chaos Engineering platform. May our applications dance in chaos on Kubernetes!
 
-If you find a bug or think something is missing, feel free to file an [issue](https://github.com/pingcap/chaos-mesh/issues), open a PR, or join us on the #sig-chaos-mesh channel in the [TiDB Community](https://pingcap.com/tidbslack) slack workspace.
+If you find a bug or think something is missing, feel free to file an [issue](https://github.com/pingcap/chaos-mesh/issues), open a PR, or join us on the #sig-chaos-mesh channel in the [TiDB Community](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) slack workspace.
 
 GitHub: [https://github.com/pingcap/chaos-mesh](https://github.com/pingcap/chaos-mesh)

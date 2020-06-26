@@ -14,7 +14,7 @@ Dear TiDB contributors:
 
 Not long after we celebrated our 300th contributor milestone in September 2019, a new record, [400th contributor](https://github.com/pingcap/tidb/graphs/contributors), is just created in our TiDB repository!
 
-Ever since writing the first line of code of TiDB in May 2015, I have witnessed this open-source distributed database project transforming from infancy to puberty, now growing fast into adulthood. I have enjoyed the glorious moments when its storage layer, [the TiKV project](https://tikv.org/), was upgraded to a [CNCF Incubating Project](https://www.cncf.io/blog/2019/05/21/toc-votes-to-move-tikv-into-cncf-incubator/) and when its ecosystem tools hit their major releases. I am also pleased to see TiDB continuously polished and adopted in the production environments of hundreds of users, helping them scale and grow their business without worrying about their database infrastructure. All these honors and achievements belong to the TiDB community, to our beloved contributors ([Have you landed on the TiDB planet?](https://pingcap.com/tidb-planet/)) and our following distinguished committers:
+Ever since writing the first line of code of TiDB in May 2015, I have witnessed this open-source distributed database project transforming from infancy to puberty, now growing fast into adulthood. I have enjoyed the glorious moments when its storage layer, [the TiKV project](https://tikv.org/), was upgraded to a [CNCF Incubating Project](https://www.cncf.io/blog/2019/05/21/toc-votes-to-move-tikv-into-cncf-incubator/) and when its ecosystem tools hit their major releases. I am also pleased to see TiDB continuously polished and adopted in the production environments of hundreds of users, helping them scale and grow their business without worrying about their database infrastructure. All these honors and achievements belong to the TiDB community, to our beloved contributors and our following distinguished committers:
 
 * Kai Li ([GitHub ID: kayaklee](https://github.com/kayaklee)), Head of Database Team, [Meituan-Dianping](https://en.wikipedia.org/wiki/Meituan-Dianping)
 * Di Wu ([GitHub ID: foxmailed](https://github.com/foxmailed)), Head of Database Middleware/Distributed Database, [Toutiao.com](https://www.toutiao.com/)
@@ -37,12 +37,12 @@ For those who love hacking in the open-source distributed system projects, we ma
 * [a series of training courses](https://github.com/pingcap/talent-plan) on writing distributed systems in Go and Rust
 * [meticulously defined community roles to make you feel belonging and recognized with a clear growth path](https://pingcap.com/blog/tidb-community-upgrade/)
 * an [upgraded community structure](https://pingcap.com/blog/tidb-community-upgrade/#new-community-structure)with Special Interest Groups (SIG), Working Groups (WG) to facilitate contributions and project development
-* diversified community activities [TiDB Hackathon 2019](https://pingcap.com/blog/insert-into-tidb-hackathon-2019-values-hack-fun-tidb-ecosystem/), [TiDB DevCon](https://pingcap.com/blog/tidb-devcon-2018-recap/), [Paper Reading](https://pingcap.com/community-cn/paper-reading/), and the ongoing [TiDB Usability Challenge program](https://pingcap.com/community/tidb-usability-challenge/)
+* diversified community activities [TiDB Hackathon 2019](https://pingcap.com/blog/insert-into-tidb-hackathon-2019-values-hack-fun-tidb-ecosystem/), [TiDB DevCon](https://pingcap.com/blog/tidb-devcon-2018-recap/), Paper Reading, and the ongoing [TiDB Usability Challenge program](https://github.com/pingcap/community/blob/master/challenge-programs/challenge-program-season-2.md)
 * with more to come!
 
 While this achievement is worth celebrating, we know there is still lots of work ahead. In addition to making TiDB faster, easier to use, and a real HTAP platform, we want to begin 2020 by striving for a diversified community full of innovative ideas, collaborations, and engagements. We hope you will enjoy the self-governing, active, global TiDB community we are committed to building.
 
-Linus Torvalds once said, "In open source, we feel strongly that to really do something well, you have to get a lot of people involved." Whether you want to use TiDB to unleash the power of data or to have fun hacking with other fellow contributors, join us today on our [community Slack channel](https://pingcap.com/tidbslack).
+Linus Torvalds once said, "In open source, we feel strongly that to really do something well, you have to get a lot of people involved." Whether you want to use TiDB to unleash the power of data or to have fun hacking with other fellow contributors, join us today on our [community Slack channel](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog).
 
 Enjoy!
 
