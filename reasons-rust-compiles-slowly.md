@@ -30,7 +30,7 @@ with a few more subjects: LLVM, compiler architecture, and linking.
 
 [prev]: https://pingcap.com/blog/rust-huge-compilation-units
 
-- [LLVM and poor LLVM IR generation](#llvm-and-poor-llvm-ir-generation)
+- [LLVM and poor LLVM IR generation](#tradeoff-4-llvm-and-poor-llvm-ir-generation)
 - [Batch compilation](#batch-compilation)
 - [Build scripts and procedural macros](#build-scripts-and-procedural-macros)
 - [Static linking](#static-linking)
