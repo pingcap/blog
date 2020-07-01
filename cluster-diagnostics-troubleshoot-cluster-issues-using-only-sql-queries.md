@@ -83,7 +83,7 @@ To generate a diagnostic report:
 ![View full report](media/view-full-report.jpg)
 <div class="caption-center"> View the full report </div>
 
-If the system has any abnormal behavior, such as QPS jitters or higher latency, you can generate a comparison report for that time range and for a time range with normal activity. You can easily compare the differences between system metrics of the two time periods, so you can quickly find the problem:
+If the system has any abnormal behavior, such as QPS jitters or higher latency, you can generate a comparison report for that time range and for a time range with normal activities. You can easily compare the differences between system metrics of the two time periods, so you can quickly find the problem:
 
 ![Generate a comparison report](media/generate-comparison-report.jpg)
 <div class="caption-center"> Generate a comparison report </div>
@@ -101,13 +101,18 @@ The automatic diagnostics is based on a series of built-in diagnostic rules, and
 Currently, diagnostic rules are as follows:
 
 * `config`: Checks configuration consistency. It checks whether the same type of components have the same configurations and whether configuration values are set properly.
+
 * `version`: Checks version consistency. It checks whether versions of the same type of components are consistent.
+
 * `node-load`: Checks server node load. It checks whether CPU, memory, and disk usage are too high.
+
 * `critical-error`: Checks critical errors in the system, such as `server is busy`, component restarting, and failures to write the binlog.
+
 * `threshold-check`: Checks whether some monitoring metrics exceed threshold values, for example:
+
     * Whether the CPU usage of a thread in TiKV's components exceeds threshold values
     * Whether [leaders](https://pingcap.com/docs/dev/glossary/#leaderfollowerlearner) and [Regions](https://pingcap.com/docs/dev/glossary/#regionpeerraft-group) (the basic data storage unit in TiKV) are balanced among TiKV instances
-    * Whether a TiKV instance has too many Regions and whether a single instance has more than 20,000 instances
+    * Whether a TiKV instance has too many Regions and whether a single instance has more than 20,000 Regions
 
 We're still improving the rules cluster diagnostics uses. If you're interested in adding rules, you can file a pull request [on GitHub](https://github.com/pingcap/tidb/).
 
