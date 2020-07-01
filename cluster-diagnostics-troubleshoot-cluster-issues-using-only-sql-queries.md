@@ -35,7 +35,7 @@ In a TiDB cluster, a single transaction might involve multiple instances of TiDB
 SELECT * FROM information_schema.cluster_log where message like "%{txn_id}%" and time > '2020-03-27 15:39:00' and time < '2020-03-27 15:50:00'
 ```
 
-Similarly, splitting and merging the basic unit of TiKV storage (the [Region](https://pingcap.com/docs/stable/glossary/#regionpeerraft-group)) and the Region [leader](https://pingcap.com/docs/dev/glossary/#leaderfollowerlearner) switch usually involve multiple TiKV nodes. You can quickly view all activities in a life cycle of a Region through the log table.
+Similarly, splitting and merging the basic unit of TiKV storage (the [Region](https://docs.pingcap.com/tidb/v4.0/glossary#regionpeerraft-group)) and the Region [leader](https://docs.pingcap.com/tidb/v4.0/glossary#leaderfollowerlearner) switch usually involve multiple TiKV nodes. You can quickly view all activities in a life cycle of a Region through the log table.
 
 When you query logs, the SQL statement's predicates are pushed down to each log node for filtering, and no program collects all the logs. So the overhead is controllable and is lower than using the grep command. You can do what a distributed grep command can do but with less overhead.
 
@@ -111,7 +111,7 @@ Currently, diagnostic rules are as follows:
 * `threshold-check`: Checks whether some monitoring metrics exceed threshold values, for example:
 
     * Whether the CPU usage of a thread in TiKV's components exceeds threshold values
-    * Whether [leaders](https://pingcap.com/docs/dev/glossary/#leaderfollowerlearner) and [Regions](https://pingcap.com/docs/dev/glossary/#regionpeerraft-group) (the basic data storage unit in TiKV) are balanced among TiKV instances
+    * Whether [leaders](https://docs.pingcap.com/tidb/v4.0/glossary#leaderfollowerlearner) and [Regions](https://docs.pingcap.com/tidb/v4.0/glossary#regionpeerraft-group) (the basic data storage unit in TiKV) are balanced among TiKV instances
     * Whether a TiKV instance has too many Regions and whether a single instance has more than 20,000 Regions
 
 We're still improving the rules cluster diagnostics uses. If you're interested in adding rules, you can file a pull request [on GitHub](https://github.com/pingcap/tidb/).
