@@ -10,7 +10,7 @@ image: /images/blog/troubleshoot-distributed-database-issues.jpg
 
 ![Troubleshoot distributed database issues](media/troubleshoot-distributed-database-issues.jpg)
 
-[TiDB](https://docs.pingcap.com/tidb/dev/overview) is an open-source, distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads. Ideally, a TiDB cluster should always be efficient and problem free. It should be stable,  load-balanced, and have a reliable rate of queries per second (QPS). There shouldn’t be any jitters (either in the cluster or on disk), and no hotspots, slow queries, or network fluctuations.
+[TiDB](https://docs.pingcap.com/tidb/dev/overview) is an open-source, distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads. Ideally, a TiDB cluster should always be efficient and problem free. It should be stable, load-balanced, and have a reliable rate of queries per second (QPS). There shouldn't be any jitters (either in the cluster or on disk), and no hotspots, slow queries, or network fluctuations.
 
 However, the reality is often unsatisfactory. For external reasons, application traffic may surge and increase the pressure on the cluster. Through a chain reaction of events, the CPU load maxes out, out of memory errors occur, network latency increases, and disk writes and reads slow down.
 
@@ -18,18 +18,18 @@ Before TiDB 4.0, when these problems occurred in the cluster, there was no unifo
 
 Now, TiDB 4.0 introduces a new feature, cluster diagnostics, a built-in widget in TiDB Dashboard, which lets you diagnose cluster problems within a specified time range and summarize the diagnostic results and cluster-related load monitoring information in a diagnostic report.
 
-Our [previous post](https://pingcap.com/blog/easier-troubleshooting-for-distributed-databases/#cluster-diagnostics) gave you a quick peek at this feature. In this post, we’ll elaborate on cluster diagnostics’s diagnostic reports, and show you examples of how cluster diagnostics can help you quickly find system problems.
+Our [previous post](https://pingcap.com/blog/easier-troubleshooting-for-distributed-databases/#cluster-diagnostics) gave you a quick peek at this feature. In this post, we'll elaborate on cluster diagnostics's diagnostic reports, and show you examples of how cluster diagnostics can help you quickly find system problems.
 
 ![Cluster diagnostic report](media/cluster-diagnostics.gif)
 <div class="caption-center"> Cluster diagnostic report </div>
 
 ## How cluster diagnostics makes your job easier
 
-It’s important to provide a consistent user experience and reduce the learning curve. There is a lot of information that is relevant to troubleshooting, including cluster static information and cluster runtime information. We reorganize this information across the entire cluster to make sure that you can access it using SQL queries, without the need for external tools. At the same time, you can extract common SQL statements as scripts and write different troubleshooting scripts for different application scenarios.
+It's important to provide a consistent user experience and reduce the learning curve. There is a lot of information that is relevant to troubleshooting, including cluster static information and cluster runtime information. We reorganize this information across the entire cluster to make sure that you can access it using SQL queries, without the need for external tools. At the same time, you can extract common SQL statements as scripts and write different troubleshooting scripts for different application scenarios.
 
 ## Querying logs with cluster diagnostics
 
-In a TiDB cluster, a single transaction might involve multiple instances of TiDB’s storage engine, [TiKV](https://pingcap.com/docs/stable/architecture/#tikv-server). Before TiDB 4.0, if you wanted to view logs related to a specific transaction ID (`txn_id`), you might need to log in to all nodes and view the logs using the grep command. But in TiDB 4.0 and later, we offer cluster log tables. You can view all relevant logs with only one SQL statement. For example:
+In a TiDB cluster, a single transaction might involve multiple instances of TiDB's storage engine, [TiKV](https://pingcap.com/docs/stable/architecture/#tikv-server). Before TiDB 4.0, if you wanted to view logs related to a specific transaction ID (`txn_id`), you might need to log in to all nodes and view the logs using the grep command. But in TiDB 4.0 and later, we offer cluster log tables. You can view all relevant logs with only one SQL statement. For example:
 
 ```
 SELECT * FROM information_schema.cluster_log where message like "%{txn_id}%" and time > '2020-03-27 15:39:00' and time < '2020-03-27 15:50:00'
@@ -37,7 +37,7 @@ SELECT * FROM information_schema.cluster_log where message like "%{txn_id}%" and
 
 Similarly, splitting and merging the basic unit of TiKV storage (the [Region](https://pingcap.com/docs/stable/glossary/#regionpeerraft-group)) and the Region [leader](https://pingcap.com/docs/dev/glossary/#leaderfollowerlearner) switch usually involve multiple TiKV nodes. You can quickly view all activities in a life cycle of a Region through the log table.
 
-When you query logs, the SQL statement’s predicates are pushed down to each log node for filtering, and no program collects all the logs. So the overhead is controllable and is lower than using the grep command. You can do what a distributed grep command can do but with less overhead.
+When you query logs, the SQL statement's predicates are pushed down to each log node for filtering, and no program collects all the logs. So the overhead is controllable and is lower than using the grep command. You can do what a distributed grep command can do but with less overhead.
 
 ## Cluster diagnostic reports
 
@@ -45,14 +45,14 @@ In TiDB 4.0, if you want to diagnose or inspect the cluster within a time range,
 
 ### The instance CPU usage report
 
-The instance CPU usage report lets you view the average (AVG), maximum (MAX), and minimum (MIN) CPU usage for TiDB, Placement Driver (PD), and TiKV instances. You can use this report to quickly judge whether the cluster’s load is balanced or if it has hotspots.
+The instance CPU usage report lets you view the average (AVG), maximum (MAX), and minimum (MIN) CPU usage for TiDB, Placement Driver (PD), and TiKV instances. You can use this report to quickly judge whether the cluster's load is balanced or if it has hotspots.
 
 ![The instance CPU usage report](media/instance-cpu-usage.jpg)
 <div class="caption-center"> The instance CPU usage report </div>
 
 ### The monitoring execution time report
 
-The monitoring execution time report presents the monitoring time for each component in the cluster and what percentage it is of the total execution time for all queries. You can use this report to quickly determine whether a component’s execution time is too long and whether there is a bottleneck.
+The monitoring execution time report presents the monitoring time for each component in the cluster and what percentage it is of the total execution time for all queries. You can use this report to quickly determine whether a component's execution time is too long and whether there is a bottleneck.
 
 ![The monitoring execution time report](media/monitoring-execution-time.jpg)
 <div class="caption-center"> The monitoring execution time report </div>
@@ -94,7 +94,7 @@ Here are two cases that show how cluster diagnostics helped us quickly find syst
 
 ### Automatic diagnostics and system inspection
 
-Cluster diagnostics automatically diagnoses system faults and potential problems in the current cluster. This feature lets you inspect the cluster as a whole and analyze the system for bottlenecks. You don’t have to check the monitoring information for nodes one by one. Diagnostic results are output to the `information_schema.inspection_result` system table. When you query this table, you trigger diagnostics. When you encounter a problem, you can first query this table to find the cause.
+Cluster diagnostics automatically diagnoses system faults and potential problems in the current cluster. This feature lets you inspect the cluster as a whole and analyze the system for bottlenecks. You don't have to check the monitoring information for nodes one by one. Diagnostic results are output to the `information_schema.inspection_result` system table. When you query this table, you trigger diagnostics. When you encounter a problem, you can first query this table to find the cause.
 
 The automatic diagnostics is based on a series of built-in diagnostic rules, and it gives diagnostic results by querying the cluster information. 
 
@@ -105,13 +105,13 @@ Currently, diagnostic rules are as follows:
 * `node-load`: Checks server node load. It checks whether CPU, memory, and disk usage are too high.
 * `critical-error`: Checks critical errors in the system, such as `server is busy`, component restarting, and failures to write the binlog.
 * `threshold-check`: Checks whether some monitoring metrics exceed threshold values, for example:
-    * Whether the CPU usage of a thread in TiKV’s components exceeds threshold values
+    * Whether the CPU usage of a thread in TiKV's components exceeds threshold values
     * Whether [leaders](https://pingcap.com/docs/dev/glossary/#leaderfollowerlearner) and [Regions](https://pingcap.com/docs/dev/glossary/#regionpeerraft-group) (the basic data storage unit in TiKV) are balanced among TiKV instances
     * Whether a TiKV instance has too many Regions and whether a single instance has more than 20,000 instances
 
-We're still improving the rules cluster diagnostics uses. If you’re interested in adding rules, you can file a pull request [on GitHub](https://github.com/pingcap/tidb/).
+We're still improving the rules cluster diagnostics uses. If you're interested in adding rules, you can file a pull request [on GitHub](https://github.com/pingcap/tidb/).
 
-Let’s look at an example. In the following monitoring interface, the query’s 999th percentile latency and queries per second (QPS) suddenly jittered and then immediately returned to normal. What caused this phenomenon?
+Let's look at an example. In the following monitoring interface, the query's 999th percentile latency and queries per second (QPS) suddenly jittered and then immediately returned to normal. What caused this phenomenon?
 
 ![P999 latency and QPS jittered](media/qps-jitter.jpg)
 <div class="caption-center"> The 999th percentile latency and QPS suddenly jittered </div>
@@ -133,10 +133,10 @@ The above result showed that the `172.16.5.40:23151` TiKV instance restarted at 
 
 Automatic diagnostics does not always pinpoint the problem. More often than not, you need to find the problem based on monitoring and other information. However, a TiDB cluster has many monitoring metrics. To quickly identify abnormal monitoring items, you can compare two time ranges.
 
-Let’s see another example. In the monitoring interface below, the query’s 999th percentile latency and QPS suddenly dropped at 17:18:00 on March 3, 2020 and, after a few minutes, returned to normal status. Why?
+Let's see another example. In the monitoring interface below, the query's 999th percentile latency and QPS suddenly dropped at 17:18:00 on March 3, 2020 and, after a few minutes, returned to normal status. Why?
 
 ![P999 latency and QPS dropped](media/latency-and-qps-dropped.jpg)
-<div class="caption-center"> The query’s 999th percentile latency and QPS suddenly dropped </div>
+<div class="caption-center"> The query's 999th percentile latency and QPS suddenly dropped </div>
 
 In TiDB 4.0, the `metrics_summary` monitoring system table contains TiDB, PD, and TiKV instances and some monitoring items of the server node. We can use this table to compare all system monitorings when the system is normal against when the system has a problem to quickly find the monitoring item with the biggest difference during the two time ranges:
 
@@ -167,11 +167,11 @@ ORDER BY  ratio DESC limit 10;
 
 The query results above showed that:
 
-* The `tidb_slow_query_cop_process_total_time` (`cop process`s’ execution time in TiDB slow queries) in t2 was about 5,866 times that in t1.
+* The `tidb_slow_query_cop_process_total_time` (`cop process`s' execution time in TiDB slow queries) in t2 was about 5,866 times that in t1.
 * The `tidb_distsql_partial_scan_key_total_num` (the number of keys scanned by TiDB's `distsql` requests) in t2 was about 3,648 times that in t1.
-* The `tidb_slow_query_cop_wait_total_time` (`cop` requests’ waiting time in TiDB slow queries) in t2 was about 267 times that in t1.
-* The `tikv_cop_total_response_size` (the size of the result returned by TiKV’s `cop` requests) in t2 was about 192 times that in t1.
-* The `tikv_cop_scan_details` (the number of scans of TiKV’s `cop` requests) in t2 was about 105 times that in t1.
+* The `tidb_slow_query_cop_wait_total_time` (`cop` requests' waiting time in TiDB slow queries) in t2 was about 267 times that in t1.
+* The `tikv_cop_total_response_size` (the size of the result returned by TiKV's `cop` requests) in t2 was about 192 times that in t1.
+* The `tikv_cop_scan_details` (the number of scans of TiKV's `cop` requests) in t2 was about 105 times that in t1.
 
 According to the statistics above, we knew that t2 had more `cop` requests than t1. As a result, TiKV Coprocessor was overloaded and `cop task` waited. The reason might be that there were a lot of large queries in t2. We could use `CLUSTER_SLOW_QUERY` to query whether there were unexpected queries during the t2 time period.
 
@@ -181,4 +181,4 @@ At last, we found the root of the problem. During t1 and t2, we were running the
 
 The cluster diagnostics feature simplifies and streamlines TiDB cluster monitoring. Say goodbye to multiple tools and multiple learning curves. Further, you can monitor and analyze the entire cluster at the same time. No more checking each node individually. 
 
-Cluster diagnostics is a work in progress. We’re still adding some diagnostic rules, and we look forward to feedback and advice from the open-source community. If you’d like to help us, join our [community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) and share your idea with us. 
+Cluster diagnostics is a work in progress. We're still adding some diagnostic rules, and we look forward to feedback and advice from the open-source community. If you'd like to help us, join our [community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) and share your idea with us. 
