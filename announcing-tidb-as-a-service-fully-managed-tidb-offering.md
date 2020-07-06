@@ -6,6 +6,7 @@ summary: TiDB Cloud Beta is released. It's the easiest, most economical, and mos
 tags: ['Release', 'TiDB Cloud', 'HTAP', 'Cloud']
 categories: ['Engineering']
 image: /images/blog/htap-tidb-cloud-beta.jpg
+aliases: ['/blog/announcing-tidb-cloud-managed-as-a-service-and-in-the-marketplace/']
 ---
 
 ![TiDB Cloud Beta](media/htap-tidb-cloud-beta.jpg)
