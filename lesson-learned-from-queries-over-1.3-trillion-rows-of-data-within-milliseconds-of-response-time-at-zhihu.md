@@ -64,10 +64,10 @@ MySQL sharding and MHA is not a good solution, because both MySQL sharding and M
 #### Shortcomings of MHA
 
 * We need to implement the virtual IP (VIP) configuration by writing a script or utilizing a third-party tool.
-* MHA only monitors the master database.
+* MHA only monitors the primary database.
 * To configure MHA, we need to configure passwordless Secure Shell ([SSH](https://en.wikipedia.org/wiki/Secure_Shell)). This may lead to potential security risks.
 * MHA doesn't provide the read load balancing feature for the secondary server.
-* MHA can only monitor whether the master server (instead of the secondary master) is available.
+* MHA can only monitor whether the primary server (instead of the secondary primary) is available.
 
 Database scalability was still the weak point of the overall system until we found TiDB and migrated data from MySQL to TiDB.
 
@@ -169,7 +169,7 @@ During this process, we accumulated precious experience:
 
 ### Evaluating resources
 
-Before we tried TiDB, we didn't analyze how many hardware resources we would need to support the same amount of data we had on the MySQL side. To reduce maintenance costs, we deployed MySQL in the single master — single secondary topology. In contrast, the [Raft](https://raft.github.io/) protocol implemented in TiDB requires at least three replicas. Therefore, we needed more hardware resources to support our business data in TiDB, and we needed to prepare machine resources in advance.
+Before we tried TiDB, we didn't analyze how many hardware resources we would need to support the same amount of data we had on the MySQL side. To reduce maintenance costs, we deployed MySQL in the single primary — single secondary topology. In contrast, the [Raft](https://raft.github.io/) protocol implemented in TiDB requires at least three replicas. Therefore, we needed more hardware resources to support our business data in TiDB, and we needed to prepare machine resources in advance.
 
 Once our data center was set up properly, we could quickly complete our evaluation of TiDB.
 

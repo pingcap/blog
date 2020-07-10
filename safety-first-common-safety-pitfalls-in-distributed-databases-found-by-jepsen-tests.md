@@ -376,7 +376,7 @@ This is a summary of each report's problems discovered.
     - Violations in a single partition linearizability tests due to read-only transactions passing through the transaction ordering system.
     - Dirty read / Lost updates are possible during network partitions due to waiting transactions being released before partition detection code has run.
     - Lost updates in the crash recovery system are possible.
-* YugaByte DB
+* YugaByteDB
   + 2019-03-26 - 1.1.9
     - Timeouts persist for the entire duration of a partition, instead of eventually falling to a "declared unavailable" state.
     - Logs during partition could consume 40MB of disk per minute.

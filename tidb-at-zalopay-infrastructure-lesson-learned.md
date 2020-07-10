@@ -219,7 +219,7 @@ Here is a comparison of the strongest candidate - MySQL - with TiDB (reference [
   <tr>
    <td>Replication methods
    </td>
-   <td>Master-master replication, primary-secondary replication
+   <td>Primary-primary replication, primary-secondary replication
    </td>
    <td>Uses Raft consensus algorithm to ensure data replication with strong consistency among multiple replicas.
    </td>

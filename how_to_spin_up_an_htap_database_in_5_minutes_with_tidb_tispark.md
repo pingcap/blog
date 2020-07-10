@@ -89,7 +89,7 @@ Now that Docker is set up, let's deploy TiDB!
     docker-compose up -d
     ```
 
-You can see messages in your terminal launching the default components of a TiDB cluster: 1 TiDB instance, 3 TiKV instances, 3 Placement Driver (PD) instances, Prometheus, Grafana, 2 TiSpark instances (one master, one secondary), and a TiDB-Vision instance.
+You can see messages in your terminal launching the default components of a TiDB cluster: 1 TiDB instance, 3 TiKV instances, 3 Placement Driver (PD) instances, Prometheus, Grafana, 2 TiSpark instances (one primary, one secondary), and a TiDB-Vision instance.
 
 Your terminal will show something like this:
 

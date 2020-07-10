@@ -34,7 +34,7 @@ Previously, our main solution for the backend system was MySQL, with MongoDB sup
 
 3. To handle the service access performance under large data volume, we had to use more MySQL shardings, which made the application logic much heavier and more complicated. Meanwhile, to meet the multi-dimensional query demand, we always needed to introduce extra storage or sacrifice some performance, thus blocking the rapid iteration of our product.
 
-4. Due to the regular MySQL primary-secondary (M-S) failover design, application access was often unavailable. If a node failed, it took a long time to recover because of the massive data volume. But the M-S architecture could only guarantee high availability using extra components and through primary-secondary switch, and during the switch process, as the system needed to ensure the state of the Master database, the election of the new Master, and the issue of the new routing, application access got interrupted.
+4. Due to the regular MySQL primary-secondary failover design, application access was often unavailable. If a node failed, it took a long time to recover because of the massive data volume. But the primary-secondary architecture could only guarantee high availability using extra components and through primary-secondary switch, and during the switch process, as the system needed to ensure the state of the primary database, the election of the new primary, and the issue of the new routing, application access got interrupted.
 
 ## Why TiDB?
 

@@ -45,11 +45,11 @@ The architecture has the following characteristics:
 
 * **MySQL primary-secondary structure**
 
-    The database layer employs the MySQL primary-secondary structure. Its semi-synchronous replication enables data from one MySQL server (the master instance) to be copied automatically to one or more MySQL servers (the secondary instances). This feature addresses latency and consistency issues.
+    The database layer employs the MySQL primary-secondary structure. Its semi-synchronous replication enables data from one MySQL server (the primary instance) to be copied automatically to one or more MySQL servers (the secondary instances). This feature addresses latency and consistency issues.
 
 * **Failover**
 
-    The billing application accesses the back-end database through a virtual IP address (VIP). If the master instance is down, the application service automatically drifts to the secondary through a VIP, ensuring that the service is unaffected.
+    The billing application accesses the back-end database through a virtual IP address (VIP). If the primary instance is down, the application service automatically drifts to the secondary through a VIP, ensuring that the service is unaffected.
 
 * **Data backup**
 
