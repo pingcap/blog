@@ -121,7 +121,7 @@ Standard stress testing for the `INSERT` statement:
 ![Standard stress testing for the INSERT statement](media/standard-stress-testing-for-the-insert-statement.png)
 <div class="caption-center"> Figure 5: Standard stress testing for the INSERT statement </div>
 
-TiDB's performance results were able to meet our requirements, even though the system did have some stability issues when we dramatically increased our test workloads that far exceeded the real production environment. Therefore, we decided to use some read traffic in the MySQL slave as the canary traffic in TiDB.
+TiDB's performance results were able to meet our requirements, even though the system did have some stability issues when we dramatically increased our test workloads that far exceeded the real production environment. Therefore, we decided to use some read traffic in the MySQL secondary as the canary traffic in TiDB.
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('Powering the Xiaomi Mobile Lifestyle with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>

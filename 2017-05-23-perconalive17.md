@@ -233,7 +233,7 @@ To help users exploit the best part of TiDB, we have prepared the following tool
 
 Syncer is a tool to synchronize data from MySQL in real time.
 
-It is hook up as a MySQL replica: we have a MySQL master with binlog enabled and Syncer acts as a fake slave. At the very beginning, Syncer gets the position of the current binlog which is the initial synchronizing position. When new data is written into MySQL, Syncer obtains the binlog from the master, synchronizes the data to the Save Point in the disk, and then applies the rule filter to send data to either MySQL or TiDB cluster.
+It is hook up as a MySQL replica: we have a MySQL primary with binlog enabled and Syncer acts as a fake secondary. At the very beginning, Syncer gets the position of the current binlog which is the initial synchronizing position. When new data is written into MySQL, Syncer obtains the binlog from the primary, synchronizes the data to the Save Point in the disk, and then applies the rule filter to send data to either MySQL or TiDB cluster.
 
 ![TiDB Binlog](media/image_12.png)
 

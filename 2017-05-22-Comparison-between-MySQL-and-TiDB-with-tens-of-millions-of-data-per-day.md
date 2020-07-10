@@ -53,7 +53,7 @@ We studied many distributed database solutions in the community and came upon Ti
 
 ## TiDB, give it a go
 
-In the process of test deployment, we used the Syncer tool, provided by TiDB, to deploy TiDB as a MySQL Slave to the MySQL master of the original business, testing the compatibility and stability of read/write. After a while, the system was proved to perform well in read/write so we decided to move the read request of the business layer to TiDB. Later, we also switch the write business to the TiDB cluster, making the system online smoothly.
+In the process of test deployment, we used the Syncer tool, provided by TiDB, to deploy TiDB as a MySQL secondary to the MySQL primary of the original business, testing the compatibility and stability of read/write. After a while, the system was proved to perform well in read/write so we decided to move the read request of the business layer to TiDB. Later, we also switch the write business to the TiDB cluster, making the system online smoothly.
 
 The GaeaAD system works well for more than half a year since it has come online in October, 2016. Based on the hands-on experience, we summarized the following benefits brought by TiDB:
 ![TiDB in GAEA](media/gaea 2.png)

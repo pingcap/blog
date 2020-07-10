@@ -30,7 +30,7 @@ Before the Internet data surge, the amount of data in enterprises was generally 
 
 However, as the business became more complex, and the amount of data kept increasing, a notable problem occurred: it was difficult to process only OLTP requests in a standalone database, not to mention handling analytical queries simultaneously. **Running OLTP and OLAP tasks in the same database might cause might cause a huge impact on OLTP workloads.**
 
-We could use the master-slave model or sharding to relieve the problem, but it would be hard to implement application requirements.
+We could use the primary-secondary model or sharding to relieve the problem, but it would be hard to implement application requirements.
 
 In this context, the big data technology represented by [Apache Hadoop](https://en.wikipedia.org/wiki/Apache_Hadoop) began to flourish. This technology builds a data analysis platform with many relatively inexpensive x86 machines, and uses parallel capabilities to solve computing problems of big data sets. In addition, architects **divide the storage system into two modules: online transactions and data analysis**.
 

@@ -15,14 +15,14 @@ Step under the covers, however, and there are differences. If your architecture 
 
 ## 1. TiDB natively distributes query execution and storage
 
-With MySQL, it is common to scale-out via replication. Typically you will have one MySQL master with many slaves, each with a complete copy of the data. Using either application logic or technology like [ProxySQL](https://proxysql.com/), queries are routed to the appropriate server (offloading queries from the master to slaves whenever it is safe to do so).
+With MySQL, it is common to scale-out via replication. Typically you will have one MySQL primary with many secondaries, each with a complete copy of the data. Using either application logic or technology like [ProxySQL](https://proxysql.com/), queries are routed to the appropriate server (offloading queries from the primary to secondaries whenever it is safe to do so).
 
-Scale-out replication works very well for read-heavy workloads, as the query execution can be divided between replication slaves. However, it becomes a bottleneck for write-heavy workloads, since each replica must have a full copy of the data. Another way to look at this is that MySQL Replication scales out SQL processing, but it does not scale out the storage. (By the way, this is true for traditional replication as well as newer solutions such as Galera Cluster and Group Replication.)
+Scale-out replication works very well for read-heavy workloads, as the query execution can be divided between replication secondaries. However, it becomes a bottleneck for write-heavy workloads, since each replica must have a full copy of the data. Another way to look at this is that MySQL Replication scales out SQL processing, but it does not scale out the storage. (By the way, this is true for traditional replication as well as newer solutions such as Galera Cluster and Group Replication.)
 
 TiDB works a little bit differently:
 
 - Query execution is handled via a layer of TiDB servers. Scaling out SQL processing is possible by adding new TiDB servers, which is very easy to do using Kubernetes [ReplicaSets](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/). This is because TiDB servers are [stateless](https://en.wikipedia.org/wiki/State_(computer_science)); its [TiKV](https://github.com/tikv/tikv/wiki) storage layer is responsible for all of the data persistence.
-- The data for tables is automatically sharded into small chunks and distributed among TiKV servers. Three copies of each data Region (the TiKV name for a shard) are kept in the TiKV cluster, but no TiKV server requires a full copy of the data. To use MySQL terminology: Each TiKV server is both a master and a slave at the same time, since for some data Regions it will contain the primary copy, and for others, it will be secondary.
+- The data for tables is automatically sharded into small chunks and distributed among TiKV servers. Three copies of each data Region (the TiKV name for a shard) are kept in the TiKV cluster, but no TiKV server requires a full copy of the data. To use MySQL terminology: Each TiKV server is both a primary and a secondary at the same time, since for some data Regions it will contain the primary copy, and for others, it will be secondary.
 - TiDB supports queries across data Regions or, in MySQL terminology, cross-shard queries. The metadata about where the different Regions are located is maintained by the Placement Driver, the management server component of any TiDB Cluster. All operations are fully [ACID](https://en.wikipedia.org/wiki/ACID_(computer_science)) compliant, and an operation that modifies data across two Regions uses a [two-phase commit](https://en.wikipedia.org/wiki/Two-phase_commit_protocol).
 
 For MySQL users learning TiDB, a simpler explanation is the TiDB servers are like an intelligent proxy that translates SQL into batched key-value requests to be sent to TiKV. TiKV servers store your tables with range-based partitioning. The ranges automatically balance to keep each partition at 96MB (by default, but configurable), and each range can be stored on a different TiKV server. The Placement Driver server keeps track of which ranges are located where and automatically rebalances a range if it becomes too large or too hot.
@@ -31,7 +31,7 @@ This design has several advantages of scale-out replication:
 
 - It independently scales the SQL Processing and Data Storage tiers. For many workloads, you will hit one bottleneck before the other.
 - It incrementally scales by adding nodes (for both SQL and Data Storage).
-- It utilizes hardware better. To scale out MySQL to one master and four replicas, you would have five copies of the data. TiDB would use only three replicas, with hotspots automatically rebalanced via the Placement Driver.
+- It utilizes hardware better. To scale out MySQL to one primary and four replicas, you would have five copies of the data. TiDB would use only three replicas, with hotspots automatically rebalanced via the Placement Driver.
 
 ## 2. TiDB's storage engine is RocksDB
 
@@ -56,7 +56,7 @@ With TiDB, rather than retaining the metrics inside the server, a strategic choi
 
 ## 4. TiDB handles DDL significantly better
 
-If we ignore for a second that not all data definition language (DDL) changes in MySQL are online, a larger challenge when running a distributed MySQL system is externalizing schema changes on all nodes at the same time. Think about a scenario where you have 10 shards and add a column, but each shard takes a different length of time to complete the modification. This challenge still exists without sharding, since replicas will process DDL after a master.
+If we ignore for a second that not all data definition language (DDL) changes in MySQL are online, a larger challenge when running a distributed MySQL system is externalizing schema changes on all nodes at the same time. Think about a scenario where you have 10 shards and add a column, but each shard takes a different length of time to complete the modification. This challenge still exists without sharding, since replicas will process DDL after a primary.
 
 TiDB implements online DDL using the [protocol introduced by the Google F1 paper](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/41344.pdf). In short, DDL changes are broken up into smaller transition stages so they can prevent data corruption scenarios, and the system tolerates an individual node being behind up to one DDL version at a time.
 

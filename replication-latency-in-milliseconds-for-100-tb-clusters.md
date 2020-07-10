@@ -20,7 +20,7 @@ In this post, I'll deep dive into why we built TiCDC and how we implement its ke
 
 ## Why TiCDC?
 
-With nearly 1,000 companies using TiDB in their production environments, you can be assured that many TiDB users need to replicate data to other scenarios in real time. For traditional relational database management systems, the most common replication solution is master-slave replication based on the binary log (binlog). This method is efficient, stable, and easy to use. 
+With nearly 1,000 companies using TiDB in their production environments, you can be assured that many TiDB users need to replicate data to other scenarios in real time. For traditional relational database management systems, the most common replication solution is primary-secondary replication based on the binary log (binlog). This method is efficient, stable, and easy to use. 
 
 Before version 4.0, TiDB provided TiDB Binlog, which collects binlog data from TiDB and provides near real-time replication to downstream platforms. TiDB Binlog is a mature product: it was developed and improved over several years, and it's proven successful in many production environments.
 
