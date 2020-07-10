@@ -308,9 +308,9 @@ name-of-dump-rule:
 
 For more information on support for the block and allow list, see Mydumper parameters and its [source code](https://github.com/pingcap/mydumper).
 
-The corresponding rule of table and schema block and allow list rule for Loader and Syncer is black-white-list. Assuming you only want to replicate data from tables t1 and t2 from the test schema, you can configure the rule as below:
+The corresponding rule of table and schema block and allow list rule for Loader and Syncer is block-allow-list. Assuming you only want to replicate data from tables t1 and t2 from the test schema, you can configure the rule as below:
 
-The corresponding rule of table and the block and allow list rule for Loader and Syncer is black-white-list. Assuming you only want to replicate data from tables `t1` and `t2` from the test schema, you can configure the rule as below:
+The corresponding rule of table and the block and allow list rule for Loader and Syncer is block-allow-list. Assuming you only want to replicate data from tables `t1` and `t2` from the test schema, you can configure the rule as below:
 
 ```
 name-of-bwl-rule:
