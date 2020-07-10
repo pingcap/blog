@@ -45,7 +45,7 @@ We chose TiDB for the following reasons:
 - Horizontal scalability: TiDB provides horizontal scalability simply by adding more nodes. We don't need to worry about the storage capacity ever!
 - Online DDL: With TiDB, we can add new columns or indices online, saving hours of work for the DBA team.
 - MySQL compatibility: TiDB is compatible with MySQL, and the data in MySQL can be easily migrated to TiDB. We can use TiDB as if we were using MySQL, but without manual sharding.
-- Automatic failover and high availability: With TiDB, there's no M-S switch, so our data and applications can be always on and continuously available.
+- Automatic failover and high availability: With TiDB, there's no primary-secondary switch, so our data and applications can be always on and continuously available.
 
 ## Adoption Process
 
