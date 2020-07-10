@@ -122,7 +122,7 @@ Deploying a TiDB cluster is much easier than ever before. Developers can use Doc
 
 #### TiDB Syncer
 
-TiDB Syncer is a smart tool to migrate data from MySQL to TiDB in real-time. It poses as a MySQL slave and listens to the changes of master by parsing the MySQL Binary Logs, and replaying the changes sequentially on the TiDB instance.
+TiDB Syncer is a smart tool to migrate data from MySQL to TiDB in real-time. It poses as a MySQL secondary and listens to the changes of master by parsing the MySQL Binary Logs, and replaying the changes sequentially on the TiDB instance.
 
 ![TiDB Syncer](media/syncer.png)
 

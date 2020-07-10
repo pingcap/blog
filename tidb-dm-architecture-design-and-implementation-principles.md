@@ -9,7 +9,7 @@ categories: ['MySQL Scalability']
 
 TiDB Data Migration (DM) is an integrated data transfer and replication management platform that supports full data migration or incremental data replication from MySQL or MariaDB instances into a TiDB cluster.
 
-A common real-life use case is using TiDB DM to connect sharded MySQL or MariaDB to TiDB, treating TiDB almost as a slave, then run analytical workloads on this TiDB cluster to fulfill real-time reporting needs. TiDB DM provides good support if you need to manage multiple data replication tasks at the same time or need to merge multiple MySQL/MariaDB instances into a single TiDB cluster.
+A common real-life use case is using TiDB DM to connect sharded MySQL or MariaDB to TiDB, treating TiDB almost as a secondary, then run analytical workloads on this TiDB cluster to fulfill real-time reporting needs. TiDB DM provides good support if you need to manage multiple data replication tasks at the same time or need to merge multiple MySQL/MariaDB instances into a single TiDB cluster.
 
 ## Architecture design
 
@@ -58,10 +58,10 @@ In each DM-worker node, dumper, loader, relay, syncer (binlog replication) and o
 
 - For incremental data replication:
 
-    1. Relay is used as a slave of the upstream MySQL to fetch the binlog that is persisted in the local storage as the relay log.
+    1. Relay is used as a secondary of the upstream MySQL to fetch the binlog that is persisted in the local storage as the relay log.
     2. Syncer reads and parses the relay log to build SQL statements, and then replicates these SQL statements to the downstream TiDB.
 
-This process is similar to the master-slave replication in MySQL. But the main difference is in TiDB DM, the persisted relay log in the local storage can be used simultaneously by multiple syncer units of different subtasks, which avoids multiple tasks' repeatedly fetching the binlog from the upstream MySQL.
+This process is similar to the primary-secondary replication in MySQL. But the main difference is in TiDB DM, the persisted relay log in the local storage can be used simultaneously by multiple syncer units of different subtasks, which avoids multiple tasks' repeatedly fetching the binlog from the upstream MySQL.
 
 ### Concurrency model
 
@@ -292,7 +292,7 @@ As you can see, TiDB DM mostly uses a two-level sharding group for coordination 
 
 During data replication, sometimes it is not necessary to replicate all upstream data to downstream. This is a scenario where we could use certain rules to filter out the unwanted part of the data. In TiDB DM, we support two replication filters that apply to different levels.
 
-#### Black and white table lists
+#### Block and allow list
 
 TiDB DM allows you to configure inclusive/exclusive replication of a specific part of tables or schemas for processing units including Dumper, Loader, and Syncer.
 
@@ -306,11 +306,11 @@ name-of-dump-rule:
 - `name-of-dump-rule`: name of the rule specified by the user. Multiple upstream instances can share a common rule by referencing the rule name.
 - `extra-args`: an extra parameter for the dumper unit. Mydumper configuration options that are not explicitly defined in the dumper unit must be passed in through this parameter. The format is consistent with Mydumper.
 
-For more information on support for black and white table list, see Mydumper parameters and its [source code](https://github.com/pingcap/mydumper).
+For more information on support for the block and allow list, see Mydumper parameters and its [source code](https://github.com/pingcap/mydumper).
 
-The corresponding rule of table and schema black and white list for Loader and Syncer is black-white-list. Assuming you only want to replicate data from tables t1 and t2 from the test schema, you can configure the rule as below:
+The corresponding rule of table and schema block and allow list rule for Loader and Syncer is black-white-list. Assuming you only want to replicate data from tables t1 and t2 from the test schema, you can configure the rule as below:
 
-The corresponding rule of table and schema black and white list for Loader and Syncer is  black-white-list. Assuming you only want to replicate data from tables `t1` and `t2` from the test schema, you can configure the rule as below:
+The corresponding rule of table and the block and allow list rule for Loader and Syncer is black-white-list. Assuming you only want to replicate data from tables `t1` and `t2` from the test schema, you can configure the rule as below:
 
 ```
 name-of-bwl-rule:
@@ -321,9 +321,9 @@ name-of-bwl-rule:
       tbl-name: "t2"
 ```
 
-Only part of the configuration options are used in the sample above. For complete configuration options and their definitions, see the [user documentation](https://docs.pingcap.com/tidb-data-migration/dev/feature-overview/#black-and-white-table-lists) for this feature. The rule used in TiDB DM is similar to the master-slave filter rule in MySQL, so you can also refer to [Evaluation of Database-Level Replication and Binary Logging Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html) and [Evaluation of Table-Level Replication Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html).
+Only part of the configuration options are used in the sample above. For complete configuration options and their definitions, see the [user documentation](https://docs.pingcap.com/tidb-data-migration/dev/feature-overview/#black-and-white-lists) for this feature. The rule used in TiDB DM is similar to the primary-secondary filter rule in MySQL, so you can also refer to [Evaluation of Database-Level Replication and Binary Logging Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html) and [Evaluation of Table-Level Replication Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html).
 
-For the Loader unit, after getting the schema name and table name by parsing the SQL file name, it identifies the configured black and white list rule. If the result indicates no replication is required, the entire SQL file will be ignored. For the Syncer unit, after getting the schema name and table name by parsing the binlog file, it identifies the configured black and white list rule. If the result indicates no replication is required, the corresponding binlog event data will be ignored.
+For the Loader unit, after getting the schema name and table name by parsing the SQL file name, it identifies the configured block and allow list rule. If the result indicates no replication is required, the entire SQL file will be ignored. For the Syncer unit, after getting the schema name and table name by parsing the binlog file, it identifies the configured block and allow list rule. If the result indicates no replication is required, the corresponding binlog event data will be ignored.
 
 #### Binlog event filtering
 

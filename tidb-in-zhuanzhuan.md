@@ -34,7 +34,7 @@ Previously, our main solution for the backend system was MySQL, with MongoDB sup
 
 3. To handle the service access performance under large data volume, we had to use more MySQL shardings, which made the application logic much heavier and more complicated. Meanwhile, to meet the multi-dimensional query demand, we always needed to introduce extra storage or sacrifice some performance, thus blocking the rapid iteration of our product.
 
-4. Due to the regular MySQL Master-Slave (M-S) failover design, application access was often unavailable. If a node failed, it took a long time to recover because of the massive data volume. But the M-S architecture could only guarantee high availability using extra components and through Master-Slave switch, and during the switch process, as the system needed to ensure the state of the Master database, the election of the new Master, and the issue of the new routing, application access got interrupted.
+4. Due to the regular MySQL primary-secondary (M-S) failover design, application access was often unavailable. If a node failed, it took a long time to recover because of the massive data volume. But the M-S architecture could only guarantee high availability using extra components and through primary-secondary switch, and during the switch process, as the system needed to ensure the state of the Master database, the election of the new Master, and the issue of the new routing, application access got interrupted.
 
 ## Why TiDB?
 
@@ -68,7 +68,7 @@ Based on the testing results, we recommended these use-case scenarios:
 - Online applications with mixed read and write.
 - Sequential write scenarios such as data archiving, logging, and turnover amortizing.
 
-After the functional testing and stress testing, we felt confident  that TiDB met our requirements, so we began pre-production adoption. We mounted TiDB on the online MySQL and used it as MySQL's slave to synchronize online data. Then we migrated some online read traffic from MySQL to TiDB, to see whether the TiDB cluster met the needs of application access. It turned out that TiDB could handle that well.
+After the functional testing and stress testing, we felt confident  that TiDB met our requirements, so we began pre-production adoption. We mounted TiDB on the online MySQL and used it as MySQL's secondary to synchronize online data. Then we migrated some online read traffic from MySQL to TiDB, to see whether the TiDB cluster met the needs of application access. It turned out that TiDB could handle that well.
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('Managing the Surging Data Volume of a Fast-Growing Marketplace with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -93,12 +93,12 @@ Our DBA staff also needed to verify that  TiDB's data was consistent with that o
 
 **Step 2: Synchronize data.**
 
-Our DBA staff deployed the TiDB cluster as the slave of MySQL's instances and then synchronized the data of its Contact List Table to a large table of TiDB. A single instance in MySQL had been sharded to 1,024 tables.
+Our DBA staff deployed the TiDB cluster as the secondary of MySQL's instances and then synchronized the data of its Contact List Table to a large table of TiDB. A single instance in MySQL had been sharded to 1,024 tables.
 
 **Step 3: Migrate the traffic.**
 
 1. Migrate the read traffic to TiDB.
-2. Disconnect the Master-Slave synchronization between TiDB and MySQL, and then perform double-write to ensure that the application traffic can roll back to MySQL at any time. (Double-write means writing MySQL and TiDB at the same time so that the data in the two databases are consistent.)
+2. Disconnect the primary-secondary synchronization between TiDB and MySQL, and then perform double-write to ensure that the application traffic can roll back to MySQL at any time. (Double-write means writing MySQL and TiDB at the same time so that the data in the two databases are consistent.)
 3. One-week observation period.
 4. Stop the write operation of MySQL, and from that point, the application traffic is completely migrated to TiDB.
 

@@ -43,19 +43,19 @@ The architecture has the following characteristics:
 
     Each billing application is deployed on multiple machines through [Keepalived](https://www.keepalived.org/), so the traffic is load-balanced. This guarantees the high availability of the application service.
 
-* **MySQL master-slave structure**
+* **MySQL primary-secondary structure**
 
-    The database layer employs the MySQL master-slave structure. Its semi-synchronous replication enables data from one MySQL server (the master instance) to be copied automatically to one or more MySQL servers (the slave instances). This feature addresses latency and consistency issues.
+    The database layer employs the MySQL primary-secondary structure. Its semi-synchronous replication enables data from one MySQL server (the master instance) to be copied automatically to one or more MySQL servers (the secondary instances). This feature addresses latency and consistency issues.
 
 * **Failover**
 
-    The billing application accesses the back-end database through a virtual IP address (VIP). If the master instance is down, the application service automatically drifts to the slave through a VIP, ensuring that the service is unaffected.
+    The billing application accesses the back-end database through a virtual IP address (VIP). If the master instance is down, the application service automatically drifts to the secondary through a VIP, ensuring that the service is unaffected.
 
 * **Data backup**
 
-    Through the master-slave semi-synchronous replication, the slave collects data from the online billing application. Then, it dumps the data files to a data warehouse through full and incremental replication. Online and offline computing tasks are performed there.
+    Through the primary-secondary semi-synchronous replication, the secondary collects data from the online billing application. Then, it dumps the data files to a data warehouse through full and incremental replication. Online and offline computing tasks are performed there.
 
-There are over 50 MySQL master-slave structures like this, involving 200~400 servers. Gigabytes of data are inserted on a daily basis.
+There are over 50 MySQL primary-secondary structures like this, involving 200~400 servers. Gigabytes of data are inserted on a daily basis.
 
 ## Bottlenecks
 
@@ -171,7 +171,7 @@ We tested MySQL with middleware solutions, and this architecture didn't meet our
 * The performance did not satisfy our requirements.
 * Migrating to the new application architecture was complicated. We would need to modify large amounts of application code.
 
-In fact, solutions such as MySQL InnoDB clusters and MySQL with middleware are essentially an extension of the MySQL master-slave structure. They are not a real distributed system, but achieve horizontal scalability in a way like adding "patches"—that's why many of their characteristics did not meet our expectations.
+In fact, solutions such as MySQL InnoDB clusters and MySQL with middleware are essentially an extension of the MySQL primary-secondary structure. They are not a real distributed system, but achieve horizontal scalability in a way like adding "patches"—that's why many of their characteristics did not meet our expectations.
 
 #### CockroachDB versus TiDB
 

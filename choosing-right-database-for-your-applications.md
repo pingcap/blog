@@ -80,7 +80,7 @@ When we're choosing a database from a variety of products, we ask ourselves:
     You might think that 1,000 writes per second is too low a threshold. We set it to 1,000 because:
 
   * Before we put an application into production, our estimate might be inaccurate. In normal conditions, we have 1,000 writes per second. But when we're running a big sales promotion campaign, the write QPS may jump to 10,000 writes per second. It's better to set a conservative reference value.
-  * We allow the R&D team to use large text fields. When the length of a single row increases to a certain point, the write performance for the master database and the replication performance for the slave database may be drastically slower. Thus, we can't expect a high write rate for a single node.
+  * We allow the R&D team to use large text fields. When the length of a single row increases to a certain point, the write performance for the master database and the replication performance for the secondary database may be drastically slower. Thus, we can't expect a high write rate for a single node.
 
 * **Does the application require that the 99th percentile response time be within one millisecond (ms)?**
 
@@ -175,7 +175,7 @@ In addition, compared with the application writing data to the database and Redi
 
 But its shortcoming is write latency. Data is written to the MySQL master and then sent to Redis. In this process, there may be dozens of milliseconds of latency. If we want to use Redis this way, we need to know whether the application accepts such latency.
 
-When we query new orders in real time, we usually avoid high-frequency read-only queries on MySQL masters by this way. To avoid the impact of slave replication delays, we had to route queries for some critical columns of Shopee order tables to MySQL masters. In a big promotion campaign, the master might be overwhelmed. Therefore, we changed our approach and first wrote new order data to MySQL and then transformed binlog parsing results to Redis. This way, we effectively relieved the pressure on MySQL masters.
+When we query new orders in real time, we usually avoid high-frequency read-only queries on MySQL masters by this way. To avoid the impact of secondary replication delays, we had to route queries for some critical columns of Shopee order tables to MySQL masters. In a big promotion campaign, the master might be overwhelmed. Therefore, we changed our approach and first wrote new order data to MySQL and then transformed binlog parsing results to Redis. This way, we effectively relieved the pressure on MySQL masters.
 
 ### Refactoring data structures and code instead of direct migration
 
@@ -188,7 +188,7 @@ After we finished migration and the application resumed services, we found that 
 We analyzed this query and found that:
 
 * The query ran quite frequently. It took up 90% of all the read-only queries at peak time.
-* The query was a complicated SQL query which needed a full table scan. It was difficult to optimize the query by adding an index. Before migrating to TiDB, MySQL had 1,000 tables. When we executed the query, only one small table was scanned, and we had more than 20 MySQL slaves to serve the query. Even so, as the data size increased and the hot data volume exceeded memory size, all MySQL slaves were overwhelmed.
+* The query was a complicated SQL query which needed a full table scan. It was difficult to optimize the query by adding an index. Before migrating to TiDB, MySQL had 1,000 tables. When we executed the query, only one small table was scanned, and we had more than 20 MySQL secondaries to serve the query. Even so, as the data size increased and the hot data volume exceeded memory size, all MySQL secondaries were overwhelmed.
 
     After data was migrated to TiDB and 1,000 tables merged into one, the query had to scan a much bigger table. Large amounts of intermediate result sets were passed from TiKV nodes to SQL nodes. Thus, the performance was undesirable.
 

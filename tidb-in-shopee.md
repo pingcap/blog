@@ -160,9 +160,9 @@ With one year's worth of TiDB experience under our belt, we feel confident in Ti
 
 - Currently, our TiDB clusters serve large amounts of non-transactional data. We plan to evaluate the migration of some transactional data from MySQL to TiDB.
 
-- We plan to use TiDB as part of our MySQL replication scheme, where TiDB will serve as the MySQL slave and data in MySQL will be replicated to TiDB in real time.
+- We plan to use TiDB as part of our MySQL replication scheme, where TiDB will serve as the MySQL secondary and data in MySQL will be replicated to TiDB in real time.
 
-    This slave-like TiDB cluster will then support analytical queries for our business intelligence system, drawing insights from our data. Since these queries are read-only and often require a full table scan or index scan, TiDB is much better suited to process these queries than MySQL. We also plan to use TiSpark to read data from TiKV directly if faster analytical query performance is needed.
+    This secondary-like TiDB cluster will then support analytical queries for our business intelligence system, drawing insights from our data. Since these queries are read-only and often require a full table scan or index scan, TiDB is much better suited to process these queries than MySQL. We also plan to use TiSpark to read data from TiKV directly if faster analytical query performance is needed.
 
 - Currently, we are running TiDB clusters on bare metal. It takes our DBAs substantial amount of time to maintain the hardware, network, and OS of our servers. In the future, we intend to run TiDB on our container platform and build up a toolset to achieve self-service resource application and configuration management. Then our staff will be freed from the daily grinds of operation and maintenance.
 

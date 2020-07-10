@@ -89,7 +89,7 @@ Now that Docker is set up, let's deploy TiDB!
     docker-compose up -d
     ```
 
-You can see messages in your terminal launching the default components of a TiDB cluster: 1 TiDB instance, 3 TiKV instances, 3 Placement Driver (PD) instances, Prometheus, Grafana, 2 TiSpark instances (one master, one slave), and a TiDB-Vision instance.
+You can see messages in your terminal launching the default components of a TiDB cluster: 1 TiDB instance, 3 TiKV instances, 3 Placement Driver (PD) instances, Prometheus, Grafana, 2 TiSpark instances (one master, one secondary), and a TiDB-Vision instance.
 
 Your terminal will show something like this:
 
@@ -130,7 +130,7 @@ To check if your deployment is successful:
 
 ## Test TiDB compatibility with MySQL
 
-As we mentioned, TiDB is MySQL compatible. You can use TiDB as MySQL slaves with instant horizontal scalability. That's how many innovative tech companies, like [Mobike](https://pingcap.com/case-studies/tidb-in-mobike), use TiDB.
+As we mentioned, TiDB is MySQL compatible. You can use TiDB as MySQL secondaries with instant horizontal scalability. That's how many innovative tech companies, like [Mobike](https://pingcap.com/case-studies/tidb-in-mobike), use TiDB.
 
 To test out this MySQL compatibility:
 

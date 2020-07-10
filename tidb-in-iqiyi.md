@@ -70,7 +70,7 @@ Therefore, we decided to deploy TiDB in our Risk Monitoring Center.
 
 The Risk Monitoring Center was the first iQiyi project to use TiDB online in the production environment, so we came up with the following plan:
 
-1. To ensure the absolute data safety, we designed a plan B for the TiDB cluster: We replaced the InnoDB in MySQL with TokuDB for its write capability. Then we deployed MySQL with TokuDB as the slave for the TiDB cluster and synchronize the data in the TiDB cluster with TiDB Binlog. Although this was not optimal because the MySQL with TokuDB solution cannot handle the data growth in the peak time, we designed this to be the disaster recovery plan regardless of the delay.
+1. To ensure the absolute data safety, we designed a plan B for the TiDB cluster: We replaced the InnoDB in MySQL with TokuDB for its write capability. Then we deployed MySQL with TokuDB as the secondary for the TiDB cluster and synchronize the data in the TiDB cluster with TiDB Binlog. Although this was not optimal because the MySQL with TokuDB solution cannot handle the data growth in the peak time, we designed this to be the disaster recovery plan regardless of the delay.
 2. Deployed an internally developed load balancer on the front end to make full use of the computing capability of multiple TiDB nodes and guarantee the high availability of the TiDB nodes.
 3. Deployed [Prometheus](https://en.wikipedia.org/wiki/Prometheus) and [Grafana](https://www.crunchbase.com/organization/raintank#section-overview) to monitor the TiDB cluster status. Connected Grafana to our internal alert platform to instantly inform the operations team of the alert information via short messages and emails.
 
@@ -133,7 +133,7 @@ The following picture shows the TiDB Lightning architecture:
 
 In the user login information database project, we were confronted with some thorny problems—and all of them have been resolved with TiDB.
 
-- The data volume of this project was steadily increasing; as a result, the MySQL master-slave cluster would not be able to hold such massive data in the future.
+- The data volume of this project was steadily increasing; as a result, the MySQL primary-secondary cluster would not be able to hold such massive data in the future.
 - As the data size of a single table was tremendous, we had to use sharding in the services, and thus the code of the application layer became complex and could not scale.
 
 After data was migrated to TiDB, we did not need sharding anymore, and the application codes have been simplified.
@@ -151,7 +151,7 @@ However, Syncer currently cannot display real-time delay information in Grafana.
 We have two requirements for high availability of the database:
 
 - The service is still available even if the server goes down.
-- The service is deployed across multiple data centers, and there is a read-only slave database of our data center, with shortened response time.
+- The service is deployed across multiple data centers, and there is a read-only secondary database of our data center, with shortened response time.
 
 For these requirements, TiDB has the corresponding solutions:
 
