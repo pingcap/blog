@@ -1,5 +1,5 @@
 ---
-title: 'How TiDB's HTAP Makes Truly Hybrid Workloads Possible'
+title: How TiDB's HTAP Makes Truly Hybrid Workloads Possible
 author: [Shawn Ma]
 date: 2020-07-16
 summary: This post introduces the design details of the HTAP architecture of TiDB, including the real-time updatable columnar engine, the multi-Raft replication strategy, and smart selection. 
@@ -193,7 +193,6 @@ In TiDB 4.0, the most important enhancement is access path auto-selection based 
 This technique is known as "smart scan," and almost all databases have used it for decades. It might be one of the most popular features for TiDB 4.0. TiDB HTAP uses smart selection to extend its scenarios from OLTP plus business intelligence (BI) reports to more hybrid cases. Using TiFlash can greatly simplify TiDB's hybrid architecture. 
 
 For example, one of our clients used it in a logistics application. They wanted to do high concurrent queries on detailed orders as well as low concurrent shipping analysis, aggregating data for specific locations and time periods in real time. Without a columnar store, multi-dimensional analysis on large dataset is a lot slower compared to analytical databases. Empowered by TiFlash, TiDB blurs the boundary between OLTP and OLAP. In contrast, TiSpark, a thin layer built for running Apache Spark on top of TiDB to answer complex OLAP queries, still aligns with the team's bigdata. DBAs and business application teams prefer accessing TiFlash via TiDB.
-
 
 ## Give TiDB a try
 
