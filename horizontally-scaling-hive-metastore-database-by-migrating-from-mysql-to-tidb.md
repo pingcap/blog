@@ -2,7 +2,7 @@
 title: Horizontally Scaling the Hive Metastore Database by Migrating from MySQL to TiDB
 author: ['Mengyu Hu']
 date: 2020-07-24
-summary: This post shows how TiDB helps Zhihu eliminate their database bottleneck and horizontally scale Zhihu's Hive Metastore database to meet their growing business needs.
+summary: This post shows how TiDB helps Zhihu eliminate their database bottleneck and horizontally scale their Hive Metastore database to meet the growing business needs.
 image: /images/blog/horizontally-scale-hive-metastore.jpg
 tags: ['Scalability', 'MySQL sharding']
 categories: ['MySQL Scalability']
@@ -79,8 +79,6 @@ Before we migrated from MySQL to TiDB, our Hive architecture was as follows. In 
 ![The Hive architecture before migration to TiDB](media/hive-architecture-before-migration.jpg)
 <div class="caption-center"> The Hive architecture before migration to TiDB </div>
 
-The Hive architecture before migration to TiDB
-
 ### After migration to TiDB
 
 After we migrated from MySQL to TiDB, the Hive architecture looks like this:
@@ -110,6 +108,8 @@ During the migration process, the application was not affected. Now TiDB success
 
 We tested the database from the Hive level, simulated the application peak, and concurrently deleted and added partitions for tables with millions of partitions. We executed Hive SQL statements as follows:
 
+{{< copyable "sql" >}}
+
 ```sql
 ALTER TABLE '${table_name}' DROP IF EXISTS PARTITION(...);
 ALTER TABLE '${table_name}' ADD IF NOT EXISTS PARTITION(...);
@@ -120,6 +120,8 @@ The operation execution time dropped from 45–75 seconds before migration to un
 ### The impact of large queries on the database
 
 From the Metastore level, we tested some of the SQL statements submitted by Metastore, especially SQL statements that would cause great pressure on the Metastore, for example:
+
+{{< copyable "sql" >}}
 
 ```sql
 SELECT `A0`.`PART_NAME`,`A0`.`PART_NAME` AS `NUCORDER0` FROM `PARTITIONS` `A0` LEFT OUTER JOIN `TBLS` `B0` ON `A0`.`TBL_ID` = `B0`.`TBL_ID` LEFT OUTER JOIN `DBS` `C0` ON `B0`.`DB_ID` = `C0`.`DB_ID` WHERE `C0`.`NAME` = '${database_name}' AND `B0`.`TBL_NAME` = '${table_name}' ORDER BY `NUCORDER0`
