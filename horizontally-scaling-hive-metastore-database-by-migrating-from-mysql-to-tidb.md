@@ -112,6 +112,11 @@ We tested the database from the Hive level, simulated the application peak, and 
 
 ```sql
 ALTER TABLE '${table_name}' DROP IF EXISTS PARTITION(...);
+```
+
+{{< copyable "sql" >}}
+
+```sql
 ALTER TABLE '${table_name}' ADD IF NOT EXISTS PARTITION(...);
 ```
 
