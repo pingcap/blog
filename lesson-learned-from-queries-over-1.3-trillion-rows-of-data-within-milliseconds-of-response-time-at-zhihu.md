@@ -8,6 +8,7 @@ categories: ['MySQL Scalability']
 url: /success-stories/lesson-learned-from-queries-over-1.3-trillion-rows-of-data-within-milliseconds-of-response-time-at-zhihu/
 customer: Zhihu
 customerCategory: Internet
+notShowOnLogoWall: true
 --- 
 
 **Industry:** Knowledge Sharing
