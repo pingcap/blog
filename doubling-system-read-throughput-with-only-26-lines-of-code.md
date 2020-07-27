@@ -5,6 +5,7 @@ date: 2020-02-05
 summary: The Follower Read feature lets any follower replica in a Region serve a read request under the premise of strongly consistent reads. It reduces the load on the Raft leader and improves the read throughput of the TiDB cluster. Read this post to learn more. 
 tags: ['Engineering']
 categories: ['Engineering']
+aliases: ['/blog/achieving-5x-qps-with-only-26-lines-of-code/']
 image: /images/blog/follower-read-load-balancing-consistent-read.png
 ---
 
