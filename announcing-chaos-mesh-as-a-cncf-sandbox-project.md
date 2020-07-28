@@ -22,7 +22,7 @@ Chaos Mesh is a versatile Chaos Engineering platform that orchestrates chaos exp
 Within only 7 months since it was open-sourced on December 31st, 2019, Chaos Mesh has already received almost 2,000 GitHub stars, with 44 contributors from multiple organizations. As a young project, the adoption in production has been the key recognition and motivation that drives us forward constantly. Here is a list of our adopters so far:
 
 * [PingCAP](https://github.com/dcalvin/toc/blob/c66c65724edc3f0b555c9c8a59e88406bc29639f/proposals/www.pingcap.com)
-* [Xpeng Mot](https://en.xiaopeng.com/)or
+* [Xpeng Motor](https://en.xiaopeng.com/)
 * [NetEase Fuxi Lab](https://www.crunchbase.com/organization/netease-fuxi-lab)
 * [JuiceFS](http://juicefs.com/?hl=en)
 * [Dailymotion](https://www.dailymotion.com/)
