@@ -8,8 +8,6 @@ aliases: ['/blog/2017/07/24/tidbbestpractice/']
 categories: ['Engineering']
 ---
 
-<span id="top"></span>
-
 From Li SHEN: shenli@pingcap.com
 
 See the following blogs ([Data Storage](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/), [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/), [Scheduling](https://pingcap.github.io/blog/2017/07/20/tidbinternal3/)) for TiDB's principles.
@@ -17,41 +15,39 @@ See the following blogs ([Data Storage](https://pingcap.github.io/blog/2017/07/1
 ## Table of Content
 
 + [Preface](#preface)
-+ [Basic Concepts](#basic)
++ [Basic Concepts](#basic-concepts)
   - [Raft](#raft)
-  - [Distributed Transactions](#dist)
-  - [Data Sharding](#sharding)
-  - [Load Balancing](#load)
-  - [SQL on KV](#sql)
-  - [Secondary Indexes](#second)
-+ [Scenarios and Practices](#practice)
-  - [Deployment](#deploy)
-  - [Importing Data](#importing)
+  - [Distributed Transactions](#distributed-transactions)
+  - [Data Sharding](#data-sharding)
+  - [Load Balancing](#load-balancing)
+  - [SQL on KV](#sql-on-key-value)
+  - [Secondary Indexes](#secondary-indexes)
++ [Scenarios and Practices](#scenarios-and-practices)
+  - [Deployment](#deployment)
+  - [Importing Data](#importing-data)
   - [Write](#write)
   - [Query](#query)
-  - [Monitoring and Log](#log)
-  - [Documentation](#doc)
-  - [Best Scenarios for TiDB](#scenario)
+  - [Monitoring and Log](#monitoring-and-log)
+  - [Documentation](#documentation)
+  - [Best Scenarios for TiDB](#best-scenarios-for-tidb)
 
-## <span id="preface">Preface</span>
+## Preface
 
 Database is a generic infrastructure system. It is important to, for one thing, consider various user scenarios during the development process, and for the other, modify the data parameters or the way to use according to actual situations in specific business scenarios.
 
 TiDB is a distributed database compatible with MySQL protocol and syntax. But with the internal implementation and supporting of distributed storage and transactions, the way of using TiDB is different from MySQL.
 
-## <span id="basic">Basic Concepts</span>
+## Basic Concepts
 
 The best practices are closely related to its implementation principles. This article briefly introduces Raft, distributed transactions, data sharding, load balancing, the mapping solution from SQL to KV, implementation method of secondary indexing and distributed execution engine.
 
-### <span id="raft">Raft</span>
+### Raft
 
 Raft is a consensus algorithm and ensures data replication with strong consistency. At the bottom layer, TiDB uses Raft to synchronize data. TiDB writes data to the majority of the replicas before returning the result of success. In this way, the system will definitely have the latest data even though a few replicas might get lost. For example, if there are three replicas, the system will not return the result of success until data has been written to two replicas. Whenever a replica is lost, at least one of the remaining two replicas have the latest data.
 
 To store three replicas, compared with the synchronization of primary-secondary, Raft is more efficient. The write latency of Raft depends on the two fastest replicas, instead of the slowest. Therefore, the implementation of geo-distributed and multiple active datacenters becomes possible by using the Raft synchronization. In the typical scenario of three datacenters distributing in two sites, to guarantee the data consistency, we just need to successfully write data into the local datacenter and the closer one, instead of writing to all three data-centers. However, this does not mean that cross-datacenter deployment can be implemented in any scenario. When the amount of data to be written is large, the bandwidth and latency between data-centers become the key factors. If the write speed exceeds the bandwidth or the latency is too high, the Raft synchronization mechanism still cannot work well.
 
-[Back to the top](#top)
-
-### <span id="dist">Distributed Transactions</span>
+### Distributed Transactions
 
 TiDB provides complete distributed transactions and the model has some optimizations on the basis of [Google Percolator](http://research.google.com/pubs/pub36726.html). Here, I would just talk about two things:
 
@@ -70,17 +66,15 @@ TiDB provides complete distributed transactions and the model has some optimizat
 
  There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Google Cloud Spanner.
 
-[Back to the top](#top)
-
-### <span id="sharding"> Data Sharding</span>
+### Data Sharding
 
 TiKV automatically shards bottom-layered data according to the Range of Key. Each Region is a range of Key, from a left-close-right-open interval, [StartKey, EndKey). When the amount of Key-Value in Region exceeds a certain value, it will automatically split.
 
-### <span id="load"> Load Balancing </span>
+### Load Balancing
 
 PD will automatically balance the load of the cluster according to the state of the entire TiKV cluster. The unit of scheduling is Region and the logic is the strategy configured by PD.
 
-### <span id="sql">SQL on Key-Value</span>
+### SQL on Key-Value
 
 TiDB automatically maps the SQL structure into Key-Value structure. For more information, please refer to [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/). Simply put, TiDB has done two things:
 
@@ -90,9 +84,7 @@ TiDB automatically maps the SQL structure into Key-Value structure. For more inf
 
 As you can see, data and index in the same table have the same prefix, so that these Key-Values are at adjacent positions in the Key space of TiKV. Therefore, when the amount of data to be written is large and all is written to one table, the write hotspot is thus created. The situation gets worse when some index values of the continuous written data is also continuous (e.g. fields that increase with time, like update time), which will create a few write hotspots and become the bottleneck of the entire system. Likewise, if all data is read from a focused small range (e.g. the continuous tens or hundreds of thousands of rows of data), access hotspot of data will probably occur.
 
-[Back to the top](#top)
-
-### <span id="second"> Secondary Indexes </span>
+### Secondary Indexes
 
 TiDB supports the complete secondary indexes which are also global indexes. Many queries can be optimized by index. Lots of MySQL experience is also applicable to TiDB, it is noted that TiDB has its unique features. Below are a few notes when using secondary indexes in TiDB.
 
@@ -112,8 +104,6 @@ TiDB supports the complete secondary indexes which are also global indexes. Many
 TiDB has implemented global indexes, so indexes and data of the Table are not necessarily on data sharding. When querying through indexes, it should firstly scan indexes to get the corresponding row ID and then use the row ID to get the data. Thus, this method involves two network requests and has a certain performance overhead.
 
 If the query involves lots of rows, scanning index proceeds concurrently. When the first batch of results is returned, getting the data of Table can then proceed. Therefore, this is a parallel + Pipeline model. Though the two accesses create overhead, the latency is not high.
-
-[Back to the top](#top)
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('TiDB Best Practices', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -145,19 +135,17 @@ The following two conditions don't have the problem of two accesses:
 
  As in MySQL 5.7, all indexes in TiDB are in ascending order. TiDB supports the ability to read an ascending index in reverse order, at a performance overhead of about 23%. Earlier versions of TiDB had a higher performance penalty, and thus reverse index scans were not recommended.
 
-[Back to the top](#top)
-
-## <span id="practice"> Scenarios and Practices </span>
+## Scenarios and Practices
 
 In the last section, we discussed some basic implementation mechanisms of TiDB and their influence on usage. Let's start from specific usage scenarios and operation practices. We'll go through from deployment to business supporting.
 
-### <span id="deploy"> Deployment</span>
+### Deployment
 
 Please read [Software and Hardware Requirements](https://pingcap.com/docs/op-guide/recommendation/) before deployment.
 
 It is recommended to deploy the TiDB cluster through [TiDB Ansible](https://pingcap.com/docs/op-guide/ansible-deployment/). This tool can deploy, stop, destroy, and update the whole cluster, which is quite convenient.
 
-### <span id="importing">Importing Data</span>
+### Importing Data
 
 If there is a Unique Key and if the business end can ensure that there is no conflict in data, you can turn on this switch in Session:
 
@@ -175,9 +163,7 @@ Please pay extra attention to this parameter:
 sync-log = true
 ```
 
-[Back to the top](#top)
-
-### <span id="write">Write</span>
+### Write
 
 As mentioned before, TiDB limits the size of a single transaction in the Key-Value layer. As for the SQL layer, a row of data is mapped to a Key-Value entry. For each additional index, there will be one more Key-Value entries. So the limits mirrored in the SQL layer for a single transaction are:
 
@@ -203,9 +189,7 @@ for i from 0 to 23:
 
 This pseudocode means to split huge chunks of data into small ones and then delete, so that the following `Delete` statement will not be influenced.
 
-[Back to the top](#top)
-
-### <span id="query">Query</span>
+### Query
 
 For query requirements and specific statements, please refer to [this statement](https://pingcap.com/docs/v3.0/reference/sql/statements/add-column/).
 
@@ -215,7 +199,7 @@ In addition, you can also use MySQL's standard index selection, the `Hint` synta
 
 If the business scenario needs both OLTP and OLAP, you can send the TP request and AP request to different tidb-servers, diminishing the impact of AP business on TP. It is recommended to use high-end machines (e.g. more processor cores, larger memory, etc.) for the tidb-server that carries AP business.
 
-### <span id="log">Monitoring and Log</span>
+### Monitoring and Log
 
 TiDB uses [Grafana+Prometheus to monitor the system state](https://pingcap.com/docs/op-guide/monitor-overview/). The monitoring system is automatically deployed and configured if using TiDB Ansible.
 
@@ -223,7 +207,7 @@ There are lots of items in the monitoring system, the majority of which are for 
 
 In addition to monitoring, you can also view the system logs. The three components of TiDB, `tidb-server`, `tikv-server` and `pd-server`, each has a `--log-file` parameter. If this parameter has been configured when initiating, logs will be stored in the file configured by the parameter and Log files are automatically archived on a daily basis. If the `--log-file` parameter has not been configured, log will be output to stderr.
 
-### <span id="doc">Documentation</span>
+### Documentation
 
 TiDB has a large number of official documents either in [Chinese](https://pingcap.com/docs-cn/) or [English](https://pingcap.com/docs/). You can also search the issue list for a solution.
 
@@ -231,7 +215,7 @@ If you have met an issue, you can start from the [FAQ](https://pingcap.com/docs/
 
 For more information, see [our website](https://pingcap.com/) and our [Technical Blog](https://pingcap.com/blog/).
 
-### <span id="scenario">Best Scenarios for TiDB</span>
+### Best Scenarios for TiDB
 
 Simply put, TiDB can be used in the following scenarios:
 
@@ -240,4 +224,3 @@ Simply put, TiDB can be used in the following scenarios:
 + The access mode has no obvious hotspot
 + Transactions, strong consistency, and disaster recovery
 
-[Back to the top](#top)
