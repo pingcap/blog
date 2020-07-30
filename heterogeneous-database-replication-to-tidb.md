@@ -29,7 +29,7 @@ A typical heterogeneous database migration process involves:
 1. [Application adaptation development](#1-application-adaptation-development)
 2. [Application verification testing](#2-application-verification-testing)
 3. [Migration testing](#3-migration-testing)
-4. [Database migration and production database switch](#4-database-migration-and-production-database-switch)
+4. [Database migration and production database switch](#4-data-migration-and-production-database-switch)
 
 ### 1. Application adaptation development
 
