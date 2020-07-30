@@ -39,7 +39,7 @@ Almost all early TiDB users have gone through this step. In version 3.0 or earli
 
 There are two ways to perform application verification testing. You can combine the two methods to effectively verify your application.
 
-![Application verification](meida/application-verification.jpg)
+![Application verification](media/application-verification.jpg)
 <div class="caption-center"> Application verification </div>
 
 The first method is to test your application with production data. To do this, you must first use database replication technology to replicate the data from the production database to TiDB. Then, you use a testing application to perform a stress test. To stress TiDB and ensure that it will be stable in your production environment, apply a workload 10 to 20 times higher than your real production traffic. One of the advantages of replicating data from the production database to TiDB is that you **avoid wide variations between test data and production data, which may cause many problems**. For example, an SQL query, which has been tuned in the testing environment to achieve its highest performance, may become a slow SQL query in the production environment if the data is not replicated to TiDB for testing.
@@ -119,7 +119,7 @@ The disadvantages of an ETL job are similar to those of using an interface file:
 
 ### Using a CDC tool
 
-We recommend that you use change data capture (CDC) tools to replicate heterogeneous databases**. **There are many CDC tools, such as Oracle GoldenGate (OGG), IBM InfoSphere CDC, and [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/stable/overview) (DM).
+We recommend that you use change data capture (CDC) tools to replicate heterogeneous databases. There are many CDC tools, such as Oracle GoldenGate (OGG), IBM InfoSphere CDC, and [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/stable/overview) (DM).
 
 The following table summarizes the advantages and disadvantages of using CDC tools. As you can see, there are far more advantages.
 
