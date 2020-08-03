@@ -133,7 +133,7 @@ The following table summarizes the advantages and disadvantages of using CDC too
   <tr>
    <td>Your application requires no additional development.
 <p>
-CDC tools can obtain all DML changes, like `DELETE` and `UPDATE`.
+CDC tools can obtain all DML changes, like <code>DELETE</code> and <code>UPDATE</code>.
 <p>
 Because the workload is distributed through the day, these tools have higher performance.
 <p>
