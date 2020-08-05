@@ -115,7 +115,7 @@ In the table below, assume that we have set the global `tidb_txn_mode` = 'pessim
    <td>
    </td>
    <td>> UPDATE test SET v = v + 1 WHERE k = 1;
-<p>
+<br/>
 <span style="color: red;">block...</span>
    </td>
   </tr>
@@ -129,7 +129,7 @@ In the table below, assume that we have set the global `tidb_txn_mode` = 'pessim
    <td>
    </td>
    <td>> COMMIT;
-<p>
+<br/>
 <span style="color: red;">Query OK, 0 row affected (0.00 sec)</span>
    </td>
   </tr>
@@ -159,15 +159,15 @@ Let's look at the following table to see the transaction isolation:
   </tr>
   <tr>
    <td>> SELECT * FROM test;
-<p>
+<br/>
 +------+------+
-<p>
+<br/>
 |     k  |   v    |
-<p>
+<br/>
 +------+------+
-<p>
+<br/>
 |    1   |   1    |
-<p>
+<br/>
 +------+------+
    </td>
    <td>> UPDATE test SET v = v + 1 WHERE k = 1;
@@ -175,15 +175,15 @@ Let's look at the following table to see the transaction isolation:
   </tr>
   <tr>
    <td>> SELECT * FROM test;
-<p>
+<br/>
 +------+------+
-<p>
+<br/>
 |     k  |   v    |
-<p>
+<br/>
 +------+------+
-<p>
+<br/>
 |    1   |   1    |
-<p>
+<br/>
 +------+------+
    </td>
    <td>
@@ -191,15 +191,15 @@ Let's look at the following table to see the transaction isolation:
   </tr>
   <tr>
    <td>> SELECT * FROM test FOR UPDATE; -- get an updated snapshot
-<p>
+<br/>
 +------+------+
-<p>
+<br/>
 |     k  |   v    |
-<p>
+<br/>
 +------+------+
-<p>
+<br/>
 |    1   |   2    |
-<p>
+<br/>
 +------+------+
    </td>
    <td>
@@ -253,7 +253,7 @@ Here's how a similar case looks in the database:
    <td>
    </td>
    <td><strong>> UPDATE test SET v = 2 WHERE k = 1;</strong>
-<p>
+<br/>
 <strong><span style="color: red;">ERROR 1213 (40001): Deadlock found when trying to get lock; try restarting transaction</span></strong>
    </td>
   </tr>
@@ -298,13 +298,13 @@ The following table shows a specific comparison. Note that `id` is the primary k
   </tr>
   <tr>
    <td>mysql> BEGIN;
-<p>
+<br/>
 Query OK, 0 rows affected (0.00 sec)
-<p>
+<br/>
  
-<p>
+<br/>
 mysql> SELECT * FROM t WHERE id>=10 AND id&lt;11 FOR UPDATE;
-<p>
+<br/>
 <span style="color: red;">Empty set (0.00 sec)</span>
    </td>
    <td>
@@ -316,23 +316,23 @@ mysql> SELECT * FROM t WHERE id>=10 AND id&lt;11 FOR UPDATE;
    <td>
    </td>
    <td>>BEGIN;
-<p>
+<br/>
 Query OK, 0 rows affected (0.00 sec)
-<p>
+<br/>
  
-<p>
+<br/>
 > SELECT * FROM t WHERE id>=10 AND id&lt;11 FOR UPDATE;
-<p>
+<br/>
 <span style="color: red;">// block</span>
    </td>
    <td>> BEGIN;
-<p>
+<br/>
 Query OK, 0 rows affected (0.00 sec)
-<p>
+<br/>
  
-<p>
+<br/>
 > SELECT * FROM t WHERE id>=10 AND id&lt;11 FOR UPDATE;
-<p>
+<br/>
 <span style="color: red;">Empty set (0.00 sec)</span>
    </td>
   </tr>
@@ -345,11 +345,11 @@ When TiDB executes a DML statement that includes an embedded `SELECT`, TiDB does
 <table>
   <tr>
    <td colspan="3" >CREATE TABLE t1 (a INT, b INT DEFAULT 0, PRIMARY KEY (a,b)); 
-<p>
+<br/>
 INSERT INTO t1 (a,b) VALUES (1070109, 99);
-<p>
+<br/>
 CREATE TABLE t2 (b INT, a INT, PRIMARY KEY (b));
-<p>
+<br/>
 INSERT INTO t2 (b,a) VALUES (7,1070109);
    </td>
   </tr>
@@ -391,7 +391,7 @@ INSERT INTO t2 (b,a) VALUES (7,1070109);
    <td>INSERT INTO t1 (a) VALUES ((SELECT a FROM t2 WHERE b=7));
    </td>
    <td>TiDB does not lock the data in `(SELECT a FROM t2 WHERE b=7)`, so it succeeds.
-<p>
+<br/>
 MySQL tries to lock the data in `(SELECT a FROM t2 WHERE b=7)`, so it fails with an error `lock wait timeout`.
    </td>
   </tr>

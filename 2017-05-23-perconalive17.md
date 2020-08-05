@@ -10,7 +10,9 @@ categories: ['MySQL Scalability']
 
 This is the speech Edward Huang gave at Percona Live - Open Source Database Conference 2017.
 
-<span id="top">The slides are [here](https://www.percona.com/live/17/sites/default/files/slides/A%20brief%20introduction%20of%20TiDB%20%28Percona%20Live%29.pdf).</span>
+<span id="top"></span>
+
+The slides are [here](https://www.percona.com/live/17/sites/default/files/slides/A%20brief%20introduction%20of%20TiDB%20%28Percona%20Live%29.pdf).
 
 - [Speaker introduction](#speaker)
 - [What would you do when…](#what)
@@ -169,7 +171,7 @@ TiKV employs an optimistic transaction model and only locks data in the final 2 
 
 The default isolation level of TiKV is Repeatable Read (SI) and it exposes the lock API, which is used for implementing SSI (Serializable snapshot isolation), such as SELECT … FOR UPDATE in mysql, for the client.
 
-## <span id="distsql">Distributed SQL<span>
+## <span id="distsql">Distributed SQL</span>
 
 We take the performance of TiDB very seriously. TiDB has a full-featured SQL layer. For some operations, for example, select count(*), there is no need for TiDB to get data from row to row first and then count. The quicker way is that TiDB pushes down these operations to the corresponding TiKV nodes, the TiKV nodes do the computing and then TiDB consolidates the final results.
 
@@ -179,7 +181,7 @@ Distributed join will be covered later.
 
 [Back to the top](#top)
 
-## <span id="sql">TiDB SQL layer overview<span>
+## <span id="sql">TiDB SQL layer overview</span>
 
 ![TiDB SQL layer overview](media/image_8.png)
 
@@ -195,7 +197,7 @@ There are also other crucial components like Privilege Manager, Schema Manager, 
 
 [Back to the top](#top)
 
-## <span id="query">What Happens behind a query<span>
+## <span id="query">What Happens behind a query</span>
 
 We have talked about the process. Let's see an example to show what's going on behind a query. Assuming we have a schema with two fields and an index. Now we need to run the following query: SELECT COUNT(c1) FROM t WHERE c1 > 10 AND c2 = 'percona';
 
@@ -225,7 +227,7 @@ TiDB's SQL layer currently supports 3 kinds of distributed join type, hashjoin /
 
 [Back to the top](#top)
 
-## <span id="tools">Tools matter<span>
+## <span id="tools">Tools matter</span>
 
 To help users exploit the best part of TiDB, we have prepared the following tools: Syncer, TiDB Binlog, Mydumper/MyLoader(Loader).
 

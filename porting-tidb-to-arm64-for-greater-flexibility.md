@@ -53,8 +53,8 @@ We used 100 threads, loaded 1 million rows of data, and executed 1 million opera
 |       | x86-64 (operations/sec) | ARM64 (operations/sec) |
 | :---- | :---- | :---- |
 | Load | 22,948.5 | 14,698.6 |
-| Workload A | Update: 14,244.5<br>Read: 14,224.5 | Update: 9,932.6<br>Read: 9,917.8 |
-| Workload B | Update: 4,819.0<br>Read: 92,302.2 | Update: 2,102.0<br>Read: 39,776.8 |
+| Workload A | Update: 14,244.5<br/>Read: 14,224.5 | Update: 9,932.6<br/>Read: 9,917.8 |
+| Workload B | Update: 4,819.0<br/>Read: 92,302.2 | Update: 2,102.0<br/>Read: 39,776.8 |
 | Workload C | Read: 113,663.1 | Read: 49,262.0 |
 
 As you can see, the performance on ARM64 is much worse than that on x86-64. So we need to do some optimizations. From [Optimizing Network Intensive Workloads on Amazon EC2 A1 Instances](https://aws.amazon.com/cn/blogs/compute/optimizing-network-intensive-workloads-on-amazon-ec2-a1-instances/), we know we can do something to handle the network more efficiently. This article provides a script that makes CPU 0 and 8 handle network interruptions, and evenly distribute received packets to all CPUs. But unfortunately, after we applied this script and did the benchmark again, we ran `mpstat` and found that CPU 0 and 8 were full.
