@@ -10,7 +10,7 @@ categories: ['Engineering']
 
 Author: Max Liu (CEO at PingCAP)
 
-![Horizontal scaling for Hive](media/cloud-native-distributed-sql-database.jpg)
+![An Elastic, Real-Time HTAP Database Ready for the Cloud](media/cloud-native-distributed-sql-database.jpg)
 
 TiDB is an open-source, distributed, [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) database built by [PingCAP](https://pingcap.com/) and its open-source community. At [TiDB DevCon 2020](https://pingcap.com/community/devcon2020/), the TiDB community's annual technical conference, more than 80 developers, TiDB users, and partners online from all over the world shared their first-hand development and practical experience with TiDB. The topics covered finance, telecommunications, e-commerce, logistics, video, information, education, medical care, and many other industries. At the meeting, we showed [TiDB 4.0](https://docs.pingcap.com/tidb/stable/release-4.0-ga)'s general availability (GA) technical details and its performance in a production environment. More than 3,000 people signed up to watch the live broadcast and exchanged their ideas in the group. 
 
@@ -172,7 +172,7 @@ You might be ambitious and want to write a distributed database of your own. No 
 
 Finally, let's talk about our experience in chaos engineering. There is a common understanding in the software field that all foreseeable accidents will eventually occur. We must accept the fact that complex systems are unavoidable, and we must do our best to keep them stable and resilient. Today, the complexity of the entire system is not only limited to the database, but extends to all parts of the business, and ultimately settles in the quality of services the system provides to users.
 
-![Amazon's and Netflix's microservices](media/amazon-and-Netflix-microservices.jpg)
+![Amazon's and Netflix's microservices](media/amazon-and-netflix-microservices.jpg)
 <div class="caption-center"> Amazon's and Netflix's microservices </div>
 
 The figure above graphically represents the connections within Amazon's and Netflix's microservices. These connections are actually much more complicated than spider webs. Therefore, we need a system to simulate all possible faults, let the faults happen continuously, and take precautions to enhance the robustness of the system.
