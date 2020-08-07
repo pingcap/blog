@@ -8,7 +8,7 @@ tags: ['Database selection', 'MySQL']
 categories: ['MySQL Scalability']
 url: /success-stories/tidb-at-zalopay-infrastructure-lesson-learned/
 customer: VNG
-customerCategory: Internet
+customerCategory: Financial Services
 ---
 
 **Industry:** Mobile Payment
