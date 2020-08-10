@@ -9,6 +9,7 @@ url: /success-stories/lesson-learned-from-queries-over-1.3-trillion-rows-of-data
 customer: Zhihu
 customerCategory: Internet
 notShowOnLogoWall: true
+aliases: ['/blog/use-case-tidb-in-eleme/']
 --- 
 
 **Industry:** Knowledge Sharing
