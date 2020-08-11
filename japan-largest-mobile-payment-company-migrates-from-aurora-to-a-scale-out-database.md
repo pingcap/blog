@@ -16,7 +16,7 @@ customerCategory: Financial Services
 
 ![Aurora alternative: a horizontal scaling database](media/aurora-alternative-horizontal-scaling-database.jpg)
 
-_This article is based on a talk given by Munenori Hirakawa at [TiDB DevCon 2020](https://pingcap.com/community/devcon2020/). See the [video](https://www.youtube.com/watch?v=vCXrEZ-gf_M) and [slides](https://www.slideshare.net/PingCAP-TiDB/tidb-at-paypay)._
+*This article is based on a talk given by Munenori Hirakawa at [TiDB DevCon 2020](https://pingcap.com/community/devcon2020/). See the [video](https://www.youtube.com/watch?v=vCXrEZ-gf_M) and [slides](https://www.slideshare.net/PingCAP-TiDB/tidb-at-paypay).*
 
 [PayPay](https://www.crunchbase.com/organization/paypay#section-overview) was established in October 2018 as a joint venture Softbank Group, Yahoo Japan, and the Indian mobile payment company Paytm. It is the number one mobile payment company in Japan. Japan is still mainly a cash-based society, but after large-scale marketing activities and government policy support for a cashless society, our business is rapidly expanding. Currently, there are about 100 million people in Japan, of which 30 million users and 2 million merchants are using PayPay, and our recent transaction volume has reached 1 billion.
 
