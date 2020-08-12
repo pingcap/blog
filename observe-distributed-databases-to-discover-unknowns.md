@@ -18,7 +18,7 @@ Google's Cloud Bigtable, a non-relational, NoSQL data storage system, has a diag
 
 Inspired by Google's Key Visualizer, we have implemented Key Visualizer (KeyViz) in [TiDB](https://en.wikipedia.org/wiki/TiDB), a distributed, relational, NewSQL database. Key Visualizer will be available in TiDB 4.0, which will be generally available later this year. This tool uses different colors to show access frequency and traffic for different areas in a cluster. **Key Visualizer displays system status graphically, which helps database administrators (DBAs) quickly troubleshoot database performance issues and enables users to gain deep insights into their applications**.
 
-<iframe src="media/key-visualizer.mp4" width="100%" height="auto" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe src="https://download.pingcap.com/images/blog/key-visualizer.mp4" width="100%" height="auto" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 <div class="caption-center"> Key Visualizer </div>
 
 In this post, we'll do a deep dive on what Key Visualizer is, how it works, how it can help you, and which scenarios it applies to. If you're a DBA or database developer, we hope you can take this knowledge and apply it to your own work. For example, if you're a developer, you could adopt TiDB and Key Visualizer for your own applications, or even design a similar tool to troubleshoot your system.
