@@ -185,7 +185,7 @@ Notice that the only difference between these two cases is that the first
 ToString`. The first is using static dispatch, and the second dynamic.
 
 In Rust `&impl ToString` is essentially shorthand for a type parameter argument
-that is only used once, like in the earlier example `fn print<T: ToString>(v:
+that is only used once, like in the earlier example `fn print&lt;T: ToString&gt;(v:
 T)`.
 
 Note that in these examples we have to use `inline(never)` to defeat the
@@ -298,7 +298,7 @@ All that is only touching on the surface of the tradeoffs involved in monomorphi
 
 > niko: e.g., `fn foo<T>() { bar::<Vec<T>>(); } fn bar<U>() { .. }`
 
-> niko: here, you have a type descriptor for T that was given to you dynamically, but you have to build the type descriptor for Vec<T>
+> niko: here, you have a type descriptor for T that was given to you dynamically, but you have to build the type descriptor for Vec&lt;T&gt;
 
 > niko: and then we can make it even worse
 
@@ -310,7 +310,7 @@ All that is only touching on the surface of the tradeoffs involved in monomorphi
 
 > niko: because we have to be able to figure out `Vec<T>: Debug`, and all we know is `T: Debug`
 
-> niko: we might be able to handle that by bubbling up the Vec<T> to our callers...
+> niko: we might be able to handle that by bubbling up the Vec&lt;T&gt; to our callers...
 
 ## In the next episode of Rust Compile-time Adventures with TiKV
 

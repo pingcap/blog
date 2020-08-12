@@ -18,12 +18,12 @@ Ready? Let's get started!
 Before we start deploying TiDB, we'll need a few things first: `wget`, Git, Docker, and a MySQL client. If you don't have them installed already, here are the instructions to get them.
 
 <main class="tabs">
-  <input id="tabMacOS" type="radio" name="tabs" value="macOSContent" checked>
+  <input id="tabMacOS" type="radio" name="tabs" value="macOSContent" checked/>
   <label for="tabMacOS">
    <span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png" width="20"></img></span>
     <span class="label__title">macOS</span>
   </label>
-  <input id="tabLinux" type="radio" name="tabs" value="linuxContent">
+  <input id="tabLinux" type="radio" name="tabs" value="linuxContent"/>
   <label for="tabLinux">
     <span><img src="https://cdn4.iconfinder.com/data/icons/proglyphs-free/512/Linux_-_Tux-512.png" width="20"></img></span>
     <span class="label__title">Linux</span>
@@ -54,6 +54,7 @@ Before we start deploying TiDB, we'll need a few things first: `wget`, Git, Dock
             <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt install wget git mysql-client</code></pre></div>
           </li>
         </ul>
+      </li>
       <li>
         <p>To install Docker, go <a href="https://docs.docker.com/install/">here.</a></p>
         <p>After Docker is installed, use the following command to start it and add the current user to the Docker user group:</p>

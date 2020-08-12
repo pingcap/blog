@@ -195,11 +195,11 @@ Here are some testing statements we ran:
    <td>Range query
    </td>
    <td>SELECT c FROM sbtest%u WHERE id BETWEEN ? AND ?
-<p>
+<br/>
 SELECT SUM(k) FROM sbtest%u WHERE id BETWEEN ? AND ?
-<p>
+<br/>
 SELECT c FROM sbtest WHERE id BETWEEN ? AND ? ORDER BY c
-<p>
+<br/>
 SELECT DISTINCT c FROM sbtest%u WHERE id BETWEEN ? AND ? ORDER BY c
    </td>
   </tr>
@@ -426,9 +426,9 @@ Inside the TiDB cluster, there are three main components:
    <td>Environment
    </td>
    <td>41 servers
-<p>
+<br/>
 88 instances
-<p>
+<br/>
 38 Syncer real-time replication streams (will upgrade to
 <a href="https://docs.pingcap.com/tidb-data-migration/dev/overview">TiDB Data Migration</a>)
    </td>
@@ -437,7 +437,7 @@ Inside the TiDB cluster, there are three main components:
    <td>Storage
    </td>
    <td>20 TB data (50 TB total)
-<p>
+<br/>
 2.3 million Regions
    </td>
   </tr>
@@ -445,9 +445,9 @@ Inside the TiDB cluster, there are three main components:
    <td>Performance
    </td>
    <td>4 k/s average QPS
-<p>
+<br/>
 10 k/s QPS at peak time (sustained for 4 hours)
-<p>
+<br/>
 1:5 read/write ratio
    </td>
   </tr>
@@ -455,9 +455,9 @@ Inside the TiDB cluster, there are three main components:
    <td>Latency
    </td>
    <td>80% of latencies below 8 ms
-<p>
+<br/>
 95% of latencies below 125 ms
-<p>
+<br/>
 99.9% of latencies below 500 ms
    </td>
   </tr>

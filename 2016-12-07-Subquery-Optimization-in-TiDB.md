@@ -8,7 +8,7 @@ aliases: ['/blog/2016/12/07/Subquery-Optimization-in-TiDB/', '/blog/2016/12/07/s
 categories: ['Engineering']
 ---
 
-<script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config" dangerouslySetInnerHTML={{ __html: `
   MathJax.Hub.Config({
     extensions: ["tex2jax.js"],
     jax: ["input/TeX", "output/HTML-CSS"],
@@ -19,6 +19,7 @@ categories: ['Engineering']
     },
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
+`}}>
 </script>
 <script type="text/javascript" src="path-to-MathJax/MathJax.js">
 </script>

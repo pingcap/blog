@@ -165,7 +165,7 @@ With MVCC, the Key array in TiKV looks like this:
 ~~  ……
 ```
 
-It is noted that as for multiple versions of a Key, we put the bigger number first (you can review the Key-Value section in which I mentioned that Key is an ordered array). In this way, when a user gets the Value by Key + <Version>, he can construct the Key of MVCC with Key and Version, which is Key-<Version>. Then he can directly Seek(Key-Version) and locate the first position that is greater than or equal to this Key-Version. For more detail, see [MVCC in TiKV](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/).
+It is noted that as for multiple versions of a Key, we put the bigger number first (you can review the Key-Value section in which I mentioned that Key is an ordered array). In this way, when a user gets the Value by Key + &lt;Version&gt;, he can construct the Key of MVCC with Key and Version, which is Key-&lt;Version&gt;. Then he can directly Seek(Key-Version) and locate the first position that is greater than or equal to this Key-Version. For more detail, see [MVCC in TiKV](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/).
 
 [Back to the top](#top)
 

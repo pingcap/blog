@@ -257,14 +257,12 @@ Finally, we would like to extend our appreciation for the excellent work of the 
 If you're interested in TiFlash technologies, you can contact me at [weiwan@pingcap.com](mailto:weiwan@pingcap.com).
 
 <div style="margin-top: 5rem; margin-bottom: 2rem;text-align: left;">
-<!--[if lte IE 8]>
-<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
-<![endif]-->
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
-<script>
+<script dangerouslySetInnerHTML={{ __html: `
   hbspt.forms.create({
  portalId: "4466002",
  formId: "62420aae-0006-4369-8bdd-532b7469f9be"
 });
+`}}>
 </script>
 </div>

@@ -120,20 +120,20 @@ We selected the following parameters as configuration knobs:
    <td>disable-auto-compactions
    </td>
    <td>write-heavy: turning on is better
-<p>
+<br/>
 point-lookup, range-scan: turning off is better
    </td>
-   <td>{1, 0}
+   <td>{'{1, 0}'}
    </td>
   </tr>
   <tr>
    <td>block-size
    </td>
    <td>point-lookup: the smaller the better
-<p>
+<br/>
 range-scan: the larger the better
    </td>
-   <td>{4k,8k,16k,32k,64k}
+   <td>{'{4k,8k,16k,32k,64k}'}
    </td>
   </tr>
   <tr>
@@ -148,7 +148,7 @@ range-scan: the larger the better
    <td>optimize-filters-for-hits
    </td>
    <td>point-lookup, range-scan:
-<p>
+<br/>
 turning off is better
    </td>
    <td>{1,0}

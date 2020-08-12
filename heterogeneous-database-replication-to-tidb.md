@@ -132,17 +132,17 @@ The following table summarizes the advantages and disadvantages of using CDC too
   </tr>
   <tr>
    <td>Your application requires no additional development.
-<p>
+<br/><br/>
 CDC tools can obtain all DML changes, like <code>DELETE</code> and <code>UPDATE</code>.
-<p>
+<br/><br/>
 Because the workload is distributed through the day, these tools have higher performance.
-<p>
+<br/><br/>
 CDC tools bring low latency and near real-time replication.
-<p>
+<br/><br/>
 Upstream data is obtained by reading redo logs, which does not impact the SQL performance.
    </td>
    <td>CDC tools are mostly commercial products, and you need to purchase them.
-<p>
+<br/><br/>
 Most CDC tools only allow a specific database as an upstream database. If you have multiple types of upstream databases, you need to use multiple CDC tools.
    </td>
   </tr>
