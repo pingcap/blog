@@ -173,7 +173,7 @@ For more feature and documentation details, see [What's New in TiDB 4.0](https:/
 
 ### TiDB Cloud docs
 
-[TiDB Cloud](https://en.pingcap.com/products/tidbcloud) is a fully-managed Database-as-a-Service (DBaaS) product that brings everything great about TiDB to your cloud, and lets you focus on your applications, not the complexities of your database. In June, we released a complete set of TiDB Cloud documentation. Check out [TiDB Cloud Documentation](https://docs.pingcap.com/tidbcloud/beta) and [start your free trial](https://en.pingcap.com/products/tidbcloud/trial/) now!
+[TiDB Cloud](https://pingcap.com/products/tidbcloud) is a fully-managed Database-as-a-Service (DBaaS) product that brings everything great about TiDB to your cloud, and lets you focus on your applications, not the complexities of your database. In June, we released a complete set of TiDB Cloud documentation. Check out [TiDB Cloud Documentation](https://docs.pingcap.com/tidbcloud/beta) and [start your free trial](https://pingcap.com/products/tidbcloud/trial/) now!
 
 ## What's next
 
