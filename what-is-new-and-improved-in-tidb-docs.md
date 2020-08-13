@@ -63,13 +63,16 @@ The following table shows how the documentation is organized:
 <br/>
 <a href="https://github.com/pingcap/tidb-operator">TiDB Operator</a> helps manage cloud-native TiDB on Kubernetes and automates operating tasks. This makes TiDB easier to deploy on any cloud that provides managed Kubernetes.
 <br/>
+<br/>
 <a href="https://docs.pingcap.com/tidb-data-migration/stable">TiDB Data Migration docs</a>
 <br/>
 <a href="https://github.com/pingcap/dm">TiDB Data Migration (DM)</a> is an integrated data replication task management platform that supports full data migration and incremental data migration from MySQL or MariaDB to TiDB. It can help reduce operating costs and simplify troubleshooting.
 <br/>
+<br/>
 <a href="https://docs.pingcap.com/tidb/dev/ecosystem-tool-user-guide">TiDB Database Tools docs</a>
 <br/>
 TiDB database tools are a collection of useful toolkits for migrating data to or from TiDB, including <a href="https://github.com/pingcap/dumpling">Dumpling</a>, <a href="https://github.com/pingcap/mydumper">Mydumper</a>, Loader, Syncer, <a href="https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector">sync-diff-inspector</a>, <a href="https://github.com/pingcap/br">Backup & Restore (BR)</a>, <a href="https://github.com/pingcap/tidb-lightning">TiDB Lightning</a>, and <a href="https://github.com/pingcap/ticdc">TiCDC</a>.
+<br/>
 <br/>
 <a href="https://docs.pingcap.com/tidb/dev/tiup-documentation-guide">TiUP docs</a>
 <br/>
@@ -142,6 +145,7 @@ Last June, we made great improvements to documentation search so you can find an
    <td>You can specify the exact version that you want to get results from.
    </td>
    <td>Search results for the latest "stable" version are returned by default, but you can select your version in the drop-down list in the upper left of the page. 
+<br/>
 <br/>
 For example, if you use TiDB Operator v1.0 and want to know how to modify the time zone setting for a TiDB cluster in Kubernetes, click <strong>Tools </strong>&gt; <strong>TiDB Operator</strong>, select <strong>v1.0</strong> in the drop-down, and then enter "time zone" to search.
    </td>
