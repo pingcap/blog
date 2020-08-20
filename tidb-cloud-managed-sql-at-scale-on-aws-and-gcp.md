@@ -12,7 +12,7 @@ image: /images/blog/tidb-cloud-features.png
 
 This June, we [announced](https://pingcap.com/blog/announcing-tidb-as-a-service-fully-managed-tidb-offering/) the beta release of [TiDB Cloud](https://pingcap.com/products/tidbcloud), the fully managed database service provided by PingCAP. TiDB Cloud offers fully managed [TiDB](https://docs.pingcap.com/tidb/stable/overview), the horizontally scaling, distributed SQL database that processes both transactional and analytical queries well. Our goal is to empower your applications with a reliable database service that **responds fast even during traffic peaks** and **provides real-time analytics on market changes** while **minimizing your operational costs**.
 
-Try [TiDB Cloud](https://en.pingcap.com/products/tidbcloud/trial) if this sounds like what you're looking for. **We're offering a 14-day free trial with 24/7 expert support.**
+Try [TiDB Cloud](https://pingcap.com/products/tidbcloud/trial) if this sounds like what you're looking for. **We're offering a 14-day free trial with 24/7 expert support.**
 
 In this article, I'll walk you through what TiDB Cloud offers.
 
@@ -30,7 +30,7 @@ With TiDB Cloud, scaling your database out or in could not be easier. When your 
 
 More than that, TiDB is also awesome at analytics.
 
-TiDB adopts a [modular architecture](https://en.pingcap.com/blog/how-tidb-htap-makes-truly-hybrid-workloads-possible#modular-architecture) that separates the SQL computing engine from the storage engine. This makes it a lot easier to independently develop a row store engine (the [TiKV](https://tikv.org/) servers, with data in row format) and a column store engine (the [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) servers, with data in column format). Then we use standby [Raft Learner](https://etcd.io/docs/v3.3.12/learning/learner/#raft-learner) nodes to glue row and column formats together.
+TiDB adopts a [modular architecture](https://pingcap.com/blog/how-tidb-htap-makes-truly-hybrid-workloads-possible#modular-architecture) that separates the SQL computing engine from the storage engine. This makes it a lot easier to independently develop a row store engine (the [TiKV](https://tikv.org/) servers, with data in row format) and a column store engine (the [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) servers, with data in column format). Then we use standby [Raft Learner](https://etcd.io/docs/v3.3.12/learning/learner/#raft-learner) nodes to glue row and column formats together.
 
 With row stores, you get fast write speed; with column stores, you aggregate large volumes of data very quickly and get fast query speed. **Now you get both in a single TiDB database.**
 
@@ -84,6 +84,6 @@ The benefits of the fully managed database service brought by TiDB Cloud are:
 
 ## Start your first free cluster now!
 
-[Sign up](https://en.pingcap.com/products/tidbcloud/trial) now to start your 14-day free trial on TiDB Cloud.
+[Sign up](https://pingcap.com/products/tidbcloud/trial) now to start your 14-day free trial on TiDB Cloud.
 
 For more guidance, check out the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/beta) or [email us](mailto:info@pingcap.com). We're glad to help with any issues during your trial.
