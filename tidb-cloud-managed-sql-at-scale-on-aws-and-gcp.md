@@ -22,7 +22,9 @@ TiDB Cloud is built to bring everything great about TiDB to the cloud. Among all
 
 TiDB's horizontal scalability and MySQL compatibility have led many former Aurora and MySQL users to choose TiDB as their data backbone.
 
-> "After a careful investigation, we decided to migrate from Amazon Aurora to TiDB. Thanks to TiDB's horizontal scalability, we no longer have to worry about our database capacity." - Product Tech Senior Manager at PayPay, Japan's Largest Mobile Payment Company
+*"After a careful investigation, we decided to migrate from Amazon Aurora to TiDB. Thanks to TiDB's horizontal scalability, we no longer have to worry about our database capacity."*
+
+*-Product Tech Senior Manager at PayPay, Japan's Largest Mobile Payment Company*
 
 With TiDB Cloud, scaling your database out or in could not be easier. When your application traffic surges or drops, you can simply add or remove nodes from your cluster with just a few clicks.
 
