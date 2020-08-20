@@ -3,8 +3,8 @@ title: 'TiDB Cloud: Managed SQL at Scale on AWS and GCP'
 author: [Ken Liu]
 date: 2020-08-20
 summary: This post introduces in detail the features of TiDB Cloud - the fully managed, horizontal scaling, cloud-native, distributed SQL database in the cloud.
-tags: ['TiDB Cloud', 'Cloud', 'HTAP', 'Product']
-categories: ['Product']
+tags: ['TiDB Cloud', 'Cloud', 'HTAP']
+categories: ['Engineering']
 image: /images/blog/tidb-cloud-features.png
 ---
 
