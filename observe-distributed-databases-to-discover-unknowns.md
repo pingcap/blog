@@ -45,7 +45,7 @@ Key Visualizer is a visual diagnostic tool that lets users observe their TiDB cl
 
 Key Visualiser uses heatmaps to display read and write traffic volume. Here is an example:
 
-![Key Visualizer's heatmap](media/troubleshoot-distributed-database.jpg)
+![Key Visualizer's heatmap](media/key-viz-heatmap.jpg)
 <div class="caption-center"> Key Visualizer's heatmap </div>
 
 In the heatmap:
