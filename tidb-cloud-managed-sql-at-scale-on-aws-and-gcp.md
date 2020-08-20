@@ -2,7 +2,7 @@
 title: 'TiDB Cloud: Managed SQL at Scale on AWS and GCP'
 author: [Ken Liu]
 date: 2020-08-20
-summary: This post introduces in detail the features of TiDB Cloud - the fully managed, horizontal scaling, cloud-native, distributed SQL database in the cloud.
+summary: This post introduces in detail the features of TiDB Cloud - the fully managed, horizontally scaling, cloud-native, distributed SQL database in the cloud.
 tags: ['TiDB Cloud', 'Cloud', 'HTAP']
 categories: ['Engineering']
 image: /images/blog/tidb-cloud-features.png
@@ -53,6 +53,7 @@ Also, our global expert support is available 24/7 so that you can rest assured t
 TiDB Cloud offers enterprise-grade security by deploying clusters in dedicated Virtual Private Cloud (VPC) networks. Each tenant on TiDB Cloud has its own isolated network, and your application service and the TiDB database service use independent VPC networks as well. Connecting to your database requires VPC peering to ensure data and connection security.
 
 ![Isolated and secured deployments guaranteed by dedicated VPC networks](media/dedicated-vpc-networks-in-tidb-cloud.png)
+<div class="caption-center"> Isolated and secured deployments guaranteed by dedicated VPC networks </div>
 
 Transport Layer Security (TLS) encryption is always enabled for all deployments on TiDB Cloud. Connections between TiDB clients and servers are encrypted, as are connections between all TiDB component nodes. Encrypting data on disk (also known as "at rest") is also enabled by default for all your persisted data and backups.
 
@@ -65,6 +66,7 @@ TiDB Cloud is cloud-agnostic. You can deploy your database to AWS or GCP. If you
 TiDB Cloud ensures the high availability of your application data. Each time TiDB writes or updates your data, it replicates to at least three replicas in different availability zones (AZs) in the cloud. TiDB uses the Raft distributed consensus algorithm to guarantee strong consistency. Even if one AZ fails, your data is still available, and the service stays on.
 
 ![Highly available, managed TiDB database survives an AZ outage](media/tidb-cloud-survives-an-az-outage.png)
+<div class="caption-center"> Highly available, managed TiDB database survives an AZ outage </div>
 
 Also, you can easily configure automatic and ad hoc backups and restore your cluster from a backup on the UI.
 
