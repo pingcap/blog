@@ -70,6 +70,8 @@ To guarantee uptime for your production clusters, we also include a [service-lev
 
 ## Summing it up
 
+The benefits of the fully managed database service brought by TiDB Cloud are:
+
 - No in-house administrative team required and no hardware costs
 - Deploy and scale with a few clicks on the UI
 - Highly scalable and MySQL-compatible
