@@ -18,13 +18,13 @@ customerCategory: Internet
 
 [VIPKid](https://en.wikipedia.org/wiki/VIPKid) is an online English education company based in China that serves children aged 4-15 and their parents. Through our online classroom portal and video chat platform, children in China can get a 25-minute English lesson from a fluent English speaking teacher in the United States or Canada. Currently, we have more than 700,000 paying students. 
 
-We use MySQL as our backend database. But as our application data grew rapidly, standalone MySQL’s storage capacity became a bottleneck, and it could no longer meet our application requirements. We tried MySQL sharding on our core applications, but it was difficult to run multi-dimensional queries on sharded data. Therefore, we adopted [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads. **TiDB supports creating secondary indexes on large tables. We can use it to perform multi-dimensional SQL queries.** We don’t need to worry about cross-shard, multi-dimensional queries for sharding any more.
+We use MySQL as our backend database. But as our application data grew rapidly, standalone MySQL's storage capacity became a bottleneck, and it could no longer meet our application requirements. We tried MySQL sharding on our core applications, but it was difficult to run multi-dimensional queries on sharded data. Therefore, we adopted [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads. **TiDB supports creating secondary indexes on large tables. We can use it to perform multi-dimensional SQL queries.** We don't need to worry about cross-shard, multi-dimensional queries for sharding any more.
 
-I’m a senior DBA engineer at VIPKid, and I’d like to discuss how we use TiDB to do multi-dimensional queries on sharded data and enhance our real-time analytics capability. First, I’ll discuss the application scenarios in which we use TiDB, and then I’ll share the benefits TiDB gives us.
+I'm a senior DBA engineer at VIPKid, and I'd like to discuss how we use TiDB to do multi-dimensional queries on sharded data and enhance our real-time analytics capability. First, I'll discuss the application scenarios in which we use TiDB, and then I'll share the benefits TiDB gives us.
 
 ## Why we chose TiDB
 
-Previously, we used MySQL as our backend database. But as our data size sharply increased, a standalone MySQL database had limited storage capacity and couldn’t provide services for us. 
+Previously, we used MySQL as our backend database. But as our data size sharply increased, a standalone MySQL database had limited storage capacity and couldn't provide services for us. 
 
 **We tried MySQL sharding but found it had these disadvantages:**
 
@@ -34,17 +34,17 @@ Previously, we used MySQL as our backend database. But as our data size sharply 
 
 Therefore, we looked for a new database and found that [TiDB](https://docs.pingcap.com/tidb/stable/overview) is a good solution.
 
-[TiDB](https://github.com/pingcap/tidb) is an open-source, distributed SQL database built by [PingCAP](https://pingcap.com/) and its open-source community. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. It’s a one-stop solution for both Online Transactional Processing (OLTP) and Online Analytical Processing (OLAP) workloads. You can learn more about TiDB’s architecture [here](https://docs.pingcap.com/tidb/v4.0/architecture).
+[TiDB](https://github.com/pingcap/tidb) is an open-source, distributed SQL database built by [PingCAP](https://pingcap.com/) and its open-source community. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. It's a one-stop solution for both Online Transactional Processing (OLTP) and Online Analytical Processing (OLAP) workloads. You can learn more about TiDB's architecture [here](https://docs.pingcap.com/tidb/v4.0/architecture).
 
 TiDB has many [advantages](https://docs.pingcap.com/tidb/stable/overview#key-features), of which the following attract us most:
 
-* **It’s compatible with the MySQL protocol, common MySQL features, and the MySQL ecosystem.** To migrate a production application to TiDB, we only need to modify a small amount of code.
+* **It's compatible with the MySQL protocol, common MySQL features, and the MySQL ecosystem.** To migrate a production application to TiDB, we only need to modify a small amount of code.
 * **It supports horizontally scaling in or out.** The TiDB architecture design separates computing from storage and enables us to separately scale out or scale in the computing or storage capacity online as needed. The scaling process is transparent to application operations and maintenance staff.
-* It’s suitable for various use cases that require **high availability and strong consistency with large-scale data**.
+* It's suitable for various use cases that require **high availability and strong consistency with large-scale data**.
 
 ## How we use TiDB at VIPKid
 
-We’ve found that TiDB is especially helpful to us in these application scenarios:
+We've found that TiDB is especially helpful to us in these application scenarios:
 
 * Working with large amounts of data and highly concurrent writes
 * Multi-dimensional queries for sharded core applications
@@ -58,13 +58,13 @@ The following figure shows the application scenarios with large data volumes and
 ![Massive-data and high-concurrent-write scenarios](media/massive-data-and-high-concurrent-writes.jpg)
 <div class="caption-center"> Massive-data and high-concurrent-write scenarios </div>
 
-The system’s current peak workload is about 10,000 transactions per second (TPS), and about 18 million rows of data is added each day. This table only retains the data for the last two months. Currently, a single table has about 1.2 billion rows of data. This amount of data is actually too big. If we store this amount of data in MySQL, the maintenance cost will be high, so we migrated all system data to TiDB.
+The system's current peak workload is about 10,000 transactions per second (TPS), and about 18 million rows of data is added each day. This table only retains the data for the last two months. Currently, a single table has about 1.2 billion rows of data. This amount of data is actually too big. If we store this amount of data in MySQL, the maintenance cost will be high, so we migrated all system data to TiDB.
 
 During the migration process, we made some minor changes to the table schema. We removed the original auto-increment ID, and when we built the table, we scattered [Regions](https://docs.pingcap.com/tidb/stable/glossary#regionpeerraft-group) in advance by specifying the configuration. When there are highly concurrent writes, this approach avoids writing hotspots. In TiDB 4.0, [TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-intro) makes it easier to find hotspots because it graphically displays information such as the write volume and read volume.
 
 ### Multi-dimensional queries for sharded core applications 
 
-In the earlier stages of our company, we implemented sharding on many of our core applications—such as class scheduling. Generally, when we do sharding, only one application column is used as the sharding key. However, a scheduling task may involve several dimensions including classrooms, teachers, students, and courses. In addition, other applications may also access the data. For example, when the teacher application accesses data, the data is displayed in the teacher’s view. But if data is split based on the student’s view, the teacher’s access request will be broadcast to all shards, which is not allowed online.
+In the earlier stages of our company, we implemented sharding on many of our core applications—such as class scheduling. Generally, when we do sharding, only one application column is used as the sharding key. However, a scheduling task may involve several dimensions including classrooms, teachers, students, and courses. In addition, other applications may also access the data. For example, when the teacher application accesses data, the data is displayed in the teacher's view. But if data is split based on the student's view, the teacher's access request will be broadcast to all shards, which is not allowed online.
 
 We tried several solutions with limited success. Finally, we used [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/stable/overview) (DM) to replicate all sharded tables from upstream to downstream in real time and merge them into a global table. All multi-dimensional queries run on TiDB, whether they are on the management application operation platform or on the application indicator monitoring system.
 
@@ -75,13 +75,13 @@ For DM, we did two things:
 * We changed the DM delay monitoring mechanism. In most cases, when we merge shards, the replication delay is within 200 milliseconds.
 * We achieved high availability for DM. 
 
-If you’d like to learn the details of our DM modification, you can join the [TiDB community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog). 
+If you'd like to learn the details of our DM modification, you can join the [TiDB community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog). 
 
 ### Data life cycle management
 
-If you’ve used MySQL, you might know that the cost of maintaining large tables in MySQL is high; so in general, many companies will do hierarchical data archiving. We now divide the data into multiple levels according to the specific application and read and write volumes. We put the cold data, warm data, and online read traffic in TiDB. 
+If you've used MySQL, you might know that the cost of maintaining large tables in MySQL is high; so in general, many companies will do hierarchical data archiving. We now divide the data into multiple levels according to the specific application and read and write volumes. We put the cold data, warm data, and online read traffic in TiDB. 
 
-To transfer data, we must ensure that the table schema of cold and hot data is the same. However, there is a lot more cold data than hot data. This can impact efficiency of table schema changes. For example, if you’ve changed the table schema for the hot data, such as adding a column, and you want to do the same thing for cold data, the cost will be very high—perhaps 10 times greater than the hot table or even more. So we decided to use TiDB to do this. On the one hand, TiDB's DDL has some useful features. For example, you can add or subtract fields in seconds. On the other hand, with TiDB’s horizontal scalability, we can reuse a set of TiDB archive clusters for each application.
+To transfer data, we must ensure that the table schema of cold and hot data is the same. However, there is a lot more cold data than hot data. This can impact efficiency of table schema changes. For example, if you've changed the table schema for the hot data, such as adding a column, and you want to do the same thing for cold data, the cost will be very high—perhaps 10 times greater than the hot table or even more. So we decided to use TiDB to do this. On the one hand, TiDB's DDL has some useful features. For example, you can add or subtract fields in seconds. On the other hand, with TiDB's horizontal scalability, we can reuse a set of TiDB archive clusters for each application.
 
 ### Real-time data analytics
 
@@ -94,7 +94,7 @@ This scenario is mainly used by business intelligence (BI) analysts and some BI 
 
 ## What benefits does TiDB 4.0 bring us?
 
-### TiFlash, TiDB’s columnar storage engine
+### TiFlash, TiDB's columnar storage engine
 
 [TiFlash](https://docs.pingcap.com/tidb/dev/tiflash-overview) is an extended analytical engine and columnar store for TiDB. A TiDB database that incorporates TiFlash lets you perform real-time HTAP analytics.
 
@@ -118,7 +118,7 @@ I did a simple test with five TiKV nodes, one TiFlash node, and one table with 2
 
 ##### Decreased costs 
 
-We used to have a cluster for BI, but it ran an older version of TiDB. We’ve replaced it with a TiDB 4.0 cluster with TiFlash. The following table shows the resource allocation when the new and old clusters are under the same load. Deploying a new cluster with TiFlash has reduced our overall costs by 35%.
+We used to have a cluster for BI, but it ran an older version of TiDB. We've replaced it with a TiDB 4.0 cluster with TiFlash. The following table shows the resource allocation when the new and old clusters are under the same load. Deploying a new cluster with TiFlash has reduced our overall costs by 35%.
 
 <table>
   <tr>
@@ -161,13 +161,13 @@ If there was an SQL query involving a full table scan, the TiKV cluster load wou
 
 We found TiFlash had these limitations:
 
-* If your SQL statement includes functions that TiFlash hasn’t implemented yet, it’s impossible to push down operators. The SQL statement just uses TiFlash’s capability to speed up calculations. 
+* If your SQL statement includes functions that TiFlash hasn't implemented yet, it's impossible to push down operators. The SQL statement just uses TiFlash's capability to speed up calculations. 
 
-    If your statements don’t implement pushdowns, you can [open an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+    If your statements don't implement pushdowns, you can [open an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 * TiFlash has very limited support for JOIN operation between large tables.
 
-    The PingCAP team has optimized the JOIN operation between a large table and a small table. They’ll continually optimize the rest of JOIN operations.
+    The PingCAP team has optimized the JOIN operation between a large table and a small table. They'll continually optimize the rest of JOIN operations.
 
 ### TiDB Dashboard: easier troubleshooting for TiDB
 
@@ -186,7 +186,7 @@ For more details, see [TiDB Dashboard: Easier Troubleshooting for Distributed Da
 
 ### Backup & Restore: a distributed backup and restore tool 
 
-In the past, TiDB only supported logical backups, and backing up large amounts of data was not very efficient. Now, TiDB’s [Backup & Restore](https://docs.pingcap.com/tidb/stable/backup-and-restore-tool) (BR) tool uses physical backups, which is very impressive. BR is a distributed backup and restore tool, that offers high backup and restore speeds—[1 GB/s or more for 10 TB of data](https://pingcap.com/blog/back-up-and-restore-a-10-tb-cluster-at-1-gb-per-second).
+In the past, TiDB only supported logical backups, and backing up large amounts of data was not very efficient. Now, TiDB's [Backup & Restore](https://docs.pingcap.com/tidb/stable/backup-and-restore-tool) (BR) tool uses physical backups, which is very impressive. BR is a distributed backup and restore tool, that offers high backup and restore speeds—[1 GB/s or more for 10 TB of data](https://pingcap.com/blog/back-up-and-restore-a-10-tb-cluster-at-1-gb-per-second).
 
 We gave BR a try, as shown in the figure below:
 
@@ -197,6 +197,6 @@ PingCAP suggested that to make a backup, we use the same shared storage on the B
 
 ## Summary
 
-As our application data grew quickly, standalone MySQL’s storage capacity could no longer meet our application requirements. After we sharded our core applications, it was difficult to run multi-dimensional queries on sharded data. Therefore, we adopted [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed, HTAP database, which features MySQL compatibility, horizontal scalability, high availability, and strong consistency. 
+As our application data grew quickly, standalone MySQL's storage capacity could no longer meet our application requirements. After we sharded our core applications, it was difficult to run multi-dimensional queries on sharded data. Therefore, we adopted [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed, HTAP database, which features MySQL compatibility, horizontal scalability, high availability, and strong consistency. 
 
-Thanks to TiDB’s support for multi-dimensional SQL queries on sharded tables, we don’t need to worry about multi-dimensional queries across shards. In addition, TiDB has powerful functionalities and ecosystem tools. They helped improve our query performance, easily troubleshoot cluster problems, and quickly back up data.
+Thanks to TiDB's support for multi-dimensional SQL queries on sharded tables, we don't need to worry about multi-dimensional queries across shards. In addition, TiDB has powerful functionalities and ecosystem tools. They helped improve our query performance, easily troubleshoot cluster problems, and quickly back up data.
