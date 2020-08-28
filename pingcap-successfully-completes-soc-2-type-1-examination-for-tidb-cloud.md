@@ -6,6 +6,7 @@ summary: PingCAP, provider of the cloud-native hybrid transactional/analytical p
 image: /images/blog/cloud-native-htap-tidb-cloud-soc-2.jpg
 tags: ['TiDB Cloud', 'Announcement']
 categories: ['MySQL Scalability']
+aliases: ['/pingcap-successfully-completes-type-1-soc-2-examination-for-tidb-cloud/']
 ---
 
 ![Cloud-native, HTAP TiDB Cloud SOC 2](media/cloud-native-htap-tidb-cloud-soc-2.jpg)
