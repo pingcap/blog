@@ -8,6 +8,7 @@ tags: ['MySQL sharding', 'MySQL', 'High availability', 'Scalability']
 url: /case-studies/why-we-chose-a-distributed-sql-database-to-complement-mysql/
 customer: VIPKid
 customerCategory: Internet
+categories: ['MySQL Scalability']
 ---
 
 **Industry:** EdTech
