@@ -7,7 +7,8 @@ image: /images/blog/aurora-alternative-horizontal-scaling-database.jpg
 tags: ['Scalability', 'Amazon Aurora']
 url: /case-studies/japan-largest-mobile-payment-company-migrates-from-aurora-to-a-scale-out-database/
 customer: PayPay
-customerCategory: Financial Services 
+customerCategory: Financial Services
+categories: ['MySQL Scalability'] 
 ---
 
 **Industry:** Mobile Payment
