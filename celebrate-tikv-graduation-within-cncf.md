@@ -22,15 +22,15 @@ As the original founder of the project and an important part of the maintainers 
 
 _"We were amazed by the level of maturity of the ecosystem around this solution. The Kubernetes operator is pretty simple to get started with and helps with common operation tasks. The observability tools are rich. This level of resiliency can be achieved thanks to the rock-solid TiKV implementation. Its graduation is well deserved."_
 
-- Smaïne Kahlouch, DevOps team leader at Dailymotion
+-- Smaïne Kahlouch, DevOps team leader at Dailymotion
 
 _"TiKV has provided such an excellent foundation to build versatile cloud-native stateful services. TiDB and Zetta Table Store are both built on top of TiKV, and they jointly support all the large table application scenarios of Zhihu and solve many problems caused by limited scalability of MySQL. We are very proud to be part of the community, and we believe TiKV will benefit more users by becoming a graduated project in CNCF."_
 
-- Xiaoguang Sun, TiKV Maintainer, and director of Infrastructure at Zhihu.com
+-- Xiaoguang Sun, TiKV Maintainer, and director of Infrastructure at Zhihu.com
 
 _"TiKV is a very stable and performant distributed key-value database. Its intelligent and efficient cluster management functions provide great support for our online recommendation service. We adopted TiKV in 2018, and it has become an essential part of our storage system."_
 
-- Fu Chen, TiKV Maintainer, and distributed storage engineer at Yidian Zixun
+-- Fu Chen, TiKV Maintainer, and distributed storage engineer at Yidian Zixun
 
 "We have been using TiKV in production on the ARM platform since December 2019," said Birong Huang, senior engineer at U-Next. "The scalability and high performance of TiKV enabled us through the unpredictable traffic increase through COVID-19. We are constantly impressed by how active the TiKV community is and would love to contribute back! Congratulations on the graduation!"
 
