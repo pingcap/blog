@@ -9,6 +9,7 @@ categories: ['MySQL Scalability']
 url: /success-stories/horizontally-scaling-hive-metastore-database-by-migrating-from-mysql-to-tidb/
 customer: Zhihu
 customerCategory: Internet
+logo: /images/blog/customers/zhihu-logo.png
 ---
 
 **Industry:** Knowledge Sharing
@@ -19,7 +20,7 @@ customerCategory: Internet
 
 [Zhihu](https://en.wikipedia.org/wiki/Zhihu) which means "Do you know?" in classical Chinese, is the Quora of China: a question-and-answer website where all kinds of questions are created, answered, edited, and organized by the community of its users. As [China's biggest knowledge sharing platform](https://walkthechat.com/zhihu-chinas-largest-qa-platform-content-marketers-dream/), we have 220 million registered users and 30 million questions with more than 130 million answers on the site. In August 2019, we completed [$450 million in F-round funding](https://pandaily.com/zhihu-completes-largest-funding-round-ever-of-450-million/).
 
-At Zhihu, we used MySQL as the Hive Metastore. With data growth in Hive, MySQL stored about 60 GB of data, and the largest table had more than 20 million rows of data. Although the data volume was not excessive for a standalone MySQL database, running queries or writing data in Hive caused frequent operations in Metastore. In this case, MySQL, Metastore's backend database, became the bottleneck for the entire system. We compared multiple solutions and found that [TiDB](https://docs.pingcap.com/tidb/v4.0), an open-source distributed [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) database was the optimal solution. **Thanks to TiDB's elastic scalability, we can horizontally scale our metadata storage system without worrying about database capacity.** 
+At Zhihu, we used MySQL as the Hive Metastore. With data growth in Hive, MySQL stored about 60 GB of data, and the largest table had more than 20 million rows of data. Although the data volume was not excessive for a standalone MySQL database, running queries or writing data in Hive caused frequent operations in Metastore. In this case, MySQL, Metastore's backend database, became the bottleneck for the entire system. We compared multiple solutions and found that [TiDB](https://docs.pingcap.com/tidb/v4.0), an open-source distributed [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) database was the optimal solution. **Thanks to TiDB's elastic scalability, we can horizontally scale our metadata storage system without worrying about database capacity.**
 
 Last year, we published a [post](https://pingcap.com/case-studies/lesson-learned-from-queries-over-1.3-trillion-rows-of-data-within-milliseconds-of-response-time-at-zhihu) that showed how we kept our query response times at milliseconds levels despite having over 1.3 trillion rows of data. This post became a hit on various media platforms like [Hacker News](https://news.ycombinator.com/item?id=20758702) and [DZone](https://dzone.com/articles/lesson-learned-from-queries-over-13-trillion-rows-1). Today, I'll share with you how we use TiDB to horizontally scale Hive Metastore to meet our growing business needs.
 
@@ -46,7 +47,7 @@ We compared multiple options and chose TiDB as our final solution.
 We considered using MySQL sharding to balance the load of multiple MySQL databases in a cluster. However, we decided against this policy because it had these issues:
 
 * To shard MySQL, we would need to modify the Metastore interface to operate MySQL. This would involve a lot of high-risk changes, and it would make future Hive upgrades more complicated.
-* Every day, we replicated MySQL data to Hive for data governance and data life cycle management. We used the internal data replication platform to replicate data. If we had used MySQL sharding, we would need to update the replication logic for the data replication platform. 
+* Every day, we replicated MySQL data to Hive for data governance and data life cycle management. We used the internal data replication platform to replicate data. If we had used MySQL sharding, we would need to update the replication logic for the data replication platform.
 
 ### Scaling Metastore using Federation
 
@@ -55,7 +56,7 @@ We thought we could scale Hive Metastore using Federation. We could form an arch
 But after investigation, we found this policy also had flaws:
 
 * To enable Federation on Hive Metastore, we wouldn't need to modify Metastore, but we would have to maintain a set of routing components. What's more, we need to carefully set routing rules. If we divided the existing MySQL store to different MySQL instances, divisions might be uneven. This would result in unbalanced loads among subclusters.
-* Like the MySQL sharing solution, we would need to update the replication logic for the data replication platform. 
+* Like the MySQL sharing solution, we would need to update the replication logic for the data replication platform.
 
 ### TiDB, with elastic scalability, is the perfect solution
 

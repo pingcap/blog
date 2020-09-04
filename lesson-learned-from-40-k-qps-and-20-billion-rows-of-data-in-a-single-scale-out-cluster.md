@@ -9,6 +9,7 @@ categories: ['MySQL Scalability']
 url: /success-stories/lesson-learned-from-40-k-qps-and-20-billion-rows-of-data-in-a-single-scale-out-cluster/
 customer: JD Cloud & AI
 customerCategory: Internet
+logo: /images/blog/customers/jd-cloud-logo.png
 ---
 
 **Industry:** Cloud Computing
@@ -31,7 +32,7 @@ In this section, I'll elaborate on challenges we encountered in storing OSS meta
 
 ### Challenges caused by rapid data growth
 
-As shown in the figure below, we previously used MySQL to store OSS metadata (such as image size). Metadata was grouped in buckets, which are similar to namespaces.  
+As shown in the figure below, we previously used MySQL to store OSS metadata (such as image size). Metadata was grouped in buckets, which are similar to namespaces.
 
 ![Original OSS metadata storage system based on MySQL](media/original-oss-metadata-storage-system-based-on-mysql.png)
 <div class="caption-center"> Original OSS metadata storage system based on MySQL </div>
@@ -85,7 +86,7 @@ TiKV complements other CNCF project technologies like [etcd](https://etcd.io/), 
 The overall architecture of TiKV is illustrated in the figure below:
 
 ![TiKV architecture](media/tikv-architecture.png)
-<div class="caption-center"> TiKV architecture </div>  
+<div class="caption-center"> TiKV architecture </div>
 
 TiKV connect to clients. To understand how TiKV works, you need to understand some basic terms:
 

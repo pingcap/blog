@@ -2,14 +2,15 @@
 title: Shopping on Shopee, the TiDB Way
 author: ['Chunhui Liu', 'Chao Hong']
 date: 2019-02-14
-summary: As our business boom, our team faced severe challenges in scaling our backend system to meet the demand until we found TiDB, a MySQL-compatible NewSQL hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Now we can provide better service and experience for our users without worrying about our database capacity. 
+summary: As our business boom, our team faced severe challenges in scaling our backend system to meet the demand until we found TiDB, a MySQL-compatible NewSQL hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Now we can provide better service and experience for our users without worrying about our database capacity.
 tags: ['TiDB','Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-shopee/
 customer: Shopee
 customerCategory: Internet
 notShowOnLogoWall: true
---- 
+logo: /images/blog/customers/shopee-logo.png
+---
 
 **Industry:** E-Commerce
 

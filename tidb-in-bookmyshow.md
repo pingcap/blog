@@ -7,6 +7,7 @@ categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-bookmyshow/
 customerCategory: Internet
 customer: BookMyShow
+logo: /images/blog/customers/bookmyshow-logo.png
 ---
 
 Since 2007, BookMyShow has made it easy for entertainment-seekers in India to buy tickets for movies, sporting events, plays, concerts, and more. As India's largest e-commerce site for booking entertainment tickets online, it has a total user base of [more than 50 million in over 650 cities and towns](http://www.forbesindia.com/article/leaderboard/bookmyshow-eyes-the-big-picture/49657/1), and holds a lion's share of the market in the country's online ticketing space, processing millions of transactions a week.

@@ -9,6 +9,7 @@ url: /success-stories/tidb-in-mobike/
 aliases: ['/blog/Use-Case-TiDB-in-Mobike/']
 customer: Mobike
 customerCategory: Internet
+logo: /images/blog/customers/mobike_logo.png
 ---
 
 **Industry:** Ridesharing
@@ -91,7 +92,7 @@ Currently, our TiDB cluster holds several dozen nodes with multiple TBs of data.
 
 ### **Case 3: OLTP for the Mobike Store**
 
-Mobike Store is an online shopping platform for users to purchase items using Mobike coins--an innovative loyalty reward program that gained wide popularity among our riders. Users can collect these Mobike coins in various ways, based on their riding history, frequency, and particular behaviors.  
+Mobike Store is an online shopping platform for users to purchase items using Mobike coins--an innovative loyalty reward program that gained wide popularity among our riders. Users can collect these Mobike coins in various ways, based on their riding history, frequency, and particular behaviors.
 
 With a rapidly growing user base, data from Mobike Store soared. We estimate that its data volume will easily reach hundreds of billion rows within the year. To support the Mobike Store system, we needed a database that can meet the following requirements:
 

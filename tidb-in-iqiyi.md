@@ -2,12 +2,13 @@
 title: 'Always Fun, Always On: How TiDB Helps iQiyi Deliver Streaming Videos'
 author: ['Boshuai Zhu']
 date: 2018-10-18
-summary: As our business grew exponentially, we were overwhelmed trying to handle the mounting data until we found TiDB, a MySQL-compatible NewSQL hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Now we no longer worry about data volume and can bring high-quality entertainment services to our users with more confidence than before. 
+summary: As our business grew exponentially, we were overwhelmed trying to handle the mounting data until we found TiDB, a MySQL-compatible NewSQL hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Now we no longer worry about data volume and can bring high-quality entertainment services to our users with more confidence than before.
 tags: ['TiDB', 'Success Story']
 categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-iqiyi/
 customer: iQiyi
 customerCategory: Internet
+logo: /images/blog/customers/iqiyi-logo.png
 ---
 
 **Industry:** Media and Entertainment
@@ -18,7 +19,7 @@ customerCategory: Internet
 
 Since our business has grown rapidly, our data size has also soared. This has placed enormous pressure on our backend system, especially the MySQL cluster. We experienced the suffocating pain of tackling immense data until we found [TiDB](http://bit.ly/tidb_repo_publication), a MySQL-compatible NewSQL hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built and supported by PingCAP. Finally, we can properly manage our data.
 
-Currently, the TiDB cluster is deployed in the internal system of our database cloud team. With the April 2018 release of its 2.0 version, TiDB has proven to be much more mature, with increased system stability and query efficiency. In this post, we will share why we chose TiDB, how we are using it, and the lessons we learned working closely with the PingCAP team.  
+Currently, the TiDB cluster is deployed in the internal system of our database cloud team. With the April 2018 release of its 2.0 version, TiDB has proven to be much more mature, with increased system stability and query efficiency. In this post, we will share why we chose TiDB, how we are using it, and the lessons we learned working closely with the PingCAP team.
 
 ## Why We Chose TiDB
 
@@ -66,7 +67,7 @@ During the database evaluation process, we compared Apache Druid with TiDB and f
 
 Therefore, we decided to deploy TiDB in our Risk Monitoring Center.
 
-#### Deployment Process  
+#### Deployment Process
 
 The Risk Monitoring Center was the first iQiyi project to use TiDB online in the production environment, so we came up with the following plan:
 
@@ -113,7 +114,7 @@ The video transcoding database stores the historical data produced in transcodin
 
 **Pain point:** Previously in the MySQL cluster, because of the limited storage capacity, we could only retain the data of the last several months. Thus we lost the chance to analyze and process the earlier data.
 
-**Solution:** To solve this problem, we deployed a TiDB cluster at the end of 2017 and migrated the data to the TiDB cluster through full and incremental import. This strategy ensured data consistency between the previous MySQL cluster and the newly-built TiDB cluster.  
+**Solution:** To solve this problem, we deployed a TiDB cluster at the end of 2017 and migrated the data to the TiDB cluster through full and incremental import. This strategy ensured data consistency between the previous MySQL cluster and the newly-built TiDB cluster.
 
 During the full import, we originally used Mydumper + Loader, a data migration tool developed by PingCAP. But we found that Loader was too slow for our needs.
 
