@@ -188,35 +188,35 @@ The TiDB Toolkit package includes Dumpling and TiDB Lighting.
 
 1. Download the TiDB Toolkit using the following commands. 
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```shell
-mkdir tidb-toolkit-latest-linux-amd64 && \
-wget -qO- https://download.pingcap.org/tidb-toolkit-latest-linux-amd64.tar.gz|tar -xzv -C tidb-toolkit-latest-linux-amd64 --strip-components 1
-```
+    ```shell
+    mkdir tidb-toolkit-latest-linux-amd64 && \
+    wget -qO- https://download.pingcap.org/tidb-toolkit-latest-linux-amd64.tar.gz|tar -xzv -C tidb-toolkit-latest-linux-amd64 --strip-components 1
+    ```
 
 2. Use Dumpling to export the data from Amazon Aurora. Based on your environment, replace the content in angle brackets (&lt;&gt;), and then execute the following commands.
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```shell
-export_username=<Aurora username>
-export_password=<Aurora password>
-export_endpoint=<the endpoint for Amazon Aurora MySQL>
-backup_dir=<backup directory>
+    ```shell
+    export_username=<Aurora username>
+    export_password=<Aurora password>
+    export_endpoint=<the endpoint for Amazon Aurora MySQL>
+    backup_dir=<backup directory>
 
-./tidb-toolkit-latest-linux-amd64/bin/dumpling \
-  -u "$export_username" \
-  -p "$export_password" \
-  -P 3306 \
-  -h "$export_endpoint" \
-  --filetype sql \
-  --threads 8 \
-  -o "$backup_dir" \
-  -f "*.*" -f '!/^(mysql|INFORMATION_SCHEMA|PERFORMANCE_SCHEMA|METRICS_SCHEMA|INSPECTION_SCHEMA)$/.*' \
-  --consistency="none" \
-  -F 256MiB
-```
+    ./tidb-toolkit-latest-linux-amd64/bin/dumpling \
+      -u "$export_username" \
+      -p "$export_password" \
+      -P 3306 \
+      -h "$export_endpoint" \
+      --filetype sql \
+      --threads 8 \
+      -o "$backup_dir" \
+      -f "*.*" -f '!/^(mysql|INFORMATION_SCHEMA|PERFORMANCE_SCHEMA|METRICS_SCHEMA|INSPECTION_SCHEMA)$/.*' \
+      --consistency="none" \
+      -F 256MiB
+    ```
 
 ### Import data into TiDB Cloud
 
