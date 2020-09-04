@@ -27,6 +27,9 @@ image: /images/blog/...
 - categories
   - format: list(array) **['category']**
   - category values: Engineering, HTAP, MySQL Scalability, Open Source Community
+- logo
+  - format: /images/blog/customers/xxx
+  - only add to case studies article
 
 ## For SEO and social media share
 

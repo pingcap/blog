@@ -9,6 +9,7 @@ categories: ['MySQL Scalability']
 url: /success-stories/choosing-right-database-for-your-applications/
 customer: Shopee
 customerCategory: Internet
+logo: /images/blog/customers/shopee-logo.png
 ---
 
 **Industry:** E-Commerce
@@ -114,7 +115,7 @@ According to our experience, in some scenarios, MySQL sharding has more cons tha
 
     A common practice is resharding: slicing data into more partitions to reduce each shard's data size and read-write traffic.
 
-    Recently, we've begun to migrate some data to TiDB. Theoretically, if TiDB tables' primary keys are sparsely scattered, hot data could be evenly distributed among TiKV [Regions](https://pingcap.com/docs/dev/glossary/#regionpeerraft-group) (the basic unit for data storage in TiKV).  
+    Recently, we've begun to migrate some data to TiDB. Theoretically, if TiDB tables' primary keys are sparsely scattered, hot data could be evenly distributed among TiKV [Regions](https://pingcap.com/docs/dev/glossary/#regionpeerraft-group) (the basic unit for data storage in TiKV).
 On the whole, MySQL sharding could solve the horizontal scaling issue for databases, but it leads to some pain points in development, operations, and maintenance. We attempt to mitigate and solve problems under the MySQL sharding framework. Meanwhile, we try to establish TiDB-based solutions in which we don't have to shard a database. In this respect, we've made progress.
 
 ## Lessons learned in database selection

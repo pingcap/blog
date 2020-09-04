@@ -8,7 +8,8 @@ tags: ['Scalability', 'Amazon Aurora']
 url: /case-studies/japan-largest-mobile-payment-company-migrates-from-aurora-to-a-scale-out-database/
 customer: PayPay
 customerCategory: Financial Services
-categories: ['MySQL Scalability'] 
+categories: ['MySQL Scalability']
+logo: /images/blog/customers/paypay.png
 ---
 
 **Industry:** Mobile Payment
@@ -45,10 +46,10 @@ We have about 80 components, and almost all components use Java, Spring Boot, an
 
 In addition, we also compared Amazon Aurora and TiDB.
 
-The advantage of Aurora is that: 
+The advantage of Aurora is that:
 
 * It uses a write primary endpoint and a read-only secondary endpoint by default. The replication latency between the primary and secondary is very small. Even if a slow query occurs on the secondary, it will not affect the write performance on the primary. Proper use of these two endpoints can effectively ensure stability.
-* Aurora is an AWS managed service with low management costs. 
+* Aurora is an AWS managed service with low management costs.
 
 However, **when Aurora encounters many write requests, binlog replication becomes a bottleneck**. During the commit process, Aurora waits for the replication destination to return an acknowledgement (ACK), so when the number of replications increases, the commit latency also increases. For disaster recovery, we needed replication, so this problem was getting worse. When we did a proof of concept for TiDB, we did not encounter this problem. TiDB can easily handle three times more transactions than Aurora. To be fair, I want to emphasize that Aurora is a good database. But it wasn't just because of our binlog replication requirements.
 

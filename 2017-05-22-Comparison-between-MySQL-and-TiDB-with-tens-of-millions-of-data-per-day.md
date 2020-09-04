@@ -7,6 +7,7 @@ aliases: ['/blog/2017/05/22/Comparison-between-MySQL-and-TiDB-with-tens-of-milli
 categories: ['MySQL Scalability']
 customer: GAEA
 customerCategory: Gaming
+logo: /images/blog/customers/gaea-logo.png
 ---
 
 ## Table of content

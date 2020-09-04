@@ -8,7 +8,8 @@ categories: ['MySQL Scalability']
 url: /success-stories/tidb-in-xiaomi/
 customer: Xiaomi
 customerCategory: Internet
---- 
+logo: /images/blog/customers/xiaomi-logo.png
+---
 
 **Industry:** Consumer Electronics
 
@@ -130,7 +131,7 @@ TiDB's performance results were able to meet our requirements, even though the s
 
 ## Migration Process
 
-Our team conducted the migration process to TiDB in two steps: data migration and traffic shifting.  
+Our team conducted the migration process to TiDB in two steps: data migration and traffic shifting.
 
 ### TiDB Data Migration
 

@@ -7,6 +7,7 @@ url: /success-stories/tidb-in-yuanfudao/
 aliases: ['/blog/2017/08/08/tidbforyuanfudao/', '/blog/2017-08-08-tidbforyuanfudao/']
 customer: Yuanfudao.com
 customerCategory: Internet
+logo: /images/blog/customers/yuanfudao-logo.png
 ---
 
 Yuanfudao.com is an online tutoring service targeting the K-12 educational segment in China with the largest number of elementary and secondary school student users. It owns three applications, Yuantiku, the online question bank, Xiaoyuansouti, the application for question search by taking pictures, and yuanfudao.com, an online tutoring service.

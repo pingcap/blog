@@ -10,6 +10,7 @@ url: /success-stories/why-we-chose-tidb-over-other-mysql-based-and-newsql-storag
 aliases: ['/success-stories/why-we-chose-a-distributed-sql-database-alongside-mysql-to-break-down-data-silos/','/case-studies/why-we-chose-a-distributed-sql-database-alongside-mysql-to-break-down-data-silos/']
 customer: NetEase Games
 customerCategory: Gaming
+logo: /images/blog/customers/netease-games-logo.png
 ---
 
 **Industry:** Gaming
@@ -35,7 +36,7 @@ In this section, I'll introduce the MySQL architecture for our billing applicati
 We deploy more than 10 billing applications to provide services for different game products. A big product employs a dedicated billing application, while multiple small products share the same application. Each billing application applies the standalone MySQL architecture as shown below. (The direction of the arrows indicates the flow of the data or request.)
 
 ![Standalone MySQL architecture](media/standalone-mysql-architecture.png)
-<div class="caption-center"> Standalone MySQL architecture </div>  
+<div class="caption-center"> Standalone MySQL architecture </div>
 
 The architecture has the following characteristics:
 
@@ -162,7 +163,7 @@ At the beginning, we preferred to use MySQL-based solutions such as MySQL InnoDB
 In MySQL clusters of two different versions—5.7.25 and 8.0.12—we performed writes on 10 tables (each had 10 million rows) with 128 concurrent threads. The same test was run for clusters with a single node (that is, a standalone architecture), three nodes, and five nodes. The results are shown below:
 
 ![Results of testing MySQL clusters of different node sizes](media/results-of-testing-mysql-clusters-of-different-node-sizes.png)
-<div class="caption-center"> Results of testing MySQL clusters of different node sizes </div>  
+<div class="caption-center"> Results of testing MySQL clusters of different node sizes </div>
 
 The tests showed that a multi-node MySQL cluster performed about 30% worse under write workloads than a standalone MySQL node. Other read and write tests had similar results.
 
@@ -238,7 +239,7 @@ SELECT DISTINCT c FROM sbtest%u WHERE id BETWEEN ? AND ? ORDER BY c
 The following figure shows one of our important testing results: In general, CRDB 2.1.0 and TiDB 2.0.5 had a similar performance in most of the read and write workloads.
 
 ![Performance comparison of reads and writes on a large table](media/performance-comparison-of-reads-and-writes-on-a-large-table.png)
-<div class="caption-center"> Performance comparison of reads and writes on a large table </div>  
+<div class="caption-center"> Performance comparison of reads and writes on a large table </div>
 
 Conclusion:
 
