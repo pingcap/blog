@@ -10,7 +10,7 @@ customer: Zhihu
 customerCategory: Internet
 notShowOnLogoWall: true
 aliases: ['/blog/use-case-tidb-in-eleme/']
-logo: /images/blog/customers/zhihu.png
+logo: /images/blog/customers/zhihu-logo.png
 ---
 
 **Industry:** Knowledge Sharing
