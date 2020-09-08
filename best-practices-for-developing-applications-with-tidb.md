@@ -154,11 +154,6 @@ As mentioned previously, auto-increment IDs are mostly designed as primary keys 
 
 While writing data, you don't have to specify the auto-increment ID column in TiDB. TiDB automatically assigns values for it. Of course, you can specify an incremental ID column for writing. Just set the value to write as `NULL`, and TiDB automatically assigns values for it.
 
-<div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Best Practices for Developing Applications with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
-    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Best Practices for Developing Applications with TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
-</div>
-
 ```
 mysql> create table autoid(`auto_inc_id` bigint unsigned not null primary key auto_increment comment 'auto-increment ID', b int);
 Query OK, 0 rows affected (0.25 sec)
@@ -268,6 +263,11 @@ So far, we have only noticed that Oracle GoldenGate (OGG) users need to set this
 jdbc:mysql://192.168.1.20:4000/dbname?tidb_constraint_check_in_place=1
 ```
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Best Practices for Developing Applications with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Best Practices for Developing Applications with TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## 5. TiDB supported indexes: primary key indexes, unique indexes, and secondary indexes
 
 This section describes how TiDB uses indexes and their current restrictions. It also describes how composite indexes are designed in TiDB.
@@ -304,11 +304,6 @@ A composite index in TiDB is structured as `key tablekeyname (a,b,c)`. Like othe
 ```sql
 select a,b,c from tablename where a<predicate>'<value1>' and b<predicate>'<value2>' and c<predicate>'<value3>';
 ```
-
-<div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Best Practices for Developing Applications with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
-    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Best Practices for Developing Applications with TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
-</div>
 
 - If the predicate of condition **a** is `=`or `in`, composite index `(a,b,c)` can be used with query condition **b**, for example:
 
