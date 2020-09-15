@@ -1,6 +1,6 @@
 ---
 title: How We Build an HTAP Database That Simplifies Your Data Platform
-date: 2019-09-15
+date: 2020-09-15
 author: ['Shawn Ma']
 summary: This post talks about why HTAP matters in a database platform, how TiDB implements HTAP, and how you can apply TiDB in different scenarios.
 tags: ['TiFlash', 'TiSpark', 'HTAP', 'Real-time analytics']
