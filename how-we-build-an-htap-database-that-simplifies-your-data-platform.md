@@ -61,7 +61,7 @@ Then, what's new in TiDB 4.0? Simply put, TiDB 4.0 provides an improved HTAP exp
 
 Now, as shown in the figure below, when you combine TiFlash with TiKV, TiDB has a scalable architecture of integrated row and column stores.
 
-![TiDB 4.0 HTAP architecture](media/tidb-4.0-htap-architecture.png)
+![TiDB 4.0 HTAP architecture](media/tidb-4.0-htap-architecture.jpg)
 <div class="caption-center"> TiDB 4.0 HTAP architecture </div>
 
 In this architecture:
