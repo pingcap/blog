@@ -5,7 +5,8 @@ date: 2020-09-17
 summary: A DevOps engineer in ZaloPay, Vietnam's most popular mobile payment application, shared why his team chose TiDB as ZaloPay's merchant platform core database. He talked about their pain points, how they use TiDB, and what he likes about it the most.
 tags: ['HTAP', 'DevCon', 'TiSpark', 'Real-time analytics']
 url: /case-studies/zalopay-choosing-a-scale-out-database-to-serve-100-million-users/
-customerCategory: Internet
+customer: VNG
+customerCategory: Financial Services
 categories: ['HTAP']
 logo: /images/blog/customers/vng-logo.png
 image: /images/blog/zalopay-user-story.jpg
