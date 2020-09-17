@@ -11,7 +11,7 @@ logo: /images/blog/customers/vng-logo.png
 image: /images/blog/zalopay-user-story.jpg
 ---
 
-![ZaloPay User Story](media/zalopay-user-story.jpg)
+![ZaloPay: Using a Scale-Out MySQL Alternative to Serve Millions of Users](media/zalopay-using-a-scale-out-mysql-alternative-to-serve-millions-of-users.jpg)
 
 VNG is a leading internet technology company in Vietnam. Their flagship product, Zalo, is the most popular chat platform in Vietnam. [ZaloPay](https://www.facebook.com/zalopay.engineering/) is a mobile payment application built on top of Zalo. Today, more than 100 million users worldwide use ZaloPay to transfer money and make payments.
 
