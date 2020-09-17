@@ -10,6 +10,7 @@ url: /success-stories/tidb-at-zalopay-infrastructure-lesson-learned/
 customer: VNG
 customerCategory: Financial Services
 logo: /images/blog/customers/vng-logo.png
+notShowOnLogoWall: true
 ---
 
 **Industry:** Mobile Payment
