@@ -9,7 +9,7 @@ customer: VNG
 customerCategory: Financial Services
 categories: ['HTAP']
 logo: /images/blog/customers/vng-logo.png
-image: /images/blog/zalopay-user-story.jpg
+image: /images/blog/zalopay-choosing-scale-out-mysql-alternative-database-tidb.jpg
 ---
 
 **Industry:** Mobile Payment
