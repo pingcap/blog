@@ -34,16 +34,27 @@ When we switched to [TiDB](https://docs.pingcap.com/tidb/stable/overview), we im
 When we upgraded to [TiDB 4.0](https://docs.pingcap.com/tidb/stable/whats-new-in-tidb-4.0), we solved even more issues. Be sure to click the links below each issue for detailed information on how 4.0 helped us.
 
 * **Clusters were slow to deploy and difficult to manage.**
+    
     [TiUP can deploy a cluster in only one minute](#tiup-can-deploy-a-cluster-in-only-one-minute)
+
 * **Hotspots were hard to find.** Hotspots are fairly common in e-commerce scenarios. In the past, we had to query each node's log separately. Investigating hotspots was slow and costly.
+
     [Key Visualizer clearly displays hotspots across the entire cluster](#key-visualizer-clearly-displays-hotspots-across-the-entire-cluster)
+
 * **It was hard to view the status of the entire cluster.** Sometimes, we needed to confirm the status of the cluster. Because there are many items to monitor and logs are scattered throughout the cluster, getting status was time-consuming. We couldn't locate problems quickly.
+
     [TiDB Dashboard efficiently displays cluster-wide information](#tidb-dashboard-efficiently-displays-cluster-wide-information)
+
 * **Extracting data often slowed down our online response** and affected TiKV, TiDB's storage engine.
+
     [TiFlash extracts data without affecting online performance](#tiflash-extracts-data-without-affecting-online-performance)
+
 * **It was hard to back up and restore very large clusters.** This was an urgent issue for us. We were using logical backup, but it wasn't very effective.
+
     [Backup & Restore quickly backs up and restores very large clusters](#backup-restore-quickly-backs-up-and-restores-very-large-clusters)
+
 * **Configuring the TiKV thread pool was complicated,** and, as our application changed, we had to update it.
+
     [TiKV's unified read pool streamlines configuration](#tikvs-unified-read-pool-streamlines-configuration)
 
 ## TiUP can deploy a cluster in only one minute
