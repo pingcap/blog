@@ -18,7 +18,7 @@ logo: /images/blog/customers/zhuanzhuan-logo.png
 
 ![MySQL horizontal scaling, MySQL alternative database](media/scale-out-mysql-alternative-database-zhuanzhuan.jpg)
 
-[Zhuan Zhuan](https://www.crunchbase.com/organization/zhuan-zhuan) is an online used goods trading platform. You can think of us as “the Letgo of China.” Since we launched our platform in 2015, we have grown tremendously. In 2018, we had more than 200 million users, with over 50 million monthly active users on our app and WeChat mini-program. 
+[Zhuan Zhuan](https://www.crunchbase.com/organization/zhuan-zhuan) is an online used goods trading platform. You can think of us as "the Letgo of China." Since we launched our platform in 2015, we have grown tremendously. In 2018, we had more than 200 million users, with over 50 million monthly active users on our app and WeChat mini-program. 
 
 In an earlier [post](https://pingcap.com/case-studies/tidb-in-zhuanzhuan), we talked about why we migrated from MySQL to [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed, Hybrid Transactional/Analytical Processing (HTAP) database, and how TiDB helped our database achieve horizontal scaling.
 
