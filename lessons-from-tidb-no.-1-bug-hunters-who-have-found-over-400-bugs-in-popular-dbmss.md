@@ -1,5 +1,5 @@
 ---
-title: 'Lessons from TiDB's No. 1 Bug Hunters Who've Found 400+ Bugs in Popular DBMSs'
+title: Lessons from TiDB's No. 1 Bug Hunters Who've Found 400+ Bugs in Popular DBMSs
 author: ['Manuel Rigger']
 date: 2020-10-06
 summary: Dr. Manuel Rigger and his colleague have found 400+ bugs in popular DBMSs, including 50+ TiDB bugs. Learn their experience in finding logic bugs in DBMSs.
@@ -25,7 +25,7 @@ As Manuel explains, the key to this method is rewriting query statements so the 
 Manuel gave this talk at [TiDB DevCon 2020](https://pingcap.com/community/devcon2020/).Click the video link to watch Manuel take you step-by-step through his process. You can see the slides [here](https://www.slideshare.net/PingCAP-TiDB/finding-logic-bugs-in-database-management-systems).
 
 <iframe id="youtube-video" title="Lessons from TiDB's #1 Bug Hunters" src="https://www.youtube.com/embed/z16m9MIxgMI?rel=0" frameborder="0" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
-<div class="caption-center"> Lessons from TiDB's #1 Bug Hunters </div>
+<div class="caption-center"> Lessons from TiDB's #1 bug hunters </div>
 
 ## Transcript
 
