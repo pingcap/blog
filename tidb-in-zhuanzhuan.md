@@ -10,6 +10,7 @@ aliases: ['/blog/use-case-tidb-in-zhuanzhuan']
 customer: Zhuan Zhuan
 customerCategory: Internet
 logo: /images/blog/customers/zhuanzhuan-logo.png
+notShowOnLogoWall: true
 ---
 
 **Industry:** E-commerce
