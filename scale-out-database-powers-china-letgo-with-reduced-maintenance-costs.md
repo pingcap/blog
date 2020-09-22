@@ -51,7 +51,7 @@ When we upgraded to [TiDB 4.0](https://docs.pingcap.com/tidb/stable/whats-new-in
 
 * **It was hard to back up and restore very large clusters.** This was an urgent issue for us. We were using logical backup, but it wasn't very effective.
 
-    [Backup & Restore quickly backs up and restores very large clusters](#backup-restore-quickly-backs-up-and-restores-very-large-clusters)
+    [Backup & Restore quickly backs up and restores very large clusters](#backup--restore-quickly-backs-up-and-restores-very-large-clusters)
 
 * **Configuring the TiKV thread pool was complicated,** and, as our application changed, we had to update it.
 
