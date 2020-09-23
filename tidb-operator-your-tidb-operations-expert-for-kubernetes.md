@@ -1,5 +1,5 @@
 ---
-title: TiDB Operator: Your TiDB Operations Expert for Kubernetes
+title: 'TiDB Operator: Your TiDB Operations Expert in Kubernetes'
 date: 2020-09-24
 author: ['Aylei Wu']
 summary: This post analyzes the pros and cons of running databases in Kubernetes. It also introduces TiDB Operator, a tool for managing TiDB clusters in Kubernetes, and describes how large companies are using it in their production environments as well as their best practices.
@@ -16,28 +16,28 @@ In this post, I'll answer the question of whether or not to run TiDB in Kubernet
 
 ## TiDB in Kubernetes: to be or not to be?
 
-Many of Kubernetes' features were designed for [stateless applications](https://www.redhat.com/en/topics/cloud-native-apps/stateful-vs-stateless), like [microservices](https://en.wikipedia.org/wiki/Microservices). As cloud-native technology gains traction, Kubernetes is applied in a wide range of technological fields, as if at some point everything should run in Kubernetes. No wonder people raise some concerns: is Kubernetes the right choice for all scenarios? and, do we really need Kubernetes in our technology stack? 
+Many of Kubernetes' features were designed for [stateless applications](https://www.redhat.com/en/topics/cloud-native-apps/stateful-vs-stateless), like [microservices](https://en.wikipedia.org/wiki/Microservices). As cloud-native technology gains traction, Kubernetes is applied in a wide range of technological fields, as if at some point everything should run in Kubernetes. No wonder people raise some concerns: is Kubernetes the right choice for all scenarios? and, do we really need Kubernetes in our technology stack?
 
-Indeed, Kubernetes _is_ helpful in the areas it's good at. But Kubernetes also introduces complexity to your system, not to mention the cost of migrating to it. 
+Indeed, Kubernetes _is_ helpful in the areas it's good at. But Kubernetes also introduces complexity to your system, not to mention the cost of migrating to it.
 
 So how do we decide whether or not to run our databases (in this case, TiDB) in Kubernetes? The answer is simple: if most of your applications already run in Kubernetes, and if your engineers are comfortable using it, then your database shouldn't be an outlier. In other words, if all applications are in Kubernetes, it doesn't make economic sense to get an extra Site Reliability Engineering (SRE) team to maintain TiDB on virtual machines.
 
-Here comes the next question: what can we gain from deploying TiDB in Kubernetes? Just like microservices, we can achieve** declarative management, automatic operation and maintenance, and elastic resource configuration**.
+Here comes the next question: what can we gain from deploying TiDB in Kubernetes? Just like microservices, we can achieve **declarative management, automatic operation and maintenance, and elastic resource configuration**.
 
 Sounds cool, right? But people are still concerned about **the stability of running databases in Kubernetes**. In the highly dynamic Kubernetes environment, it's hard for traditional RDBMSs to maintain stability. If Kubernetes is down, so are our services, and we might even lose data. Therefore, traditional RDBMSs don't work well in Kubernetes.
 
 But TiDB is no traditional RDBMS. It is a cloud-native, distributed SQL database, a born player for Kubernetes.
 
-* TiDB adapts to the dynamic Kubernetes environment. It supports multi-replication fault tolerance. Even when a minority of the nodes goes down, the cluster runs as usual, without a glitch. With TiDB,  engineers can also see all cluster metrics and take charge of the cluster state, even in a complicated containerized environment.
-* Kubernetes can better tap into TiDB's potential. By using declarative APIs, Kubernetes simplifies TiDB's cluster management, which is more complicated for a distributed database than a stand-alone database. Kubernetes' elastic resource pool makes it easier to horizontally scale in and out TiDB clusters and perform failover. 
+- **TiDB adapts to the dynamic Kubernetes environment**. It supports multi-replication fault tolerance. Even when a minority of the nodes goes down, the cluster runs as usual, without a glitch. With TiDB, engineers can also see all cluster metrics and take charge of the cluster state, even in a complicated containerized environment.
+- **Kubernetes can better tap into TiDB's potential**. By using declarative APIs, Kubernetes simplifies TiDB's cluster management, which is more complicated for a distributed database than a stand-alone database. Kubernetes' elastic resource pool makes it easier to horizontally scale in and out TiDB clusters and perform failover.
 
 However, though TiDB and Kubernetes work perfectly together, it's not easy for the SRE team to deploy and maintain TiDB in Kubernetes. Can we automate these operations and make it more efficient to maintain TiDB in Kubernetes? Thankfully, yes. Let me present to you TiDB Operator, your TiDB expert for Kubernetes.
 
 ## What is TiDB Operator?
 
-[TiDB Operator](https://github.com/pingcap/tidb-operator), is an automatic operation system for TiDB clusters in Kubernetes. It provides a full management life-cycle for TiDB, including deployment, upgrades, scaling, backup, fail-over, and configuration changes.
+[TiDB Operator](https://github.com/pingcap/tidb-operator), is an automatic operation system for TiDB clusters in Kubernetes. It provides a full management lifecycle for TiDB, including deployment, upgrades, scaling, backup, failover, and configuration changes.
 
-By virtue of the extensibility of Kubernetes, TiDB Operator collects all the knowledge of Kubernetes and TiDB, applies the knowledge to the maintenance process, and automates management. It is an operations expert for running TiDB in Kubernetes. 
+By virtue of the extensibility of Kubernetes, TiDB Operator collects all the knowledge of Kubernetes and TiDB, applies the knowledge to the maintenance process, and automates management. It is an operations expert for running TiDB in Kubernetes.
 
 TiDB Operator has both [custom resource definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions) (CRDs) and [custom controllers](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#custom-controllers).
 
@@ -56,7 +56,7 @@ When deploying a TiDB cluster, TiDB Operator selects the most suitable Kubernete
 
 Most importantly, TiDB Operator scatters TiKV pods and adds store labels to TiKV. This way, PD can schedule data [Regions](https://docs.pingcap.com/tidb/stable/glossary#regionpeerraft-group) on as many different physical nodes as possible to achieve a high availability topology at the Region level.
 
-### Upgrade 
+### Upgrade
 
 When a TiKV instance is shut down during rolling upgrade, it does not transfer all Leaders out. Thus, when the TiKV instance is down, the Leader is down, and the Raft group has to reelect a Leader. The reelection timeout might increase latency when the database has lots of traffic.
 
@@ -64,7 +64,7 @@ Then, how does TiDB Operator avoid this issue? Before upgrading TiKV containers,
 
 ### Auto-failover
 
-In the graphic below, TiKV-1 is down. 
+In the graphic below, TiKV-1 is down.
 
 ![TiKV-1 is down](media/tidb-operator-auto-failover-1.jpg)
 <div class="caption-center">TiKV-1 is down</div>
@@ -87,28 +87,26 @@ You may still have some concerns: how much performance overhead does Kubernetes 
 
 ### Zero performance overhead
 
-Under the proper configuration, TiDB Operator doesn't bring any performance overhead to your cluster. 
+Under the proper configuration, TiDB Operator doesn't bring any performance overhead to your cluster.
 
 * With TiDB Operator, you can either deploy each component on a dedicated node, or deploy multiple components on a single node. You can make trade-offs between performance and cost all by yourself.
 * TiDB Operator can automate deploying on local disks, which reduces the overhead of remote storage.
 * It can also deploy the cluster through Kubernetes hostNetwork. This eliminates extra network overhead in Kubernetes.
-
 
 ### Strong stability
 
 TiDB Operator is a solid cornerstone on which we can enhance the stability of databases.
 
 * When the control plane fails, the nodes running TiDB are unaffected.
-* When a Kubernetes node running TiDB fails, TiDB Operator performs auto-failover and moves TiDB to other nodes. 
+* When a Kubernetes node running TiDB fails, TiDB Operator performs auto-failover and moves TiDB to other nodes.
 * When all nodes in the Kubernetes cluster fail, TiDB Operator by default retains all stores and makes sure that no data is lost.
 * What if a disastrous failure happens, say, the data center is flooded? TiDB Operator also performs regular backup for your data, so at least you can get the latest backup file and restore your data to a recent time point.
-
 
 ## Best practices: PayPay and Mashang Consumer Finance
 
 How is TiDB Operator doing in real production environments? Let's look at two cases: PayPay and Mashang Consumer Finance.
 
-[PayPay](https://en.pingcap.com/case-studies/japan-largest-mobile-payment-company-migrates-from-aurora-to-a-scale-out-database) is the top mobile payment company in Japan. PayPay has deployed over 100 database nodes using TiDB Operator, including more than 30 nodes in the production environment managed by TiDB Operator. Back when PayPay conducted a [proof of concept](https://en.wikipedia.org/wiki/Proof_of_concept) (POC), they made a thorough disaster recovery drill, including various process failures, node failures, and AWS availability zone failures, as well as disaster recovery. They even simulated  the whole AWS server going down to test if they could restore the cluster data through regular backups. To their relief, TiDB Operator passed all these tests, and PayPay gladly put their whole cluster on TiDB Operator and Kubernetes.
+[PayPay](https://en.pingcap.com/case-studies/japan-largest-mobile-payment-company-migrates-from-aurora-to-a-scale-out-database) is the top mobile payment company in Japan. PayPay has deployed over 100 database nodes using TiDB Operator, including more than 30 nodes in the production environment managed by TiDB Operator. Back when PayPay conducted a [proof of concept](https://en.wikipedia.org/wiki/Proof_of_concept) (POC), they made a thorough disaster recovery drill, including various process failures, node failures, and AWS availability zone failures, as well as disaster recovery. They even simulated the whole AWS server going down to test if they could restore the cluster data through regular backups. To their relief, TiDB Operator passed all these tests, and PayPay gladly put their whole cluster on TiDB Operator and Kubernetes.
 
 Another example is [Mashang Consumer Finance](https://www.crunchbase.com/organization/ms-finance), a Chinese financial services company. They put their system archive and batch processing services on TiDB, with over 60 physical nodes in the online cluster. After the company used TiDB Operator, their hardware cost of hybrid deployment was reduced by 70%, compared to the previous physical machine deployment.
 
