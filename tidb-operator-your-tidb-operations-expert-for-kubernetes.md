@@ -3,7 +3,7 @@ title: 'TiDB Operator: Your TiDB Operations Expert in Kubernetes'
 date: 2020-09-24
 author: ['Aylei Wu']
 summary: This post analyzes the pros and cons of running databases in Kubernetes. It also introduces TiDB Operator, a tool for managing TiDB clusters in Kubernetes, and describes how large companies are using it in their production environments as well as their best practices.
-tags: ['Cloud-native', 'Kubernetes', 'Best practice', 'Cloud']
+tags: ['Cloud-native', 'Kubernetes', 'TiDB Operator']
 categories: ['Engineering']
 image: /images/blog/tidb-in-kubernetes.jpg
 ---
@@ -35,7 +35,7 @@ However, though TiDB and Kubernetes work perfectly together, it's not easy for t
 
 ## What is TiDB Operator?
 
-[TiDB Operator](https://github.com/pingcap/tidb-operator), is an automatic operation system for TiDB clusters in Kubernetes. It provides a full management lifecycle for TiDB, including deployment, upgrades, scaling, backup, failover, and configuration changes.
+[TiDB Operator](https://github.com/pingcap/tidb-operator) is an automatic operation system for TiDB clusters in Kubernetes. It provides a full management lifecycle for TiDB, including deployment, upgrades, scaling, backup, failover, and configuration changes.
 
 By virtue of the extensibility of Kubernetes, TiDB Operator collects all the knowledge of Kubernetes and TiDB, applies the knowledge to the maintenance process, and automates management. It is an operations expert for running TiDB in Kubernetes.
 
@@ -80,7 +80,7 @@ If the controller determines that TiKV-1 is abnormal and if the abnormality cont
 
 TiDB Operator can also automatically scale the TiDB cluster. When the cluster is running, based on the monitoring metrics of all components, TiDB Operator auto-scales the cluster. TiDB Operator can automatically add or remove nodes depending on the amount of storage or computing capacity the cluster needs. This way, the cluster can automatically adapt as your business needs change without manual intervention.
 
-![TiDB Operator auto-scales the cluster](tidb-operator-auto-scale.jpg)
+![TiDB Operator auto-scales the cluster](media/tidb-operator-auto-scale.jpg)
 <div class="caption-center">TiDB Operator auto-scales the cluster</div>
 
 You may still have some concerns: how much performance overhead does Kubernetes bring to the database? Will Kubernetes affect the database stability? If Kubernetes is down, will my database go down as well? TiDB Operator can certainly give you all the answers.
