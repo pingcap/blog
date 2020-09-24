@@ -18,7 +18,7 @@ In this post, I'll answer the question of whether or not to run TiDB in Kubernet
 
 Many of Kubernetes' features were designed for [stateless applications](https://www.redhat.com/en/topics/cloud-native-apps/stateful-vs-stateless), like [microservices](https://en.wikipedia.org/wiki/Microservices). As cloud-native technology gains traction, Kubernetes is applied in a wide range of technological fields, as if at some point everything should run in Kubernetes. No wonder people raise some concerns: is Kubernetes the right choice for all scenarios? and, do we really need Kubernetes in our technology stack?
 
-Indeed, Kubernetes _is_ helpful in the areas it's good at. But there is a cost to migrating to Kubernetes and it introduces complexity to your system.
+Indeed, Kubernetes _is_ helpful in the areas it's good at. But there is a cost of migrating to Kubernetes and it introduces complexity to your system.
 
 So how do we decide whether or not to run our databases (in this case, TiDB) in Kubernetes? The answer is simple: if most of your applications already run in Kubernetes, and if your engineers are comfortable using it, run your database there, too. It doesn't make economic sense to get an extra Site Reliability Engineering (SRE) team to maintain TiDB on virtual machines.
 
