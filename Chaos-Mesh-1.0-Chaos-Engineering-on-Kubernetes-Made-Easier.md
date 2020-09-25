@@ -3,6 +3,7 @@ title: 'Chaos Mesh 1.0: Chaos Engineering on Kubernetes Made Easier'
 author: ['Chaos Mesh Maintainers']
 date: 2020-09-25
 summary: Today, we are proud to announce the general availability of Chaos Mesh® 1.0, following its entry into CNCF as a sandbox project in July, 2020. After 10 months of effort within the open-source community, Chaos Mesh is now ready in terms of functionality, scalability, and ease of use. Here are some highlights.
+image: /images/blog/chaos-mesh-1.0.png
 tags: [Announcement, Chaos Mesh, Chaos Engineering]
 categories: ['Engineering']
 ---
