@@ -3,7 +3,7 @@ title: 'chaos-mesh-action: Integrate Chaos Engineering into Your CI'
 author: ['Xiang Wang']
 date: 2020-09-29
 summary: Chaos Mesh is a cloud-native chaos testing platform that orchestrates chaos in Kubernetes environments. This article shares how to use chaos-mesh-action, a GitHub action to integrate Chaos Mesh into the CI process.
-tags: [Chaos Mesh, Chaos Engineering, GitHub Action, CI]
+tags: ['Chaos Mesh', 'Chaos Engineering', 'GitHub Action', 'Continuous Integration']
 categories: ['Engineering']
 image: /images/blog/chaos-mesh-action.png
 ---
