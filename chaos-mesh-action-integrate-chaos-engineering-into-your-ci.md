@@ -10,7 +10,7 @@ image: /images/blog/chaos-mesh-action.png
 
 ![chaos-mesh-action - Integrate Chaos Engineering into Your CI](/media/chaos-mesh-action.png)
 
-[Chaos Mesh](https://chaos-mesh.org) is a cloud-native chaos testing platform that orchestrates chaos in Kubernetes environments. While it’s well received in the community with its rich fault injection types and easy-to-use dashboard, it was difficult to use Chaos Mesh with end-to-end testing or the continuous integration (CI) process. As a result, problems introduced during system development could not be discovered before the release.
+[Chaos Mesh](https://chaos-mesh.org) is a cloud-native chaos testing platform that orchestrates chaos in Kubernetes environments. While it's well received in the community with its rich fault injection types and easy-to-use dashboard, it was difficult to use Chaos Mesh with end-to-end testing or the continuous integration (CI) process. As a result, problems introduced during system development could not be discovered before the release.
 
 In this article, I will share how we use chaos-mesh-action, a GitHub action to integrate Chaos Mesh into the CI process.
 
@@ -20,7 +20,7 @@ chaos-mesh-action is available on [GitHub market](https://github.com/marketplace
 
 [GitHub Action](https://docs.github.com/en/actions) is a CI/CD feature natively supported by GitHub, through which we can easily build automated and customized software development workflows in the GitHub repository. 
 
-Combined with GitHub actions, Chaos Mesh can be more easily integrated into the daily development and testing of the system, thus guaranteeing that each code submission on GitHub is bug-free and won’t damage existing code. The following figure shows chaos-mesh-action integrated into the CI workflow:
+Combined with GitHub actions, Chaos Mesh can be more easily integrated into the daily development and testing of the system, thus guaranteeing that each code submission on GitHub is bug-free and won't damage existing code. The following figure shows chaos-mesh-action integrated into the CI workflow:
 
 ![chaos-mesh-action integration in the CI workflow](/media/chaos-mesh-action-integrate-in-the-ci-workflow.png)
 
@@ -42,7 +42,7 @@ Before you design a workflow, you must consider the following issues:
 * What types of faults will we inject? 
 * How do we verify the correctness of the system?
 
-As an example, let’s design a simple test workflow that includes the following steps: 
+As an example, let's design a simple test workflow that includes the following steps: 
 
 1. Create two Pods in a Kubernetes cluster.
 2. Ping one pod from the other. 
@@ -63,7 +63,7 @@ A workflow is essentially the configuration of jobs that take place sequentially
 
 * Set the workflow name and trigger rules.
 
-    This job names the workflow "Chaos.” When the code is pushed to the master branch or a pull request is submitted to the master branch, this workflow is triggered.
+    This job names the workflow "Chaos". When the code is pushed to the master branch or a pull request is submitted to the master branch, this workflow is triggered.
 
     ```yaml
     name: Chaos
