@@ -53,7 +53,7 @@ As an example, let's design a simple test workflow that includes the following s
 After you design the workflow, the next step is to create it. 
 
 1. Navigate to the GitHub repository that contains the software you want to test.
-2. To start creating a workflow, click **Actions**, and then click the **"New workflow**" button:
+2. To start creating a workflow, click **Actions**, and then click **New workflow**:
 
 ![Creating a new GitHub workflow](/media/creating-a-workflow.png)
 
