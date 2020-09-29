@@ -8,7 +8,7 @@ categories: ['Engineering']
 image: /images/blog/chaos-mesh-action.png
 ---
 
-![chaos-mesh-action - Integrate Chaos Engineering into Your CI](/media/chaos-mesh-action.png)
+![chaos-mesh-action - Integrate Chaos Engineering into Your CI](media/chaos-mesh-action.png)
 
 [Chaos Mesh](https://chaos-mesh.org) is a cloud-native chaos testing platform that orchestrates chaos in Kubernetes environments. While it's well received in the community with its rich fault injection types and easy-to-use dashboard, it was difficult to use Chaos Mesh with end-to-end testing or the continuous integration (CI) process. As a result, problems introduced during system development could not be discovered before the release.
 
@@ -22,7 +22,7 @@ chaos-mesh-action is available on [GitHub market](https://github.com/marketplace
 
 Combined with GitHub actions, Chaos Mesh can be more easily integrated into the daily development and testing of the system, thus guaranteeing that each code submission on GitHub is bug-free and won't damage existing code. The following figure shows chaos-mesh-action integrated into the CI workflow:
 
-![chaos-mesh-action integration in the CI workflow](/media/chaos-mesh-action-integrate-in-the-ci-workflow.png)
+![chaos-mesh-action integration in the CI workflow](media/chaos-mesh-action-integrate-in-the-ci-workflow.png)
 
 <div class="caption-center"> chaos-mesh-action integration in the CI workflow </div>
 
@@ -55,7 +55,7 @@ After you design the workflow, the next step is to create it.
 1. Navigate to the GitHub repository that contains the software you want to test.
 2. To start creating a workflow, click **Actions**, and then click **New workflow**:
 
-![Creating a new GitHub workflow](/media/creating-a-workflow.png)
+![Creating a new GitHub workflow](media/creating-a-workflow.png)
 
 <div class="caption-center"> Creating a new GitHub workflow </div>
 
