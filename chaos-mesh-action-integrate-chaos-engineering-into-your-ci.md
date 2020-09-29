@@ -24,7 +24,7 @@ Combined with GitHub actions, Chaos Mesh can be more easily integrated into the 
 
 ![chaos-mesh-action integration in the CI workflow](/media/chaos-mesh-action-integrate-in-the-ci-workflow.png)
 
-<div class="caption-center"> chaos-mesh-action integrate in the CI workflow </div>
+<div class="caption-center"> chaos-mesh-action integration in the CI workflow </div>
 
 ## Using chaos-mesh-action in GitHub workflow
 
@@ -55,7 +55,7 @@ After you design the workflow, the next step is to create it.
 1. Navigate to the GitHub repository that contains the software you want to test.
 2. To start creating a workflow, click **Actions**, and then click the **"New workflow**" button:
 
-![Creating a workflow](/media/creating-a-workflow.png)
+![Creating a new GitHub workflow](/media/creating-a-workflow.png)
 
 <div class="caption-center"> Creating a new GitHub workflow </div>
 
