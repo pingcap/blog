@@ -14,7 +14,7 @@ image: /images/blog/how-bank-of-china-uses-a-scale-out-database-to-support-zabbi
 
 **Industry:** Banking
 
-**Author:** Yu Han (DevOps Engineer at VNG Corporation)
+**Author:** Yu Han (Engineer at Information Technology Operations Center, Bank of China)
 
 ![How Bank of China Uses a Scale-Out Database to Support Zabbix Monitoring at Scale](media/how-bank-of-china-uses-a-scale-out-database-to-support-zabbix-monitoring-at-scale.jpg)
 
