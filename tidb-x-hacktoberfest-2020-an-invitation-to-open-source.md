@@ -27,7 +27,7 @@ How can you participate? It could not be easier with the following steps:
 3. Start coding and submit your PRs. Again the PR does not need to be corresponding to the labeled issue. 
 4. Our maintainers review your PRs. Once you successfully merged, or have gained approval for 4 or more of them, the PRs will be automatically counted on the Hacktoberfest end, and you will be eligible to claim your SWAG.
 
-    ![PR gains approval](media/pr-gains-approval.png)
+    ![PR gains approval](media/pr-gains-approval.jpg)
 
     **Note:** If your PRs are merged or approved but you haven't seen the number reflected on Hacktoberfest, comment under your PR.
 
