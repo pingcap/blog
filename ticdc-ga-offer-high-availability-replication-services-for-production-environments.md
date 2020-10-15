@@ -16,7 +16,7 @@ With **high data reliability** and **horizontal scalability** features, TiCDC pr
 
 In this post, we'll walk you through TiCDC's features, application scenarios, and real-world case studies. 
 
-![TiCDC architecture](media/ticdc-architecture.jpg)
+![TiCDC architecture](media/ticdc-highly-available-architecture.jpg)
 <div class="caption-center"> TiCDC architecture </div>
 
 ## TiCDC's features
