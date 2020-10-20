@@ -2,7 +2,7 @@
 title: Why We Migrated from Exadata to a Scale-Out HTAP Database for Near Real-Time Analytics
 author: ['Youzhi Zhu']
 date: 2020-10-20
-summary: As its business quickly grew, ZTO Express found Exadata, Kudu, and HBase couldn't meet their database requirements. They chose TiDB to scale out their database and perform multi-dimensional analytics in near real time.
+summary: As its business quickly grew, ZTO Express found Exadata, Kudu, and HBase couldn't meet their database requirements. They migrated from Exadata to TiDB to scale out their database and perform multi-dimensional analytics in near real time.
 image: /images/blog/scale-out-htap-database-zto.jpg
 tags: ['Scalability', 'HTAP', 'Real-time analytics']
 url: /case-studies/why-we-migrated-from-exadata-to-a-scale-out-htap-database-for-near-real-time-analytics/
