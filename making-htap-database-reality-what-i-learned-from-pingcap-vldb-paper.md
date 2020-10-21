@@ -10,7 +10,7 @@ image: /images/blog/making-htap-database-reality-what-i-learned-from-pingcap-vld
 
 **Author:** Xianlin Chen (DBA at PalFish)
 
-![banner](media/making-htap-database-reality-what-i-learned-from-pingcap-vldb-paper.jpg)
+![HTAP database](media/making-htap-database-reality-what-i-learned-from-pingcap-vldb-paper.jpg)
 
 Recently, [VLDB 2020](https://vldb2020.org/) published [PingCAP](https://pingcap.com/)'s paper, [TiDB: A Raft-based HTAP Database](https://en.pingcap.com/blog/vldb-2020-tidb-a-raft-based-htap-database). This is the first paper in the industry to describe the implementation of a distributed [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) database. As a DBA who benefits greatly from [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed SQL database, I'm happy that VLDB recognized TiDB, and I'm inspired by the PingCAP engineering team's novel ideas.
 
@@ -31,8 +31,6 @@ OLTP and OLAP describe two very different data processing methods, and, therefor
 | Transactions | Yes | No | 
 | Concurrency | High | Low |
 | Query pattern | Similar | Varies a lot |
-
-<div class="caption-center">Comparing OLTP and OLAP workloads</div>
 
 Years ago, databases made little distinction between OLTP and OLAP. Instead, one database processed both types of requests. However, as the data volume grew, it became difficult to process two types of workloads in a single database. Most significantly, the different workload types interfered with each other.
 
