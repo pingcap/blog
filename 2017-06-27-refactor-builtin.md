@@ -8,21 +8,21 @@ aliases: ['/blog/2017/06/27/refactor-builtin/']
 categories: ['Engineering']
 ---
 
-<span id="top"> </span>
+
 In order to accelerate expression evaluation, we recently refactored its framework. This tutorial will show you how to use the new computational framework to rewrite or add a built-in function in TiDB.
 
 ## Table of Content
 
-+ [The overall process](#overall)
++ [The overall process](#the-overall-process)
 + [Example](#example)
-  - [Take a look at `builtin_string.go`](#first)
-  - [Refine the existing `TestLength()` method](#move)
-  - [Test the implementation of LENGTH at the SQL level](#final)
-+ [Before refactoring...](#before)
-+ [After refactoring...](#after)
-+ [Appendix](#app)
+  - [Take a look at `builtin_string.go`](#take-a-look-at-expressionbuiltin_stringgo)
+  - [Refine the existing `TestLength()` method](#refine-the-existing-testlength-method)
+  - [Test the implementation of LENGTH at the SQL level](#test-the-implementation-of-length-at-the-sql-level)
++ [Before refactoring...](#before-refactoring)
++ [After refactoring...](#after-refactoring)
++ [Appendix](#appendix)
 
-### <span id="overall"> The overall process </span>
+### The overall process
 
 1. Select any function to your interest from the [expression](https://github.com/pingcap/tidb/tree/master/expression) directory, assuming the function is named XX.
 
@@ -45,7 +45,7 @@ In the executor directory, add tests at the SQL level.
 
 Let's look at the [PR](https://github.com/pingcap/tidb/pull/3519) of overriding the `LENGTH ()` function for detailed explanation:
 
-#### <span id="first"> Take a look at `expression/builtin_string.go`：</span>
+#### Take a look at `expression/builtin_string.go`:
 
 First, let's take a look at the [`expression/builtin_string.go`](https://github.com/pingcap/tidb/blob/master/expression/builtin_string.go) file:
 
@@ -60,12 +60,12 @@ First, let's take a look at the [`expression/builtin_string.go`](https://github.
      baseIntBuiltinFunc
  }
  func (c *lengthFunctionClass) getFunction(args []Expression, ctx context.Context) (builtinFunc, error) {
-  
+
  //Infer the return value type of `LEGNTH` function according to MySQL rules
  tp := types.NewFieldType(mysql.TypeLonglong)
  tp.Flen = 10
  types.SetBinChsClnFlag(tp)
-  
+
  //Generate function signature based on the number & type of parameters, and return value type. Note that after refactoring, instead of the `newBaseBuiltinFunc` method, the `newBaseBuiltinFuncWithTp` method is used here.
  //In the `newBaseBuiltinFuncWithTp` function declaration, `args` represents the function's parameters, `tp` represents the return value type of the function, and `argsTp` represents the correct types of all parameters in the function signature.
  // The number of parameters for `LENGTH` is 1, the parameter type is string, and the return value type is int. Therefore, `tp` here stands for the return value type of the function and `tpString` is used to identify the correct type of parameter. For a function with multiple parameters, when calling `newBaseBuiltinFuncWithTp`, we need to input the correct types of all parameters.
@@ -98,7 +98,7 @@ First, let's take a look at the [`expression/builtin_string.go`](https://github.
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Refactoring the Built-in Functions in TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
-#### <span id="move"> Refine the existing `TestLength()` method:</span>
+#### Refine the existing `TestLength()` method:
 
 Moving on to [`expression/builtin_string_test.go`](https://github.com/pingcap/tidb/blob/master/expression/builtin_string_test.go), let's refine the existing `TestLength()` method:
 
@@ -150,7 +150,7 @@ func (s *testEvaluatorSuite) TestLength(c *C) {
 
 [Back to the top](#top)
 
-#### <span id="final"> Test the implementation of `LENGTH` at the SQL level </span>
+#### Test the implementation of `LENGTH` at the SQL level
 
 Finally let's look at [`executor/executor_test.go`](https://github.com/pingcap/tidb/blob/master/expression/evaluator_test.go) and test the implementation of `LENGTH` at the SQL level:
 
@@ -173,7 +173,7 @@ func (s *testSuite) TestStringBuiltin(c *C) {
 }
 ```
 
-### <span id="before"> Before refactoring...</span>
+### Before refactoring...
 
 TiDB abstracts the expression through the Expression interface (defined in the [expression/expression.go](https://github.com/pingcap/tidb/blob/master/expression/expression.go) file) and defines the `eval` method to evaluate the expression:
 
@@ -221,7 +221,7 @@ In order to solve these two problems, we refactored the expression evaluation fr
 
 [Back to the top](#top)
 
-### <span id="after"> After refactoring...</span>
+### After refactoring...
 
 The refactored framework has two advantages:
 
@@ -234,7 +234,7 @@ Let's go back to the previous example, in the **compiling phase**, the generated
 
 In this way, in the **executing phase**, for every `ScalarFunction`, it is guaranteed that all of its parameter types match the data types in the given expression evaluation, and we don't need to check and convert parameter types repeatedly.
 
-### <span id="app"> Appendix </span>
+### Appendix
 
 - For a built-in function, multiple function signatures may be created to handle different scenarios, depending on the number & type of parameters, and the type of return value. For most built-in functions, each parameter type and return value type are determined, so only a function signature is needed.
 - For referring rules of more complicated return value type, you can refer to the implementation and test of the `CONCAT` function. You can use the `MySQLWorkbench` tool to run the query `select funcName (arg0, arg1, ...)` to observe the field type of the return value in MySQL's built-in functions when inputting different parameters.
@@ -246,7 +246,7 @@ In this way, in the **executing phase**, for every `ScalarFunction`, it is guara
  4. string
  5. Time
  6. Duration
-  
+
  The `WrapWithCastAsXX ()` method can convert an expression to the corresponding type.
 
 - For a function signature, its return value type has been determined, so when defining, you need to combine it with the corresponding `baseXXBuiltinFunc` and implement the `evalXX ()` method. Note that XX should only be one of the six types listed above.

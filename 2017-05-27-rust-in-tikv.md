@@ -14,20 +14,18 @@ This is the speech Siddon Tang gave at the 1st Rust Meetup in Beijing on April 1
 
 ## Table of Content
 
-<span id="top"> </span>
-
-- [What's TiKV](#what)
-- [We need a language with...](#need)
-- [Why not C++?](#c)
-- [Why not Go?](#go)
-- [So we turned to Rust...](#rust)
-- [TiKV Timeline](#timeline)
-- [TiKV Architecture](#architecture)
-- [Multi-Raft](#mult)
-- [Scale out](#scale)
-- [A simple write flow](#write)
-- [Key technologies](#key)
-- [Future plan](#todo)
+- [What's TiKV](#whats-tikv)
+- [We need a language with...](#we-need-a-language-with)
+- [Why not C++?](#why-not-c)
+- [Why not Go?](#why-not-go)
+- [So we turned to Rust...](#so-we-turned-to-rust)
+- [TiKV Timeline](#tikv-timeline)
+- [TiKV Architecture](#tikv-architecture)
+- [Multi-Raft](#multi-raft)
+- [Scale out](#scale-out)
+- [A simple write flow](#a-simple-write-flow)
+- [Key technologies](#key-technologies)
+- [Future plan](#future-plan)
 
 ![Siddon Tang at the 1st Rust Meetup in Beijing](media/tangsir.jpg)
 
@@ -37,7 +35,7 @@ Before we begin, let me introduce myself. My name is Siddon Tang, the Chief Arch
 
 At first, I will explain the reason why we chose Rust to develop TiKV, then show you the architecture of TiKV briefly and the key technologies. In the end, I will introduce what we plan to do in the future.
 
-### <span id="what">What's TiKV?</span>
+### What's TiKV?
 
 All right, let's begin. First,  what is TiKV. TiKV is a distributed Key-Value database with the following features:
 
@@ -53,7 +51,7 @@ All right, let's begin. First,  what is TiKV. TiKV is a distributed Key-Value da
 
 [Back to the top](#top)
 
-### <span id="need">We need a language with... </span>
+### We need a language with...
 
 As you see, TiKV has many powerful features. To develop these features, we also need a powerful programming language. The language should have:
 
@@ -65,11 +63,11 @@ As you see, TiKV has many powerful features. To develop these features, we also 
 
 * **Binding C efficiency**: We depend on RocksDB heavily, so we must be able to call the RocksDB API as fast as we can, without any performance reduction.
 
-### <span id="c">Why not C++? </span>
+### Why not C++?
 
 To develop a high performance service, C++ may be the best choice in most cases, but we didn't choose it. We figured we might spend too much time avoiding the memory problem or the data race problem. Moreover, C++ has no official package manager and that makes the maintaining and compiling third dependences very troublesome and difficult, resulting in a long development cycle.
 
-### <span id="go">Why not Go? </span>
+### Why not Go?
 
 At first, we considered using Go, but then gave up this idea. Go has GC which fixes many memory problems, but it might stop the running process sometimes. No matter how little time the stop takes, we can't afford it. Go doesn't solve the data race problem either. Even we can use double dash race in test or at runtime, this isn't enough.
 
@@ -79,7 +77,7 @@ More seriously, CGO has heavy expenses, but we need to call RocksDB API without 
 
 [Back to the top](#top)
 
-### <span id="rust">So we turned to Rust...</span>
+### So we turned to Rust...
 
 ### But Rust...
 
@@ -87,7 +85,7 @@ Rust is a system programming language,  maintained by Mozilla. It is a very powe
 
 ![Steep learning curve of Rust](media/curve.jpg)
 
-I have been using many programming languages, like C++, Go, python, lua, etc. and Rust is the hardest language for me to master. In PingCAP, we will let the new colleague spend at least one month to learn Rust, to struggle with the compiling errors, and then to rise above it. This would never happen for Go.  
+I have been using many programming languages, like C++, Go, python, lua, etc. and Rust is the hardest language for me to master. In PingCAP, we will let the new colleague spend at least one month to learn Rust, to struggle with the compiling errors, and then to rise above it. This would never happen for Go.
 
 Besides, the compiling time is very long, even longer than C++. Each time when I type cargo build to start building TiKV, I can even do some pushups.
 
@@ -110,7 +108,7 @@ Rust has no GC expenses, so we won't meet the "stop the world" problem. Calling 
 
 [Back to the top](#top)
 
-### <span id="timeline">TiKV Timeline </span>
+### TiKV Timeline
 
 ![TiKV timeline](media/timeline.jpg)
 
@@ -118,7 +116,7 @@ Here you can see the TiKV timeline. We first began to develop TiKV January 1st, 
 
 As you can see, the development of TiKV is very fast and the released versions of TiKV are stable. Choosing Rust has already been proved a correct decision. Thanks, Rust.
 
-### <span id="architecture">TiKV Architecture </span>
+### TiKV Architecture
 
 ![TiKV architecture](media/kvarchi.jpg)
 
@@ -136,7 +134,7 @@ On the top layer, it is the KV and coprocessor API layer for handling client req
 
 [Back to the top](#top)
 
-### <span id="mult">Multi-Raft </span>
+### Multi-Raft
 
 ![Multi-Raft](media/multi.jpg)
 
@@ -144,7 +142,7 @@ Here is an example of Multi-Raft.
 
 You can see that there are four TiKV nodes. Within each store, we have several regions. Region is the basic unit of data movement and is replicated by Raft. Each region is replicated to three nodes.  These three replicas of one Region make a Raft group.
 
-### <span id="scale">Scale Out</span>
+### Scale Out
 
 #### Scale-out (initial state)
 
@@ -172,13 +170,13 @@ Then we remove the replica of region 1 from Node A. All these are executed by th
 
 [Back to the top](#top)
 
-### <span id="write">A simple write flow </span>
+### A simple write flow
 
 ![A simple write flow](media/write.jpg)
 
 Here is a simple write flow: when a client sends a write request to TiKV, TiKV first parses the protocol and then dispatches the request to the KV thread, then the KV thread executes some transaction logics and sends the request to Raft thread, after TiKV replicates the Raft log and applies it to RocksDB, the write request is finished.
 
-### <span id="key">Key technologies </span>
+### Key technologies
 
 Now let's move on to the key technologies:
 
@@ -194,7 +192,7 @@ For **monitoring**, we wrote a rust client for Prometheus, and this client is re
 
 [Back to the top](#top)
 
-### <span id="todo">TODO...</span>
+### TODO...
 
 Ok, that's what we have done and are doing. Here are what we will do in the future:
 

@@ -9,21 +9,20 @@ categories: ['Engineering']
 ---
 
 From Li SHEN: shenli@pingcap.com
-<span id="top"> </span>
 
 ## Table of Content
 
 + [Foreword](#foreword)
-+ [Storing data](#storingdata)
-+ [Key-Value](#kv)
++ [Storing data](#storing-data)
++ [Key-Value](#key-value)
 + [RocksDB](#rocksdb)
 + [Raft](#raft)
 + [Region](#region)
 + [MVCC](#mvcc)
 + [Transaction](#transaction)
-+ [Miscellaneous](#misc)
++ [Miscellaneous](#miscellaneous)
 
-### <span id="foreword">Foreword:</span>
+### Foreword:
 
 Database, operating system and compiler are known as the three big systems and regarded as the footstone of the whole computer software. Among them, database supports the businesses and is closer to the application layer. After decades of development, progress keeps emerging in this field.
 
@@ -35,7 +34,7 @@ This is the first of our series of articles.
 
 [Back to the top](#top)
 
-### <span id="storingdata">Storing data</span>
+### Storing data
 
 ![Storing data](media/database.png)
 
@@ -60,7 +59,7 @@ As we are talking about TiKV, I hope you can forget any concept about SQL and fo
 
 [Back to the top](#top)
 
-#### <span id="kv">Key-Value</span>
+#### Key-Value
 
 A data storage system should, first and foremost, determine the store model of data. In other words, in which format should the data be stored. TiKV chooses the Key-Value model and offers a solution to traverse orderly. To put it simply: you can see TiKV as a huge Map where Key and Value are the original Byte array. In this Map, Key is arranged in a comparison order according to the raw binary bit of the byte array.
 
@@ -71,13 +70,13 @@ The following points need to be kept in mind:
 
 You might wonder the relation between the storage model that I'm talking about and the table in SQL. Here, I want to highlight: they are irrelevant.
 
-#### <span id="rocksdb">RocksDB</span>
+#### RocksDB
 
 Any durable storage engine stores data on disk and TiKV is no exception. But TiKV doesn't write data to disk directly. Instead, it stores data in RocksDB and then RocksDB is responsible for the data storage. The reason is that it costs a lot to develop a standalone storage engine, especially a high-performance standalone engine. You need to do all kinds of detailed optimization. Fortunately, we found that RocksDB is an excellent open source standalone storage engine that meets all of our requirements. Besides, as the Facebook team keeps optimizing it, we can enjoy a powerful and advancing standalone engine without investing much effort. But of course we contribute a few lines of code to RocksDB and we hope that this project would get better. In a word, you can regard RocksDB as a standalone Key-Value Map.
 
 [Back to the top](#top)
 
-#### <span id="raft">Raft</span>
+#### Raft
 
 Finding an effective, reliable and local storage solution is the important first step of this complex project. Now we are facing with a more difficult thing: how to secure the intactness and correctness of data when a single machine fails?
 A good way is to replicate data to multiple machines. Then, when one machine crashes, we have replicas on other machines. But it is noted that the replicate solution should be reliable, effective and can deal with the situation of an invalid replica.
@@ -103,7 +102,7 @@ In summary, through the standalone RocksDB, we can store data on a disk rapidly;
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Internal (I) - Data Storage', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
-#### <span id="region">Region</span>
+#### Region
 
 In this section, I want to introduce a very important concept: Region. It is the foundation to comprehend a series of mechanism.
 
@@ -134,7 +133,7 @@ As we distribute and replicate data in Regions, we have a distributed Key-Value 
 
 [Back to the top](#top)
 
-#### <span id="mvcc">MVCC</span>
+#### MVCC
 
 Many databases implement multi-version concurrency control (MVCC) and TiKV is no exception. Assume that two clients update the Value of a Key at the same time, without MVCC, data would be locked. In a distributed scenario, this will lead to performance and deadlock problem.
 
@@ -169,11 +168,11 @@ It is noted that as for multiple versions of a Key, we put the bigger number fir
 
 [Back to the top](#top)
 
-#### <span id="transaction">Transaction</span>
+#### Transaction
 
 Transaction of TiKV adopts the Percolator model and has lots of optimizations. I don't want to dive deep since you can read the paper and our articles(Currently in Chinese). What I want to say is that transaction in TiKV uses the optimistic lock. During the execution process, it will not detect write conflict. Only in the commit phase will it detect conflicts. The transaction that finishes committing earlier will be written successfully while the other would retry. If the write conflict of the business is not serious, the performance of this model is very good. For example, it works well to randomly update some rows of data in a large table. However, if the write conflict is severe, the performance would be bad. Take counter as an extreme example. The situation that many clients update a few rows at the same time leads to serious conflicts and numerous invalid retry.
 
-#### <span id="misc">Miscellaneous</span>
+#### Miscellaneous
 
 Up to now,  I have introduced the basic concept and some details of TiKV, the layered structure of this distributed and transactional Key-Value engine and how to implement multi-datacenter disaster recovery. I'll introduce how to construct the SQL layer on top of the storage model of Key-Value in the next article.
 

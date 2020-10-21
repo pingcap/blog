@@ -8,23 +8,21 @@ aliases: ['/blog/2017/07/11/tidbinternal2/']
 categories: ['Engineering']
 ---
 
-<span id="top"> </span>
-
 From Li SHEN: shenli@pingcap.com
 
 ## Table of Content
 
-+ [Mapping the Relational Model to the Key-Value Model](#map)
-+ [Metadata Management](#meta)
-+ [Architecture of SQL on Key-Value](#sqlonkv)
-+ [SQL Computing](#sqlcompute)
-+ [Distributed SQL Operation](#dissql)
-+ [Architecture of the SQL Layer](#sqlarch)
++ [Mapping the Relational Model to the Key-Value Model](#mapping-the-relational-model-to-the-keyvalue-model)
++ [Metadata Management](#metadata-management)
++ [Architecture of SQL on Key-Value](#architecture-of-sql-on-keyvalue)
++ [SQL Computing](#sql-computing)
++ [Distributed SQL Operation](#distributed-sql-operation)
++ [Architecture of the SQL Layer](#architecture-of-the-sql-layer)
 + [Summary](#summary)
 
 My [last blog](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/) introduces the way that TiDB stores data, which is also the basic concepts of TiKV. In this article, I'll elaborate on how TiDB uses the bottom layer Key-Value to store data, maps the relational model to the Key-Value model and performs SQL computing.
 
-### <span id="map">Mapping the Relational Model to the Key-Value Model</span>
+### Mapping the Relational Model to the Key-Value Model
 
 Let's simplify the Relational Model to be just about Table and the SQL statements. What we need to think about is how to store Table and run the SQL statements on top of the Key-Value structure.
 
@@ -155,7 +153,7 @@ The previous encoding rules help you to understand the above example. We hope th
 
 [Back to the top](#top)
 
-### <span id="meta">Metadata Management</span>
+### Metadata Management
 
 After explaining how data and index of a table is mapped to Key-Value, this section introduces the storage of metadata.
 
@@ -165,7 +163,7 @@ Apart from this, a specialized Key-Value stores the version of the current Schem
 
 [Back to the top](#top)
 
-### <span id="sqlonkv">Architecture of SQL on Key-Value</span>
+### Architecture of SQL on Key-Value
 
 The following diagram shows the entire architecture of TiDB:
 
@@ -175,7 +173,7 @@ The main function of the TiKV Cluster is to serve as the Key-Value engine to sto
 
 [Back to the top](#top)
 
-### <span id="sqlcompute">SQL Computing</span>
+### SQL Computing
 
 The mapping solution from SQL to Key-Value shows how to store the relational data. Then we need to understand how to use these data to meet the query requests, which, in other words, the process of how a query statement accesses the data stored in the bottom layer.
 
@@ -200,7 +198,7 @@ This solution works though it still has the following drawbacks:
 
 [Back to the top](#top)
 
-### <span id="dissql">Distributed SQL Operation</span>
+### Distributed SQL Operation
 
 It is simple to avoid the above drawbacks.
 
@@ -214,7 +212,7 @@ The following sketch shows how data returns layer by layer:
 
 You can refer to [MPP and SMP in TiDB (in Chinese)](https://mp.weixin.qq.com/s?__biz=MzI3NDIxNTQyOQ==&mid=2247484187&idx=1&sn=90a7ce3e6db7946ef0b7609a64e3b423&chksm=eb162471dc61ad679fc359100e2f3a15d64dd458446241bff2169403642e60a95731c6716841&scene=4) to know how TiDB makes the SQL statement run faster.
 
-### <span id="sqlarch">Architecture of the SQL Layer</span>
+### Architecture of the SQL Layer
 
 The previous sections introduce some functions of the SQL layer and I hope you have a basic idea about how to process the SQL statement. Actually, TiDB's SQL Layer is much complicated and has lots of modules and layers. The following diagram lists all important modules and the call relation:
 
@@ -224,7 +222,7 @@ The SQL requests will be sent directly or via a Load Balancer to tidb-server, wh
 
 [Back to the top](#top)
 
-### <span id="summary">Summary</span>
+### Summary
 
 Up till now, we've known how data is stored and used for operation from the perspective of SQL. Information about the SQL layer, such as the principle of optimization and the detail of the distributed execution framework will be introduced in the future.
 In the next article, we will dwell on information about PD, especially the cluster management and schedule. This is an interesting part as you will see things that are invisible when using TiDB but important to the whole cluster.
