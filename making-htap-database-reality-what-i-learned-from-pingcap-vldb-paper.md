@@ -1,8 +1,8 @@
 ---
-title: [Making an HTAP Database a Reality: What I Learned from PingCAP's VLDB Paper]
+title: Making an HTAP Database a Reality: What I Learned from PingCAP's VLDB Paper
 author: ['Xianlin Chen']
 date: 2020-10-22
-summary: 'Recently, VLDB published the PingCAP paper, TiDB: A Raft-based HTAP Database. This article, a DBA at PalFish shares his thoughts on the article and his expectations for TiDB's future development.'
+summary: Recently, VLDB published the PingCAP paper, TiDB: A Raft-based HTAP Database. This article, a DBA at PalFish shares his thoughts on the article and his expectations for TiDB's future development.
 tags: ['HTAP', 'VLDB', 'Consistency', 'Raft']
 categories: ['HTAP']
 image: /images/blog/making-htap-database-reality-what-i-learned-from-pingcap-vldb-paper.jpg
