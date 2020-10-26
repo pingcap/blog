@@ -92,13 +92,9 @@ To make sure that TiDB goes well with ARM for our application, we ran benchmarki
   <tr>
    <td>Disk
    </td>
-   <td>Two SSD system disks
-<p>
-One NVMe data disk
+   <td>Two SSD system disks<br/>One NVMe data disk
    </td>
-   <td>Two SSD system disks
-<p>
-One NVMe data disk
+   <td>Two SSD system disks<br/>One NVMe data disk
    </td>
   </tr>
   <tr>
