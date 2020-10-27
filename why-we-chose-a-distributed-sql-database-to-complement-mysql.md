@@ -5,7 +5,7 @@ date: 2020-08-26
 summary: VIPKid chose TiDB to manage its high data volume, highly concurrent write application. Learn how TiDB excels in that scenario, along with multidimensional queries, data life cycle management, and real-time analytics.
 image: /images/blog/mysql-horizontal-scaling-vipkid.jpg
 tags: ['MySQL sharding', 'MySQL', 'High availability', 'Scalability']
-url: /case-studies/why-we-chose-a-distributed-sql-database-to-complement-mysql/
+url: /success-stories/why-we-chose-a-distributed-sql-database-to-complement-mysql/
 customer: VIPKid
 customerCategory: Internet
 categories: ['MySQL Scalability']

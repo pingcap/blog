@@ -4,7 +4,7 @@ author: ['Yu Han']
 date: 2020-10-12
 summary: To monitor their large-scale IT infrastructure, Bank of China chose TiDB, a scale-out relational database, to replace Zabbix's MySQL backend. Learn how they use TiDB to manage over 10,000 monitored devices and 18 TB data.
 tags: ['Scalability', 'MySQL compatibility', 'MySQL', 'Best practice']
-url: /case-studies/how-bank-of-china-uses-a-scale-out-database-to-support-zabbix-monitoring-at-scale/
+url: /success-stories/how-bank-of-china-uses-a-scale-out-database-to-support-zabbix-monitoring-at-scale/
 customer: Bank of China
 customerCategory: Financial Services
 categories: ['MySQL Scalability']

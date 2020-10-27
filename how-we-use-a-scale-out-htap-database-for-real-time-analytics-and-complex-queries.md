@@ -5,7 +5,7 @@ date: 2020-10-02
 summary: Xiaohongshu receives more than 100 million rows of data every day. They adopted TiDB because it supports both transactional and analytical queries, real-time data analytics, and horizontal scalability.
 image: /images/blog/mysql-alternative-database-at-xiaohongshu.jpg
 tags: ['HTAP', 'TiFlash', 'Real-time analytics', 'Scalability', 'MySQL', 'MySQL sharding']
-url: /case-studies/how-we-use-a-scale-out-htap-database-for-real-time-analytics-and-complex-queries/
+url: /success-stories/how-we-use-a-scale-out-htap-database-for-real-time-analytics-and-complex-queries/
 customer: Xiaohongshu
 customerCategory: Internet
 categories: ['MySQL Scalability']
@@ -18,7 +18,7 @@ logo: /images/blog/customers/xiaohongshu-logo.png
 
 ![MySQL alternative: a scale-out HTAP database](media/mysql-alternative-database-at-xiaohongshu.jpg)
 
-[Xiaohongshu](https://en.wikipedia.org/wiki/Xiaohongshu) is a popular social media and e-commerce platform in China. Maybe you know us by our other name: RED or Little Red Book. The Xiaohongshu app allows users to post and share product reviews, travel blogs, and lifestyle stories via short videos and photos. By July 2019, we had over 300 million registered users. 
+[Xiaohongshu](https://en.wikipedia.org/wiki/Xiaohongshu) is a popular social media and e-commerce platform in China. Maybe you know us by our other name: RED or Little Red Book. The Xiaohongshu app allows users to post and share product reviews, travel blogs, and lifestyle stories via short videos and photos. By July 2019, we had over 300 million registered users.
 
 Our business is growing quickly, and our application receives more than 100 million rows of data every day. We looked for a database that supports both **transactional and analytical queries**, **real-time data analytics**, and **horizontal scalability**. We found that [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads, was a good solution.
 
@@ -62,30 +62,30 @@ Let's review our three application scenarios in a non-TiDB world.
 
 ### Data reports
 
-For data reports, we used the Hadoop data warehouse to do some pre-aggregation of the data, and then aggregated the high-dimensional data and put it in MySQL for query. For data reports, the data in Hadoop was pre-aggregated in [T+1](https://www.investopedia.com/terms/t/tplus1.asp) mode through Hive and put into MySQL every day. Then, we built some business intelligence (BI) systems to graphically display the report queries, so our analysts could see their customized reports. 
+For data reports, we used the Hadoop data warehouse to do some pre-aggregation of the data, and then aggregated the high-dimensional data and put it in MySQL for query. For data reports, the data in Hadoop was pre-aggregated in [T+1](https://www.investopedia.com/terms/t/tplus1.asp) mode through Hive and put into MySQL every day. Then, we built some business intelligence (BI) systems to graphically display the report queries, so our analysts could see their customized reports.
 
 What's wrong with this approach? With the rapid growth of our business, the types of reports became more diverse. The scalability of MySQL was also a challenging issue. If we kept adding MySQL nodes, it would eventually become difficult to manage them all. If you've operated and maintained a database, you know that this can be quite cumbersome.
 
 ### Querying the online sharded database in real time
 
-Let's look at the online sharded MySQL database in the primary-secondary architecture. We need to perform data queries on it without affecting the online application, so we can only check the secondary database. This secondary database is, of course, a sharded database. 
+Let's look at the online sharded MySQL database in the primary-secondary architecture. We need to perform data queries on it without affecting the online application, so we can only check the secondary database. This secondary database is, of course, a sharded database.
 
-A series of questions arise here. First, we still have operation and maintenance issues: 
+A series of questions arise here. First, we still have operation and maintenance issues:
 
-* How do we manage so many nodes in the sharded MySQL database? 
-* How do we scale out the database? 
-* Do we need to reshard the shards? 
-* How do we ensure data consistency? 
-* How do we scale in the database? 
-* How do we manage metadata? 
+* How do we manage so many nodes in the sharded MySQL database?
+* How do we scale out the database?
+* Do we need to reshard the shards?
+* How do we ensure data consistency?
+* How do we scale in the database?
+* How do we manage metadata?
 
-This is the complexity of operation and maintenance. 
+This is the complexity of operation and maintenance.
 
 In addition, if I want to run a transaction on a sharded MySQL database, can I use a sharding middleware? If I want to do a `JOIN`, or even a `GROUP BY` aggregate query, is it possible with a sharding middleware? It may be possible, but it will not be simple, so we must find a solution that can easily do complex, distributed queries.
 
 ### Anti-fraud data analytics
 
-In the anti-fraud data analytics scenario, we want to reduce latency between data ingestion and processing. Before TiDB, we wrote data to the backend data warehouse in T+1 mode. The time to insights didn't meet our requirement. Fraud can happen very quickly. It's important to see the details of the issued coupon in seconds, so that we can take measures immediately. 
+In the anti-fraud data analytics scenario, we want to reduce latency between data ingestion and processing. Before TiDB, we wrote data to the backend data warehouse in T+1 mode. The time to insights didn't meet our requirement. Fraud can happen very quickly. It's important to see the details of the issued coupon in seconds, so that we can take measures immediately.
 
 ## TiDB HTAP improved data service capabilities
 
@@ -102,9 +102,9 @@ In the data report scenario, TiDB replaces MySQL, which solves the complicated p
 
 ### Querying the sharded database in real time
 
-As our application data quickly grew, a standalone MySQL database couldn't store very much data, so we sharded the data into 10,000 tables. But a single TiDB cluster can store the large amounts of data we have. 
+As our application data quickly grew, a standalone MySQL database couldn't store very much data, so we sharded the data into 10,000 tables. But a single TiDB cluster can store the large amounts of data we have.
 
-We replicated MySQL data to TiDB via the binlog in real time with replication latency less than one second and merged the sharded tables to a large table in TiDB. 
+We replicated MySQL data to TiDB via the binlog in real time with replication latency less than one second and merged the sharded tables to a large table in TiDB.
 
 Finally, we see only one large table in TiDB. No more shards. We use MySQL as the primary database and TiDB as the secondary database. We can query TiDB without affecting MySQL. In addition, TiDB also supports ACID transactions, `JOIN` operations, and aggregate functions.
 
@@ -129,9 +129,9 @@ TiFlash has great design points:
 * **Automatic storage selection.** TiDB intelligently determines whether to select row storage or column storage to cope with various query scenarios without manual intervention.
 * **Flexibility and workload isolation.** Both row and column stores scale separately.
 
-We also tested TiFlash, taking the logistics scenario as an example. We evaluated 393 production queries and found: 
+We also tested TiFlash, taking the logistics scenario as an example. We evaluated 393 production queries and found:
 
-* For aggregate queries like `GROUP BY` and `SUM`, compared with TiKV, TiFlash's query performance improved from about three to ten times, and the average execution time was reduced by about 68%. 
+* For aggregate queries like `GROUP BY` and `SUM`, compared with TiKV, TiFlash's query performance improved from about three to ten times, and the average execution time was reduced by about 68%.
 * For non-aggregate queries, compared with TiKV, TiFlash's average execution time was reduced by about 4%. Almost all non-aggregate queries hit the TiKV index and did not use the TiFlash column storage.
 
 TiDB 4.0 also introduces [pessimistic locking](https://docs.pingcap.com/tidb/stable/pessimistic-transaction#behaviors). In logistics scenarios, many tables require a `JOIN`, but that's expensive. To avoid performing a `JOIN`, we'll combine these tables into a large, wide table in advance. For example, if I combine three tables into one large, wide table, three streams will update this table at the same time, and they might update the same row. TiDB 3.0 uses an optimistic concurrency control mechanism, which will cause transaction conflicts. TiDB 4.0 has pessimistic locking, which effectively solves this problem.
@@ -145,7 +145,7 @@ We have an excellent relationship with [PingCAP](https://pingcap.com/)'s TiFlash
 You may be more familiar with the ClickHouse column storage engine, so let's compare it with TiFlash. Although ClickHouse has faster computing performance than TiFlash, we chose TiFlash because ClickHouse has some issues. For example:
 
 * ClickHouse's cluster model is more complicated to operate and maintain.
-* ClickHouse does not support data updates. 
+* ClickHouse does not support data updates.
 
 Many of our applications have transactions and need frequent updates. However, ClickHouse doesn't support updates. If we change the operations to `APPEND` or `INSERT`, the application team must make a lot of changes, like deduplicating the data. Because many scenarios require frequent updates, we chose TiFlash.
 

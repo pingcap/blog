@@ -5,7 +5,7 @@ date: 2020-09-10
 summary: After trying out different database solutions, BIGO chose TiDB. In this post, a BIGO DBA talks about TiDB 4.0's new features, how they benefit BIGO's business, and BIGO's plan to use TiDB 4.0 even more in the future.
 image: /images/blog/htap-database-bigo.jpg
 tags: ['TiFlash', 'HTAP', 'Real-time analytics', 'Scalability']
-url: /case-studies/why-we-chose-an-htap-database-over-mysql-for-horizontal-scaling-and-complex-queries/
+url: /success-stories/why-we-chose-an-htap-database-over-mysql-for-horizontal-scaling-and-complex-queries/
 customer: BIGO
 customerCategory: Internet
 categories: ['MySQL Scalability']
@@ -32,28 +32,28 @@ Before we used TiDB, we tried PhxSQL, MySQL, and Pika, but they had these shortc
     * Difficult to scale out and shard
     * Couldn't handle high queries per second (QPS)
     * Almost unmaintained
-* MySQL: 
+* MySQL:
     * Difficult to scale out
     * Not good at executing complex SQL queries
-* Pika: 
+* Pika:
     * Difficult to perform complex queries and range queries
 
 We looked for a new solution and found that TiDB, an open-source, distributed, [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) database, was a good choice. We adopted TiDB because it had these advantages:
 
 * **It's compatible with the MySQL protocol.** To migrate a production application to TiDB, we only need to modify a small amount of code.
 * It's suitable for various use cases that require **strong consistency** and **high availability** with large-scale data.
-* **It supports horizontally scaling in or out.** TiDB's architecture separates computing from storage and enables us to separately scale out or scale in the computing or storage capacity online as needed. 
+* **It supports horizontally scaling in or out.** TiDB's architecture separates computing from storage and enables us to separately scale out or scale in the computing or storage capacity online as needed.
 * It's easy to [deploy](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup).
 
 ## TiDB 4.0 in BIGO
 
 [TiDB](https://github.com/pingcap/tidb) is an open source, distributed SQL database that provides horizontal scalability, high availability, and real-time HTAP. In May 2020, TiDB released the 4.0 GA version, marking a milestone in its history.
 
-Earlier this year, we started using TiDB 4.0 beta. We created a test cluster, which would iterate along with the latest development version of TiDB. Therefore, we upgraded to TiDB 4.0 GA soon after its release. 
+Earlier this year, we started using TiDB 4.0 beta. We created a test cluster, which would iterate along with the latest development version of TiDB. Therefore, we upgraded to TiDB 4.0 GA soon after its release.
 
-We took a bold step and deployed two TiDB clusters in the production environment, mostly for analytical processing. 
+We took a bold step and deployed two TiDB clusters in the production environment, mostly for analytical processing.
 
-* One was used to analyze network monitoring metrics. This cluster's data volume grew fast, and its SQL statements were mostly analytical. The application also needed quick response. 
+* One was used to analyze network monitoring metrics. This cluster's data volume grew fast, and its SQL statements were mostly analytical. The application also needed quick response.
 * The other was deployed as the downstream storage for the big data system. After being processed by big data tools, the data in the TiDB cluster was provided for online real-time services. The data volume of a single table is large.
 
 In TiDB 4.0, [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview) is used for cluster deployment, [Pump](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview#pump) and [Drainer](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview#drainer) are used to replicate data across different continents based on binlogs, and [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) is used for real-time data analytics. We use these TiDB 4.0 components widely in our system.
@@ -64,9 +64,9 @@ A new version of the database can bring instability to the existing system. Howe
 
 ### Application requirements
 
-When the application team puts forward new requirements, as DBAs, we always do our best to meet their needs. 
+When the application team puts forward new requirements, as DBAs, we always do our best to meet their needs.
 
-The application developers used to complain that TiDB's character set sorting didn't work as expected. They were right. Before 4.0, TiDB couldn't identify letter cases in its sorting. It treated uppercase and lowercase the same way. Thanks to 4.0, TiDB now supports case sensitivity through [character sets and collations](http://docs.pingcap.com/tidb/stable/character-set-and-collation). 
+The application developers used to complain that TiDB's character set sorting didn't work as expected. They were right. Before 4.0, TiDB couldn't identify letter cases in its sorting. It treated uppercase and lowercase the same way. Thanks to 4.0, TiDB now supports case sensitivity through [character sets and collations](http://docs.pingcap.com/tidb/stable/character-set-and-collation).
 
 In TiDB 4.0, [the pessimistic transaction model](https://docs.pingcap.com/tidb/stable/pessimistic-transaction), an important feature for e-commerce and financial platforms, is generally available. With TiDB 4.0, applications no longer need to put much focus on inconsistencies or data conflicts.
 
@@ -82,7 +82,7 @@ In addition, we can use TiUP to look into the status of the entire cluster. We d
 
 #### Backup & Restore
 
-Another good feature of TiDB 4.0 is [Backup & Restore (BR)](https://github.com/pingcap/br). BR is a command-line tool for distributed backup and restore of TiDB cluster data. Compared with mydumper or loader, BR is more suitable for clusters with huge data volume. 
+Another good feature of TiDB 4.0 is [Backup & Restore (BR)](https://github.com/pingcap/br). BR is a command-line tool for distributed backup and restore of TiDB cluster data. Compared with mydumper or loader, BR is more suitable for clusters with huge data volume.
 
 Prior to TiDB 4.0, we could only perform backup and restore via mydumper or by creating disk snapshots, which makes it difficult for DBAs to maintain the databases. Though we wanted to try our core applications with TiDB, the lack of a complete backup and restore feature prevented us from doing so.
 
@@ -92,12 +92,12 @@ With BR, we'll use TiDB in more of our applications and go further and more conf
 
 If you ask me what's my favorite feature of TiDB 4.0, the answer is absolutely [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview). TiFlash is the component that makes TiDB a true HTAP database.
 
-TiDB has two storage engines: TiKV, a row store, and TiFlash, a column store. TiFlash is a columnar extension of TiKV, which replicates data from TiKV according to the [Raft](https://en.wikipedia.org/wiki/Raft_(computer_science)) consensus algorithm. 
+TiDB has two storage engines: TiKV, a row store, and TiFlash, a column store. TiFlash is a columnar extension of TiKV, which replicates data from TiKV according to the [Raft](https://en.wikipedia.org/wiki/Raft_(computer_science)) consensus algorithm.
 
 ![TiDB's HTAP Architecture with TiFlash](media/tidb-htap-architecture-with-tiflash-bigo.jpg)
 <div class="caption-center">TiDB Architecture with TiFlash</div>
 
-We usually divide requests into two types: Online Transactional Processing (OLTP) and Online Analytical Processing (OLAP). We may take it for granted that the requests from real-time online applications are OLTP workloads, and the summaries of big data analytics are OLAP workloads. But is that really the case? In actual use scenarios, to meet the operational requirements, many online applications make queries of real-time reports. 
+We usually divide requests into two types: Online Transactional Processing (OLTP) and Online Analytical Processing (OLAP). We may take it for granted that the requests from real-time online applications are OLTP workloads, and the summaries of big data analytics are OLAP workloads. But is that really the case? In actual use scenarios, to meet the operational requirements, many online applications make queries of real-time reports.
 
 Simply using big data tools, these queries may take T+1 or even T+N days to process. That's nowhere near real time. One of the existing solutions is to make queries on the OLTP storage. Other solutions include modifying indexes, replicating the same data to different storage, or writing the same data to different tables. These solutions are either inefficient or troublesome. **TiFlash gives us a new option: adding a columnar replica to achieve real-time analytics.**
 
@@ -120,13 +120,13 @@ TiDB 4.0 offers many possibilities that we have yet to explore. In this section,
 
 As our businesses spread across more than one continent,  our applications often have to deal with multi-source replication. Previously, we used [Pump](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview#pump) and [Drainer](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview#drainer) to implement the replication, but when data was written from multiple sources, we also had to deduplicate the written data.
 
-In such a scenario, Pump and Drainer are not the ideal solution. They have deployment and availability issues, consume too many resources, and produce undesired binlogs. With TiDB 4.0, we'll experiment with [TiCDC](https://docs.pingcap.com/tidb/dev/ticdc-overview), a change data capture tool, to replicate data between multiple TiDB clusters and between various data sources. We'll also develop some features on our own, such as conflict resolution and data merging. 
+In such a scenario, Pump and Drainer are not the ideal solution. They have deployment and availability issues, consume too many resources, and produce undesired binlogs. With TiDB 4.0, we'll experiment with [TiCDC](https://docs.pingcap.com/tidb/dev/ticdc-overview), a change data capture tool, to replicate data between multiple TiDB clusters and between various data sources. We'll also develop some features on our own, such as conflict resolution and data merging.
 
 ### Placement-Driver-based service discovery
 
 Many applications use TiKV and TiFlash as storage engines, and the TiDB server is a stateless service. Most applications are integrated with this stateless service, and use a proxy-like service to forward requests to different TiDB servers to achieve load balancing. Such an architecture is not very elegant. When the proxy is connected with a container, the cluster might perform elastic scheduling through the container or by other methods. In such cases, the proxy might not be unable to detect back-end changes quickly enough.
 
-[Placement Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD) solves this issue because it provides [etcd](https://github.com/etcd-io/etcd)-based interfaces. We can find available TiDB nodes in these interfaces. When the cluster is elastically scaled out, such as during the peak hours, it can quickly scale out a stateless TiDB node. Then, PD can quickly spot the TiDB server, and we can find the service from the client and route the increased traffic towards that server. 
+[Placement Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD) solves this issue because it provides [etcd](https://github.com/etcd-io/etcd)-based interfaces. We can find available TiDB nodes in these interfaces. When the cluster is elastically scaled out, such as during the peak hours, it can quickly scale out a stateless TiDB node. Then, PD can quickly spot the TiDB server, and we can find the service from the client and route the increased traffic towards that server.
 
 In this way, a scaled-out service can go online in a short time, and we don't have to alter much of the application code. If we do this in the old way, a scaled-out database has to register the service and then register in the proxy again, which might delay the whole process.
 
@@ -144,9 +144,9 @@ In this way, a scaled-out service can go online in a short time, and we don't ha
 ![TiDB Dashboard](media/tidb-dashboard-bigo.gif)
 <div class="caption-center">TiDB Dashboard</div>
 
-As a DBA, I sometimes run into conflicts with the application developers. The developers might insist that they didn't make any requests, saw no changes, and, therefore, the data doesn't have a hotspot. Before TiDB 4.0, we didn't have a way to prove or disprove such a claim. Now with TiDB Dashboard, **we can see clearly** **what the database workload looks like**. 
+As a DBA, I sometimes run into conflicts with the application developers. The developers might insist that they didn't make any requests, saw no changes, and, therefore, the data doesn't have a hotspot. Before TiDB 4.0, we didn't have a way to prove or disprove such a claim. Now with TiDB Dashboard, **we can see clearly** **what the database workload looks like**.
 
-For example, take the widget, [Key Visualizer](https://pingcap.com/blog/observe-distributed-databases-to-discover-unknowns). It's a visual diagnostic tool that lets users observe their TiDB cluster's read and write volume over time and presents the data as a heat map. 
+For example, take the widget, [Key Visualizer](https://pingcap.com/blog/observe-distributed-databases-to-discover-unknowns). It's a visual diagnostic tool that lets users observe their TiDB cluster's read and write volume over time and presents the data as a heat map.
 
 <iframe src="https://download.pingcap.com/images/blog/key-visualizer.mp4" width="100%" height="auto" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 <div class="caption-center"> Key Visualizer </div>
@@ -155,7 +155,7 @@ In this heat map:
 
 * The X axis represents time.
 * The Y axis represents the key ranges, with mappings between key ranges to tables and indexes.
-* The colors represent the read or write volume of key ranges. The brighter the color, the higher the read or write volume. 
+* The colors represent the read or write volume of key ranges. The brighter the color, the higher the read or write volume.
 
 Key Visualizer is popular among users. We heard that a user even created an emoji heatmap for fun with Key Visualizer:
 
