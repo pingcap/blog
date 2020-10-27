@@ -12,6 +12,10 @@ categories: ['MySQL Scalability']
 logo: /images/blog/customers/u-next-logo.png
 ---
 
+**Industry**: Media and Entertainment
+
+**Author**: Birong Huang (Senior engineer at U-Next)
+
 ![Running TiDB on ARM as MySQL alternative](media/unext-scale-out-database-on-arm-mysql-alternative.jpg)
 
 [U-Next](https://www.unext.co.jp/en) is a subscription-based video streaming platform that has one of the largest market shares in Japan. In the past few years, our business grew rapidly, and our old IT infrastructure could no longer keep pace. We needed to upgrade our system.
