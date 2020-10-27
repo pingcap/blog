@@ -4,7 +4,7 @@ author: ['Birong Huang']
 date: 2020-10-27
 summary: In this article, an engineer at U-Next talks about why they chose TiDB and why they run it on the ARM architecture. He also provides detailed benchmarking results showing that TiDB runs equally well on ARM and x86.
 tags: ['ARM', 'Scalability', 'High availability', 'MySQL compatibility']
-url: /case-studies/running-a-scale-out-database-on-arm-as-mysql-alternative
+url: /case-studies/running-a-scale-out-database-on-arm-as-mysql-alternative/
 customer: U-Next
 customerCategory: Internet
 image: /images/blog/unext-scale-out-database-on-arm-mysql-alternative.jpg
