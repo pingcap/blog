@@ -5,7 +5,7 @@ date: 2020-10-08
 summary: Bank of Beijing sought an open-source, horizontally scalable database to scale out their database. Learn how they use TiDB to achieve database scaling with zero downtime.
 image: /images/blog/horizontal-scaling-database-in-bob.jpg
 tags: ['Scalability']
-url: /case-studies/how-we-use-a-distributed-database-to-achieve-horizontal-scaling-without-downtime/
+url: /success-stories/how-we-use-a-distributed-database-to-achieve-horizontal-scaling-without-downtime/
 customer: Bank of Beijing
 customerCategory: Financial Services
 categories: ['MySQL Scalability']
@@ -54,8 +54,8 @@ In 2018, we deployed TiDB to production. Based on the bank's security regulation
 
 We use a primary-secondary, multi-active architecture:
 
-* The primary cluster works in the production environment of Beijing and Xi'an and undertakes daily production services. 
-* The secondary cluster is a remote disaster recovery DC built in Xi'an. 
+* The primary cluster works in the production environment of Beijing and Xi'an and undertakes daily production services.
+* The secondary cluster is a remote disaster recovery DC built in Xi'an.
 * We use Kafka to replicate the binlog between the primary and secondary clusters.
 
 In the past two years, we have cooperated with PingCAP on several important issues:
@@ -70,7 +70,7 @@ Next, I'll introduce TiDB's application scenarios in BOB.
 
 According to the requirements of China's central bank, all payment transactions handled by third-party providers must connect to the Electronics Payment Clearing Platform. BOB has integrated its applications and systems to meet the challenges of large data volume and highly concurrent requests brought by Internet finance.
 
-After we deployed TiDB in the Electronics Payment Clearing Platform and the UnionPay Cardless Quick Payment System for production, the two systems successfully handled challenges on November 11, 2018 and November 11, 2019, the days of an annual Chinese shopping festival. On the festival day in 2019, the **peak traffic reached 7,500 queries per second (QPS)**, more than 10 times the usual QPS. Our IT team performed multiple online operations and maintenance tasks, including version upgrades and patching, and used TiDB's multiple replicas to **achieve zero downtime in operations and maintenance**. 
+After we deployed TiDB in the Electronics Payment Clearing Platform and the UnionPay Cardless Quick Payment System for production, the two systems successfully handled challenges on November 11, 2018 and November 11, 2019, the days of an annual Chinese shopping festival. On the festival day in 2019, the **peak traffic reached 7,500 queries per second (QPS)**, more than 10 times the usual QPS. Our IT team performed multiple online operations and maintenance tasks, including version upgrades and patching, and used TiDB's multiple replicas to **achieve zero downtime in operations and maintenance**.
 
 When we upgraded the BOB system, we upgraded the applications in the business chain of the Electronics Payment Clearing Platform to the TiDB distributed architecture.
 
@@ -93,7 +93,7 @@ Once we integrated TiDB into the two transaction systems described above, we app
 
 Here, I'd like to share with you some lessons we learned when we built the TiDB distributed architecture.
 
-### Application transformation 
+### Application transformation
 
 Our bank's survival depends on satisfied customers. For example, some customers like to snap products up in the middle of the night, so we need a flexible system that can handle a large amount of data traffic. TiDB was the clear choice.
 
@@ -110,14 +110,14 @@ Within BOB, more and more projects are adopting TiDB's distributed microservice 
 In the future, the BOB distributed database team will mainly work on two tasks:
 
 * **Applying TiDB in more scenarios**
-    * We'll continue to explore the use of TiDB in core application scenarios like bank accounts and customer information. 
-    * To continuously implement distributed databases in the financial field, we'll combine the features of partitioned tables, pessimistic locking, and even HTAP with the banking system. 
+    * We'll continue to explore the use of TiDB in core application scenarios like bank accounts and customer information.
+    * To continuously implement distributed databases in the financial field, we'll combine the features of partitioned tables, pessimistic locking, and even HTAP with the banking system.
     * We also face challenges from deploying two DCs in the same city.
 * **Making progress through cooperation**
-    * As more and more projects in the industry begin to use TiDB to shift to microservices, our system developers need to think about how to design and develop code under a distributed architecture. 
-    * Adopting TiDB's distributed database has brought some challenges to managing and operating our architecture. Based on past experience, we need to form a mature banking system construction methodology. 
+    * As more and more projects in the industry begin to use TiDB to shift to microservices, our system developers need to think about how to design and develop code under a distributed architecture.
+    * Adopting TiDB's distributed database has brought some challenges to managing and operating our architecture. Based on past experience, we need to form a mature banking system construction methodology.
     * As part of building our distributed database, BOB helped formulate standards for the financial industry. In the future, we'll continue to contribute to the industry.
 
-In addition, we'll study the pilot HTAP application. TiDB 4.0 introduced [TiFlash](https://docs.pingcap.com/tidb/dev/tiflash-overview), an extended analytical engine and columnar store for TiDB. A TiDB database that incorporates TiFlash lets users perform **real-time HTAP analytics**. We believe that HTAP is the future of databases. 
+In addition, we'll study the pilot HTAP application. TiDB 4.0 introduced [TiFlash](https://docs.pingcap.com/tidb/dev/tiflash-overview), an extended analytical engine and columnar store for TiDB. A TiDB database that incorporates TiFlash lets users perform **real-time HTAP analytics**. We believe that HTAP is the future of databases.
 
 If you'd like to learn more about our experience with TiDB or if you have any questions, you can join the [TiDB community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog).

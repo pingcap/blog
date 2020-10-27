@@ -5,7 +5,7 @@ date: 2020-10-20
 summary: As its business quickly grew, ZTO Express found Exadata, Kudu, and HBase couldn't meet their database requirements. They migrated from Exadata to TiDB to scale out their database and perform multi-dimensional analytics in near real time.
 image: /images/blog/scale-out-htap-database-zto.jpg
 tags: ['Scalability', 'HTAP', 'Real-time analytics']
-url: /case-studies/why-we-migrated-from-exadata-to-a-scale-out-htap-database-for-near-real-time-analytics/
+url: /success-stories/why-we-migrated-from-exadata-to-a-scale-out-htap-database-for-near-real-time-analytics/
 customer: ZTO Express
 customerCategory: Internet
 categories: ['MySQL Scalability']
@@ -22,7 +22,7 @@ logo: /images/blog/customers/zto-logo.png
 
 As our business quickly grew, huge amounts of data flooded into our database. Oracle Exadata didn't meet our requirement for data storage. After we sharded our database, we couldn't perform data analytics in real time, and our database couldn't scale. Two other options, Apache Kudu and HBase were not desirable for building a real-time data warehouse. We looked for a database that supported **horizontal scalability, distributed transactions with strong consistency, highly concurrent writes, and minute-level, multi-dimensional queries**.
 
-In this post, I'll describe why we chose [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed, Hybrid Transactional/Analytical Processing (HTAP) database, as our solution and how TiDB helps scale out our database and supports our multi-dimensional analytics with query response times in minutes.  
+In this post, I'll describe why we chose [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed, Hybrid Transactional/Analytical Processing (HTAP) database, as our solution and how TiDB helps scale out our database and supports our multi-dimensional analytics with query response times in minutes.
 
 ## Why we chose TiDB, a distributed SQL database
 
@@ -40,7 +40,7 @@ As our business quickly developed, we had these pain points:
 Facing the problems above, we looked for a database with the following capabilities:
 
 * It supports online horizontal scalability. Data is sliced by "[region](https://www.dummies.com/programming/big-data/hadoop/regions-in-hbase/)" and can be split and migrated like in HBase. It had better support hotspot auto-scheduling.
-* To support the original Oracle application, it should support strongly-consistent distributed transactions and secondary indexes. 
+* To support the original Oracle application, it should support strongly-consistent distributed transactions and secondary indexes.
 * It supports high-concurrency writes and updates and has the ability to quickly query the results based on the needs of the application team.
 * Its technology ecology is closely integrated with Spark so that we can use Spark to quickly perform minute-level data analytics.
 * It supports building large, wide tables and multi-dimensional query analytics.
@@ -55,15 +55,15 @@ In 2019, we deployed TiDB for production. Currently, in our production environme
 
 ### Migrating from Exadata to TiDB
 
-Before we adopted TiDB, the architecture of our core system at ZTO Express looked like this: 
+Before we adopted TiDB, the architecture of our core system at ZTO Express looked like this:
 
 ![Former architecture with Oracle](media/former-architecture-with-oracle.jpg)
 <div class="caption-center"> Former architecture with Oracle </div>
 
 We had a lot of data and many information sources in each data transfer point. In the architectural diagram above:
 
-* On the left were message-oriented middleware with multiple topics. 
-* On the right, the application consumer consumed these middleware messages and stored them in Oracle. We had API and application data services to provide external service capabilities. 
+* On the left were message-oriented middleware with multiple topics.
+* On the right, the application consumer consumed these middleware messages and stored them in Oracle. We had API and application data services to provide external service capabilities.
 
 In this architecture, data analytics for large amounts of data relied on building many stored procedures on Oracle. But as data size increased, storage and computing issues became more and more severe. Unfortunately, we couldn't solve this problem by simply upgrading our Oracle hardware—and, in any case, that option was expensive. Therefore, we decided to look for a new solution.
 
@@ -81,7 +81,7 @@ After we adopted TiDB, our architecture looks like this:
 
 ![Current architecture with horizontal scalability](media/architecture-horizontal-scalability-zto.jpg)
 <div class="caption-center"> Current architecture with TiDB </div>
-                        
+
 In this diagram:
 
 * On the left are many messages. Spark connects these messages to the system in real time and performs `MERGE` and `JOIN` operations with data in Hive dimension tables in the distributed computing framework. At the same time, Spark performs `MERGE` operations with the data analyzed by offline T+1 calculation mode and the data stored in HBase.
@@ -95,7 +95,7 @@ In this architecture, every critical node supports horizontal scalability. Gener
 
 In 2017, we explored a method to build a real-time data warehouse. We tested Apache HBase and Kudu and found they were undesirable:
 
-* Kudu uses Impala as the query engine, but we mainly use Presto as the query engine. There might be compatibility issues. Besides, the Kudu community is not active. 
+* Kudu uses Impala as the query engine, but we mainly use Presto as the query engine. There might be compatibility issues. Besides, the Kudu community is not active.
 * HBase can't meet our requirements for all application queries.
 
 In our logistics process, a lot of messages are connected to our system. We need to predict the full transportation path routing and latency for each parcel, and capture the data for each parcel being transferred. We need to handle large amounts of data with low latency, and we decided to use TiDB plus TiSpark to build our real-time wide table.
@@ -131,7 +131,7 @@ When we started using TiDB, we came across some problems. Along with the PingCAP
 
 Special applications have a lot of writes and updates in a specific time range. Currently, our main concern is index hotspots. We query many applications by time, so we need to create time-related indexes or composite indexes. Writes or updates in a continuous time period might cause index hotspots. This could affect write performance.
 
-The PingCAP team will optimize this issue in the future, and we hope our problem can eventually be mitigated. 
+The PingCAP team will optimize this issue in the future, and we hope our problem can eventually be mitigated.
 
 ### Some problems were difficult to troubleshoot
 
@@ -146,13 +146,13 @@ In addition, the PingCAP team is also developing a Timeline Tracing feature, whi
 
 ### Memory fragmentation
 
-We have many `UPDATE`, `INSERT`, and `DELETE` statements. Previously, we used TiDB 3.0.3. After the system ran stably for a period of time, we found that in the monitoring metric chart, metrics for some nodes, like the Raftstore CPU metric, were intermittently missing, while cluster performance-related monitoring metrics, such as the SQL duration metric, slowly climbed. 
+We have many `UPDATE`, `INSERT`, and `DELETE` statements. Previously, we used TiDB 3.0.3. After the system ran stably for a period of time, we found that in the monitoring metric chart, metrics for some nodes, like the Raftstore CPU metric, were intermittently missing, while cluster performance-related monitoring metrics, such as the SQL duration metric, slowly climbed.
 
 At first, we thought the problem was with monitoring itself. But with PingCAP engineers' help, we found the issue was due to memory fragmentation. Then, we performed a rolling restart of the cluster, and the problem was temporarily solved. TiDB 3.0.14 fixed this problem, and since we upgraded to that version, it's no longer an issue.
 
 ## What's next
 
-Currently, we have many applications running stably in TiDB 3.0.14. In May 2020, [TiDB 4.0 GA](https://docs.pingcap.com/tidb/stable/release-4.0-ga) was released. Many of TiDB 4.0's features meet our urgent needs, such as [backups for large data volumes](https://pingcap.com/blog/back-up-and-restore-a-10-tb-cluster-at-1-gb-per-second), [large transactions](https://pingcap.com/blog/large-transactions-in-tidb), and [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) (an extended analytical engine for TiDB to perform real-time HTAP analytics). 
+Currently, we have many applications running stably in TiDB 3.0.14. In May 2020, [TiDB 4.0 GA](https://docs.pingcap.com/tidb/stable/release-4.0-ga) was released. Many of TiDB 4.0's features meet our urgent needs, such as [backups for large data volumes](https://pingcap.com/blog/back-up-and-restore-a-10-tb-cluster-at-1-gb-per-second), [large transactions](https://pingcap.com/blog/large-transactions-in-tidb), and [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) (an extended analytical engine for TiDB to perform real-time HTAP analytics).
 
 Now, our OLTP and OLAP applications are not truly physically separated on key-value nodes. When we have a large number of analytical queries and they span a wide range of time and involve large amounts of data, index filtering performance is poor, which causes full table scans. In this case, TiSpark demands a good many resources, and the pressure on key-value nodes is high. At the peak time, data analytics may affect write performance. Therefore, we pay close attention to TiFlash. Next, we will test TiDB 4.0 and build a real-time data warehouse.
 

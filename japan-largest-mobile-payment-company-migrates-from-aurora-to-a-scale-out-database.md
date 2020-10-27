@@ -5,7 +5,7 @@ date: 2020-08-11
 summary: As PayPay's business grew, their payment management database became a bottleneck. Learn why PayPay chose TiDB over Aurora to handle their most crucial data and how efficiently they migrated to TiDB.
 image: /images/blog/aurora-alternative-horizontal-scaling-database.jpg
 tags: ['Scalability', 'Amazon Aurora']
-url: /case-studies/japan-largest-mobile-payment-company-migrates-from-aurora-to-a-scale-out-database/
+url: /success-stories/japan-largest-mobile-payment-company-migrates-from-aurora-to-a-scale-out-database/
 customer: PayPay
 customerCategory: Financial Services
 categories: ['MySQL Scalability']

@@ -5,7 +5,7 @@ date: 2020-09-22
 summary: Zhuan Zhuan embraced TiDB 4.0's new features with great results. It's a truly HTAP database with one-minute deployment, visual troubleshooting, and reduced maintenance costs.
 image: /images/blog/scale-out-mysql-alternative-database-zhuanzhuan.jpg
 tags: ['TiFlash', 'Ecosystem tools', 'Troubleshooting', 'Backup and restore']
-url: /case-studies/scale-out-database-powers-china-letgo-with-reduced-maintenance-costs/
+url: /success-stories/scale-out-database-powers-china-letgo-with-reduced-maintenance-costs/
 customer: Zhuan Zhuan
 customerCategory: Internet
 categories: ['MySQL Scalability']
@@ -18,7 +18,7 @@ logo: /images/blog/customers/zhuanzhuan-logo.png
 
 ![MySQL horizontal scaling, MySQL alternative database](media/scale-out-mysql-alternative-database-zhuanzhuan.jpg)
 
-[Zhuan Zhuan](https://www.crunchbase.com/organization/zhuan-zhuan) is an online used goods trading platform. You can think of us as "the Letgo of China." Since we launched our platform in 2015, we have grown tremendously. In 2018, we had more than 200 million users, with over 50 million monthly active users on our app and WeChat mini-program. 
+[Zhuan Zhuan](https://www.crunchbase.com/organization/zhuan-zhuan) is an online used goods trading platform. You can think of us as "the Letgo of China." Since we launched our platform in 2015, we have grown tremendously. In 2018, we had more than 200 million users, with over 50 million monthly active users on our app and WeChat mini-program.
 
 In an earlier [post](https://pingcap.com/case-studies/tidb-in-zhuanzhuan), we talked about why we migrated from MySQL to [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed, Hybrid Transactional/Analytical Processing (HTAP) database, and how TiDB helped our database achieve horizontal scaling.
 
@@ -34,7 +34,7 @@ When we switched to [TiDB](https://docs.pingcap.com/tidb/stable/overview), we im
 When we upgraded to [TiDB 4.0](https://docs.pingcap.com/tidb/stable/whats-new-in-tidb-4.0), we solved even more issues. Be sure to click the links below each issue for detailed information on how 4.0 helped us.
 
 * **Clusters were slow to deploy and difficult to manage.**
-    
+
     [TiUP can deploy a cluster in only one minute](#tiup-can-deploy-a-cluster-in-only-one-minute)
 
 * **Hotspots were hard to find.** Hotspots are fairly common in e-commerce scenarios. In the past, we had to query each node's log separately. Investigating hotspots was slow and costly.
@@ -61,7 +61,7 @@ When we upgraded to [TiDB 4.0](https://docs.pingcap.com/tidb/stable/whats-new-in
 
 TiDB 4.0 introduces a new component management tool, [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview), which makes deploying a TiDB environment faster than ever. If you've wanted to deploy TiDB before, but thought it was too complicated or time consuming, TiUP solves that.
 
-For example, we used TiUP to deploy three TiDB instances, three TiKV instances, three Placement Driver instances, and one TiFlash instance in _one minute_. Besides lightning-fast deployment, TiUP also offers a large number of parameters we can use to [check the status](https://docs.pingcap.com/tidb/stable/tiup-component-management#query-the-operating-status-of-a-component) of our cluster. 
+For example, we used TiUP to deploy three TiDB instances, three TiKV instances, three Placement Driver instances, and one TiFlash instance in _one minute_. Besides lightning-fast deployment, TiUP also offers a large number of parameters we can use to [check the status](https://docs.pingcap.com/tidb/stable/tiup-component-management#query-the-operating-status-of-a-component) of our cluster.
 
 ## Key Visualizer clearly displays hotspots across the entire cluster
 
@@ -76,7 +76,7 @@ In the heatmap:
 
 * The x-axis represents time.
 * The y-axis represents the key ranges, with mappings between key ranges to tables and indices.
-* The colors represent the read or write volume of key ranges. The brighter the color, the higher the read or write volume. 
+* The colors represent the read or write volume of key ranges. The brighter the color, the higher the read or write volume.
 
 <iframe src="https://download.pingcap.com/images/blog/key-visualizer.mp4" width="100%" height="auto" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 <div class="caption-center"> Key Visualizer: quickly troubleshoot database performance issues </div>
@@ -108,7 +108,7 @@ The following figure shows the TiDB Dashboard's [**Overview**](https://docs.ping
 * Node status
 * Alert-related information
 
-Through the overview, we can quickly find the status of the cluster, quickly locate problems, and use TiDB better. 
+Through the overview, we can quickly find the status of the cluster, quickly locate problems, and use TiDB better.
 
 ### Finding slow queries
 
@@ -131,22 +131,22 @@ TiDB's new log search feature lets us search for logs on all instances in the cl
 ![Search and export logs](media/log-search.gif)
 <div class="caption-center"> Search and export logs </div>
 
-## TiFlash extracts data without affecting online performance 
+## TiFlash extracts data without affecting online performance
 
-In the past, extracting data increased online response times. [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview#tiflash-overview) solves this problem and includes features such as asynchronous replication, consistency, intelligent selection, and calculation acceleration. 
+In the past, extracting data increased online response times. [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview#tiflash-overview) solves this problem and includes features such as asynchronous replication, consistency, intelligent selection, and calculation acceleration.
 
 At Zhuan Zhuan, we mainly use TiFlash on shared physical machine hosts and physical isolation. When we add a TiKV node to the new machine, requests are separated. Different requests go to different back-end data nodes, so that when you extract data, it will not affect the overall online performance. Based on the complexity of our application and SQL statements, TiDB automatically chooses to use TiFlash or TiKV to ensure the best performance. If a request is for online data, TiDB chooses TiKV. If a request is for offline data, TiDB chooses TiFlash. This is an intelligent selection mechanism.
 
 ![TiFlash for real-time analytics](media/tidb-with-tiflash.png)
-<div class="caption-center"> TiDB including TiFlash </div> 
+<div class="caption-center"> TiDB including TiFlash </div>
 
 ## Backup & Restore quickly backs up and restores very large clusters
 
-Prior to TiDB 4.0, we struggled to effectively back up our large data clusters. We used logical backups, which really didn't meet our needs. 
+Prior to TiDB 4.0, we struggled to effectively back up our large data clusters. We used logical backups, which really didn't meet our needs.
 
 We tested TiDB 4.0's distributed backup and recovery tool, [Backup & Restore](https://docs.pingcap.com/tidb/stable/backup-and-restore-tool#use-br-to-back-up-and-restore-data), and got excellent results. In a 10 Gb network environment, at 120 MB/sec network speed, it took **less than 10 minutes to back up 300 GB of data to the network file system**.
 
-**Under the same speed limit of 120 MB/sec, we restored our data through the network file system in about 12 minutes**. Backup & Restore has greatly reduced our backup and restore time. 
+**Under the same speed limit of 120 MB/sec, we restored our data through the network file system in about 12 minutes**. Backup & Restore has greatly reduced our backup and restore time.
 
 Another key factor is that the speed of backup depends entirely on the number of TiKV instances we have. The more TiKV instances we have, the faster our backup and restore speeds.
 
