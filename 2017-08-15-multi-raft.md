@@ -9,8 +9,6 @@ categories: ['Engineering']
 
 (Email: tl@pingcap.com)
 
-<span id="top"> </span>
-
 + [Placement Driver](#placement-driver)
 + [Raftstore](#raftstore)
   - [Region](#region)

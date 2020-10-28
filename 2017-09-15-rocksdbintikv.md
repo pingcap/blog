@@ -8,8 +8,6 @@ aliases: ['/blog/2017/09/15/rocksdbintikv/']
 categories: ['Engineering']
 ---
 
-<span id="top"></span>
-
 This is the speech Siddon Tang gave at the [RocksDB meetup](https://www.meetup.com/RocksDB/events/242226234/) on August 28, 2017.
 
 <!-- TOC -->
