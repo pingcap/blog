@@ -10,27 +10,25 @@ categories: ['MySQL Scalability']
 
 This is the speech Edward Huang gave at Percona Live - Open Source Database Conference 2017.
 
-<span id="top"></span>
-
 The slides are [here](https://www.percona.com/live/17/sites/default/files/slides/A%20brief%20introduction%20of%20TiDB%20%28Percona%20Live%29.pdf).
 
-- [Speaker introduction](#speaker)
-- [What would you do when…](#what)
-- [TiDB Project - Goal](#goal)
-- [Sofware Stack](#stack)
-- [Safe Split](#split)
-- [Scale Out](#scale)
-- [ACID Transaction](#transaction)
-- [Distributed SQL](#distsql)
-- [TiDB SQL Layer Overview](#sql)
-- [What Happens behind a query](#query)
-- [Distributed Join (HashJoin)](#hashjoin)
-- [Tools Matter](#tools)
-- [Use Cases](#usecase)
+- [Speaker introduction](#speaker-introduction)
+- [What would you do when…](#what-would-you-do-when)
+- [TiDB Project - Goal](#tidb-goal)
+- [Sofware Stack](#software-stack)
+- [Safe Split](#safe-split)
+- [Scale Out](#scale-out)
+- [ACID Transaction](#acid-transaction)
+- [Distributed SQL](#distributed-sql)
+- [TiDB SQL Layer Overview](#tidb-sql-layer-overview)
+- [What Happens behind a query](#what-happens-behind-a-query)
+- [Distributed Join (HashJoin)](#distributed-join-hashjoin)
+- [Tools Matter](#tools-matters)
+- [Use Cases](#use-cases)
 - [Sysbench](#sysbench)
 - [Roadmap](#roadmap)
 
-## <span id="speaker"> Speaker introduction </span>
+## Speaker introduction
 
 As one of the three co-founders of PingCAP, I feel honored that PingCAP was once again invited to the Percona Live Conference.
 
@@ -40,7 +38,7 @@ First of all, I'd like to introduce myself. My name is Edward Huang, an infrastr
 
 Up to now, I have worked on three projects, Codis, a proxy-based redis cluster solution which is very popular in China , TiDB and TiKV, a NewSQL database, our topic today. All of them are open source and many people benefit from them, especially in China. And I prefer languages such as Golang, Python, and Rust. By the way, we are using Golang and Rust in our projects (TiDB is written in Go and TiKV uses Rust).
 
-## <span id="what">What would you do when…</span>
+## What would you do when…
 
 And first of all I want to ask a question: what would you do when your RDBMS is becoming the bottleneck of your application? Maybe most of you guys may have experienced the following situations. In the old days, all you can do is to either refactor your application or use database middleware, something like mysql proxy. But once you decide to use the sharding solution, you will never get rid of sharding key and say goodbye to complex query as it's a one-way path.
 
@@ -48,7 +46,7 @@ So how to scale your relational database is a pain point of the entire industry.
 
 [Back to the top](#top)
 
-## <span id="goal">TiDB goal</span>
+## TiDB goal
 
 And there comes TiDB, when we were designing TiDB, we want to achieve the following goals:
 
@@ -64,7 +62,7 @@ And there comes TiDB, when we were designing TiDB, we want to achieve the follow
 
 During the first section, I'll talk about the technical overview of TiDB and TiKV project, including the storage layer, a brief walk through our distributed sql engine, and some tools for community users to migrate from MySQL to TiDB and vice versa. Secondly, I'll introduce some real world cases and benchmarks. We got several users in China, which have already used TiDB in production for over 3 months. And in the end, I'll do a quick demo of setting up a TiDB-cluster and have some queries on it.
 
-## <span id="architecture">Architecture</span>
+## Architecture
 
 Below shows the TiDB architecture.
 
@@ -82,7 +80,7 @@ These three components communicate with each other through gRPC.
 
 [Back to the top](#top)
 
-## <span id="stack">Storage stack </span>
+## Storage stack
 
 Let's dive deep into the storage stack of TiKV.
 
@@ -102,7 +100,7 @@ Region is a set of continuous key-value pairs in byte-order.
 
 [Back to the top](#top)
 
-## <span id="split">Safe split</span>
+## Safe split
 
 Let's take a look at the diagram here: The data is split into a set of continuous key-value pairs which we name them from a to z. Region 1 stores "a" to “e”, Region 2 “f” to “j”, Region 3 “k” to “o”, etc. As region is a logical concept, all the regions in a physical node share the same rocksdb instance.
 
@@ -138,7 +136,7 @@ And finally, once the split-log is committed, all the replicas in the Raft group
 
 [Back to the top](#top)
 
-## <span id="scale">Scale out</span>
+## Scale out
 
 We've talked about split. Now let's see how TiKV scales out. Our project is as scalable as NoSQL system, which means you can easily increase the capacity or balance the workload by adding more machines.
 
@@ -163,7 +161,7 @@ This is how TiKV scales out.
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('A Brief Introduction of TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
-## <span id="transaction">ACID transaction</span>
+## ACID transaction
 
 Our transaction model is inspired by Google's Percolator. It's mainly a decentralized 2-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign increasing timestamp for each transaction.
 
@@ -171,7 +169,7 @@ TiKV employs an optimistic transaction model and only locks data in the final 2 
 
 The default isolation level of TiKV is Repeatable Read (SI) and it exposes the lock API, which is used for implementing SSI (Serializable snapshot isolation), such as SELECT … FOR UPDATE in mysql, for the client.
 
-## <span id="distsql">Distributed SQL</span>
+## Distributed SQL
 
 We take the performance of TiDB very seriously. TiDB has a full-featured SQL layer. For some operations, for example, select count(*), there is no need for TiDB to get data from row to row first and then count. The quicker way is that TiDB pushes down these operations to the corresponding TiKV nodes, the TiKV nodes do the computing and then TiDB consolidates the final results.
 
@@ -181,7 +179,7 @@ Distributed join will be covered later.
 
 [Back to the top](#top)
 
-## <span id="sql">TiDB SQL layer overview</span>
+## TiDB SQL layer overview
 
 ![TiDB SQL layer overview](media/image_8.png)
 
@@ -197,7 +195,7 @@ There are also other crucial components like Privilege Manager, Schema Manager, 
 
 [Back to the top](#top)
 
-## <span id="query">What Happens behind a query</span>
+## What Happens behind a query
 
 We have talked about the process. Let's see an example to show what's going on behind a query. Assuming we have a schema with two fields and an index. Now we need to run the following query: SELECT COUNT(c1) FROM t WHERE c1 > 10 AND c2 = 'percona';
 
@@ -213,7 +211,7 @@ There are several advantages in this approach: First, there are more nodes invol
 
 [Back to the top](#top)
 
-## <span id="hashjoin">Distributed join (HashJoin)</span>
+## Distributed join (HashJoin)
 
 Now, let's see a little more complex query: we have two tables, left and right. Now I write a simple join query, let's see what happens behind a join.
 
@@ -227,7 +225,7 @@ TiDB's SQL layer currently supports 3 kinds of distributed join type, hashjoin /
 
 [Back to the top](#top)
 
-## <span id="tools">Tools matter</span>
+## Tools matter
 
 To help users exploit the best part of TiDB, we have prepared the following tools: Syncer, TiDB Binlog, Mydumper/MyLoader(Loader).
 
@@ -245,7 +243,7 @@ For data migration, we don't have our own tool. We use Mydumper/Loader for data 
 
 [Back to the top](#top)
 
-## <span id="usecase">Use cases</span>
+## Use cases
 
 Currently, there are about 20 customers using our products in production environments and more than 200 PoC users contacting us or trying our products.
 
@@ -259,7 +257,7 @@ Another customer is using TiDB as the drop-in replacement for MySQL for OLTP wor
 
 [Back to the top](#top)
 
-## <span id="sysbench">Sysbench</span>
+## Sysbench
 
 Let's see some Sysbench results for Read and Insert in the next few slides. Here are the details of the system that we are using.
 
@@ -279,7 +277,7 @@ This is TiDB, SQL at Scale.
 
 [Back to the top](#top)
 
-## <span id="roadmap">Roadmap</span>
+## Roadmap
 
 The final section of my speech is our roadmap to the future:
 

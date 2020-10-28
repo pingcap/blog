@@ -10,17 +10,15 @@ categories: ['Engineering']
 
 (Email: tl@pingcap.com)
 
-<span id="top"> </span>
-
 ## Table of content
 
-+ [Architecture](#arch)
++ [Architecture](#architecture)
 + [Raft](#raft)
   - [Storage](#storage)
   - [Config](#config)
-  - [RawNode](#raw)
+  - [RawNode](#rawnode)
 
-## <span id="arch">Architecture</span>
+## Architecture
 
 Below is TiKV's overall architecture:
 
@@ -36,7 +34,7 @@ Below is TiKV's overall architecture:
 
 [Back to the top](#top)
 
-## <span id="raft">Raft</span>
+## Raft
 
 TiKV uses the Raft algorithm to implement the strong consistency of data in a distributed environment. For detailed information about Raft, please refer to the paper [In Search of an Understandable Consensus Algorithm](https://web.stanford.edu/~ouster/cgi-bin/papers/raft-atc14) and [the official website](https://raft.github.io/). Simply put, Raft is a model of replication log + State Machine. We can only write through a Leader and the Leader will replicate the command to its Followers in the form of log. When the majority of nodes in the cluster receive this log, this log has been committed and can be applied into the State Machine.
 
@@ -54,7 +52,7 @@ Note that how TiKV and etcd process membership change is different from what is 
 
 The Raft library is independent and users can directly embed it into their applications. What they need to do is to process storage and message sending. This article will briefly introduce how to use Raft and you can find the code under the directory of TiKV source code /src/raft.
 
-### <span id="storage">Storage</span>
+### Storage
 
 First of all, we need to define our Storage, which is mainly used for storing relevant data of Raft. Below is the trait definition:
 
@@ -140,7 +138,7 @@ Note that the above Storage interface is just for Raft. But actually we also use
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('A TiKV Source Code Walkthrough - Raft in TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
-### <span id="config">Config</span>
+### Config
 
 Before using Raft, we need to know some relevant configuration of Raft. Below are the items that need extra attention in Config:
 
@@ -178,7 +176,7 @@ Here is the detailed implication of tick: TiKV's Raft is timing-driven. Assume t
 
 [Back to the top](#top)
 
-### <span id="raw">RawNode</span>
+### RawNode
 
 We use Raft through RawNode and below is its constructor:
 

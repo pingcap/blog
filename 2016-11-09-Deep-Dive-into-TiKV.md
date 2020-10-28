@@ -7,19 +7,17 @@ aliases: ['/blog/2016/11/09/Deep-Dive-into-TiKV/', '/blog/2016/11/09/deep-dive-i
 categories: ['Engineering']
 ---
 
-<span id="top"></span>
-
 ## Table of Content
 
 - [About TiKV](#about-tikv)
 - [Architecture](#architecture)
 - [Protocol](#protocol)
 - [Raft](#raft)
-- [Placement Driver (PD)](#placement-driver)
+- [Placement Driver (PD)](#placement-driver-pd)
 - [Transaction](#transaction)
 - [Coprocessor](#coprocessor)
 - [Key processes analysis](#key-processes-analysis)
-  - [Key-Value operation](#key-value-operation)
+  - [Key-Value operation](#keyvalue-operation)
   - [Membership Change](#membership-change)
   - [Split](#split)
 
@@ -184,7 +182,7 @@ Let's see how a transaction is executed:
 
 1. The transaction starts. When the transaction starts, the client must obtain the current timestamp (startTS) from TSO. Because TSO guarantees the monotonic increasing of the timestamp, startTS can be used to identify the time series of the transaction.
 
-2. The transaction is in progress. During a transaction, all the read operations must carry `startTS` while they send RPC requests to TiKV and TiKV uses MVCC to make sure to return the data that is written before `startTS`. For the write operations, TiKV uses optimistic concurrency control which means the actual data is cached on the clients rather than written to the servers assuming that the current transaction doesn't affect other transactions.  
+2. The transaction is in progress. During a transaction, all the read operations must carry `startTS` while they send RPC requests to TiKV and TiKV uses MVCC to make sure to return the data that is written before `startTS`. For the write operations, TiKV uses optimistic concurrency control which means the actual data is cached on the clients rather than written to the servers assuming that the current transaction doesn't affect other transactions.
 
 3. The transaction commits. TiKV uses a 2-phase commit algorithm. Its difference from the common 2-phase commit is that there is no independent transaction manager. The commit state of a transaction is identified by the commit state of the `PrimaryKey` which is selected from one of the to-be-committed keys.
 

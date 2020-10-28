@@ -18,7 +18,7 @@ chaos-mesh-action is available on [GitHub market](https://github.com/marketplace
 
 ## Design of chaos-mesh-action
 
-[GitHub Action](https://docs.github.com/en/actions) is a CI/CD feature natively supported by GitHub, through which we can easily build automated and customized software development workflows in the GitHub repository. 
+[GitHub Action](https://docs.github.com/en/actions) is a CI/CD feature natively supported by GitHub, through which we can easily build automated and customized software development workflows in the GitHub repository.
 
 Combined with GitHub actions, Chaos Mesh can be more easily integrated into the daily development and testing of the system, thus guaranteeing that each code submission on GitHub is bug-free and won't damage existing code. The following figure shows chaos-mesh-action integrated into the CI workflow:
 
@@ -39,18 +39,18 @@ Combined with GitHub actions, Chaos Mesh can be more easily integrated into the 
 Before you design a workflow, you must consider the following issues:
 
 * What functions are we going to test in this workflow?
-* What types of faults will we inject? 
+* What types of faults will we inject?
 * How do we verify the correctness of the system?
 
-As an example, let's design a simple test workflow that includes the following steps: 
+As an example, let's design a simple test workflow that includes the following steps:
 
 1. Create two Pods in a Kubernetes cluster.
-2. Ping one pod from the other. 
+2. Ping one pod from the other.
 3. Use Chaos Mesh to inject network delay chaos and test whether the ping command is affected.
 
 ### Create the workflow
 
-After you design the workflow, the next step is to create it. 
+After you design the workflow, the next step is to create it.
 
 1. Navigate to the GitHub repository that contains the software you want to test.
 2. To start creating a workflow, click **Actions**, and then click **New workflow**:
@@ -59,7 +59,7 @@ After you design the workflow, the next step is to create it.
 
 <div class="caption-center"> Creating a new GitHub workflow </div>
 
-A workflow is essentially the configuration of jobs that take place sequentially and automatically. Note that the jobs are configured in a single file. For better illustration, we split the script into different job groups as shown below: 
+A workflow is essentially the configuration of jobs that take place sequentially and automatically. Note that the jobs are configured in a single file. For better illustration, we split the script into different job groups as shown below:
 
 * Set the workflow name and trigger rules.
 
@@ -79,7 +79,7 @@ A workflow is essentially the configuration of jobs that take place sequentially
 
 * Install the CI-related environment.
 
-    This configuration specifies the operating system (Ubuntu), and that it uses [helm/kind-action](https://github.com/marketplace/actions/kind-cluster) to create a Kind cluster. Then, it outputs related information about the cluster. Finally, it checks out the GitHub repository for the workflow to access. 
+    This configuration specifies the operating system (Ubuntu), and that it uses [helm/kind-action](https://github.com/marketplace/actions/kind-cluster) to create a Kind cluster. Then, it outputs related information about the cluster. Finally, it checks out the GitHub repository for the workflow to access.
 
     ```yaml
     jobs:
@@ -153,7 +153,7 @@ A workflow is essentially the configuration of jobs that take place sequentially
     You can obtain the Base64 value of the above chaos configuration file using the following command:
 
     ```shell
-    $ base64 chaos.yaml
+    base64 chaos.yaml
     ```
 
 * Verify the system correctness.
@@ -188,7 +188,7 @@ PING busybox-1.busybox.busybox.svc (10.244.0.6): 56 data bytes
 ……
 ```
 
-The output indicates a regular series of 10-millisecond delays that last about 5 seconds each. This is consistent with the chaos configuration we injected into chaos-mesh-action.  
+The output indicates a regular series of 10-millisecond delays that last about 5 seconds each. This is consistent with the chaos configuration we injected into chaos-mesh-action.
 
 ## Current status and next steps
 
@@ -196,4 +196,4 @@ At present, we have applied chaos-mesh-action to the [TiDB Operator](https://git
 
 In the future, we plan to apply chaos-mesh-action to more tests to ensure the stability of TiDB and related components. You are welcome to create your own workflow using chaos-mesh-action.
 
-If you find a bug or think something is missing, feel free to file an issue, open a pull request (PR), or join us on the [#project-chaos-mesh](https://join.slack.com/t/cloud-native/shared_invite/zt-fyy3b8up-qHeDNVqbz1j8HDY6g1cY4w) channel in the [CNCF](https://www.cncf.io/) slack workspace. 
+If you find a bug or think something is missing, feel free to file an issue, open a pull request (PR), or join us on the [#project-chaos-mesh](https://join.slack.com/t/cloud-native/shared_invite/zt-fyy3b8up-qHeDNVqbz1j8HDY6g1cY4w) channel in the [CNCF](https://www.cncf.io/) slack workspace.

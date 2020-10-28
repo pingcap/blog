@@ -12,9 +12,9 @@ Author: Max Liu (CEO at PingCAP)
 
 ![An Elastic, Real-Time HTAP Database Ready for the Cloud](media/cloud-native-distributed-sql-database.jpg)
 
-TiDB is an open-source, distributed, [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) database built by [PingCAP](https://pingcap.com/) and its open-source community. At [TiDB DevCon 2020](https://pingcap.com/community/devcon2020/), the TiDB community's annual technical conference, more than 80 developers, TiDB users, and partners online from all over the world shared their first-hand development and practical experience with TiDB. The topics covered finance, telecommunications, e-commerce, logistics, video, information, education, medical care, and many other industries. At the meeting, we showed [TiDB 4.0](https://docs.pingcap.com/tidb/stable/release-4.0-ga)'s general availability (GA) technical details and its performance in a production environment. More than 3,000 people signed up to watch the live broadcast and exchanged their ideas in the group. 
+TiDB is an open-source, distributed, [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) database built by [PingCAP](https://pingcap.com/) and its open-source community. At [TiDB DevCon 2020](https://pingcap.com/community/devcon2020/), the TiDB community's annual technical conference, more than 80 developers, TiDB users, and partners online from all over the world shared their first-hand development and practical experience with TiDB. The topics covered finance, telecommunications, e-commerce, logistics, video, information, education, medical care, and many other industries. At the meeting, we showed [TiDB 4.0](https://docs.pingcap.com/tidb/stable/release-4.0-ga)'s general availability (GA) technical details and its performance in a production environment. More than 3,000 people signed up to watch the live broadcast and exchanged their ideas in the group.
 
-This post is based on the keynote speech Max Liu, CEO at PingCAP, gave at this conference. The slides are [here](https://www.slideshare.net/PingCAP-TiDB/tidb-devcon-2020-opening-keynote). 
+This post is based on the keynote speech Max Liu, CEO at PingCAP, gave at this conference. The slides are [here](https://www.slideshare.net/PingCAP-TiDB/tidb-devcon-2020-opening-keynote).
 
 &nbsp;
 
@@ -113,10 +113,10 @@ These achievements are attributed to contributions from the TiDB open-source com
 Some users told us TiDB could be challenging to install. It could take them from several hours to an entire day to deploy the system. Now, this is about to change. TiDB 4.0 introduces [TiUP](https://pingcap.com/docs/stable/how-to/deploy/orchestrated/tiup/), a component manager that streamlines installing and configuring a TiDB cluster into a few easy commands. With TiUP, you can [get your cluster up in just one minute](https://pingcap.com/blog/get-tidb-cluster-up-in-only-one-minute)! To deploy a 15-node production cluster, it takes only 45 seconds. Whatever your need or experience level, TiUP will get your cluster up and running quickly with a minimal learning curve.
 
 ```shell
-$ curl https://tiup-mirrors.pingcap.com/install.sh | sh  && tiup playground nightly --monitor
+curl https://tiup-mirrors.pingcap.com/install.sh | sh  && tiup playground nightly --monitor
 ```
 
-## Security matters! 
+## Security matters!
 
 ![TiDB security](media/tidb-security.jpg)
 <div class="caption-center"> TiDB security </div>
@@ -132,9 +132,9 @@ You might wonder: is TiDB 4.0 _really_ ready for production? Let's see a real-wo
 ![TiDB 4.0 in Zhihu](media/tidb-in-zhihu.jpg)
 <div class="caption-center"> TiDB 4.0 in Zhihu </div>
 
-[Zhihu](https://en.wikipedia.org/wiki/Zhihu), which means "Do you know?" in classical Chinese, is the Quora of China: a question-and-answer website where all kinds of questions are created, answered, edited, and organized by the community of its users. It is [China's biggest knowledge sharing platform](https://walkthechat.com/zhihu-chinas-largest-qa-platform-content-marketers-dream/). 
+[Zhihu](https://en.wikipedia.org/wiki/Zhihu), which means "Do you know?" in classical Chinese, is the Quora of China: a question-and-answer website where all kinds of questions are created, answered, edited, and organized by the community of its users. It is [China's biggest knowledge sharing platform](https://walkthechat.com/zhihu-chinas-largest-qa-platform-content-marketers-dream/).
 
-Last year, Zhihu adopted TiDB in their Moneta application (which stores posts users have already read), and they published a [post](https://pingcap.com/case-studies/lesson-learned-from-queries-over-1.3-trillion-rows-of-data-within-milliseconds-of-response-time-at-zhihu) that showed how they kept their query response times at milliseconds levels despite having over 1.3 trillion rows of data. 
+Last year, Zhihu adopted TiDB in their Moneta application (which stores posts users have already read), and they published a [post](https://pingcap.com/case-studies/lesson-learned-from-queries-over-1.3-trillion-rows-of-data-within-milliseconds-of-response-time-at-zhihu) that showed how they kept their query response times at milliseconds levels despite having over 1.3 trillion rows of data.
 
 Recently, Zhihu upgraded to TiDB 4.0. Their cluster has a capacity of 1 PB, and they've stored 471 TB of data in the cluster.
 
@@ -147,7 +147,7 @@ As we can see in these diagrams, compared with TiDB 3.0, TiDB 4.0 has reduced la
 
 ## Why is TiDB so popular?
 
-In the last year, we were often asked, "Why is TiDB so popular?" 
+In the last year, we were often asked, "Why is TiDB so popular?"
 
 ![The TiDB project's stars on GitHub](media/tidb-stars-on-github.jpg)
 <div class="caption-center"> The TiDB project's stars on GitHub </div>
@@ -177,7 +177,7 @@ Finally, let's talk about our experience in chaos engineering. There is a common
 
 The figure above graphically represents the connections within Amazon's and Netflix's microservices. These connections are actually much more complicated than spider webs. Therefore, we need a system to simulate all possible faults, let the faults happen continuously, and take precautions to enhance the robustness of the system.
 
-Therefore, when we were developing TiDB, we built a system called **[Chaos Mesh®](https://github.com/pingcap/chaos-mesh), a cloud-native Chaos Engineering platform that orchestrates chaos experiments in Kubernetes environments. It features all-around fault injection methods for complex systems in Kubernetes, covering faults in the Pod, the network, the file system, and even the kernel**. 
+Therefore, when we were developing TiDB, we built a system called **[Chaos Mesh®](https://github.com/pingcap/chaos-mesh), a cloud-native Chaos Engineering platform that orchestrates chaos experiments in Kubernetes environments. It features all-around fault injection methods for complex systems in Kubernetes, covering faults in the Pod, the network, the file system, and even the kernel**.
 
 For example, Chaos Mesh can simulate a disk failure. In our test environment, if the disk breaks every minute, the network is isolated every minute. Although this situation rarely occurs in reality, if it does, it causes a catastrophic failure.
 
@@ -190,4 +190,4 @@ When we're developing TiDB, we use Chaos Mesh to test TiDB. TiDB 4.0 received ve
 
 TiDB is no longer just a database product. It has become the cornerstone of many systems. Before you use it, you can refer to other people's [experiences or solutions](https://pingcap.com/case-studies). We'll be posting more articles about [TiDB DevCon 2020](https://pingcap.com/community/devcon2020/), so stay tuned.
 
-You're welcome to [try TiDB](https://docs.pingcap.com/tidb/v4.0/release-4.0-ga), join our [community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog), and send us your feedback. 
+You're welcome to [try TiDB](https://docs.pingcap.com/tidb/v4.0/release-4.0-ga), join our [community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog), and send us your feedback.

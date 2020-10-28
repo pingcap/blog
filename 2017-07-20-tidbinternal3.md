@@ -8,21 +8,19 @@ aliases: ['/blog/2017/07/20/tidbinternal3/']
 categories: ['Engineering']
 ---
 
-<span id="top"></span>
-
 From Li SHEN: shenli@pingcap.com
 
 ## Table of Content
 
-+ [Why scheduling](#why)
-+ [The Requirements of Scheduling](#requirement)
-+ [The Basic Operations of Scheduling](#basic)
-+ [Information Collecting](#collection)
-+ [The Policy of Scheduling](#policy)
-+ [The implementation of Scheduling](#implementation)
++ [Why scheduling](#why-scheduling)
++ [The Requirements of Scheduling](#the-requirements-of-scheduling)
++ [The Basic Operations of Scheduling](#the-basic-operations-of-scheduling)
++ [Information Collecting](#information-collecting)
++ [The Policy of Scheduling](#the-policy-of-scheduling)
++ [The implementation of Scheduling](#the-implementation-of-scheduling)
 + [Summary](#summary)
 
-## <span id="why">Why scheduling?</span>
+## Why scheduling?
 
 From [the first blog of TiDB internal](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/), we know that TiKV cluster is the distributed KV storage engine of TiDB database. Data is replicated and managed in Regions and each Region has multiple Replicas distributed on different TiKV nodes. Among these replicas, Leader is in charge of read/write and Follower synchronizes the raft log sent by Leader. Now, please think about the following questions:
 
@@ -39,7 +37,7 @@ It is easy to solve the above questions one by one, but once mixed up, it become
 
 [Back to the top](#top)
 
-## <span id="requirement">The Requirements of Scheduling</span>
+## The Requirements of Scheduling
 
 I want to categorize and sort out the previously listed questions. In general, there are two types:
 
@@ -64,7 +62,7 @@ To meet these needs, we need to, first of all, collect enough information, such 
 
 [Back to the top](#top)
 
-## <span id="basic">The Basic Operations of Scheduling</span>
+## The Basic Operations of Scheduling
 
 The basic operations of schedule are the simplest. In other word, what we can do to meet the schedule policy. This is the essence of the whole scheduler.
 The previous scheduler requirements seem to be complicated, but can be generalized into 3 operations:
@@ -82,14 +80,14 @@ The Raft protocol happens to meet these requirements: the `AddReplica`, `RemoveR
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Internal (III) - Scheduling', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
-## <span id="collection">Information Collecting</span>
+## Information Collecting
 
 Schedule depends on the information gathering of the whole cluster. Simply put, we need to know the state of each TiKV node and each Region. TiKV cluster reports two kinds of information to PD:
 
 + Each TiKV node regularly reports the overall information of nodes to PD
 
  There are heartbeats between TiKV Store and PD. On the one hand, PD checks whether each Store is active or if there are newly-added Stores through heartbeats. On the other hand, heartbeats carry the state information of this Store, mainly including:
-  
+
 - total disk capacity
 - free disk capacity
 - the number of Regions
@@ -111,7 +109,7 @@ Through these two kinds of heartbeats, PD gathers the information of the whole c
 
 [Back to the top](#top)
 
-## <span id="policy">The Policy of Scheduling</span>
+## The Policy of Scheduling
 
 After gathering information, PD needs some policies to draw up a concrete schedule plan.
 
@@ -158,13 +156,13 @@ As the data storage capacity of each replica is fixed, if we maintain the balanc
 
 [Back to the top](#top)
 
-## <span id="implementation">The implementation of Scheduling</span>
+## The implementation of Scheduling
 
 Now let's see the schedule process.
 
 PD gets the detail data of the cluster by constantly gathering information through heartbeats of Store or Leader. Based on this information and the schedule policies, PD generates the operating sequence, and then checks whether there is an operation to be performed on this Region when receiving a heartbeat sent by the Region Leader. PD returns the upcoming operation to Region Leader through the reply message of the heartbeat and then monitors the execution result in the next heartbeat. These operations are just suggestions to Region Leader, which are not guaranteed to be executed. It is the Region Leader that decides to whether and when to execute according to its current state.
 
-## <span id="summary">Summary</span>
+## Summary
 
 This blog discloses information you might not find elsewhere. We hope that you've had a better understanding about what needs to be considered to build a distributed storage system for scheduling and how to decouple policies and implementation to support a more flexible expansion of policy.
 

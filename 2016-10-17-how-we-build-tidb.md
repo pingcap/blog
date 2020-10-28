@@ -8,36 +8,36 @@ aliases: ['/blog/2016/10/17/how-we-build-tidb/']
 categories: ['Engineering']
 ---
 
-<span id="top">This is the speech Max Liu gave at **Percona Live Open Source Database Conference 2016**. </span>
+This is the speech Max Liu gave at **Percona Live Open Source Database Conference 2016**.
 
 The slides are [here](https://www.percona.com/live/plam16/sessions/how-we-build-tidb).
 
-+ [Speaker introduction](#1)
-+ [Why another database?](#2)
-+ [What to build?](#3)
-+ [How to design?](#4)
-  + [The principles or the philosophy](#5)
-    + [Disaster recovery](#6)
-    + [Easy to use](#7)
-    + [The community and ecosystem](#8)
-  + [Loose coupling – the logical architecture](#9)
-  + [The alternatives](#10)
-+ [How to develop](#11)
-  + [The architecture](#12)
-  + [TiKV core technologies](#13)
-    + [TiKV software stack](#14)
-    + [Placement Driver](#15)
-    + [Raft](#16)
-    + [MVCC](#17)
-    + [Transaction](#18)
-  + [TiDB core technologies](#19)
-    + [Mapping table data to Key-Value store](#20)
-    + [Predicate push-down](#21)
-    + [Schema changes](#22)
-+ [How to test?](#23)
-+ [The future plan](#24)
++ [Speaker introduction](#speaker-introduction)
++ [Why another database?](#why-another-database)
++ [What to build?](#what-to-build)
++ [How to design?](#how-to-design)
+  + [The principles or the philosophy](#the-principles-or-the-philosophy)
+    + [Disaster recovery](#disaster-recovery)
+    + [Easy to use](#easy-to-use)
+    + [The community and ecosystem](#the-community-and-ecosystem)
+  + [Loose coupling – the logical architecture](#loose-coupling--the-logical-architecture)
+  + [The alternatives](#the-alternatives)
++ [How to develop](#how-to-develop)
+  + [The architecture](#the-architecture)
+  + [TiKV core technologies](#tikv-core-technologies)
+    + [TiKV software stack](#tikv-software-stack)
+    + [Placement Driver](#placement-driver)
+    + [Raft](#raft)
+    + [MVCC](#mvcc)
+    + [Transaction](#transaction)
+  + [TiDB core technologies](#tidb-core-technologies)
+    + [Mapping table data to Key-Value store](#mapping-table-data-to-key-value-store)
+    + [Predicate push-down](#predicate-push-down)
+    + [Schema changes](#schema-changes)
++ [How to test?](#how-to-test)
++ [The future plan](#the-future-plan)
 
-## <span id="1">Speaker introduction</span>
+## Speaker introduction
 
 First, about me. I am an infrastructure engineer and I am also the CEO of PingCAP. Currently, my team and I are working on two open source projects: TiDB and TiKV. Ti is short for Titanium, which is a chemical element known for its corrosion resistance and it is widely used in high-end technologies.
 
@@ -51,7 +51,7 @@ So today we will cover the following topics:
 
 [Back to the top](#top)
 
-## <span id="2">Why another database</span>
+## Why another database
 
 Before we start, let&#39;s go back to the very beginning and ask yourself a question: Why another database. We all know that there are many databases, such as the traditional Relational database and NoSQL. So why another one?
 
@@ -61,7 +61,7 @@ Before we start, let&#39;s go back to the very beginning and ask yourself a ques
 
 [Back to the top](#top)
 
-## <span id="3">What to build?</span>
+## What to build?
 
 So we are building a NewSQL database with the following features:
 
@@ -74,7 +74,7 @@ In short, we want to build a distributed, consistent, scalable, SQL Database. We
 
 [Back to the top](#top)
 
-## <span id="4">How to design?</span>
+## How to design?
 
 Now we have a clear picture of what kind of database we want to build, the next step is how, how to design it, how to develop it and how to test it. In the next few slides, I am going to talk about how to design TiDB.
 
@@ -82,7 +82,7 @@ In this section, I will introduce how we design TiDB, including the principles, 
 
 [Back to the top](#top)
 
-## <span id="5">The principles or the philosophy</span>
+## The principles or the philosophy
 
 Before we design, we have several principles or philosophy in mind:
 
@@ -96,13 +96,13 @@ Before we design, we have several principles or philosophy in mind:
 
 [Back to the top](#top)
 
-### <span id="6">Disaster recovery</span>
+### Disaster recovery
 
 The first and foremost design principle is to build a database where no data is lost. To ensure the safety of the data, we found that multiple replicas are just not enough and we still need to keep Binlog in both the SQL layer and the Key-Value layer. And of course, we must make sure that we always have a backup in case the entire cluster crashes.
 
 [Back to the top](#top)
 
-### <span id="7">Easy to use</span>
+### Easy to use
 
 The second design principle is about the usability. After years of struggling among different workarounds and trade-offs, we are fully aware of the pain points of the users. So when it comes to us to design a database, we are going to make it easy to use and there should be no scary sharding keys, no partition, no explicit handmade local index or global index, and making scale transparent to the users.
 
@@ -112,13 +112,13 @@ The second design principle is about the usability. After years of struggling am
 
 The database we are building also needs to be cross-platform. The database can run on the on premise devices. Here is a picture of TiDB running on a Raspberry Pi cluster with 20 nodes.
 
-![TiDB running on a Raspberry Pi cluster with 20 nodes](media/how-we-build-tidb-1.png)
+![TiDB running on a Raspberry Pi cluster with 20 nodes](https://download.pingcap.com/images/blog/how-we-build-tidb-1.png)
 
 It can also support the popular containers such as Docker. And we are making it work with Kubernetes. Of course, it can be run on any cloud platform, whether it&#39;s public, private or hybrid.
 
 [Back to the top](#top)
 
-### <span id="8">The community and ecosystem</span>
+### The community and ecosystem
 
 The next design principle is about the community and ecosystem. We want to stand on the shoulders of the giants instead of creating something new and scary. TiDB supports MySQL protocol and is compatible with most of the MySQL drivers (ODBC, JDBC) and SQL syntax, MySQL clients and ORM, and the following MySQL management tools and bench tools.
 
@@ -158,11 +158,11 @@ So overall, we&#39;d like to be a part of the big open source community and woul
 
 [Back to the top](#top)
 
-## <span id="9">Loose coupling – the logical architecture</span>
+## Loose coupling – the logical architecture
 
 This diagram shows the logical architecture of the database.
 
-![TiDB's logical architecture](media/how-we-build-tidb-2.png)
+![TiDB's logical architecture](https://download.pingcap.com/images/blog/how-we-build-tidb-2.png)
 
 As I mentioned earlier about our design principle, we are adopting the loose coupling approach. From the diagram, we can see that it is highly-layered. We have TiDB to work as the MySQL server, and TiKV to work as the distributed Key-Value layer. Inside TiDB, we have the MySQL Server layer and the SQL layer. Inside TiKV, we have transaction, MVCC, Raft, and the Local Key-Value Storage, RocksDB.
 
@@ -172,7 +172,7 @@ From the architecture, you can also see that we don&#39;t have a distributed fil
 
 [Back to the top](#top)
 
-## <span id="10">The alternatives</span>
+## The alternatives
 
 In the next few slides, I am going to talk about design decisions about using the alternative technologies compared with Spanner and F1, as well as the pros and cons of these alternatives.
 
@@ -212,15 +212,15 @@ That&#39;s all about how we design TiDB. I have introduced the principles, the a
 
 [Back to the top](#top)
 
-## <span id="11">How to develop</span>
+## How to develop
 
 In this section, I will introduce the architecture and the core technologies for TiKV and TiDB.
 
 [Back to the top](#top)
 
-## <span id="12">The architecture</span>
+## The architecture
 
-![TiKV architecture](media/how-we-build-tidb-3.png)
+![TiKV architecture](https://download.pingcap.com/images/blog/how-we-build-tidb-3.png)
 
 About TiKV architecture: Let&#39;s take a look from the bottom.
 
@@ -231,7 +231,7 @@ About TiKV architecture: Let&#39;s take a look from the bottom.
 - KV API: it&#39;s a set of programming interfaces and allows developers to put or get data.
 - Placement Driver: Placement driver is a very important part, and it helps to achieve geo-replication, horizontal scalability and consistent distributed transactions. It&#39;s kind-of the brain of the cluster.
 
-![TiDB architecture](media/how-we-build-tidb-4.png)
+![TiDB architecture](https://download.pingcap.com/images/blog/how-we-build-tidb-4.png)
 
 About the TiDB architecture:
 
@@ -242,7 +242,7 @@ About the TiDB architecture:
 
 [Back to the top](#top)
 
-## <span id="13">TiKV core technologies</span>
+## TiKV core technologies
 
 Let&#39;s take a look at the TiKV core technologies.
 
@@ -250,17 +250,17 @@ We build TiKV to be a distributed key-value layer to store data.
 
 [Back to the top](#top)
 
-### <span id="14"> TiKV software stack</span>
+### TiKV software stack
 
 Let&#39;s take a look at the software stack.
 
-![TiKV software stack](media/how-we-build-tidb-5.png)
+![TiKV software stack](https://download.pingcap.com/images/blog/how-we-build-tidb-5.png)
 
  First, we can see that there is a client connecting to TiKV. We also have several nodes. And within each node, we have stores, one per physical disk. Within each store, we have many regions. Region is the basic unit of data movement and is replicated by Raft. Each region is replicated to several nodes.  A Raft group consists of the replicas of one Region. And region is more like a logical concept, in a single store, many regions may share the same Rocksdb instance.
 
 [Back to the top](#top)
 
-### <span id="15">Placement Driver</span>
+### Placement Driver
 
 About Placement Driver, this concept comes from the original paper of Google Spanner. It provides the God&#39;s view of the entire cluster. It has the following responsibilities:
 
@@ -273,11 +273,10 @@ And thanks to Raft, within itself, Placement Driver is a cluster too and it is a
 [Back to the top](#top)
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('How we build TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
-    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How we build TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+    <TrackGABtns blogName="How we build TiDB" />
 </div>
 
-### <span id="16">Raft</span>
+### Raft
 
 In TiKV, we use the Raft for scaling and replication. We have multiple Raft groups. Workload is distributed among multiple regions. There could be millions of regions in one big cluster. Once a region is too large, it will be split into two smaller regions, just like cell division.
 
@@ -287,21 +286,21 @@ In the next few slides, I will show you the scaling-out process.
 
 #### Scale-out
 
-![Step 1 of the scaling-out process in TiKV](media/how-we-build-tidb-6.png)
+![Step 1 of the scaling-out process in TiKV](https://download.pingcap.com/images/blog/how-we-build-tidb-6.png)
 
 In this diagram, we have 4 nodes, namely Node A, Node B, Node C, and Node D. And we have 3 regions, Region 1, Region 2 and Region 3. We can see that there are 3 regions on Node A.
 
 To balance the data, we add a new node, Node E. The first step we do is to transfer the leadership from the replica of Region 1 on Node A to the replica on Node B.
 
-![Step 2 of the scaling-out process in TiKV](media/how-we-build-tidb-7.png)
+![Step 2 of the scaling-out process in TiKV](https://download.pingcap.com/images/blog/how-we-build-tidb-7.png)
 
 Step 2, we add a Replica of Region 1 to Node E.
 
-![Step 3 of the scaling-out process in TiKV](media/how-we-build-tidb-8.png)
+![Step 3 of the scaling-out process in TiKV](https://download.pingcap.com/images/blog/how-we-build-tidb-8.png)
 
 Step 3, remove the replica of Region 1 from Node A.
 
-![Step 4 of the scaling-out process in TiKV](media/how-we-build-tidb-9.png)
+![Step 4 of the scaling-out process in TiKV](https://download.pingcap.com/images/blog/how-we-build-tidb-9.png)
 
 Now the data is balanced and the cluster scales out from 4 nodes to 5 nodes.
 
@@ -309,7 +308,7 @@ This is how TiKV scales out. Let&#39;s see how it handles auto-failover.
 
 [Back to the top](#top)
 
-### <span id="17">MVCC</span>
+### MVCC
 
 - Each transaction sees a snapshot of the database at the beginning time of this transaction. Any changes made by this transaction will not be seen by other transactions until the transaction is committed.
 - Data is tagged with versions in the following format: Key\_version: value.
@@ -317,7 +316,7 @@ This is how TiKV scales out. Let&#39;s see how it handles auto-failover.
 
 [Back to the top](#top)
 
-### <span id="18">Transaction</span>
+### Transaction
 
 These are Transaction APIs. As a programmer, I want to write code like this:
 
@@ -345,31 +344,31 @@ Let&#39;s see an example: If Bob wants transfer 7 dollars to Joe.
 
 1. Initial state: Joe has 2 dollars in his account, Bob has 10 dollars.
 
-   ![Transaction example 1](media/how-we-build-tidb-10.png)
+   ![Transaction example 1](https://download.pingcap.com/images/blog/how-we-build-tidb-10.png)
 
 2. The transfer transaction begins by locking Bob&#39;s account by writing the lock column. This lock is the primary for the transaction. The transaction also writes data at its start timestamp, 7.
 
-   ![Transaction example 2](media/how-we-build-tidb-11.png)
+   ![Transaction example 2](https://download.pingcap.com/images/blog/how-we-build-tidb-11.png)
 
 3. The transaction now locks Joe&#39;s account and writes Joe&#39;s new balance. The lock is secondary for the transaction and contains a reference to the primary lock; So we can use this secondary lock to find the primary lock.
 
-   ![Transaction example 3](media/how-we-build-tidb-12.png)
+   ![Transaction example 3](https://download.pingcap.com/images/blog/how-we-build-tidb-12.png)
 
 4. The transaction has now reached the commit point: it erases the primary lock and replaces it with a write record at a new timestamp (called the commit timestamp): 8. The write record contains a pointer to the timestamp where the data is stored. Future readers of the column &quot;bal&quot; in row &quot;Bob&quot; will see the value $3.
 
-   ![Transaction example 4](media/how-we-build-tidb-13.png)
+   ![Transaction example 4](https://download.pingcap.com/images/blog/how-we-build-tidb-13.png)
 
 5. The transaction completes by adding write records and deleting locks at the secondary cells. In this case, there is only one secondary: Joe.
 
-   ![Transaction example 5](media/how-we-build-tidb-14.png)
+   ![Transaction example 5](https://download.pingcap.com/images/blog/how-we-build-tidb-14.png)
 
    So this is how it looks like when the transaction is done.
 
-   ![Transaction example 6](media/how-we-build-tidb-15.png)
+   ![Transaction example 6](https://download.pingcap.com/images/blog/how-we-build-tidb-15.png)
 
 [Back to the top](#top)
 
-## <span id="19">TiDB core technologies</span>
+## TiDB core technologies
 
 That&#39;s it about the TiKV core technologies. Let&#39;s move on to TiDB.
 
@@ -381,7 +380,7 @@ TiDB has a protocol layer that is compatible with MySQL. And it will do the foll
 
 [Back to the top](#top)
 
-### <span id="20">Mapping table data to Key-Value store</span>
+### Mapping table data to Key-Value store
 
 Let&#39;s use an example to show how a SQL table is mapped to Key-Value pairs.
 
@@ -393,27 +392,27 @@ INSERT INTO user VALUES (2, &quot;tom&quot;, &quot;tom@pingcap.com&quot;);
 
 If we map this table to key-value pairs, it should be put in the following way.
 
-![Mapping table data to Key-Value pairs](media/how-we-build-tidb-16.png)
+![Mapping table data to Key-Value pairs](https://download.pingcap.com/images/blog/how-we-build-tidb-16.png)
 
 Of course, TiDB supports secondary index. It&#39;s a global index. TiDB puts data and index updates into the same transaction, so all the indexes in TiDB are transactional and fully consistent. And it&#39;s transparent to the users.
 
 Indexes are just key-value pairs that the values point to the row key. After we create indexes for the user name, the key-value storage looks like this:
 
-![Key-Value pairs](media/how-we-build-tidb-17.png)
+![Key-Value pairs](https://download.pingcap.com/images/blog/how-we-build-tidb-17.png)
 
 The key of the index consists of two parts: the name and the user id as the suffix. So here &quot;bob&quot; is the name, and 1 is the user id, and the value points to the row key.
 
 [Back to the top](#top)
 
-### <span id="21">Predicate push-down</span>
+### Predicate push-down
 
 For some operations like count some columns in a table, TiDB pushes down these operations to the corresponding TiKV nodes, the TiKV nodes do the computing and then TiDB merges the final results. This diagram shows the process of a simple predicate push-down.
 
-![Predicate push-down](media/how-we-build-tidb-18.png)
+![Predicate push-down](https://download.pingcap.com/images/blog/how-we-build-tidb-18.png)
 
 [Back to the top](#top)
 
-### <span id="22">Schema changes</span>
+### Schema changes
 
 This slide is about schema changes. Why online schema change is a must-have feature? It&#39;s because we need the full data availability all the time and minimal performance impact so that the ops people can have a good-night&#39;s sleep.
 
@@ -449,11 +448,11 @@ But TiDB is also different from Google F1 at the following aspects:
 
 One more thing before schema change. Let&#39;s take a look at the big picture of SQL in TiDB:
 
-![SQL in TiDB](media/how-we-build-tidb-19.png)
+![SQL in TiDB](https://download.pingcap.com/images/blog/how-we-build-tidb-19.png)
 
 Here is an overview of a TiDB instance during a schema change:
 
-![A TiDB instance during a schema change](media/how-we-build-tidb-20.png)
+![A TiDB instance during a schema change](https://download.pingcap.com/images/blog/how-we-build-tidb-20.png)
 
 [Back to the top](#top)
 
@@ -509,7 +508,7 @@ then Step 4,  switch to the final state where all of the new queries can use the
 
 Here is one of the screenshots for adding an index.
 
-![Adding an index](media/how-we-build-tidb-21.png)
+![Adding an index](https://download.pingcap.com/images/blog/how-we-build-tidb-21.png)
 
 We can use any MySQL client to query the status of the online DDL job. Just simply run the &quot;show status&quot; statement and we can see that the current state is &quot;delete-only&quot; as I highlighted and that the action is &quot;add index&quot;. There is some other information such as who is doing the DDL job, the state of the current job and the current schema version.
 
@@ -519,11 +518,11 @@ We can use any MySQL client to query the status of the online DDL job. Just simp
 
 This screenshot shows that the current state is &quot;write reorganization&quot; as I highlighted.
 
-![Status of adding index](media/how-we-build-tidb-22.png)
+![Status of adding index](https://download.pingcap.com/images/blog/how-we-build-tidb-22.png)
 
 [Back to the top](#top)
 
-## <span id="23">How to test?</span>
+## How to test?
 
 In this section, I will introduce how we are testing the system.
 
@@ -534,7 +533,7 @@ In this section, I will introduce how we are testing the system.
 
 [Back to the top](#top)
 
-## <span id="24">The future plan</span>
+## The future plan
 
 Here is our future plan:
 

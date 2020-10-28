@@ -8,8 +8,6 @@ aliases: ['/blog/2017/09/08/rocksdbbug/']
 categories: ['Engineering']
 ---
 
-<span id="top"></span>
-
 Data was corrupted. A cluster panicked. The crime scene was compromised. What happened? Detective Huang (huachao@pingcap.com) went all lengths to locate the criminal and solved it once and for all.
 
 ## Background
