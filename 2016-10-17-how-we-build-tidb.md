@@ -250,7 +250,7 @@ We build TiKV to be a distributed key-value layer to store data.
 
 [Back to the top](#top)
 
-###  TiKV software stack
+### TiKV software stack
 
 Let&#39;s take a look at the software stack.
 
