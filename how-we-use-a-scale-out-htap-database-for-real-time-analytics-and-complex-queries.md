@@ -60,7 +60,7 @@ The figure below shows our infrastructure before we used TiDB. In terms of appli
 
 Let's review our three application scenarios in a non-TiDB world.
 
-### Data reports
+### Data reporting
 
 For data reports, we used the Hadoop data warehouse to do some pre-aggregation of the data, and then aggregated the high-dimensional data and put it in MySQL for query. For data reports, the data in Hadoop was pre-aggregated in [T+1](https://www.investopedia.com/terms/t/tplus1.asp) mode through Hive and put into MySQL every day. Then, we built some business intelligence (BI) systems to graphically display the report queries, so our analysts could see their customized reports.
 
@@ -83,7 +83,7 @@ This is the complexity of operation and maintenance.
 
 In addition, if I want to run a transaction on a sharded MySQL database, can I use a sharding middleware? If I want to do a `JOIN`, or even a `GROUP BY` aggregate query, is it possible with a sharding middleware? It may be possible, but it will not be simple, so we must find a solution that can easily do complex, distributed queries.
 
-### Anti-fraud data analytics
+### Anti-fraud analytics
 
 In the anti-fraud data analytics scenario, we want to reduce latency between data ingestion and processing. Before TiDB, we wrote data to the backend data warehouse in T+1 mode. The time to insights didn't meet our requirement. Fraud can happen very quickly. It's important to see the details of the issued coupon in seconds, so that we can take measures immediately.
 
