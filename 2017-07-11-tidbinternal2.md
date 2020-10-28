@@ -12,7 +12,7 @@ From Li SHEN: shenli@pingcap.com
 
 ## Table of Content
 
-+ [Mapping the Relational Model to the Key-Value Model](#mapping-the-relational-model-to-the-keyvalue-model)
++ [Mapping the Relational Model to the Key-Value Model](#mapping-the-relational-model-to-the-key-value-model)
 + [Metadata Management](#metadata-management)
 + [Architecture of SQL on Key-Value](#architecture-of-sql-on-keyvalue)
 + [SQL Computing](#sql-computing)

@@ -14,7 +14,7 @@ The slides are [here](https://www.percona.com/live/17/sites/default/files/slides
 
 - [Speaker introduction](#speaker-introduction)
 - [What would you do when…](#what-would-you-do-when)
-- [TiDB Project - Goal](#tidb-project---Goal)
+- [TiDB Project - Goal](#tidb-goal)
 - [Sofware Stack](#software-stack)
 - [Safe Split](#safe-split)
 - [Scale Out](#scale-out)
