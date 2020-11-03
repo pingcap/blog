@@ -4,7 +4,7 @@ author: ['Jun Yu']
 date: 2020-11-03
 summary: Financial companies have stringent requirements for high availability and disaster recovery, which many databases cannot meet. This article describes how TiDB addresses both these issues with a range of options that make it an excellent choice for the industry.
 tags: ['Backup and restore', 'Disaster recovery', 'High availability']
-categories: ['MySQL scalability']
+categories: ['MySQL Scalability']
 image: /images/blog/financial-industry-disaster-recovery.png
 ---
 
