@@ -115,7 +115,7 @@ Because Li Auto's applications heavily depend on DM, they used TiUP to upgrade D
 
 DM 2.0 reduces the risks of replicating data from MySQL to TiDB in real time, avoids data loss during data replication, and guarantees service high availability.
 
-### Give DM 2.0 a try
+## Give DM 2.0 a try
 
 You can [use TiUP to quickly deploy a DM cluster](https://docs.pingcap.com/tidb-data-migration/v2.0/deploy-a-dm-cluster-using-tiup) and [create a data migration task](https://docs.pingcap.com/tidb-data-migration/v2.0/quick-start-create-task) to migrate data from MySQL to TiDB. If you're using a DM 1.0 cluster, you can [use TiUP to import and upgrade it to 2.0](https://docs.pingcap.com/tidb-data-migration/v2.0/maintain-dm-using-tiup#import-and-upgrade-a-dm-10-cluster-deployed-using-dm-ansible).
 
