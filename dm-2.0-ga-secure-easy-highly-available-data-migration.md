@@ -65,7 +65,7 @@ Beside DM-workers register automatically, you don't have to restart DM-masters, 
 
 #### Improved exception handling and task automation
 
-In DM 2.0, you can use the `[query-status](https://docs.pingcap.com/tidb-data-migration/stable/query-status)` command to identify potential exceptions during data migration. For some common exceptions, you can get "Workaround" information on how to handle them. DM 2.0 introduces the `[handle-error](https://docs.pingcap.com/tidb-data-migration/stable/handle-failed-sql-statements)` command to replace DM 1.0's `sql-skip` and `sql-replace` commands. This simplifies the handling process for incorrect SQL statements during data migration.
+In DM 2.0, you can use the [`query-status`](https://docs.pingcap.com/tidb-data-migration/stable/query-status) command to identify potential exceptions during data migration. For some common exceptions, you can get "Workaround" information on how to handle them. DM 2.0 introduces the [`handle-error`](https://docs.pingcap.com/tidb-data-migration/stable/handle-failed-sql-statements) command to replace DM 1.0's `sql-skip` and `sql-replace` commands. This simplifies the handling process for incorrect SQL statements during data migration.
 
 In addition, DM 2.0 automatically processes the corresponding `sql_mode` in the fully exported data and incremental binlog data. This greatly reduces the need for manual configuration and intervention. DM 2.0 makes a series of features easier to use, including:
 
