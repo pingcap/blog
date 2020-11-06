@@ -98,7 +98,7 @@ Choosing a technology is also choosing the ecosystem that comes with it. MySQL h
 
 After a thorough review, **PalFish decided to go all-in with TiDB**. We no longer add new databases or tables to MongoDB, and instead migrated all big tables from MongoDB to TiDB.
 
-## How we 're using TiDB
+## How we're using TiDB
 
 Here I 'd like to share two typical scenarios of TiDB in PalFish: the online class data storage and the trading system.
 
