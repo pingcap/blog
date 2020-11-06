@@ -6,6 +6,7 @@ summary: DM 2.0 has reached general availability. It supports highly available m
 tags: ['Ecosystem tools', 'Data migration', 'High availability', 'Announcement']
 categories: ['Engineering']
 image: /images/blog/data-migration-2.0.jpg
+press_release: true
 ---
 
 ![Data migration, database migration tool](media/data-migration-2.0.jpg)

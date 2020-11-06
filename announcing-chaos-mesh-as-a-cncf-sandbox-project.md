@@ -6,6 +6,7 @@ summary: We're thrilled to announce that Chaos Mesh®, our open-sourced Chaos En
 tags: ['Chaos Mesh', 'Announcement', 'CNCF']
 categories: ['Engineering']
 image: /images/blog/chaos-mesh-cncf-sandbox.jpg
+press_release: true
 ---
 
 ![HTAP database](media/chaos-mesh-cncf-sandbox.jpg) 

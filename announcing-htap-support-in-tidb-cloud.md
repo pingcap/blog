@@ -6,6 +6,7 @@ summary: Today, we're glad to announce that TiDB Cloud, our fully managed databa
 tags: ['TiDB Cloud', 'HTAP', 'Real-time analytics', 'Announcement']
 categories: ['HTAP']
 image: /images/blog/htap-tidb-cloud.jpg
+press_release: true
 ---
 
 ![HTAP support in TiDB Cloud](media/htap-tidb-cloud.jpg)

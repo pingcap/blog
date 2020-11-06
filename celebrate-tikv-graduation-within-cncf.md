@@ -6,6 +6,7 @@ summary: The Cloud Native Computing Foundation (CNCF) today just announced that 
 tags: ['TiKV', 'Announcement', 'CNCF']
 categories: ['Open Source Community']
 image: /images/blog/cloud-native-tikv-cncf-graduation.jpg
+press_release: true
 ---
 
 ![TiKV, a cloud-native database, graduates from CNCF](media/cloud-native-tikv-cncf-graduation.jpg)       
