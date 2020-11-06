@@ -6,6 +6,7 @@ summary: TiCDC is TiDB's change data capture framework. It is now generally avai
 tags: ['Ecosystem tools', 'Announcement']
 categories: ['Engineering']
 image: /images/blog/change-data-capture-ga.jpg
+press_release: true
 ---
 
 ![CDC in database](media/change-data-capture-ga.jpg)

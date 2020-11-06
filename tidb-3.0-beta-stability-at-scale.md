@@ -5,6 +5,7 @@ date: 2019-01-24
 summary: This post introduces the key new features of TiDB 3.0 Beta.
 tags: ['TiDB', 'MySQL Scalability', 'HTAP', 'Open Source Community']
 categories: ['MySQL Scalability']
+press_release: true
 ---
 
 Author: Li Shen, VP of Engineering at PingCAP

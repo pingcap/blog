@@ -5,6 +5,7 @@ summary: TiDB is compatible with MySQL, strong consistent and highly available.
 tags: ['TiDB', 'Product', 'Golang', 'MySQL Scalability', 'HTAP']
 categories: ['MySQL Scalability']
 aliases: ['/blog/2017/10/17/announcement/']
+press_release: true
 ---
 
 ## PingCAP Launches TiDB 1.0, A Scalable Hybrid Database Solution

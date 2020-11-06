@@ -6,6 +6,7 @@ summary: PingCAP has upgraded and adjusted the TiDB community organization struc
 tags: ['TiDB','Open Source Community']
 categories: ['Open Source Community']
 image: /images/blog/tidb-community-upgrade.png
+press_release: true
 ---
 
 ![TiDB community upgrade](media/tidb-community-upgrade.png)

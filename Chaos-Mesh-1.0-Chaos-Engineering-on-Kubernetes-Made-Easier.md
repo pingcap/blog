@@ -6,6 +6,7 @@ summary: Today, we are proud to announce the general availability of Chaos MeshÂ
 image: /images/blog/chaos-mesh-1.0.png
 tags: [Announcement, Chaos Mesh, Chaos Engineering]
 categories: ['Engineering']
+press_release: true
 ---
 
 ![Chaos-Mesh-1.0 - Chaos-Engineering-on-Kubernetes-Made-Easier](media/chaos-mesh-1.0.png)

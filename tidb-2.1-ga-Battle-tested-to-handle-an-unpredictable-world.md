@@ -5,6 +5,7 @@ date: 2018-12-04
 summary: PingCAP, a leading distributed database company that created the popular MySQL-compatible cloud-native NewSQL database TiDB, announces that TiDB 2.1 is ready for General Availability.
 tags: ['TiDB', 'MySQL Scalability', 'HTAP', 'Open Source Community']
 categories: ['MySQL Scalability']
+press_release: true
 ---
 
 Today, we are proud to announce that TiDB 2.1 is ready for General Availability. TiDB is an open-source NewSQL Hybrid Transactional and Analytical Processing (HTAP) database -- [one of the most popular](https://github.com/pingcap/tidb) and active database products on GitHub. It is designed to provide elastic horizontal scalability, strong consistency, and high availability. TiDB is MySQL-compatible and serves as a single relational database solution for both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workloads.

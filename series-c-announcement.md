@@ -5,6 +5,7 @@ date: 2018-09-11
 summary: PingCAP, a leading distributed database company that created the popular cloud-native NewSQL database TiDB, announces a $50 million Series C funding round led by FOSUN and Morningside Venture Capital. All previous investors—China Growth Capital, Yunqi Partners, Matrix Partners China, and others—have also participated in this round. PingCAP plans to use this new capital to expand the TiDB ecosystem globally, build cross-cloud product offering, and invest in innovation of its core technology.
 tags: ['TiDB', 'PingCAP']
 categories: ['Engineering']
+press_release: true
 ---
 
 <i>Read the coverage on [**TechCrunch**](https://techcrunch.com/2018/09/11/tidb-developer-pingcap-wants-to-expand-in-north-america-after-raising-50m-series-c/), [**Business Insider**](https://markets.businessinsider.com/news/stocks/pingcap-raises-50-million-in-series-c-round-1027525459), [**SiliconANGLE**](https://siliconangle.com/2018/09/11/newsql-startup-pingcap-raises-50m-expand-tidb-ecosystem/)</i>

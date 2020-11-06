@@ -7,6 +7,7 @@ tags: ['Release', 'TiDB Cloud', 'HTAP', 'Cloud']
 categories: ['Engineering']
 image: /images/blog/htap-tidb-cloud-beta.jpg
 aliases: ['/blog/announcing-tidb-cloud-managed-as-a-service-and-in-the-marketplace/']
+press_release: true
 ---
 
 ![TiDB Cloud Beta](media/htap-tidb-cloud-beta.jpg)

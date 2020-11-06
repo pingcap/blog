@@ -6,6 +6,7 @@ summary: TiDB 4.0 has reached general availability. It's an elastic, real-time H
 tags: ['Release', 'Benchmark', 'HTAP', 'Cloud-native']
 categories: ['MySQL Scalability']
 image: /images/blog/htap-cloud-native-database.jpg
+press_release: true
 ---
 
 **Author:** Siddon Tang (Chief Architect at PingCAP)
