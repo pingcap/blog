@@ -57,9 +57,9 @@ When we conduct chaos experiments, it is vital that we keep strict control over 
 
 ## Try it out now
 
-You can quickly deploy Chaos Mesh in your Kubernetes environment through the `install.sh` script or the Helm tool. For specific installation steps, please refer to the [Chaos Mesh Getting Started](https://chaos-mesh.org/docs/1.0.0/installation/installation) document. In addition, thanks to the [Katakoda interactive tutorial](https://chaos-mesh.org/interactiveTutorial), you can also quickly get your hands on Chaos Mesh without having to deploy it.
+You can quickly deploy Chaos Mesh in your Kubernetes environment through the `install.sh` script or the Helm tool. For specific installation steps, please refer to the [Chaos Mesh Getting Started](https://chaos-mesh.org/docs/get_started/installation) document. In addition, thanks to the [Katakoda interactive tutorial](https://chaos-mesh.org/interactiveTutorial), you can also quickly get your hands on Chaos Mesh without having to deploy it.
 
-If you haven't upgraded to 1.0 GA, please refer to the [1.0 Release Notes](https://chaos-mesh.org/docs/1.0.0/releases/v1.0.0) for the changes and upgrade guidelines.
+If you haven't upgraded to 1.0 GA, please refer to the [1.0 Release Notes](https://chaos-mesh.org/docs/releases/v1.0.0) for the changes and upgrade guidelines.
 
 ## Thanks
 
