@@ -3,6 +3,7 @@ title: PingCAP Plants its Seed in Silicon Valley
 date: 2017-12-08
 summary: PingCAP, a cutting-edge distributed Hybrid Transactional/Analytical Processing (HTAP) database company, is excited to announce the opening of its Silicon Valley office, located at the GSV Labs in Redwood City, California.
 tags: ['TiDB', 'Golang', 'Open Source Community']
+aliases: ['/blog/silicon-valley-office-announcement/']
 categories: ['Open Source Community']
 press_release: true
 ---
