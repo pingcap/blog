@@ -50,7 +50,7 @@ After we analyzed our use scenarios, we realized that we needed a new database t
 * Big data ecosystem
 * Horizontal scalability, without intrusion into the application
 
-Viewing these requirements, we knew that NoSQL wouldn't be an option. To address massive amounts of data, NoSQL is designed to be “[basically available, soft state, eventual consistency](https://www.techopedia.com/definition/29164/basically-available-soft-state-eventual-consistency-base) (BASE)“—just the opposite of ACID. The lack of an ACID transactional capability limits the use scenarios of MongoDB, as well as other NoSQL databases. Besides, NoSQL doesn't support SQL, so we can't reuse the rich resources accumulated by other RDBMSs in the past few decades.
+Viewing these requirements, we knew that NoSQL wouldn't be an option. To address massive amounts of data, NoSQL is designed to be "[basically available, soft state, eventual consistency](https://www.techopedia.com/definition/29164/basically-available-soft-state-eventual-consistency-base) (BASE)"—just the opposite of ACID. The lack of an ACID transactional capability limits the use scenarios of MongoDB, as well as other NoSQL databases. Besides, NoSQL doesn't support SQL, so we can't reuse the rich resources accumulated by other RDBMSs in the past few decades.
 
 Bearing these in mind, we started the quest for the ideal database. And that's when TiDB was brought to our attention.
 
@@ -82,7 +82,7 @@ However, at PalFish, the real problem is that a standalone database can't handle
 
 Cost and efficiency were also important factors in our decision-making. At first glance, the hardware resources needed by TiDB are daunting. But we know that machines take up only a portion of the total cost—not all of it.
 
-TiDB needs more and better machines than MySQL does, but it also saves more time for developers and DBAs. Remember the rule of economy in the Unix philosophy? “Programmer time is expensive; conserve it in preference to machine time.” **At PalFish, we always expect the machine and software to do more, and our people to do less**. That's exactly what TiDB has to offer.
+TiDB needs more and better machines than MySQL does, but it also saves more time for developers and DBAs. Remember the rule of economy in the Unix philosophy? "Programmer time is expensive; conserve it in preference to machine time." **At PalFish, we always expect the machine and software to do more, and our people to do less**. That's exactly what TiDB has to offer.
 
 MySQL does provide high availability, but our DBA and infrastructure team needs to spend time on the implementation. MySQL can handle big tables, but the data sharding must be done by DBAs and engineers. It takes time—time that we could invest more wisely. With MySQL, the consumption of talent is also the cost: it's just not so apparent and tangible as the extra machines TiDB requires. As machines become cheaper and talent more expensive, we must be aware of such invisible expenses.
 
