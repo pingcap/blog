@@ -5,7 +5,7 @@ date: 2020-11-19
 summary: A senior architect at China Telecom Bestpay shared how TiDB, a MySQL-compatible, distributed SQL database, boosted the performance of their application system by 3–5 times.
 tags: ['MySQL compatibility', 'Scalability']
 url: /success-stories/how-we-process-data-five-times-more-efficiently-using-a-scale-out-mysql-alternative/
-customer: China Telecom
+customer: China Telecom Bestpay
 customerCategory: Financial Services
 categories: ['MySQL Scalability']
 logo: /images/blog/customers/china-telecom-bestpay-logo.png
