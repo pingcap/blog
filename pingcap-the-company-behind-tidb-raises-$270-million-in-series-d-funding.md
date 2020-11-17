@@ -5,6 +5,7 @@ date: 2020-11-17
 summary: With great pleasure, we are announcing that we have raised $270 million in Series D funding led by global investors. We are looking for more innovations, global expansion, and more team growth as we strive to build the database of the future.
 image: /images/blog/pingcap-raises-$270-million-in-series-d-funding.jpg
 tags: ['Announcement']
+press_release: true
 ---
 
 ![PingCAP raises $270 million in series D funding](media/pingcap-raises-$270-million-in-series-d-funding.jpg)
