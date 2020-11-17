@@ -172,7 +172,7 @@ Then import a Grafana dashboard, some useful dashboards:
 
 ## Benchmarking
 
-There are numerous ways to benchmark TiDB or TiKV, the most common are YCSB and Sysbench. There is also the [automated tests repo](https://github.com/pingcap/automated-tests), but that is not open source.
+There are numerous ways to benchmark TiDB or TiKV, the most common are YCSB and Sysbench. There is also the automated tests repo, but that is not open source.
 
 ### YCSB
 
