@@ -227,6 +227,6 @@ If you have trouble deploying TiDB on KubeSphere, contact us on [GitHub](https:/
 
 * [KubeSphere on GitHub](https://github.com/kubesphere/kubesphere)
 * [KubeSphere Documentation](https://kubesphere.io/docs/)
-* [TiDB on GitHub](https://github.com/ping/tidb)
+* [TiDB on GitHub](https://github.com/pingcap/tidb)
 * [TiDB Documentation](https://docs.pingcap.com/tidb/stable)
 * [TiDB Operator Documentation](https://docs.pingcap.com/tidb-in-kubernetes/stable)
