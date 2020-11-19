@@ -62,7 +62,7 @@ We must quickly optimize the database to meet the 2003 SQL standard as well as a
 | Task | Required completion time |
 |---|---|
 |Join multiple tables, and query less than 10 million rows in the result set.| <= 5 seconds|
-|Load data files in batches.|<= 30 minutes </br>(Example: 20 GB of data total)|
+|Load data files in batches.|<= 30 minutes <br/>(Example: 20 GB of data total)|
 |Delete 500,000 rows from hundreds of millions of rows.|<= 10 seconds|
 |Delete 20 million rows from 300 million rows.|<= 10 seconds|
 |Update 1 million rows among 300 million rows.|<= 5 minutes|
