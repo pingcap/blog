@@ -46,7 +46,8 @@ Go to the [`push down scalar functions` issue page](https://github.com/pingcap/t
 
 ### Step 2: Find the logic of corresponding implementation in TiDB
 
-Search the related `builtinXXXSig` (XXX is the function signature you want to implement) in the `expression` directory of TiDB.
+Search the related `builtinXXXSig` (XXX is the function signature you want to implement) in the [`expression`](https://github.com/pingcap/tidb/tree/master/expression) directory of TiDB.
+
 
 Take [`MultiplyIntUnsigned`](https://github.com/pingcap/tikv/pull/3277) as an example, which we will use throughout this guide, you can find the corresponding function signature (`builtinArithmeticMultiplyIntUnsignedSig`) and its [implementation](https://github.com/pingcap/tidb/blob/master/expression/builtin_arithmetic.go#L532).
 
