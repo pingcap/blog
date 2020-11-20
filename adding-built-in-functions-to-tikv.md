@@ -54,7 +54,7 @@ Take [`MultiplyIntUnsigned`](https://github.com/pingcap/tikv/pull/3277) as an ex
 
 1. The name of the file where the built-in function exists in TiKV should correspond to the same name in TiDB.
 
-    For example, since all the pushdown files in the `expression` directory in TiDB are named `builtin_XXX`, in TiKV the corresponding file name should be `builtin_XXX.rs`. In this example, the current function is in the builtin_arithmetic.go file in TiDB, so the function should be placed in [builtin_arithmetic.rs](https://github.com/tikv/tikv/blob/master/components/tidb_query_normal_expr/src/builtin_arithmetic.rs) in TiKV.
+    For example, since all the pushdown files in the `expression` directory in TiDB are named `builtin_XXX`, in TiKV the corresponding file name should be `builtin_XXX.rs`. In this example, the current function is in the builtin_arithmetic.go file in TiDB, so the function should be placed in builtin_arithmetic.rs in TiKV.
 
     **Note:** If the corresponding file in TiKV does not exist, you need to create a new file in the corresponding directory with the same name as in TiDB.
 
@@ -175,7 +175,7 @@ To implement the same function in Rust for TiKV, it should be:
 
 When TiKV receives a pushdown request, it checks all the expressions first including the number of the expression arguments.
 
-In TiDB, there is a strict limit for the number of arguments in each built-in function. For the number of arguments, see [`builtin.go`](https://github.com/pingcap/tidb/blob/master/expression/builtin.go) in TiDB.
+In TiDB, there is a strict limit for the number of arguments in each built-in function. For the number of arguments, see `builtin.go` in TiDB.
 
 To add argument check:
 
