@@ -42,7 +42,7 @@ AWS Cloud takes different approaches to enforce these limits:
 
 EBS connects to EC2 instances through a network interface. Therefore, for a given EC2/EBS pair, the actual disk performance is determined not only by the EBS specs, but also by the EC2's capability of dedicated bandwidth to cloud storage. The following table summarizes the performance of several instance types:
 
-| | Baseline Bandwidth <br/>(MiB/s) | Maximum Bandwidth <br/>(MiB/s)<sup>1</sup> | Baseline IOPS | Maximum IOPS* |
+| | Baseline Bandwidth <br/>(MiB/s) | Maximum Bandwidth <br/>(MiB/s)<sup>1</sup> | Baseline IOPS | Maximum IOPS<sup>1</sup> |
 |:--|--|--|--|--|
 | m5.2xlarge | 287.5 | 593.75 | 12,000 | 18,750 |
 | m5.4xlarge | 593.75 | 593.75 | 18,750 | 18,750 |
