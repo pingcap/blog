@@ -148,34 +148,30 @@ Several EC2 types have one or more local [instance stores](https://docs.aws.amaz
 
 <table>
   <tr>
-   <td>
-   </td>
-   <td colspan="2" >Bandwidth (MiB/S)
-   </td>
-   <td colspan="2" >IOPS
-   </td>
-   <td colspan="2" >Latency (μs)
-   </td>
-   <td>
-   </td>
+   <th rowspan="2">
+   </th>
+   <th colspan="2" >Bandwidth (MiB/S)
+   </th>
+   <th colspan="2" >IOPS
+   </th>
+   <th colspan="2" >Latency (μs)
+   </th>
+   <th rowspan="2">fsync (per sec)
+   </th>
   </tr>
   <tr>
-   <td>
-   </td>
-   <td>Write
-   </td>
-   <td>Read
-   </td>
-   <td>Write
-   </td>
-   <td>Read
-   </td>
-   <td>Write
-   </td>
-   <td>Read
-   </td>
-   <td>fsync (per sec)
-   </td>
+   <th>Write
+   </th>
+   <th>Read
+   </th>
+   <th>Write
+   </th>
+   <th>Read
+   </th>
+   <th>Write
+   </th>
+   <th>Read
+   </th>
   </tr>
   <tr>
    <td>Instance store (270 GB)
