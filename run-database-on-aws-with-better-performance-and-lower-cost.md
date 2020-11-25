@@ -55,7 +55,7 @@ The [Amazon EBS-optimized instances document](https://docs.aws.amazon.com/AWSEC2
 The following graphic showcases how EC2 bandwidth limits directly affect service performance. Two clusters are cross compared using different types of instances as node servers; namely, m5.2xlarge and m5.4xlarge. Each cluster node is equipped with a 1 TB AWS provisioned IOPS volume of 6,000 IOPS. In theory, this disk has a maximum throughput of 1,500 MiB/s for 256 KiB I/O, but the actual performance is tightly bounded by EC2 bandwidth. After we switched EC2 instances, the performance doubled with nearly the same CPU usage.
 
 ![TPC-C 5000 Warehouse](media/tidb-on-aws-tpcc-5000-warehouse.png)
-<div class="caption-center">TPC-C 5000 warehouse</div>
+<div class="caption-center">TPC-C 5,000 warehouse on different AWS EC2 instances</div>
 
 #### General purpose SSD (gp2)
 
@@ -73,14 +73,14 @@ In general, **a provisioned IOPS SSD volume is a perfect fit for large-scale, da
 
 ### Disk striping
 
-One EBS volume has limited performance, but **you can stripe several volumes together as a RAID-0 array to multiply storage power**. According to our benchmark, the performance of a RAID 0 array with two 1 TB gp2 volumes is comparable to io1 provisioned with 6 K IOPS, but with only 40% of the cost.
+One EBS volume has limited performance, but **you can stripe several volumes together as a RAID 0 array to multiply storage power**. According to our benchmark, the performance of a RAID 0 array with two 1 TB gp2 volumes is comparable to io1 provisioned with 6 K IOPS, but with only 40% of the cost.
 
 ![TPC-C 5000 warehouse on striped AWS gp2](media/tidb-on-aws-tpcc-5000-warehouse-on-striped-aws-gp2.png)
-<div class="caption-center">TPC-C 5000 warehouse on striped AWS gp2</div>
+<div class="caption-center">TPC-C 5,000 warehouse on striped AWS gp2</div>
 
-However, a RAID-0 configuration lacks data redundancy. Therefore, a RAID array's service guarantee is slightly weaker than that of a single volume. For instance, striping two gp2 volumes of 99.8% durability produces an array of 99.6% durability.
+However, a RAID 0 configuration lacks data redundancy. Therefore, a RAID array's service guarantee is slightly weaker than that of a single volume. For instance, striping two gp2 volumes of 99.8% durability produces an array of 99.6% durability.
 
-Also, resizing a RAID-0 array involves service downtime. So for users adopting disk striping, we suggest you plan the volume size of each storage node before deploying it.
+Also, resizing a RAID 0 array involves service downtime. So for users adopting disk striping, we suggest you plan the volume size of each storage node before deploying it.
 
 ### Recommended storage node configurations
 
@@ -91,7 +91,7 @@ The table below is a list of storage node configurations that we consider cost e
 | | CPU Core | Capacity (GB) | IOPS<sup>1</sup> | Throughput (MiB/s)<sup>1</sup> | Approximate monthly cost ($)<sup>2</sup> |
 |:--|--|--|--|--|--|
 | m5.2xlarge + gp2 | 8 | 1,000 | 3,000 | 250 | 376 |
-| m5.4xlarge + RAID-0 array of 2 gp2 | 16 | 2,000 | 6,000 | 500 | 753 |
+| m5.4xlarge + RAID 0 array of 2 gp2 | 16 | 2,000 | 6,000 | 500 | 753 |
 | m5.4xlarge + io1 | 16 | 1,000 | 6,000+ | 593.75 | 1,068+ |
 | m5.8xlarge + io1 | 32 | 2,000 | 10,000+ | 850 | 2,006+ |
 
@@ -216,11 +216,11 @@ Nonetheless, as a fast tier device, **instance stores can be used as cache to of
 To demonstrate the importance of SSD caching, we use EnhanceIO (an [open-source solution for SSD caching](https://github.com/stec-inc/EnhanceIO)) to optimize several workloads that are bounded by read IOPS.
 
 ![SSD caching on AWS gp2](media/tidb-on-aws-ssd-caching-on-aws-gp2.png)
-<div class="caption-center">SSD caching on AWS gp2</div>
+<div class="caption-center">Benchmark on AWS gp2 with SSD caching</div>
 
-\* YCSB workload A, uniform distribution
-
-\*\* TPC-C 5000 warehouse, block-size configured to 4 KiB
+> \* YCSB workload A, uniform distribution
+>
+> \*\* TPC-C 5000 warehouse, block-size configured to 4 KiB
 
 SSD caching does not bring extra risk to data integrity because we only use local disks as read-only cache. Furthermore, several SSD caching solutions, including EnhanceIO, support hot plugging, so you can dynamically configure the caching strategy while the service stays up.
 
@@ -266,7 +266,7 @@ Based on your workload and budget, you now should decide on your specific cluste
 Underneath TiKV, we use RocksDB as the storage engine. It uses block cache to store recent reads in uncompressed format. Configuring the block cache size essentially adjusts the proportion of uncompressed and compressed content (system page) stored in memory.
 
 ![RocksDB read path](media/tidb-on-aws-rocksdb-read-path.png)
-<div class="caption-center">RocksDB read path (part of <a href="https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png">the performance map</a>)</div>
+<div class="caption-center">RocksDB read path</div>
 
 Reading from block cache is faster than reading from page cache, but it isn't always ideal to allocate large block cache. If you set a relatively small block cache, memory can hold more blocks because they are stored compactly in system page cache, thus avoiding reads to these blocks from hitting disk storage.
 
