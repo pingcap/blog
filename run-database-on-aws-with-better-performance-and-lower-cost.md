@@ -233,7 +233,7 @@ As discussed before, the access latency of EBS is sensitive to I/O throughput. T
 
 (Compaction flow is displayed inverted to show the matching pattern)
 
-**To maintain background I/O flow at a stable level, we recommend you set `rate-bytes-per-sec_`_ at a moderately low value.** In TiKV 4.0.8 and later, you can dynamically change the I/O rate limit, and a DBA can optimize this parameter as the workload evolves. Both methods are listed below.
+**To maintain background I/O flow at a stable level, we recommend you set `rate-bytes-per-sec` at a moderately low value.** In TiKV 4.0.8 and later, you can dynamically change the I/O rate limit, and a DBA can optimize this parameter as the workload evolves. Both methods are listed below.
 
 * Method 1: Edit `tikv.toml`
 
