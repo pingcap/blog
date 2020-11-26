@@ -252,7 +252,7 @@ As discussed before, the access latency of EBS is sensitive to I/O throughput. T
 * Method 2: Use bash script
 
     ```shell
-    $ tikv-ctl --host 127.0.0.1:20160 modify-tikv-config -n rocksdb.rate_bytes_per_sec -v "100MB"
+    tikv-ctl --host 127.0.0.1:20160 modify-tikv-config -n rocksdb.rate_bytes_per_sec -v "100MB"
     ```
 
 However, constant manual intervention is inconvenient. Our ultimate goal is a more autonomous, "self-driving" database. As a step in that direction, we recently introduced a new auto-tuned algorithm that automatically configures rate limits based on user workload, which will be available in the next major release.
