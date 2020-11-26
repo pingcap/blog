@@ -8,7 +8,7 @@ categories: ['Open Source Community']
 image: /images/blog/cloud-native-chaos-mesh.jpg
 ---
 
-Author: Hui Zhang at Fuxi Lab, NetEase
+*Author:* Hui Zhang at Fuxi Lab, NetEase
 
 ![Cloud-native Chaos Mesh](media/cloud-native-chaos-mesh.jpg)
 
