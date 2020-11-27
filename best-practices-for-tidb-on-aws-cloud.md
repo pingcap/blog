@@ -75,7 +75,7 @@ In general, **a provisioned IOPS SSD volume is a perfect fit for large-scale, da
 
 One EBS volume has limited performance, but **you can stripe several volumes together as a RAID 0 array to multiply storage power**. According to our benchmark, the performance of a RAID 0 array with two 1 TB gp2 volumes is comparable to io1 provisioned with 6 K IOPS, but with only 40% of the cost.
 
-![TPC-C 5000 warehouse on striped AWS gp2](media/tidb-on-aws-tpcc-5000-warehouse-on-striped-aws-gp2.png)
+![TPC-C 5000 warehouse on striped AWS gp2](media/tidb-on-aws-tpcc-5000-warehouse-on-striped-gp2.png)
 <div class="caption-center">TPC-C 5,000 warehouse on striped AWS gp2</div>
 
 However, a RAID 0 configuration lacks data redundancy. Therefore, a RAID array's service guarantee is slightly weaker than that of a single volume. For instance, striping two gp2 volumes of 99.8% durability produces an array of 99.6% durability.
@@ -91,7 +91,7 @@ The table below is a list of storage node configurations that we consider cost e
 | | CPU Core | Capacity (GB) | IOPS<sup>1</sup> | Throughput (MiB/s)<sup>1</sup> | Approximate monthly cost ($)<sup>2</sup> |
 |:--|--|--|--|--|--|
 | m5.2xlarge + gp2 | 8 | 1,000 | 3,000 | 250 | 376 |
-| m5.4xlarge + RAID 0 array of 2 gp2 | 16 | 2,000 | 6,000 | 500 | 753 |
+| m5.4xlarge + 2 gp2 in RAID 0 | 16 | 2,000 | 6,000 | 500 | 753 |
 | m5.4xlarge + io1 | 16 | 1,000 | 6,000+ | 593.75 | 1,068+ |
 | m5.8xlarge + io1 | 32 | 2,000 | 10,000+ | 850 | 2,006+ |
 
@@ -226,12 +226,10 @@ SSD caching does not bring extra risk to data integrity because we only use loca
 
 ### I/O rate limiting
 
-As discussed before, the access latency of EBS is sensitive to I/O throughput. This poses a great threat to performance stability for systems like TiKV that rely on background compaction to provide sustained service. The following graph shows that an increase in the read/write flow causes a decrease in the write operations per second:
+As discussed before, the access latency of EBS is sensitive to I/O throughput. This poses a great threat to performance stability for systems like TiKV that rely on background compaction to provide sustained service. The following graph shows that an increase in the read/write flow causes a decrease in the write operations per second (compaction flow is displayed inverted to illustrate the matching pattern):
 
 ![The impact of compaction on foreground writes](media/tidb-on-aws-impact-of-compaction-on-foreground-writes.png)
 <div class="caption-center">The impact of compaction on foreground writes</div>
-
-(Compaction flow is displayed inverted to show the matching pattern)
 
 **To maintain background I/O flow at a stable level, we recommend you set `rate-bytes-per-sec` at a moderately low value.** In TiKV 4.0.8 and later, you can dynamically change the I/O rate limit, and a DBA can optimize this parameter as the workload evolves. Both methods are listed below.
 
