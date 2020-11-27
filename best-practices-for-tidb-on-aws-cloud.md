@@ -1,5 +1,5 @@
 ---
-title: How to Run a Database on AWS with Better Performance and Lower Cost
+title: Best Practices for TiDB on AWS Cloud
 author: ['Xinye Tao']
 date: 2020-11-24
 summary: This article illustrates the best practices of running TiDB on AWS, including how to choose the suitable cloud storage and properly configure the system.
