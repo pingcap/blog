@@ -64,7 +64,7 @@ Today, I'll introduce how we're using TiDB in two important scenarios:
 
 ### TiDB in one of our financing systems
 
-Every day, one of our financing systems replicates tens of millions of basic data from the upstream system, and, in the future, it's expected to access more product data. **Before we adopted TiDB, we faced data currency pressure, and our database capacity was expected to become our bottleneck.** In addition, because our system relied on the upstream system's table schema, it often followed the upstream system to make data definition language (DDL) changes, while the [pt-online-schema-change](percona.com/doc/percona-toolkit/LATEST/pt-online-schema-change.html) (pt-osc) solution has many limitations.
+Every day, one of our financing systems replicates tens of millions of basic data from the upstream system, and, in the future, it's expected to access more product data. **Before we adopted TiDB, we faced data currency pressure, and our database capacity was expected to become our bottleneck.** In addition, because our system relied on the upstream system's table schema, it often followed the upstream system to make data definition language (DDL) changes, while the [pt-online-schema-change](https://www.percona.com/doc/percona-toolkit/LATEST/pt-online-schema-change.html) (pt-osc) solution has many limitations.
 
 We had these problems:
 
