@@ -48,14 +48,14 @@ To solve the problems above, we did a thorough investigation and evaluation. In 
 TiDB attracted us, because it had these advantages:
 
 * TiDB's distributed architecture helps **horizontally scale our database** while **maintaining strong data consistency**. 
-* TiDB is** compatible with the MySQL protocol**. We can use MySQL as the primary database and TiDB as its secondary database. We can seamlessly replicate data from MySQL to TiDB in real time, which minimizes application migration costs.
+* TiDB is **compatible with the MySQL protocol**. We can use MySQL as the primary database and TiDB as its secondary database. We can seamlessly replicate data from MySQL to TiDB in real time, which minimizes application migration costs.
 * TiDB is an **open-source database** with an active open-source community and numerous users. It rapidly iterates. This is in line with our embrace of open source.
 * TiDB supports **high availability** with **automatic fault recovery**.
 * PingCAP Tech Centers provide **professional technical support** for us. They are responsive and experienced. During our estimation, testing, and deployment to production, they participated actively and gave us constructive solutions and advice.
 
 ## How we're using TiDB as an alternative to MySQL
 
-So far, we've deployed TiDB in dozens of application systems in the production environment. **These systems‘ data volumes range from hundreds of gigabytes to dozens of terabytes. **Currently, multiple important systems are under proof of concept (POC) or are ready  for the production environment. 
+So far, we've deployed TiDB in dozens of application systems in the production environment. **These systems‘ data volumes range from hundreds of gigabytes to dozens of terabytes.** Currently, multiple important systems are under proof of concept (POC) or are ready  for the production environment. 
 
 Today, I'll introduce how we're using TiDB in two important scenarios:
 
@@ -93,7 +93,7 @@ To solve these issues, we decided to [migrate from MySQL to TiDB](https://pingca
 
 Because of TiDB's horizontal scalability and MySQL compatibility, we can use it as an alternative to the MySQL database to resolve our database capacity and performance bottlenecks. 
 
-Since WeBank was established, technology has always been the core engine driving our business development. Now, our core system can support **100 million+ users** and** highly concurrent transactions**. We've achieved an average of **300 million+ daily transactions** and **a peak of 600 million+ single-day transactions**. Our operation and maintenance cost per account is** less than one-tenth of the industry average**.
+Since WeBank was established, technology has always been the core engine driving our business development. Now, our core system can support **100 million+ users** and **highly concurrent transactions**. We've achieved an average of **300 million+ daily transactions** and **a peak of 600 million+ single-day transactions**. Our operation and maintenance cost per account is **less than one-tenth of the industry average**.
 
 In the future, based on our application requirements and TiDB's new features, we'll explore more application scenarios at WeBank.
 
