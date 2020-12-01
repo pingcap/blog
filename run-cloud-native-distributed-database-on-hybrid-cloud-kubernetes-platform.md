@@ -5,6 +5,7 @@ date: 2020-11-16
 summary: A site reliability engineer gives a step-by-step tutorial on how to deploy TiDB on KubeSphere, an open-source, distributed GUI operating system with Kubernetes as its kernel.
 tags: ['TiDB Operator', 'Cloud-native', 'Kubernetes', 'Tutorial']
 categories: ['Open Source Community']
+aliases: ['/blog/tidb-on-kubesphere/']
 image: /images/blog/tidb-on-kubesphere-cloud-native-database.jpg
 ---
 
