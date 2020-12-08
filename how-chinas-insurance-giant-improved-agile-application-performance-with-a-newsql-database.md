@@ -12,7 +12,7 @@ logo: /images/blog/customers/pingan-life-insurance-logo.png
 image: /images/blog/china-insurance-giant-improved-agile-application-performance-with-newsql-tidb-database.jpg
 ---
 
-**Industry:** Financial Services
+**Industry:** Insurance
 
 **Author:** Ping An Jin Guanjia Application Development Team
 
