@@ -30,9 +30,9 @@ BCC embeds LLVM or Clang to rewrite, compile, and load BPF programs. Although it
 * It uses the Clang front-end to modify user-written BPF programs. When a problem occurs, it's difficult to find the problem and figure out a solution. 
 * You must remember naming conventions and automatically generated tracepoint structs. 
 * Because the libbcc library contains a huge LLVM or Clang library, when you use it, you might encounter some issues:
-* When a tool starts, it takes many CPU and memory resources to compile the BPF program. If it runs on a server that lacks system resources, it might trigger a problem.
-* BCC depends on kernel header packages, which you must install on each target host. If you need unexported content in the kernel, you must manually copy and paste the type definition into the BPF code.
-* Because BPF programs are compiled during runtime, many simple compilation errors can only be detected at runtime. This affects your development experience.
+    * When a tool starts, it takes many CPU and memory resources to compile the BPF program. If it runs on a server that lacks system resources, it might trigger a problem.
+    * BCC depends on kernel header packages, which you must install on each target host. If you need unexported content in the kernel, you must manually copy and paste the type definition into the BPF code.
+    * Because BPF programs are compiled during runtime, many simple compilation errors can only be detected at runtime. This affects your development experience.
 
 By contrast, BPF CO-RE has these advantages:
 
