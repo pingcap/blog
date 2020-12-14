@@ -1,10 +1,11 @@
 ---
-title: How THP Slows Down Your Database Performance and What to Do about It
+title: Why We Disable Linux's THP Feature for Databases
 author: ['Wenbo Zhang']
 date: 2020-12-10
 summary: This post dives deep into how transparent huge pages (THP) slow down the system and explains why you should disable THP to improve your database performance.
 tags: ['Performance tuning', 'Linux']
 categories: ['Engineering']
+aliases: ['/blog/how-thp-slows-down-your-database-performance-and-what-to-do-about-it']
 image: /images/blog/how-thp-slows-down-your-database-performance-banner.jpg
 ---
 
