@@ -101,7 +101,7 @@ static int open_and_attach_perf_event(int freq, struct bpf_program *prog,
                 }
         } 
 
-          	return 0;
+        return 0;
 }
 ```
 
