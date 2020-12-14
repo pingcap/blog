@@ -12,7 +12,7 @@ image: /images/blog/making-htap-database-reality-what-i-learned-from-pingcap-vld
 
 ![HTAP database](media/making-htap-database-reality-what-i-learned-from-pingcap-vldb-paper.jpg)
 
-Recently, [VLDB 2020](https://vldb2020.org/) published [PingCAP](https://pingcap.com/)'s paper, [TiDB: A Raft-based HTAP Database](https://pingcap.com/blog/vldb-2020-tidb-a-raft-based-htap-database). This is the first paper in the industry to describe the implementation of a distributed [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) database. As a DBA who benefits greatly from [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed SQL database, I'm happy that VLDB recognized TiDB, and I'm inspired by the PingCAP engineering team's novel ideas.
+Recently, [VLDB 2020](https://vldb2020.org/) published [PingCAP](https://pingcap.com/)'s paper, [TiDB: A Raft-based HTAP Database](https://pingcap.com/blog/vldb-2020-tidb-a-raft-based-htap-database). This is the first paper in the industry to describe the implementation of a distributed Raft-based [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) database. As a DBA who benefits greatly from [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed SQL database, I'm happy that VLDB recognized TiDB, and I'm inspired by the PingCAP engineering team's novel ideas.
 
 PingCAP's paper is not the typical theoretical research paper, proposing an idea that may never be implemented. Instead, it proves, clearly and pragmatically, that a distributed HTAP database is achievable. Database researchers can use this information to head more confidently in the right direction.
 
@@ -26,9 +26,9 @@ OLTP and OLAP describe two very different data processing methods, and, therefor
 
 | **Characteristics** | **OLTP** | **OLAP** |
 |:--|--|--|
-| Data queried in one request | Small (a few rows) | Large | 
+| Data queried in one request | Small (a few rows) | Large |
 | Real-time update | Yes | No |
-| Transactions | Yes | No | 
+| Transactions | Yes | No |
 | Concurrency | High | Low |
 | Query pattern | Similar | Varies a lot |
 
@@ -40,9 +40,9 @@ PingCAP's paper proposes a new way to solve this problem: **the replication shou
 
 ## Strong consistency or resource isolation
 
-Because OLTP and OLAP are very different workloads, it is difficult to do both kinds of jobs in a single database. There are two general schemas: 
+Because OLTP and OLAP are very different workloads, it is difficult to do both kinds of jobs in a single database. There are two general schemas:
 
-* **Design a storage engine suitable for both OLTP and OLAP**. In the storage engine, data is consistent and real time, but it's hard to make sure that two workloads do not get in the way of each other. 
+* **Design a storage engine suitable for both OLTP and OLAP**. In the storage engine, data is consistent and real time, but it's hard to make sure that two workloads do not get in the way of each other.
 * **Build two sets of storage engines in one database**. Each storage engine would handle one type of workload, so OLTP and OLAP don't affect each other. However, since data is replicated between two engines, it might be challenging to achieve strong data consistency and resource isolation at the same time.
 
 TiDB chose the second method. [TiKV](https://tikv.org/), the row-based storage engine, handles OLTP workloads, while [TiFlash](https://docs.pingcap.com/tidb/dev/tiflash-overview/), the columnar storage engine, handles OLAP workloads. But how do they provide strong consistency and resource isolation?
@@ -61,13 +61,13 @@ However, if TiFlash's Learner replica asynchronously receives logs from the Raft
 
 TiFlash guarantees strong consistency when the application reads data from TiFlash. Similar to Raft's follower read mechanism, the Learner replica provides snapshot isolation, so we can read data from TiFlash using a specified timestamp. When TiFlash gets a read request, the Learner replica sends a `ReadIndex` request to its Leader. According to the received `ReadIndex`, the Leader holds back the request until the corresponding Raft log is replicated to the Learner, and then filters the required data by the specified timestamp. This is how TiFlash can provide strongly consistent data.
 
-When the application reads data from TiFlash, TiFlash's Learner replica only needs to perform a `ReadIndex` operation with TiKV's Leader replica. This operation imposes very little burden on TiKV. According to the paper, when TiDB processed both OLTP and OLAP workloads, OLAP throughput decreased by less than 5%, and OLTP throughput decreased by only 10%. 
+When the application reads data from TiFlash, TiFlash's Learner replica only needs to perform a `ReadIndex` operation with TiKV's Leader replica. This operation imposes very little burden on TiKV. According to the paper, when TiDB processed both OLTP and OLAP workloads, OLAP throughput decreased by less than 5%, and OLTP throughput decreased by only 10%.
 
 Moreover, the paper documents an experiment in which the asynchronous data replication from TiKV to TiFlash produced a very low latency. In the case of a data volume of 10 warehouses, the latency was mostly within 100 ms, with the largest latency smaller than 300 ms. In the case of 100 warehouses, the latency was mostly within 500 ms, with the largest latency smaller than 1500 ms. Most importantly, the latency didn't affect data consistency. It only made TiFlash process requests a little slower.
 
 ## TiDB: uniting OLTP and OLAP
 
-TiDB has two storage engines, TiKV for OLTP and TiFlash for OLAP, and both support strongly consistent data replication and provide the same snapshot isolation. 
+TiDB has two storage engines, TiKV for OLTP and TiFlash for OLAP, and both support strongly consistent data replication and provide the same snapshot isolation.
 
 This is a huge bonus for optimizing queries at the computing layer. When the optimizer processes a request, it has three options: row scan ([TiKV](https://docs.pingcap.com/tidb/dev/tikv-overview)), index scan ([TiKV](https://docs.pingcap.com/tidb/dev/tikv-overview)), or column scan ([TiFlash](https://docs.pingcap.com/tidb/dev/tiflash-overview)). For a single request, the optimizer can apply different scans for different parts of data, which provides a lot of flexibility for optimization. The PingCAP paper also proved that **an OLAP request that uses both storage engines works better than a request that uses either of the two engines**.
 
@@ -99,6 +99,6 @@ In a word, this is a question about isolating resources in the storage layer and
 
 ## Conclusion
 
-PingCAP's implementation of an HTAP database has elegantly solved a decades-long conflict: how to process two types of queries in a single database. [Their paper](http://www.vldb.org/pvldb/vol13/p3072-huang.pdf) does more than lay out a theoretical case; it shows exactly how they implemented the database, and it backs up their claims with solid testing. 
+PingCAP's implementation of an HTAP database has elegantly solved a decades-long conflict: how to process two types of queries in a single database. [Their paper](http://www.vldb.org/pvldb/vol13/p3072-huang.pdf) does more than lay out a theoretical case; it shows exactly how they implemented the database, and it backs up their claims with solid testing.
 
-As the first paper in the industry to describe the implementation of a distributed HTAP database, TiDB's paper proved that a distributed, Raft-based HTAP database is achievable. It may speed up the development and adoption of distributed HTAP databases. In this regard, it marks a milestone.
+As the first paper in the industry to describe the implementation of a distributed Raft-based HTAP database, TiDB's paper proved that a distributed, Raft-based HTAP database is achievable. It may speed up the development and adoption of distributed HTAP databases. In this regard, it marks a milestone.
