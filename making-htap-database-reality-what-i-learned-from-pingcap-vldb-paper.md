@@ -12,7 +12,7 @@ image: /images/blog/making-htap-database-reality-what-i-learned-from-pingcap-vld
 
 ![HTAP database](media/making-htap-database-reality-what-i-learned-from-pingcap-vldb-paper.jpg)
 
-Recently, [VLDB 2020](https://vldb2020.org/) published [PingCAP](https://pingcap.com/)'s paper, [TiDB: A Raft-based HTAP Database](https://pingcap.com/blog/vldb-2020-tidb-a-raft-based-htap-database). This is the first paper in the industry to describe the implementation of a distributed Raft-based [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) database. As a DBA who benefits greatly from [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed SQL database, I'm happy that VLDB recognized TiDB, and I'm inspired by the PingCAP engineering team's novel ideas.
+Recently, [VLDB 2020](https://vldb2020.org/) published [PingCAP](https://pingcap.com/)'s paper, [TiDB: A Raft-based HTAP Database](https://pingcap.com/blog/vldb-2020-tidb-a-raft-based-htap-database). This is the first paper in the industry to describe the Raft-based implementation of a distributed [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) database. As a DBA who benefits greatly from [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed SQL database, I'm happy that VLDB recognized TiDB, and I'm inspired by the PingCAP engineering team's novel ideas.
 
 PingCAP's paper is not the typical theoretical research paper, proposing an idea that may never be implemented. Instead, it proves, clearly and pragmatically, that a distributed HTAP database is achievable. Database researchers can use this information to head more confidently in the right direction.
 
@@ -101,4 +101,4 @@ In a word, this is a question about isolating resources in the storage layer and
 
 PingCAP's implementation of an HTAP database has elegantly solved a decades-long conflict: how to process two types of queries in a single database. [Their paper](http://www.vldb.org/pvldb/vol13/p3072-huang.pdf) does more than lay out a theoretical case; it shows exactly how they implemented the database, and it backs up their claims with solid testing.
 
-As the first paper in the industry to describe the implementation of a distributed Raft-based HTAP database, TiDB's paper proved that a distributed, Raft-based HTAP database is achievable. It may speed up the development and adoption of distributed HTAP databases. In this regard, it marks a milestone.
+As the first paper in the industry to describe the Raft-based implementation of a distributed HTAP database, TiDB's paper proved that a distributed, Raft-based HTAP database is achievable. It may speed up the development and adoption of distributed HTAP databases. In this regard, it marks a milestone.

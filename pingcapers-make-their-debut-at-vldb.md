@@ -20,7 +20,7 @@ It's worth noting that the talks are pre-recorded. Considering the time differen
 
     In this paper, we propose TiDB as a Hybrid Transactional/Analytical Processing (HTAP) database—a "one size fits many" solution for OLTP and OLAP applications.
 
-    This is the first paper in the industry on the implementation of a distributed real-time Raft-based HTAP database. The author will be available for a live QA in the day one session.
+    This is the first paper in the industry on the Raft-based implementation of a distributed real-time HTAP database. The author will be available for a live QA in the day one session.
 
     **Presented by**: Ed Huang, CTO and Cofounder at PingCAP
 
