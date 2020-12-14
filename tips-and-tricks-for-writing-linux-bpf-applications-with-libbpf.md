@@ -302,9 +302,9 @@ This is very cool. However, when you use such expressions in conditional stateme
 SEC("tp_btf/block_rq_issue")
 int BPF_PROG(block_rq_issue, struct request_queue *q, struct request *rq)
 {
-	if (targ_queued && BPF_CORE_READ(q, elevator))
-		return 0;
-	return trace_rq_start(rq);
+        if (targ_queued && BPF_CORE_READ(q, elevator))
+                return 0;
+        return trace_rq_start(rq);
 }
 ```
 
