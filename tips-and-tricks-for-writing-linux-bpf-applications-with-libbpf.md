@@ -33,8 +33,8 @@ If your BPF code doesn't need any runtime adjustments (for example, adjusting th
 ```c
 obj = readahead_bpf__open_and_load();
 if (!obj) {
-     	fprintf(stderr, "failed to open and/or load BPF object\n");
-     	return 1;
+        fprintf(stderr, "failed to open and/or load BPF object\n");
+        return 1;
 }
 err = readahead_bpf__attach(obj);
 ```
@@ -43,7 +43,7 @@ You can see the complete code in [readahead.c](https://github.com/iovisor/bcc/bl
 
 ### Selective attach
 
-By default, `<name>__attach()` attaches all auto-attachable BPF programs. However, sometimes you might want to selectively attach the corresponding BPF program according to the command line parameters. In this case, you can call ` bpf_program__attach()` instead. For example:
+By default, `<name>__attach()` attaches all auto-attachable BPF programs. However, sometimes you might want to selectively attach the corresponding BPF program according to the command line parameters. In this case, you can call `bpf_program__attach()` instead. For example:
 
 {{< copyable "" >}}
 
@@ -51,13 +51,13 @@ By default, `<name>__attach()` attaches all auto-attachable BPF programs. Howeve
 err = biolatency_bpf__load(obj);
 [...]
 if (env.queued) {
-     	obj->links.block_rq_insert =
+        obj->links.block_rq_insert =
                 bpf_program__attach(obj->progs.block_rq_insert);
-     	err = libbpf_get_error(obj->links.block_rq_insert);
-     	[...]
+        err = libbpf_get_error(obj->links.block_rq_insert);
+        [...]
 }
 obj->links.block_rq_issue =
-     	bpf_program__attach(obj->progs.block_rq_issue);
+        bpf_program__attach(obj->progs.block_rq_issue);
 err = libbpf_get_error(obj->links.block_rq_issue);
 [...]
 ```
@@ -74,7 +74,7 @@ After this, open and attach `perf_event` by yourself:
 
 ```c
 static int open_and_attach_perf_event(int freq, struct bpf_program *prog,
-                              	struct bpf_link *links[])
+                                struct bpf_link *links[])
 {
         struct perf_event_attr attr = {
                 .type = PERF_TYPE_SOFTWARE,
@@ -90,7 +90,7 @@ static int open_and_attach_perf_event(int freq, struct bpf_program *prog,
                         fprintf(stderr, "failed to init perf sampling: %s\n",
                                 strerror(errno));
                         return -1;
-          	    }
+                    }
                 links[i] = bpf_program__attach_perf_event(prog, fd);
                 if (libbpf_get_error(links[i])) {
                         fprintf(stderr, "failed to attach perf event on cpu: "
@@ -119,13 +119,13 @@ Starting in [v0.2](https://github.com/libbpf/libbpf/releases/tag/v0.2), libbpf s
 SEC("tp_btf/irq_handler_entry")
 int BPF_PROG(irq_handler_entry1, int irq, struct irqaction *action)
 {
-	    [...]
+            [...]
 }
 
 SEC("tp_btf/irq_handler_entry")
 int BPF_PROG(irq_handler_entry2)
 {
-	    [...]
+            [...]
 }
 ```
 
@@ -166,10 +166,10 @@ Here is an example:
 ```c
 struct {
         __uint(type, BPF_MAP_TYPE_HASH);
-      	__uint(max_entries, MAX_ENTRIES);
-      	__type(key, u32);
-      	__type(value, u64);
-      	__uint(map_flags, BPF_F_NO_PREALLOC);
+        __uint(max_entries, MAX_ENTRIES);
+        __type(key, u32);
+        __type(value, u64);
+        __uint(map_flags, BPF_F_NO_PREALLOC);
 } start SEC(".maps");
 ```
 
@@ -185,9 +185,9 @@ In `<name>.bpf.c`, define the map as:
 
 ```c
 struct {
-      	__uint(type, BPF_MAP_TYPE_HASH);
-      	__type(key, u32);
-      	__type(value, u64);
+        __uint(type, BPF_MAP_TYPE_HASH);
+        __type(key, u32);
+        __type(value, u64);
 } start SEC(".maps");
 ``` 
 
@@ -213,17 +213,17 @@ When you select the map type, if multiple events are associated and occur on the
 
 ```c
 struct {
-      	__uint(type, BPF_MAP_TYPE_PERCPU_ARRAY);
-      	__uint(max_entries, 1);
-      	__type(key, u32);
-      	__type(value, u64);
+        __uint(type, BPF_MAP_TYPE_PERCPU_ARRAY);
+        __uint(max_entries, 1);
+        __type(key, u32);
+        __type(value, u64);
 } start SEC(".maps");
 
 SEC("tp_btf/softirq_entry")
 int BPF_PROG(softirq_entry, unsigned int vec_nr)
 {
-      	u64 ts = bpf_ktime_get_ns();
-      	u32 key = 0; 
+        u64 ts = bpf_ktime_get_ns();
+        u32 key = 0; 
           	
         bpf_map_update_elem(&start, &key, &ts, 0);
         return 0;
@@ -265,9 +265,9 @@ Then, you can traverse the array directly in user space:
 ```c
 static int print_count(struct softirqs_bpf__bss *bss)
 {
-      	const char *units = env.nanoseconds ? "nsecs" : "usecs";
-      	__u64 count;
-      	__u32 vec;
+        const char *units = env.nanoseconds ? "nsecs" : "usecs";
+        __u64 count;
+        __u32 vec;
 
         printf("%-16s %6s%5s\n", "SOFTIRQ", "TOTAL_", units);
 
