@@ -22,7 +22,7 @@ logo: /images/blog/customers/palfish-logo.png
 
 As our business rapidly grew, the surge of data posed a severe challenge to our MongoDB database. MongoDB (2.x and 3.x) does not support transactions and has no predefined schema to directly regulate data. This blocked our business growth. To solve these problems, we migrated from MongoDB to [TiDB](https://github.com/pingcap/tidb), an open-source, MySQL-compatible, distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) workloads. This turned out to be the right move.
 
-In this post, we'll share with you why we chose TiDB over MongoDB and MySQL and **how TiDB supports our application with even fourfold users**. We hope our experience can help you find the most appropriate database for your application.
+In this post, we'll share with you why we chose TiDB over MongoDB and MySQL and **how TiDB supports our application with doubled users**. We hope our experience can help you find the most appropriate database for your application.
 
 ## Why we outgrew MongoDB
 
