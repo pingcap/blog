@@ -1,11 +1,12 @@
 ---
-title: 'Why We Switched from bcc-tools to libbpf-tools for BPF Performance Analysis'
+title: 'Why We Switched from BCC to libbpf for Linux BPF Performance Analysis'
 author: ['Wenbo Zhang']
 date: 2020-12-03
 summary: Libbpf + BPF CO-RE is better than BCC. It greatly reduces storage space and runtime overhead, and it improves programmers' deployment and development experience.
 tags: ['Performance tuning']
 categories: ['Engineering']
 image: /images/blog/bcc-vs-libbpf-bpf-performance-analysis.jpg
+aliases: ['/blog/why-we-switched-from-bcc-tools-to-libbpf-tools-for-bpf-performance-analysis']
 ---
 
 ![BPF Linux, BPF performance tools](media/bcc-vs-libbpf-bpf-performance-analysis.jpg)
