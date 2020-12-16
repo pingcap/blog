@@ -8,7 +8,6 @@ categories: ['Engineering']
 image: /images/blog/bcc-vs-libbpf-bpf-performance-analysis.jpg
 aliases: ['/blog/why-we-switched-from-bcc-tools-to-libbpf-tools-for-bpf-performance-analysis']
 ---
-why-we-switched-from-bcc-to-libbpf-for-linux-bpf-performance-analysis
 
 ![BPF Linux, BPF performance tools](media/bcc-vs-libbpf-bpf-performance-analysis.jpg)
 
