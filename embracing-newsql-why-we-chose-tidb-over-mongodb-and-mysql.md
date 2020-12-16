@@ -22,7 +22,7 @@ logo: /images/blog/customers/palfish-logo.png
 
 As our business rapidly grew, the surge of data posed a severe challenge to our MongoDB database. MongoDB (2.x and 3.x) does not support transactions and has no predefined schema to directly regulate data. This blocked our business growth. To solve these problems, we migrated from MongoDB to [TiDB](https://github.com/pingcap/tidb), an open-source, MySQL-compatible, distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) workloads. This turned out to be the right move.
 
-In this post, we'll share with you why we chose TiDB over MongoDB and MySQL and **how TiDB supports our application with even fourfold data**. We hope our experience can help you find the most appropriate database for your application.
+In this post, we'll share with you why we chose TiDB over MongoDB and MySQL and **how TiDB supports our application with even fourfold users**. We hope our experience can help you find the most appropriate database for your application.
 
 ## Why we outgrew MongoDB
 
@@ -119,7 +119,7 @@ As a for-profit online education platform, PalFish provides an online marketplac
 * The database must support ACID-compliant transactions.
 * Because of the explosive growth of data, the database must be able to scale out.
 
-From the end of 2019 to October 2020, our paid users increased from 500,000 to over 2 million. **Even under the pressure of quadrupling data, TiDB successfully supported our core trading system**.
+From the end of 2019 to October 2020, our paid users increased from 500,000 to over 2 million. **Even under the pressure of quadrupling users, TiDB successfully supported our core trading system**.
 
 ### Our current status with TiDB
 
