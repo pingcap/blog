@@ -78,7 +78,7 @@ From the application layer, we can easily call TiDB's standardized API. TiDB pro
 
 TiDB also provides a solution for multi-active data centers—if any data center is down, the entire cluster can automatically switch traffic and resume service without users' awareness. In addition, TiDB can be well integrated into the cloud-native data ecosystem, avoiding data silos.
 
-Currently, we've migrated more than **30 TB** of data to the TiDB clusters. The migration is still going., and the overall migrated data volume is expected to exceed **100 TB**.
+Currently, we've migrated more than **30 TB** of data to the TiDB clusters. The migration is still going, and the overall migrated data volume is expected to exceed **100 TB**.
 
 ## Why we chose TiDB
 
