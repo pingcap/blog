@@ -94,7 +94,7 @@ Now that you have Helm charts ready, you can upload them to KubeSphere as app te
 
 2. Go to your workspace. From the navigation bar, select **App Templates**, and, on the right, click **Upload Template**.
 
-    ![Select App Templates](meida/tidb-in-kubesphere-2-select-app-templates.png)
+    ![Select App Templates](media/tidb-in-kubesphere-2-select-app-templates.png)
 
     [My last blog post](https://pingcap.com/blog/run-cloud-native-distributed-database-on-hybrid-cloud-kubernetes-platform) explained how to deploy TiDB using an app repository. This time, let's upload Helm charts as app templates.
 
