@@ -27,7 +27,7 @@ Before you try the steps in this post, make sure:
 
 ## Prepare TiDB Helm Charts
 
-To deploy TiDB on KubeSphere, you need TiDB [Helm](https://helm.sh/) charts. Helm helps you create, install, and manage Kubernetes applications. A Helm chart contains files that describe the necessary collection of Kubernetes resources. In this section, I’ll demonstrate how to download the required Helm charts and upload them to KubeSphere.
+To deploy TiDB on KubeSphere, you need TiDB [Helm](https://helm.sh/) charts. Helm helps you create, install, and manage Kubernetes applications. A Helm chart contains files that describe the necessary collection of Kubernetes resources. In this section, I'll demonstrate how to download the required Helm charts and upload them to KubeSphere.
 
 ### Download TiDB Helm Charts
 
@@ -96,7 +96,7 @@ Now that you have Helm charts ready, you can upload them to KubeSphere as app te
 
     ![Select App Templates](meida/tidb-in-kubesphere-2-select-app-templates.png)
 
-    [My last blog post](https://pingcap.com/blog/run-cloud-native-distributed-database-on-hybrid-cloud-kubernetes-platform) explained how to deploy TiDB using an app repository. This time, let’s upload Helm charts as app templates.
+    [My last blog post](https://pingcap.com/blog/run-cloud-native-distributed-database-on-hybrid-cloud-kubernetes-platform) explained how to deploy TiDB using an app repository. This time, let's upload Helm charts as app templates.
 
 3. Select the Helm charts you want to upload to KubeSphere. After they are successfully uploaded, they appear in the list below.
 
@@ -178,7 +178,7 @@ For more information about how to deploy an app from the App Store, see the [Kub
 
 Both TiDB and KubeSphere are powerful tools for us as we deploy containerized applications and use the distributed database on the cloud. As a big fan of open source, I hope both groups can continue to deliver efficient and effective cloud-native tools for us in production.
 
-If you have any questions, don’t hesitate to contact us in [Slack](https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE) or [GitHub](https://github.com/kubesphere).
+If you have any questions, don't hesitate to contact us in [Slack](https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE) or [GitHub](https://github.com/kubesphere).
 
 ## References
 
