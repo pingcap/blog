@@ -4,7 +4,7 @@ author: [Shawn Ma]
 date: 2020-07-16
 summary: This post introduces the design details of the HTAP architecture of TiDB, including the real-time updatable columnar engine, the multi-Raft replication strategy, and smart selection. 
 tags: ['HTAP', 'VLDB', 'TiFlash']
-categories: ['HTAP']
+categories: ['Engineering']
 image: /images/blog/htap-database.jpg
 ---
 

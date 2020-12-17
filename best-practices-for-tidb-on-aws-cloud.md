@@ -4,7 +4,7 @@ author: ['Xinye Tao']
 date: 2020-11-24
 summary: This article illustrates the best practices of running TiDB on AWS, including how to choose the suitable cloud storage and properly configure the system.
 tags: ['Best practice', 'Raft', 'Cloud']
-categories: ['Engineering']
+categories: ['Product']
 aliases: ['/blog/run-database-on-aws-with-better-performance-and-lower-cost/']
 image: /images/blog/tidb-on-aws-cloud-best-practices-banner.jpg
 ---

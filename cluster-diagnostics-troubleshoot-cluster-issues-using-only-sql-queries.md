@@ -4,7 +4,7 @@ author: ['Heng Long', 'Shuang Chen']
 date: 2020-07-01
 summary: TiDB 4.0 introduces cluster diagnostics, a built-in widget in TiDB Dashboard, which lets you diagnose cluster problems within a specified time range. You can summarize the diagnostic results and cluster-related load monitoring information in a diagnostic report.
 tags: ['Troubleshooting', 'Distributed SQL database']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/troubleshoot-distributed-database-issues.jpg
 ---
 

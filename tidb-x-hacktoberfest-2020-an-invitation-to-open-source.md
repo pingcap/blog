@@ -4,7 +4,7 @@ author: ['TiDB community']
 date: 2020-10-14
 summary: TiDB is in Hacktoberfest, a celebration open to everyone in our global community. Whether you're an experienced developer or an open-source newbie learning to code, you can help drive the growth of open source and make positive contributions to the ever-growing TiDB community.
 tags: ['Community news']
-categories: ['Open Source Community']
+categories: ['Community']
 image: /images/blog/tidb-x-hacktoberfest.jpg
 ---
 

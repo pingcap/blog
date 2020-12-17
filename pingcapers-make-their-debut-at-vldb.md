@@ -4,7 +4,7 @@ author: ['PingCAP']
 date: 2020-08-31
 summary: 'The 46th VLDB conference will be broadcast online from August 31st to September 4th. PingCAP is honored to attend this conference, and we will share two papers with you TiDB: A Raft-based HTAP Database and Interleaved Multi-Vectorizing.'
 tags: ['VLDB', 'HTAP']
-categories: ['HTAP']
+categories: ['Company']
 image: /images/blog/pingcap-papers-htap-database-vldb.jpg
 ---
 
