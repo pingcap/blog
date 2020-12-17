@@ -5,12 +5,12 @@ date: 2020-12-17
 summary: This article walks you through how to deploy TiDB on KubeSphere and release TiDB to the App Store to make it available to other tenants.
 tags: ['TiDB Operator', 'Cloud-native', 'Kubernetes', 'Tutorial']
 categories: ['Open Source Community']
-image: /images/blog/
+image: /images/blog/release-cloud-native-distributed-database-to-kubesphere-app-store.jpg
 ---
 
 **Author:** Will Zhang (SRE at iSoftStone)
 
-![TiDB on Kubesphere](media/)
+![TiDB on Kubesphere](media/release-cloud-native-distributed-database-to-kubesphere-app-store.jpg)
 
 [KubeSphere](https://kubesphere.io/), an open-source, distributed operating system with Kubernetes as its kernel, helps you manage cloud-native applications on a GUI container platform. [TiDB](https://docs.pingcap.com/tidb/stable/) is an open-source, cloud-native database that runs smoothly on Kubernetes.
 
