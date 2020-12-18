@@ -25,6 +25,7 @@ logo: /images/blog/customers/gaea-logo.png
 ## MySQL, our first choice
 
 Considering the amount of data and for a simplified implementation, GAEA chose the highly-available MySQL RDS storage solution at the very beginning of designing GaeaAD. At that time, we mainly used SQL Syntax to implement the matching logic, including many join table queries and aggregation operations. The system worked well and responded within one minute with tens of millions of rows of data.
+
 ![MySQL in GAEA](media/gaea 1.png)
 
 ## Look for new solutions
@@ -57,9 +58,11 @@ We studied many distributed database solutions in the community and came upon Ti
 In the process of test deployment, we used the Syncer tool, provided by TiDB, to deploy TiDB as a MySQL secondary to the MySQL primary of the original business, testing the compatibility and stability of read/write. After a while, the system was proved to perform well in read/write so we decided to move the read request of the business layer to TiDB. Later, we also switch the write business to the TiDB cluster, making the system online smoothly.
 
 The GaeaAD system works well for more than half a year since it has come online in October, 2016. Based on the hands-on experience, we summarized the following benefits brought by TiDB:
+
 ![TiDB in GAEA](media/gaea 2.png)
 
 We replaced the highly-available MySQL RDS with the 3-node TiDB cluster. The average time needed for a single match reduces to about 30 seconds from over 2 minutes, and it even reaches to 10 seconds or so with the continuous optimization of TiDB's engineers. In addition, we found that TiDB has superior advantages and outperforms MySQL especially when the data volume is large. We guess this owes to the existence of TiDB's self-developed distributed SQL Optimizer. But when it comes to a small amount of data, this advantage is not that prominent because of the internal communication cost.
+
 ![Comparison between the query time of TiDB and MySQL](media/gaea 3.png)
 (A comparison between the query time of TiDB and MySQL in cases of different amounts of data)
 
