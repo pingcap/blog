@@ -137,7 +137,7 @@ TiDB Binlog is a tool designed to help users to synchronize data to downstream d
 *Binlog*
 
 <!-- markdownlint-disable MD024 -->
-#### TiDB Lightning
+#### TiDB Lightning, a high-speed data importing tool
 
 TiDB Lightning is a high-speed data importing tool, customized for TiDB:
 
