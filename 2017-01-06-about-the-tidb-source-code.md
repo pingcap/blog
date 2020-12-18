@@ -35,13 +35,13 @@ As is shown in the architecture diagram, the TiDB Server is between the Load Bal
 - The SQL layer
   
     This layer has the following functions:
-    
-	+ Parse and execute the SQL statement
+
+    + Parse and execute the SQL statement
     + Make and optimize the query plans
     + Generate the optimizer
     + Access data through the Storage Engine API layer
     + Return the result to the MySQL Protocol layer
-  
+ 
     This layer is very important and see [The SQL layer](#the-sql-layer) for further information.
 
 - The Storage Engine API layer
@@ -61,7 +61,7 @@ See the following list for all the packages and their main functions:
     This package can be considered to be the interface between the MySQL Protocol Layer and the SQL layer. There are three main files:
 
     + [`session.go`](https://github.com/pingcap/tidb/blob/master/session/session.go): Each session object corresponds to a connection of the MySQL client. The MySQL protocol layer manages the binding between the connection and the session. All the MySQL queries/commands are executed by calling the Session interface.     
-	+ [`tidb.go`](https://github.com/pingcap/tidb/blob/master/session/tidb.go): This file includes some functions to be called by `session.go`.
+    + [`tidb.go`](https://github.com/pingcap/tidb/blob/master/session/tidb.go): This file includes some functions to be called by `session.go`.
     + [`bootstrap.go`](https://github.com/pingcap/tidb/blob/master/session/bootstrap.go): If a TiDB Server is started but the system is not yet initialized, the `bootstrap.go` file will initiate the system. See the following section for the detailed information.
 
 - [docs](https://github.com/pingcap/tidb/tree/master/docs)
@@ -177,9 +177,9 @@ See the following list for all the packages and their main functions:
 
     The implementation of the Key-Value store at the bottom. If you want to plug in a new storage engines, you can package the storage engine and put the code in this package. The new storage engine needs to implement the interface defined in the [kv](https://github.com/pingcap/tidb/tree/master/kv) package.
     
-	The implementation of the Key-Value store at the bottom. If you want to plug in a new storage engines, you can package the storage engine and put the code in this package. The new storage engine needs to implement the interface defined in the [kv](https://github.com/pingcap/tidb/tree/master/kv) package.
+    The implementation of the Key-Value store at the bottom. If you want to plug in a new storage engines, you can package the storage engine and put the code in this package. The new storage engine needs to implement the interface defined in the [kv](https://github.com/pingcap/tidb/tree/master/kv) package.
     
-	The implementation of the Key-Value store at the bottom. If you want to plug in a new storage engines, you can package the storage engine and put the code in this package. The new storage engine needs to implement the interface defined in the [kv](https://github.com/pingcap/tidb/tree/master/kv) package.
+    The implementation of the Key-Value store at the bottom. If you want to plug in a new storage engines, you can package the storage engine and put the code in this package. The new storage engine needs to implement the interface defined in the [kv](https://github.com/pingcap/tidb/tree/master/kv) package.
 
     Currently, there are two storage engines: TiKV, a distributed storage engine, and localstore/{goleveldb/boltdb}, a stand-alone storage engine.
 
@@ -266,7 +266,7 @@ There are following types of optimization methods:
 
 - Cost based optimizer: optimize a plan by calculating the query cost
     
-	This type of optimizer is more complex. There are two key problems: one is how to get the true distribution information of the data; the other one is how to estimate the cost of a certain query plan based on this information.
+    This type of optimizer is more complex. There are two key problems: one is how to get the true distribution information of the data; the other one is how to estimate the cost of a certain query plan based on this information.
 
 - History based optimizer: optimize a plan according to the history query information
   
