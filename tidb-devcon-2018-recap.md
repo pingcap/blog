@@ -6,7 +6,7 @@ tags: ['Community news', 'DevCon', 'Conference']
 categories: ['Community']
 ---
 
-On January 20th, 2018, a chilly Saturday in the middle of the winter, more than 200 coders, hackers, and techies streamed into Garage Café, a chic coffee shop in the heart of Beijing’s techhub, Zhongguancun. They weren’t there to get coffee. They weren’t there to stay warm. They were there to be part of TiDB DevCon 2018, a technology party for the developers, by the developers.
+On January 20th, 2018, a chilly Saturday in the middle of the winter, more than 200 coders, hackers, and techies streamed into Garage Café, a chic coffee shop in the heart of Beijing's techhub, Zhongguancun. They weren't there to get coffee. They weren't there to stay warm. They were there to be part of TiDB DevCon 2018, a technology party for the developers, by the developers.
 
 ![Attendees-signing-in](media/attendees-signing-in.png)
 
@@ -16,12 +16,11 @@ On January 20th, 2018, a chilly Saturday in the middle of the winter, more than 
 
 *A packed audience at TiDB DevCon 2018*
 
-At this party, the team behind TiDB announced exciting news, shared the project’s latest development, and unveiled the future plans of the TiDB project. Here are some important news and highlights:
+At this party, the team behind TiDB announced exciting news, shared the project's latest development, and unveiled the future plans of the TiDB project. Here are some important news and highlights:
 
 ![Max Liu](media/max-liu-talk.png)
 
 *PingCAP co-founder and CEO, Max Liu, giving the opening address at TiDB DevCon 2018*
-
 
 <!-- TOC -->
 
@@ -29,17 +28,17 @@ At this party, the team behind TiDB announced exciting news, shared the project�
 - [Community](#community)
 - [Partners](#partners)
 - [TiDB 1.1 Alpha Release](#tidb-11-alpha-release)
-    - [Performance & latency](#performance--latency)
-    - [TiDB Lightning](#tidb-lightning)
+  - [Performance & latency](#performance--latency)
+  - [TiDB Lightning](#tidb-lightning)
 - [Tools and Ecosystem](#tools-and-ecosystem)
-    - [TiDB deployment](#tidb-deployment)
-    - [Import & Export Tools](#import--export-tools)
-        - [TiDB Syncer](#tidb-syncer)
-        - [TiDB Binlog](#tidb-binlog)
-        - [TiDB Lightning](#tidb-lightning-1)
-    - [Wormhole--Enterprise synchronization tool](#wormhole--enterprise-synchronization-tool)
-    - [TiDB Insight](#tidb-insight)
-    - [Monitoring & Alerting](#monitoring--alerting)
+  - [TiDB deployment](#tidb-deployment)
+  - [Import & Export Tools](#import--export-tools)
+    - [TiDB Syncer](#tidb-syncer)
+    - [TiDB Binlog](#tidb-binlog)
+    - [TiDB Lightning](#tidb-lightning-1)
+  - [Wormhole--Enterprise synchronization tool](#wormhole--enterprise-synchronization-tool)
+  - [TiDB Insight](#tidb-insight)
+  - [Monitoring & Alerting](#monitoring--alerting)
 - [2018 Roadmap](#2018-roadmap)
 
 <!-- /TOC -->
@@ -56,14 +55,14 @@ The team behind TiDB, PingCAP, grew from 35 members in 2016 to almost 90 members
 * More than 200 users are running TiDB in production environments, 50 times more than 2016.
 * Three distinguished TiDB contributors were recognized as TiDB committers. For more information about how to join the TiDB community, see [TiDB Community repo](https://github.com/pingcap/community) and [How to become a TiDB committer](https://github.com/pingcap/community#how-do-i-become-a-committer).
     ![Ed Huang and three contributors](media/huang-and-three-contributors.png)
-    
+
     *PingCAP co-founder & CTO, Ed Huang (left), recognizing three distinguished TiDB contributors as TiDB committer*
-    
+
 ## Partners
 
 Designed to be a cloud-native HTAP database, TiDB has been fully integrated and available on [UCloud](https://www.ucloud.cn/) and [Tencent Cloud](https://cloud.tencent.com/product/tidb). Close partnerships with other public cloud vendors will be announced soon. Stay tuned!
 
-Some of TiDB’s largest customers, [Mobike](https://www.crunchbase.com/organization/mobike), [Toutiao](https://www.crunchbase.com/organization/toutiao), [SpeedyCloud](https://www.crunchbase.com/organization/speedycloud), [Qunar.com](https://www.crunchbase.com/organization/qunar-com), [Ele.me](https://www.crunchbase.com/organization/ele-me), also shared their use cases and best practices:
+Some of TiDB's largest customers, [Mobike](https://www.crunchbase.com/organization/mobike), [Toutiao](https://www.crunchbase.com/organization/toutiao), [SpeedyCloud](https://www.crunchbase.com/organization/speedycloud), [Qunar.com](https://www.crunchbase.com/organization/qunar-com), [Ele.me](https://www.crunchbase.com/organization/ele-me), also shared their use cases and best practices:
 
 ![Mobike](media/mobike-database-team-manager.png)
 
@@ -123,7 +122,7 @@ Deploying a TiDB cluster is much easier than ever before. Developers can use Doc
 
 #### TiDB Syncer
 
-TiDB Syncer is a smart tool to migrate data from MySQL to TiDB in real-time. It poses as a MySQL slave and listens to the changes of master by parsing the MySQL Binary Logs, and replaying the changes sequentially on the TiDB instance.
+TiDB Syncer is a smart tool to migrate data from MySQL to TiDB in real time. It poses as a MySQL secondary and listens to the changes of primary by parsing the MySQL Binary Logs, and replaying the changes sequentially on the TiDB instance.
 
 ![TiDB Syncer](media/syncer.png)
 
@@ -137,6 +136,7 @@ TiDB Binlog is a tool designed to help users to synchronize data to downstream d
 
 *Binlog*
 
+<!-- markdownlint-disable MD024 -->
 #### TiDB Lightning
 
 TiDB Lightning is a high-speed data importing tool, customized for TiDB:
@@ -156,8 +156,8 @@ Wormhole is an enterprise edition tool for data synchronization. It contains the
 * Pre-checking
 * Lightweight ETL in real-time
 * Cloud DB integration with:
-    * AliCloud RDS
-    * TencentCloud CDB
+  * AliCloud RDS
+  * TencentCloud CDB
 
 ![Wormhole--Enterprise synchronization tool](media/wormhole-enterprise-synchronization-tool.png)
 
@@ -181,11 +181,11 @@ The TiDB monitoring system collects metrics from TiDB cluster and is integrated 
 
 ## 2018 Roadmap
 
-After recapping all the news and developments from an exciting and productive 2017, PingCAP co-founder and CEO, Max Liu, unveiled TiDB’s 2018 roadmap. 
+After recapping all the news and developments from an exciting and productive 2017, PingCAP co-founder and CEO, Max Liu, unveiled TiDB's 2018 roadmap.
 
 ![2018 roadmap](media/2018-roadmap.png)
 
-*PingCAP co-founder and CEO, Max Liu, sharing TiDB’s 2018 roadmap*
+*PingCAP co-founder and CEO, Max Liu, sharing TiDB's 2018 roadmap*
 
 * Region level SQL query cache (2018 Q1)
 * View (2018 Q1)
@@ -197,8 +197,7 @@ After recapping all the news and developments from an exciting and productive 20
 * Geo-Index (2018 Q4-2019 Q1)
 * Window function (2018 Q4)
 
-Last but not least, we want to thank all the attendees for braving the cold to participate in the first (but definitely not the last) TiDB DevCon, all the speakers from our customer companies to share their use cases and best practices, and all the amazing contributors to the vibrant and growing TiDB community. We know you have big hopes for 2018; we won’t let you down.  
-
+Last but not least, we want to thank all the attendees for braving the cold to participate in the first (but definitely not the last) TiDB DevCon, all the speakers from our customer companies to share their use cases and best practices, and all the amazing contributors to the vibrant and growing TiDB community. We know you have big hopes for 2018; we won't let you down.  
 
 ![DevCon 2018 group photo](media/group-photo.png)
 
