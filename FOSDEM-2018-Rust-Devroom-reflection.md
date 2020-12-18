@@ -34,13 +34,13 @@ In my talk, I shared our experiences on the following topics from our process of
 
 2. How we build the TiKV core system using Rust, including the backend store, the gRPC framework, and the consensus replication mechanism.
 
-	* Backend store: TiKV adopts [RocksDB](http://rocksdb.org/) as the backend storage engine for its high-performance and fast storage, and uses[ Raft](https://raft.github.io/) and [Multi-raft](https://pingcap.com/blog/2017-08-15-multi-raft/) to ensure data safety and horizontal scalability. We implemented t[he Raft Consensus algorithm in Rust](https://github.com/pingcap/raft-rs)**.**
+* Backend store: TiKV adopts [RocksDB](http://rocksdb.org/) as the backend storage engine for its high-performance and fast storage, and uses[Raft](https://raft.github.io/) and [Multi-raft](https://pingcap.com/blog/2017-08-15-multi-raft/) to ensure data safety and horizontal scalability. We implemented t[he Raft Consensus algorithm in Rust](https://github.com/pingcap/raft-rs)**.**
 
-	* Transaction: As a distributed Key-Value database, TiKV also supports transaction and is ACID compliant. To maintain consistency among the Multi-raft groups, TiKV adopts an optimized [two-phase commit (2PC) protocol](https://en.wikipedia.org/wiki/Two-phase_commit_protocol) and supports [Multiversion Concurrency Control (MVCC)](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/), [Snapshot Isolation](https://en.wikipedia.org/wiki/Snapshot_isolation), and [Optimistic Transaction](https://en.wikipedia.org/wiki/Optimistic_concurrency_control).
+* Transaction: As a distributed Key-Value database, TiKV also supports transaction and is ACID compliant. To maintain consistency among the Multi-raft groups, TiKV adopts an optimized [two-phase commit (2PC) protocol](https://en.wikipedia.org/wiki/Two-phase_commit_protocol) and supports [Multiversion Concurrency Control (MVCC)](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/), [Snapshot Isolation](https://en.wikipedia.org/wiki/Snapshot_isolation), and [Optimistic Transaction](https://en.wikipedia.org/wiki/Optimistic_concurrency_control).
 
-	* For different machines to communicate to each other, TiKV uses [gRPC](https://grpc.io/), a high-performance universal RPC framework. We develop a[ gRPC library for Rust built on C Core library and futures](https://github.com/pingcap/grpc-rs).
+* For different machines to communicate to each other, TiKV uses [gRPC](https://grpc.io/), a high-performance universal RPC framework. We develop a[gRPC library for Rust built on C Core library and futures](https://github.com/pingcap/grpc-rs).
 
-3. How we monitor the cluster and diagnose problems: to monitor the metrics of the cluster and gain insights, TiKV adopts [Prometheus](https://prometheus.io/) as the monitoring solution. We build a [Prometheus instrumentation library for Rust ](https://github.com/pingcap/rust-prometheus)[applications](https://github.com/pingcap/rust-prometheus), which is listed as a third-party client on the [Official Prometheus Client Libraries](https://prometheus.io/docs/instrumenting/clientlibs/).
+3. How we monitor the cluster and diagnose problems: to monitor the metrics of the cluster and gain insights, TiKV adopts [Prometheus](https://prometheus.io/) as the monitoring solution. We build a [Prometheus instrumentation library for Rust](https://github.com/pingcap/rust-prometheus)[applications](https://github.com/pingcap/rust-prometheus), which is listed as a third-party client on the [Official Prometheus Client Libraries](https://prometheus.io/docs/instrumenting/clientlibs/).
 
 4. How we use the failure injection test to guarantee data safety. Inspired by FreeBSD's [failpoints](https://freebsd.org/cgi/man.cgi?query=fail), TiKV implemented a fail point to inject errors by users at runtime in Rust.
 
@@ -50,7 +50,7 @@ The following diagram shows the TiKV architecture:
 
 *TiKV Architecture*
 
-Our team has big plans beyond just building a full-featured distributed transactional Key-Value database like TiKV. We have already built a stateless SQL layer, [TiDB](https://github.com/pingcap/tidb), mainly for [Online transaction processing (OLTP)](https://en.wikipedia.org/wiki/Online_transaction_processing) that works directly with TiKV, and [TiSpark](https://github.com/pingcap/tispark), an Apache Spark driver which sits on top of TiKV for handling heavy [Online analytical processing ](https://en.wikipedia.org/wiki/Online_analytical_processing)[(OLAP)](https://en.wikipedia.org/wiki/Online_analytical_processing) workloads. Our ultimate vision is to build a Hybrid Transactional/Analytical Processing database that empowers businesses to meet both workloads with a single database and enables real-time business analysis based on live transactional data.
+Our team has big plans beyond just building a full-featured distributed transactional Key-Value database like TiKV. We have already built a stateless SQL layer, [TiDB](https://github.com/pingcap/tidb), mainly for [Online transaction processing (OLTP)](https://en.wikipedia.org/wiki/Online_transaction_processing) that works directly with TiKV, and [TiSpark](https://github.com/pingcap/tispark), an Apache Spark driver which sits on top of TiKV for handling heavy [Online analytical processing](https://en.wikipedia.org/wiki/Online_analytical_processing)[(OLAP)](https://en.wikipedia.org/wiki/Online_analytical_processing) workloads. Our ultimate vision is to build a Hybrid Transactional/Analytical Processing database that empowers businesses to meet both workloads with a single database and enables real-time business analysis based on live transactional data.
 
 ![Architecture of TiDB, a Hybrid Transactional/Analytical Processing (HTAP) database](media/Hybrid_Transactional_Analytical_Processing_database.png)
 
@@ -67,7 +67,7 @@ Last but not least, we welcome everyone to fork, star, use, and contribute to th
 
 * [Rustwrapper for RocksDB](https://github.com/pingcap/rust-rocksdb)
 
-* [Raft Consensus algorithm implemented in ](https://github.com/pingcap/raft-rs)[Rust](https://github.com/pingcap/raft-rs)
+* [Raft Consensus algorithm implemented in](https://github.com/pingcap/raft-rs)[Rust](https://github.com/pingcap/raft-rs)
 
 * [gRPC library for Rust built on C Core library and futures](https://github.com/pingcap/grpc-rs)
 
