@@ -257,4 +257,4 @@ In the long term, we will build a mightier ecosystem together with PingCAP. Here
 
     We will adopt TiDB in more application scenarios like physical backup and multiwrite across data centers.
 
-We look forward to a new era of HTAP database led by TiDB and PingCAP！
+We look forward to a new era of HTAP database led by TiDB and PingCAP!
