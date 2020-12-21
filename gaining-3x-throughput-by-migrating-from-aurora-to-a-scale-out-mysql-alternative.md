@@ -21,7 +21,7 @@ logo: /images/blog/customers/paypay.png
 
 > PayPay is the dominant player in Japan's QR code payment market. Its payment system processes thousands of requests per second and has zero-tolerance for errors. To meet such challenges, we migrated the core payment DB to [TiDB](https://docs.pingcap.com/tidb/stable/overview/). The migration was completed during COVID-19 by teams located in 3 different countries. This post was written by myself and my teammate Shinnosuke.
 
-- George Li, Platform Engineer
+— George Li, Platform Engineer
 
 ## Introduction
 
