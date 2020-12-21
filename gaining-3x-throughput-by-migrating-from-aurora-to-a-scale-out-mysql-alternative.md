@@ -12,15 +12,21 @@ logo: /images/blog/customers/paypay.png
 
 **Industry:** Mobile Payment
 
-**Author:** Paytm
+**Authors:**
+- George Li (Platform Engineer)
+- Shinnosuke (Platform Engineer)
 
 ![Migrating from Aurora to a scale-out MySQL alternative database](media/mysql-horizontal-scaling-database-paypay.jpg)
+
+> PayPay is the dominant player in Japan's QR code payment market. Its payment system processes thousands of requests per second and has zero-tolerance for errors. To meet such challenges, we migrated the core payment DB to [TiDB](https://docs.pingcap.com/tidb/stable/overview/). The migration was completed during COVID-19 by teams located in 3 different countries. This post was written by myself and my teammate Shinnosuke.
+
+- George Li, Platform Engineer
 
 ## Introduction
 
 With 33M users, [PayPay](https://paypay.ne.jp/?pid=official_sns&utm_source=twitter&shortlink=34a78924&utm_medium=social&af_adset=profile&af_ad=201905&utm_campaign=twitter_01&af_channel=twitter&c=twitter_01) has strict requirements on the payment system's response time. During PayPay's rapid growth, the core payment service was experiencing performance issues due to the increased processing time in its Aurora database. Such performance issues would be limiting PayPay's business growth, and thus we had to solve this problem before the system traffic reaches the tipping point.
 
-After research and PoC, we [migrated the core payment database from Aurora to](https://en.pingcap.com/case-studies/japan-largest-mobile-payment-company-migrates-from-aurora-to-a-scale-out-database) [TiDB](https://docs.pingcap.com/tidb/stable/overview/), a scalable distributed database with high availability and cross-region replicas. We finished the migration in 3 months, and since the migration, the payment system can now **support 3 times throughput compared to before**.
+After research and PoC, we [migrated the core payment database from Aurora to TiDB](https://pingcap.com/case-studies/japan-largest-mobile-payment-company-migrates-from-aurora-to-a-scale-out-database), a scalable distributed database with high availability and cross-region replicas. We finished the migration in 3 months, and since the migration, the payment system can now **support 3 times throughput compared to before**.
 
 ## Background
 
