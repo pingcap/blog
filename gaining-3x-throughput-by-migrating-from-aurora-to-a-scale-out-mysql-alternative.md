@@ -54,7 +54,7 @@ We had integrity checks running for 2 months before the migration and 1 month af
 
 ### Performance test
 
-We used the same set of load testing suites with Gatling against both Aurora and TiDB, and verified that **TiDB can support 3x the throughput compared to Aurora while maintaining &lt; 1-second P99 latency SLA**.
+We used the same set of load testing suites with Gatling against both Aurora and TiDB, and verified that **TiDB can support 3x the throughput compared to Aurora while maintaining \< 1-second P99 latency SLA**.
 
 ### Disaster recovery drills
 
