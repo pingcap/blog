@@ -1,13 +1,13 @@
 ---
 title: Gaining 3x Throughput by Migrating from Aurora to a Scale-Out MySQL Alternative
-author: ['Paytm']
+author: ['George Li', 'Shinnosuke']
 date: 2020-12-21
 summary: PayPay is Japan's largest mobile payment company. Learn how they achieved 3x throughput by migrating from Aurora to TiDB, a scale-out MySQL alternative.
 image: /images/blog/mysql-horizontal-scaling-database-paypay.jpg
 tags: ['Scalability', 'Amazon Aurora']
-customer: PayPay
+customer: Paytm Labs
 customerCategory: Financial Services
-logo: /images/blog/customers/paypay.png
+logo: /images/blog/customers/paytm-labs.jpg
 ---
 
 **Industry:** Mobile Payment
