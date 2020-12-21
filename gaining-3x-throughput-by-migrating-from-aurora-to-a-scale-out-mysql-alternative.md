@@ -13,6 +13,7 @@ logo: /images/blog/customers/paypay.png
 **Industry:** Mobile Payment
 
 **Authors:**
+
 - George Li (Platform Engineer)
 - Shinnosuke (Platform Engineer)
 
