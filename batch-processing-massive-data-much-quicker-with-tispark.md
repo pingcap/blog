@@ -6,7 +6,6 @@ summary: A senior solution architect at PingCAP explains why TiSpark (TiDB + Apa
 tags: ['TiSpark']
 categories: ['Engineering']
 image: /images/blog/batch-processing-massive-data-much-quicker-with-tispark.jpg
-aliases: ['/blog/batch-processing-massive-data-much-quicker-with-tispark']
 ---
 
 ![Batch Processing Massive Data Much Quicker with TiSpark](media/batch-processing-massive-data-much-quicker-with-tispark.jpg)
