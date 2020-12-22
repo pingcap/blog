@@ -218,4 +218,4 @@ The following table summarizes each job ID and task:
 
 ## Contact me
 
-I hope this blog post will bring you more knowledge about TiSpark. If you have more questions about TiSpark or its batch processing solution, please [email me](mailto: yangzhexuan@pingcap.com). I'd be glad to discuss with you about how to integrate TiSpark into your application. :-)
+I hope this blog post will bring you more knowledge about TiSpark. If you have more questions about TiSpark or its batch processing solution, please [email me](mailto:yangzhexuan@pingcap.com). I'd be glad to discuss with you about how to integrate TiSpark into your application. :-)
