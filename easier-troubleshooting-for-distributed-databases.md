@@ -3,7 +3,7 @@ title: 'TiDB Dashboard: Easier Troubleshooting for Distributed Databases'
 author: [Wenxuan Shi, Ming Zhang, Shuang Chen]
 date: 2020-05-28
 summary: TiDB 4.0 introduces TiDB Dashboard, which provides various built-in widgets in a graphical interface that let you easily diagnose, monitor, and manage your clusters in one place. Now you can troubleshoot TiDB clusters more easily. 
-tags: ['Troubleshooting', 'Distributed SQL database']
+tags: ['Troubleshooting', 'Distributed SQL database', 'System profiling']
 categories: ['Engineering']
 image: /images/blog/troubleshoot-distributed-databases.jpg
 --- 

@@ -3,7 +3,7 @@ title: Quickly Find Rust Program Bottlenecks Online Using a Go Tool
 author: [Ke'ao Yang]
 date: 2020-03-25
 summary: It can be hard to find Rust programs' performance bottlenecks online. By integrating pprof-rs in TiKV, we can use the Go tool pprof to visualize TiKV's profiling data. This helps analyze the program's performance online.
-tags: ['Go', 'Rust', 'TiKV']
+tags: ['Go', 'Rust', 'TiKV', 'System profiling']
 categories: ['Engineering']
 image: /images/blog/find-rust-program-bottlenecks-online-using-go-tool.jpg
 ---
