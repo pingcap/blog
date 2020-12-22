@@ -92,7 +92,7 @@ The components in the figure are color coded:
 
 When TiSpark receives a task and processes the data, it locks the tables before writing the data. This prevents TiSpark from rolling back its transaction due to conflicts with other transactions. We don't want to see any rollbacks like this because TiSpark is usually processing hundreds of millions of rows of data, which is time-consuming.
 
-This table locking behavior only applies to TiDB v3.0.14 and above. In version 4.0.x, TiDB changed the transaction protocol, and now supports large transactions up to 10 GB. If TiSpark is compatible with the protocol modification, there is no need to lock the tables.
+This table locking behavior only applies to TiDB **v3.0.14 and above**. In version 4.0.x, TiDB changed the transaction protocol, and now supports large transactions up to **10 GB**. If TiSpark is compatible with the protocol modification, there is no need to lock the tables.
 
 Next, TiSpark categorizes, counts, samples, and calculates the data to be written, and evaluates how many new Regions need to be generated in this batch write. It then passes the information to TiDB. TiDB then interacts with other components and splits into the correct amount of Regions in advance.
 
@@ -104,7 +104,7 @@ Pre-splitting Regions avoids the following issues:
 During the writing process, TiSpark also interacts with PD in two ways:
 
 * **Gets meta information.** TiKV stores key-value pairs, so TiSpark converts all data rows into key-value pairs before writing. TiSpark needs to know which Region to write the key-value pairs to; that is, it needs to obtain the corresponding address of the Region.
-* **Requests a timestamp from PD to guarantee transactions. **You can regard this timestamp as a transaction ID. Next, TiSpark uses Spark Worker to concurrently write the generated key-value pairs to TiKV.
+* **Requests a timestamp from PD to guarantee transactions.** You can regard this timestamp as a transaction ID. Next, TiSpark uses Spark Worker to concurrently write the generated key-value pairs to TiKV.
 
 ### Implementation
 
@@ -164,7 +164,7 @@ val finalDF = df.withColumnRenamed("newBala", "balance")
 1. Locate the loan column and the interest rate column using the DataFrame interface.
 2. Use a simple arithmetic operation to calculate the interest.
 3. Create a new column called `toBeDeducted` using the `withColumn` interface.
-4. Subtract this `toBededucted` value from its original balance and get the new balance.
+4. Subtract this `toBeDeducted` value from its original balance and get the new balance.
 5. Drop the `toBeDeducted` column.
 
 Another example is the rewards points system for credit cards.
@@ -183,7 +183,7 @@ When the execution is complete, we can process the DataFrame according to differ
 
 When you submit a task to TiSpark, you can monitor the progress of the task. The figure below shows a batch processing task that writes 4 million rows of data:
 
-![alt_text](images/image4.png "image_tooltip")
+![Monitor tasks in TiSpark](images/monitor-tispark-tasks.png)
 
 From the monitor page, you can see what the task is processing, and that it should be completed in about 5 minutes.
 
