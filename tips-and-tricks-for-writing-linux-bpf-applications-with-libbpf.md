@@ -3,7 +3,7 @@ title: Tips and Tricks for Writing Linux BPF Applications with libbpf
 author: ['Wenbo Zhang']
 date: 2020-12-14
 summary: Compared to BCC, the libbpf + BPF CO-RE solution greatly reduces storage space and runtime overhead. That's why we switched from bcc-tools to libbpf-tools. This post introduces some tips and tricks for writing BPF applications with libbpf.
-tags: ['Performance tuning']
+tags: ['Performance tuning', 'Linux']
 categories: ['Engineering']
 image: /images/blog/linux-bpf-performance-analysis-tools.jpg
 ---
