@@ -4,7 +4,7 @@ author: ['PingCAP']
 date: 2020-03-06
 summary: TiDB Challenge Program is a series community program to bring TiDB to a new level in terms of stability, performance, and usability. With amazing improvements in performance in season 1 last year, we are now pleased to announce that season 2 is ready for you.
 tags: ['Community news']
-categories: ['Open Source Community']
+categories: ['Community']
 image: /images/blog/tidb-usability-challenge.jpg
 ---
 
@@ -29,12 +29,12 @@ Here's what's new in this season:
   * [TiDB](https://github.com/pingcap/tidb/projects/26)
   * [TiKV](https://github.com/tikv/tikv/projects/20)
   * [PD](https://github.com/pingcap/pd/projects/2)
-  * [Chaos-Mesh](https://github.com/pingcap/chaos-mesh/projects/14)
+  * [Chaos Mesh](https://github.com/pingcap/chaos-mesh/projects/14)
   * [Data Migration](https://github.com/pingcap/dm/projects/1)
-  * [Backup&Restore](https://github.com/pingcap/br/projects/1)
+  * [Backup & Restore](https://github.com/pingcap/br/projects/1)
   * [client-rust](https://github.com/tikv/client-rust/projects/3)
-  * [tidb-dashboard](https://github.com/pingcap-incubator/tidb-dashboard/projects/17)
-  * [tiup](https://github.com/pingcap-incubator/tiup/projects/1)
+  * [TiDB Dashboard](https://github.com/pingcap-incubator/tidb-dashboard/projects/17)
+  * [TiUP](https://github.com/pingcap-incubator/tiup/projects/1)
   * and more to come!
 
 * **Bountiful prizes**

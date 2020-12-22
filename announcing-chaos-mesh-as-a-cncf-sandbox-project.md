@@ -3,7 +3,7 @@ title: Announcing Chaos Mesh® as a CNCF Sandbox Project
 author: [Siddon Tang]
 date: 2020-07-28
 summary: We're thrilled to announce that Chaos Mesh®, our open-sourced Chaos Engineering platform for Kubernetes, is now officially accepted as a CNCF Sandbox project. 
-tags: ['Chaos Mesh', 'Announcement', 'CNCF']
+tags: ['Chaos Mesh', 'Announcement', 'CNCF', 'Chaos Engineering']
 categories: ['Engineering']
 image: /images/blog/chaos-mesh-cncf-sandbox.jpg
 press_release: true
