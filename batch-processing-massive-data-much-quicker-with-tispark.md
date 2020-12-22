@@ -11,7 +11,7 @@ aliases: ['/blog/batch-processing-massive-data-much-quicker-with-tispark']
 
 ![Batch Processing Massive Data Much Quicker with TiSpark](media/batch-processing-massive-data-much-quicker-with-tispark.jpg)
 
-TiSpark is an Apache Spark plugin that works with the TiDB platform to answer complex online analytical processing (OLAP) queries. It is widely used by our customers to batch process their massive data and discover analytical insights.
+[TiSpark](https://docs.pingcap.com/tidb/stable/tispark-overview) is an Apache Spark plugin that works with the [TiDB](https://docs.pingcap.com/tidb/stable) platform to answer complex online analytical processing (OLAP) queries. It is widely used by our [customers](https://pingcap.com/case-studies/) to batch process their massive data and discover analytical insights.
 
 I'm a senior solution architect at PingCAP and a former developer of TiSpark. In this post, I will explain why TiSpark is better than the traditional batch processing solution, how you can benefit from TiSpark, and how it works.
 
