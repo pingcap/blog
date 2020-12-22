@@ -183,7 +183,7 @@ When the execution is complete, we can process the DataFrame according to differ
 
 When you submit a task to TiSpark, you can monitor the progress of the task. The figure below shows a batch processing task that writes 4 million rows of data:
 
-![Monitor tasks in TiSpark](images/monitor-tispark-tasks.png)
+![Monitor tasks in TiSpark](media/monitor-tispark-tasks.png)
 
 From the monitor page, you can see what the task is processing, and that it should be completed in about 5 minutes.
 
