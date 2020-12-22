@@ -19,6 +19,7 @@ I'm a senior solution architect at PingCAP and a former developer of TiSpark. In
 Let's first review the traditional batch processing architecture.
 
 ![Traditional batch processing architecture](media/traditional-batch-processing-way.jpg)
+<div class="caption-center"> Traditional batch processing architecture </div>
 
 The traditional batch processing system first gets raw data, which can be CSV files, or data read from TiDB, MySQL, or other heterogeneous databases.
 
@@ -35,6 +36,7 @@ Sometimes it gets so slow that commercial banks cannot accept it. This is becaus
 But if we're talking about TiSpark, it's a different story.
 
 ![Batch processing using TiSpark](media/batch-processing-using-tispark.jpg)
+<div class="caption-center"> Batch processing using TiSpark </div>
 
 TiSpark treats the loaded raw data as a whole for data processing, without breaking up a large data set into small subsets.
 
@@ -53,6 +55,7 @@ To sum up, batch processing using TiSpark has the following advantages:
 The following figure shows the role of TiSpark in the entire TiDB cluster:
 
 ![The TiDB cluster's components](media/tidb-cluster-components.jpg)
+<div class="caption-center"> TiDB cluster's components </div>
 
 The components in the figure are color coded:
 
@@ -183,6 +186,7 @@ When the execution is complete, we can process the DataFrame according to differ
 When you submit a task to TiSpark, you can monitor the progress of the task. The figure below shows a batch processing task that writes 4 million rows of data:
 
 ![Monitor tasks in TiSpark](media/monitor-tispark-tasks.png)
+<div class="caption-center"> Monitor tasks in TiSpark </div>
 
 From the monitor page, you can see what the task is processing, and that it should be completed in about 5 minutes.
 
