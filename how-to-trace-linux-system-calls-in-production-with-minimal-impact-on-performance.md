@@ -34,6 +34,7 @@ Let's look at some common uses of perf.
     ```
 
     ![System call counts](media/system-call-counts.jpg)
+    <div class="caption-center"> System call counts </div>
 
     From the output, you can see that the `kube-apiserver` command had the most system calls during sampling.
 
@@ -46,6 +47,7 @@ Let's look at some common uses of perf.
     ```
 
     ![System calls longer than 200 ms](media/system-calls-longer-than-200-ms.jpg)
+    <div class="caption-center"> System calls longer than 200 ms </div>
 
     From the output, you can see the process names, process IDs (PIDs), the specific system calls that exceed 200 ms, and the returned values.
 
@@ -58,6 +60,7 @@ Let's look at some common uses of perf.
     ```
 
     ![System call overheads by process](media/system-call-overheads-by-process.jpg)
+    <div class="caption-center"> System call overheads by process </div>
 
     From the output, you can see the times of each system call, the times of the errors, the total latency, the average latency, and so on.
 
@@ -70,6 +73,7 @@ Let's look at some common uses of perf.
     ```
 
     ![Stack information of system calls with high latency](media/stack-information-of-system-calls-with-high-latency.jpg)
+    <div class="caption-center"> Stack information of system calls with high latency </div>
 
 + To trace a group of tasks. For example, two BPF tools are running in the background. To see their system call information, you can add them to a `perf_event` cgroup and then execute `per trace`:
 
@@ -83,6 +87,7 @@ Let's look at some common uses of perf.
     ```
 
     ![Trace a group of tasks](media/trace-a-group-of-tasks.jpg)
+    <div class="caption-center"> Trace a group of tasks </div>
 
 Those are some of the most common uses of perf. If you'd like to know more (especially about perf-trace), see the [Linux manual page](https://man7.org/linux/man-pages/man1/perf-trace.1.html). From the manual pages, you will learn that perf-trace can filter tasks based on PIDs or thread IDs (TIDs), but that it has no convenient support for containers and the Kubernetes (K8s) environments. Don't worry. Next, we'll discuss a tool that can easily trace system calls in containers and in K8s environments that uses cgroup v2.
 
@@ -91,6 +96,7 @@ Those are some of the most common uses of perf. If you'd like to know more (espe
 Traceloop provides better support for tracing Linux system calls in the containers or K8s environments that use cgroup v2. You might be unfamiliar with traceloop but know BPF Compiler Collection (BCC) pretty well. (Its front-end is implemented using Python or C++.) In the IO Visor Project, BCC's parent project, there is another project named gobpf that provides Golang bindings for the BCC framework. Based on gobpf, traceloop is developed for environments of containers and K8s. The following illustration shows the traceloop architecture:
 
 ![traceloop architecture](media/traceloop-architecture.jpg)
+<div class="caption-center"> traceloop architecture </div>
 
 We can further simplify this illustration into the following key procedures. Note that these procedures are implementation details, not operations to perform:
 
@@ -111,6 +117,7 @@ sudo -E ./traceloop cgroups --dump-on-exit /sys/fs/cgroup/system.slice/sshd.serv
 ```
 
 ![traceloop tracing system calls](media/traceloop-tracing-system-calls.jpg)
+<div class="caption-center"> traceloop tracing system calls </div>
 
 As the results show, the traceloop output is similar to that of strace or perf-trace except for the cgroup-based task filtering. Note that CentOS 8 mounts cgroup v2 directly on the `/sys/fs/cgroup` path instead of on `/sys/fs/cgroup/unified` as Ubuntu does. Therefore, before you use traceloop, you should run `mount -t cgroup2` to determine the mount information.
 
@@ -121,6 +128,7 @@ The team behind traceloop has integrated it with the Inspektor Gadget project, s
 We conducted a sysbench test in which system calls were either traced using multiple tracers (traceloop, strace, and perf-trace) or not traced. The benchmark results are as follows:
 
 ![Sysbench results with system calls traced and untraced](media/sysbench-results-with-system-calls-traced-and-untraced.jpg)
+<div class="caption-center"> Sysbench results with system calls traced and untraced </div>
 
 As the benchmark shows, strace caused the biggest decrease in application performance. perf-trace caused a smaller decrease, and traceloop caused the smallest.
 
