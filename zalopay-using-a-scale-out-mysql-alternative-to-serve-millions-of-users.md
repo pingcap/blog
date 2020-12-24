@@ -7,7 +7,6 @@ tags: ['HTAP', 'DevCon', 'TiSpark', 'Real-time analytics']
 url: /success-stories/zalopay-using-a-scale-out-mysql-alternative-to-serve-millions-of-users/
 customer: VNG
 customerCategory: Financial Services
-categories: ['HTAP']
 logo: /images/blog/customers/vng-logo.png
 image: /images/blog/zalopay-choosing-scale-out-mysql-alternative-database-tidb.jpg
 ---
