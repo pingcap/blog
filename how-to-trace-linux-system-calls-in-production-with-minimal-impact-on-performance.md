@@ -1,7 +1,7 @@
 ---
 title: How to Trace Linux System Calls in Production with Minimal Impact on Performance
 author: ['Wenbo Zhang']
-date: 2020-12-31
+date: 2020-12-24
 summary: To trace system calls in Linux effectively, you can use perf to analyze system calls that have latency in general scenarios. For containers or Kubernetes that use cgroup v2, traceloop is more convenient.
 tags: ['Linux', 'System profiling', 'Performance tuning']
 categories: ['Engineering']
@@ -73,7 +73,7 @@ Let’s look at some common uses of perf.
 
     ![Trace a group of tasks](media/trace-a-group-of-tasks.jpg)
 
-    Those are some of the most common uses of perf.  If you’d like to know more (especially about perf-trace), see the [Linux manual page](https://man7.org/linux/man-pages/man1/perf-trace.1.html). From the manual pages, you will learn that perf-trace can filter tasks based on PIDs or thread IDs (TIDs), but that it has no convenient support for containers and the Kubernetes (K8s) environments. Don’t worry. Next, we’ll discuss a tool that can easily trace system calls in containers and in K8s environments that uses cgroup v2.
+Those are some of the most common uses of perf. If you’d like to know more (especially about perf-trace), see the [Linux manual page](https://man7.org/linux/man-pages/man1/perf-trace.1.html). From the manual pages, you will learn that perf-trace can filter tasks based on PIDs or thread IDs (TIDs), but that it has no convenient support for containers and the Kubernetes (K8s) environments. Don’t worry. Next, we’ll discuss a tool that can easily trace system calls in containers and in K8s environments that uses cgroup v2.
 
 ## Traceloop, a performance profiler for cgroup v2 and K8s
 
@@ -89,7 +89,7 @@ We can further simplify this illustration into the following key procedures. Not
 
 > **Note:**
 >
-> Currently, you  can get the cgroup ID only by executing `bpf helper: bpf_get_current_cgroup_id`, and this ID is available only in cgroup v2. Therefore, before you use traceloop, make sure that [cgroup v2 is enabled](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html#basic-operations) in your environment.
+> Currently, you can get the cgroup ID only by executing `bpf helper: bpf_get_current_cgroup_id`, and this ID is available only in cgroup v2. Therefore, before you use traceloop, make sure that [cgroup v2 is enabled](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html#basic-operations) in your environment.
 
 In the following demo (on the CentOS 8 4.18 kernel), when traceloop exits, the system call information is traced:
 
