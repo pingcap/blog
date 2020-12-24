@@ -4,7 +4,7 @@ author: ['PingCAP']
 date: 2020-10-15
 summary: TiCDC is TiDB's change data capture framework. It is now generally available. This post introduces its features, application scenarios, and real-world case studies.
 tags: ['Ecosystem tools', 'Announcement']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/change-data-capture-ga.jpg
 press_release: true
 ---

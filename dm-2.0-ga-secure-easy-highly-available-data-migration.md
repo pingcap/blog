@@ -4,7 +4,7 @@ author: ['PingCAP']
 date: 2020-11-04
 summary: DM 2.0 has reached general availability. It supports highly available migration tasks and shard merging and migration in optimistic mode.
 tags: ['Ecosystem tools', 'Data migration', 'High availability', 'Announcement']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/data-migration-2.0.jpg
 press_release: true
 ---

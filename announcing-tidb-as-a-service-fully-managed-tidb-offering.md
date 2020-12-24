@@ -4,7 +4,7 @@ author: [PingCAP]
 date: 2020-06-23
 summary: TiDB Cloud Beta is released. It's the easiest, most economical, and most resilient way to unlock the full power of TiDB in the cloud, allowing the users to deploy and run TiDB clusters with just a few clicks.
 tags: ['Release', 'TiDB Cloud', 'HTAP', 'Cloud']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/htap-tidb-cloud-beta.jpg
 aliases: ['/blog/announcing-tidb-cloud-managed-as-a-service-and-in-the-marketplace/']
 press_release: true
