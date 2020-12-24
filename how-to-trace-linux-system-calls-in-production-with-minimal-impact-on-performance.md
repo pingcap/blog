@@ -5,11 +5,12 @@ date: 2020-12-24
 summary: To trace system calls in Linux effectively, you can use perf to analyze system calls that have latency in general scenarios. For containers or Kubernetes that use cgroup v2, traceloop is more convenient.
 tags: ['Linux', 'System profiling', 'Performance tuning']
 categories: ['Engineering']
+image: /images/blog/how-to-trace-linux-syscalls.jpg
 ---
 
 ![How to trace Linux System Calls in Production with Minimal Impact on Performance](media/how-to-trace-linux-syscalls.jpg)
 
-If you need to dynamically trace Linux process system calls, you might first consider strace. strace is simple to use and works well for issues such as “Why can’t the software run on this machine?” However, if you’re running a trace in a production environment, strace is NOT a good choice. It introduces a substantial amount of overhead. According to [a performance test](http://vger.kernel.org/~acme/perf/linuxdev-br-2018-perf-trace-eBPF/#/4/2) conducted by Arnaldo Carvalho de Melo, a senior software engineer at Red Hat, **the process traced using strace ran 173 times slower, which is disastrous for a production environment**.
+If you need to dynamically trace Linux process system calls, you might first consider strace. strace is simple to use and works well for issues such as "Why can't the software run on this machine?" However, if you're running a trace in a production environment, strace is NOT a good choice. It introduces a substantial amount of overhead. According to [a performance test](http://vger.kernel.org/~acme/perf/linuxdev-br-2018-perf-trace-eBPF/#/4/2) conducted by Arnaldo Carvalho de Melo, a senior software engineer at Red Hat, **the process traced using strace ran 173 times slower, which is disastrous for a production environment**.
 
 So are there any tools that excel at tracing system calls in a production environment? The answer is YES. This blog post introduces perf and traceloop, two commonly used command-line tools, to help you trace system calls in a production environment.
 
@@ -22,9 +23,11 @@ perf is a powerful Linux profiling tool, refined and upgraded by Linux kernel de
 + c2c: Detects the potential for false sharing. Red Hat once tested the c2c prototype on a number of Linux applications and found many cases of false sharing and cache lines on hotspots.
 + trace: Traces system calls with acceptable overheads. It performs only **1.36** times slower with workloads specified in the `dd` command.
 
-Let’s look at some common uses of perf.
+Let's look at some common uses of perf.
 
 + To see which commands made the most system calls:
+
+    {{< copyable "shell-regular" >}}
 
     ```shell
     perf top -F 49 -e raw_syscalls:sys_enter --sort comm,dso --show-nr-samples
@@ -36,6 +39,8 @@ Let’s look at some common uses of perf.
 
 + To see system calls that have latencies longer than a specific duration. In the following example, this duration is 200 milliseconds:
 
+    {{< copyable "shell-regular" >}}
+
     ```shell
     perf trace --duration 200
     ```
@@ -45,6 +50,8 @@ Let’s look at some common uses of perf.
     From the output, you can see the process names, process IDs (PIDs), the specific system calls that exceed 200 ms, and the returned values.
 
 + To see the processes that had system calls within a period of time and a summary of their overhead:
+
+    {{< copyable "shell-regular" >}}
 
     ```shell
     perf trace -p $PID  -s
@@ -56,6 +63,8 @@ Let’s look at some common uses of perf.
 
 + To analyze the stack information of calls that have a high latency:
 
+    {{< copyable "shell-regular" >}}
+
     ```shell
     perf trace record --call-graph dwarf -p $PID -- sleep 10
     ```
@@ -63,6 +72,8 @@ Let’s look at some common uses of perf.
     ![Stack information of system calls with high latency](media/stack-information-of-system-calls-with-high-latency.jpg)
 
 + To trace a group of tasks. For example, two BPF tools are running in the background. To see their system call information, you can add them to a `perf_event` cgroup and then execute `per trace`:
+
+    {{< copyable "shell-regular" >}}
 
     ```shell
     mkdir /sys/fs/cgroup/perf_event/bpftools/
@@ -73,11 +84,11 @@ Let’s look at some common uses of perf.
 
     ![Trace a group of tasks](media/trace-a-group-of-tasks.jpg)
 
-Those are some of the most common uses of perf. If you’d like to know more (especially about perf-trace), see the [Linux manual page](https://man7.org/linux/man-pages/man1/perf-trace.1.html). From the manual pages, you will learn that perf-trace can filter tasks based on PIDs or thread IDs (TIDs), but that it has no convenient support for containers and the Kubernetes (K8s) environments. Don’t worry. Next, we’ll discuss a tool that can easily trace system calls in containers and in K8s environments that uses cgroup v2.
+Those are some of the most common uses of perf. If you'd like to know more (especially about perf-trace), see the [Linux manual page](https://man7.org/linux/man-pages/man1/perf-trace.1.html). From the manual pages, you will learn that perf-trace can filter tasks based on PIDs or thread IDs (TIDs), but that it has no convenient support for containers and the Kubernetes (K8s) environments. Don't worry. Next, we'll discuss a tool that can easily trace system calls in containers and in K8s environments that uses cgroup v2.
 
 ## Traceloop, a performance profiler for cgroup v2 and K8s
 
-Traceloop provides better support for tracing Linux system calls in the containers or K8s environments that use cgroup v2. You might be unfamiliar with traceloop but know BPF Compiler Collection (BCC) pretty well. (Its front-end is implemented using Python or C++.) In the IO Visor Project, BCC’s parent project, there is another project named gobpf that provides Golang bindings for the BCC framework. Based on gobpf, traceloop is developed for environments of containers and K8s. The following illustration shows the traceloop architecture:
+Traceloop provides better support for tracing Linux system calls in the containers or K8s environments that use cgroup v2. You might be unfamiliar with traceloop but know BPF Compiler Collection (BCC) pretty well. (Its front-end is implemented using Python or C++.) In the IO Visor Project, BCC's parent project, there is another project named gobpf that provides Golang bindings for the BCC framework. Based on gobpf, traceloop is developed for environments of containers and K8s. The following illustration shows the traceloop architecture:
 
 ![traceloop architecture](media/traceloop-architecture.jpg)
 
@@ -93,8 +104,10 @@ We can further simplify this illustration into the following key procedures. Not
 
 In the following demo (on the CentOS 8 4.18 kernel), when traceloop exits, the system call information is traced:
 
+{{< copyable "shell-regular" >}}
+
 ```shell
-sudo -E ./traceloop cgroups  --dump-on-exit /sys/fs/cgroup/system.slice/sshd.service
+sudo -E ./traceloop cgroups --dump-on-exit /sys/fs/cgroup/system.slice/sshd.service
 ```
 
 ![traceloop tracing system calls](media/traceloop-tracing-system-calls.jpg)
@@ -113,4 +126,4 @@ As the benchmark shows, strace caused the biggest decrease in application perfor
 
 ## Summary of Linux profilers
 
-For issues such as “Why can’t the software run on this machine,” strace is still a powerful system call tracer in Linux. But to trace the latency of system calls, the BPF-based perf-trace is a better option. In containers or K8s environments that use cgroup v2, traceloop is the easiest to use.
+For issues such as "Why can't the software run on this machine," strace is still a powerful system call tracer in Linux. But to trace the latency of system calls, the BPF-based perf-trace is a better option. In containers or K8s environments that use cgroup v2, traceloop is the easiest to use.
