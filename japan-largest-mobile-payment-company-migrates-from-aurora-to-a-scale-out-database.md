@@ -8,7 +8,6 @@ tags: ['Scalability', 'Amazon Aurora']
 url: /success-stories/japan-largest-mobile-payment-company-migrates-from-aurora-to-a-scale-out-database/
 customer: PayPay
 customerCategory: Financial Services
-categories: ['MySQL Scalability']
 logo: /images/blog/customers/paypay.png
 ---
 

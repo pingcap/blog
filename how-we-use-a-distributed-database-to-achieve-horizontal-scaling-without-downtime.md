@@ -8,7 +8,6 @@ tags: ['Scalability']
 url: /success-stories/how-we-use-a-distributed-database-to-achieve-horizontal-scaling-without-downtime/
 customer: Bank of Beijing
 customerCategory: Financial Services
-categories: ['MySQL Scalability']
 logo: /images/blog/customers/bank-of-beijing-logo.png
 ---
 

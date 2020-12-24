@@ -8,7 +8,6 @@ tags: ['HTAP', 'TiFlash', 'Real-time analytics', 'Scalability', 'MySQL', 'MySQL 
 url: /success-stories/how-we-use-a-scale-out-htap-database-for-real-time-analytics-and-complex-queries/
 customer: Xiaohongshu
 customerCategory: Internet
-categories: ['MySQL Scalability']
 logo: /images/blog/customers/xiaohongshu-logo.png
 ---
 

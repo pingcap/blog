@@ -8,7 +8,6 @@ tags: ['TiFlash', 'Ecosystem tools', 'Troubleshooting', 'Backup and restore']
 url: /success-stories/scale-out-database-powers-china-letgo-with-reduced-maintenance-costs/
 customer: Zhuan Zhuan
 customerCategory: Internet
-categories: ['MySQL Scalability']
 logo: /images/blog/customers/zhuanzhuan-logo.png
 ---
 

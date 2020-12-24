@@ -8,7 +8,6 @@ url: /success-stories/running-a-scale-out-database-on-arm-as-mysql-alternative/
 customer: U-Next
 customerCategory: Internet
 image: /images/blog/unext-scale-out-database-on-arm-mysql-alternative.jpg
-categories: ['MySQL Scalability']
 logo: /images/blog/customers/u-next-logo.png
 ---
 

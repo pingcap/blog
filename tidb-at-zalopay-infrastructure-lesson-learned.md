@@ -5,7 +5,6 @@ date: 2020-05-11
 summary: As VNG's business developed, their infrastructure became an obstacle to their growth. Then they chose TiDB as the core database for their ZaloPay app and used it to store their critical data. Now, VNG has 20+ TiDB nodes in their production environment.
 image: /images/blog/tidb-at-zalopay-infrastructure.jpg
 tags: ['Database selection', 'MySQL']
-categories: ['MySQL Scalability']
 url: /success-stories/tidb-at-zalopay-infrastructure-lesson-learned/
 customer: VNG
 customerCategory: Financial Services

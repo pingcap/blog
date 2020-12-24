@@ -5,7 +5,6 @@ date: 2020-08-28
 summary: PingCAP, provider of the cloud-native hybrid transactional/analytical processing (HTAP) TiDB database, successfully completes an SOC 2 Type 1 examination for TiDB Cloud.
 image: /images/blog/cloud-native-htap-tidb-cloud-soc-2.jpg
 tags: ['TiDB Cloud', 'Announcement']
-categories: ['MySQL Scalability']
 aliases: ['/pingcap-successfully-completes-type-1-soc-2-examination-for-tidb-cloud/']
 press_release: true
 ---

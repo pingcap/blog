@@ -7,7 +7,6 @@ image: /images/blog/scale-out-htap-database-zto.jpg
 tags: ['Scalability', 'HTAP', 'Real-time analytics']
 customer: ZTO Express
 customerCategory: Internet
-categories: ['MySQL Scalability']
 logo: /images/blog/customers/zto-logo.png
 aliases: ['/case-studies/why-we-migrated-from-exadata-to-a-scale-out-htap-database-for-near-real-time-analytics']
 ---
