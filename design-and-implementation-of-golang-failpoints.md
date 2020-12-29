@@ -3,7 +3,7 @@ title: Design and Implementation of Golang Failpoints
 author: ['Heng Long']
 date: 2019-05-18
 summary: This post introduces design and implementation of Golang Failpoint.
-tags: ['Golang']
+tags: ['Go']
 categories: ['Engineering']
 ---
 

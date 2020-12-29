@@ -3,7 +3,7 @@ title: Rust's Huge Compilation Units
 author: ['Brian Anderson']
 date: 2020-06-22
 summary: The third episode of the Rust Compile Time series discusses why Rust's compilation units are so big and how that affects compile times.
-tags: ['Engineering', 'TiKV', 'Rust']
+tags: ['TiKV', 'Rust']
 categories: ['Engineering']
 image: /images/blog/rust-compile-time-adventures.png
 aliases: ['/blog/Rust-s-Huge-Compilation-Units/']
