@@ -4,7 +4,7 @@ author: ['Haodong Ji']
 date: 2020-09-22
 summary: Zhuan Zhuan embraced TiDB 4.0's new features with great results. It's a truly HTAP database with one-minute deployment, visual troubleshooting, and reduced maintenance costs.
 image: /images/blog/scale-out-mysql-alternative-database-zhuanzhuan.jpg
-tags: ['TiFlash', 'Ecosystem tools', 'Troubleshooting', 'Backup and restore']
+tags: ['TiFlash', 'Ecosystem tools', 'Troubleshooting', 'Backup and restore', 'MySQL', 'Scalability']
 url: /success-stories/scale-out-database-powers-china-letgo-with-reduced-maintenance-costs/
 customer: Zhuan Zhuan
 customerCategory: Internet

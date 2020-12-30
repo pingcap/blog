@@ -3,7 +3,7 @@ title: The Hybrid Database Capturing Perishable Insights at Yiguo
 author: ['Ruixing Luo']
 date: 2018-06-22
 summary: As the largest B2C fresh produce online marketplace in China, serving close to 5 million users and 1,000+ enterprise customers, Yiguo.com uses TiDB to capture real-time insights from fresh transactional data to make timely and accurate business decisions.
-tags: ['Real-time analytics', 'HTAP', 'TiSpark']
+tags: ['Real-time analytics', 'HTAP', 'TiSpark', 'MySQL', 'Scalability']
 url: /success-stories/hybrid-database-capturing-perishable-insights-at-yiguo/
 customer: Yiguo.com
 customerCategory: Internet

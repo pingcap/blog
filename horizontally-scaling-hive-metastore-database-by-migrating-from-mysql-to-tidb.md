@@ -4,7 +4,7 @@ author: ['Mengyu Hu']
 date: 2020-07-24
 summary: This post shows how TiDB helps Zhihu eliminate their database bottleneck and horizontally scale their Hive Metastore database to meet the growing business needs.
 image: /images/blog/horizontally-scale-hive-metastore.jpg
-tags: ['Scalability', 'MySQL sharding']
+tags: ['Scalability', 'MySQL', 'Sharding']
 url: /success-stories/horizontally-scaling-hive-metastore-database-by-migrating-from-mysql-to-tidb/
 customer: Zhihu
 customerCategory: Internet
