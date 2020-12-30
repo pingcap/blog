@@ -8,7 +8,6 @@ tags: ['TiFlash', 'HTAP', 'Real-time analytics', 'Scalability']
 url: /success-stories/why-we-chose-an-htap-database-over-mysql-for-horizontal-scaling-and-complex-queries/
 customer: BIGO
 customerCategory: Internet
-categories: ['MySQL Scalability']
 logo: /images/blog/customers/bigo-logo.png
 ---
 

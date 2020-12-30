@@ -3,8 +3,8 @@ title: 'Titan: A RocksDB Plugin to Reduce Write Amplification'
 author: ['Zhiquan Zheng']
 date: 2019-04-25
 summary: As a RocksDB plugin for key-value separation, inspired by WiscKey, Titan is available for preview in TiDB 3.0. This post introduces the design and implementation of Titan.
-tags: ['Engineering']
-categories: ['Engineering']
+tags: ['RocksDB', 'TiKV']
+categories: ['Product']
 ---
 
 ## Introduction

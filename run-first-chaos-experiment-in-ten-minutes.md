@@ -4,7 +4,7 @@ author: ['Chengwen Yin']
 date: 2020-03-18
 summary: In this 10-minute tutorial, we will help you to quickly get started with Chaos Engineering and run your first chaos experiment with Chaos Mesh.
 tags: ['Chaos Mesh', 'How to']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/run-first-chaos-experiment-in-ten-minutes.jpg
 ---
 
@@ -64,7 +64,7 @@ Before moving forward, make sure you have [Git](https://git-scm.com/) and [Docke
 >
 > * Depending on your network, these steps might take a few minutes.
 > * If you see an error message like this:
->  
+>
 >     ```bash
 >     ERROR: failed to create cluster: failed to generate kubeadm config content: failed to get kubernetes version from node: failed to get file: command "docker exec --privileged kind-control-plane cat /kind/version" failed with error: exit status 1
 >     ```

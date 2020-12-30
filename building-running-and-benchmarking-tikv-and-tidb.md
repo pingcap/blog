@@ -4,7 +4,7 @@ author: [Nick Cameron]
 date: 2020-05-04
 summary: This post introduces how to build and run your own TiDB or TiKV, and how to run some benchmarks on those databases.
 tags: ['How to', 'Benchmark', 'TiKV']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/building-running-benchmarking-tikv-tidb.jpg
 ---
 

@@ -4,7 +4,7 @@ author: [Heng Long]
 date: 2020-04-29
 summary: TiUP is a component manager that streamlines installing and configuring a TiDB cluster into a few easy commands. It helps get your cluster up and running quickly with a minimal learning curve.
 tags: ['Ecosystem tools']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/quickly-install-tidb-cluster.jpg
 ---
 

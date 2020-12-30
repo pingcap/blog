@@ -3,8 +3,8 @@ title: 'FOSDEM 2019 Recap: Global Technology, Local Community'
 author: ['Kevin Xu']
 date: 2019-02-12
 summary: In this post, Kevin Xu shares the PingCAP team's experience and activities at FOSDEM 2019, including three talks they delivered at the conference -- the first one about TiDB and its architecture, horizontal scalability and MySQL compatibility, the second about improving development posture in Rust based on the work building TiKV, and the last about Rust implementation of Prometheus.
-tags: ['TiKV', 'Rust', 'TiDB', 'MySQL Scalability', 'HTAP', 'Open Source Community']
-categories: ['Open Source Community']
+tags: ['TiKV', 'Rust', 'MySQL', 'Conference']
+categories: ['Community']
 ---
 
 On the heels of a successful TiDB DevCon in Beijing, where [more than 700 people attended](https://pingcap.com/blog/tidb-3.0-beta-stability-at-scale/) this annual TiDB user conference, Team PingCAP trekked halfway around the world to Brussels, Belgium, to participate in the largest developer conference in Europe, [FOSDEM](https://fosdem.org/2019/). We had three talks to deliver, one in the MySQL, MariaDB and Friends DevRoom and two in the Rust DevRoom. Even though TiDB as an open-source NewSQL database is growing in popularity and global reach, our team knows that a truly global technology hinges on the support of local communities. After all, globalization is localization, and there's no better place to "localize" a technology for thousands of developers than FOSDEM.

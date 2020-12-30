@@ -4,7 +4,7 @@ author: [Tianshuang Qin]
 date: 2020-07-30
 summary: PingCAP is experienced in heterogeneous database replication. This post gives best practice tips for database migration to TiDB. 
 tags: ['Data replication']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/database-replication.jpg
 ---
 

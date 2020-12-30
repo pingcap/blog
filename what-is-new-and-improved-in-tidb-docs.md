@@ -5,7 +5,7 @@ date: 2020-08-13
 summary: Along with the rapid releases of TiDB products and projects, we also constantly update and improve our TiDB documentation. This post covers recent big changes, new content, and improvements in TiDB documentation.
 image: /images/blog/distributed-sql-database-documentation.jpg
 tags: ['Documentation']
-categories: ['Engineering']
+categories: ['Product']
 ---
 
 ![A distributed SQL database's documentation](media/distributed-sql-database-documentation.jpg)

@@ -2,8 +2,8 @@
 title: 9 Why's to Ask When Evaluating a Distributed Database
 author: ['Ed Huang']
 date: 2018-08-17
-summary: Since PingCAP started building TiDB, it has encountered countless challenges, pitfalls, and critical design choices. Over the past three years, the PingCAP team has answered many questions from the users. Ed Huang, the CTO of PingCAP, has summarized these questions into “9 why's” that every engineer may ask when looking at a distributed database and gives his answers to these questions in this post to help make decision-making of engineers a bit easier.
-tags: ['TiDB', 'Engineering', 'MySQL Scalability', 'HTAP', 'Open Source Community']
+summary: Since PingCAP started building TiDB, it has encountered countless challenges, pitfalls, and critical design choices. Over the past three years, the PingCAP team has answered many questions from the users. Ed Huang, the CTO of PingCAP, has summarized these questions into “9 why’s” that every engineer may ask when looking at a distributed database and gives his answers to these questions in this post to help make decision-making of engineers a bit easier.
+tags: ['Distributed system', 'HTAP', 'MySQL', 'RocksDB', 'Scalability']
 aliases: ['/blog/9-whys-to-ask-when-evaluating-a-distributed-database/']
 categories: ['Engineering']
 ---
@@ -98,4 +98,3 @@ When a company starts out small, any database and infrastructure would work, but
 
 When we first started designing and building TiDB, we carried a lot of these lessons, from both our own experiences and other fellow DBAs and infrastructure engineers, with us. A truly useful and robust distributed database should instantly solve scalability bottlenecks and render all the “quick fixes” like manual sharding obsolete, so application developers can focus on doing what they do best--serve customers and grow the business, not managing database shards. Recently, we've seen two of our users, [Mobike (dockless bikesharing)](https://pingcap.com/case-studies/tidb-in-mobike) and Zhuan Zhuan (online marketplace), do exactly that. Both companies have been experiencing explosive growth, and because they deployed TiDB right as this growth was taking off, their database infrastructure was not the bottleneck that prevented them from growing the way they did. In fact, Zhuan Zhuan is all-in on TiDB, because it knows that a well-built distributed database is mission critical to its future.
 
-Note: An abridged version of this article was published on [The New Stack](https://thenewstack.io/5-questions-for-evaluating-a-distributed-database/).

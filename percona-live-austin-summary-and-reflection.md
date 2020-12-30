@@ -3,8 +3,8 @@ title: Percona Live Austin -- Summary and Reflection
 date: 2019-06-11
 author: ['Kevin Xu']
 summary: In this post, Kevin Xu shares the PingCAP team's experience and activities at Percona Live in Austin, including several technical sharing sessions and boosting friendship with people inside and outside PingCAP.
-tags: ['TiKV', 'Rust', 'TiDB', 'Open Source Community']
-categories: ['Open Source Community']
+tags: ['Conference']
+categories: ['Community']
 aliases: ['/blog/percona-live-austin-summary-and--eflection/']
 ---
 

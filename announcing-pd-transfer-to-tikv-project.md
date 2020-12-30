@@ -5,7 +5,7 @@ date: 2020-08-14
 summary: We decide to move the Placement Driver library entirely to TiKV org, happening at 11 AM, UTC+8, August 17, 2020.
 image: /images/blog/pd-transfer-to-tikv-cloud-native.jpg
 tags: ['Announcement', 'CNCF', 'TiKV']
-categories: ['Open Source Community']
+categories: ['Community']
 ---
 
 ![A distributed SQL database's documentation](media/pd-transfer-to-tikv-cloud-native.jpg)

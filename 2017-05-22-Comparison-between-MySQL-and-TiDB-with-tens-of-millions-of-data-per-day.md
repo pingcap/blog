@@ -4,7 +4,6 @@ date: 2017-05-22
 summary: This document is a use case that details the performance of MySQL and TiDB with tens of millions of rows of data per day.
 tags: ['Scalability', 'MySQL', 'Distributed system']
 aliases: ['/blog/2017/05/22/Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day/','/blog/2017/05/22/comparison-between-mysql-and-tidb-with-tens-of-millions-of-data-per-day/','/case-studies/2017-05-22-comparison-between-mysql-and-tidb-with-tens-of-millions-of-data-per-day/','/blog/2017-05-22-Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day/']
-categories: ['MySQL Scalability']
 customer: GAEA
 customerCategory: Gaming
 logo: /images/blog/customers/gaea-logo.png

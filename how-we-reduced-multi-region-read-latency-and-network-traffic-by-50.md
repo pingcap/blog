@@ -3,7 +3,7 @@ title: How We Reduced Multi-region Read Latency and Network Traffic by 50%
 author: ['Tianyi Zhuang', 'Hetian Zhu', 'Peng Qu', 'Haoxiang Lin']
 date: 2020-02-19
 summary: High read latency and network traffic are common issues for a multi-region architecture. At TiDB Hackathon 2019, a team won 2nd place by reducing multi-region read latency and network traffic by 50%. Read this post to learn how they did it.
-tags: ['Engineering']
+tags: ['High availability']
 categories: ['Engineering']
 image: /images/blog/reduce-multi-region-read-latency-and-network-traffic.png
 ---

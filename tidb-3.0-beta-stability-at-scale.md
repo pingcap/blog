@@ -3,8 +3,8 @@ title: "TiDB 3.0 Beta: Stability at Scale"
 author: ['Li Shen']
 date: 2019-01-24
 summary: This post introduces the key new features of TiDB 3.0 Beta.
-tags: ['TiDB', 'MySQL Scalability', 'HTAP', 'Open Source Community']
-categories: ['MySQL Scalability']
+tags: ['Release']
+categories: ['Product']
 press_release: true
 ---
 

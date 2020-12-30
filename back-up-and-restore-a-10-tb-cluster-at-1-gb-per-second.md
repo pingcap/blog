@@ -4,7 +4,7 @@ author: ['Taining Shen']
 date: 2020-04-13
 summary: Backing up or restoring a large-scale distributed SQL database is a time-consuming task. Our upcoming TiDB 4.0 release will support Backup & Restore (BR), a distributed backup and restore tool, which lets you back up and restore data at 1+ GB/s for 10-TB data.
 tags: ['Ecosystem tools', 'Distributed SQL database', 'Backup and restore']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/quickly-back-up-and-restore-a-large-scale-cluster.png
 ---
 

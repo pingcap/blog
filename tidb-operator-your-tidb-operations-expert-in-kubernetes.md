@@ -4,7 +4,7 @@ date: 2020-09-24
 author: ['Aylei Wu']
 summary: This post analyzes the pros and cons of running databases in Kubernetes. It also introduces TiDB Operator, a tool for managing TiDB clusters in Kubernetes, and describes how large companies are using it in their production environments as well as their best practices.
 tags: ['Cloud-native', 'Kubernetes', 'TiDB Operator']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/tidb-in-kubernetes.jpg
 ---
 

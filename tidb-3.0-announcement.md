@@ -3,8 +3,8 @@ title: TiDB 3.0 Reaches GA, Delivers Stability at Scale and Performance Boost
 author: ['Li Shen']
 date: 2019-07-01
 summary: TiDB 3.0 is released! This blog post introduces some highlights of TiDB 3.0, including major features focused on stability, significant performance improvements in Sysbench and TPC-C benchmarks, a newly introduced component, and important features and improvements. 
-tags: ['TiDB', 'Product', 'Golang', 'MySQL Scalability', 'HTAP']
-categories: ['MySQL Scalability']
+tags: ['Release', 'Benchmark']
+categories: ['Product']
 press_release: true
 ---
 

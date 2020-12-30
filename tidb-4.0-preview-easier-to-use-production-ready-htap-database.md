@@ -4,7 +4,7 @@ author: ['Siddon Tang']
 date: 2020-04-10
 summary: Get a preview of TiDB 4.0. Our landmark release has production-ready HTAP capabilities, continues to solve issues for large-scale, distributed SQL databases, and is easier to use than ever.
 tags: ['Release', 'Distributed SQL database', 'HTAP', 'Ecosystem tools', 'Cloud-native', 'Benchmark']
-categories: ['MySQL Scalability']
+categories: ['Product']
 image: /images/blog/easier-to-use-production-ready-htap-database.png
 ---
 

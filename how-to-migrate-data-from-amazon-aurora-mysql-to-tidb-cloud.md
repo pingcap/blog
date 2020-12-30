@@ -4,7 +4,7 @@ author: ['Yiwen Chen']
 date: 2020-09-04
 summary: This post introduces how to smoothly migrate data from Amazon Aurora MySQL to TiDB Cloud using Dumpling and TiDB Lightning.
 tags: ['TiDB Cloud', 'Amazon Aurora', 'Data migration', 'Tutorial']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/aurora-alternative-tidb-cloud.jpg
 ---
 

@@ -3,7 +3,7 @@ title: TiDB Internal (I) - Data Storage
 author: ['Li SHEN']
 date: 2017-07-11
 summary: This is the first one of three blogs to introduce TiDB internal.
-tags: ['TiDB', 'TiKV', 'Engineering', 'Golang', 'Rust', 'MySQL Scalability', 'HTAP']
+tags: ['TiKV', 'Raft', 'MVCC']
 aliases: ['/blog/2017/07/11/tidbinternal1/']
 categories: ['Engineering']
 ---
@@ -174,6 +174,6 @@ Transaction of TiKV adopts the Percolator model and has lots of optimizations. I
 
 #### Miscellaneous
 
-Up to now,  I have introduced the basic concept and some details of TiKV, the layered structure of this distributed and transactional Key-Value engine and how to implement multi-datacenter disaster recovery. I'll introduce how to construct the SQL layer on top of the storage model of Key-Value in the next article.
+Up to now, I have introduced the basic concept and some details of TiKV, the layered structure of this distributed and transactional Key-Value engine and how to implement multi-datacenter disaster recovery. I'll introduce how to construct the SQL layer on top of the storage model of Key-Value in the next article.
 
 [Back to the top](#top)

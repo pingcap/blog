@@ -2,15 +2,15 @@
 title: 'TiDB Dashboard: Easier Troubleshooting for Distributed Databases'
 author: [Wenxuan Shi, Ming Zhang, Shuang Chen]
 date: 2020-05-28
-summary: TiDB 4.0 introduces TiDB Dashboard, which provides various built-in widgets in a graphical interface that let you easily diagnose, monitor, and manage your clusters in one place. Now you can troubleshoot TiDB clusters more easily. 
+summary: TiDB 4.0 introduces TiDB Dashboard, which provides various built-in widgets in a graphical interface that let you easily diagnose, monitor, and manage your clusters in one place. Now you can troubleshoot TiDB clusters more easily.
 tags: ['Troubleshooting', 'Distributed SQL database']
-categories: ['Engineering']
+categories: ['Product']
 image: /images/blog/troubleshoot-distributed-databases.jpg
---- 
+---
 
 ![Troubleshoot distributed database](media/troubleshoot-distributed-databases.jpg)
 
-It's challenging to troubleshoot issues in a distributed database because the information about the system is scattered in different machines. 
+It's challenging to troubleshoot issues in a distributed database because the information about the system is scattered in different machines.
 
 [TiDB](https://pingcap.com/docs/stable/) is an open-source, distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads. Before version 4.0, it could be difficult to efficiently troubleshoot TiDB's system problems. To diagnose a TiDB cluster's issues, even an experienced database administrator (DBA) needed to understand TiDB's basic architecture, get familiar with thousands of TiDB monitoring metrics, and gain experience in the field to ensure that when they encountered similar problems next time, they could fix them more quickly.
 
@@ -60,7 +60,7 @@ TiDB Dashboard can list the slow queries in your cluster. It displays each query
 
 ## Cluster diagnostics
 
-The cluster diagnostics widget lets you diagnose cluster problems within a specified time range and summarize the diagnostic results and cluster-related load monitoring information into a diagnostic report. 
+The cluster diagnostics widget lets you diagnose cluster problems within a specified time range and summarize the diagnostic results and cluster-related load monitoring information into a diagnostic report.
 
 The diagnostic report is a web page form. After you download it from the browser, you can view it offline. If you choose two time ranges for comparison, you can get a comparison report about cluster issues for different periods.
 
@@ -71,7 +71,7 @@ TiDB Dashboard generates cluster diagnostic reports based on a series of preset 
 
 ## Log search
 
-The log search widget lets you search for logs on all instances in the cluster, preview search results, and export logs. 
+The log search widget lets you search for logs on all instances in the cluster, preview search results, and export logs.
 
 Before TiDB 4.0, to search for logs, you had to use the Secure Shell (SSH) protocol to connect to each remote server, but now you just need a few clicks.
 
@@ -80,7 +80,7 @@ Before TiDB 4.0, to search for logs, you had to use the Secure Shell (SSH) proto
 
 ## Instance profiling
 
-Instance profiling analysis lets you collect internal profiling data for each TiDB, TiKV, and Placement Driver (PD) instance, without having to restart the instance. 
+Instance profiling analysis lets you collect internal profiling data for each TiDB, TiKV, and Placement Driver (PD) instance, without having to restart the instance.
 
 You can display profiling data as a flame graph or a directed acyclic graph. These graphs visualize various internal operations an instance performed during the profiling data collection period and the proportion of the operation execution time in this period. This way, you can quickly understand the main CPU resource the instance consumes.
 
@@ -99,14 +99,14 @@ And the following flame graph shows CPU usage in a TiKV instance. It visually sh
 
 ## Try out the TiDB Dashboard
 
-TiDB Dashboard is directly built into the PD component of the TiDB 4.0 cluster, so you don't need to deploy anything extra. If your TiDB cluster is version [4.0.0-rc.1](https://pingcap.com/docs/stable/releases/release-4.0.0-rc.1/) or later, you can give TiDB Dashboard a try. 
+TiDB Dashboard is directly built into the PD component of the TiDB 4.0 cluster, so you don't need to deploy anything extra. If your TiDB cluster is version [4.0.0-rc.1](https://pingcap.com/docs/stable/releases/release-4.0.0-rc.1/) or later, you can give TiDB Dashboard a try.
 
 As our [previous post](https://pingcap.com/blog/get-tidb-cluster-up-in-only-one-minute/) described, TiDB 4.0 introduces [TiUP](https://github.com/pingcap-incubator/tiup), a component manager that streamlines installing and configuring a TiDB cluster into a few easy commands. You can [use TiUP to quickly set up a TiDB 4.0 cluster](https://pingcap.com/docs/stable/production-deployment-using-tiup/) on your local machine, and then:
 
 1. Use TiUP to start the nightly version of the test cluster on your local Mac or Linux machine:
 
     {{< copyable "shell-regular" >}}
-    
+
     ```shell
     tiup playground nightly --monitor
     ```

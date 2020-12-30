@@ -3,8 +3,8 @@ title: Delivering Real-time Analytics and True HTAP by Combining Columnstore and
 author: ['Wan Wei']
 date: 2019-11-04
 summary: TiDB is an HTAP database that targets both OLTP and OLAP scenarios. TiFlash is its extended analytical engine. This post introduces how TiFlash fuels TiDB to become a true HTAP database that lets users perform real-time analytics.
-tags: ['Engineering']
-categories: ['Engineering']
+tags: ['HTAP', 'Real-time analytics', 'TiFlash']
+categories: ['Product']
 image: /images/blog/combining-columnstore-and-rowstore-makes-a-true-htap-database.png
 ---
 

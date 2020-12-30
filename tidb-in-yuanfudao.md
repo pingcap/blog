@@ -2,7 +2,7 @@
 title: How TiDB tackles fast data growth and complex queries for yuanfudao.com
 date: 2017-08-08
 summary: This document is a case study that details the reasons why yuanfudao.com chose TiDB as its backend database solution to tackle their fast data growth and complex queries.
-tags: ['TiDB', 'Success Story']
+tags: ['Real-time analytics', 'Scalability', 'High availability']
 url: /success-stories/tidb-in-yuanfudao/
 aliases: ['/blog/2017/08/08/tidbforyuanfudao/', '/blog/2017-08-08-tidbforyuanfudao/']
 customer: Yuanfudao.com

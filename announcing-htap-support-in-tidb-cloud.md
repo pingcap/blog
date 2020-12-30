@@ -4,7 +4,7 @@ author: ['PingCAP']
 date: 2020-09-08
 summary: Today, we're glad to announce that TiDB Cloud, our fully managed database service powered by TiDB, now supports Hybrid Transactional/Analytical Processing (HTAP) workloads.
 tags: ['TiDB Cloud', 'HTAP', 'Real-time analytics', 'Announcement']
-categories: ['HTAP']
+categories: ['Product']
 image: /images/blog/htap-tidb-cloud.jpg
 press_release: true
 ---

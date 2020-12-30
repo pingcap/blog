@@ -4,8 +4,7 @@ author: ['Can Cui']
 date: 2019-12-11
 summary: As the business developed, standalone MySQL couldn't meet JD Cloud & AI's OSS metadata storage requirements. This post introduces how TiKV empowered JD Cloud & AI to manage huge amounts of OSS metadata with a simple and horizontally scalable architecture.
 image: /images/blog/replacing-mysql-with-a-horizontally-scaling-database.jpg
-tags: ['TiKV','Success Story']
-categories: ['MySQL Scalability']
+tags: ['TiKV', 'Scalability']
 url: /success-stories/lesson-learned-from-40-k-qps-and-20-billion-rows-of-data-in-a-single-scale-out-cluster/
 customer: JD Cloud & AI
 customerCategory: Internet

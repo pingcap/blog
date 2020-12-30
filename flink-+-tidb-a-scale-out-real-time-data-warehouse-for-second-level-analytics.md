@@ -4,7 +4,7 @@ author: ['Zhi Qi']
 date: 2020-11-11
 summary: By combining Apache Flink and TiDB, we offer an efficient, easy-to-use, real-time data warehouse with horizontal scalability and high availability.
 tags: ['Scalability', 'HTAP', 'Real-time analytics']
-categories: ['Engineering']
+categories: ['Community']
 image: /images/blog/flink-tidb-real-time-analytics.jpg
 ---
 

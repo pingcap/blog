@@ -3,7 +3,7 @@ title: Try to Fix Two Linux Kernel Bugs While Testing TiDB Operator in K8s
 author: ['Wenbo Zhang']
 date: 2019-05-01
 summary: This post introduces how the EE team at PingCAP tackled two Linux kernel bugs while testing TiDB Operator in K8s. PingCAP engineers also hope the K8s community, RHEL and CentOS can help fix these bugs thoroughly in the near future.
-tags: ['Engineering']
+tags: ['Bug fix', 'Kubernetes', 'Linux']
 categories: ['Engineering']
 ---
 

@@ -2,9 +2,9 @@
 title: About the TiDB Source Code
 date: 2017-01-06
 summary: The target audience of this document is the contributors in the TiDB community. The document aims to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process.
-tags: ['TiDB', 'Engineering', 'Golang', 'MySQL Scalability', 'HTAP']
+tags: ['Architecture', 'Query execution']
 aliases: ['/blog/2017/01/06/about-the-tidb-source-code/']
-categories: ['MySQL Scalability']
+categories: ['Engineering']
 ---
 
 The target audience of this document is the contributors in the TiDB community. The document aims to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process.
@@ -26,170 +26,196 @@ The target audience of this document is the contributors in the TiDB community. 
 As is shown in the architecture diagram, the TiDB Server is between the Load Balancer (or Application) and the storage engine layer at the bottom. Within the TiDB server, there are three layers:
 
 - The MySQL Protocol layer
-  This layer has two functions: + At the beginning, it receives the requests from the MySQL client, parses the MySQL Protocol packages to the corresponding commands in TiDB Session. + In the end, it transfers the result to the MySQL protocol format and returns it to the Client.
+  
+    This layer has two functions:
+  
+    + At the beginning, it receives the requests from the MySQL client, parses the MySQL Protocol packages to the corresponding commands in TiDB Session.
+    + In the end, it transfers the result to the MySQL protocol format and returns it to the Client.
+
 - The SQL layer
-  This layer has the following functions: + Parse and execute the SQL statement + Make and optimize the query plans + Generate the optimizer + Access data through the Storage Engine API layer + Return the result to the MySQL Protocol layer
-  This layer is very important and see [The SQL layer](#the-sql-layer) for further information.
+  
+    This layer has the following functions:
+
+    + Parse and execute the SQL statement
+    + Make and optimize the query plans
+    + Generate the optimizer
+    + Access data through the Storage Engine API layer
+    + Return the result to the MySQL Protocol layer
+ 
+    This layer is very important and see [The SQL layer](#the-sql-layer) for further information.
 
 - The Storage Engine API layer
-  This layer provides transactional (distributed or standalone) storage. There is an abstraction layer between the KV layer and the SQL layer and it enables the SQL layer to see the unified interface and ignore the differences among the KV storage engines.
-  This layer provides transactional (distributed or standalone) storage. There is an abstraction layer between the KV layer and the SQL layer and it enables the SQL layer to see the unified interface and ignore the differences among the KV storage engines.  
-  This layer provides transactional (distributed or standalone) storage. There is an abstraction layer between the KV layer and the SQL layer and it enables the SQL layer to see the unified interface and ignore the differences among the KV storage engines.
+  
+    This layer provides transactional (distributed or standalone) storage. There is an abstraction layer between the KV layer and the SQL layer and it enables the SQL layer to see the unified interface and ignore the differences among the KV storage engines.
+  
+    This layer provides transactional (distributed or standalone) storage. There is an abstraction layer between the KV layer and the SQL layer and it enables the SQL layer to see the unified interface and ignore the differences among the KV storage engines.  
+  
+    This layer provides transactional (distributed or standalone) storage. There is an abstraction layer between the KV layer and the SQL layer and it enables the SQL layer to see the unified interface and ignore the differences among the KV storage engines.
 
 ## Overview of the code structure
 
 See the following list for all the packages and their main functions:
 
 - [tidb](https://github.com/pingcap/tidb)
-  This package can be considered to be the interface between the MySQL Protocol Layer and the SQL layer. There are three main files:
+  
+    This package can be considered to be the interface between the MySQL Protocol Layer and the SQL layer. There are three main files:
 
-       + [`session.go`](https://github.com/pingcap/tidb/blob/master/session/session.go): Each session object corresponds to a connection of the MySQL client. The MySQL protocol layer manages the binding between the connection and the session. All the MySQL queries/commands are executed by calling the Session interface.
-       + [`tidb.go`](https://github.com/pingcap/tidb/blob/master/session/tidb.go): This file includes some functions to be called by `session.go`.
-       + [`bootstrap.go`](https://github.com/pingcap/tidb/blob/master/session/bootstrap.go): If a TiDB Server is started but the system is not yet initialized, the `bootstrap.go` file will initiate the system. See the following section for the detailed information.
+    + [`session.go`](https://github.com/pingcap/tidb/blob/master/session/session.go): Each session object corresponds to a connection of the MySQL client. The MySQL protocol layer manages the binding between the connection and the session. All the MySQL queries/commands are executed by calling the Session interface.     
+    + [`tidb.go`](https://github.com/pingcap/tidb/blob/master/session/tidb.go): This file includes some functions to be called by `session.go`.
+    + [`bootstrap.go`](https://github.com/pingcap/tidb/blob/master/session/bootstrap.go): If a TiDB Server is started but the system is not yet initialized, the `bootstrap.go` file will initiate the system. See the following section for the detailed information.
 
 - [docs](https://github.com/pingcap/tidb/tree/master/docs)
 
-  This package contains some brief documents of TiDB. See [Documents](https://github.com/pingcap/docs) for all the detailed documents.
+    This package contains some brief documents of TiDB. See [Documents](https://github.com/pingcap/docs) for all the detailed documents.
 
 - [executor](https://github.com/pingcap/tidb/tree/master/executor)
-  This is the TiDB executor. A SQL statement will be transferred to the combination a series of executors (operators). The main interface exposed in this package is `Executor`:
+    
+    This is the TiDB executor. A SQL statement will be transferred to the combination a series of executors (operators). The main interface exposed in this package is `Executor`:
 
-```go
-type Executor interface {
-    // Returns the next row of data (If the result is empty, then there is no more data)
-    Next() (*Row, error)
-    // Close the current Executor and clean up
-    Close() error
-    //Change the result Schema from the executor, including the details of each Field
-    Schema() expression.Schema
-}
-```
+    ```go
+    type Executor interface {
+        // Returns the next row of data (If the result is empty, then there is no more data)
+        Next() (*Row, error)
+        // Close the current Executor and clean up
+        Close() error
+        //Change the result Schema from the executor, including the details of each Field
+        Schema() expression.Schema
+    }
+    ```
 
-All kinds of executors implement this interface. The executing engine in TiDB adopts the `Volcano` model where the executors interact with each other through the above 3 interfaces. Each executor only needs to access the data through the `Next` interface and the meta data through the `Schema` interface.
+    All kinds of executors implement this interface. The executing engine in TiDB adopts the `Volcano` model where the executors interact with each other through the above 3 interfaces. Each executor only needs to access the data through the `Next` interface and the meta data through the `Schema` interface.
 
 - [plan](https://github.com/pingcap/tidb/tree/rc2.3/plan)
 
-       This is the core of the entire SQL layer. After a SQL statement is parsed to an abstract syntax tree (AST), the query plan is generated and optimized (including logical optimization and physical optimization) in this package.
-       This is the core of the entire SQL layer. After a SQL statement is parsed to an abstract syntax tree (AST), the query plan is generated and optimized (including logical optimization and physical optimization) in this package.
-       This is the core of the entire SQL layer. After a SQL statement is parsed to an abstract syntax tree (AST), the query plan is generated and optimized (including logical optimization and physical optimization) in this package.
+    This is the core of the entire SQL layer. After a SQL statement is parsed to an abstract syntax tree (AST), the query plan is generated and optimized (including logical optimization and physical optimization) in this package.
+    
+    This is the core of the entire SQL layer. After a SQL statement is parsed to an abstract syntax tree (AST), the query plan is generated and optimized (including logical optimization and physical optimization) in this package.
+    
+    This is the core of the entire SQL layer. After a SQL statement is parsed to an abstract syntax tree (AST), the query plan is generated and optimized (including logical optimization and physical optimization) in this package.
 
-       The following functions are also included in this package:
+    The following functions are also included in this package:
 
-       + [`validator.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/validator.go): Validates the AST.
-
-       + [`preprocess.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/preprocess.go): Currently, there is only `name resolve`.
-
-       + [`resolver.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/resolver.go)`: Parses the name. To parse and bind the identifier of database/table/column/alias to the corresponding column or Field.
-
-       + [`typeinferer.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/typeinferer.go): Infers the type of the result. For SQL statements, the type of the result does not need inference.
-
-       + [`logical_plan_builder.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/logical_plan_builder.go): Makes optimized logical query plans.
-
-       + [`physical_plan_builder.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/physical_plan_builder.go): Makes the physical query plans based on the logical plans.
+    + [`validator.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/validator.go): Validates the AST.
+    + [`preprocess.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/preprocess.go): Currently, there is only `name resolve`.
+    + [`resolver.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/resolver.go)`: Parses the name. To parse and bind the identifier of database/table/column/alias to the corresponding column or Field.
+    + [`typeinferer.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/typeinferer.go): Infers the type of the result. For SQL statements, the type of the result does not need inference.
+    + [`logical_plan_builder.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/logical_plan_builder.go): Makes optimized logical query plans.
+    + [`physical_plan_builder.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/physical_plan_builder.go): Makes the physical query plans based on the logical plans.
 
 - [privilege](https://github.com/pingcap/tidb/tree/master/privilege)
 
-       The authority control related interface which is implemented in the [`privilege/privileges`](https://github.com/pingcap/tidb/tree/master/privilege/privileges) directory.
+    The authority control related interface which is implemented in the [`privilege/privileges`](https://github.com/pingcap/tidb/tree/master/privilege/privileges) directory.
 
 - [sessionctx](https://github.com/pingcap/tidb/tree/master/sessionctx)
 
-       Stores the state information in the session, such as the session variables. The information can be obtained from the session. It is included in a separate directory for clear dependency and to avoid the problems of circular dependencies.
+    Stores the state information in the session, such as the session variables. The information can be obtained from the session. It is included in a separate directory for clear dependency and to avoid the problems of circular dependencies.
 
 - [table](https://github.com/pingcap/tidb/tree/master/table)
-  The `table` interface which is a layer of abstraction of the tables in the database. It provides many operations to the table such as getting the information of the column or reading a row of data. The implementation is in the [table/tables](https://github.com/pingcap/tidb/tree/master/table/tables) directory.
+  
+    The `table` interface which is a layer of abstraction of the tables in the database. It provides many operations to the table such as getting the information of the column or reading a row of data. The implementation is in the [table/tables](https://github.com/pingcap/tidb/tree/master/table/tables) directory.
 
-       The directory also includes the abstraction of Column and Index.
+    The directory also includes the abstraction of Column and Index.
 
 - [tidb-server](https://github.com/pingcap/tidb/tree/master/tidb-server)
 
-  The [main.go](https://github.com/pingcap/tidb/blob/master/tidb-server/main.go) file of the TiDB Server which is mainly the codes to start the server.
-  The [main.go](https://github.com/pingcap/tidb/blob/master/tidb-server/main.go) file of the TiDB Server which is mainly the codes to start the server.
-  The [main.go](https://github.com/pingcap/tidb/blob/master/tidb-server/main.go) file of the TiDB Server which is mainly the codes to start the server.
+    The [main.go](https://github.com/pingcap/tidb/blob/master/tidb-server/main.go) file of the TiDB Server which is mainly the codes to start the server.
+    The [main.go](https://github.com/pingcap/tidb/blob/master/tidb-server/main.go) file of the TiDB Server which is mainly the codes to start the server.
+    The [main.go](https://github.com/pingcap/tidb/blob/master/tidb-server/main.go) file of the TiDB Server which is mainly the codes to start the server.
 
 - [server](https://github.com/pingcap/tidb/tree/master/server)
 
-       The implementation of the MySQL Protocol which is to parse the protocol and to pass the command/query.
+    The implementation of the MySQL Protocol which is to parse the protocol and to pass the command/query.
 
 - [ast](https://github.com/pingcap/tidb/tree/rc2.3/ast)
 
-       The SQL statement will be parsed to be an abstract syntax tree. The data structure is defined in the [ast](https://github.com/pingcap/tidb/tree/rc2.3/ast) directory. Each node must implement the `visitor` interface and call the `Accept` method in the node to traverse the tree.
+    The SQL statement will be parsed to be an abstract syntax tree. The data structure is defined in the [ast](https://github.com/pingcap/tidb/tree/rc2.3/ast) directory. Each node must implement the `visitor` interface and call the `Accept` method in the node to traverse the tree.
 
-       If new syntax support is needed, besides adding the rule to [parser](https://github.com/pingcap/tidb/tree/rc2.3/parser), you also need to add the data structure to this directory.
+    If new syntax support is needed, besides adding the rule to [parser](https://github.com/pingcap/tidb/tree/rc2.3/parser), you also need to add the data structure to this directory.
 
 - [ddl](https://github.com/pingcap/tidb/tree/master/ddl)
 
-       The related codes for asynchronous schema changes which is similar to the implementation in [Google F1](http://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41344.pdf).
+    The related codes for asynchronous schema changes which is similar to the implementation in [Google F1](http://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41344.pdf).
 
 - [domain](https://github.com/pingcap/tidb/tree/master/domain)
 
-       [domain](https://github.com/pingcap/tidb/tree/master/domain) can be considered as a storage space where databases and tables are created. Somewhat like Name Space, the databases with the same name can exist in different domains. Domains bind with the information schema detail.
+    [domain](https://github.com/pingcap/tidb/tree/master/domain) can be considered as a storage space where databases and tables are created. Somewhat like Name Space, the databases with the same name can exist in different domains. Domains bind with the information schema detail.
 
 - [expression](https://github.com/pingcap/tidb/tree/master/expression)
 
-       The definition of the expressions. See the following for the most important interface:
+    The definition of the expressions. See the following for the most important interface:
 
-```go
-type Expression interface {
-...
-}
-```
+    ```go
+    type Expression interface {
+    ...
+    }
+    ```
 
-The following lists the expressions that implement the interface:
+    The following lists the expressions that implement the interface:
 
-- Scalar Function: Scalar Function expressions
-- Aggregate Function: Aggregate Function expressions
-- Column: Column expressions
-- Const: Constant expressions
+    - Scalar Function: Scalar Function expressions
+    - Aggregate Function: Aggregate Function expressions
+    - Column: Column expressions
+    - Const: Constant expressions
 
 * [infoschema](https://github.com/pingcap/tidb/tree/master/infoschema)
 
-  The implementation of `InformationSchema` which provides the details of the `db/table/column`.
+    The implementation of `InformationSchema` which provides the details of the `db/table/column`.
 
 * [kv](https://github.com/pingcap/tidb/tree/master/kv)
 
-       Key-Value related interface definition and some of the implementations, including `Retriever / Mutator / Transaction / Snapshot / Storage / Iterator`, etc. A unified abstraction of the underlying Key-Value storages.
+    Key-Value related interface definition and some of the implementations, including `Retriever / Mutator / Transaction / Snapshot / Storage / Iterator`, etc. A unified abstraction of the underlying Key-Value storages.
 
 * [model](https://github.com/pingcap/tidb/tree/rc2.3/model)
 
-       The DDL / DML related data structure supported by TiDB, including `DBInfo / TableInfo / ColumnInfo / IndexInfo`, etc.
+    The DDL / DML related data structure supported by TiDB, including `DBInfo / TableInfo / ColumnInfo / IndexInfo`, etc.
 
 * [parser](https://github.com/pingcap/tidb/tree/source-code/parser)
 
-       The syntax parsing module, including lexical analysis ([lexer.go](https://github.com/pingcap/tidb/blob/rc2.3/parser/lexer.go)) and syntax analysis ([parser.y](https://github.com/pingcap/tidb/blob/rc2.3/parser/parser.y)). The main interface to the external is `Parse ()` which is to parse the SQL text into AST.
+    The syntax parsing module, including lexical analysis ([lexer.go](https://github.com/pingcap/tidb/blob/rc2.3/parser/lexer.go)) and syntax analysis ([parser.y](https://github.com/pingcap/tidb/blob/rc2.3/parser/parser.y)). The main interface to the external is `Parse ()` which is to parse the SQL text into AST.
 
 * [store](https://github.com/pingcap/tidb/tree/master/store)
 
-       The implementation of the Key-Value store at the bottom. If you want to plug in a new storage engines, you can package the storage engine and put the code in this package. The new storage engine needs to implement the interface defined in the [kv](https://github.com/pingcap/tidb/tree/master/kv) package.
-       The implementation of the Key-Value store at the bottom. If you want to plug in a new storage engines, you can package the storage engine and put the code in this package. The new storage engine needs to implement the interface defined in the [kv](https://github.com/pingcap/tidb/tree/master/kv) package.
-       The implementation of the Key-Value store at the bottom. If you want to plug in a new storage engines, you can package the storage engine and put the code in this package. The new storage engine needs to implement the interface defined in the [kv](https://github.com/pingcap/tidb/tree/master/kv) package.
+    The implementation of the Key-Value store at the bottom. If you want to plug in a new storage engines, you can package the storage engine and put the code in this package. The new storage engine needs to implement the interface defined in the [kv](https://github.com/pingcap/tidb/tree/master/kv) package.
+    
+    The implementation of the Key-Value store at the bottom. If you want to plug in a new storage engines, you can package the storage engine and put the code in this package. The new storage engine needs to implement the interface defined in the [kv](https://github.com/pingcap/tidb/tree/master/kv) package.
+    
+    The implementation of the Key-Value store at the bottom. If you want to plug in a new storage engines, you can package the storage engine and put the code in this package. The new storage engine needs to implement the interface defined in the [kv](https://github.com/pingcap/tidb/tree/master/kv) package.
 
-       Currently, there are two storage engines: TiKV, a distributed storage engine, and localstore/{goleveldb/boltdb}, a stand-alone storage engine.
+    Currently, there are two storage engines: TiKV, a distributed storage engine, and localstore/{goleveldb/boltdb}, a stand-alone storage engine.
 
-       For more information about the KV and store, see [How to Plug in a New Storage Engine](https://github.com/ngaut/builddatabase/blob/master/tidb/storage.md) (Currently in Chinese).
+    For more information about the KV and store, see [How to Plug in a New Storage Engine](https://github.com/ngaut/builddatabase/blob/master/tidb/storage.md) (Currently in Chinese).
 
 * [terror](https://github.com/pingcap/parser/tree/master/terror)
-  The error system for TiDB. For more information, see [Detailed specification](https://docs.google.com/a/pingcap.com/document/d/1L7th17VTZCOeb4RfFqgs9cya6yORKqWcjB2fYqckOFU/edit?usp=sharing) (Currently in Chinese).
+  
+    The error system for TiDB. For more information, see [Detailed specification](https://docs.google.com/a/pingcap.com/document/d/1L7th17VTZCOeb4RfFqgs9cya6yORKqWcjB2fYqckOFU/edit?usp=sharing) (Currently in Chinese).
 
 * context
-  The `context` interface. `Session` is the implementation of the `context` interface. The reason that we have an interface is to avoid the circular dependencies. All the state information of `session` can be accessed using this interface.
+  
+    The `context` interface. `Session` is the implementation of the `context` interface. The reason that we have an interface is to avoid the circular dependencies. All the state information of `session` can be accessed using this interface.
 
 * inspectkv
-  The auxiliary check package for TiDB SQL data and Key-Value storage. In the future, it will be used to access TiKV from the external and will be re-defined and developed.
+  
+    The auxiliary check package for TiDB SQL data and Key-Value storage. In the future, it will be used to access TiKV from the external and will be re-defined and developed.
 
 * [meta](https://github.com/pingcap/tidb/tree/master/meta)
-  The definition of the metadata related constants and common functions for TiDB. In [meta/autoid](https://github.com/pingcap/tidb/tree/master/meta/autoid), an API is defined for ID auto-increment within a globally unique session. The meta information depends on this tool.
+  
+    The definition of the metadata related constants and common functions for TiDB. In [meta/autoid](https://github.com/pingcap/tidb/tree/master/meta/autoid), an API is defined for ID auto-increment within a globally unique session. The meta information depends on this tool.
 
 * [mysql](https://github.com/pingcap/tidb/tree/rc2.3/mysql)
-  MySQL related constant definitions.
+  
+    MySQL related constant definitions.
 
 * [structure](https://github.com/pingcap/tidb/tree/master/structure)
-  A layer of encapsulation on top of Key-Value which supports rich Key-Value types, such as string, list, hash, etc. The package is mainly used in asynchronous Schema changes.
+  
+    A layer of encapsulation on top of Key-Value which supports rich Key-Value types, such as string, list, hash, etc. The package is mainly used in asynchronous Schema changes.
 
 * [util](https://github.com/pingcap/tidb/tree/master/util)
-  Some utility classes. The 7 package is very important because it contains the definitions of the data types and the operations toward different kinds of data type objects.
+  
+    Some utility classes. The 7 package is very important because it contains the definitions of the data types and the operations toward different kinds of data type objects.
 
 * [distsql](https://github.com/pingcap/tidb/tree/master/distsql)
-  The execution interface for distributed SQL. If the storage engine at the bottom supports distributed executor, it can send requests through this interface. See [The distributed executor](#the-distributed-executor) for further information.
+  
+    The execution interface for distributed SQL. If the storage engine at the bottom supports distributed executor, it can send requests through this interface. See [The distributed executor](#the-distributed-executor) for further information.
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('About the TiDB Source Code', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -236,15 +262,17 @@ There are following types of optimization methods:
 
 - Rule based optimizer: optimize a plan by using a set of rules to determine the execution plan for a given query.
 
-  This type of optimizer is easy to implement. It only takes some frequently used rules and it works well for most of the common queries. But you cannot choose the best solution based on the true data scenario. Take the "select \* from t where c1 = 10 and c2 > 100" statement as an example, when selecting index, if you only follow the rules, you must use the index in `c1` for the query. But if all the values of `c1` in `t` are `10`, it will be a bad query plan. If there is information about how the data is distributed in the table, it will help choose a better plan.
+    This type of optimizer is easy to implement. It only takes some frequently used rules and it works well for most of the common queries. But you cannot choose the best solution based on the true data scenario. Take the "select \* from t where c1 = 10 and c2 > 100" statement as an example, when selecting index, if you only follow the rules, you must use the index in `c1` for the query. But if all the values of `c1` in `t` are `10`, it will be a bad query plan. If there is information about how the data is distributed in the table, it will help choose a better plan.
 
 - Cost based optimizer: optimize a plan by calculating the query cost
-  This type of optimizer is more complex. There are two key problems: one is how to get the true distribution information of the data; the other one is how to estimate the cost of a certain query plan based on this information.
+    
+    This type of optimizer is more complex. There are two key problems: one is how to get the true distribution information of the data; the other one is how to estimate the cost of a certain query plan based on this information.
 
 - History based optimizer: optimize a plan according to the history query information
-  This type of optimizer is seldom used, especially in OLTP databases.
-  This type of optimizer is seldom used, especially in OLTP databases.
-  This type of optimizer is seldom used, especially in OLTP databases.
+  
+    This type of optimizer is seldom used, especially in OLTP databases.
+    This type of optimizer is seldom used, especially in OLTP databases.
+    This type of optimizer is seldom used, especially in OLTP databases.
 
 The codes for the TiDB optimizer is included in the [plan](https://github.com/pingcap/tidb/tree/rc2.3/plan) package. The package is mainly to transform an AST to a query plan tree. The nodes of the tree are different types of logical operator and physical operator. All sorts of optimization towards the query plan are all based on the methods of calling the root node, optimizing all the related nodes recursively, then transforming and trimming each node on the tree.
 
@@ -288,7 +316,6 @@ The physical query plan tree from the optimizer is transformed to an executor. E
 As a distributed database, there is a distributed computing framework inside TiDB. A running query is distributed and parallelized as much as possible. The entry point of the framework is in the [distsql](https://github.com/pingcap/tidb/tree/master/distsql) package. The following API and two interfaces are the most important part:
 
 ```go
-
 // Select do a select request, returns SelectResult.
 // conncurrency: The max concurrency for underlying coprocessor request.
 // keepOrder: If the result should returned in key order. For example if we need keep data in order by

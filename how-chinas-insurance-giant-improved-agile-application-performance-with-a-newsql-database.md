@@ -7,7 +7,6 @@ tags: ['MySQL compatibility', 'NewSQL', 'Data replication', 'Disaster recovery']
 url: /success-stories/how-chinas-insurance-giant-improved-agile-application-performance-with-a-newsql-database/
 customer: Ping An Life Insurance
 customerCategory: Financial Services
-categories: ['MySQL Scalability']
 logo: /images/blog/customers/pingan-life-insurance-logo.png
 image: /images/blog/china-insurance-giant-improved-agile-application-performance-with-newsql-tidb-database.jpg
 ---

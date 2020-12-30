@@ -1,9 +1,9 @@
 ---
-title: How to do Performance Tuning on TiDB, A Distributed NewSQL Database
+title: How to Do Performance Tuning on TiDB, a Distributed NewSQL Database
 author: ['Jinpeng Zhang']
 date: 2018-03-16
-summary: Doing performance tuning on distributed systems is no joking matter. It's much more complicated than on a single node server, and bottlenecks can pop up anywhere, from system resources in a single node or subcomponent, to cooperation between nodes, to even network bandwidth. Performance tuning is a practice that aims to find these bottlenecks and address them, in order to reveal more bottlenecks and address them as well, until the system reaches an optimal performance level. In this article, I will share some best practices on how to tune "write" operations in TiDB to achieve maximum performance.
-tags: ['TiDB', 'TiKV', 'NewSQL', 'Golang', 'Rust', 'Engineering']
+summary: Doing performance tuning on distributed systems is no joking matter. It’s much more complicated than on a single node server, and bottlenecks can pop up anywhere, from system resources in a single node or subcomponent, to cooperation between nodes, to even network bandwidth. Performance tuning is a practice that aims to find these bottlenecks and address them, in order to reveal more bottlenecks and address them as well, until the system reaches an optimal performance level. In this article, I will share some best practices on how to tune "write" operations in TiDB to achieve maximum performance.
+tags: ['Performance tuning', 'TiKV', 'Distributed system', 'How to']
 categories: ['Engineering']
 ---
 

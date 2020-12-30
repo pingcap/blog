@@ -3,7 +3,7 @@ title: A Few More Reasons Rust Compiles Slowly
 author: ['Brian Anderson']
 date: 2020-06-29
 summary: This is the fourth episode of the Rust Compile Time series. It discusses some factors that cause Rust to build slow, including LLVM, compiler architecture, and linking.
-tags: ['Engineering', 'TiKV', 'Rust']
+tags: ['TiKV', 'Rust']
 categories: ['Engineering']
 image: /images/blog/rust-compile-time-adventures.png
 ---

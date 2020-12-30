@@ -7,7 +7,6 @@ tags: ['MySQL compatibility', 'Scalability']
 url: /success-stories/how-we-process-data-five-times-more-efficiently-using-a-scale-out-mysql-alternative/
 customer: China Telecom Bestpay
 customerCategory: Financial Services
-categories: ['MySQL Scalability']
 logo: /images/blog/customers/china-telecom-bestpay-logo.png
 image: /images/blog/bestpay-tidb-case-study-banner.jpg
 ---

@@ -7,9 +7,9 @@ image: /images/blog/scale-out-htap-database-zto.jpg
 tags: ['Scalability', 'HTAP', 'Real-time analytics']
 customer: ZTO Express
 customerCategory: Internet
-categories: ['MySQL Scalability']
 logo: /images/blog/customers/zto-logo.png
 aliases: ['/case-studies/why-we-migrated-from-exadata-to-a-scale-out-htap-database-for-near-real-time-analytics']
+redirectTag: ['Success-Story', 'TiDB', 'MySQL-Scalability']
 ---
 
 **Industry:** Logistics
@@ -119,7 +119,7 @@ TiDB uses Prometheus plus Grafana as its monitoring mechanism. The monitoring me
 
 ### Increasing our IT efficiency by 300%
 
-In 2019, we completed 12.12 billion orders—a year-on-year increase of 42.2%, which exceeded the industry average growth rate by 16.9 percentage points. On November 11, 2019, TiDB supported our big sales promotion, with peak traffic reaching more than **120,000 queries per second (QPS)**. It also supported **inserts and updates of tens of billions of rows**. TiSpark supported our **online minute-level data analytics**. This guaranteed that our IT service ran steadily on our sales promotion day. 
+In 2019, we completed 12.12 billion orders—a year-on-year increase of 42.2%, which exceeded the industry average growth rate by 16.9 percentage points. On November 11, 2019, TiDB supported our big sales promotion, with peak traffic reaching more than **120,000 queries per second (QPS)**. It also supported **inserts and updates of tens of billions of rows**. TiSpark supported our **online minute-level data analytics**. This guaranteed that our IT service ran steadily on our sales promotion day.
 
 In addition, our new database infrastructure based on TiDB has brought us the following benefits:
 
@@ -133,12 +133,12 @@ In addition, our new database infrastructure based on TiDB has brought us the fo
 
 ### Reducing our cost per order by 17.1％
 
-Currently, we have more than 100 TiDB physical nodes and more than 200 TiDB instances in the production environment. They mainly serve bills, the settlement center, the order center, the waybill center, the message center, and smart transshipment-related applications. 
+Currently, we have more than 100 TiDB physical nodes and more than 200 TiDB instances in the production environment. They mainly serve bills, the settlement center, the order center, the waybill center, the message center, and smart transshipment-related applications.
 
 The benefits we got from TiDB are as follows:
 
 * Data-driven refined management measures continued to be effective. In the second quarter of 2020, **our cost per order dropped by 17.1%** year-on-year.
-* Compared with Oracle, TiDB's flexible, efficient, and on-demand deployment plan remarkably reduced our total cost of ownership (TCO). 
+* Compared with Oracle, TiDB's flexible, efficient, and on-demand deployment plan remarkably reduced our total cost of ownership (TCO).
 
 ## Issues and solutions
 

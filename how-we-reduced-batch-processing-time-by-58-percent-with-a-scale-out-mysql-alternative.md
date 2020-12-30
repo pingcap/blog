@@ -7,7 +7,6 @@ tags: ['Scalability', 'MySQL', 'NewSQL']
 url: /success-stories/how-we-reduced-batch-processing-time-by-58-percent-with-a-scale-out-mysql-alternative/
 customer: WeBank
 customerCategory: Financial Services
-categories: ['MySQL Scalability']
 logo: /images/blog/customers/webank-logo.png
 image: /images/blog/tidb-as-mysql-alternative-database-in-webank.jpg
 ---

@@ -4,7 +4,7 @@ author: ['Hui Zhang']
 date: 2020-11-26
 summary: NetEase Fuxi AI Lab is China's first professional game AI research institution. In their search for a Chaos Engineering tool to test their Kubernetes-based AI training platform, they chose Chaos Mesh and have improved their system resiliency ever since.
 tags: ['Chaos Mesh', 'Chaos Engineering']
-categories: ['Open Source Community']
+categories: ['Community']
 image: /images/blog/cloud-native-chaos-mesh.jpg
 ---
 

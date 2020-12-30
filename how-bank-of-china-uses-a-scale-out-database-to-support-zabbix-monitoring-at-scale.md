@@ -7,7 +7,6 @@ tags: ['Scalability', 'MySQL compatibility', 'MySQL', 'Best practice']
 url: /success-stories/how-bank-of-china-uses-a-scale-out-database-to-support-zabbix-monitoring-at-scale/
 customer: Bank of China
 customerCategory: Financial Services
-categories: ['MySQL Scalability']
 logo: /images/blog/customers/bank-of-china-logo.png
 image: /images/blog/how-bank-of-china-uses-a-scale-out-database-to-support-zabbix-monitoring-at-scale.jpg
 ---

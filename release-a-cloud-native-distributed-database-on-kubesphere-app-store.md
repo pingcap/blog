@@ -4,7 +4,7 @@ author: ['Will Zhang']
 date: 2020-12-17
 summary: This article walks you through how to deploy TiDB on KubeSphere and release TiDB to the App Store to make it available to other tenants.
 tags: ['TiDB Operator', 'Cloud-native', 'Kubernetes', 'Tutorial']
-categories: ['Open Source Community']
+categories: ['Community']
 image: /images/blog/release-cloud-native-distributed-database-to-kubesphere-app-store.jpg
 ---
 

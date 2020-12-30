@@ -6,7 +6,6 @@ summary: In this post, PalFish explains why they chose TiDB over MongoDB and MyS
 tags: ['NewSQL','ACID transaction','MySQL','MongoDB']
 image: /images/blog/palfish-embracing-newsql-tidb.png
 url: /success-stories/embracing-newsql-why-we-chose-tidb-over-mongodb-and-mysql/
-categories: ['MySQL Scalability']
 customer: PalFish
 customerCategory: Internet
 logo: /images/blog/customers/palfish-logo.png

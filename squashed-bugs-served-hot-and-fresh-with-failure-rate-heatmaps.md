@@ -3,7 +3,7 @@ title: Squashed Bugs, Served Hot and Fresh with Failure Rate Heatmaps
 author: ['Qinyuan Du']
 date: 2019-12-18
 summary: At TiDB Hackathon 2019, a team won the third prize by building a bot that helps quickly locate bugs in the code. Read this post to get more details. 
-tags: ['Engineering']
+tags: ['Bug fix', 'Hackathon']
 categories: ['Engineering']
 image: /images/blog/automatic-debug.png
 ---
