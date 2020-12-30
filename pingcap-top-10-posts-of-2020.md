@@ -1,7 +1,7 @@
 ---
 title: PingCAP's Top 10 Posts of 2020
 author: ['PingCAP']
-date: 2020-12-29
+date: 2020-12-30
 summary: Check out PingCAP's top 10 most popular posts in 2020.
 tags: ['Year in review']
 categories: ['Company']
