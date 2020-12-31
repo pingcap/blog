@@ -20,7 +20,7 @@ From Li SHEN: shenli@pingcap.com
 + [Architecture of the SQL Layer](#architecture-of-the-sql-layer)
 + [Summary](#summary)
 
-My [last blog](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/) introduces the way that TiDB stores data, which is also the basic concepts of TiKV. In this article, I'll elaborate on how TiDB uses the bottom layer Key-Value to store data, maps the relational model to the Key-Value model and performs SQL computing.
+My [last blog](https://pingcap.com/blog/2017-07-11-tidbinternal1) introduces the way that TiDB stores data, which is also the basic concepts of TiKV. In this article, I'll elaborate on how TiDB uses the bottom layer Key-Value to store data, maps the relational model to the Key-Value model and performs SQL computing.
 
 ### Mapping the Relational Model to the Key-Value Model
 

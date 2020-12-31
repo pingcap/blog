@@ -22,7 +22,7 @@ From Li SHEN: shenli@pingcap.com
 
 ## Why scheduling?
 
-From [the first blog of TiDB internal](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/), we know that TiKV cluster is the distributed KV storage engine of TiDB database. Data is replicated and managed in Regions and each Region has multiple Replicas distributed on different TiKV nodes. Among these replicas, Leader is in charge of read/write and Follower synchronizes the raft log sent by Leader. Now, please think about the following questions:
+From [the first blog of TiDB internal](https://pingcap.com/blog/2017-07-11-tidbinternal1), we know that TiKV cluster is the distributed KV storage engine of TiDB database. Data is replicated and managed in Regions and each Region has multiple Replicas distributed on different TiKV nodes. Among these replicas, Leader is in charge of read/write and Follower synchronizes the raft log sent by Leader. Now, please think about the following questions:
 
 + How to guarantee that multiple Replicas of the same Region are distributed on different nodes? Further, what happens if starting multiple TiKV instances on one machine?
 + When TiKV cluster is performing multi-site deployment for disaster recovery, how to guarantee that multiple Replicas of a Raft Group will not get lost if there is outage in one datacenter?
@@ -166,6 +166,6 @@ PD gets the detail data of the cluster by constantly gathering information throu
 
 This blog discloses information you might not find elsewhere. We hope that you've had a better understanding about what needs to be considered to build a distributed storage system for scheduling and how to decouple policies and implementation to support a more flexible expansion of policy.
 
-We hope these three blogs ([Data Storage](https://pingcap.github.io/blog/2017/07/11/tidbinternal1), [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2), and [Scheduling](https://pingcap.github.io/blog/2017/07/20/tidbinternal3)) can help you understand the basic concepts and implementation principles of TiDB. In the future, more blogs about TiDB from code to architecture are on their way!
+We hope these three blogs ([Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1), [Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2), and [Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3)) can help you understand the basic concepts and implementation principles of TiDB. In the future, more blogs about TiDB from code to architecture are on their way!
 
 [Back to the top](#top)

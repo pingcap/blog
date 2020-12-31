@@ -44,21 +44,21 @@ Evolve TiDB schemas as your requirement changes. You can add new columns and ind
 
 ### Use cases
 
-[How TiDB tackles fast data growth and complex queries for yuanfudao.com](https://pingcap.github.io/blog/2017/08/08/tidbforyuanfudao/)
+[How TiDB tackles fast data growth and complex queries for yuanfudao.com](https://pingcap.com/case-studies/tidb-in-yuanfudao)
 
-[Migration from MySQL to TiDB to handle tens of millions of rows of data per day](https://pingcap.github.io/blog/2017/05/22/Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day/)
+[Migration from MySQL to TiDB to handle tens of millions of rows of data per day](https://pingcap.com/case-studies/2017-05-22-Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day)
 
 ### For more information:
 
 TiDB internal:
 
-- [Data Storage](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/)
-- [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/)
-- [Scheduling](https://pingcap.github.io/blog/2017/07/20/tidbinternal3/)
+- [Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1)
+- [Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2)
+- [Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3)
 
 [Release Notes](https://pingcap.com/docs/releases/ga/)
 
-[Best Practice](https://pingcap.github.io/blog/2017/07/24/tidbbestpractice/)
+[Best Practice](https://pingcap.com/blog/2017-07-24-tidbbestpractice)
 
 [Documents](https://pingcap.com/docs)
 
