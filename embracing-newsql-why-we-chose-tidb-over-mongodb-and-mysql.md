@@ -3,7 +3,7 @@ title: 'Embracing NewSQL: Why We Chose TiDB over MongoDB and MySQL'
 author: ['Xianlin Chen']
 date: 2020-11-12
 summary: In this post, PalFish explains why they chose TiDB over MongoDB and MySQL. The key factors were their application requirements and their perspective on NewSQL databases.
-tags: ['NewSQL','ACID transaction','MySQL','MongoDB']
+tags: ['NewSQL', 'ACID transaction', 'MySQL', 'MongoDB', 'HTAP', 'Scalability', 'Real-time analytics', 'High availability']
 image: /images/blog/palfish-embracing-newsql-tidb.png
 url: /success-stories/embracing-newsql-why-we-chose-tidb-over-mongodb-and-mysql/
 customer: PalFish

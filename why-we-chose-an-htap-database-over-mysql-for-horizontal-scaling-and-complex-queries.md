@@ -4,7 +4,7 @@ author: ['Jiaqing Xu']
 date: 2020-09-10
 summary: After trying out different database solutions, BIGO chose TiDB. In this post, a BIGO DBA talks about TiDB 4.0's new features, how they benefit BIGO's business, and BIGO's plan to use TiDB 4.0 even more in the future.
 image: /images/blog/htap-database-bigo.jpg
-tags: ['TiFlash', 'HTAP', 'Real-time analytics', 'Scalability']
+tags: ['TiFlash', 'HTAP', 'Real-time analytics', 'Scalability', 'MySQL', 'Consistency']
 url: /success-stories/why-we-chose-an-htap-database-over-mysql-for-horizontal-scaling-and-complex-queries/
 customer: BIGO
 customerCategory: Internet

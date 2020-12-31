@@ -3,7 +3,7 @@ title: Lesson Learned from Queries over 1.3 Trillion Rows of Data Within Millise
 author: ['Xiaoguang Sun']
 date: 2019-08-21
 summary: As the business boomed and massive data in applications accrued each month, Zhihu faced severe challenges in scaling the backend system. This post introduces how Zhihu managed to keep milliseconds of query response time over a large amount of data and how TiDB, an open source MySQL-compatible HTAP database, empowered Zhihu to get real-time insights into data.
-tags: ['Scalability', 'Real-time analytics', 'MySQL']
+tags: ['Scalability', 'Real-time analytics', 'MySQL', 'HTAP', 'Sharding']
 url: /success-stories/lesson-learned-from-queries-over-1.3-trillion-rows-of-data-within-milliseconds-of-response-time-at-zhihu/
 customer: Zhihu
 customerCategory: Internet
