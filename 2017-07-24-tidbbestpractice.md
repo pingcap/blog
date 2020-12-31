@@ -10,7 +10,7 @@ categories: ['Product']
 
 From Li SHEN: shenli@pingcap.com
 
-See the following blogs ([Data Storage](https://pingcap.github.io/blog/2017/07/11/tidbinternal1/), [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/), [Scheduling](https://pingcap.github.io/blog/2017/07/20/tidbinternal3/)) for TiDB's principles.
+See the following blogs ([Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1), [Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2), [Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3)) for TiDB's principles.
 
 ## Table of Content
 
@@ -76,7 +76,7 @@ PD will automatically balance the load of the cluster according to the state of 
 
 ### SQL on Key-Value
 
-TiDB automatically maps the SQL structure into Key-Value structure. For more information, please refer to [Computing](https://pingcap.github.io/blog/2017/07/11/tidbinternal2/). Simply put, TiDB has done two things:
+TiDB automatically maps the SQL structure into Key-Value structure. For more information, please refer to [Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2). Simply put, TiDB has done two things:
 
 + A row of data is mapped to a Key-Value pair. Key is prefixed with TableID and suffixed with row ID.
 
