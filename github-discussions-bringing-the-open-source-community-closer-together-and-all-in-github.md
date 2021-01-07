@@ -8,6 +8,8 @@ categories: ['Community']
 image: /images/blog/github-discussions.jpg
 ---
 
+![GitHub Discussions: Bringing the Open Source Community Closer Together and All in GitHub'](media/github-discussions.jpg)
+
 I use open source projects on GitHub every day, and I've often wondered:
 
 <span style="text-align:center;font-weight:bold;"> Where do open source communities live? </span>
