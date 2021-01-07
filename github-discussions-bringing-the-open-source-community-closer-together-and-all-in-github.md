@@ -29,6 +29,7 @@ In this post, I'll explain why the open source community was scattered around th
 ## GitHub: organized software but a scattered community
 
 > "People around the world are turning to open source—and to GitHub. It is becoming not only the home for developers, but a platform where people in many roles, doing diverse work, come to learn, engage with the community, and contribute to projects that advance the greater good. "
+>
 > — GitHub Octoverse 2020 Report
 
 GitHub is a world-leading developer platform as well as a community-based project collaboration platform.
@@ -57,9 +58,9 @@ If you are a user of open source projects, ask yourself:
 
 To achieve these things, an open source community should have at least three components:
 
-* A place for members to communicate
-* An official bulletin board
-* A community knowledge base
+* **A place for members to communicate**
+* **An official bulletin board**
+* **A community knowledge base**
 
 Previously, GitHub only provided Issues and Pull Requests for communities to interact.
 
@@ -87,6 +88,7 @@ GitHub recently introduced a new feature, **Discussions**, to bring together the
 ## Overview of Discussions
 
 > "Software communities don't just write code together. They brainstorm feature ideas, help new users get their bearings, and collaborate on best ways to use the software. … Conversations need their own place—that's what GitHub Discussions is for."
+>
 > — [GitHub Blog: New from Satellite 2020](https://github.blog/2020-05-06-new-from-satellite-2020-github-codespaces-github-discussions-securing-code-in-private-repositories-and-more/)
 
 Discussions is a beta feature that GitHub launched earlier 2020. At first, it was only open to a few select projects, such as Next.js and Office 365 CLI.
@@ -171,6 +173,7 @@ But now, their problem-solving procedure is probably like this:
 ## The future of open source communities
 
 > "The strongest communities support growth and participation by engaging newcomers and contributors while also helping provide sustainable work for maintainers."
+>
 > — GitHub Octoverse 2020 Report
 
 Now that there is Discussions, what will the GitHub open source communities look like in the future?
