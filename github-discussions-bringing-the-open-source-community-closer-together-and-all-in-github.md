@@ -208,7 +208,7 @@ It seems hopeful to me that the future of open source communities would be:
 
 With Discussions, **project information alignment becomes centralized, transparent, and faster**.
 
-Every question and answer made by community members is a contribution to the community knowledge base, and every 👍  they left in the RFC discussion page takes its part in the project's decision making.
+Every question and answer made by community members is a contribution to the community knowledge base, and every "👍" they left in the RFC discussion page takes its part in the project's decision making.
 
 Every author of an open source project has probably dreamed of building an active, self-governed, and contributing open source community that accelerates good iterations of the project.
 
