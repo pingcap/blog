@@ -8,7 +8,7 @@ categories: ['Community']
 image: /images/blog/github-discussions.jpg
 ---
 
-![GitHub Discussions: Bringing the Open Source Community Closer Together and All in GitHub'](media/github-discussions.jpg)
+![GitHub Discussions: Bringing the Open Source Community Closer Together and All in GitHub](media/github-discussions.jpg)
 
 I use open source projects on GitHub every day, and I've often wondered:
 
@@ -101,7 +101,7 @@ Every public repository can now enable it in **Settings>Options>Features>Discuss
 When Discussions is enabled, it appears as a new tab in the repository page. (See the red box below.) It works like a unified forum where people share information, ask for help, and interact with the project maintainers.
 
 ![The Discussions Page in the next.js repo](media/the-discussions-page-in-the-next-js-repo.png)
-<div class="caption-center"> The Discussions Page in the next.js repo </div>
+<div class="caption-center"> The Discussions page in the next.js repo </div>
 
 A discussion page is similar to an issue page, but Discussions also provides some additional features:
 
@@ -133,7 +133,7 @@ A discussion page is similar to an issue page, but Discussions also provides som
 
     Big projects' repositories tend to have thousands of issues, including bug reports, feature requests, usage questions, and general discussions. Issues pile up and become a mess, making it difficult to manage.
 
-    But now, maintainers can migrate all issues other than bug reports and feature requests to Discussions for clearer categorization. Community members can help each other solve problems in Discussions, and thus help maintainers ease their burden.
+    But now, maintainers can migrate all issues other than bug reports and feature requests to Discussions for clearer categorization. Community members can help each other solve problems in Discussions, and thus ease maintainers' burden.
 
 * **An entrance for newcomers and home to all members**
 
@@ -149,7 +149,7 @@ A discussion page is similar to an issue page, but Discussions also provides som
 However, Discussions also has some downsides:
 
 * Discussions makes it easier to communicate, so the number of discussions is likely to increase a lot, which means the maintainer has more things to manage. This might not be good news—especially for amateur project maintainers.
-* Maintainers need to help users understand the differences between Discussions_ _and Issues because the distinction is unclear.
+* Maintainers need to help users understand the differences between Discussions and Issues because the distinction is unclear.
 
 For **users of open source projects**, as far as I see, this feature seems only to be a good thing.
 
@@ -166,9 +166,9 @@ But now, their problem-solving procedure is probably like this:
 * Search it in the project Discussions.
 * If they can't find an answer, create a new discussion.
 
-**Discussions can potentially become the first place where users seek solutions, because this is the only dedicated community for the project.**
+**Discussions is expected to become the first place where users seek solutions, because this is the only dedicated community for the project.**
 
-## A look at the future
+## The future of open source communities
 
 > "The strongest communities support growth and participation by engaging newcomers and contributors while also helping provide sustainable work for maintainers."
 > — GitHub Octoverse 2020 Report
@@ -181,7 +181,7 @@ In March 2020, Office 365 CLI team [announced](https://twitter.com/climicrosoft3
 
 According to the GitHub Octoverse 2020 Report, the next.js repository started using Discussions in January, 2020. By October, community members had opened over 3,000 discussions to communicate and collaborate. Almost half of those who have contributed to the repository used Discussions.
 
-To encourage community members to discuss new features at the first place, next.js even migrated Request for Comments (RFC) proposals from Issues_ _to Discussions.
+To encourage community members to discuss new features, next.js even migrated Request for Comments (RFC) proposals from Issues to Discussions.
 
 See the members' reactions outlined in the red box below? This is a real "alive" community!
 
@@ -201,15 +201,15 @@ It seems hopeful to me that the future of open source communities would be:
 
 <span style="text-align:center;text-decoration:underline;font-weight:bold">All in GitHub</span>
 
-* **GitHub Issues** is for collecting bug reports and new feature requests.
-* **GitHub Discussions** is for publishing project information, including at least three types:
+* **GitHub Issues** is for collecting bug reports and feature requests.
+* **GitHub Discussions** is for anything that requires agile communication, including at least three types:
     * RFCs for new features
     * Learning materials and project announcements
     * Q&A and other types of communication
 * **GitHub Projects** is for tracing development progress. Community members can participate in the collaboration.
 * **GitHub Pull Request** is for committing code. Community members can take part in the code review.
 
-With Discussions, project information alignment becomes centralized, transparent, and faster.
+With Discussions, **project information alignment becomes centralized, transparent, and faster**.
 
 Every question and answer made by community members is a contribution to the community knowledge base, and every 👍 they left in the RFC discussion page takes its part in the project's decision making.
 
@@ -219,13 +219,14 @@ It seems that we are now one step closer to that dream.
 
 ## Thinking beyond the feature
 
-GitHub is an awesome product. It has even introduced more useful and thoughtful features since its acquisition by Microsoft in 2018.
+GitHub is an awesome product. It has introduced more useful and thoughtful features since its acquisition by Microsoft in 2018.
 
-As a fan of GitHub, I am very glad that this company keeps expanding the possibility of its product and keeps introducing new features that make millions of users' eyes brighten.
+As a fan of GitHub, I am very glad that this company keeps expanding the possibilities of its product.
 
 On [Hacker News](https://news.ycombinator.com/item?id=22388639), however, some developers expressed their concern about the expansion of the "GitHub Kingdom":
 
 > GitHub is slowly eating the surrounding cities. Github pages replaced our hosted sites. Projects replaced Trello/Waffle and friends. Actions replaced Travis/CircleCI. Sponsors is about to hit Patreon, and now Discussions aims for a piece of StackOverflow pie…
+>
 > I think they are doing great in terms of performance and UI. It's hard to resist the convenience of having everything linked together in a coherent way. But this will probably backfire in the future.
 
 As more projects enable the Discussions feature, I expect that there will be more discussions regarding this concern and some backup plan to solve it.
