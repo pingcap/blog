@@ -12,7 +12,7 @@ image: /images/blog/github-discussions.jpg
 
 I use open source projects on GitHub every day, and I've often wondered:
 
-<div class="caption-center"> Where do open source communities live? </div>
+<div class="caption-center"><span style="text-decoration:underline;font-weight:bold"> Where do open source communities live? </span></div>
 
 Previously for different projects, I might have different answers in mind:
 
@@ -22,7 +22,7 @@ Previously for different projects, I might have different answers in mind:
 
 It wasn't until GitHub recently introduced the Discussions feature that I found my only answer:
 
-<div class="caption-center">  For an open source project on GitHub, its community can be right on GitHub. </div>
+<div class="caption-center"><span style="text-decoration:underline;font-weight:bold"> For an open source project on GitHub, its community can be right on GitHub. </span></div>
 
 In this post, I'll explain why the open source community was scattered around the Internet, how GitHub Discussions brings the community closer together, and why the open source community's future tends to be all in GitHub. In the final part, I'll provide a different viewpoint to encourage you to think beyond the feature itself.
 
