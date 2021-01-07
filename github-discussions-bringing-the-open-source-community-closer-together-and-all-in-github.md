@@ -215,7 +215,7 @@ Every author of an open source project has probably dreamed of building an activ
 
 It seems that we are now one step closer to that dream.
 
-## The ambition of GitHub
+## Thinking beyond the feature
 
 GitHub is an awesome product. It has even introduced more useful and thoughtful features since its acquisition by Microsoft in 2018.
 
