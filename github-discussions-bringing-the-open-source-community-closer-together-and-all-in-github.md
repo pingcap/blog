@@ -12,7 +12,7 @@ image: /images/blog/github-discussions.jpg
 
 I use open source projects on GitHub every day, and I've often wondered:
 
-<span style="text-align:center;font-weight:bold;"> Where do open source communities live? </span>
+<div class="caption-center"> Where do open source communities live? </div>
 
 Previously for different projects, I might have different answers in mind:
 
@@ -22,7 +22,7 @@ Previously for different projects, I might have different answers in mind:
 
 It wasn't until GitHub recently introduced the Discussions feature that I found my only answer:
 
-<span style="text-align:center;font-weight:bold;"> For an open source project on GitHub, its community can be right on GitHub. </span>
+<div class="caption-center">  For an open source project on GitHub, its community can be right on GitHub. </div>
 
 In this post, I'll explain why the open source community was scattered around the Internet, how GitHub Discussions brings the community closer together, and why the open source community's future tends to be all in GitHub. In the final part, I'll provide a different viewpoint to encourage you to think beyond the feature itself.
 
@@ -196,7 +196,7 @@ The above examples are a sign that **the shape of open source communities is cha
 
 It seems hopeful to me that the future of open source communities would be:
 
-<span style="text-align:center;text-decoration:underline;font-weight:bold">All in GitHub</span>
+<div class="caption-center"><span style="text-decoration:underline;font-weight:bold"> All in GitHub </span></div>
 
 * **GitHub Issues** is for collecting bug reports and feature requests.
 * **GitHub Discussions** is for anything that requires agile communication, including at least three types:
@@ -208,7 +208,7 @@ It seems hopeful to me that the future of open source communities would be:
 
 With Discussions, **project information alignment becomes centralized, transparent, and faster**.
 
-Every question and answer made by community members is a contribution to the community knowledge base, and every 👍 they left in the RFC discussion page takes its part in the project's decision making.
+Every question and answer made by community members is a contribution to the community knowledge base, and every 👍  they left in the RFC discussion page takes its part in the project's decision making.
 
 Every author of an open source project has probably dreamed of building an active, self-governed, and contributing open source community that accelerates good iterations of the project.
 
