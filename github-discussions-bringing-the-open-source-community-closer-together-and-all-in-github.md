@@ -28,7 +28,7 @@ In this post, I'll explain why the open source community was scattered around th
 
 ## GitHub: organized software but a scattered community
 
-> "People around the world are turning to open source—and to GitHub. It is becoming not only the home for developers, but a platform where people in many roles, doing diverse work, come to learn, engage with the community, and contribute to projects that advance the greater good. " GitHub Octoverse 2020 Report
+> "People around the world are turning to open source—and to GitHub. It is becoming not only the home for developers, but a platform where people in many roles, doing diverse work, come to learn, engage with the community, and contribute to projects that advance the greater good." GitHub Octoverse 2020 Report
 
 GitHub is a world-leading developer platform as well as a community-based project collaboration platform.
 
