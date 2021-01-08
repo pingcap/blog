@@ -3,14 +3,14 @@ title: How to Simulate I/O Faults at Runtime?
 author: ['Keao Yang']
 date: 2021-01-08
 summary: This post dives deep into how we implement the IOChaos experiment without using a sidecar.
-tags: ['Chaos Mesh', 'Chaos engineering', 'Fault injection']
+tags: ['Chaos Mesh', 'Chaos Engineering', 'Fault injection']
 categories: ['Engineering']
 image: /images/blog/how-to-simulate-io-faults-at-runtime.jpg
 ---
 
 ![How to simulate I/O faults at runtime](media/how-to-simulate-io-faults-at-runtime.jpg)
 
-In a production environment, filesystem faults might occur due to various incidents such as disk failures and administrator errors. As a Chaos Engineering platform, Chaos Mesh has supported simulating I/O faults in a filesystem ever since its early versions. By simply adding an IOChaos CustomResourceDefinition (CRD), we can watch how the filesystem fails and returns errors.
+In a production environment, filesystem faults might occur due to various incidents such as disk failures and administrator errors. As a Chaos Engineering platform, [Chaos Mesh](https://pingcap.com/blog/chaos-mesh-your-chaos-engineering-solution-for-system-resiliency-on-kubernetes) has supported simulating I/O faults in a filesystem ever since its early versions. By simply adding an IOChaos CustomResourceDefinition (CRD), we can watch how the filesystem fails and returns errors.
 
 However, before Chaos Mesh 1.0, this experiment was not easy and may have consumed a lot of resources. We needed to inject sidecar containers to the Pod through the mutating admission webhooks and rewrite the `ENTRYPOINT` command. Even if no fault was injected, the injected sidecar container caused a substantial amount of overhead.
 
