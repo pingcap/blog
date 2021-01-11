@@ -1,5 +1,5 @@
 ---
-title: How to Simulate I/O Faults at Runtime?
+title: How to Simulate I/O Faults at Runtime
 author: ['Keao Yang']
 date: 2021-01-08
 summary: This post dives deep into how we implement the IOChaos experiment without using a sidecar.
@@ -98,7 +98,7 @@ After the process is finished, FD `1` of the current process points to `/var/run
 
 #### Write a program to make the target process replace its own file descriptor
 
-The combined functionality of ptrace and dup2 make it possible for the tracer to make the tracee replace the opened FD by itself. Now, we need to write a binary program and make the target process run it:
+The combined functionality of ptrace and dup2 makes it possible for the tracer to make the tracee replace the opened FD by itself. Now, we need to write a binary program and make the target process run it:
 
 > **Note:**
 >
