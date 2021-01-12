@@ -71,17 +71,15 @@ To address these pain points, we considered reforming and upgrading our existing
    </td>
    <td>
 <ul>
-<li>It's easy to query by ID.
-<li>In the short term, the cost of implementation is low.
-</li>
+<li>It's easy to query by ID.</li>
+<li>In the short term, the cost of implementation is low.</li>
 </ul>
    </td>
    <td>
 <ul>
-<li>As the tables grow linearly, maintenance is increasingly hard. If each table contains millions of rows of data, at least 30 new tables are added each year.
-<li>Data sharding requires code changes.
-<li>If we introduce middleware for sharding, we need to hire new employees to maintain the middleware.
-</li>
+<li>As the tables grow linearly, maintenance is increasingly hard. If each table contains millions of rows of data, at least 30 new tables are added each year.</li>
+<li>Data sharding requires code changes.</li>
+<li>If we introduce middleware for sharding, we need to hire new employees to maintain the middleware.</li>
 </ul>
    </td>
   </tr>
@@ -91,16 +89,14 @@ To address these pain points, we considered reforming and upgrading our existing
    </td>
    <td>
 <ul>
-<li>Mature technology.
-<li>When the data volume is large, it can scale out via sharding.
-</li>
+<li>Mature technology.</li>
+<li>When the data volume is large, it can scale out via sharding.</li>
 </ul>
    </td>
    <td>
 <ul>
-<li>We need to refactor the whole application, which is impossible in a short period.
-<li>It's a document database, so the application needs to build its own data validation logic.
-</li>
+<li>We need to refactor the whole application, which is impossible in a short period.</li>
+<li>It's a document database, so the application needs to build its own data validation logic.</li>
 </ul>
    </td>
   </tr>
@@ -110,15 +106,13 @@ To address these pain points, we considered reforming and upgrading our existing
    </td>
    <td>
 <ul>
-<li>Powerful searchability (with secondary indexes).
-</li>
+<li>Powerful searchability (with secondary indexes).</li>
 </ul>
    </td>
    <td>
 <ul>
-<li>When encountering a large number of updates, ES may have high latency. Meanwhile, it can also experience incremental capacity and segment increase, which triggers merging and thus affects the search performance.
-<li>Schemaless. Long-term maintenance is expensive.
-</li>
+<li>When encountering a large number of updates, ES may have high latency. Meanwhile, it can also experience incremental capacity and segment increase, which triggers merging and thus affects the search performance.</li>
+<li>Schemaless. Long-term maintenance is expensive.</li>
 </ul>
    </td>
   </tr>
@@ -128,18 +122,16 @@ To address these pain points, we considered reforming and upgrading our existing
    </td>
    <td>
 <ul>
-<li>Mature technology.
-<li>Rowkey-based query without extra workload.
-<li>It scales out horizontally.
-</li>
+<li>Mature technology.</li>
+<li>Rowkey-based query without extra workload.</li>
+<li>It scales out horizontally.</li>
 </ul>
    </td>
    <td>
 <ul>
-<li>Special development required when data can't be queried by rowkey. Its interface is not universal.
-<li>No support for a secondary index.
-<li>The protocol is incompatible with our current read/write programs.
-</li>
+<li>Special development required when data can't be queried by rowkey. Its interface is not universal.</li>
+<li>No support for a secondary index.</li>
+<li>The protocol is incompatible with our current read/write programs.</li>
 </ul>
    </td>
   </tr>
@@ -149,16 +141,14 @@ To address these pain points, we considered reforming and upgrading our existing
    </td>
    <td>
 <ul>
-<li>Uses HBase as the bottom-layer KV storage. Strong stability.
-<li>Scales out horizontally.
-</li>
+<li>Uses HBase as the bottom-layer KV storage. Strong stability.</li>
+<li>Scales out horizontally.</li>
 </ul>
    </td>
    <td>
 <ul>
-<li>SQL syntax is not universal. It has only `upsert` but no `insert` or `update`.
-<li>Phoenix depends on Percolator to implement transactions, which might not be reliable.
-</li>
+<li>SQL syntax is not universal. It has only `upsert` but no `insert` or `update`.</li>
+<li>Phoenix depends on Percolator to implement transactions, which might not be reliable.</li>
 </ul>
    </td>
   </tr>
@@ -168,16 +158,14 @@ To address these pain points, we considered reforming and upgrading our existing
    </td>
    <td>
 <ul>
-<li>Uses HBase as the OLTP storage and ES as the secondary index.
-<li>Draws on the advantages of both.
-</li>
+<li>Uses HBase as the OLTP storage and ES as the secondary index.</li>
+<li>Draws on the advantages of both.</li>
 </ul>
    </td>
    <td>
 <ul>
-<li>No support for transactions.
-<li>It's difficult to keep data consistent between HBase and ES.
-</li>
+<li>No support for transactions.</li>
+<li>It's difficult to keep data consistent between HBase and ES.</li>
 </ul>
    </td>
   </tr>
@@ -187,20 +175,18 @@ To address these pain points, we considered reforming and upgrading our existing
    </td>
    <td>
 <ul>
-<li>It's completely compatible with the MySQL protocol and requires hardly any changes to the application.
-<li>Distributed storage, infinite scalability, and high availability.
-<li>A perfect alternative to MySQL sharding.
-<li>DDL schema changes don't affect the application.
-<li>Transaction support with the snapshot level of isolation.
-<li>Compatible with CDC.
-</li>
+<li>It's completely compatible with the MySQL protocol and requires hardly any changes to the application.</li>
+<li>Distributed storage, infinite scalability, and high availability.</li>
+<li>A perfect alternative to MySQL sharding.</li>
+<li>DDL schema changes don't affect the application.</li>
+<li>Transaction support with the snapshot level of isolation.</li>
+<li>Compatible with CDC.</li>
 </ul>
    </td>
    <td>
 <ul>
-<li>It requires high-end hardware resources.
-<li>No triggers. No stored procedure. Not compatible with some syntaxes.
-</li>
+<li>It requires high-end hardware resources.</li>
+<li>No triggers. No stored procedure. Not compatible with some syntaxes.</li>
 </ul>
    </td>
   </tr>
