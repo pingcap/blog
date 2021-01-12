@@ -2,7 +2,7 @@
 title: A Top Car Trading Platform Chooses a Scale-out Database as a MySQL Alternative
 author: ["Chehaoduo"]
 date: 2021-01-12
-summary: Chehaoduo, the largest auto trading platform in China, migrated from MySQL to TiDB and got rid of the troublesome process of MySQL sharding and schema changes.
+summary: Chehaoduo, one of the largest auto trading platforms in China, migrated from MySQL to TiDB and got rid of the troublesome process of MySQL sharding and schema changes.
 tags: ['Database selection', 'MySQL sharding', 'MySQL compatibility', 'Scalability', 'MongoDB']
 image: /images/blog/chehaoduo-mysql-alternative-scale-out-database.png
 customer: Chehaoduo
@@ -16,7 +16,7 @@ logo: /images/blog/customers/chehaoduo-logo.png
 
 ![Chehaoduo uses a scale-out MySQL alternative database](media/chehaoduo-mysql-alternative-scale-out-database.png)
 
-[Chehaoduo](https://www.crunchbase.com/organization/guazi-com) is an online trading platform for both new cars and personal used cars. Founded in 2015, it is now the largest auto trading platform in China, valued at $9 billion in its series D round of funding last year.
+[Chehaoduo](https://www.crunchbase.com/organization/guazi-com) is an online trading platform for both new cars and personal used cars. Founded in 2015, it is now one of the largest auto trading platforms in China, valued at $9 billion in its series D round of funding last year.
 
 In the early stages of Chehaoduo, to quickly adapt to our application development, we chose MySQL as our major database. However, as our business evolved, we were greatly troubled by the complication of MySQL sharding and schema changes. In face of this dilemma, we found an alternative database to MySQL: [TiDB](https://docs.pingcap.com/tidb/stable), an open-source, MySQL compatible database that scales out to hold massive data.
 
