@@ -19,11 +19,11 @@ logo: /images/blog/customers/chehaoduo-logo.png
 
 In the early stages of Chehaoduo, to quickly adapt to our application development, we chose MySQL as our major database. However, as our business evolved, we were greatly troubled by the complication of MySQL sharding and schema changes. In face of this dilemma, we found an alternative database to MySQL: [TiDB](https://docs.pingcap.com/tidb/stable), an open-source, MySQL compatible database that scales out to hold massive data.
 
-In this post, I’ll share with you why we chose TiDB and how it empowers our application to provide better service for our customers.
+In this post, I'll share with you why we chose TiDB and how it empowers our application to provide better service for our customers.
 
 ## How MySQL fell short
 
-MySQL is a stand-alone database that doesn’t provide horizontal scalability. After our data volume exceeded a certain threshold, MySQL could no longer deliver satisfactory performance.
+MySQL is a stand-alone database that doesn't provide horizontal scalability. After our data volume exceeded a certain threshold, MySQL could no longer deliver satisfactory performance.
 
 ### Single MySQL instance has limits
 
@@ -38,12 +38,12 @@ Depending on the data volume of the application, each split could take 2 to 4 we
 As the user base grows, some tables might have tens of millions of data records, which slows down reads and writes. The usual approach is to shard the data, but this has some problems:
 
 - The distributed transactions are hard to handle.
-- MySQL can’t create secondary indexes.
+- MySQL can't create secondary indexes.
 - The shards might not be able to further scale out.
-- There’s no way to perform cross-shard joins.
-- It’s hard to perform a sort-merge join on the result set.
+- There's no way to perform cross-shard joins.
+- It's hard to perform a sort-merge join on the result set.
 
-### It’s hard to change schemas for big tables
+### It's hard to change schemas for big tables
 
 At Chehaoduo, our business model changes rapidly. To adapt to the business requirements, we have to frequently change table schemas.
 
@@ -70,7 +70,7 @@ To address these pain points, we considered reforming and upgrading our existing
    </td>
    <td>
 <ul>
-<li>It’s easy to query by ID.
+<li>It's easy to query by ID.
 <li>In the short term, the cost of implementation is low.
 </li>
 </ul>
@@ -98,7 +98,7 @@ To address these pain points, we considered reforming and upgrading our existing
    <td>
 <ul>
 <li>We need to refactor the whole application, which is impossible in a short period.
-<li>It’s a document database, so the application needs to build its own data validation logic.
+<li>It's a document database, so the application needs to build its own data validation logic.
 </li>
 </ul>
    </td>
@@ -135,7 +135,7 @@ To address these pain points, we considered reforming and upgrading our existing
    </td>
    <td>
 <ul>
-<li>Special development required when data can’t be queried by rowkey. Its interface is not universal.
+<li>Special development required when data can't be queried by rowkey. Its interface is not universal.
 <li>No support for a secondary index.
 <li>The protocol is incompatible with our current read/write programs.
 </li>
@@ -175,7 +175,7 @@ To address these pain points, we considered reforming and upgrading our existing
    <td>
 <ul>
 <li>No support for transactions.
-<li>It’s difficult to keep data consistent between HBase and ES.
+<li>It's difficult to keep data consistent between HBase and ES.
 </li>
 </ul>
    </td>
@@ -186,10 +186,10 @@ To address these pain points, we considered reforming and upgrading our existing
    </td>
    <td>
 <ul>
-<li>It’s completely compatible with the MySQL protocol and requires hardly any changes to the application.
+<li>It's completely compatible with the MySQL protocol and requires hardly any changes to the application.
 <li>Distributed storage, infinite scalability, and high availability.
 <li>A perfect alternative to MySQL sharding.
-<li>DDL schema changes don’t affect the application.
+<li>DDL schema changes don't affect the application.
 <li>Transaction support with the snapshot level of isolation.
 <li>Compatible with CDC.
 </li>
@@ -205,11 +205,11 @@ To address these pain points, we considered reforming and upgrading our existing
   </tr>
 </table>
 
-To sum up, **TiDB is horizontally scalable and MySQL compatible. It supports online DDL schema changes and distributed transactions.** These features combined are suitable for Chehaoduo’s use case: large data volumes, frequent schema changes, and long-term data storage.
+To sum up, **TiDB is horizontally scalable and MySQL compatible. It supports online DDL schema changes and distributed transactions.** These features combined are suitable for Chehaoduo's use case: large data volumes, frequent schema changes, and long-term data storage.
 
 ### Analyzing our use scenarios
 
-After we studied TiDB’s advantages, we also analyzed Chehaoduo’s specific use scenarios and summarized the application side’s concerns:
+After we studied TiDB's advantages, we also analyzed Chehaoduo's specific use scenarios and summarized the application side's concerns:
 
 - One application has nearly 300 million rows of data, with 1.7 million rows of new data added each day and 50 million each month. Even if only the hot data within 2 months are stored in MySQL, a single table could be crammed with more than 100 million rows of data.
 - Cars have a longer sales cycle than other products. During the long sales cycle, once-cold data may become hot again. Therefore, the application might need to update cold data. And since the application serves online users, the database needs to read and write in real time.
@@ -220,9 +220,9 @@ Based on these requirements. we decided to migrate several applications to TiDB,
 
 ## Our migration process
 
-Facing a new database, the core application team couldn’t help but feel concerned about its stability and reliability. To boost their confidence, we decided to pilot the system on some less critical services. The entire testing process had three stages.
+Facing a new database, the core application team couldn't help but feel concerned about its stability and reliability. To boost their confidence, we decided to pilot the system on some less critical services. The entire testing process had three stages.
 
-The first stage was to use TiDB as a MySQL replica cluster and sync data using [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/stable) (DM). The application side examined whether TiDB’s data consistency, stability, and performance met their requirements. After that, we routed a small proportion of online requests to read from TiDB and observed the data. As everything went smoothly, we gradually increased the proportion until TiDB completely took over all read requests. The data validation didn’t fail. By then, the application side had faith in TiDB and was ready to move on to the next stage.
+The first stage was to use TiDB as a MySQL replica cluster and sync data using [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/stable) (DM). The application side examined whether TiDB's data consistency, stability, and performance met their requirements. After that, we routed a small proportion of online requests to read from TiDB and observed the data. As everything went smoothly, we gradually increased the proportion until TiDB completely took over all read requests. The data validation didn't fail. By then, the application side had faith in TiDB and was ready to move on to the next stage.
 
 ![Migration stage 1](media/chehaoduo-migration-1.jpg)
 
@@ -247,13 +247,13 @@ With TiDB, our service quality has greatly improved:
 
 ## Lessons learned
 
-While running TiDB in our production environment, we’ve encountered a few problems. Here, I’d like to share some lessons we learned.
+While running TiDB in our production environment, we've encountered a few problems. Here, I'd like to share some lessons we learned.
 
 ### Choose the right version
 
 For the production environment, we suggest choosing a release that has run normally for some time.
 
-TiDB is an on-going technology. Bug fixes and new features are continuously added to new releases. Since our first research, TiDB has matured from version 2.0 to 4.0. When we upgraded from v2.1.x to 3.0.x, we didn’t notice the SQL mode change, which resulted in an unexpected impact caused by the `ONLY_FULL_GROUP_BY` rule. Now, we only choose stable releases and usually don’t upgrade our clusters unless we encounter critical bugs or need new features.
+TiDB is an on-going technology. Bug fixes and new features are continuously added to new releases. Since our first research, TiDB has matured from version 2.0 to 4.0. When we upgraded from v2.1.x to 3.0.x, we didn't notice the SQL mode change, which resulted in an unexpected impact caused by the `ONLY_FULL_GROUP_BY` rule. Now, we only choose stable releases and usually don't upgrade our clusters unless we encounter critical bugs or need new features.
 
 ### Bind your SQL
 
@@ -261,15 +261,15 @@ Because TiDB uses cost-based optimization, when the statistics change, the optim
 
 ### Isolate resources
 
-As we gained more confidence in TiDB, we hoped to migrate more applications to it. However, due to limited hardware resources, we couldn’t immediately get several independent TiDB clusters online. Therefore, our DBA team explored the possibility of deploying multiple clusters on the same set of physical servers.
+As we gained more confidence in TiDB, we hoped to migrate more applications to it. However, due to limited hardware resources, we couldn't immediately get several independent TiDB clusters online. Therefore, our DBA team explored the possibility of deploying multiple clusters on the same set of physical servers.
 
 To achieve hybrid deployment, we must isolate the resources from each other. TiDB has three key components: [PD](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (the scheduler), [TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage) (the storage), and [TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing) (the computing layer).
 
 - PD has low resource requirements.
 - TiKV supports configuring the maximum CPU and memory at the software layer. We also mount multiple SSDs in the same machine to isolate I/O.
-- TiDB also supports limiting CPU and memory usage at the software layer, but it can’t stop skyrocketing memory access in a short period of time. Fortunately, we can configure `memory_limit` in systemd and let [cgroups](https://en.wikipedia.org/wiki/Cgroups) cap the memory usage. This also inspires us to try fully controlling resources using Kubernetes and Docker.
+- TiDB also supports limiting CPU and memory usage at the software layer, but it can't stop skyrocketing memory access in a short period of time. Fortunately, we can configure `memory_limit` in systemd and let [cgroups](https://en.wikipedia.org/wiki/Cgroups) cap the memory usage. This also inspires us to try fully controlling resources using Kubernetes and Docker.
 
-After we verified that the abnormal SQL statements on one cluster didn’t affect other clusters on the same physical machine, we connected our other applications, one by one, with TiDB.
+After we verified that the abnormal SQL statements on one cluster didn't affect other clusters on the same physical machine, we connected our other applications, one by one, with TiDB.
 
 ## Our future plans with TiDB
 
@@ -283,7 +283,7 @@ TiDB is a cloud-native distributed database. Our existing clusters are mostly de
 
 Our advertising application is sensitive to service latency. It offers targeted advertising based on user data. With our data accumulating in the past five years, we needed a persistable key-value store to provide service for the advertising application.
 
-[TiKV](https://tikv.org/), TiDB’s storage component, drew our attention. TiKV was originally created to complement TiDB, but we can also deploy it independent of TiDB as low-latency, persistable storage. We have already implemented this project, and plan to extend the use of TiKV to more applications.
+[TiKV](https://tikv.org/), TiDB's storage component, drew our attention. TiKV was originally created to complement TiDB, but we can also deploy it independent of TiDB as low-latency, persistable storage. We have already implemented this project, and plan to extend the use of TiKV to more applications.
 
 ### Apply TiCDC
 
@@ -303,4 +303,4 @@ Currently, our migration process has two major parts: migrate data using DM and 
 
 <div class="caption-center">Our future plans with TiDB</div>
 
-The above plans won’t be brought to reality if it hadn’t been for TiDB. With TiDB as one of the core components in our architecture, we will build a powerful system to support our business in the long run.
+The above plans won't be brought to reality if it hadn't been for TiDB. With TiDB as one of the core components in our architecture, we will build a powerful system to support our business in the long run.
