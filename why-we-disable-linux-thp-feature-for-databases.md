@@ -75,7 +75,7 @@ Therefore, even when the unused memory is higher than the `high` watermark, the 
 
 To verify whether the performance fluctuation is related to memory fragmentation:
 
-1. View the direct memory reclaim operations taken per second. Execute `sar -b` to observe `pgscand/s`. If this number is greater than 0 for a consecutive period of time, take the following steps to troubleshoot the problem.
+1. View the direct memory reclaim operations taken per second. Execute `sar -B` to observe `pgscand/s`. If this number is greater than 0 for a consecutive period of time, take the following steps to troubleshoot the problem.
 2. Observe the memory fragmentation index. Execute `cat /sys/kernel/debug/extfrag/extfrag_index` to get the index**.** Focus on the fragmentation index of the block whose order is >= 3. If the number is close to 1,000, the fragmentation is severe; if it's close to 0, the memory is insufficient.
 3. View the memory fragmentation status. Execute `cat /proc/buddyinfo` and `cat /proc/pagetypeinfo` to show the status. (Refer to the [Linux manual page](https://man7.org/linux/man-pages/man5/proc.5.html) for details.) Focus on the number of pages whose order is >= 3.
 
