@@ -10,7 +10,7 @@ customerCategory: Internet
 logo: /images/blog/customers/58-logo.png
 ---
 
-**Industry:**Advertising
+**Industry:** Advertising
 
 **Authors:**
 
@@ -55,7 +55,7 @@ We adopted TiDB, because it met all our requirements for the database:
 
 * **TiDB uses distributed storage, and it can easily scale out.** We no longer need to worry that a single machine's capacity is limited.
 * **TiDB is highly available.** We don't need to use an additional high-availability service. So TiDB helps us eliminate extra operation and maintenance costs.
-* **TiDB supports writes from multiple nodes. **This prevents a database performance bottleneck when we write about 15,000 rows of data to a single node.
+* **TiDB supports writes from multiple nodes.** This prevents a database performance bottleneck when we write about 15,000 rows of data to a single node.
 * **TiDB provides data aggregation solutions for sharding**. With TiDB, we no longer need to shard databases.
 * **TiDB has a complete monitoring system.** We don't need to build our own monitoring software.
 
@@ -120,8 +120,9 @@ The following table summarizes how we've used TiDB over the years and how our re
 
 <li>1 billion daily visits</li>
 
-<li>2,300 MySQL clusters and 11 TiDB clusters
-(We gradually migrated from MySQL to TiDB.)
+<li>2,300 MySQL clusters and 11 TiDB clusters</li>
+
+<li>(We gradually migrated from MySQL to TiDB.)
 </li>
 </ul>
    </td>
