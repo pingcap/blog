@@ -62,7 +62,7 @@ To get started, let's install TiUP. Navigate to the [TiUP home page](https://tiu
 The first command installs TiUP.
 
 ```shell
-curl --proto '= https' --tlsv1.2 -sSf https: / /tiup-mirrors.pingcap.com/install.sh | sh
+curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
 ```
 
 The second runs a single-machine cluster.
@@ -124,6 +124,6 @@ Over time, we'll enhance TiUP to include more tried-and-tested tools from the Ti
 * TPC-C performance benchmarking (`tiup bench tpcc`)
 * TPC-H performance benchmarking (`tiup bench tpch`)
 * Integrated cluster tools for one-stop production cluster maintenance and scaling in or out (`tiup cluster`)
-We've open-sourced the [TiUP project](https://github.com/pingcap-incubator/tiup), and we look forward to working with the community to improve this ecosystem and to develop new components to cover various use cases. The community can share their own achievements and empower users with the same needs by writing components that cover dedicated scenarios. You're welcome to join the [TiDB Community on Slack](http://suo.im/5BmPAe) to give us advice or feedback on your user experience.
+We've open-sourced the [TiUP project](https://github.com/pingcap/tiup), and we look forward to working with the community to improve this ecosystem and to develop new components to cover various use cases. The community can share their own achievements and empower users with the same needs by writing components that cover dedicated scenarios. You're welcome to join the [TiDB Community on Slack](http://suo.im/5BmPAe) to give us advice or feedback on your user experience.
 
 _*App Store is a trademark of Apple Inc., registered in the U.S. and other countries._
