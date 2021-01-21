@@ -1,14 +1,14 @@
 ---
-title: Five Principles that Guide TiDB and Our Company (Part I)
+title: Five Principles that Guide TiDB and PingCAP (Part I)
 author: ['Max Liu']
 date: 2021-01-21
 summary: PingCAP's CEO talks about the philosophy of TiDB's evolution and how PingCAP built TiDB in the past five years.
 tags: ['Architecture']
 categories: ['Company']
-image: /images/blog/tidb-philosophy-five-principles-that-guide-tidb-and-our-company.jpg
+image: /images/blog/tidb-philosophy-five-principles-that-guide-tidb-and-pingcap.jpg
 ---
 
-![Five Principles that Guide TiDB and Our Company](media/tidb-philosophy-five-principles-that-guide-tidb-and-our-company.jpg)
+![Five Principles that Guide TiDB and PingCAP](media/tidb-philosophy-five-principles-that-guide-tidb-and-pingcap.jpg)
 
 _This article is based on a talk given by Max Liu at PingCAP Infra Meetup._
 
@@ -28,7 +28,7 @@ Before we started to build TiDB, we did some simple user research. What problems
 
 During the two years, we made many choices about how TiDB would evolve. For example, TiDB must adopt a multi-layered architecture; otherwise, we couldn't control its complexity.
 
-**TiDB has two layers: the SQL layer and the key-value (KV) layer. **So which layer should we start with? It didn't matter which one we chose, but we had to start somewhere. What criteria should we use to make the choice?
+**TiDB has two layers: the SQL layer and the key-value (KV) layer.** So which layer should we start with? It didn't matter which one we chose, but we had to start somewhere. What criteria should we use to make the choice?
 
 That's when we determined **TiDB Principle #1: Always stay close to our users**. The closer we stay to our users, the quicker we can get their feedback and verify if our idea works. Apparently, the SQL layer is relevant to our users, since they don't have to know about the KV layer. So we started there and built the SQL layer on top of an existing KV storage engine. Even today, most TiDB users aren't aware of the KV layer. They write SQL, run the query, and get the result. Whether the bottom storage engine is changed or optimized is none of their concern.
 
@@ -40,7 +40,7 @@ But no one would adopt the prototype. Because TiDB didn't have a KV storage laye
 
 The first consideration was **correctness**. For critical industries, such as banking, insurance, and securities, data correctness is the most important factor of a database. No one would use a database that processes data incorrectly.
 
-Secondly,** the implementation should be simple**. No user would tolerate a product that's difficult to use. One of our early goals was to make TiDB easier to use than HBase, with a smaller code base. Even today, TiDB's code base is less than one tenth the size of HBase's.
+Secondly, **the implementation should be simple**. No user would tolerate a product that's difficult to use. One of our early goals was to make TiDB easier to use than HBase, with a smaller code base. Even today, TiDB's code base is less than one tenth the size of HBase's.
 
 Thirdly, we considered **extensibility**. TiDB's architecture consists of multiple layers, such as the SQL layer and the KV layer. But the KV storage layer itself is also multi-layered. It supports the Raw KV API and transaction API and is quite extensible. Some users appreciated this design and made great use of our Raw KV API.
 
