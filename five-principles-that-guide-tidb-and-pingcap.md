@@ -5,10 +5,10 @@ date: 2021-01-21
 summary: PingCAP’s CEO talks about the philosophy of TiDB’s evolution and how PingCAP built TiDB in the past five years.
 tags: ['Architecture']
 categories: ['Company']
-image: /images/blog/tidb-philosophy-five-principles-that-guide-tidb-and-our-company.png
+image: /images/blog/tidb-philosophy-five-principles-that-guide-tidb-and-our-company.jpg
 ---
 
-![Five Principles that Guide TiDB and Our Company](media/tidb-philosophy-five-principles-that-guide-tidb-and-our-company.png)
+![Five Principles that Guide TiDB and Our Company](media/tidb-philosophy-five-principles-that-guide-tidb-and-our-company.jpg)
 
 _This article is based on a talk given by Max Liu at PingCAP Infra Meetup._
 
