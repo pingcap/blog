@@ -79,7 +79,7 @@ The distributed database industry has its own methodology: verify the algorithm 
 
 The transition from theory to practice is not an easy step to take. We must test the system with massive test cases. In normal software, the number of test cases seldom exceeds 100,000. In TiDB, our test cases reached tens of millions.
 
-Of course, we can't write all those cases by hand. Because TiDB is compatible with the MySQL protocol, we could use some of their test cases. These test cases include applications, framework, and management tools. Because many apps (such as WordPress and numerous object-relational mapping ([ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)) tools depend on MySQL, we could run them on TiDB and know whether TiDB's compatibility with MySQL worked as expected. We also tested TiDB with many MySQL management tools, such Navicat and PHP admin.
+Of course, we can't write all those cases by hand. Because TiDB is compatible with the MySQL protocol, we could use some of their test cases. These test cases include applications, framework, and management tools. Because many apps (such as WordPress and numerous object-relational mapping ([ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)) tools depend on MySQL, we could run them on TiDB and know whether TiDB's compatibility with MySQL worked as expected. We also tested TiDB with many MySQL management tools, such as Navicat and PHP admin.
 
 We also used TiDB as the backend of our internal Confluence and Jira tools. Though the dataset was not large, we wanted to have as many tests as possible in different applications. This is also eating our own dog food.
 
