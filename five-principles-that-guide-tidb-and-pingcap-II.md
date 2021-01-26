@@ -12,7 +12,7 @@ image: /images/blog/tidb-philosophy-five-principles-that-guide-tidb-and-pingcap.
 
 _This article is based on a talk given by Max Liu at PingCAP Infra Meetup._
 
-In [my last post](https://pingcap.com/blog/five-principles-that-guide-tidb-and-pingcap), I talked about how we made TiDB work, made it right, and, finally, made it fast. But we didn't stop there. To build an ideal database, we need to make TiDB affordable for all and adopted by all.
+In [my last post](https://pingcap.com/blog/five-principles-that-guide-tidb-and-pingcap), I talked about how we made [TiDB](https://docs.pingcap.com/tidb/stable) work, made it right, and, finally, made it fast. But we didn't stop there. To build an ideal database, we need to make TiDB affordable for all and adopted by all.
 
 ## Make it cheap
 
@@ -65,6 +65,6 @@ Therefore, we decided to target TiDB at those companies, because TiDB is a distr
 
 ## Looking back and going forward
 
-In 2015, when we started the company, people mocked us: how dare you claim to build a new database? Just five years later, in 2020, we had adopters across the globe and closed $270 million of series D round of funding. TiDB had higher performance and lower latency, supported hybrid cloud service and elastic scaling, and became a true HTAP database. We acquired major customers in the financial and banking industries, including companies in China, Japan, and North America.
+In 2015, when we started the company, people mocked us: how dare you claim to build a new database? Just five years later, in 2020, we had [adopters across the globe](https://docs.pingcap.com/tidb/stable/adopters) and closed $270 million of [series D round of funding](https://pingcap.com/blog/pingcap-the-company-behind-tidb-raises-$270-million-in-series-d-funding). TiDB had higher performance and lower latency, supported hybrid cloud service and elastic scaling, and became a true HTAP database. We acquired major customers in the financial and banking industries, including companies in China, Japan, and North America.
 
 In 2021, the world is full of uncertainty and change, but with TiDB's principles in place, we're confident we can meet our challenges and prosper.
