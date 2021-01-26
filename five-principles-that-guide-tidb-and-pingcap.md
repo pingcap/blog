@@ -12,7 +12,7 @@ image: /images/blog/tidb-philosophy-five-principles-that-guide-tidb-and-pingcap.
 
 _This article is based on a talk given by Max Liu at PingCAP Infra Meetup._
 
-TiDB is an open source, distributed SQL database started by PingCAP. As the CEO of PingCAP, I'm also TiDB's principal product manager, with veto power on the important features of our product. Rather than adding more features, my duty at PingCAP is to cut down unnecessary features so that TiDB stays focused yet flexible.
+[TiDB](https://docs.pingcap.com/tidb/stable) is an open source, distributed SQL database started by PingCAP. As the CEO of PingCAP, I'm also TiDB's principal product manager, with veto power on the important features of our product. Rather than adding more features, my duty at PingCAP is to cut down unnecessary features so that TiDB stays focused yet flexible.
 
 In this post, I will talk about the philosophy behind TiDB's evolution, and, as a product manager, how I figured out where TiDB would be going and how we finally got there.
 
@@ -48,7 +48,7 @@ Next, **high performance and low latency**. Although a database can never be too
 
 Last but not least, **stability**. We put extra emphasis on each layer's stability. For the bottom storage engine, we chose a very stable candidate, [RocksDB](https://en.wikipedia.org/wiki/RocksDB), and built our KV storage, [TiKV](https://docs.pingcap.com/tidb/stable/tikv-overview), on top of that.
 
-Another three months went by, and we released TiKV. We got back to one potential user and asked them to consider TiDB again. However, they turned us down again because they were afraid that it might crash and lose their data.
+Another three months went by, and we released [TiKV](https://docs.pingcap.com/tidb/stable/tikv-overview). We got back to one potential user and asked them to consider TiDB again. However, they turned us down again because they were afraid that it might crash and lose their data.
 
 #### Ensure data safety
 
