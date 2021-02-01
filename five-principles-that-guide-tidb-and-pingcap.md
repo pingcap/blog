@@ -147,4 +147,4 @@ With just one well-designed stone, we killed more than two birds. This solution 
 
 ## What's next
 
-By then we had successfully built a database that's beyond our expectations. But that wasn't enough. In the next post, I'll show you two more principles of TiDB and explain how we came to shape TiDB the way it is today.
+By then we had successfully built a database that's beyond our expectations. But that wasn't enough. In the [next post](https://pingcap.com/blog/five-principles-that-guide-tidb-and-pingcap-II), I'll show you two more principles of TiDB and explain how we came to shape TiDB the way it is today.
