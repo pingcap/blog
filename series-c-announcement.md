@@ -8,7 +8,7 @@ categories: ['Company']
 press_release: true
 ---
 
-Read the coverage on [**TechCrunch**](https://techcrunch.com/2018/09/11/tidb-developer-pingcap-wants-to-expand-in-north-america-after-raising-50m-series-c/), [**Business Insider**](https://markets.businessinsider.com/news/stocks/pingcap-raises-50-million-in-series-c-round-1027525459), [**SiliconANGLE**](https://siliconangle.com/2018/09/11/newsql-startup-pingcap-raises-50m-expand-tidb-ecosystem/)
+*Read the coverage on [**TechCrunch**](https://techcrunch.com/2018/09/11/tidb-developer-pingcap-wants-to-expand-in-north-america-after-raising-50m-series-c/), [**Business Insider**](https://markets.businessinsider.com/news/stocks/pingcap-raises-50-million-in-series-c-round-1027525459), [**SiliconANGLE**](https://siliconangle.com/2018/09/11/newsql-startup-pingcap-raises-50m-expand-tidb-ecosystem/)*
 
 ![PingCAP Raises $50 Million in Series C Round](media/series-c-announcement.png)
 <div class="caption-center">PingCAP Raises $50 Million in Series C Round</div>
