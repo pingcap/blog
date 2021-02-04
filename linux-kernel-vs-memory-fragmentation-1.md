@@ -1,14 +1,14 @@
 ---
-title: Lessons from TiDB's No. 1 Bug Hunters Who've Found 400+ Bugs in Popular DBMSs
+title: Linux kernel vs memory fragmentation (1/2)
 author: ['Wenbo Zhang']
 date: 2021-02-04
 summary:
 tags: ['', '']
 categories: ['Engineering']
-image: /images/blog/.jpg
+image: /images/blog/linux-memory-fragmentation-and-defragmentation.jpg
 ---
 
-![Database bug, database test](media/xxx.jpg)
+![Linux kernel memory fragmentation and defragmentation](media/linux-memory-fragmentation-and-defragmentation.png)
 
 (External) memory fragmentation is a long-standing Linux kernel programming issue. As the system runs, it assigns various tasks to memory pages. Over time, memory gets fragmented, and eventually, a busy system that is up for a long time may have only a few contiguous physical pages.
 
@@ -154,11 +154,8 @@ Because the virtual address and physical address are not linearly mapped, access
 * Level 4: Page 4-level directory index
 * Level 5: Page global index
 
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image1.png "image_tooltip")
-
-[Intel 5-level paging - Wikipedia](https://en.wikipedia.org/wiki/Intel_5-level_paging)
+![Intel 5-level paging - Virtual address](media/intel-5-level-paging.png)
+<div class="caption-center"> Intel 5-level paging - Wikipedia </div>
 
 The page frame number of the physical memory is stored in the direct page table entry, and you can find it through the direct page table index. **The physical address is the combination of the found page frame number and the page offset.**
 
@@ -178,9 +175,7 @@ Among the defined migration types, the three most frequently used are: **MIGRATE
 
 You can view the distribution of each migration type at each stage through `/proc/pagetypeinfo`:
 
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image2.png "image_tooltip")
+![Linux `/proc/pagetypeinfo` command](media/pagetypeinfo-command.png)
 
 **When applying for a page, the page allocation flag you use determines the specific migration type from which the page is allocated.** For example, you can use `__GFP_MOVABLE` for user space memory, and `__GFP_RECLAIMABLE` for file pages.
 
@@ -210,7 +205,7 @@ My previous article [Why We Disable Linux's THP Feature for Databases](https://e
 
 3. Tap Ctrl-C to stop collecting. A event contains many fields:
 
-    ![alt_text](images/image3.png "image_tooltip")
+    ![Linux ftrace events' fields](media/linux-ftrace-events-fields.png)
 
     To analyze the number of external memory fragmentation events, focus on **the events with `fallback_order &lt; pageblock order`**. In the x86_64 environment, `pageblock order` is 9.
 
