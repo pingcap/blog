@@ -1,5 +1,5 @@
 ---
-title: Linux kernel vs memory fragmentation (1/2)
+title: Linux Kernel vs. Memory Fragmentation (Part I)
 author: ['Wenbo Zhang']
 date: 2021-02-04
 summary: This post introduces common methods to prevent Linux memory fragmentation, the principle of memory compaction, how to view the fragmentation index, etc.
