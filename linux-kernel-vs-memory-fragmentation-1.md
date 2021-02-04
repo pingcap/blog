@@ -5,7 +5,7 @@ date: 2021-02-04
 summary: This post introduces common methods to prevent Linux memory fragmentation, the principle of memory compaction, how to view the fragmentation index, etc.
 tags: ['Linux']
 categories: ['Engineering']
-image: /images/blog/linux-memory-fragmentation-and-defragmentation.jpg
+image: /images/blog/linux-memory-fragmentation-and-defragmentation.png
 ---
 
 ![Linux kernel memory fragmentation and defragmentation](media/linux-memory-fragmentation-and-defragmentation.png)
