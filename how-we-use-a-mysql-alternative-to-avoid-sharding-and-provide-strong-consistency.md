@@ -6,7 +6,7 @@ summary: Meituan is the largest local life service company in China. As their bu
 tags: ['ACID transaction', 'Scalability', 'Database selection']
 customer: Meituan
 customerCategory: Internet
-logo: /images/blog/customers/meituan-logo.
+logo: /images/blog/customers/meituan-logo.png
 image: /images/blog/how-we-use-a-mysql-alternative-to-avoid-sharding-and-provide-strong-consistency.jpg
 ---
 
