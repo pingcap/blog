@@ -4,7 +4,7 @@ author: ['JD Cloud database team']
 date: 2020-02-09
 summary: PingCAP teams up with JD Cloud to provide Cloud-TiDB service on the JD Cloud platform.
 tags: ['Cloud-native', 'HTAP', 'Scalability', 'Real-time analytics', 'Backup and restore']
-categories: ['Product']
+categories: ['Community']
 image: /images/blog/jd-cloud-cloud-native-distributed-database-service.jpg
 ---
 
