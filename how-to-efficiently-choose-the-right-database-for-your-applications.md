@@ -16,10 +16,10 @@ Finding the right database solution for your application is not easy. At [iQIYI]
 
 Today, I'll share with you: 
 
-* What criteria to use for selecting a database (#database-selection-criteria)
-* What databases we use at iQIYI (#what-databases-we-use-at-iqiyi)
-* Some decision models to help you efficiently pick a database (#practical-decision-trees-for-efficiently-choosing-a-database)
-* Tips for choosing your database (#tips-for-choosing-a-database)
+* [What criteria to use for selecting a database](#database-selection-criteria)
+* [What databases we use at iQIYI](#what-databases-we-use-at-iqiyi)
+* [Some decision models to help you efficiently pick a database](#practical-decision-trees-for-efficiently-choosing-a-database)
+* [Tips for choosing your database](#tips-for-choosing-a-database)
 
 I hope this post can help you easily find the right database for your applications.
 
