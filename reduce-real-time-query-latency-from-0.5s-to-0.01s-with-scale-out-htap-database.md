@@ -24,7 +24,7 @@ image: /images/blog/mysql-horizontal-scaling-database-autohome.jpg
 
 The Autohome community forum is one of our oldest applications, with 100 million+ daily visits and 1 billion+ daily interface calls. As our data size rapidly grew, SQL Server became our database bottleneck. **Sharding didn't meet our app requirements**, and **scaling database capacity affected apps.** We looked for a new database solution. 
 
-After we compared [TiDB](https://docs.pingcap.com/tidb/stable/overview), Apache Ignite, and CockroachDB, we chose TiDB, an open-source, distributed, Hybrid Transactional/Analytical Processing (HTAP) database. Thanks to its horizontal scalability, now we can easily scale out our database, and our transactional** 99th percentile latency is within 12 ms.**
+After we compared [TiDB](https://docs.pingcap.com/tidb/stable/overview), Apache Ignite, and CockroachDB, we chose TiDB, an open-source, distributed, Hybrid Transactional/Analytical Processing (HTAP) database. Thanks to its horizontal scalability, now we can easily scale out our database, and our transactional **99th percentile latency is within 12 ms.**
 
 In 2020, TiDB also served as the underlying storage for our big sales promotion **with hundreds of thousands of Queries Per Second (QPS)**. **Our real-time query latency was reduced from 0.5 s to 0.01 s. TiDB's 99th percentile latency was within 20 ms**.
 
@@ -32,8 +32,8 @@ This post introduces how TiDB helps us achieve database scaling and real-time an
 
 * [Our forum reply app's pain points](#our-pain-points-for-the-community-forum-reply-app)
 * [Why we chose TiDB over Ignite and CockroachDB](#our-exploration-of-distributed-sql-databases)
-* [How we use TiDB in the forum reply app](#how-we-use-tidb-in-the-forum-reply-app)
-* [Why and how we use TiDB in our big sales promotion app](#why-and-how-we-use-tidb-in-our-big-sales-promotion-app) 
+* [How we use TiDB in the forum reply app](#how-we-use-tidb-in-the-autohome-forum-reply-application)
+* [Why and how we use TiDB in our big sales promotion app](#introducing-tidb-to-our-big-sales-promotion) 
 
 ## Our pain points for the community forum reply app
 
