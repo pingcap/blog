@@ -20,7 +20,7 @@ _This article is based on a talk given by Xiao Huang at a TiDB User Group event.
 
 As more and more distributed databases enter the market, choosing the right one for our applications is not easy. After thoughtful consideration, we chose [TiDB](https://docs.pingcap.com/tidb/stable/), a distributed, scale-out MySQL alternative database.
 
-In this post, I’ll share the considerations we had in database selection and introduce how we use TiDB at Meituan to solve our pain points.
+In this post, I'll share the considerations we had in database selection and introduce how we use TiDB at Meituan to solve our pain points.
 
 ## What to consider when selecting a database
 
@@ -63,7 +63,7 @@ To prevent data breach and data loss, the database should have the following thr
 * Data recovery. No matter what anomaly happens, we should be able to recover the data from backup.
 * Database privileges. The database privilege management should be fine-grained. For example, the user ID, phone number, and password should not be accessible to DBAs or application developers. In such cases, we need to grant table-level, or even field-level privileges.
 
-Therefore, we want a database that is stable, efficient, and secure, with low cost. We also hope it’s an open source database so that we can get community support when a problem occurs and potentially contribute to the community ourselves.
+Therefore, we want a database that is stable, efficient, and secure, with low cost. We also hope it's an open source database so that we can get community support when a problem occurs and potentially contribute to the community ourselves.
 
 After comparing the distributed databases on the market, including Amazon Aurora, Spanner, and CockroachDB, we chose [TiDB](https://docs.pingcap.com/tidb/stable), an open source, MySQL-compatible database that provides horizontal scalability and ACID-compliant transactions.
 
@@ -75,9 +75,9 @@ We use TiDB mostly for three scenarios: horizontal scaling, financial-grade data
 
 ### Horizontal scaling
 
-We choose distributed databases because they can scale out and in easily, without manual sharding. Our business often meets sudden ups and downs. As the traffic surges, if we don’t create more shards, latency will rise. When MySQL was still our main database, DBAs had to work with the application team to manually shard the database, which was time consuming and troublesome. After the traffic goes down, merging the shards using Data Transformation Services (DTS) and validating data are also daunting tasks.
+We choose distributed databases because they can scale out and in easily, without manual sharding. Our business often meets sudden ups and downs. As the traffic surges, if we don't create more shards, latency will rise. When MySQL was still our main database, DBAs had to work with the application team to manually shard the database, which was time consuming and troublesome. After the traffic goes down, merging the shards using Data Transformation Services (DTS) and validating data are also daunting tasks.
 
-The major cause of the sharding issues is that computation and storage are not separated. To solve this problem, we need a database that separates the computing layer from the storage layer, so we can scale the storage capacity and the computing resources by different amounts as needed. That’s where TiDB comes in.
+The major cause of the sharding issues is that computation and storage are not separated. To solve this problem, we need a database that separates the computing layer from the storage layer, so we can scale the storage capacity and the computing resources by different amounts as needed. That's where TiDB comes in.
 
 TiDB has a multi-layered architecture. It has three major components: [TiDB](https://docs.pingcap.com/tidb/dev/tidb-architecture#tidb-server) for computing, [Placement Driver](https://docs.pingcap.com/tidb/dev/tidb-architecture#placement-driver-pd-server) (PD) for storing metadata and providing timestamp, and [TiKV](https://docs.pingcap.com/tidb/dev/tidb-architecture#tikv-server) for distributed storage. In this architecture, storage and computing is separate so that each layer can scale independently to handle the fluctuating traffic, without affecting other components.
 
@@ -88,22 +88,22 @@ TiDB has a multi-layered architecture. It has three major components: [TiDB](htt
 
 Financial services have different, if not more stringent, requirements on the database system. At Meituan, the database must support transactions with strong consistency.
 
-Let’s first look at a nagging problem we met in MySQL. MySQL 5.7 implements [lossless semi-sync replication](https://dev.mysql.com/doc/refman/5.7/en/replication-semisync.html). In this implementation, MySQL first writes the transaction to the binary logs, which are then sent to a replica. After the replica returns an acknowledgement (ACK), the source database completes the transaction in the storage engine (InnoDB). In other words, the binary logs are already sent to a replica before the application knows the commit is completed. If the source database crashes at this moment and the transaction is committed in the replica, a risk occurs.
+Let's first look at a nagging problem we met in MySQL. MySQL 5.7 implements [lossless semi-sync replication](https://dev.mysql.com/doc/refman/5.7/en/replication-semisync.html). In this implementation, MySQL first writes the transaction to the binary logs, which are then sent to a replica. After the replica returns an acknowledgement (ACK), the source database completes the transaction in the storage engine (InnoDB). In other words, the binary logs are already sent to a replica before the application knows the commit is completed. If the source database crashes at this moment and the transaction is committed in the replica, a risk occurs.
 
-Moreover, lossless semi-sync replication doesn’t solve data inconsistency. Even if we set the semi-sync timeout to an infinite value, data is not strongly consistent. For example, if the network goes down between the source database and replicas, no replica would be able to receive the ACK.
+Moreover, lossless semi-sync replication doesn't solve data inconsistency. Even if we set the semi-sync timeout to an infinite value, data is not strongly consistent. For example, if the network goes down between the source database and replicas, no replica would be able to receive the ACK.
 
-To resolve this issue, MySQL later introduced [MySQL Group Replication](https://dev.mysql.com/doc/refman/8.0/en/group-replication-background.html) (MGR), but its scalability is poor. A group can have at most nine members. In addition, MGR is sensitive to network jitter. A few seconds of network jitter can cause the cluster to change the primary. In addition, MGR’s [multi-primary mode](https://dev.mysql.com/doc/refman/8.0/en/group-replication-multi-primary-mode.html) has so many bugs that the MySQL community mostly uses the single-primary mode to avoid transaction conflict.
+To resolve this issue, MySQL later introduced [MySQL Group Replication](https://dev.mysql.com/doc/refman/8.0/en/group-replication-background.html) (MGR), but its scalability is poor. A group can have at most nine members. In addition, MGR is sensitive to network jitter. A few seconds of network jitter can cause the cluster to change the primary. In addition, MGR's [multi-primary mode](https://dev.mysql.com/doc/refman/8.0/en/group-replication-multi-primary-mode.html) has so many bugs that the MySQL community mostly uses the single-primary mode to avoid transaction conflict.
 
-MySQL’s semi-sync doesn’t solve the consistency problem, but TiDB’s Multi-Raft protocol does. In the storage layer, data is divided into Regions (a 96 MB range of data), each having multiple replicas to make up a Raft group. Each Raft group has a Leader that processes read and write requests. When a Leader crashes, other replicas in the group elect a new Leader. Even if a single node crashes, the Raft Group doesn’t lose any data.
+MySQL's semi-sync doesn't solve the consistency problem, but TiDB's Multi-Raft protocol does. In the storage layer, data is divided into Regions (a 96 MB range of data), each having multiple replicas to make up a Raft group. Each Raft group has a Leader that processes read and write requests. When a Leader crashes, other replicas in the group elect a new Leader. Even if a single node crashes, the Raft Group doesn't lose any data.
 
-![TiDB’s Multi-Raft protocol](media/meituan-tidb-multi-raft-protocol.png)
-<div class="caption-center"> TiDB’s Multi-Raft protocol </div>
+![TiDB's Multi-Raft protocol](media/meituan-tidb-multi-raft-protocol.png)
+<div class="caption-center"> TiDB's Multi-Raft protocol </div>
 
-Next, I’ll introduce how we use distributed transactions at Meituan for different financial scenarios.
+Next, I'll introduce how we use distributed transactions at Meituan for different financial scenarios.
 
 #### Cross-database transactions
 
-When we perform cross-database data updates, we need cross-database transactions to guarantee data consistency. Take our food delivery order service as an example. Because the customer data and the restaurant data are stored in different databases, when the customer places an order, we need to update both databases. TiDB’s cross-database transactions are helpful in this scenario.
+When we perform cross-database data updates, we need cross-database transactions to guarantee data consistency. Take our food delivery order service as an example. Because the customer data and the restaurant data are stored in different databases, when the customer places an order, we need to update both databases. TiDB's cross-database transactions are helpful in this scenario.
 
 ![Cross-database transactions](media/meituan-cross-database-transactions.png)
 <div class="caption-center"> Cross-database transactions </div>
@@ -122,21 +122,21 @@ Another use scenario is service-oriented architecture (SOA). In a microservice a
 ![SOA architecture](media/meituan-soa-architecture.jpg)
 <div class="caption-center"> SOA architecture </div>
 
-If we don’t have distributed transactions, keeping data consistent across different services is complicated. Without distributed transactions, a single operation might need to be written into different modules, resulting in multiple writes. In food delivery, when the customer-side cluster goes down but the restaurant-side cluster survives, a validating service detects that an order only exists in the restaurant database but not in the customer database. Next, the order data can be added to the customer database. But such validate-and-add logic adds complexity to the application.
+If we don't have distributed transactions, keeping data consistent across different services is complicated. Without distributed transactions, a single operation might need to be written into different modules, resulting in multiple writes. In food delivery, when the customer-side cluster goes down but the restaurant-side cluster survives, a validating service detects that an order only exists in the restaurant database but not in the customer database. Next, the order data can be added to the customer database. But such validate-and-add logic adds complexity to the application.
 
 Also, for account services, distributed transactions are essential because:
 
-* The account balance can’t be minus.
-* In the case of a power or network outage, it’s hard to maintain data consistency.
-* Data corruption might be disastrous. When multiple clusters are corrupted, it’s difficult to recover data.
+* The account balance can't be minus.
+* In the case of a power or network outage, it's hard to maintain data consistency.
+* Data corruption might be disastrous. When multiple clusters are corrupted, it's difficult to recover data.
 
 Thankfully, TiDB solves these difficulties with its distributed transaction model.
 
 #### Solution: the Percolator distributed transaction model
 
-Percolator is a system built by Google for incremental processing on a large data set. Inspired by Percolator, the [TiDB transaction model](https://docs.pingcap.com/tidb/stable/transaction-overview) is an optimized two-phase commit protocol, which supports [pessimistic transactions](https://docs.pingcap.com/tidb/stable/pessimistic-transaction). With TiDB’s distributed transaction model, our R&D engineers are relieved of the complicated logic of sharding and validating and can focus on their own development.
+Percolator is a system built by Google for incremental processing on a large data set. Inspired by Percolator, the [TiDB transaction model](https://docs.pingcap.com/tidb/stable/transaction-overview) is an optimized two-phase commit protocol, which supports [pessimistic transactions](https://docs.pingcap.com/tidb/stable/pessimistic-transaction). With TiDB's distributed transaction model, our R&D engineers are relieved of the complicated logic of sharding and validating and can focus on their own development.
 
-If you plan to use TiDB’s transaction model, we have two general tips:
+If you plan to use TiDB's transaction model, we have two general tips:
 
 * Consolidate small transactions. Distributed transactions need lots of network communication, and lots of small transactions might cause high network latency and thus affect performance.
 * Split up large transactions. A large transaction often takes a long time and updates multiple keys. Because other read requests need to wait for the large transaction to commit, the read latency might rise.
@@ -145,9 +145,9 @@ If you plan to use TiDB’s transaction model, we have two general tips:
 
 We also use TiDB for the data middle office. For massive data, the data usage gradually becomes diverse. Some data that used to be processed by OLAP databases or data warehouses now needs to be stored in TiDB and the results fetched in real time.
 
-In a hotel booking application, we need to fetch lots of data to calculate if the hotel room pricing is competitive. The results must be given in real time, but the calculation can’t affect the online service. However, if the data is stored in one database, the analytical engine continuously reads massive data from the database, which might cause OLTP transactions to respond slowly.
+In a hotel booking application, we need to fetch lots of data to calculate if the hotel room pricing is competitive. The results must be given in real time, but the calculation can't affect the online service. However, if the data is stored in one database, the analytical engine continuously reads massive data from the database, which might cause OLTP transactions to respond slowly.
 
-To address this problem, we use [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview/) to replicate data to another TiDB cluster. Because TiDB’s bottom storage engine, RocksDB, uses the log-structured merge-tree ([LSM-tree](https://en.wikipedia.org/wiki/Log-structured_merge-tree)) structure, which is highly efficient for write operations, we can quickly sync data to a TiDB replica. In this replica, we can perform massive calculations and frequent queries, generate reports, and even build a search engine.
+To address this problem, we use [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview/) to replicate data to another TiDB cluster. Because TiDB's bottom storage engine, RocksDB, uses the log-structured merge-tree ([LSM-tree](https://en.wikipedia.org/wiki/Log-structured_merge-tree)) structure, which is highly efficient for write operations, we can quickly sync data to a TiDB replica. In this replica, we can perform massive calculations and frequent queries, generate reports, and even build a search engine.
 
 We have many related data scattered across different systems. If we extract these data and pool them together into a single data middle office, we can apply it to different services, such as operations reporting and data subscription.
 
@@ -159,7 +159,7 @@ We have many related data scattered across different systems. If we extract thes
 We may also consider TiDB for the following scenarios:
 
 * Separate hot and cold data. As the company grows, the accumulated online historical data can be dumped into TiDB clusters to reduce costs.
-* Store logs and monitoring data. As TiDB’s storage layer uses the LSM-tree data structure, which is efficient for write operations, it can scale infinitely to hold all the data for analytical purposes.
+* Store logs and monitoring data. As TiDB's storage layer uses the LSM-tree data structure, which is efficient for write operations, it can scale infinitely to hold all the data for analytical purposes.
 * Online Data Definition Language (DDL) schema change. MySQL has many restrictions on changing table schema. We used to use tools like pt-osc or gh-ost to perform the schema change, but the changes might lower online performance or take too long. TiDB can perform online DDL operations within seconds, which solves a pain point for us.
 * Migrate from HBase/Elasticsearch (ES). Some of our services used HBase or ES, but these databases were frustrating to use, so we migrated the services to TiDB.
 * HTAP is a growing need. With the rise of 5G and IoT, data volumes are growing exponentially. Our fast-paced business may have both OLTP and OLAP requirements, which brings up the need for an HTAP database. With HTAP, we can quickly generate big data analytics, reducing operating and marketing costs.
