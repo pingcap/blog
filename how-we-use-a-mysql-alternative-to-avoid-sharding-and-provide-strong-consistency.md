@@ -10,6 +10,7 @@ logo: /images/blog/customers/meituan-logo.png
 image: /images/blog/how-we-use-a-mysql-alternative-to-avoid-sharding-and-provide-strong-consistency.jpg
 ---
 
+**Industry**: E-commerce
 **Author:** Xiao Huang, Senior DBA at Meituan, Leader of TiDB User Group in Beijing
 
 ![How We Use a MySQL Alternative to Avoid Sharding and Provide Strong Consistency](media/how-we-use-a-mysql-alternative-to-avoid-sharding-and-provide-strong-consistency.jpg)
