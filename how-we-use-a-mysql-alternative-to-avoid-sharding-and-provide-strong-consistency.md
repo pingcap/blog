@@ -16,7 +16,7 @@ image: /images/blog/how-we-use-a-mysql-alternative-to-avoid-sharding-and-provide
 
 _This article is based on a talk given by Xiao Huang at a TiDB User Group event._
 
-[Meituan](https://www.crunchbase.com/organization/meituan) is a world leading online-to-offline (O2O) local life service platform, connecting more than 240 million consumers and five million local merchants through a comprehensive array of e-commerce services and products. To support our highly concurrent online services, we need a distributed database that can handle large volumes of data.
+[Meituan](https://www.crunchbase.com/organization/meituan) is a world leading online-to-offline (O2O) local life service platform, connecting more than 240 million consumers and five million local merchants through a comprehensive array of e-commerce services and products. **To support our highly concurrent online services, we need a distributed database that can handle large volumes of data**.
 
 As more and more distributed databases enter the market, choosing the right one for our applications is not easy. After thoughtful consideration, we chose [TiDB](https://docs.pingcap.com/tidb/stable/), a distributed, scale-out MySQL alternative database.
 
@@ -69,7 +69,7 @@ After comparing the distributed databases on the market, including Amazon Aurora
 
 ## How we use TiDB at Meituan
 
-Currently, Meituan has over 1,700 TiDB nodes and several hundred clusters. The largest cluster has more than 40 nodes, and the largest table stores over 100 billion records. The number of queries each day exceeds 10 billion, with the peak QPS in a single cluster beyond 100 K.
+Currently, Meituan has over 1,700 TiDB nodes and several hundred clusters. The largest cluster has more than 40 nodes, and **the largest table stores over 100 billion records**. **The number of queries each day exceeds 10 billion**, with the peak QPS in a single cluster beyond 100 K.
 
 We use TiDB mostly for three scenarios: horizontal scaling, financial-grade data consistency, and data middle office.
 
