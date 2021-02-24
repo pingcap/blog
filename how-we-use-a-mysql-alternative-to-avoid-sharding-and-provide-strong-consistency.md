@@ -1,7 +1,7 @@
 ---
 title: How We Use a MySQL Alternative to Avoid Sharding and Provide Strong Consistency
 author: ['Xiao Huang']
-date: 2021-02-25
+date: 2021-02-24
 summary: Meituan is the largest local life service company in China. As their business expanded, Meituan chose TiDB as a MySQL alternative to solve the difficulty of manual sharding and provide strong consistency.
 tags: ['ACID transaction', 'Scalability', 'Database selection']
 customer: Meituan
