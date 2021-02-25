@@ -1,26 +1,27 @@
 ---
-title: TiDB, the Key to a Better Life for Meituan-Dianping's 290 Million Monthly Users
+title: Migrating from MySQL to a Scale-Out Database to Serve Our 290 Million Monthly Users
 author: ['Yinggang Zhao', 'Kun Li', 'Changjun Piao']
 date: 2018-12-06
 summary: As our business grew quickly, we were overwhelmed trying to tackle the mounting data until we found TiDB, a MySQL-compatible NewSQL hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Now we can harness our data with more confidence than ever before and provide better services for our users to enjoy a better life.
 tags: ['MySQL', 'Scalability', 'Consistency']
 url: /success-stories/tidb-in-meituan-dianping/
-customer: Meituan-Dianping
+customer: Meituan
 customerCategory: Internet
-logo: /images/blog/customers/meituan-dianping-logo.png
+logo: /images/blog/customers/meituan-logo.png
+aliases: ['/blog/tidb-in-meituan-dianping/']
 ---
 
-**Industry:** Search and Ecommerce Platform
+**Industry:** E-commerce
 
-**Authors:** Yinggang Zhao (Researcher at Meituan-Dianping), Kun Li (Database expert at Meituan-Dianping) and Changjun Piao (Database expert at Meituan-Dianping)
+**Authors:** Yinggang Zhao (Researcher at Meituan), Kun Li (Database expert at Meituan) and Changjun Piao (Database expert at Meituan)
 
 ## Introduction
 
-In Chinese, [Meituan-Dianping](https://en.wikipedia.org/wiki/Meituan-Dianping) means “better buying, better life,” and since it was formed in 2015 by the [merger of two companies](https://www.forbes.com/sites/ywang/2015/10/08/chinas-meituan-dianping-merges-to-create-a-mega-online-to-offline-service-platform/#4353d0323e28), the platform has facilitated billions of purchases of goods and services with built-in discounts. By gross merchandise volume, Meituan-Dianping is [China's largest group-buying website](https://www.crunchbase.com/organization/meituan-com#section-overview). Part Groupon, part Yelp, and part Uber Eats, we offer a range of localized services and entertainment, such as food delivery, restaurant reviews, haircuts and manicures, ticket bookings, bike-sharing, and more. [In April 2018, we had 290 million monthly active users, and last year we generated more than 5.8 billion transactions with over $51 billion in gross transaction volume.](https://www.home.saxo/insights/content-hub/articles/2018/09/07/a-closer-look-at-meituan-dianping) On September 20, 2018, our company [debuted on the Hong Kong stock exchange at an IPO price of HK$69 per share](https://money.cnn.com/2018/09/20/technology/meituan-dianping-ipo/index.html).
+In Chinese, [Meituan](https://en.wikipedia.org/wiki/Meituan) means “better buying, better life,” and since it was formed in 2015 by the [merger of two companies](https://www.forbes.com/sites/ywang/2015/10/08/chinas-meituan-dianping-merges-to-create-a-mega-online-to-offline-service-platform/#4353d0323e28), the platform has facilitated billions of purchases of goods and services with built-in discounts. By gross merchandise volume, Meituan is [China's largest group-buying website](https://www.crunchbase.com/organization/meituan-com#section-overview). Part Groupon, part Yelp, and part Uber Eats, we offer a range of localized services and entertainment, such as food delivery, restaurant reviews, haircuts and manicures, ticket bookings, bike-sharing, and more. [In April 2018, we had 290 million monthly active users, and last year we generated more than 5.8 billion transactions with over $51 billion in gross transaction volume.](https://www.home.saxo/insights/content-hub/articles/2018/09/07/a-closer-look-at-meituan-dianping) On September 20, 2018, our company [debuted on the Hong Kong stock exchange at an IPO price of HK$69 per share](https://money.cnn.com/2018/09/20/technology/meituan-dianping-ipo/index.html).
 
 As our business has grown rapidly, our data volume has also surged. This has placed tremendous pressure on the MySQL database system in our backend. Burdened by handling this immense data, we began to explore a better data storage solution. Fortunately, we found [TiDB](https://en.wikipedia.org/wiki/TiDB), a MySQL-compatible NewSQL hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built and supported by PingCAP. Now we can harness our data with more confidence than ever before and provide better services for our users to enjoy a better life.
 
-At the beginning of 2018, our [DBA](https://en.wikipedia.org/wiki/Database_administrator) (database administrator) team worked together with the architecture storage team to choose and implement a distributed database solution. Since November 2018, 10 TiDB clusters have been deployed in our production environment, with nearly 200 physical nodes. These clusters are deployed for six product divisions or platforms: delivery, transport, quick pass, accommodation, the Meituan platform, and the core development platform. Most of these applications are pure [OLTP](https://en.wikipedia.org/wiki/Online_transaction_processing) (online transaction processing) workloads. We are happy to report that all the clusters have been running smoothly since their deployment.
+At the beginning of 2018, our DBA team worked together with the architecture storage team to choose and implement a distributed database solution. Since November 2018, 10 TiDB clusters have been deployed in our production environment, with nearly 200 physical nodes. These clusters are deployed for six product divisions or platforms: delivery, transport, quick pass, accommodation, the Meituan platform, and the core development platform. Most of these applications are pure [OLTP](https://en.wikipedia.org/wiki/Online_transaction_processing) (online transaction processing) workloads. We are happy to report that all the clusters have been running smoothly since their deployment.
 
 In this post, we will share two of the scenarios for which we chose TiDB, how we are using it, some issues we've had and the corresponding solutions, as well as our experiences collaborating with PingCAP.
 
@@ -28,7 +29,7 @@ In this post, we will share two of the scenarios for which we chose TiDB, how we
 
 ### Scenario 1: Offline Analytical Workload with Huge Writes and High Read QPS
 
-The scenario at Meituan-Dianping with the largest data size for analysis has up to 500GB writes every day. This scenario features:
+The scenario at Meituan with the largest data size for analysis has up to 500GB writes every day. This scenario features:
 
 - Stable write, with each transaction operating on 100 to 200 rows, and 60,000 writes per second.
 - The daily write data of 300GB to 500GB, which will gradually increase to 3TB in the future.
@@ -58,8 +59,8 @@ To overcome these challenges and lay the foundation for the future of our infras
 
 - Compatibility with our existing software stack and ecosystem to minimize the migration cost and efforts.
 
-  - At Meituan-Dianping, MySQL was our primary database solution supporting most of our business scenarios. So compatibility with the MySQL protocol with secondary index support was a must-have feature. The solution also had to be able to deliver performant OLTP services with high concurrency.
-  - There are many product lines in Meituan-Dianping. The services have a huge volume and demand high-quality service from the storage system. We needed minimal transformation of current software stacks, such as service access, monitoring and alert system, and automated operations platform.
+  - At Meituan, MySQL was our primary database solution supporting most of our business scenarios. So compatibility with the MySQL protocol with secondary index support was a must-have feature. The solution also had to be able to deliver performant OLTP services with high concurrency.
+  - There are many product lines in Meituan. The services have a huge volume and demand high-quality service from the storage system. We needed minimal transformation of current software stacks, such as service access, monitoring and alert system, and automated operations platform.
 
 - Online scalability. Data sharding, merging, and migration need to be automatic and transparent to the online business. The solution should support shard splitting and automatic migration for data sharding, and the services should not be interrupted during data migration.
 
@@ -101,15 +102,15 @@ All the test results showed that TiDB totally lived up to our expectations.
 
 ### Adoption
 
-Meituan-Dianping is always cautious about adopting new solutions, and TiDB was no exception. The implementation of TiDB went through the following stages of migration: offline analytical scenarios, non-critical workloads, and then mission-critical workloads.
+Meituan is always cautious about adopting new solutions, and TiDB was no exception. The implementation of TiDB went through the following stages of migration: offline analytical scenarios, non-critical workloads, and then mission-critical workloads.
 
-There are many product lines in Meituan-Dianping. The services all have huge volumes and demand high-quality performance from the storage system. Therefore, it is important to plan for a good storage system, including the following aspects: monitoring and alert, and service deployment and data synchronization between upstream and downstream.
+There are many product lines in Meituan. The services all have huge volumes and demand high-quality performance from the storage system. Therefore, it is important to plan for a good storage system, including the following aspects: monitoring and alert, and service deployment and data synchronization between upstream and downstream.
 
 ### Integration with the current ecosystem:
 
 #### Monitoring and Alert
 
-Meituan-Dianping currently uses the Mt-Falcon platform (a customized distributed monitoring system inspired by [Open-Falcon](https://github.com/open-falcon)) for monitoring and alert. Various plugins have been configured in Mt-Falcon to customize monitoring multiple components, and with [Puppet](https://en.wikipedia.org/wiki/Puppet_(software)) deployed, the privileges of different users and the issue of different files can be recognized. This way, machine installation and privilege control will be established as long as we complete the plugin scripts and the necessary files.
+Meituan currently uses the Mt-Falcon platform (a customized distributed monitoring system inspired by [Open-Falcon](https://github.com/open-falcon)) for monitoring and alert. Various plugins have been configured in Mt-Falcon to customize monitoring multiple components, and with [Puppet](https://en.wikipedia.org/wiki/Puppet_(software)) deployed, the privileges of different users and the issue of different files can be recognized. This way, machine installation and privilege control will be established as long as we complete the plugin scripts and the necessary files.
 
 ![Monitoring Architecture](media/monitoring-architecture.png)
 <div class="caption-center"> Monitoring Architecture </div>
@@ -169,8 +170,8 @@ At present, MySQL is used with [Hive](https://en.wikipedia.org/wiki/Apache_Hive)
         <div class="caption-center"> Synchronization Data from TiDB to Hive </div>
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('TiDB, the Key to a Better Life for Meituan-Dianping's 290 Million Monthly Users', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
-    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB, the Key to a Better Life for Meituan-Dianping's 290 Million Monthly Users', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+    <a href="/download" onclick="trackViews('TiDB, the Key to a Better Life for Meituan's 290 Million Monthly Users', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB, the Key to a Better Life for Meituan's 290 Million Monthly Users', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
 ### Issues and Solutions
@@ -234,7 +235,8 @@ What's more, the PingCAP engineers and support team are very professional, dedic
 
 ## What's Next
 
-We plan to deploy TiDB in more and more application systems and grow together with TiDB. At present, three DBAs from Meituan-Dianping and several storage experts are fully committed to collaborating with PingCAP on the underlying storage, computing mechanism in the middle layer, access to the service layer, data model selection of the storage plans, and so on.
+We plan to deploy TiDB in more and more application systems and grow together with TiDB. At present, three DBAs from Meituan and several storage experts are fully committed to collaborating with PingCAP on the underlying storage, computing mechanism in the middle layer, access to the service layer, data model selection of the storage plans, and so on.
+
 In the long term, we will build a mightier ecosystem together with PingCAP. Here are some of our initiatives:
 
 - **TitanDB**

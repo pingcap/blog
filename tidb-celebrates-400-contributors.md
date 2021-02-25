@@ -16,7 +16,7 @@ Not long after we celebrated our 300th contributor milestone in September 2019, 
 
 Ever since writing the first line of code of TiDB in May 2015, I have witnessed this open-source distributed database project transforming from infancy to puberty, now growing fast into adulthood. I have enjoyed the glorious moments when its storage layer, [the TiKV project](https://tikv.org/), was upgraded to a [CNCF Incubating Project](https://www.cncf.io/blog/2019/05/21/toc-votes-to-move-tikv-into-cncf-incubator/) and when its ecosystem tools hit their major releases. I am also pleased to see TiDB continuously polished and adopted in the production environments of hundreds of users, helping them scale and grow their business without worrying about their database infrastructure. All these honors and achievements belong to the TiDB community, to our beloved contributors and our following distinguished committers:
 
-* Kai Li ([GitHub ID: kayaklee](https://github.com/kayaklee)), Head of Database Team, [Meituan-Dianping](https://en.wikipedia.org/wiki/Meituan-Dianping)
+* Kai Li ([GitHub ID: kayaklee](https://github.com/kayaklee)), Head of Database Team, [Meituan](https://en.wikipedia.org/wiki/Meituan)
 * Di Wu ([GitHub ID: foxmailed](https://github.com/foxmailed)), Head of Database Middleware/Distributed Database, [Toutiao.com](https://www.toutiao.com/)
 * Yulai Li ([GitHub ID: blacktear23](https://github.com/blacktear23)), Architect, [SpeedyCloud](http://www.speedycloud.cc/)
 * Chuan Du ([GitHub ID: spongedu](https://github.com/spongedu)), Senior Engineer, [Tencent Cloud](https://intl.cloud.tencent.com/)
@@ -27,10 +27,10 @@ Ever since writing the first line of code of TiDB in May 2015, I have witnessed 
 
 Let's take a look back upon the highlights that have shaped TiDB since September 2019:
 
-* [@iamzhoug37](https://github.com/iamzhoug37) (from Meituan-Dianping) supported SQL binding, which enables the optimizer to choose the correct execution plan without modifying user SQL statements when statistics are outdated.
+* [@iamzhoug37](https://github.com/iamzhoug37) (from Meituan) supported SQL binding, which enables the optimizer to choose the correct execution plan without modifying user SQL statements when statistics are outdated.
 * [@hailanwhu](https://github.com/hailanwhu) (from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University)) supported the Index Merge operator, which enables TiDB SQL Optimizer to choose more than one index to retrieve data from the storage layer. This improved the performance and robustness of query execution.
 * [@pingyu](https://github.com/pingyu) (from [Tencent](https://en.wikipedia.org/wiki/Tencent)) improved the performance of the window operator by introducing a shuffle operator. Now, he is working on integrating this operator to the whole TiDB SQL Engine layer to make it achieve better [hybrid transaction and analytical processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) performance.
-* The TiDB community vectorized [432 built-in functions](https://github.com/pingcap/tidb/pulls?utf8=%E2%9C%93&q=is%3Apr+is%3Amerged+sort%3Aupdated-desc+label%3Acontribution+%22vectorize%22+) by 79 contributors, among which [@tsthght](http://github.com/tsthght) (from Meituan-Dianping) finished 45. Also, 22 rules were implemented to the new [Cascades Planner](https://github.com/pingcap/tidb/projects/16) by 11 contributors, and [@SeaRise](https://github.com/SeaRise) (from [Huya](https://en.wikipedia.org/wiki/Huya_Live)) finished 5 among them.
+* The TiDB community vectorized [432 built-in functions](https://github.com/pingcap/tidb/pulls?utf8=%E2%9C%93&q=is%3Apr+is%3Amerged+sort%3Aupdated-desc+label%3Acontribution+%22vectorize%22+) by 79 contributors, among which [@tsthght](http://github.com/tsthght) (from Meituan) finished 45. Also, 22 rules were implemented to the new [Cascades Planner](https://github.com/pingcap/tidb/projects/16) by 11 contributors, and [@SeaRise](https://github.com/SeaRise) (from [Huya](https://en.wikipedia.org/wiki/Huya_Live)) finished 5 among them.
 
 For those who love hacking in the open-source distributed system projects, we made it our mission to make sure this is where you belong by enriching your contribution journey:
 

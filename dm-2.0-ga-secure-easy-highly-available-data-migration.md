@@ -99,7 +99,7 @@ To solve these issues, the WeBank database team conducted in-depth discussions w
 
 ### Li Auto 
 
-[Li Auto](https://en.wikipedia.org/wiki/Li_Auto) is a Chinese electric vehicle manufacturer, backed by China's consumer service delivery giants [Meituan-Dianping](https://en.wikipedia.org/wiki/Meituan) and [Bytedance](https://en.wikipedia.org/wiki/Bytedance). In October 2020, it announced that it [delivered 20,000 Li ONE SUVs in only 10 months](http://autonews.gasgoo.com/new_energy/70017646.html)—a record for the fastest delivery among China's vehicle startups.
+[Li Auto](https://en.wikipedia.org/wiki/Li_Auto) is a Chinese electric vehicle manufacturer, backed by China's consumer service delivery giants [Meituan](https://en.wikipedia.org/wiki/Meituan) and [Bytedance](https://en.wikipedia.org/wiki/Bytedance). In October 2020, it announced that it [delivered 20,000 Li ONE SUVs in only 10 months](http://autonews.gasgoo.com/new_energy/70017646.html)—a record for the fastest delivery among China's vehicle startups.
 
 Li Auto's more than 400 applications are built on microservices, covering the Internet of vehicles, order stores, vehicle production, after-sales, and logistics. In the microservice architecture, each individual microservice corresponds to an independent MySQL database (based on a public cloud RDS). 
 
