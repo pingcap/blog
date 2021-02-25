@@ -27,7 +27,7 @@ Within only 7 months since it was open-sourced on December 31st, 2019, Chaos Mes
 * [NetEase Fuxi Lab](https://www.crunchbase.com/organization/netease-fuxi-lab)
 * [JuiceFS](http://juicefs.com/?hl=en)
 * [Dailymotion](https://www.dailymotion.com/)
-* [Meituan-Dianping](https://about.meituan.com/en)
+* [Meituan](https://about.meituan.com/en)
 * [Celo](https://celo.org/)
 
 As manifested in the CNCF mission:
