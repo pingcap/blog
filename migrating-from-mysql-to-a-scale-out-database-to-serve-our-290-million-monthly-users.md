@@ -1,5 +1,5 @@
 ---
-title: TiDB, the Key to a Better Life for Meituan's 290 Million Monthly Users
+title: Migrating from MySQL to a Scale-Out Database to Serve Our 290 Million Monthly Users
 author: ['Yinggang Zhao', 'Kun Li', 'Changjun Piao']
 date: 2018-12-06
 summary: As our business grew quickly, we were overwhelmed trying to tackle the mounting data until we found TiDB, a MySQL-compatible NewSQL hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Now we can harness our data with more confidence than ever before and provide better services for our users to enjoy a better life.
@@ -8,9 +8,10 @@ url: /success-stories/tidb-in-meituan-dianping/
 customer: Meituan
 customerCategory: Internet
 logo: /images/blog/customers/meituan-logo.png
+aliases: ['/blog/tidb-in-meituan-dianping/']
 ---
 
-**Industry:** Ecommerce
+**Industry:** E-commerce
 
 **Authors:** Yinggang Zhao (Researcher at Meituan), Kun Li (Database expert at Meituan) and Changjun Piao (Database expert at Meituan)
 
@@ -20,7 +21,7 @@ In Chinese, [Meituan](https://en.wikipedia.org/wiki/Meituan) means “better buy
 
 As our business has grown rapidly, our data volume has also surged. This has placed tremendous pressure on the MySQL database system in our backend. Burdened by handling this immense data, we began to explore a better data storage solution. Fortunately, we found [TiDB](https://en.wikipedia.org/wiki/TiDB), a MySQL-compatible NewSQL hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built and supported by PingCAP. Now we can harness our data with more confidence than ever before and provide better services for our users to enjoy a better life.
 
-At the beginning of 2018, our [DBA](https://en.wikipedia.org/wiki/Database_administrator) (database administrator) team worked together with the architecture storage team to choose and implement a distributed database solution. Since November 2018, 10 TiDB clusters have been deployed in our production environment, with nearly 200 physical nodes. These clusters are deployed for six product divisions or platforms: delivery, transport, quick pass, accommodation, the Meituan platform, and the core development platform. Most of these applications are pure [OLTP](https://en.wikipedia.org/wiki/Online_transaction_processing) (online transaction processing) workloads. We are happy to report that all the clusters have been running smoothly since their deployment.
+At the beginning of 2018, our DBA team worked together with the architecture storage team to choose and implement a distributed database solution. Since November 2018, 10 TiDB clusters have been deployed in our production environment, with nearly 200 physical nodes. These clusters are deployed for six product divisions or platforms: delivery, transport, quick pass, accommodation, the Meituan platform, and the core development platform. Most of these applications are pure [OLTP](https://en.wikipedia.org/wiki/Online_transaction_processing) (online transaction processing) workloads. We are happy to report that all the clusters have been running smoothly since their deployment.
 
 In this post, we will share two of the scenarios for which we chose TiDB, how we are using it, some issues we've had and the corresponding solutions, as well as our experiences collaborating with PingCAP.
 
@@ -235,6 +236,7 @@ What's more, the PingCAP engineers and support team are very professional, dedic
 ## What's Next
 
 We plan to deploy TiDB in more and more application systems and grow together with TiDB. At present, three DBAs from Meituan and several storage experts are fully committed to collaborating with PingCAP on the underlying storage, computing mechanism in the middle layer, access to the service layer, data model selection of the storage plans, and so on.
+
 In the long term, we will build a mightier ecosystem together with PingCAP. Here are some of our initiatives:
 
 - **TitanDB**
