@@ -16,7 +16,7 @@ If your Golang application uses a MySQL-compatible database, such as MySQL, [TiD
 * Simulate or "mock" SQL services. This provides a test environment without having to use an actual database. 
 
     ![Golang unit test](media/golang-unit-test.jpg)
-<div class="caption-center"><a href="https://draveness.me/golang-101/" target="_blank"> Golang unit test </a></div>
+    <div class="caption-center"><a href="https://draveness.me/golang-101/" target="_blank"> Golang unit test </a></div>
 
     [go-sqlmock](https://github.com/DATA-DOG/go-sqlmock) is a commonly used tool for simulating services written in Golang. However, as we shall see, go-sqlmock also has its drawbacks.
 
