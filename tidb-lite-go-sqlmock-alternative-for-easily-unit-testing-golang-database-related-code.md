@@ -13,9 +13,9 @@ image: /images/blog/golang-database-unit-test-go-sqlmock-alternative.jpg
 If your Golang application uses a MySQL-compatible database, such as MySQL, [TiDB](https://docs.pingcap.com/tidb/stable), or Amazon Aurora MySQL, you will have a lot of database-related code to unit test. Typically, developers conduct unit tests using one of the following approaches:
 
 * Start a database instance on which to perform the unit test. However, this approach is not very elegant: you need to rely on an external environment, which increases your testing cost.
-* Simulate or “mock” SQL services. This provides a test environment without having to use an actual database. 
+* Simulate or "mock" SQL services. This provides a test environment without having to use an actual database. 
 
-![Golang unit test](media/golang-unit-test.jpg)
+    ![Golang unit test](media/golang-unit-test.jpg)
 <div class="caption-center"><a href="https://draveness.me/golang-101/" target="_blank"> Golang unit test </a></div>
 
     [go-sqlmock](https://github.com/DATA-DOG/go-sqlmock) is a commonly used tool for simulating services written in Golang. However, as we shall see, go-sqlmock also has its drawbacks.
@@ -24,13 +24,13 @@ A simpler and more effective approach is to use [tidb-lite](https://github.com/W
 
 In addition, some applications hope to persist data locally and store it in a database to facilitate data management. tidb-lite can also be used in this scenario. To process data locally, developers use SQL that is compatible with the MySQL protocol.
 
-This article focuses on the first scenario: how to use tidb-lite to unit test database-related code. We’ll look at the limitations of go-sqlmock, discuss tidb-lite’s advantages, and then show an example of tidb-lite in action.
+This article focuses on the first scenario: how to use tidb-lite to unit test database-related code. We'll look at the limitations of go-sqlmock, discuss tidb-lite's advantages, and then show an example of tidb-lite in action.
 
 ## go-sqlmock limitations
 
-To understand the limitations of using go-sqlmock, let’s unit test a piece of database-related code. For our example, we’ll use the `recordStats` function. When a user accesses a product, `recordStats` increments the number of product views and adds the user to the list of those who have viewed it. Here is the function code:
+To understand the limitations of using go-sqlmock, let's unit test a piece of database-related code. For our example, we'll use the `recordStats` function. When a user accesses a product, `recordStats` increments the number of product views and adds the user to the list of those who have viewed it. Here is the function code:
 
-```
+```go
 package main
 
 import (
@@ -106,9 +106,9 @@ func main() {
 }
 ```
 
-Now, let’s add the information needed to test this code. If you use go-sqlmock to write unit tests, you must define each step of the database operation, the order of the steps (including the `BEGIN` and `COMMIT` parts of the transaction), and the expected return data. If the actual operation or steps are inconsistent, sqlmock reports an error. The code for unit testing this function using go-sqlmock is as follows:
+Now, let's add the information needed to test this code. If you use go-sqlmock to write unit tests, you must define each step of the database operation, the order of the steps (including the `BEGIN` and `COMMIT` parts of the transaction), and the expected return data. If the actual operation or steps are inconsistent, sqlmock reports an error. The code for unit testing this function using go-sqlmock is as follows:
 
-```
+```go
 package main
 
 import (
@@ -168,15 +168,15 @@ In contrast, when we use tidb-lite for our unit testing, we only need to focus o
 
 ## tidb-lite: a simpler alternative
 
-**One of the most important advantages of tidb-lite over go-sqlmock is simplicity.** You can run a TiDB instance directly in the code instead of starting a MySQL or TiDB instance before running the unit test. This ensures that the unit test does not depend on the external environment. And, in contrast to go-sqlmock, we don’t need to write a lot of complex or redundant test code. We can focus on the correctness of the function.
+**One of the most important advantages of tidb-lite over go-sqlmock is simplicity.** You can run a TiDB instance directly in the code instead of starting a MySQL or TiDB instance before running the unit test. This ensures that the unit test does not depend on the external environment. And, in contrast to go-sqlmock, we don't need to write a lot of complex or redundant test code. We can focus on the correctness of the function.
 
 TiDB is also highly compatible with the MySQL protocol. Using tidb-lite can almost completely simulate the MySQL environment.
 
 ## Using tidb-lite
 
-To see tidb-lite in action, let’s unit test another function: `GetRowCount`. `GetRowCount` returns the number of eligible rows in a table. Here is the function code: 
+To see tidb-lite in action, let's unit test another function: `GetRowCount`. `GetRowCount` returns the number of eligible rows in a table. Here is the function code: 
 
-```
+```go
 package example
 
 import (
@@ -223,7 +223,7 @@ func GetRowCount(ctx context.Context, db *sql.DB , schemaName string, tableName 
 
 To write unit tests with tidb-lite, you need to use `NewTiDBServer` to create a TiDB instance and `CreateConn` to get a link to this database. Then, you can use this connection to access the database, generate test data, and verify the correctness of the function. The unit test code of this function using tidb-lite is as follows:
 
-```
+```go
 package example
 
 import (
