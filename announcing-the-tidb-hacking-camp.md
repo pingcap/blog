@@ -10,7 +10,7 @@ image: /images/blog/tidb-hacking-camp-2021.jpg
 
 ![TiDB Hacking Camp](media/tidb-hacking-camp-2021.jpg)
 
-The curtain fell on TiDB Hackathon 2020, but hacking never stops. After two days of  fierce competition, TiDB Hackathon 2020 ended up with many star projects, such as  UDF (a user defined function framework based on WASM),  TiGraph (a graph database on TiDB), and zh.md (an automatic language lint tool for Chinese documents). Developers have built a rich open source ecosystem around TiDB and greatly improved TiDB’s performance.
+The curtain fell on TiDB Hackathon 2020, but hacking never stops. After two days of fierce competition, TiDB Hackathon 2020 ended up with many star projects, such as UDF (a user defined function framework based on WASM),  TiGraph (a graph database on TiDB), and zh.md (an automatic language lint tool for Chinese documents). Developers have built a rich open source ecosystem around TiDB and greatly improved TiDB’s performance.
 
 To **move things forward,** PingCAP is now launching an 8-week **TiDB Hacking Camp**, an incubation program to actually land these projects in the community.
 
@@ -72,7 +72,7 @@ Ching-wei is a continuous integration (CI) tool which smartly reproduces bug iss
 
 ### zh.md
 
-Team Name:  zh.md
+Team Name: zh.md
 
 zh.md is a lint tool for Chinese documentation. Based on the abstract syntax trees and word segmentation, it automatically scans the documentation to diagnose existing issues and evaluate the quality. It uses statistics and NLP tools to assist writers to write style-compliant documents.
 
@@ -104,7 +104,7 @@ Yulong Zhai | zhangyushao
 
 _"These projects will fully boost the PingCAP community and attract more like-minded partners to hack together!"_
 
-Liyuan Feng  | Ti-Imporve
+Liyuan Feng | Ti-Imporve
 
 _"We hope Ti-Improve could be production ready soon because it will greatly improve the QA efficiency for the whole community."_
 
