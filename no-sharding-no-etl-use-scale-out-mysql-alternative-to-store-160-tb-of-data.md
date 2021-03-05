@@ -156,6 +156,10 @@ We're running **242 TiDB databases in 15 applications**. To name a few:
    </td>
    <td><strong>Application details</strong>
    </td>
+   <td><strong>Detailed information</strong>
+   </td>
+   <td><strong>Comment</strong>
+   </td>
   </tr>
   <tr>
    <td rowspan="3" >TEG
@@ -164,17 +168,39 @@ We're running **242 TiDB databases in 15 applications**. To name a few:
    </td>
    <td>WList is a general-purpose distributed key-list storage platform developed by the 58 Architecture Platform Department
    </td>
+   <td>Data size: 6.3 billion rows of data
+   </td>
+   <td rowspan="3" >
+<ul>
+
+<li>7.2 TB
+
+<li>In the past 6 months, 7 flash memory cards have been damaged in these applications. But <strong>thanks to TiDB’s high availability, they didn’t affect our businesses</strong>.
+</li>
+</ul>
+   </td>
   </tr>
   <tr>
    <td>WTable management backend
    </td>
    <td>The WTable cluster application accesses monitoring data such as machine CPU, I/O, and network
    </td>
+   <td>Data size: 26.2 billion rows of data
+   </td>
   </tr>
   <tr>
    <td>Search index
    </td>
    <td>It stores data about user search terms used in the last year
+   </td>
+   <td>
+<ul>
+
+<li>Current data size: 300 million rows of data
+
+<li>Daily increase: 500 thousand to 800 thousand rows of data
+</li>
+</ul>
    </td>
   </tr>
   <tr>
@@ -184,25 +210,45 @@ We're running **242 TiDB databases in 15 applications**. To name a few:
    </td>
    <td>Operation log
    </td>
+   <td>Daily increase: 40 million rows of data
+   </td>
+   <td>
+   </td>
   </tr>
   <tr>
    <td>Statement log
    </td>
    <td>Statement log
    </td>
+   <td>
+<ul>
+
+<li>QPS: 10 thousand at peak
+
+<li>Disk: 1 TB
+</li>
+</ul>
+   </td>
+   <td>
+   </td>
   </tr>
   <tr>
-   <td rowspan="2" >User growth
+   <td>User growth
    </td>
    <td>58 information
    </td>
-   <td>Headline news
+   <td>News
    </td>
-  </tr>
-  <tr>
-   <td>Contact book data storage
+   <td>
+<ul>
+
+<li>Data size: 50 million rows of data
+
+<li>Disk: 1 TB
+</li>
+</ul>
    </td>
-   <td>It stores contact book data
+   <td>
    </td>
   </tr>
   <tr>
@@ -212,26 +258,24 @@ We're running **242 TiDB databases in 15 applications**. To name a few:
    </td>
    <td>Verification center
    </td>
+   <td>Daily increase: 1 million rows of data
+   </td>
+   <td>
+   </td>
   </tr>
   <tr>
    <td>Financial company
    </td>
-   <td>The financial real-time data warehouse's underlying data storage 
+   <td>The financial real-time data warehouse’s underlying data storage 
    </td>
-   <td>The financial real-time data warehouse's underlying data storage
+   <td>The financial real-time data warehouse’s underlying data storage
    </td>
-  </tr>
-  <tr>
-   <td>Vehicle application
+   <td>Thousands of tables
    </td>
-   <td>Used car call ticket allocation
-   </td>
-   <td>It records used car number allocation and call tickets
+   <td>
    </td>
   </tr>
 </table>
-
-TEG's applications are our self-developed databases' management platforms. They have high write volumes. In August 2019, their data size reached about 6 TB. TEG applications' data increases by about 500 GB per month. In the past 6 months, 8 flash memory cards have been damaged in these applications. But **thanks to TiDB's high availability, they didn't affect our businesses**.
 
 ## Conclusion
 
