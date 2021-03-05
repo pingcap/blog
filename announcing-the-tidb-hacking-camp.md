@@ -1,6 +1,6 @@
 ---
 title: Announcing the TiDB Hacking Camp
-author: [PingCAP]
+author: ['PingCAP']
 date: 2021-03-05
 summary: TiDB Hackathon 2020 ended up with many star projects. To actually land these projects in the community, PingCAP is now launching an 8-week TiDB Hacking Camp.
 tags: ['Announcement']
