@@ -173,7 +173,7 @@ We're running **242 TiDB databases in 15 applications**. To name a few:
    <td rowspan="3" >
 <ul>
 
-<li>7.2 TB
+<li>7.2 TB</li>
 
 <li>In the past 6 months, 7 flash memory cards have been damaged in these applications. But <strong>thanks to TiDB’s high availability, they didn’t affect our businesses</strong>.
 </li>
@@ -196,7 +196,7 @@ We're running **242 TiDB databases in 15 applications**. To name a few:
    <td>
 <ul>
 
-<li>Current data size: 300 million rows of data
+<li>Current data size: 300 million rows of data</li>
 
 <li>Daily increase: 500 thousand to 800 thousand rows of data
 </li>
@@ -223,7 +223,7 @@ We're running **242 TiDB databases in 15 applications**. To name a few:
    <td>
 <ul>
 
-<li>QPS: 10 thousand at peak
+<li>QPS: 10 thousand at peak</li>
 
 <li>Disk: 1 TB
 </li>
@@ -242,7 +242,7 @@ We're running **242 TiDB databases in 15 applications**. To name a few:
    <td>
 <ul>
 
-<li>Data size: 50 million rows of data
+<li>Data size: 50 million rows of data</li>
 
 <li>Disk: 1 TB
 </li>
