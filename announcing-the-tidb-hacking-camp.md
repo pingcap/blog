@@ -8,6 +8,8 @@ categories: ['Community']
 image: /images/blog/tidb-hacking-camp-2021.jpg
 ---
 
+![TiDB Hacking Camp](media/tidb-hacking-camp-2021.jpg)
+
 The curtain fell on TiDB Hackathon 2020, but hacking never stops. After two days of  fierce competition, TiDB Hackathon 2020 ended up with many star projects, such as  UDF (a user defined function framework based on WASM),  TiGraph (a graph database on TiDB), and zh.md (an automatic language lint tool for Chinese documents). Developers have built a rich open source ecosystem around TiDB and greatly improved TiDB’s performance.
 
 To **move things forward,** PingCAP is now launching an 8-week **TiDB Hacking Camp**, an incubation program to actually land these projects in the community.
