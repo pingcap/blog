@@ -163,7 +163,7 @@ The following table summarizes the disk that we used for different components.
   <tr>
    <td>TiKV
    </td>
-   <td>EBS gp2*
+   <td>EBS gp2
    </td>
    <td>1,000
    </td>
