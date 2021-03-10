@@ -1576,7 +1576,7 @@ We will be using `oltp_read_write.lua` to test the performance for the OLTP work
 6. Run the sysbench test:
 
     ```shell
-    sysbench --config-file=config oltp_read_write --tables=16 --table-size=10000000 run
+    $ sysbench --config-file=config oltp_read_write --tables=16 --table-size=10000000 run
     ```
 
 7. Note the test results. The following are sample test results:
