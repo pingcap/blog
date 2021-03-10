@@ -989,7 +989,7 @@ For large workloads, we will test after the gp3 storageclass is stably supported
 5. In preparation for the next workload, clean up the data.
 
     ```shell
-    tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com cleanup
+    $ tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com cleanup
     ```
 
 6. Beginning at step 2, repeat this procedure for different numbers of warehouses.
