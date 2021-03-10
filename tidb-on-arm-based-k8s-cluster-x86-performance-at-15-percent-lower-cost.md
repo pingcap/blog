@@ -961,7 +961,7 @@ For large workloads, we will test after the gp3 storageclass is stably supported
 2. Create warehouses. You should specify the hostname as the load balancer's DNS name since we deployed the TiDB in EKS and exposed the database service as the LoadBalancer type:
 
     ```shell
-    tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com prepare
+   $ tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com prepare
     ```
 
 3. Run the TPC-C test for different threads. (We used 150, 300, 500, 800, and 1000). Each test runs for 10 minutes.
