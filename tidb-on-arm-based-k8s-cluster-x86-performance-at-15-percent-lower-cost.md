@@ -859,7 +859,7 @@ As you review the following benchmark tests, keep in mind that these are prelimi
 To facilitate benchmarking, TiUP has integrated the bench component, which provides two workloads for stress testing: TPC-C and TPC-H. The commands and flags are as follows:
 
 ```shell
-# tiup bench 
+$ tiup bench 
 Starting component `bench`: /Users/joshua/.tiup/components/bench/v0.0.1/bench 
 Benchmark database with different workloads
 
