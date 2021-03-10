@@ -967,7 +967,7 @@ For large workloads, we will test after the gp3 storageclass is stably supported
 3. Run the TPC-C test for different threads. (We used 150, 300, 500, 800, and 1000). Each test runs for 10 minutes.
 
     ```shell
-    tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com --threads 150 --time 10m run
+    $ tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com --threads 150 --time 10m run
     ```
 
 4. Note the tpmC result for each test case. The following is sample output:
