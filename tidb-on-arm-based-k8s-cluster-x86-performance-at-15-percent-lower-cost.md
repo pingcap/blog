@@ -897,7 +897,7 @@ Flags:
 For TPC-C, the TiUP bench component supports the following commands and flags to run the test:
 
 ```shell
-# tiup bench tpcc
+$ tiup bench tpcc
 Available Commands:
   check       Check data consistency for the workload
   cleanup     Cleanup data for the workload
