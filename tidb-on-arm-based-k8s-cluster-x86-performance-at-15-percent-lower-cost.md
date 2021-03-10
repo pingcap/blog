@@ -858,7 +858,7 @@ As you review the following benchmark tests, keep in mind that these are prelimi
 
 To facilitate benchmarking, TiUP has integrated the bench component, which provides two workloads for stress testing: TPC-C and TPC-H. The commands and flags are as follows:
 
-```
+```shell
 # tiup bench 
 Starting component `bench`: /Users/joshua/.tiup/components/bench/v0.0.1/bench 
 Benchmark database with different workloads
@@ -896,7 +896,7 @@ Flags:
 
 For TPC-C, the TiUP bench component supports the following commands and flags to run the test:
 
-```
+```shell
 # tiup bench tpcc
 Available Commands:
   check       Check data consistency for the workload
@@ -960,19 +960,19 @@ For large workloads, we will test after the gp3 storageclass is stably supported
 
 2. Create warehouses. You should specify the hostname as the load balancer's DNS name since we deployed the TiDB in EKS and exposed the database service as the LoadBalancer type:
 
-    ```
+    ```shell
     tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com prepare
     ```
 
 3. Run the TPC-C test for different threads. (We used 150, 300, 500, 800, and 1000). Each test runs for 10 minutes.
 
-    ```
+    ```shell
     tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com --threads 150 --time 10m run
     ```
 
 4. Note the tpmC result for each test case. The following is sample output:
 
-    ```
+    ```shell
     Finished
     [Summary] DELIVERY - Takes(s): 119.5, Count: 2036, TPM: 1022.6, Sum(ms): 642294, Avg(ms): 315, 90th(ms): 512, 99th(ms): 1000, 99.9th(ms): 2000
     [Summary] DELIVERY_ERR - Takes(s): 119.5, Count: 8, TPM: 4.0, Sum(ms): 1836, Avg(ms): 229, 90th(ms): 512, 99th(ms): 512, 99.9th(ms): 512
@@ -988,7 +988,7 @@ For large workloads, we will test after the gp3 storageclass is stably supported
 
 5. In preparation for the next workload, clean up the data.
 
-    ```
+    ```shell
     tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com cleanup
     ```
 
@@ -1551,7 +1551,7 @@ We will be using `oltp_read_write.lua` to test the performance for the OLTP work
 
 2. Set the sysbench configurations and save them in the configuration file. The following is a sample configuration file:
 
-    ```
+    ```shell
     mysql-host={TIDB_HOST}
     mysql-port=4000
     mysql-user=root
@@ -1565,7 +1565,7 @@ We will be using `oltp_read_write.lua` to test the performance for the OLTP work
 
 3. Before you import the data, it is necessary to make some settings to TiDB. Execute the following command in MySQL client:
 
-    ```
+    ```sql
     set global tidb_disable_txn_auto_retry = off;
     ```
 
@@ -1575,13 +1575,13 @@ We will be using `oltp_read_write.lua` to test the performance for the OLTP work
 
 6. Run the sysbench test:
 
-    ```
+    ```shell
     sysbench --config-file=config oltp_read_write --tables=16 --table-size=10000000 run
     ```
 
 7. Note the test results. The following are sample test results:
 
-    ```
+    ```shell
     SQL statistics:
         queries performed:
             read:                            10457930
