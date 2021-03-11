@@ -7,14 +7,14 @@ tags: ['Scalability', 'Cloud', 'MySQL']
 customer: Kunlun
 customerCategory: Gaming
 logo: /images/blog/customers/kunlun-logo.png
-image: /images/blog/kunlun-empowering-your-gaming-application-with-a-scale-out-newsql-database.png
+image: /images/blog/kunlun-empowering-your-gaming-application-with-a-scale-out-newsql-database.jpg
 ---
 
 **Industry:** Gaming
 
 **Author:** Han Liu (Director of IT operations at Kunlun)
 
-![Empowering Your Gaming Application with a Scale-out NewSQL Database](media/kunlun-empowering-your-gaming-application-with-a-scale-out-newsql-database.png)
+![Empowering Your Gaming Application with a Scale-out NewSQL Database](media/kunlun-empowering-your-gaming-application-with-a-scale-out-newsql-database.jpg)
 
 [Kunlun](https://www.crunchbase.com/organization/kunlun) is an industry leading internet company, focused on gaming and information. Its gaming platform, [GameArk](http://www.gameark.com/), develops and distributes games across the globe, boasting over 100 million monthly active users.
 
@@ -60,7 +60,7 @@ To meet our requirements for performance, scalability, cloud deployment, and mai
 
 Currently, GameArk has deployed a TiDB cluster that is **highly available** and **supports high concurrency and horizontal scalability on public clouds**. With the help of [TiDB Data Migration](https://docs.pingcap.com/tidb-data-migration/stable/overview/), we migrate **dozens of TB of data** from multiple MySQL databases to the TiDB cluster, which in theory provides infinite scalability. We also integrate the TiDB cluster with Kafka, Flink, Hive, Spark, and Aerospike to establish a comprehensive data system:
 
-![TiDB architecture at Kunlun](media/kunlun-tidb-architecture.png)
+![TiDB architecture at Kunlun](media/kunlun-tidb-architecture.jpg)
 <div class="caption-center"> TiDB architecture at Kunlun </div>
 
 In the future, we would like to build a more agile data service:
