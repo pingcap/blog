@@ -1,5 +1,5 @@
 ---
-title: 'TiDB on an ARM-based Kubernetes Cluster: x86 Performance at 15% Lower Cost'
+title: 'TiDB on an Arm-based Kubernetes Cluster: x86 Performance at 15% Lower Cost'
 author: ['Ron Xing']
 date: 2021-03-10
 summary: Running TiDB on EKS clusters with Graviton processors offers performance comparable to an x86-based cluster, but at a 15% saving. This article discusses the benchmark tests we ran.
@@ -8,11 +8,11 @@ categories: ['Product']
 image: /images/blog/tidb-on-eks-arm-vs-x86-benchmark.jpg
 --- 
 
-![TiDB on EKS ARM vs. x86 benchmark](media/tidb-on-eks-arm-vs-x86-benchmark.jpg)
+![TiDB on EKS Arm vs. x86 benchmark](media/tidb-on-eks-arm-vs-x86-benchmark.jpg)
 
 ## Benchmark purpose
 
-The following tests compare the performance of [TiDB](https://docs.pingcap.com/tidb/stable/), a MySQL compatible NewSQL database, running on an ARM-based Amazon Elastic Kubernetes Service (EKS) cluster and on an x86-based EKS cluster. The tests use an Online Transactional Processing (OLTP) workload, and the benchmarking tools are TPC-C and sysbench.
+The following tests compare the performance of [TiDB](https://docs.pingcap.com/tidb/stable/), a MySQL compatible NewSQL database, running on an Arm-based Amazon Elastic Kubernetes Service (EKS) cluster and on an x86-based EKS cluster. The tests use an Online Transactional Processing (OLTP) workload, and the benchmarking tools are TPC-C and sysbench.
 
 ## Benchmark environment
 
@@ -38,7 +38,7 @@ The following table summarizes all the EC2 instances we used in the EKS clusters
    </td>
   </tr>
   <tr>
-   <td>c6g.large(ARM)
+   <td>c6g.large(Arm)
    </td>
    <td>4
    </td>
@@ -52,7 +52,7 @@ The following table summarizes all the EC2 instances we used in the EKS clusters
    </td>
   </tr>
   <tr>
-   <td>c6g.2xlarge(ARM)
+   <td>c6g.2xlarge(Arm)
    </td>
    <td>8
    </td>
@@ -66,7 +66,7 @@ The following table summarizes all the EC2 instances we used in the EKS clusters
    </td>
   </tr>
   <tr>
-   <td>r6g.2xlarge(ARM)
+   <td>r6g.2xlarge(Arm)
    </td>
    <td>8
    </td>
@@ -143,7 +143,7 @@ The following table summarizes the disk that we used for different components.
 
 > **Note:**
 >
-> We didn't use EBS gp3 because the ARM support of the EBS CSI driver was not stable until the date of benchmarking. We believe that once EBS CSI driver on ARM is officially supported, gp3 provides significantly improved performance at similar costs.
+> We didn't use EBS gp3 because the Arm support of the EBS CSI driver was not stable until the date of benchmarking. We believe that once EBS CSI driver on Arm is officially supported, gp3 provides significantly improved performance at similar costs.
 
 <table>
   <tr>
@@ -222,7 +222,7 @@ Each EKS cluster consists of seven worker nodes and one admin (control plane) no
    </td>
   </tr>
   <tr>
-   <td rowspan="4" >Cluster 1: Graviton2 ARM
+   <td rowspan="4" >Cluster 1: Graviton2 Arm
    </td>
    <td>TiDB
    </td>
@@ -418,7 +418,7 @@ In the following table, the total cost per month includes a daily snapshot.
 
 ### EC2
 
-We used the following Graviton2 ARM processor based instances. Note that unit prices are based on the rate in both the US region and the APAC region.
+We used the following Graviton2 Arm processor based instances. Note that unit prices are based on the rate in both the US region and the APAC region.
 
 <table>
   <tr>
@@ -740,7 +740,7 @@ AWS US West (Oregon)
    </td>
   </tr>
   <tr>
-   <td>ARM
+   <td>Arm
    </td>
    <td><p style="text-align: right">
 1,577.97</p>
@@ -797,7 +797,7 @@ AWS Asia Pacific (Singapore)
    </td>
   </tr>
   <tr>
-   <td>ARM
+   <td>Arm
    </td>
    <td><p style="text-align: right">
 1,866.46</p>
@@ -842,7 +842,7 @@ AWS Asia Pacific (Singapore)
 
 To deploy a TiDB cluster on an x86-based EKS cluster, follow the steps in [Deploy TiDB on AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks#deploy-tidb-on-aws-eks).
 
-To deploy a TiDB cluster on an ARM-based EKS cluster, follow the steps in [TiDB Deployment on Graviton2-based EKS](https://github.com/xinghua0123/tidb-deployment/blob/main/README.md). The following [temporary ARM images](https://hub.docker.com/u/pingcap2021) are used for benchmarking:
+To deploy a TiDB cluster on an Arm-based EKS cluster, follow the steps in [TiDB Deployment on Graviton2-based EKS](https://github.com/xinghua0123/tidb-deployment/blob/main/README.md). The following [temporary Arm images](https://hub.docker.com/u/pingcap2021) are used for benchmarking:
 
 * pingcap2021/tidb-operator:v1.1.14
 * pingcap2021/pd:v4.0.10
@@ -850,7 +850,7 @@ To deploy a TiDB cluster on an ARM-based EKS cluster, follow the steps in [TiDB 
 * pingcap2021/tidb:v4.0.10
 * pingcap2021/tidb-monitor-initializer:v4.0.10
 
-Above images are temporary and not meant for a production environment. Stay tuned for the official ARM images.
+Above images are temporary and not meant for a production environment. Stay tuned for the official Arm images.
 
 ## TPC-C benchmark
 
@@ -952,7 +952,7 @@ This table summarizes the workloads we used, both in terms of the number of ware
   </tr>
 </table>
 
-For large workloads, we will test after the gp3 storageclass is stably supported on ARM-based EKS to avoid any potential bottlenecks from the disk I/O perspective.
+For large workloads, we will test after the gp3 storageclass is stably supported on Arm-based EKS to avoid any potential bottlenecks from the disk I/O perspective.
 
 ### Test procedures
 
@@ -1038,7 +1038,7 @@ The following table shows the results for a small workload:
    </td>
   </tr>
   <tr>
-   <td>ARM
+   <td>Arm
    </td>
    <td><p style="text-align: right">
 11,186.3</p>
@@ -1062,7 +1062,7 @@ The following table shows the results for a small workload:
    </td>
   </tr>
   <tr>
-   <td>(ARM-x86)/x86
+   <td>(Arm-x86)/x86
    </td>
    <td><p style="text-align: right">
 -0.22%</p>
@@ -1087,8 +1087,8 @@ The following table shows the results for a small workload:
   </tr>
 </table>
 
-![TPC-C ARM vs. x86 on EKS for a small workload](media/tpc-c-arm-vs-x86-on-eks-for-small-workload.jpg)
-<div class="caption-center"> TPC-C ARM vs. x86 on EKS for a small workload </div>
+![TPC-C Arm vs. x86 on EKS for a small workload](media/tpc-c-arm-vs-x86-on-eks-for-small-workload.jpg)
+<div class="caption-center"> TPC-C Arm vs. x86 on EKS for a small workload </div>
 
 The following table shows the results for a medium1 workload:
 
@@ -1132,7 +1132,7 @@ The following table shows the results for a medium1 workload:
    </td>
   </tr>
   <tr>
-   <td>ARM
+   <td>Arm
    </td>
    <td><p style="text-align: right">
 32,089.5</p>
@@ -1156,7 +1156,7 @@ The following table shows the results for a medium1 workload:
    </td>
   </tr>
   <tr>
-   <td>(ARM-x86)/x86
+   <td>(Arm-x86)/x86
    </td>
    <td><p style="text-align: right">
 -6.74%</p>
@@ -1181,8 +1181,8 @@ The following table shows the results for a medium1 workload:
   </tr>
 </table>
 
-![TPC-C ARM vs. x86 on EKS for a medium1 workload](media/tpc-c-arm-vs-x86-on-eks-for-medium1-workload.jpg)
-<div class="caption-center"> TPC-C ARM vs. x86 on EKS for a medium1 workload </div>
+![TPC-C Arm vs. x86 on EKS for a medium1 workload](media/tpc-c-arm-vs-x86-on-eks-for-medium1-workload.jpg)
+<div class="caption-center"> TPC-C Arm vs. x86 on EKS for a medium1 workload </div>
 
 The following table shows the results for a medium2 workload:
 
@@ -1226,7 +1226,7 @@ The following table shows the results for a medium2 workload:
    </td>
   </tr>
   <tr>
-   <td>ARM
+   <td>Arm
    </td>
    <td><p style="text-align: right">
 44,141.2</p>
@@ -1250,7 +1250,7 @@ The following table shows the results for a medium2 workload:
    </td>
   </tr>
   <tr>
-   <td>(ARM-x86)/x86
+   <td>(Arm-x86)/x86
    </td>
    <td><p style="text-align: right">
 16.49%</p>
@@ -1275,8 +1275,8 @@ The following table shows the results for a medium2 workload:
   </tr>
 </table>
 
-![TPC-C ARM vs. x86 on EKS for a medium2 workload](media/tpc-c-arm-vs-x86-on-eks-for-medium2-workload.jpg)
-<div class="caption-center"> TPC-C ARM vs. x86 on EKS for a medium2 workload </div>
+![TPC-C Arm vs. x86 on EKS for a medium2 workload](media/tpc-c-arm-vs-x86-on-eks-for-medium2-workload.jpg)
+<div class="caption-center"> TPC-C Arm vs. x86 on EKS for a medium2 workload </div>
 
 ### Price-performance ratio
 
@@ -1284,7 +1284,7 @@ In the following price-performance table:
 
 * The tpmC values are derived from the average tpmC among 300, 500, and 800 threads.
 * The total system costs for the US and APAC regions reflect the estimated five year hardware cost.
-* The price-performance ratios compare x86 and Graviton2 ARM processors. A lower cost for more performance is better. 
+* The price-performance ratios compare x86 and Graviton2 Arm processors. A lower cost for more performance is better. 
 * All costs are in US dollars.
 
 <table>
@@ -1338,7 +1338,7 @@ In the following price-performance table:
    </td>
   </tr>
   <tr>
-   <td>ARM
+   <td>Arm
    </td>
    <td>Small
    </td>
@@ -1364,7 +1364,7 @@ In the following price-performance table:
    </td>
   </tr>
   <tr>
-   <td>(ARM-x86)/x86
+   <td>(Arm-x86)/x86
    </td>
    <td>
    </td>
@@ -1410,7 +1410,7 @@ In the following price-performance table:
    </td>
   </tr>
   <tr>
-   <td>ARM
+   <td>Arm
    </td>
    <td>Medium1
    </td>
@@ -1436,7 +1436,7 @@ In the following price-performance table:
    </td>
   </tr>
   <tr>
-   <td>(ARM-x86)/x86
+   <td>(Arm-x86)/x86
    </td>
    <td>
    </td>
@@ -1482,7 +1482,7 @@ In the following price-performance table:
    </td>
   </tr>
   <tr>
-   <td>ARM
+   <td>Arm
    </td>
    <td>Medium2
    </td>
@@ -1508,7 +1508,7 @@ In the following price-performance table:
    </td>
   </tr>
   <tr>
-   <td>(ARM-x86)/x86
+   <td>(Arm-x86)/x86
    </td>
    <td>
    </td>
@@ -1529,7 +1529,7 @@ In the following price-performance table:
   </tr>
 </table>
 
-As the following graphic shows, when we compare the absolute tpmC performance under each workload, the ARM-based system and the x86-based system do not differ that much. After we factor in the hardware cost, the ARM price-performance ratio is at least 15% lower than x86, regardless of the workload.
+As the following graphic shows, when we compare the absolute tpmC performance under each workload, the Arm-based system and the x86-based system do not differ that much. After we factor in the hardware cost, the Arm price-performance ratio is at least 15% lower than x86, regardless of the workload.
 
 ![TPC-C price-performance ratio](media/tpc-c-price-performance-ratio.jpg)
 <div class="caption-center"> TPC-C price-performance ratio </div>
@@ -1643,7 +1643,7 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
    </td>
   </tr>
   <tr>
-   <td>ARM P95 latency (ms)
+   <td>Arm P95 latency (ms)
    </td>
    <td><p style="text-align: right">
 167.44</p>
@@ -1675,7 +1675,7 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
    </td>
   </tr>
   <tr>
-   <td>ARM QPS
+   <td>Arm QPS
    </td>
    <td><p style="text-align: right">
 47,944.82</p>
@@ -1707,7 +1707,7 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
    </td>
   </tr>
   <tr>
-   <td>ARM TPS
+   <td>Arm TPS
    </td>
    <td><p style="text-align: right">
 2,397.24</p>
@@ -1723,7 +1723,7 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
    </td>
   </tr>
   <tr>
-   <td>For TPS: (ARM-x86)/x86
+   <td>For TPS: (Arm-x86)/x86
    </td>
    <td><p style="text-align: right">
 -3.68%</p>
@@ -1740,8 +1740,8 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
   </tr>
 </table>
 
-![Sysbench ARM vs. x86 on EKS](media/sysbench-arm-vs-x86-on-eks.jpg)
-<div class="caption-center"> Sysbench ARM vs. x86 on EKS </div>
+![Sysbench Arm vs. x86 on EKS](media/sysbench-arm-vs-x86-on-eks.jpg)
+<div class="caption-center"> Sysbench Arm vs. x86 on EKS </div>
 
 ### Price-performance ratio
 
@@ -1749,7 +1749,7 @@ In the following price-performance table:
 
 * TPS values are derived from the average TPS among 300, 600, and 900 threads.
 * The total system cost reflects the estimated five year hardware cost. All costs are in US dollars.
-* Price-performance compares x86 and Graviton2 ARM processors. A lower value is better. That indicates a lower cost for more performance.
+* Price-performance compares x86 and Graviton2 Arm processors. A lower value is better. That indicates a lower cost for more performance.
 
 <table>
   <tr>
@@ -1798,7 +1798,7 @@ In the following price-performance table:
    </td>
   </tr>
   <tr>
-   <td>ARM
+   <td>Arm
    </td>
    <td><p style="text-align: right">
 2,654.21</p>
@@ -1822,7 +1822,7 @@ In the following price-performance table:
    </td>
   </tr>
   <tr>
-   <td>(ARM-x86)/x86
+   <td>(Arm-x86)/x86
    </td>
    <td>
    </td>
