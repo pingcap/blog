@@ -119,7 +119,7 @@ In Raft logs, the data in the same range is likely to have highly similar prefix
 
 In the sysbench batch insert testing, this optimization reduced data replication traffic across AZs by about 15%, with almost no overhead. Feel free to check out [our code](https://github.com/tikv/tikv/compare/master...Connor1996:delta-compression).
 
-![Reduce data replication traffic by 15%](media/cross-az-replication-traffic-by-15%.jpg)
+![Reduce data replication traffic by 15%](media/cross-az-replication-traffic-by-15-percent.jpg)
 <div class="caption-center"> Reduce data replication traffic by 15% </div>
 
 ![Reduce cross-AZ traffic with almost no overhead](media/cross-az-reduce-cross-az-traffic-with-almost-no-overhead.jpg)
