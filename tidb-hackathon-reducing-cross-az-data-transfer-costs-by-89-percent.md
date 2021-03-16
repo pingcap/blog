@@ -1,16 +1,16 @@
 ---
 title: 'TiDB Hackathon: Reducing Cross-AZ Data Transfer Costs by 89%'
-author: ['Jinpeng Zhang','Bokang Zhang']
+author: ['Jinpeng Zhang', 'Bokang Zhang']
 date: 2021-03-16
 summary: At TiDB Hackathon 2020, the Pingtouge team focused on reducing TiDB's cross-AZ data transfer costs on the cloud. They managed to reduce read traffic by 89% and write traffic by 15%.
-tags: ['Hackathon','Cloud']
+tags: ['Hackathon', 'Cloud']
 categories: ['Community']
-image: /images/blog/tidb-hackathon-reducing-cross-az-data-transfer-costs-by-89%.jpg
+image: /images/blog/tidb-hackathon-reducing-cross-az-data-transfer-costs-by-89-percent.jpg
 ---
 
 **Authors:** [Jinpeng Zhang](https://github.com/zhangjinpeng1987) ([TiKV](https://tikv.org/) maintainer), [Bokang Zhang](https://github.com/Connor1996) (TiKV committer)
 
-![TiDB Hackathon: Reducing Cross-AZ Data Transfer Costs by 89%](media/tidb-hackathon-reducing-cross-az-data-transfer-costs-by-89%.jpg)
+![TiDB Hackathon: Reducing Cross-AZ Data Transfer Costs by 89%](media/tidb-hackathon-reducing-cross-az-data-transfer-costs-by-89-percent.jpg)
 
 In the cloud, databases are often deployed across more than one availability zone (AZ). That way, if one AZ fails, the database service can continue uninterrupted. However, cloud service providers charge more for cross-AZ traffic, so we might have to spend a fortune on clusters with heavy traffic. In extreme cases, these charges can **make up 30%~40% of the total hardware cost**.
 
