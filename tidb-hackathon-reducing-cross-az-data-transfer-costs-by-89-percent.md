@@ -161,49 +161,11 @@ To sum up, our team has **reduced cross-AZ read traffic by 89% and reduced the d
 
 This is our plan for future improvements:
 
-<table>
-  <tr>
-   <td><strong>Feature</strong>
-   </td>
-   <td><strong>Future improvement</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>Adaptive location-based replica range scan
-   </td>
-   <td>
-<ul>
-
-<li>Improve the mechanism for monitoring the local TiKV load, such as <strong>adding a latency-based strategy.</strong>
-
-<li>Make the feature production-ready.
-</li>
-</ul>
-   </td>
-  </tr>
-  <tr>
-   <td>Raftlog Delta Encoding
-   </td>
-   <td>
-<ul>
-
-<li><strong>Apply the encoding to TSO.</strong>
-</li>
-</ul>
-   </td>
-  </tr>
-  <tr>
-   <td>PD scheduling
-   </td>
-   <td>
-<ul>
-
-<li>Take cross-AZ traffic into consideration.
-</li>
-</ul>
-   </td>
-  </tr>
-</table>
+|Feature|Future improvement|
+|:--|:----|
+|Adaptive location-based replica range scan|<ul><li>Improve the mechanism for monitoring the local TiKV load, such as <strong>adding a latency-based strategy.</strong></li><li>Make the feature production-ready.</li></ul>
+|Raftlog Delta Encoding|<strong>Apply the encoding to TSO.</strong>|
+|PD scheduling|Take cross-AZ traffic into consideration.|
 
 ## Our team and expertise
 
