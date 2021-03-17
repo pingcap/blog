@@ -73,7 +73,7 @@ After comparing the distributed databases on the market, including Amazon Aurora
 
 Currently, Meituan has over 1,700 TiDB nodes and several hundred clusters. The largest cluster has more than 40 nodes, and **the largest table stores over 100 billion records**. **The number of queries each day exceeds 10 billion**, with the peak QPS in a single cluster beyond 100 K.
 
-We use TiDB mostly for three scenarios: horizontal scaling, financial-grade data consistency, and data middle office.
+We use TiDB mostly for three scenarios: horizontal scaling, financial-grade data consistency, and data hub.
 
 ### Horizontal scaling
 
@@ -143,18 +143,18 @@ If you plan to use TiDB's transaction model, we have two general tips:
 * Consolidate small transactions. Distributed transactions need lots of network communication, and lots of small transactions might cause high network latency and thus affect performance.
 * Split up large transactions. A large transaction often takes a long time and updates multiple keys. Because other read requests need to wait for the large transaction to commit, the read latency might rise.
 
-### Data middle office
+### Data hub
 
-We also use TiDB for the data middle office. For massive data, the data usage gradually becomes diverse. Some data that used to be processed by OLAP databases or data warehouses now needs to be stored in TiDB and the results fetched in real time.
+We also use TiDB for the data hub. For massive data, the data usage gradually becomes diverse. Some data that used to be processed by OLAP databases or data warehouses now needs to be stored in TiDB and the results fetched in real time.
 
 In a hotel booking application, we need to fetch lots of data to calculate if the hotel room pricing is competitive. The results must be given in real time, but the calculation can't affect the online service. However, if the data is stored in one database, the analytical engine continuously reads massive data from the database, which might cause OLTP transactions to respond slowly.
 
 To address this problem, we use [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview/) to replicate data to another TiDB cluster. Because TiDB's bottom storage engine, RocksDB, uses the log-structured merge-tree ([LSM-tree](https://en.wikipedia.org/wiki/Log-structured_merge-tree)) structure, which is highly efficient for write operations, we can quickly sync data to a TiDB replica. In this replica, we can perform massive calculations and frequent queries, generate reports, and even build a search engine.
 
-We have many related data scattered across different systems. If we extract these data and pool them together into a single data middle office, we can apply it to different services, such as operations reporting and data subscription.
+We have many related data scattered across different systems. If we extract these data and pool them together into a single data hub, we can apply it to different services, such as operations reporting and data subscription.
 
-![TiDB for the data middle office](media/meituan-tidb-for-the-data-middle-office.png)
-<div class="caption-center"> TiDB for the data middle office </div>
+![TiDB for the data hub](media/meituan-tidb-for-the-data-hub.png)
+<div class="caption-center"> TiDB for the data hub </div>
 
 ### Other scenarios
 
