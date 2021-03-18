@@ -138,7 +138,7 @@ The following table summarizes all the EC2 instances we used in the EKS clusters
   </tr>
 </table>
 
-### Storage
+### Storage types
 
 The following table summarizes the disk that we used for different components.
 
