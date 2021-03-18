@@ -345,9 +345,9 @@ Developers have worked hard to make TiDB as MySQL compatible as possible. Howeve
     * If a user is not aware of the case sensitivity of the database, their queries may have unexpected results.
     * If you want to enable general collations, you must do it when you initialize your cluster. Enable the parameter `new_collations_enabled_on_first_bootstrap`.
 
-> **Note:**
->
-> You can't do this step later; if you miss this opportunity, you run into problems later. (The PingCAP team will solve this issue in the future.)
+        > **Note:**
+        >
+        > You can't do this step later; if you miss this opportunity, you run into problems later. (The PingCAP team will solve this issue in the future.)
 
 #### Preventing out of memory errors
 
