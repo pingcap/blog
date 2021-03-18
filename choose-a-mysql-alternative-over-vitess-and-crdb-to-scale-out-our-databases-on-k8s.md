@@ -246,7 +246,7 @@ In Ninja Van, many operations rely on local warehouse, fleet, ops, and Business 
 12.96 x</p>
 
    </td>
-   <td>Multiple joins with complex `WHERE` conditions
+   <td>Multiple joins with complex <code>WHERE</code> conditions
    </td>
   </tr>
   <tr>
@@ -264,7 +264,7 @@ In Ninja Van, many operations rely on local warehouse, fleet, ops, and Business 
 <strong>111.92 x</strong></p>
 
    </td>
-   <td>Multiple joins with `GROUP BY`
+   <td>Multiple joins with <code>GROUP BY</code>
    </td>
   </tr>
 </table>
@@ -363,19 +363,19 @@ Out of memory (OOM) errors are inevitable. However, if you carefully set the fol
   <tr>
    <td>Based on your machine specifications, set an appropriate memory quota for queries.
    </td>
-   <td>Specify `mem-quota-query`.
+   <td>Specify <code>mem-quota-query</code>.
    </td>
   </tr>
   <tr>
    <td>If the query exceeds the memory quota, specify whether to cancel the query.
    </td>
-   <td>Set `oom-action` to "cancel".
+   <td>Set <code>oom-action</code> to "cancel".
    </td>
   </tr>
   <tr>
    <td>If a single SQL statement exceeds the memory quota, use temporary storage.
    </td>
-   <td>Enable `use-tmp-storage`.
+   <td>Enable <code>use-tmp-storage</code>.
    </td>
   </tr>
 </table>
