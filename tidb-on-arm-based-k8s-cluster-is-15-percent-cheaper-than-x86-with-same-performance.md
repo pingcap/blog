@@ -1,11 +1,12 @@
 ---
-title: 'TiDB on an Arm-based Kubernetes Cluster: x86 Performance at 15% Lower Cost'
+title: 'TiDB on Arm-based Kubernetes Cluster Is 15% Cheaper than x86 with the Same Performance'
 author: ['Ron Xing']
 date: 2021-03-10
 summary: Running TiDB on EKS clusters with Graviton processors offers performance comparable to an x86-based cluster, but at a 15% saving. This article discusses the benchmark tests we ran.
 tags: ['Benchmark']
 categories: ['Product']
 image: /images/blog/tidb-on-eks-arm-vs-x86-benchmark.jpg
+aliases: ['/blog/tidb-on-arm-based-k8s-cluster-x86-performance-at-15-percent-lower-cost/']
 --- 
 
 ![TiDB on EKS Arm vs. x86 benchmark](media/tidb-on-eks-arm-vs-x86-benchmark.jpg)
@@ -137,7 +138,7 @@ The following table summarizes all the EC2 instances we used in the EKS clusters
   </tr>
 </table>
 
-### Storage
+### Storage types
 
 The following table summarizes the disk that we used for different components.
 
@@ -844,7 +845,7 @@ To deploy a TiDB cluster on an x86-based EKS cluster, follow the steps in [Deplo
 
 To deploy a TiDB cluster on an Arm-based EKS cluster, follow the steps in [TiDB Deployment on Graviton2-based EKS](https://github.com/xinghua0123/tidb-deployment/blob/main/README.md). The following [temporary Arm images](https://hub.docker.com/u/pingcap2021) are used for benchmarking:
 
-* pingcap2021/tidb-operator:v1.1.14
+* pingcap2021/tidb-operator:v1.1.11
 * pingcap2021/pd:v4.0.10
 * pingcap2021/tikv:v4.0.10
 * pingcap2021/tidb:v4.0.10
@@ -859,7 +860,7 @@ As you review the following benchmark tests, keep in mind that these are prelimi
 To facilitate benchmarking, TiUP has integrated the bench component, which provides two workloads for stress testing: TPC-C and TPC-H. The commands and flags are as follows:
 
 ```shell
-$ tiup bench 
+tiup bench 
 Starting component `bench`: /Users/joshua/.tiup/components/bench/v0.0.1/bench 
 Benchmark database with different workloads
 
@@ -897,7 +898,7 @@ Flags:
 For TPC-C, the TiUP bench component supports the following commands and flags to run the test:
 
 ```shell
-$ tiup bench tpcc
+tiup bench tpcc
 Available Commands:
   check       Check data consistency for the workload
   cleanup     Cleanup data for the workload
@@ -913,7 +914,7 @@ Flags:
       --warehouses int   Number of warehouses (default 10)
 ```
 
-### Workloads
+### TPC-C workloads
 
 This table summarizes the workloads we used, both in terms of the number of warehouses and the data sizes.
 
@@ -954,20 +955,20 @@ This table summarizes the workloads we used, both in terms of the number of ware
 
 For large workloads, we will test after the gp3 storageclass is stably supported on Arm-based EKS to avoid any potential bottlenecks from the disk I/O perspective.
 
-### Test procedures
+### TPC-C test procedures
 
 1. On the benchmark VM (c5.4xlarge), deploy the latest version of TiUP.
 
 2. Create warehouses. You should specify the hostname as the load balancer's DNS name since we deployed the TiDB in EKS and exposed the database service as the LoadBalancer type:
 
     ```shell
-   $ tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com prepare
+   tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com prepare
     ```
 
 3. Run the TPC-C test for different threads. (We used 150, 300, 500, 800, and 1000). Each test runs for 10 minutes.
 
     ```shell
-    $ tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com --threads 150 --time 10m run
+    tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com --threads 150 --time 10m run
     ```
 
 4. Note the tpmC result for each test case. The following is sample output:
@@ -989,12 +990,12 @@ For large workloads, we will test after the gp3 storageclass is stably supported
 5. In preparation for the next workload, clean up the data.
 
     ```shell
-    $ tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com cleanup
+    tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com cleanup
     ```
 
 6. Beginning at step 2, repeat this procedure for different numbers of warehouses.
 
-### Benchmark results
+### TPC-C benchmark results
 
 The following table shows the results for a small workload:
 
@@ -1278,7 +1279,7 @@ The following table shows the results for a medium2 workload:
 ![TPC-C Arm vs. x86 on EKS for a medium2 workload](media/tpc-c-arm-vs-x86-on-eks-for-medium2-workload.jpg)
 <div class="caption-center"> TPC-C Arm vs. x86 on EKS for a medium2 workload </div>
 
-### Price-performance ratio
+### TPC-C price-performance ratio
 
 In the following price-performance table:
 
@@ -1538,14 +1539,14 @@ As the following graphic shows, when we compare the absolute tpmC performance un
 
 We will be using `oltp_read_write.lua` to test the performance for the OLTP workload.
 
-### Workloads
+### Sysbench workloads
 
 * Read (75%) and Write (25%)
 * Table: 16
 * Table size: 10 M rows per table
 * Data size: around 100 GB
 
-### Test procedures
+### Sysbench test procedures
 
 1. Deploy the latest version of sysbench on the benchmark VM (c5.4xlarge).
 
@@ -1576,7 +1577,7 @@ We will be using `oltp_read_write.lua` to test the performance for the OLTP work
 6. Run the sysbench test:
 
     ```shell
-    $ sysbench --config-file=config oltp_read_write --tables=16 --table-size=10000000 run
+    sysbench --config-file=config oltp_read_write --tables=16 --table-size=10000000 run
     ```
 
 7. Note the test results. The following are sample test results:
@@ -1611,7 +1612,7 @@ We will be using `oltp_read_write.lua` to test the performance for the OLTP work
 
 8. Beginning at step 5, repeat this procedure and set the thread to 600 and 900.
 
-### Benchmark results
+### Sysbench benchmark results
 
 Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in sysbench are proportional, we will only compare the TPS in our test.
 
@@ -1743,7 +1744,7 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
 ![Sysbench Arm vs. x86 on EKS](media/sysbench-arm-vs-x86-on-eks.jpg)
 <div class="caption-center"> Sysbench Arm vs. x86 on EKS </div>
 
-### Price-performance ratio
+### Sysbench price-performance ratio
 
 In the following price-performance table:
 
