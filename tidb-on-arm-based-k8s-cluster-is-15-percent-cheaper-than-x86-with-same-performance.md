@@ -914,7 +914,7 @@ Flags:
       --warehouses int   Number of warehouses (default 10)
 ```
 
-### Workloads
+### TPC-C workloads
 
 This table summarizes the workloads we used, both in terms of the number of warehouses and the data sizes.
 
@@ -955,7 +955,7 @@ This table summarizes the workloads we used, both in terms of the number of ware
 
 For large workloads, we will test after the gp3 storageclass is stably supported on Arm-based EKS to avoid any potential bottlenecks from the disk I/O perspective.
 
-### Test procedures
+### TPC-C test procedures
 
 1. On the benchmark VM (c5.4xlarge), deploy the latest version of TiUP.
 
@@ -995,7 +995,7 @@ For large workloads, we will test after the gp3 storageclass is stably supported
 
 6. Beginning at step 2, repeat this procedure for different numbers of warehouses.
 
-### Benchmark results
+### TPC-C benchmark results
 
 The following table shows the results for a small workload:
 
@@ -1279,7 +1279,7 @@ The following table shows the results for a medium2 workload:
 ![TPC-C Arm vs. x86 on EKS for a medium2 workload](media/tpc-c-arm-vs-x86-on-eks-for-medium2-workload.jpg)
 <div class="caption-center"> TPC-C Arm vs. x86 on EKS for a medium2 workload </div>
 
-### Price-performance ratio
+### TPC-C price-performance ratio
 
 In the following price-performance table:
 
@@ -1539,14 +1539,14 @@ As the following graphic shows, when we compare the absolute tpmC performance un
 
 We will be using `oltp_read_write.lua` to test the performance for the OLTP workload.
 
-### Workloads
+### Sysbench workloads
 
 * Read (75%) and Write (25%)
 * Table: 16
 * Table size: 10 M rows per table
 * Data size: around 100 GB
 
-### Test procedures
+### Sysbench test procedures
 
 1. Deploy the latest version of sysbench on the benchmark VM (c5.4xlarge).
 
@@ -1612,7 +1612,7 @@ We will be using `oltp_read_write.lua` to test the performance for the OLTP work
 
 8. Beginning at step 5, repeat this procedure and set the thread to 600 and 900.
 
-### Benchmark results
+### Sysbench benchmark results
 
 Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in sysbench are proportional, we will only compare the TPS in our test.
 
@@ -1744,7 +1744,7 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
 ![Sysbench Arm vs. x86 on EKS](media/sysbench-arm-vs-x86-on-eks.jpg)
 <div class="caption-center"> Sysbench Arm vs. x86 on EKS </div>
 
-### Price-performance ratio
+### Sysbench price-performance ratio
 
 In the following price-performance table:
 
