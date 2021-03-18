@@ -4,7 +4,7 @@ author: ['Shaun Chong', 'Mengnan Gong']
 date: 2021-03-18
 summary: Ninja Van is a leading logistics company in Southeast Asia. They chose TiDB over Vitess and CockroachDB to scale out their databases on Kubernetes.
 image: /images/blog/mysql-alternative-database-on-k8s-ninja-van.jpg
-tags: ['NewSQL', 'Kubernetes', 'Scalability', TiDB Operator']
+tags: ['NewSQL', 'Kubernetes', 'Scalability', 'TiDB Operator']
 customer: Ninja Van
 customerCategory: Internet
 logo: /images/blog/customers/ninja-van-logo.png
