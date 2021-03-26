@@ -48,10 +48,6 @@ As is shown in the architecture diagram, the TiDB Server is between the Load Bal
   
     This layer provides transactional (distributed or standalone) storage. There is an abstraction layer between the KV layer and the SQL layer and it enables the SQL layer to see the unified interface and ignore the differences among the KV storage engines.
   
-    This layer provides transactional (distributed or standalone) storage. There is an abstraction layer between the KV layer and the SQL layer and it enables the SQL layer to see the unified interface and ignore the differences among the KV storage engines.  
-  
-    This layer provides transactional (distributed or standalone) storage. There is an abstraction layer between the KV layer and the SQL layer and it enables the SQL layer to see the unified interface and ignore the differences among the KV storage engines.
-
 ## Overview of the code structure
 
 See the following list for all the packages and their main functions:
