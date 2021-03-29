@@ -1,12 +1,12 @@
 ---
-title: 'TiDB on Arm-based Kubernetes Cluster Is 15% Cheaper than x86 with the Same Performance'
+title: 'TiDB on Arm-based Kubernetes Cluster Achieves Up to 25% Better Price-Performance Ratio than x86'
 author: ['Ron Xing']
 date: 2021-03-10
-summary: Running TiDB on EKS clusters with Graviton processors offers performance comparable to an x86-based cluster, but at a 15% saving. This article discusses the benchmark tests we ran.
+summary: Running TiDB on EKS clusters with Graviton processors offers up to 25% better price-performance ratio compared to an x86-based cluster. This article discusses the benchmark tests we ran.
 tags: ['Benchmark']
 categories: ['Product']
 image: /images/blog/tidb-on-eks-arm-vs-x86-benchmark.jpg
-aliases: ['/blog/tidb-on-arm-based-k8s-cluster-x86-performance-at-15-percent-lower-cost/']
+aliases: ['/blog/tidb-on-arm-based-k8s-cluster-x86-performance-at-15-percent-lower-cost/', '/blog/tidb-on-arm-based-k8s-cluster-is-15-percent-cheaper-than-x86-with-same-performance/']
 --- 
 
 ![TiDB on EKS Arm vs. x86 benchmark](media/tidb-on-eks-arm-vs-x86-benchmark.jpg)
@@ -142,10 +142,6 @@ The following table summarizes all the EC2 instances we used in the EKS clusters
 
 The following table summarizes the disk that we used for different components.
 
-> **Note:**
->
-> We didn't use EBS gp3 because the Arm support of the EBS CSI driver was not stable until the date of benchmarking. We believe that once EBS CSI driver on Arm is officially supported, gp3 provides significantly improved performance at similar costs.
-
 <table>
   <tr>
    <td><strong>Service type</strong>
@@ -164,13 +160,13 @@ The following table summarizes the disk that we used for different components.
   <tr>
    <td>TiKV
    </td>
-   <td>EBS gp2
+   <td>EBS gp3
    </td>
    <td>1,000
    </td>
-   <td>3,000
+   <td>16,000
    </td>
-   <td>250
+   <td>600
    </td>
    <td>3
    </td>
@@ -182,7 +178,7 @@ The following table summarizes the disk that we used for different components.
    </td>
    <td>50
    </td>
-   <td>100
+   <td>150
    </td>
    <td>128
    </td>
@@ -209,7 +205,7 @@ The following table summarizes the disk that we used for different components.
 
 We used one c5.4xlarge EC2 instance as a benchmark node where TPC-C and sysbench are deployed.
 
-Each EKS cluster consists of seven worker nodes and one admin (control plane) node. Seven worker nodes serve as dedicated TiDB, TiKV, and PD nodes.
+Each EKS cluster consists of seven worker nodes and one admin (control plane) node. Seven worker nodes serve as dedicated TiDB, TiKV, and PD nodes. 
 
 <table>
   <tr>
@@ -339,7 +335,7 @@ The TiDB cluster software versions and the sysbench tool version are listed belo
 
 In the following cost examples:
 
-* Cost calculations are based on the on-demand rate for instances in the **US West (Oregon)** and **Asia Pacific (Singapore)** regions in US dollars (USD) per month. 
+* Cost calculations are based on the on-demand rate for instances in the **US West (Oregon)** and **Asia Pacific (Singapore) **regions** **in US dollars (USD) per month. 
 * Monthly calculations are based on 730 hours of usage per month.
 
 ### Storage
@@ -364,16 +360,16 @@ In the following table, the total cost per month includes a daily snapshot.
    </td>
   </tr>
   <tr>
-   <td>gp2
+   <td>gp3
    </td>
    <td>1,000
    </td>
    <td><p style="text-align: right">
-3,000</p>
+16,000</p>
 
    </td>
    <td><p style="text-align: right">
-250 </p>
+600 </p>
 
    </td>
    <td><p style="text-align: right">
@@ -381,11 +377,11 @@ In the following table, the total cost per month includes a daily snapshot.
 
    </td>
    <td><p style="text-align: right">
-456.75</p>
+648.27</p>
 
    </td>
    <td><p style="text-align: right">
-516.75</p>
+746.58</p>
 
    </td>
   </tr>
@@ -748,7 +744,7 @@ AWS US West (Oregon)
 
    </td>
    <td><p style="text-align: right">
-466.50</p>
+740.86</p>
 
    </td>
    <td><p style="text-align: right">
@@ -756,19 +752,19 @@ AWS US West (Oregon)
 
    </td>
    <td><p style="text-align: right">
-2,117.47</p>
+2,391.83</p>
 
    </td>
   </tr>
   <tr>
-   <td>X86
+   <td>x86
    </td>
    <td><p style="text-align: right">
 1,972.46</p>
 
    </td>
    <td><p style="text-align: right">
-466.50</p>
+740.86</p>
 
    </td>
    <td><p style="text-align: right">
@@ -776,7 +772,7 @@ AWS US West (Oregon)
 
    </td>
    <td><p style="text-align: right">
-2,511.96</p>
+2,786.32</p>
 
    </td>
   </tr>
@@ -805,7 +801,7 @@ AWS Asia Pacific (Singapore)
 
    </td>
    <td><p style="text-align: right">
-527.50</p>
+856.71</p>
 
    </td>
    <td><p style="text-align: right">
@@ -813,19 +809,19 @@ AWS Asia Pacific (Singapore)
 
    </td>
    <td><p style="text-align: right">
-2,466.96</p>
+2,796.17</p>
 
    </td>
   </tr>
   <tr>
-   <td>X86
+   <td>x86
    </td>
    <td><p style="text-align: right">
 2,333.08</p>
 
    </td>
    <td><p style="text-align: right">
-527.50</p>
+856.71</p>
 
    </td>
    <td><p style="text-align: right">
@@ -833,7 +829,7 @@ AWS Asia Pacific (Singapore)
 
    </td>
    <td><p style="text-align: right">
-2,933.58</p>
+3,262.79</p>
 
    </td>
   </tr>
@@ -928,32 +924,22 @@ This table summarizes the workloads we used, both in terms of the number of ware
    </td>
   </tr>
   <tr>
-   <td>Small
+   <td>Lagre1
    </td>
-   <td>10
+   <td>5000
    </td>
-   <td>~1 GB
-   </td>
-  </tr>
-  <tr>
-   <td>Medium1
-   </td>
-   <td>100
-   </td>
-   <td>~10 GB
+   <td>~500 GB
    </td>
   </tr>
   <tr>
-   <td>Medium2
+   <td>Large2
    </td>
-   <td>500
+   <td>10000
    </td>
-   <td>~50 GB
+   <td>~1 TB
    </td>
   </tr>
 </table>
-
-For large workloads, we will test after the gp3 storageclass is stably supported on Arm-based EKS to avoid any potential bottlenecks from the disk I/O perspective.
 
 ### TPC-C test procedures
 
@@ -962,42 +948,43 @@ For large workloads, we will test after the gp3 storageclass is stably supported
 2. Create warehouses. You should specify the hostname as the load balancer's DNS name since we deployed the TiDB in EKS and exposed the database service as the LoadBalancer type:
 
     ```shell
-   tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com prepare
+   tiup bench tpcc --warehouses 10000 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com prepare
     ```
 
-3. Run the TPC-C test for different threads. (We used 150, 300, 500, 800, and 1000). Each test runs for 10 minutes.
+3. Run the TPC-C test for different threads. (We used 150, 300, 500, 800, and 1000). Each test runs for 30 minutes.
 
     ```shell
-    tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com --threads 150 --time 10m run
+    tiup bench tpcc --warehouses 10000 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com --threads 150 --time 10m run
     ```
 
 4. Note the tpmC result for each test case. The following is sample output:
 
     ```shell
     Finished
-    [Summary] DELIVERY - Takes(s): 119.5, Count: 2036, TPM: 1022.6, Sum(ms): 642294, Avg(ms): 315, 90th(ms): 512, 99th(ms): 1000, 99.9th(ms): 2000
-    [Summary] DELIVERY_ERR - Takes(s): 119.5, Count: 8, TPM: 4.0, Sum(ms): 1836, Avg(ms): 229, 90th(ms): 512, 99th(ms): 512, 99.9th(ms): 512
-    [Summary] NEW_ORDER - Takes(s): 119.7, Count: 23288, TPM: 11673.2, Sum(ms): 7075203, Avg(ms): 303, 90th(ms): 1000, 99th(ms): 2000, 99.9th(ms): 4000
-    [Summary] NEW_ORDER_ERR - Takes(s): 119.7, Count: 52, TPM: 26.1, Sum(ms): 14735, Avg(ms): 283, 90th(ms): 1000, 99th(ms): 1000, 99.9th(ms): 1000
-    [Summary] ORDER_STATUS - Takes(s): 119.8, Count: 2023, TPM: 1013.5, Sum(ms): 30272, Avg(ms): 14, 90th(ms): 20, 99th(ms): 32, 99.9th(ms): 40
-    [Summary] ORDER_STATUS_ERR - Takes(s): 119.8, Count: 1, TPM: 0.5, Sum(ms): 0, Avg(ms): 0, 90th(ms): 1, 99th(ms): 1, 99.9th(ms): 1
-    [Summary] PAYMENT - Takes(s): 119.7, Count: 22045, TPM: 11046.1, Sum(ms): 10108739, Avg(ms): 458, 90th(ms): 1000, 99th(ms): 2000, 99.9th(ms): 4000
-    [Summary] PAYMENT_ERR - Takes(s): 119.7, Count: 78, TPM: 39.1, Sum(ms): 25008, Avg(ms): 320, 90th(ms): 1000, 99th(ms): 1500, 99.9th(ms): 1500
-    [Summary] STOCK_LEVEL - Takes(s): 119.7, Count: 2124, TPM: 1064.5, Sum(ms): 37020, Avg(ms): 17, 90th(ms): 24, 99th(ms): 40, 99.9th(ms): 48
-    tpmC: 11673.2
+    [Summary] DELIVERY - Takes(s): 1796.7, Count: 88527, TPM: 2956.3, Sum(ms): 242093840, Avg(ms): 2734, 90th(ms): 4000, 99th(ms): 8000, 99.9th(ms): 8000
+    [Summary] DELIVERY_ERR - Takes(s): 1796.7, Count: 133, TPM: 4.4, Sum(ms): 206560, Avg(ms): 1553, 90th(ms): 4000, 99th(ms): 4000, 99.9th(ms): 8000
+    [Summary] NEW_ORDER - Takes(s): 1798.8, Count: 1002915, TPM: 33453.0, Sum(ms): 916326214, Avg(ms): 913, 90th(ms): 1500, 99th(ms): 2000, 99.9th(ms): 4000
+    [Summary] NEW_ORDER_ERR - Takes(s): 1798.8, Count: 319, TPM: 10.6, Sum(ms): 118662, Avg(ms): 371, 90th(ms): 1000, 99th(ms): 1500, 99.9th(ms): 1500
+    [Summary] ORDER_STATUS - Takes(s): 1798.9, Count: 89022, TPM: 2969.3, Sum(ms): 4346202, Avg(ms): 48, 90th(ms): 80, 99th(ms): 160, 99.9th(ms): 512
+    [Summary] ORDER_STATUS_ERR - Takes(s): 1798.9, Count: 1, TPM: 0.0, Sum(ms): 19, Avg(ms): 19, 90th(ms): 20, 99th(ms): 20, 99.9th(ms): 20
+    [Summary] PAYMENT - Takes(s): 1798.9, Count: 956516, TPM: 31903.7, Sum(ms): 628421123, Avg(ms): 656, 90th(ms): 1000, 99th(ms): 1500, 99.9th(ms): 2000
+    [Summary] PAYMENT_ERR - Takes(s): 1798.9, Count: 201, TPM: 6.7, Sum(ms): 46899, Avg(ms): 233, 90th(ms): 512, 99th(ms): 1000, 99.9th(ms): 1000
+    [Summary] STOCK_LEVEL - Takes(s): 1798.9, Count: 89370, TPM: 2980.8, Sum(ms): 6052088, Avg(ms): 67, 90th(ms): 112, 99th(ms): 256, 99.9th(ms): 512
+    [Summary] STOCK_LEVEL_ERR - Takes(s): 1798.9, Count: 3, TPM: 0.1, Sum(ms): 342, Avg(ms): 114, 90th(ms): 192, 99th(ms): 192, 99.9th(ms): 192
+    tpmC: 33453.0
     ```
 
-5. In preparation for the next workload, clean up the data.
+5. To proceed with the next workload, change the number of warehouses.
 
     ```shell
-    tiup bench tpcc --warehouses 10 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com cleanup
+    tiup bench tpcc --warehouses 5000 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com --threads 150 --time 10m run
     ```
 
 6. Beginning at step 2, repeat this procedure for different numbers of warehouses.
 
 ### TPC-C benchmark results
 
-The following table shows the results for a small workload:
+The following table shows the results for a large1 workload:
 
 <table>
   <tr>
@@ -1018,23 +1005,23 @@ The following table shows the results for a small workload:
    <td>x86
    </td>
    <td><p style="text-align: right">
-11,211.4</p>
+30603.8</p>
 
    </td>
    <td><p style="text-align: right">
-12,624.8</p>
+33270.4</p>
 
    </td>
    <td><p style="text-align: right">
-12,111.7</p>
+36813.8</p>
 
    </td>
    <td><p style="text-align: right">
-11,941.0</p>
+36388.6</p>
 
    </td>
    <td><p style="text-align: right">
-11,919.4</p>
+34956.3</p>
 
    </td>
   </tr>
@@ -1042,23 +1029,23 @@ The following table shows the results for a small workload:
    <td>Arm
    </td>
    <td><p style="text-align: right">
-11,186.3</p>
+34114.3</p>
 
    </td>
    <td><p style="text-align: right">
-11,977.6</p>
+36715.2</p>
 
    </td>
    <td><p style="text-align: right">
-12,570.0</p>
+42493.1</p>
 
    </td>
    <td><p style="text-align: right">
-12,465.1</p>
+41275.0</p>
 
    </td>
    <td><p style="text-align: right">
-11,680.0</p>
+41426.9</p>
 
    </td>
   </tr>
@@ -1066,32 +1053,32 @@ The following table shows the results for a small workload:
    <td>(Arm-x86)/x86
    </td>
    <td><p style="text-align: right">
--0.22%</p>
+11.47%</p>
 
    </td>
    <td><p style="text-align: right">
--5.13%</p>
+10.35%</p>
 
    </td>
    <td><p style="text-align: right">
-3.78%</p>
+15.43%</p>
 
    </td>
    <td><p style="text-align: right">
-4.39%</p>
+13.43%</p>
 
    </td>
    <td><p style="text-align: right">
--2.01%</p>
+18.51%</p>
 
    </td>
   </tr>
 </table>
 
-![TPC-C Arm vs. x86 on EKS for a small workload](media/tpc-c-arm-vs-x86-on-eks-for-small-workload.jpg)
-<div class="caption-center"> TPC-C Arm vs. x86 on EKS for a small workload </div>
+![TPC-C Arm vs. x86 on EKS for a large1 workload](media/tpc-c-arm-vs-x86-on-eks-for-large1-workload.jpg)
+<div class="caption-center"> TPC-C Arm vs. x86 on EKS for a large1 workload </div>
 
-The following table shows the results for a medium1 workload:
+The following table shows the results for a large2 workload:
 
 <table>
   <tr>
@@ -1112,23 +1099,23 @@ The following table shows the results for a medium1 workload:
    <td>x86
    </td>
    <td><p style="text-align: right">
-34,407.8</p>
+28624.3</p>
 
    </td>
    <td><p style="text-align: right">
-49,379.5</p>
+33464.3</p>
 
    </td>
    <td><p style="text-align: right">
-53,965.8</p>
+31478.6</p>
 
    </td>
    <td><p style="text-align: right">
-54,459.9</p>
+33892.9</p>
 
    </td>
    <td><p style="text-align: right">
-52,319.8</p>
+31562.9</p>
 
    </td>
   </tr>
@@ -1136,23 +1123,23 @@ The following table shows the results for a medium1 workload:
    <td>Arm
    </td>
    <td><p style="text-align: right">
-32,089.5</p>
+29858.5</p>
 
    </td>
    <td><p style="text-align: right">
-52,382.1</p>
+35259.4</p>
 
    </td>
    <td><p style="text-align: right">
-55,479.4</p>
+34088.0</p>
 
    </td>
    <td><p style="text-align: right">
-53,914.1</p>
+35899.8</p>
 
    </td>
    <td><p style="text-align: right">
-56,058.6</p>
+33453.0</p>
 
    </td>
   </tr>
@@ -1160,126 +1147,32 @@ The following table shows the results for a medium1 workload:
    <td>(Arm-x86)/x86
    </td>
    <td><p style="text-align: right">
--6.74%</p>
+4.31%</p>
 
    </td>
    <td><p style="text-align: right">
-6.08%</p>
+5.36%</p>
 
    </td>
    <td><p style="text-align: right">
-2.80%</p>
+8.29%</p>
 
    </td>
    <td><p style="text-align: right">
--1.00%</p>
+5.92%</p>
 
    </td>
    <td><p style="text-align: right">
-7.14%</p>
+5.99%</p>
 
    </td>
   </tr>
 </table>
 
-![TPC-C Arm vs. x86 on EKS for a medium1 workload](media/tpc-c-arm-vs-x86-on-eks-for-medium1-workload.jpg)
-<div class="caption-center"> TPC-C Arm vs. x86 on EKS for a medium1 workload </div>
+![TPC-C Arm vs. x86 on EKS for a large2 workload](media/tpc-c-arm-vs-x86-on-eks-for-large2-workload.jpg)
+<div class="caption-center"> TPC-C Arm vs. x86 on EKS for a large2 workload </div>
 
-The following table shows the results for a medium2 workload:
-
-<table>
-  <tr>
-   <td><strong>tpmC</strong>
-   </td>
-   <td><strong>150</strong>
-   </td>
-   <td><strong>300</strong>
-   </td>
-   <td><strong>500</strong>
-   </td>
-   <td><strong>800</strong>
-   </td>
-   <td><strong>1,000</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>x86
-   </td>
-   <td><p style="text-align: right">
-37,893.7</p>
-
-   </td>
-   <td><p style="text-align: right">
-57,138.3</p>
-
-   </td>
-   <td><p style="text-align: right">
-61,601.6</p>
-
-   </td>
-   <td><p style="text-align: right">
-65,132.7</p>
-
-   </td>
-   <td><p style="text-align: right">
-63,240.5</p>
-
-   </td>
-  </tr>
-  <tr>
-   <td>Arm
-   </td>
-   <td><p style="text-align: right">
-44,141.2</p>
-
-   </td>
-   <td><p style="text-align: right">
-57,666.4</p>
-
-   </td>
-   <td><p style="text-align: right">
-62,466.7</p>
-
-   </td>
-   <td><p style="text-align: right">
-67,230.7</p>
-
-   </td>
-   <td><p style="text-align: right">
-68,067.7</p>
-
-   </td>
-  </tr>
-  <tr>
-   <td>(Arm-x86)/x86
-   </td>
-   <td><p style="text-align: right">
-16.49%</p>
-
-   </td>
-   <td><p style="text-align: right">
-0.92%</p>
-
-   </td>
-   <td><p style="text-align: right">
-1.40%</p>
-
-   </td>
-   <td><p style="text-align: right">
-3.22%</p>
-
-   </td>
-   <td><p style="text-align: right">
-7.63%</p>
-
-   </td>
-  </tr>
-</table>
-
-![TPC-C Arm vs. x86 on EKS for a medium2 workload](media/tpc-c-arm-vs-x86-on-eks-for-medium2-workload.jpg)
-<div class="caption-center"> TPC-C Arm vs. x86 on EKS for a medium2 workload </div>
-
-### TPC-C price-performance ratio
+### Price-performance ratio
 
 In the following price-performance table:
 
@@ -1315,52 +1208,52 @@ In the following price-performance table:
   <tr>
    <td>x86
    </td>
-   <td>Small
+   <td>Large1
    </td>
    <td><p style="text-align: right">
-12,225</p>
+35,490.93</p>
 
    </td>
    <td><p style="text-align: right">
-150,717.6</p>
+162,208.80</p>
 
    </td>
    <td><p style="text-align: right">
-12.33</p>
+4.57</p>
 
    </td>
    <td><p style="text-align: right">
-176,014.80</p>
+189,804.60</p>
 
    </td>
    <td><p style="text-align: right">
-14.40</p>
+5.35</p>
 
    </td>
   </tr>
   <tr>
    <td>Arm
    </td>
-   <td>Small
+   <td>Large1
    </td>
    <td><p style="text-align: right">
-12,337</p>
+40,161.10</p>
 
    </td>
    <td><p style="text-align: right">
-127,048.2</p>
+138,539.40</p>
 
    </td>
    <td><p style="text-align: right">
-10.30</p>
+3.45</p>
 
    </td>
    <td><p style="text-align: right">
-148,017.60</p>
+161,807.40</p>
 
    </td>
    <td><p style="text-align: right">
-12.00</p>
+4.03</p>
 
    </td>
   </tr>
@@ -1374,65 +1267,61 @@ In the following price-performance table:
    <td>
    </td>
    <td><p style="text-align: right">
--16.5%</p>
+-24.52%</p>
 
    </td>
    <td>
    </td>
    <td><p style="text-align: right">
--16.67%</p>
+-24.66%</p>
 
    </td>
   </tr>
   <tr>
    <td>x86
    </td>
-   <td>Medium1
+   <td>Large2
+   </td>
+   <td>32,945.27
    </td>
    <td><p style="text-align: right">
-52,601</p>
+162,208.80</p>
 
    </td>
    <td><p style="text-align: right">
-150,717.6</p>
+4.92</p>
 
    </td>
    <td><p style="text-align: right">
-2.87</p>
+189,804.60</p>
 
    </td>
    <td><p style="text-align: right">
-176,014.80</p>
-
-   </td>
-   <td><p style="text-align: right">
-3.35</p>
+5.76</p>
 
    </td>
   </tr>
   <tr>
    <td>Arm
    </td>
-   <td>Medium1
+   <td>Large2
+   </td>
+   <td>35,082.40
    </td>
    <td><p style="text-align: right">
-53,925</p>
+138,539.40</p>
 
    </td>
    <td><p style="text-align: right">
-127,048.2</p>
+3.95</p>
 
    </td>
    <td><p style="text-align: right">
-2.35</p>
+161,807.40</p>
 
    </td>
    <td><p style="text-align: right">
-148,017.60</p>
-
-   </td>
-   <td><p style="text-align: right">
-2.74</p>
+4.61</p>
 
    </td>
   </tr>
@@ -1446,91 +1335,19 @@ In the following price-performance table:
    <td>
    </td>
    <td><p style="text-align: right">
--18.11%</p>
+-19.79%</p>
 
    </td>
    <td>
    </td>
    <td><p style="text-align: right">
--17.97%</p>
-
-   </td>
-  </tr>
-  <tr>
-   <td>x86
-   </td>
-   <td>Medium2
-   </td>
-   <td><p style="text-align: right">
-61,290</p>
-
-   </td>
-   <td><p style="text-align: right">
-150,717.6</p>
-
-   </td>
-   <td><p style="text-align: right">
-2.46</p>
-
-   </td>
-   <td><p style="text-align: right">
-176,014.80</p>
-
-   </td>
-   <td><p style="text-align: right">
-2.87</p>
-
-   </td>
-  </tr>
-  <tr>
-   <td>Arm
-   </td>
-   <td>Medium2
-   </td>
-   <td><p style="text-align: right">
-62,454</p>
-
-   </td>
-   <td><p style="text-align: right">
-127,048.2</p>
-
-   </td>
-   <td><p style="text-align: right">
-2.03</p>
-
-   </td>
-   <td><p style="text-align: right">
-148,017.60</p>
-
-   </td>
-   <td><p style="text-align: right">
-2.37</p>
-
-   </td>
-  </tr>
-  <tr>
-   <td>(Arm-x86)/x86
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td><p style="text-align: right">
--17.47%</p>
-
-   </td>
-   <td>
-   </td>
-   <td><p style="text-align: right">
--17.47%</p>
+-19.94%</p>
 
    </td>
   </tr>
 </table>
 
-As the following graphic shows, when we compare the absolute tpmC performance under each workload, the Arm-based system and the x86-based system do not differ that much. After we factor in the hardware cost, the Arm price-performance ratio is at least 15% lower than x86, regardless of the workload.
+As the following graphic shows, when we compare the absolute tpmC performance under each workload, the Arm-based system outperforms the x86-based system by 5%-15%. After we factor in the hardware cost, the Arm price-performance ratio is up to 25% lower than x86.
 
 ![TPC-C price-performance ratio](media/tpc-c-price-performance-ratio.jpg)
 <div class="caption-center"> TPC-C price-performance ratio </div>
@@ -1631,15 +1448,15 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
    <td>x86 P95 latency (ms) 
    </td>
    <td><p style="text-align: right">
-153.02</p>
+155.80</p>
 
    </td>
    <td><p style="text-align: right">
-277.21</p>
+282.25</p>
 
    </td>
    <td><p style="text-align: right">
-397.39</p>
+427.07</p>
 
    </td>
   </tr>
@@ -1647,7 +1464,7 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
    <td>Arm P95 latency (ms)
    </td>
    <td><p style="text-align: right">
-167.44</p>
+147.61</p>
 
    </td>
    <td><p style="text-align: right">
@@ -1655,7 +1472,7 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
 
    </td>
    <td><p style="text-align: right">
-390.30</p>
+383.33</p>
 
    </td>
   </tr>
@@ -1663,15 +1480,15 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
    <td>x86 QPS
    </td>
    <td><p style="text-align: right">
-49,780.45</p>
+48814.94</p>
 
    </td>
    <td><p style="text-align: right">
-53,962.19</p>
+52342.03</p>
 
    </td>
    <td><p style="text-align: right">
-54,929.00</p>
+52413.17</p>
 
    </td>
   </tr>
@@ -1679,15 +1496,15 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
    <td>Arm QPS
    </td>
    <td><p style="text-align: right">
-47,944.82</p>
+51892.58</p>
 
    </td>
    <td><p style="text-align: right">
-54,912.82</p>
+55886.22</p>
 
    </td>
    <td><p style="text-align: right">
-56,397.01</p>
+57465.90</p>
 
    </td>
   </tr>
@@ -1695,15 +1512,15 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
    <td>x86 TPS
    </td>
    <td><p style="text-align: right">
-2,489.02</p>
+2440.75</p>
 
    </td>
    <td><p style="text-align: right">
-2,698.11</p>
+2617.10</p>
 
    </td>
    <td><p style="text-align: right">
-2,746.45</p>
+2620.66</p>
 
    </td>
   </tr>
@@ -1711,15 +1528,15 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
    <td>Arm TPS
    </td>
    <td><p style="text-align: right">
-2,397.24</p>
+2594.63</p>
 
    </td>
    <td><p style="text-align: right">
-2,745.64</p>
+2794.31</p>
 
    </td>
    <td><p style="text-align: right">
-2,819.85</p>
+2873.30</p>
 
    </td>
   </tr>
@@ -1727,15 +1544,15 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
    <td>For TPS: (Arm-x86)/x86
    </td>
    <td><p style="text-align: right">
--3.68%</p>
+6.30%</p>
 
    </td>
    <td><p style="text-align: right">
-1.76%</p>
+6.77%</p>
 
    </td>
    <td><p style="text-align: right">
-2.67%</p>
+9.64%</p>
 
    </td>
   </tr>
@@ -1744,7 +1561,7 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
 ![Sysbench Arm vs. x86 on EKS](media/sysbench-arm-vs-x86-on-eks.jpg)
 <div class="caption-center"> Sysbench Arm vs. x86 on EKS </div>
 
-### Sysbench price-performance ratio
+### Price-performance ratio
 
 In the following price-performance table:
 
@@ -1778,23 +1595,23 @@ In the following price-performance table:
    <td>x86
    </td>
    <td><p style="text-align: right">
-2,644.53</p>
+2,559.50</p>
 
    </td>
    <td><p style="text-align: right">
-150,717.6</p>
+162,208.80</p>
 
    </td>
    <td><p style="text-align: right">
-56.99</p>
+63.38</p>
 
    </td>
    <td><p style="text-align: right">
-176,014.80</p>
+189,804.60</p>
 
    </td>
    <td><p style="text-align: right">
-66.56</p>
+74.16</p>
 
    </td>
   </tr>
@@ -1802,23 +1619,23 @@ In the following price-performance table:
    <td>Arm
    </td>
    <td><p style="text-align: right">
-2,654.21</p>
+2,754.08</p>
 
    </td>
    <td><p style="text-align: right">
-127,048.2</p>
+138,539.40</p>
 
    </td>
    <td><p style="text-align: right">
-47.87</p>
+50.30</p>
 
    </td>
    <td><p style="text-align: right">
-148,017.60</p>
+161,807.40</p>
 
    </td>
    <td><p style="text-align: right">
-55.77</p>
+58.75</p>
 
    </td>
   </tr>
@@ -1844,4 +1661,5 @@ In the following price-performance table:
 
 ## Conclusion
 
-Benchmarking results from both TPC-C and sysbench have shown that the Graviton2 processor has comparable performance to the x86 processor. In some cases, when the concurrency of the workload increases, Graviton2 outperforms x86. After factoring in the hardware cost, the Graviton2 processor has a better price-performance ratio than the x86—on average 15% lower. In other words, the Graviton2 processor can achieve the same performance as the x86 processor with 15% lower cost for running TiDB on EKS for TPC-C and sysbench. The results are only based on the small and medium workloads we tested. In the future, we will include more complex and large workloads with better EBS storage support. 
+Benchmarking results from both TPC-C and sysbench have shown that the Graviton2 processor has better performance compared to the x86 processor. In some cases, Graviton2 outperforms x86 by up to 18%. After factoring in the hardware cost, the Graviton2 processor has a better price-performance ratio than the x86—on average 20% lower. The results are only based on the workloads (100 GB, 500 GB, 1 TB) we tested. In the future, we will include more complex and larger workloads with better EBS storage support. 
+ 
