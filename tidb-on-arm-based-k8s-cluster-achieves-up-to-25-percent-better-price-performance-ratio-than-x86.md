@@ -1172,7 +1172,7 @@ The following table shows the results for a large2 workload:
 ![TPC-C Arm vs. x86 on EKS for a large2 workload](media/tpc-c-arm-vs-x86-on-eks-for-large2-workload.jpg)
 <div class="caption-center"> TPC-C Arm vs. x86 on EKS for a large2 workload </div>
 
-### Price-performance ratio
+### TPC-C price-performance ratio
 
 In the following price-performance table:
 
@@ -1561,7 +1561,7 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
 ![Sysbench Arm vs. x86 on EKS](media/sysbench-arm-vs-x86-on-eks.jpg)
 <div class="caption-center"> Sysbench Arm vs. x86 on EKS </div>
 
-### Price-performance ratio
+### Sysbench price-performance ratio
 
 In the following price-performance table:
 
