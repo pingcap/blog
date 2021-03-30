@@ -3,10 +3,12 @@ title: Choosing the Right Enterprise-Grade Disaster Recovery Solution for the Fi
 author: ['Jun Yu']
 date: 2020-11-03
 summary: Financial companies have stringent requirements for high availability and disaster recovery, which many databases cannot meet. This article describes how TiDB addresses both these issues with a range of options that make it an excellent choice for the industry.
-tags: ['Backup and restore', 'Disaster recovery', 'High availability']
+tags: ['Financial industry', 'Backup and restore', 'Disaster recovery', 'High availability']
 categories: ['Product']
 image: /images/blog/financial-industry-disaster-recovery.png
 ---
+
+**Author:** Jun Yu (solution architect at PingCAP)
 
 ![Financial industry disaster recovery](media/financial-industry-disaster-recovery.png)
 
