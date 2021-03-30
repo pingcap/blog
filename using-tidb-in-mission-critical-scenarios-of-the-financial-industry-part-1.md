@@ -18,7 +18,7 @@ As an open-source, distributed SQL database, **TiDB is widely adopted by banks, 
 
 In this article, I will introduce these critical business scenarios of the financial industry and the pain points they have using their current technology. After that, I'll also show you three TiDB solutions that tackle these problems.
 
-## How financial services use database
+## How financial services use databases
 
 Banks have complicated businesses, from the core banking business (accounting and settlements), to peripheral business (deposits, loans, and currency exchanges), to Internet-oriented financial business.
 
