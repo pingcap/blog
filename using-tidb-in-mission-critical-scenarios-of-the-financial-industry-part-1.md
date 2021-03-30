@@ -53,8 +53,8 @@ MySQL-based distributed databases, or say MySQL sharding solutions, also have li
 * Sharding is intrusive to applications and requires lots of code changes.
 * Because the application model and data model are bundled, the application is less flexible.
 * It has limited capabilities in batch processing, elastic scaling, and online auto-balancing.
-*   It's hard to ensure distributed transactions, strong consistency, and high availability.
-*   It's complicated to implement disaster recovery plans, such as deploying the cluster across three centers in two cities (a working center, a disaster recovery center in the same city, and a disaster recovery center in another city) or using multiple active centers in one city.
+* It's hard to ensure distributed transactions, strong consistency, and high availability.
+* It's complicated to implement disaster recovery plans, such as deploying the cluster across three centers in two cities (a working center, a disaster recovery center in the same city, and a disaster recovery center in another city) or using multiple active centers in one city.
 
 ## TiDB-based core banking solutions
 
