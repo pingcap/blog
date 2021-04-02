@@ -8,6 +8,10 @@ tags: ['Announcement']
 categories: ['Community']
 ---
 
+**Author:** Mia Zhou (Community Operations Manager at PingCAP)
+
+**Transcreator:** [Calvin Weng](https://github.com/dcalvin); [Caitin Chen](https://github.com/CaitinChen)
+
 ![Announcing the TiDB Incubator Program](media/announcing-tidb-incubator-program.jpg)
 
 Today, we are excited to introduce the [TiDB Incubator Program](https://github.com/pingcap/community/tree/master/incubator), a program designed to ensure that new projects in the TiDB ecosystem can obtain resources and help from the community towards their [desired maturity level](https://github.com/pingcap/community/blob/master/incubator/projects-approval-criteria.md).

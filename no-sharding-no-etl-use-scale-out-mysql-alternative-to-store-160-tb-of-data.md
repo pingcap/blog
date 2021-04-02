@@ -17,6 +17,8 @@ logo: /images/blog/customers/58-logo.png
 * Chunlei Liu (Senior DBA at 58.com)
 * Kai Xuan (Former Senior DBA at 58.com)
 
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![No MySQL sharding, No ETL, scale-out MySQL alternative](media/no-mysql-sharding-no-etl-scale-out-mysql-alternative.jpg)
 
 [58.com](https://www.crunchbase.com/organization/58-com) is China's leading online marketplace for classifieds covering various categories, such as jobs, real estate, automotive, financing, used goods, and local services. Merchants and consumers can publish their advertisements on our online platform so that they can connect, share information, and conduct business. By the end of 2018, we had more than 500 million users, and our total revenue in 2019 was nearly US $2.23 billion.

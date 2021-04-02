@@ -14,6 +14,8 @@ image: /images/blog/how-we-use-a-mysql-alternative-to-avoid-sharding-and-provide
 
 **Author:** Xiao Huang, Senior DBA at Meituan, Leader of TiDB User Group in Beijing
 
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![How We Use a MySQL Alternative to Avoid Sharding and Provide Strong Consistency](media/how-we-use-a-mysql-alternative-to-avoid-sharding-and-provide-strong-consistency.jpg)
 
 _This article is based on a talk given by Xiao Huang at a TiDB User Group event._

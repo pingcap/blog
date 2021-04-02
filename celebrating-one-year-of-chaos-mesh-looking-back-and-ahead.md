@@ -8,6 +8,10 @@ categories: ['Community']
 image: /images/blog/celebrating-one-year-of-chaos-mesh.jpg
 ---
 
+**Authors:** [Cwen Yin](https://github.com/cwen0) (Software Engineer at PingCAP), [Calvin Weng](https://github.com/dcalvin)
+
+**Transcreator:** [Mila Wu](https://github.com/milasuperstar)
+
 ![Celebrating one year of Chaos Mesh](media/celebrating-one-year-of-chaos-mesh.jpg)
 
 It's been a year since Chaos Mesh was first open-sourced on GitHub. Chaos Mesh started out as a mere fault injection tool and is now heading towards the goal of building a chaos engineering ecology. Meanwhile, the Chaos Mesh community was also built from scratch and has helped [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) join CNCF as a Sandbox project.

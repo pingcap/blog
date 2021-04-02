@@ -10,6 +10,8 @@ image: /images/blog/jd-cloud-cloud-native-distributed-database-service.jpg
 
 **Author:** JD Cloud database team
 
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![TiDB on JD Cloud: A Cloud-native Distributed Database Service](media/jd-cloud-cloud-native-distributed-database-service.jpg)
 
 In the past year, as most people practiced social distancing, they relied heavily on online services for shopping, remote working, and socializing. Online services surged, and as the requests and data flooded in, the database systems faced severe challenges.

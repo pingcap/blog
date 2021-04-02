@@ -8,6 +8,10 @@ categories: ['Company']
 image: /images/blog/tidb-philosophy-five-principles-that-guide-tidb-and-pingcap.jpg
 ---
 
+**Author:** [Max Liu](https://github.com/ngaut) (CEO at PingCAP)
+
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![Five Principles that Guide TiDB and PingCAP](media/tidb-philosophy-five-principles-that-guide-tidb-and-pingcap.jpg)
 
 _This article is based on a talk given by Max Liu at PingCAP Infra Meetup._

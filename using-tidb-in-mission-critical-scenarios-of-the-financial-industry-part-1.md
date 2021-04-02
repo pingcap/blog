@@ -10,6 +10,8 @@ image: /images/blog/using-tidb-in-mission-critical-scenarios-of-the-financial-in
 
 **Author:** Jun Yu (solution architect at PingCAP)
 
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![Using TiDB in Mission Critical Scenarios of the Financial Industry](media/using-tidb-in-mission-critical-scenarios-of-the-financial-industry-1.jpg)
 
 The financial industry, especially banks, needs a robust system to support their complicated transactions. With the development of technology, **the core banking system has evolved**—**from a traditional centralized system to a distributed, service-oriented architecture (SOA)**.
