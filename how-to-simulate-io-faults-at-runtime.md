@@ -1,12 +1,16 @@
 ---
 title: How to Simulate I/O Faults at Runtime
-author: ['Keao Yang']
+author: [Ke'ao Yang]
 date: 2021-01-08
 summary: This post dives deep into how we implement the IOChaos experiment without using a sidecar.
 tags: ['Chaos Mesh', 'Chaos Engineering', 'Fault injection']
 categories: ['Engineering']
 image: /images/blog/how-to-simulate-io-faults-at-runtime.jpg
 ---
+
+**Author:** Ke'ao Yang (Software Engineer at PingCAP) 
+
+**Transcreator:** [Tom Xiong](https://github.com/TomShawn); **Editor:** Tom Dewan
 
 ![How to simulate I/O faults at runtime](media/how-to-simulate-io-faults-at-runtime.jpg)
 

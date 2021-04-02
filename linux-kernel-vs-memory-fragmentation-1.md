@@ -8,6 +8,10 @@ categories: ['Engineering']
 image: /images/blog/linux-memory-fragmentation-and-defragmentation.png
 ---
 
+**Author:** Wenbo Zhang (Linux Kernel Engineer of the EE team at PingCAP)
+
+**Transcreator:** [Coco Yi](https://github.com/yikeke); **Editor:** Tom Dewan
+
 ![Linux kernel memory fragmentation and defragmentation](media/linux-memory-fragmentation-and-defragmentation.png)
 
 (External) memory fragmentation is a long-standing Linux kernel programming issue. As the system runs, it assigns various tasks to memory pages. Over time, memory gets fragmented, and eventually, a busy system that is up for a long time may have only a few contiguous physical pages.

@@ -33,7 +33,7 @@ _"TiKV is a very stable and performant distributed key-value database. Its intel
 
 -- Fu Chen, TiKV Maintainer, and distributed storage engineer at Yidian Zixun
 
-"We have been using TiKV in production on the ARM platform since December 2019," said Birong Huang, senior engineer at U-Next. "The scalability and high performance of TiKV enabled us through the unpredictable traffic increase through COVID-19. We are constantly impressed by how active the TiKV community is and would love to contribute back! Congratulations on the graduation!"
+"We have been using TiKV in production on the Arm platform since December 2019," said Birong Huang, senior engineer at U-Next. "The scalability and high performance of TiKV enabled us through the unpredictable traffic increase through COVID-19. We are constantly impressed by how active the TiKV community is and would love to contribute back! Congratulations on the graduation!"
 
 As Ed Huang, our CTO at PingCAP put it, "We realized TiKV should be a lot more than just the complementary storage of TiDB back when we created it 5 years ago, so we brought it under the realm and stewardship of CNCF, to enable and empower the next generation of databases by providing a reliable, high quality, practical storage foundation. Graduation from CNCF validates our vision and efforts. We look forward to more innovations and collaborations with the TiKV project. If you feel interested or would like to be a part of this project, see:
 

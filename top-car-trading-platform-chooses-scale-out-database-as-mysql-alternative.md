@@ -14,6 +14,8 @@ logo: /images/blog/customers/chehaoduo-logo.png
 
 **Authors:** Kevin Ge, Jiansheng Han, and Sheyang Wang (TiDB virtual team at Chehaoduo)
 
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![Chehaoduo uses a scale-out MySQL alternative database](media/chehaoduo-mysql-alternative-scale-out-database.png)
 
 [Chehaoduo](https://www.crunchbase.com/organization/guazi-com) is an online trading platform for both new cars and personal used cars. Founded in 2015, it is now one of the largest auto trading platforms in China, valued at $9 billion in its series D round of funding last year.
