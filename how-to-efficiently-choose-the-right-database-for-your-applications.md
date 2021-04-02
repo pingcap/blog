@@ -10,6 +10,8 @@ categories: ['Community']
 
 **Author:** Leitao Guo (Database and middleware manager at iQIYI)
 
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![Database selection criteria](media/how-to-choose-database.jpg)
 
 Finding the right database solution for your application is not easy. At [iQIYI](https://en.wikipedia.org/wiki/IQIYI), one of the largest online video sites in the world, we're experienced in database selection across several fields: Online Transactional Processing (OLTP), Online Analytical Processing (OLAP), Hybrid Transaction/Analytical Processing (HTAP), SQL, and NoSQL. 

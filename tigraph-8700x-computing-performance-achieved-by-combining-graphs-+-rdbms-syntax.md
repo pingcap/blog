@@ -8,6 +8,10 @@ categories: ['Community']
 image: /images/blog/add-graph-mode-to-a-relational-database.jpg
 --- 
 
+**Authors:** [Heng Long](https://github.com/lonng), [Shuang Chen](https://github.com/crazycs520), [Wenjun Huang](https://github.com/wjhuang2016) (Software Engineers at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![How do you store a graph in a relational database?](media/add-graph-mode-to-a-relational-database.jpg)
 
 A graph database is a database that uses graph data structures to store and query data. [Gartner](https://www.gartner.com/en/documents/3899263/an-introduction-to-graph-data-stores-and-applicable-use-) believes that graph data stores can efficiently model, explore, and query data with complex interrelationships across data silos. Graph analytics will grow in the next few years. They also think **it's impossible to use SQL queries to analyze graph data in relational database management systems (RDBMSs)**.

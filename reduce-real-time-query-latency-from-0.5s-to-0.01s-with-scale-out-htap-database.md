@@ -18,6 +18,8 @@ image: /images/blog/mysql-horizontal-scaling-database-autohome.jpg
 * Fan Zhang (R&D at Autohome)
 * Technical Architecture Team of Autohome Technical College
 
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![Migrating from Aurora to a scale-out MySQL alternative database](media/mysql-horizontal-scaling-database-autohome.jpg)
 
 [Autohome](https://www.crunchbase.com/organization/autohome) is the leading online destination for automobile consumers in China. It's one of the most visited auto websites in the world. We provide professionally produced and user-generated content, a comprehensive automobile library, and extensive automobile listing information, covering the entire car purchase and ownership cycle.

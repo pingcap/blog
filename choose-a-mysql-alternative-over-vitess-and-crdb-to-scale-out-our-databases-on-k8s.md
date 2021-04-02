@@ -17,7 +17,7 @@ logo: /images/blog/customers/ninja-van-logo.png
 * Shaun Chong (Co-founder and CTO at Ninja Van)
 * Mengnan Gong (Sr. Software Engineer at Ninja Van)
 
-**Transcreator:** Caitin Chen; **Editor:** Tom Dewan
+**Editors:** Tom Dewan; [Caitin Chen](https://github.com/CaitinChen)
 
 ![MySQL alternative database on Kubernetes](media/mysql-alternative-database-on-k8s-ninja-van.jpg)
 

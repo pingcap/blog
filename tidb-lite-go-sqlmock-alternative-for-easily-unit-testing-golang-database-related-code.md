@@ -8,6 +8,10 @@ categories: ['Community']
 image: /images/blog/golang-database-unit-test-go-sqlmock-alternative.jpg
 --- 
 
+**Author:** [Xiang Wang](https://github.com/WangXiangUSTC) (Software Engineer at PingCAP)
+
+**Editors:** Tom Dewan; [Caitin Chen](https://github.com/CaitinChen)
+
 ![A go-sqlmock alternative for Golang database unit test](media/golang-database-unit-test-go-sqlmock-alternative.jpg)
 
 If your Golang application uses a MySQL-compatible database, such as MySQL, [TiDB](https://docs.pingcap.com/tidb/stable), or Amazon Aurora MySQL, you will have a lot of database-related code to unit test. Typically, developers conduct unit tests using one of the following approaches:
