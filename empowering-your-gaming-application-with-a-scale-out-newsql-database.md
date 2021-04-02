@@ -14,6 +14,8 @@ image: /images/blog/kunlun-empowering-your-gaming-application-with-a-scale-out-n
 
 **Author:** Han Liu (Director of IT operations at Kunlun)
 
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![Empowering Your Gaming Application with a Scale-out NewSQL Database](media/kunlun-empowering-your-gaming-application-with-a-scale-out-newsql-database.jpg)
 
 [Kunlun](https://www.crunchbase.com/organization/kunlun) is an industry leading internet company, focused on gaming and information. Its gaming platform, [GameArk](http://www.gameark.com/), develops and distributes games across the globe, boasting over 100 million monthly active users.

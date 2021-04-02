@@ -9,6 +9,10 @@ image: /images/blog/tidb-on-eks-arm-vs-x86-benchmark.jpg
 aliases: ['/blog/tidb-on-arm-based-k8s-cluster-x86-performance-at-15-percent-lower-cost/', '/blog/tidb-on-arm-based-k8s-cluster-is-15-percent-cheaper-than-x86-with-same-performance/']
 --- 
 
+**Author:** Ron Xing (Customer Support Engineer at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![TiDB on EKS Arm vs. x86 benchmark](media/tidb-on-eks-arm-vs-x86-benchmark.jpg)
 
 ## Benchmark purpose

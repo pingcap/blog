@@ -10,6 +10,8 @@ image: /images/blog/tidb-operator-source-code-reading-1-overview.jpeg
 
 **Author:** [Yiwen Chen](https://github.com/handlerww) (Committer of TiDB Operator)
 
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![Kubernetes Operator for TiDB](media/tidb-operator-source-code-reading-1-overview.jpeg)
 
 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable) is an automatic operation system for TiDB in Kubernetes. As a Kubernetes Operator tailored for [TiDB](https://docs.pingcap.com/tidb/stable), it is widely used by TiDB users to manage their clusters throughout the entire lifecycle, and thus boasts of an active developer community.

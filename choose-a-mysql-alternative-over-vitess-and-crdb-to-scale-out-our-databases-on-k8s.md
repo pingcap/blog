@@ -17,6 +17,8 @@ logo: /images/blog/customers/ninja-van-logo.png
 * Shaun Chong (Co-founder and CTO at Ninja Van)
 * Mengnan Gong (Sr. Software Engineer at Ninja Van)
 
+**Transcreator:** Caitin Chen; **Editor:** Tom Dewan
+
 ![MySQL alternative database on Kubernetes](media/mysql-alternative-database-on-k8s-ninja-van.jpg)
 
 [Ninja Van](https://www.crunchbase.com/organization/ninja-van-2) is Southeast Asia's fastest growing last-mile logistics company. We are now in six countries in Southeast Asia. Our customers include Amazon, Shopee, Lazada, Lineman, GradExpress, Zilingo, Tokopedia, and Sendo.
