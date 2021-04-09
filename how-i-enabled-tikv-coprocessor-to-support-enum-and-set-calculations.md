@@ -59,7 +59,7 @@ In this section, I'll briefly introduce TiKV Coprocessor and then explain why I 
 
 [TiDB server](https://github.com/pingcap/tidb) is a stateless SQL layer that processes users' SQL queries, accesses data in the storage layer, and returns the corresponding results to the application. [TiKV server](https://github.com/pingcap/tikv) is TiDB's underlying storage engine.
 
-![TiDB architecture](media/tidb-architecture.jpg)
+![TiDB architecture](media/tidb-architecture-lfx.jpg)
 <div class="caption-center"> TiDB architecture </div>
 
 We can construct this model to show how TiDB and TiKV interact with each other:
@@ -84,7 +84,7 @@ In the past, **all calculation tasks involving `ENUM` or `SET` could not be push
 
 1. I [enabled TiKV to support MySQL `ENUM`/`SET](https://github.com/tikv/tikv/pull/8849).
 
-2. According to [Request for Comments](https://github.com/tikv/rfcs/pull/57) (RFC) requirements, I implemented `[ChunkedVecEnum](https://github.com/tikv/tikv/pull/8948)` and `[ChunkedVecSet](https://github.com/tikv/tikv/pull/8988)`.
+2. According to [Request for Comments](https://github.com/tikv/rfcs/pull/57) (RFC) requirements, I implemented [`ChunkedVecEnum`](https://github.com/tikv/tikv/pull/8948) and [`ChunkedVecSet`](https://github.com/tikv/tikv/pull/8988).
 
     `ChunkedVec` is a new form of memory data expression introduced in TiKV. It represents a column of data. Compared with the row form, it can more effectively use the CPU cache, and it optimized single data, multiple data (SIMD) computing. See the [RFC](https://github.com/tikv/rfcs/pull/43/files).
 
