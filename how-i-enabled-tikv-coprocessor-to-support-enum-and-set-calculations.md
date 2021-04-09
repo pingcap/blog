@@ -82,7 +82,7 @@ In the past, **all calculation tasks involving `ENUM` or `SET` could not be push
 
 ## How I implemented the project
 
-1. I [enabled TiKV to support MySQL `ENUM`/`SET](https://github.com/tikv/tikv/pull/8849).
+1. I [enabled TiKV to support MySQL `ENUM`/`SET`](https://github.com/tikv/tikv/pull/8849).
 
 2. According to [Request for Comments](https://github.com/tikv/rfcs/pull/57) (RFC) requirements, I implemented [`ChunkedVecEnum`](https://github.com/tikv/tikv/pull/8948) and [`ChunkedVecSet`](https://github.com/tikv/tikv/pull/8988).
 
