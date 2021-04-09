@@ -110,7 +110,7 @@ In the past, **all calculation tasks involving `ENUM` or `SET` could not be push
 
     The most exciting thing is that we can implement these functions without waiting for TiDB to support pushdowns. In order to support `ENUM` and `SET` pushdown, both TiDB and TiKV need to implement it. But my work makes it possible to implement the TiKV side without TiDB's support. 
 
-5. I implemented `ENUM` and `SET` support for each aggregate function, including `[COUNT](https://github.com/tikv/tikv/pull/9143)`, `[FIRST](https://github.com/tikv/tikv/pull/9135)`, `[SUM](https://github.com/tikv/tikv/pull/9148)`, `[AVG](https://github.com/tikv/tikv/pull/9186)`, `[MAX](https://github.com/tikv/tikv/pull/9146)` and `[MIN](https://github.com/tikv/tikv/pull/9184)`. This way, I made TiKV support `ENUM` and `SET`.
+5. I implemented `ENUM` and `SET` support for each aggregate function, including [`COUNT`](https://github.com/tikv/tikv/pull/9143), [`FIRST`](https://github.com/tikv/tikv/pull/9135), [`SUM`](https://github.com/tikv/tikv/pull/9148), [`AVG`](https://github.com/tikv/tikv/pull/9186), [`MAX`](https://github.com/tikv/tikv/pull/9146) and [`MIN`](https://github.com/tikv/tikv/pull/9184). This way, I made TiKV support `ENUM` and `SET`.
 
 ## Lesson learned during community cooperation
 
