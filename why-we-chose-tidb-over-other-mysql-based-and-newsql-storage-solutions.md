@@ -4,7 +4,7 @@ author: ['Wenjie Li']
 date: 2019-12-04
 summary: As business boomed, NetEase Games met bottlenecks in database scalability and data isolation. This post introduces why they chose TiDB over other MySQL-based and NewSQL storage solutions to solve their pain points.
 image: /images/blog/database-scaling-data-isolation.jpg
-tags: ['Scalability', 'MySQL']
+tags: ['Scalability', 'MySQL', 'Sharding', 'HTAP', 'Real-time analytics']
 url: /success-stories/why-we-chose-tidb-over-other-mysql-based-and-newsql-storage-solutions/
 aliases: ['/success-stories/why-we-chose-a-distributed-sql-database-alongside-mysql-to-break-down-data-silos/','/case-studies/why-we-chose-a-distributed-sql-database-alongside-mysql-to-break-down-data-silos/']
 customer: NetEase Games

@@ -3,7 +3,7 @@ title: Blitzscaling the Largest Dockless Bikesharing Platform with TiDB's Help
 author: ['Chengjie Ding', 'Ming Hu']
 date: 2018-04-03
 summary: Mobike has been using the TiDB database in the production environment since early 2017. Now they have deployed TiDB in multiple clusters with close to 100 nodes, handling dozens of TBs of data for different application scenarios. This post will provide a deep dive on why Mobike chose TiDB over MySQL and its sharding solutions by illustrating how TiDB solves their pain points.
-tags: ['Scalability', 'Real-time analytics']
+tags: ['Scalability', 'Real-time analytics', 'HTAP', 'MySQL', 'Sharding']
 url: /success-stories/tidb-in-mobike/
 aliases: ['/blog/Use-Case-TiDB-in-Mobike/']
 customer: Mobike

@@ -4,7 +4,7 @@ author: ['Youzhi Zhu']
 date: 2020-10-20
 summary: As its business quickly grew, ZTO Express found Exadata, Kudu, and HBase couldn't meet their database requirements. To scale out their database and perform multi-dimensional analytics in near real time, they migrated from Oracle Exadata to TiDB.
 image: /images/blog/scale-out-htap-database-zto.jpg
-tags: ['Scalability', 'HTAP', 'Real-time analytics']
+tags: ['Scalability', 'HTAP', 'Real-time analytics', 'Sharding']
 customer: ZTO Express
 customerCategory: Internet
 logo: /images/blog/customers/zto-logo.png

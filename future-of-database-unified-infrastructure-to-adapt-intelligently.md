@@ -4,11 +4,11 @@ author: ['Ed Huang']
 date: 2020-04-08
 summary: Today is PingCAP's 5-year birthday. In this post, Ed Huang, PingCAP's CTO, discusses about what he thinks the future holds for databases. The future of the database is about unification, adaptiveness, and intelligence.
 tags: ['Announcement']
-categories: ['Company']
-image: /images/blog/future-of-atabase.png
+categories: ['Engineering']
+image: /images/blog/future-of-database.png
 ---
 
-![Future of Database](media/future-of-atabase.png)
+![Future of Database](media/future-of-database.png)
 
 Today is [PingCAP](https://pingcap.com/)'s 5-year birthday. The 5th anniversary seems to be the perfect time to look back and look forward.
 
