@@ -10,8 +10,8 @@ image: /images/blog/empower-your-business-with-big-data-and-real-time-analytics-
 
 **Authors:**
 
-* Yueyue Zhou (Product expert at PingCAP)
-* Dan Su (Product expert at PingCAP)
+* Yueyue Zhou (Product Expert at PingCAP)
+* Dan Su (Product Expert at PingCAP)
 
 **Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
 
