@@ -8,6 +8,10 @@ categories: ['Company']
 image: /images/blog/future-of-atabase.png
 ---
 
+**Author:** [Ed Huang](https://github.com/c4pt0r) (CTO at PingCAP) 
+
+**Transcreator:** [Queeny Jin](https://github.com/queenypingcap)
+
 ![Future of Database](media/future-of-atabase.png)
 
 Today is [PingCAP](https://pingcap.com/)'s 5-year birthday. The 5th anniversary seems to be the perfect time to look back and look forward.
