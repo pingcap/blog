@@ -10,7 +10,7 @@ image: /images/blog/golang-database-unit-test-go-sqlmock-alternative.jpg
 
 **Author:** [Xiang Wang](https://github.com/WangXiangUSTC) (Software Engineer at PingCAP)
 
-**Editors:** Tom Dewan; [Caitin Chen](https://github.com/CaitinChen)
+**Editors:** Tom Dewan, [Caitin Chen](https://github.com/CaitinChen)
 
 ![A go-sqlmock alternative for Golang database unit test](media/golang-database-unit-test-go-sqlmock-alternative.jpg)
 
