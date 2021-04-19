@@ -13,7 +13,7 @@ image: /images/blog/gpu-vs-cpu-performance.jpg
 * [Ruoxi Sun](https://github.com/zanmato1984) (Tech Lead of Analytical Computing Team at PingCAP)
 * [Fei Xu](https://github.com/windtalker) (Software Engineer at PingCAP)
 
-**Editors:** Tom Dewan; [Caitin Chen](https://github.com/CaitinChen)
+**Editors:** Tom Dewan, [Caitin Chen](https://github.com/CaitinChen)
 
 ![GPU vs. CPU performance](media/gpu-vs-cpu-performance.jpg)
 
