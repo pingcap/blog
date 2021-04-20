@@ -8,8 +8,9 @@ tags: ['NewSQL', 'Kubernetes', 'Scalability', 'TiDB Operator']
 customer: Ninja Van
 customerCategory: Internet
 logo: /images/blog/customers/ninja-van-logo.png
+aliases: ['/blog/choose-a-mysql-alternative-over-vitess-and-crdb-to-scale-out-our-databases-on-k8s/']
 ---
-
+ 
 **Industry:** Logistics
 
 **Authors:**
