@@ -15,6 +15,8 @@ logo: /images/blog/customers/paypay.png
 
 **Author:** Munenori Hirakawa (Senior Manager, PayPay Product Tech Division)
 
+**Transcreator:** Tom Dewan; **Editor:** [Caitin Chen](https://github.com/CaitinChen)
+
 ![Aurora alternative: a horizontal scaling database](media/aurora-alternative-horizontal-scaling-database.jpg)
 
 *This article is based on a talk given by Munenori Hirakawa at [TiDB DevCon 2020](https://pingcap.com/community/devcon2020/). See the [video](https://www.youtube.com/watch?v=vCXrEZ-gf_M) and [slides](https://www.slideshare.net/PingCAP-TiDB/tidb-at-paypay).*

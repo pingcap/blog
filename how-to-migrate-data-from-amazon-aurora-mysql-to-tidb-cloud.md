@@ -8,13 +8,17 @@ categories: ['Product']
 image: /images/blog/aurora-alternative-tidb-cloud.jpg
 ---
 
-![Aurora alternative: TiDB Cloud](media/aurora-alternative-tidb-cloud.jpg) 
+**Author:** [Yiwen Chen](https://github.com/handlerww)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
+![Aurora alternative: TiDB Cloud](media/aurora-alternative-tidb-cloud.jpg)
 
 [TiDB](https://docs.pingcap.com/tidb/stable/overview) is an open-source, distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads. TiDB Cloud is a fully-managed TiDB service delivered by [PingCAP](https://pingcap.com/) and is the easiest, most economical, and most resilient way to unlock the full power of TiDB in the cloud.
 
 You can smoothly migrate data to TiDB from any MySQL-compatible database. In this article, we’ll show you how to migrate your data from Amazon Aurora MySQL to [TiDB Cloud](https://pingcap.com/products/tidbcloud) using the open-source [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) and [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) tools. Dumpling _exports_ data from any MySQL-compatible database, and TiDB Lightning _imports_ it into TiDB.
 
-To migrate data, do the following: 
+To migrate data, do the following:
 
 1. Make sure your environment meets the [migration prerequisites](#migration-prerequisites).
 2. [Prepare your working environment](#prepare-the-working-environment-for-data-migration).
@@ -50,7 +54,7 @@ You can learn more about [Character Sets and Collations](https://docs.pingcap.co
 
 ### Stop writing data while exporting data to the Aurora database
 
-To keep data consistency, you must stop writing data to Aurora. This is because Amazon Aurora does not support `GLOBAL READ LOCK`. The easiest way is to avoid writing data while you are exporting it. For more details, see this [Amazon support article](https://aws.amazon.com/premiumsupport/knowledge-center/mysqldump-error-rds-mysql-mariadb/?nc1=h_ls). 
+To keep data consistency, you must stop writing data to Aurora. This is because Amazon Aurora does not support `GLOBAL READ LOCK`. The easiest way is to avoid writing data while you are exporting it. For more details, see this [Amazon support article](https://aws.amazon.com/premiumsupport/knowledge-center/mysqldump-error-rds-mysql-mariadb/?nc1=h_ls).
 
 ### TiDB Cloud cluster requirements
 
@@ -81,7 +85,7 @@ From the same VPC as your Amazon Aurora instance, launch the EC2 instance. You w
 In this section, we’ll prepare an EC2 instance to run the migration tools. You need to pay attention to two issues:
 
 * The instance should be in the same VPC as your Amazon Aurora service. This helps you smoothly connect to Amazon Aurora.
-* Ensure that the free disk space is larger than the size of your data. 
+* Ensure that the free disk space is larger than the size of your data.
 
 If you are familiar with these operations, you can skip this section, and continue with "[Check the connectivity with the Amazon Aurora database](#check-the-connectivity-with-the-amazon-aurora-database)."
 
@@ -108,8 +112,8 @@ Based on the [Amazon User Guide for Linux Instances](https://docs.aws.amazon.com
 
     ![Specify the total size of your storage](media/specify-total-storage-size.jpg)
 
-6. Click **Review and Launch**. 
-7. On the **Review** page, click **Launch**. 
+6. Click **Review and Launch**.
+7. On the **Review** page, click **Launch**.
 8. On the **Select an existing key pair or create a new key pair** dialog box, choose **Create a new key pair **or** Choose an existing key pair** and click **Launch Instances**. If you choose **Create a new key pair**, click **Download Key Pair** and make sure that the key is accessible.
 
 For more details on how to launch an EC2 instance, see [AWS EC2 Get Started Guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html).
@@ -130,7 +134,7 @@ A MySQL terminal is displayed. In the output, the welcome message indicates that
 
 ```shell
 [ec2-user@ip-172-30-1-86 ~]$ mysql -h database-1-instance-1.cbrlnigpiufa.us-west-2.rds.amazonaws.com -u admin -p --ssl-mode=DISABLED
-Enter password: 
+Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 24
 Server version: 5.6.10 MySQL Community Server (GPL)
@@ -143,12 +147,12 @@ owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-mysql> 
+mysql>
 ```
 
 ### Check the database collation settings
 
-For your convenience, we need to verify the collation settings of the database. You can execute these commands in the MySQL terminal to your Amazon Aurora instance. 
+For your convenience, we need to verify the collation settings of the database. You can execute these commands in the MySQL terminal to your Amazon Aurora instance.
 
 {{< copyable "sql" >}}
 
@@ -156,7 +160,7 @@ For your convenience, we need to verify the collation settings of the database. 
 select * from ((select table_schema, table_name, column_name, collation_name from information_schema.columns where character_set_name is not null) union all (select table_schema, table_name, null, table_collation from information_schema.tables)) x where table_schema not in ('performance_schema', 'mysql', 'information_schema') and collation_name not in ('utf8_bin', 'utf8mb4_bin', 'ascii_bin', 'latin1_bin', 'binary', 'utf8_general_ci', 'utf8mb4_general_ci');
 ```
 
-The result shows an `Empty set`, which means the database is suitable to migrate to TiDB. 
+The result shows an `Empty set`, which means the database is suitable to migrate to TiDB.
 
 ```shell
 Empty set (0.04 sec)
@@ -166,7 +170,7 @@ If TiDB doesn’t support the collations that you’re using, convert your colla
 
 ### Set up VPC peering for network access to TiDB Cloud
 
-For security purposes, you need to add VPC peering to connect your network and TiDB Cloud. If you have not done this, see [Set Up VPC Peering Connections](https://docs.pingcap.com/tidbcloud/beta/set-up-vpc-peering-connections). 
+For security purposes, you need to add VPC peering to connect your network and TiDB Cloud. If you have not done this, see [Set Up VPC Peering Connections](https://docs.pingcap.com/tidbcloud/beta/set-up-vpc-peering-connections).
 
 When you complete the steps above, VPC peering is activated. You can connect to the TiDB cluster with the information below.
 
@@ -186,7 +190,7 @@ After you connect successfully, you can start the migration process.
 
 The TiDB Toolkit package includes Dumpling and TiDB Lighting.
 
-1. Download the TiDB Toolkit using the following commands. 
+1. Download the TiDB Toolkit using the following commands.
 
     {{< copyable "shell-regular" >}}
 
@@ -250,6 +254,6 @@ When the `tidb-lightning` process completes, The TiDB cluster on TiDB Cloud will
 
 ## Conclusion
 
-In this article, we showed how to do a full-data migration from Amazon Aurora to TiDB Cloud using Dumpling and TiDB Lightning. After the migration, the data and structure is the same on both TiDB Cloud and in the Aurora source cluster. Full-data migration is especially useful if you want to verify TiDB Cloud’s features using a copy of your Amazon Aurora data. We sincerely hope you found this article helpful. 
+In this article, we showed how to do a full-data migration from Amazon Aurora to TiDB Cloud using Dumpling and TiDB Lightning. After the migration, the data and structure is the same on both TiDB Cloud and in the Aurora source cluster. Full-data migration is especially useful if you want to verify TiDB Cloud’s features using a copy of your Amazon Aurora data. We sincerely hope you found this article helpful.
 
 And stay tuned. In a future article, we’ll be discussing _incremental replication_.

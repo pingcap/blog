@@ -11,6 +11,8 @@ image: /images/blog/tidb-on-kubesphere-cloud-native-database.jpg
 
 **Author:** Will Zhang (SRE at iSoftStone)
 
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![TiDB on Kubesphere](media/tidb-on-kubesphere-cloud-native-database.jpg)
 
 [Kubernetes](https://kubernetes.io/) is the de facto standard for building application services that span multiple containers, so a scalable, reliable database that can run on Kubernetes is essential. [TiDB](https://docs.pingcap.com/tidb/dev/overview), a cloud-native, open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads, meets that need admirably. Its architecture is suitable for Kubernetes, and it is MySQL compatible. TiDB also features horizontal scalability, strong consistency, and high availability.

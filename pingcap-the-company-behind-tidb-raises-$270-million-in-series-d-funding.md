@@ -10,9 +10,13 @@ aliases: ['pingcap-the-company-behind-tidb-raises-270-million-in-series-d-fundin
 press_release: true
 ---
 
+**Author:** PingCAP
+
+**Editors:** [Calvin Weng](https://github.com/dcalvin), Tom Dewan
+
 ![PingCAP raises $270 million in series D funding](media/pingcap-raises-$270-million-in-series-d-funding.jpg)
 
-With great pleasure, we are announcing that we have raised $270 million in Series D funding. This round is jointly led by GGV Capital, Access Technology Ventures, Anatole Investment, Jeneration Capital, and 5Y Capital (formerly Morningside Venture Capital). Coatue, Bertelsmann Asia Investment Fund (BAI), FutureX Capital, Kunlun Capital, Trustbridge Partners, and existing investors Matrix Partners China and Yunqi Partners also participated in this round. We are thrilled and humbled to have these prestigious and visionary investors join us as we strive to build the database of the future. 
+With great pleasure, we are announcing that we have raised $270 million in Series D funding. This round is jointly led by GGV Capital, Access Technology Ventures, Anatole Investment, Jeneration Capital, and 5Y Capital (formerly Morningside Venture Capital). Coatue, Bertelsmann Asia Investment Fund (BAI), FutureX Capital, Kunlun Capital, Trustbridge Partners, and existing investors Matrix Partners China and Yunqi Partners also participated in this round. We are thrilled and humbled to have these prestigious and visionary investors join us as we strive to build the database of the future.
 
 PingCAP began five years ago when our cofounders, sick and tired of the way databases were managed, scaled, and maintained, decided to build one themselves. Since day one, our mission has been to help every business unleash the power of data. With the help of a first-class team and hundreds of contributors from around the globe, we live our mission by delivering TiDB, an open-source distributed NewSQL Hybrid Transactional/Analytical Processing (HTAP) database. Over the last five years, more than 1,500 companies around the world have adopted TiDB, including Square, PayPay, BookMyShow, Dailymotion, Bank of China, JD.com, and Shopee. These companies and many others use TiDB for tasks like solving the scalability bottlenecks for the online transactional businesses, integrating TiDB as the real-time analytics platform, or saving infrastructure and maintenance cost (by migrating to [TiDB Cloud](https://pingcap.com/products/tidbcloud/)).
 

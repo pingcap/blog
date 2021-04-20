@@ -15,6 +15,8 @@ logo: /images/blog/customers/palfish-logo.png
 
 **Author:** Xianlin Chen (Head of Technology Hub at PalFish)
 
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![PalFish Embracing NewSQL](media/palfish-embracing-newsql-tidb.png)
 
 [PalFish](https://www.crunchbase.com/organization/palfish) is a fast-growing online education platform that focuses on English learning. It offers tailored English speaking experience to English as a Second Language (ESL) students. As of October 2020, PalFish has over 40 million users, of which more than 2 million are paid users.

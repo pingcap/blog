@@ -9,6 +9,10 @@ image: /images/blog/data-migration-2.0.jpg
 press_release: true
 ---
 
+**Author:** PingCAP
+
+**Editor:** [Caitin Chen](https://github.com/CaitinChen), Tom Dewan
+
 ![Data migration, database migration tool](media/data-migration-2.0.jpg)
 
 Our digital society produces vast amounts of data, and traditional databases such as MySQL face performance and capacity bottlenecks. One solution, database sharding, is complex and brings high operation and maintenance costs.
@@ -62,7 +66,7 @@ Besides DM 2.0's new features, it is also easier to use. You can use TiUP to:
 * Import and upgrade DM 1.0 to DM 2.0
 * Install DM 2.0 in a new environment
 
-Beside DM-workers register automatically, you don't have to restart DM-masters, and your applications stay up through the entire process. 
+Beside DM-workers register automatically, you don't have to restart DM-masters, and your applications stay up through the entire process.
 
 #### Improved exception handling and task automation
 
@@ -81,14 +85,14 @@ In addition, DM 2.0 automatically processes the corresponding `sql_mode` in the 
 
 [WeBank](https://en.wikipedia.org/wiki/WeBank_(China)) is China's first privately-owned bank. It is backed by reputable companies such as Tencent. It's devoted to offering a variety of convenient and high-quality financial services to underbanked individuals as well as small- and medium-sized enterprises.
 
-WeBank uses TiDB with several applications in which batch tasks and flow log archiving are highly dependent on DM's table merging features. 
+WeBank uses TiDB with several applications in which batch tasks and flow log archiving are highly dependent on DM's table merging features.
 
-* In the batch task processing scenario, WeBank uses DM to merge shards with the same schema of MySQL upstream into TiDB downstream. TiDB's horizontal scalability makes batch processing more efficient. 
+* In the batch task processing scenario, WeBank uses DM to merge shards with the same schema of MySQL upstream into TiDB downstream. TiDB's horizontal scalability makes batch processing more efficient.
 * In the flow log archiving scenario, WeBank uses DM to merge the shards with the same schema in the same manner and uses TiDB's horizontal scalability to achieve theoretically unlimited storage capacity.
 
-When WeBank used DM 1.0, they encountered these problems: 
+When WeBank used DM 1.0, they encountered these problems:
 
-* When a DM-worker failed, data migration was suspended. To resume the task, engineers needed to manually intervene. The operation was cumbersome and increased data migration latency. 
+* When a DM-worker failed, data migration was suspended. To resume the task, engineers needed to manually intervene. The operation was cumbersome and increased data migration latency.
 * In financial scenarios, to update table schemas, the A/B change method is usually adopted. That is, if there are multiple upstream MySQL instances, and their shards have the same schema, users perform A/B changes on only one of the instances. After a few days of observation, if no abnormality occurs, users will update the table schema for the remaining shards. In DM 1.0, this blocks data migration tasks and increases data migration latency.
 
 To solve these issues, the WeBank database team conducted in-depth discussions with [PingCAP](https://pingcap.com/) and developed and optimized a series of features. Now, DM 2.0 supports enterprise-level features such as high availability for components and support for A/B changes, which meet the data migration requirements of financial scenarios. In addition, DM 2.0 has several optimizations to improve product usability, such as:
@@ -97,11 +101,11 @@ To solve these issues, the WeBank database team conducted in-depth discussions w
 * Simplified upstream source configurations for DM-workers
 * Clearer and easier-to-read error messages
 
-### Li Auto 
+### Li Auto
 
 [Li Auto](https://en.wikipedia.org/wiki/Li_Auto) is a Chinese electric vehicle manufacturer, backed by China's consumer service delivery giants [Meituan](https://en.wikipedia.org/wiki/Meituan) and [Bytedance](https://en.wikipedia.org/wiki/Bytedance). In October 2020, it announced that it [delivered 20,000 Li ONE SUVs in only 10 months](http://autonews.gasgoo.com/new_energy/70017646.html)—a record for the fastest delivery among China's vehicle startups.
 
-Li Auto's more than 400 applications are built on microservices, covering the Internet of vehicles, order stores, vehicle production, after-sales, and logistics. In the microservice architecture, each individual microservice corresponds to an independent MySQL database (based on a public cloud RDS). 
+Li Auto's more than 400 applications are built on microservices, covering the Internet of vehicles, order stores, vehicle production, after-sales, and logistics. In the microservice architecture, each individual microservice corresponds to an independent MySQL database (based on a public cloud RDS).
 
 Li Auto uses DM to replicate data from multiple MySQL databases to a TiDB cluster in real time to meet the following application requirements:
 

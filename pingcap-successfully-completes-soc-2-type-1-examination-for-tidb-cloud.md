@@ -10,6 +10,10 @@ aliases: ['/pingcap-successfully-completes-type-1-soc-2-examination-for-tidb-clo
 press_release: true
 ---
 
+**Author:** PingCAP
+
+**Editors:** [Calvin Weng](https://github.com/dcalvin), [Queeny Jin](https://github.com/queenypingcap)
+
 ![Cloud-native, HTAP TiDB Cloud SOC 2](media/cloud-native-htap-tidb-cloud-soc-2.jpg)
 
 San Mateo, CA - August 28, 2020 - [PingCAP](https://pingcap.com/), provider of the cloud-native hybrid transactional and analytical processing (HTAP) [TiDB](https://docs.pingcap.com/tidb/stable/overview) database, announced today that it has successfully completed a Type 1 System and Organization Controls (SOC) 2 examination for its flagship managed service, [TiDB Cloud](https://docs.pingcap.com/tidbcloud/beta/tidb-cloud-intro). The examination, conducted by Schellman & Company, LLC, found that PingCAP has suitably designed controls to meet the SOC 2 criteria for the Security, Availability and Confidentiality Trust Services Categories as of July 31, 2020.

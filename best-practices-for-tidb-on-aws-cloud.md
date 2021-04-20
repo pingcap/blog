@@ -9,6 +9,10 @@ aliases: ['/blog/run-database-on-aws-with-better-performance-and-lower-cost/']
 image: /images/blog/tidb-on-aws-cloud-best-practices-banner.jpg
 ---
 
+**Author:** [Xinye Tao](https://github.com/tabokie)
+
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![TiDB on AWS Cloud Best Practices](media/tidb-on-aws-cloud-best-practices-banner.jpg)
 
 Amazon Web Services (AWS) is one of the most popular providers of public cloud services. Running databases on AWS is an essential part of using its cloud services. But how can we best leverage the cloud resources and have the database run at its best performance?

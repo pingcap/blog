@@ -8,6 +8,10 @@ categories: ['Company']
 image: /images/blog/pingcap-papers-htap-database-vldb.jpg
 ---
 
+**Author:** PingCAP
+
+**Editor:** [Calvin Weng](https://github.com/dcalvin)
+
 ![PingCAP shares papers about an HTAP database at VLDB](media/pingcap-papers-htap-database-vldb.jpg)
 
 [The 46th International Conference on Very Large Databases (VLDB)](https://vldb2020.org/) will be broadcast online from August 31st to September 4th. VLDB is a premier annual international forum for data management and database researchers, vendors, practitioners, application developers, and users. VLDB2020 will feature research talks, tutorials, demonstrations, and workshops. PingCAP is honored and proud to attend this conference, with two selected papers to be shared with you.

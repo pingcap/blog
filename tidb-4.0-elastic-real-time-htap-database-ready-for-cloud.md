@@ -8,7 +8,9 @@ tags: ['Community news', 'DevCon', 'HTAP', 'Cloud-native', 'Chaos Mesh']
 categories: ['Product']
 ---
 
-Author: Max Liu (CEO at PingCAP)
+**Author:** Max Liu (CEO at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
 
 ![An Elastic, Real-Time HTAP Database Ready for the Cloud](media/cloud-native-distributed-sql-database.jpg)
 

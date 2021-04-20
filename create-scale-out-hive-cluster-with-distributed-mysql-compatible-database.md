@@ -8,19 +8,21 @@ tags: ['Scalability', 'How to']
 categories: ['Engineering']
 ---
 
-Author: Mengyu Hu (Platform Engineer at Zhihu)
+**Author:** Mengyu Hu (Platform Engineer at Zhihu)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
 
 ![Horizontal scaling for Hive](media/horizontal-scaling-hive.jpg)
 
-Hive Metastore supports various backend databases, among which MySQL is the most commonly used. However, in real-world scenarios, MySQL's shortcoming is obvious: as metadata grows in Hive, MySQL is limited by its standalone performance and can't deliver good performance. When individual MySQL databases form a cluster, the complexity drastically increases. In scenarios with huge amounts of metadata (for example, a single table has more than 10 million or even 100 million rows of data), MySQL is not a good choice. 
+Hive Metastore supports various backend databases, among which MySQL is the most commonly used. However, in real-world scenarios, MySQL's shortcoming is obvious: as metadata grows in Hive, MySQL is limited by its standalone performance and can't deliver good performance. When individual MySQL databases form a cluster, the complexity drastically increases. In scenarios with huge amounts of metadata (for example, a single table has more than 10 million or even 100 million rows of data), MySQL is not a good choice.
 
-We had this problem, and our [migration story](https://en.pingcap.com/case-studies/horizontally-scaling-hive-metastore-database-by-migrating-from-mysql-to-tidb) proves that [TiDB](https://docs.pingcap.com/tidb/v4.0), an open-source distributed [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) database, is a perfect solution in these scenarios. 
+We had this problem, and our [migration story](https://en.pingcap.com/case-studies/horizontally-scaling-hive-metastore-database-by-migrating-from-mysql-to-tidb) proves that [TiDB](https://docs.pingcap.com/tidb/v4.0), an open-source distributed [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) database, is a perfect solution in these scenarios.
 
 In this post, I'll share with you how to create a Hive cluster with TiDB as the Metastore database at the backend so that you can use TiDB to horizontally scale Hive Metastore without worrying about database capacity.
 
 ## Why use TiDB in Hive as the Metastore database?
 
-[TiDB](https://github.com/pingcap/tidb) is a distributed SQL database built by [PingCAP](https://pingcap.com/) and its open-source community. **It is MySQL compatible and features horizontal scalability, strong consistency, and high availability.** It's a one-stop solution for both Online Transactional Processing (OLTP) and Online Analytical Processing (OLAP) workloads. 
+[TiDB](https://github.com/pingcap/tidb) is a distributed SQL database built by [PingCAP](https://pingcap.com/) and its open-source community. **It is MySQL compatible and features horizontal scalability, strong consistency, and high availability.** It's a one-stop solution for both Online Transactional Processing (OLTP) and Online Analytical Processing (OLAP) workloads.
 
 In scenarios with enormous amounts of data, due to TiDB's distributed architecture, query performance is not limited to the capability of a single machine. When the data volume reaches the bottleneck, you can add nodes to improve TiDB's storage capacity.
 
@@ -44,7 +46,7 @@ Creating a Hive cluster with TiDB involves the following steps:
 
 <table>
   <tr>
-   <td><strong>Component</strong> 
+   <td><strong>Component</strong>
    </td>
    <td><strong>Version</strong>
    </td>
@@ -52,7 +54,7 @@ Creating a Hive cluster with TiDB involves the following steps:
   <tr>
    <td>Hive
    </td>
-   <td> 3.1.2 
+   <td> 3.1.2
    </td>
   </tr>
   <tr>
@@ -124,13 +126,13 @@ There are no mandatory requirements for the component versions, as long as the c
         <description>TiDB address</description>
       </property>
 
-      <property>  
+      <property>
         <name>javax.jdo.option.ConnectionUserName</name>
         <value>hive</value>
         <description>TiDB username</description>
       </property>
 
-      <property>  
+      <property>
         <name>javax.jdo.option.ConnectionPassword</name>
         <value>123456</value>
         <description>TiDB password</description>
@@ -168,7 +170,7 @@ There are no mandatory requirements for the component versions, as long as the c
 
 #### Step 3: Initialize metadata
 
-You're performing this step to create a table for Hive metadata. The SQL script is in `${HIVE_HOME}/scripts/metastore/upgrade/mysql`. 
+You're performing this step to create a table for Hive metadata. The SQL script is in `${HIVE_HOME}/scripts/metastore/upgrade/mysql`.
 
 To initialize metadata, run the following command.
 
@@ -196,6 +198,6 @@ When `schemaTool completed` appears in the last line, it means the metadata is s
 
 If you use MySQL as the Hive Metastore database, as data grows in Hive, MySQL might become the bottleneck for the entire system. In this case, TiDB is a good solution, because it **is compatible with the MySQL protocol and has excellent horizontal scalability.** Due to its distributed architecture, **TiDB far outperforms MySQL on large data sets and large numbers of concurrent queries**.
 
-This post showed how to deploy a Hive cluster with TiDB as the Metastore database. We hope TiDB can help you horizontally scale your Hive Metastore to meet your growing business needs. 
+This post showed how to deploy a Hive cluster with TiDB as the Metastore database. We hope TiDB can help you horizontally scale your Hive Metastore to meet your growing business needs.
 
 In addition, if you're interested in our MySQL-to-TiDB migration story, check out [this post](https://en.pingcap.com/case-studies/horizontally-scaling-hive-metastore-database-by-migrating-from-mysql-to-tidb).

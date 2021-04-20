@@ -8,6 +8,13 @@ tags: ['Chaos Mesh', 'Chaos Engineering']
 categories: ['Engineering']
 ---
 
+**Authors:**
+
+- [Ben Ye](https://github.com/yeya24) (Chaos Mesh maintainer)
+- [Cwen Yin](https://github.com/cwen0) (Software Engineer at PingCAP)
+
+**Editors**: [Calvin Weng](https://github.com/dcalvin), Tom Dewan
+
 ![TiPocket - Automated Testing Framework](media/automated-chaos-testing-framework.jpg)
 
 [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh)® is an open-source chaos engineering platform for Kubernetes. Although it provides rich capabilities to simulate abnormal system conditions, it still only solves a fraction of the Chaos Engineering puzzle. Besides fault injection, a full chaos engineering application consists of hypothesizing around defined steady states, running experiments in production, validating the system via test cases, and automating the testing.
@@ -20,7 +27,7 @@ Before we can put a distributed system like [TiDB](https://github.com/pingcap/ti
 
 1. Observe the normal metrics and develop our testing hypothesis.
 2. Inject a list of failures into TiDB.
-3. Run various test cases to verify TiDB in fault scenarios. 
+3. Run various test cases to verify TiDB in fault scenarios.
 4. Monitor and collect test results for analysis and diagnosis.
 
 This sounds like a solid process, and we've used it for years. However, as TiDB evolves, the testing scale multiplies. We have multiple fault scenarios, against which dozens of test cases run in the Kubernetes testing cluster. Even with Chaos Mesh helping to inject failures, the remaining work can still be demanding—not to mention the challenge of automating the pipeline to make the testing scalable and efficient.

@@ -9,6 +9,10 @@ categories: ['Community']
 press_release: true
 ---
 
+**Author:** Chaos Mesh Maintainers
+
+**Editor:** [Calvin Weng](https://github.com/dcalvin)
+
 ![Chaos-Mesh-1.0 - Chaos-Engineering-on-Kubernetes-Made-Easier](media/chaos-mesh-1.0.png)
 
 Today, we are proud to announce the general availability of Chaos Mesh® 1.0, following its entry into CNCF as a [sandbox project](https://pingcap.com/blog/announcing-chaos-mesh-as-a-cncf-sandbox-project) in July, 2020.

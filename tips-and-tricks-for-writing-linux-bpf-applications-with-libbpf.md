@@ -8,11 +8,15 @@ categories: ['Engineering']
 image: /images/blog/linux-bpf-performance-analysis-tools.jpg
 ---
 
+**Author:** [Wenbo Zhang](https://github.com/ethercflow) (Linux Kernel Engineer of the EE team at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![Linux BPF performance analysis tools](media/linux-bpf-performance-analysis-tools.jpg)
 
-At the beginning of 2020, when I used the BCC tools to analyze our database performance bottlenecks, and pulled the code from the GitHub, I accidentally discovered that there was an additional [libbpf-tools](https://github.com/iovisor/bcc/tree/master/libbpf-tools) directory in the BCC project. I had read an article on [BPF portability](https://facebookmicrosites.github.io/bpf/blog/2020/02/19/bpf-portability-and-co-re.html) and another on [BCC to libbpf conversion](https://facebookmicrosites.github.io/bpf/blog/2020/02/20/bcc-to-libbpf-howto-guide.html), and I used what I learned to convert my previously submitted bcc-tools to libbpf-tools. I ended up converting nearly 20 tools. (See [Why We Switched from bcc-tools to libbpf-tools for BPF Performance Analysis](https://pingcap.com/blog/why-we-switched-from-bcc-tools-to-libbpf-tools-for-bpf-performance-analysis).) 
+At the beginning of 2020, when I used the BCC tools to analyze our database performance bottlenecks, and pulled the code from the GitHub, I accidentally discovered that there was an additional [libbpf-tools](https://github.com/iovisor/bcc/tree/master/libbpf-tools) directory in the BCC project. I had read an article on [BPF portability](https://facebookmicrosites.github.io/bpf/blog/2020/02/19/bpf-portability-and-co-re.html) and another on [BCC to libbpf conversion](https://facebookmicrosites.github.io/bpf/blog/2020/02/20/bcc-to-libbpf-howto-guide.html), and I used what I learned to convert my previously submitted bcc-tools to libbpf-tools. I ended up converting nearly 20 tools. (See [Why We Switched from bcc-tools to libbpf-tools for BPF Performance Analysis](https://pingcap.com/blog/why-we-switched-from-bcc-tools-to-libbpf-tools-for-bpf-performance-analysis).)
 
-During this process, I was fortunate to get a lot of help from [Andrii Nakryiko](https://github.com/anakryiko) (the libbpf + BPF CO-RE project's leader). It was fun and I learned a lot. In this post, I'll share my experience about writing Berkeley Packet Filter (BPF) applications with libbpf. I hope this article is helpful to people who are interested in libbpf and inspires them to further develop and improve BPF applications with libbpf. 
+During this process, I was fortunate to get a lot of help from [Andrii Nakryiko](https://github.com/anakryiko) (the libbpf + BPF CO-RE project's leader). It was fun and I learned a lot. In this post, I'll share my experience about writing Berkeley Packet Filter (BPF) applications with libbpf. I hope this article is helpful to people who are interested in libbpf and inspires them to further develop and improve BPF applications with libbpf.
 
 Before you read further, however, consider reading [these posts for important background information:](https://facebookmicrosites.github.io/bpf/blog/2020/02/19/bpf-portability-and-co-re.html)
 
@@ -66,7 +70,7 @@ You can see the complete code in [biolatency.c](https://github.com/iovisor/bcc/b
 
 ### Custom load and attach
 
-Skeleton is suitable for almost all scenarios, but there is a special case: perf events. In this case, instead of using links from `struct <name>__bpf`, you need to define an array: `struct bpf_link *links[]`. The reason is that `perf_event` needs to be opened separately on each CPU. 
+Skeleton is suitable for almost all scenarios, but there is a special case: perf events. In this case, instead of using links from `struct <name>__bpf`, you need to define an array: `struct bpf_link *links[]`. The reason is that `perf_event` needs to be opened separately on each CPU.
 
 After this, open and attach `perf_event` by yourself:
 
@@ -82,7 +86,7 @@ static int open_and_attach_perf_event(int freq, struct bpf_program *prog,
                 .sample_period = freq,
                 .config = PERF_COUNT_SW_CPU_CLOCK,
         };
-        int i, fd; 
+        int i, fd;
 
         for (i = 0; i < nr_cpus; i++) {
                 fd = syscall(__NR_perf_event_open, &attr, -1, i, -1, 0);
@@ -99,7 +103,7 @@ static int open_and_attach_perf_event(int freq, struct bpf_program *prog,
                         close(fd);
                         return -1;
                 }
-        } 
+        }
 
         return 0;
 }
@@ -157,7 +161,7 @@ You can see the complete code in [hardirqs.bpf.c](https://github.com/iovisor/bcc
 
 Beginning in Linux 4.6, BPF hash maps perform memory pre-allocation by default and introduce the `BPF_F_NO_PREALLOC` flag. The motivation for doing so is to avoid kprobe + bpf deadlocks. The community had tried other solutions, but in the end, pre-allocating all the map elements was the simplest solution and didn't affect the user space visible behavior.
 
-When full map pre-allocation is too memory expensive, define the map with the `BPF_F_NO_PREALLOC` flag to keep old behavior. For details, see [bpf: map pre-alloc](https://lore.kernel.org/patchwork/cover/656547/). When the map size is not large (such as `MAX_ENTRIES` = 256), this flag is not necessary. `BPF_F_NO_PREALLOC` is slower. 
+When full map pre-allocation is too memory expensive, define the map with the `BPF_F_NO_PREALLOC` flag to keep old behavior. For details, see [bpf: map pre-alloc](https://lore.kernel.org/patchwork/cover/656547/). When the map size is not large (such as `MAX_ENTRIES` = 256), this flag is not necessary. `BPF_F_NO_PREALLOC` is slower.
 
 Here is an example:
 
@@ -179,7 +183,7 @@ You can see many cases in [libbpf-tools](https://github.com/iovisor/bcc/tree/mas
 
 One advantage of libbpf-tools is that it is portable, so the maximum space required for the map may be different for different machines. In this case, you can define the map without specifying the size and resize it before load. For example:
 
-In `<name>.bpf.c`, define the map as: 
+In `<name>.bpf.c`, define the map as:
 
 {{< copyable "" >}}
 
@@ -189,7 +193,7 @@ struct {
         __type(key, u32);
         __type(value, u64);
 } start SEC(".maps");
-``` 
+```
 
 After the open phase, call `bpf_map__resize()`. For example:
 
@@ -223,7 +227,7 @@ SEC("tp_btf/softirq_entry")
 int BPF_PROG(softirq_entry, unsigned int vec_nr)
 {
         u64 ts = bpf_ktime_get_ns();
-        u32 key = 0; 
+        u32 key = 0;
 
         bpf_map_update_elem(&start, &key, &ts, 0);
         return 0;

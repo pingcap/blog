@@ -10,6 +10,8 @@ image: /images/blog/financial-industry-disaster-recovery.png
 
 **Author:** Jun Yu (solution architect at PingCAP)
 
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![Financial industry disaster recovery](media/financial-industry-disaster-recovery.png)
 
 For financial companies, especially in the banking, securities, and insurance industries, a major IT concern is how to prevent or respond to failures: hardware failures, network failures—any sudden failure that may affect the business. A core component of these businesses is the back-end database. It must operate safely and ensure data security without exceptions. To achieve this level of business continuity, the database service must be highly available. However, high availability alone is not enough. We must consider the business impact caused by disasters in the server room, the data center, or even the whole city. For this reason, disaster recovery technologies and solutions for incidents came into being.

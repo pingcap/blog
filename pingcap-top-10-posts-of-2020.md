@@ -8,6 +8,10 @@ categories: ['Company']
 image: /images/blog/2020-posts-about-cloud-native-distributed-sql-newsql.jpg
 ---
 
+**Author:** PingCAP
+
+**Editors:** [Caitin Chen](https://github.com/CaitinChen), Tom Dewan
+
 ![2020 Top posts about cloud-native, distributed SQL, HTAP, NewSQL](media/2020-posts-about-cloud-native-distributed-sql-newsql.jpg)
 
 2020 has been a difficult year for everyone, but at PingCAP we continued to innovate and inform. This year, we [released TiDB 4.0](https://pingcap.com/blog/tidb-4.0-ga-gearing-you-up-for-an-unpredictable-world-with-real-time-htap-database), a real-time Hybrid Transactional/Analytical Processing (HTAP) database, and we published 50+ technical blog posts and 17 case studies. We'd like to thank all our TiDB contributors and users for their trust and support. They not only helped us improve our product, but they also contributed great material for many of our excellent articles.

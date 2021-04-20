@@ -15,6 +15,8 @@ logo: /images/blog/customers/zhuanzhuan-logo.png
 
 **Author:** Haodong Ji (Head DBA at Zhuan Zhuan)
 
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![MySQL horizontal scaling, MySQL alternative database](media/scale-out-mysql-alternative-database-zhuanzhuan.jpg)
 
 [Zhuan Zhuan](https://www.crunchbase.com/organization/zhuan-zhuan) is an online used goods trading platform. You can think of us as "the Letgo of China." Since we launched our platform in 2015, we have grown tremendously. In 2018, we had more than 200 million users, with over 50 million monthly active users on our app and WeChat mini-program.

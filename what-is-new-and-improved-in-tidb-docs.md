@@ -8,6 +8,10 @@ tags: ['Documentation']
 categories: ['Product']
 ---
 
+**Author:** [Lilian Lee](https://github.com/lilin90)
+
+**Editor:** Tom Dewan
+
 ![A distributed SQL database's documentation](media/distributed-sql-database-documentation.jpg)
 
 [TiDB](https://docs.pingcap.com/tidb/stable/overview) is an open-source, distributed SQL database that supports Hybrid Transactional/ Analytical Processing ([HTAP](https://en.wikipedia.org/wiki/HTAP)) workloads. Along with the rapid releases of TiDB products and projects, we also continually improve our [TiDB documentation](https://docs.pingcap.com/tidb/stable) because **developer experience and user experience matter!** To help with your TiDB journey, this post covers recent big changes, new content, and improvements in TiDB documentation.
@@ -98,7 +102,7 @@ We restructured our documentation by:
 * Splitting original content
 * Updating or deleting outdated content
 
-We didn't restructure all versions of the documentation, but only the following products (and projects) and versions: 
+We didn't restructure all versions of the documentation, but only the following products (and projects) and versions:
 
 * TiDB docs: dev (the latest development version) & v4.0
 * TiDB Operator docs: dev & v1.1
@@ -118,7 +122,7 @@ You might be wondering, "If I move a file from directory A to directory B, why d
 
 ### Showing accurate, version-specific search results
 
-To search TiDB documentation, you can use either Google Search or the embedded search box in the upper right corner of every TiDB docs page. 
+To search TiDB documentation, you can use either Google Search or the embedded search box in the upper right corner of every TiDB docs page.
 
 Last June, we made great improvements to documentation search so you can find answers much more quickly. Here are the major changes:
 
@@ -144,7 +148,7 @@ Last June, we made great improvements to documentation search so you can find an
   <tr>
    <td>You can specify the exact version that you want to get results from.
    </td>
-   <td>Search results for the latest "stable" version are returned by default, but you can select your version in the drop-down list in the upper left of the page. 
+   <td>Search results for the latest "stable" version are returned by default, but you can select your version in the drop-down list in the upper left of the page.
 <br/>
 <br/>
 For example, if you use TiDB Operator v1.0 and want to know how to modify the time zone setting for a TiDB cluster in Kubernetes, click <strong>Tools </strong>&gt; <strong>TiDB Operator</strong>, select <strong>v1.0</strong> in the drop-down, and then enter "time zone" to search.

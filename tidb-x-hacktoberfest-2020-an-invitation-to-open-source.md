@@ -8,6 +8,10 @@ categories: ['Community']
 image: /images/blog/tidb-x-hacktoberfest.jpg
 ---
 
+**Author:** TiDB community
+
+**Editor:** [Calvin Weng](https://github.com/dcalvin)
+
 ![TiDB X Hacktoberfest 2020](media/tidb-x-hacktoberfest.jpg)
 
 [Hacktoberfest](https://hacktoberfest.digitalocean.com) is a month-long open source challenge hosted by DigitalOcean, Intel, and DEV. It's a celebration open to everyone in our global community. Whether you're an experienced developer, open-source newbie learning to code, event host, or company of any size, you can help drive the growth of open source and make positive contributions to an ever-growing community. As long as you submit 4 PRs before Oct 31, you are eligible to claim a limit edition T-shirt (70,000 in total on a first-come-first-served basis)!

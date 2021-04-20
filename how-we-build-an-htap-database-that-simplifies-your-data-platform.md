@@ -8,6 +8,10 @@ categories: ['Engineering']
 image: /images/blog/why-htap-matters.jpg
 ---
 
+**Author:** [Shawn Ma](https://github.com/ilovesoup)
+
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** [Caitin Chen](https://github.com/CaitinChen), Tom Dewan
+
 ![Why an HTAP Database Matters](media/why-htap-matters.jpg)
 
 _This article is based on a talk given by Shawn Ma at [TiDB DevCon 2020](https://pingcap.com/community/devcon2020/)._
@@ -110,7 +114,7 @@ When the optimizer selects a query execution plan, it treats the column store as
 
 However, if you intend to completely isolate the column store and row store, you can manually specify that the query uses one of the two storage engines.
 
-The following results, taken from [ClickHouse](https://en.wikipedia.org/wiki/ClickHouse), show the on-time benchmarking of TiFlash, MariaDB, Spark, and Greenplum on a single, wide table. For the same 10 queries, the four databases have various execution times. As you can see, in this architecture, TiDB on TiFlash performs better than the others. 
+The following results, taken from [ClickHouse](https://en.wikipedia.org/wiki/ClickHouse), show the on-time benchmarking of TiFlash, MariaDB, Spark, and Greenplum on a single, wide table. For the same 10 queries, the four databases have various execution times. As you can see, in this architecture, TiDB on TiFlash performs better than the others.
 
 ![Benchmarking TiFlash, MariaDB, Spark, and Greenplum](media/benchmarking-tiflash-mariadb-spark-greenplum.jpg)
 <div class="caption-center"> Benchmarking TiFlash, MariaDB, Spark, and Greenplum </div>
@@ -119,7 +123,7 @@ The following results, taken from [ClickHouse](https://en.wikipedia.org/wiki/Cli
 
 TiDB's HTAP architecture, with the help of TiSpark, can work seamlessly with Apache Spark. [TiSpark](https://docs.pingcap.com/tidb/stable/tispark-overview) is a thin computation layer built for running Spark on top of TiKV or TiFlash to respond to complex OLAP queries, such as providing AI computing and a toolbox for data science, as well as integrating with business intelligence (BI). By connecting with the Spark ecosystem, TiDB can provide services for these complex scenarios.
 
-You can use TiSpark with a Hadoop data lake. In this scenario, TiDB is an excellent way to provide distributed computing for heavyweight, complex queries. 
+You can use TiSpark with a Hadoop data lake. In this scenario, TiDB is an excellent way to provide distributed computing for heavyweight, complex queries.
 
 When we run a [TPC-H](http://www.tpc.org/tpch/) benchmark on TiSpark and  Greenplum, TiSpark + TiFlash hold Greenplum to a draw. Sometimes Greenplum is faster, and other times TiSpark + TiFlash is faster, as shown below.
 
@@ -132,7 +136,7 @@ As we have mentioned, in HTAP scenarios, TiDB helps users build a simplified arc
 
 ### Real-time data warehousing
 
-The following diagram shows a popular TiDB use case: real-time data warehousing. TiDB supports continuous updates, so it can easily sync data from other OLTP databases. In this architecture, TiDB collects data from multiple applications and aggregates their data in real time. 
+The following diagram shows a popular TiDB use case: real-time data warehousing. TiDB supports continuous updates, so it can easily sync data from other OLTP databases. In this architecture, TiDB collects data from multiple applications and aggregates their data in real time.
 
 ![Use TiDB as a real-time data warehouse](media/use-tidb-as-real-time-data-warehouse.jpg)
 <div class="caption-center"> Use TiDB as a real-time data warehouse </div>

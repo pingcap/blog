@@ -9,6 +9,10 @@ aliases: ['/blog/how-thp-slows-down-your-database-performance-and-what-to-do-abo
 image: /images/blog/how-thp-slows-down-your-database-performance-banner.jpg
 ---
 
+**Author:** [Wenbo Zhang](https://github.com/ethercflow) (Linux Kernel Engineer of the EE team at PingCAP)
+
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![Disabling THP to improve database performance](media/how-thp-slows-down-your-database-performance-banner.jpg)
 
 Linux's memory management system is transparent to the user. However, if you're not familiar with its working principles, you might meet unexpected performance issues. That's especially true for sophisticated software like databases. When databases are running in Linux, even small system variations might impact performance.

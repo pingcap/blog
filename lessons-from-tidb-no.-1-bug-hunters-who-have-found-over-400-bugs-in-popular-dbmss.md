@@ -8,6 +8,10 @@ categories: ['Engineering']
 image: /images/blog/find-database-bugs.jpg
 ---
 
+**Author:** [Manuel Rigger](https://www.manuelrigger.at/) (Postdoctoral researcher at ETH Zurich)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![Database bug, database test](media/find-database-bugs.jpg)
 
 ## Summary
@@ -75,6 +79,6 @@ And with that, I want to also give you a short demo to actually demonstrate that
 
 So here you can see a bug report. This was a P1 bug, so quite a severe bug, and you can see here that we create a table, we then create a view, we insert into the table, and then we have this query here that fetches records from this.
 
-So I'm copying now these SQL statements. And here I'm going to feed them to TiDB. Let's not look too deeply into what the query should actually do, but let's observe that here now an empty result set is returned. Now, let's translate this to the unoptimized query. So I'm adding here this IS TRUE to force that the predicate is evaluated as a Boolean. And here you can actually see now that a row is returned with a value of 1, which basically means TRUE. And since we see here that a TRUE value is returned, we can infer that actually this query here [the one above] should have returned a single record, which was not the case, and thus, we would have been able to detect this bug in TiDB. 
+So I'm copying now these SQL statements. And here I'm going to feed them to TiDB. Let's not look too deeply into what the query should actually do, but let's observe that here now an empty result set is returned. Now, let's translate this to the unoptimized query. So I'm adding here this IS TRUE to force that the predicate is evaluated as a Boolean. And here you can actually see now that a row is returned with a value of 1, which basically means TRUE. And since we see here that a TRUE value is returned, we can infer that actually this query here [the one above] should have returned a single record, which was not the case, and thus, we would have been able to detect this bug in TiDB.
 
 So, I hope that I could convince you that this simple, but non-obvious approach is actually quite useful to detect bugs, and I hope also that this overview of our ongoing research was interesting for you, and I hope you will have fun at the conference. And with this I say, thank you for listening and 加油 ("come on") TiDB.

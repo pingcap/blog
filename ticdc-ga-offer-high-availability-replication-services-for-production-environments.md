@@ -9,13 +9,17 @@ image: /images/blog/change-data-capture-ga.jpg
 press_release: true
 ---
 
+**Author:** PingCAP
+
+**Editors:** [Caitin Chen](https://github.com/CaitinChen), Tom Dewan
+
 ![CDC in database](media/change-data-capture-ga.jpg)
 
-[TiDB 4.0](https://docs.pingcap.com/tidb/dev/release-4.0-ga) introduces [TiCDC](https://pingcap.com/docs/dev/ticdc/ticdc-overview/) as TiDB's [change data capture](https://en.wikipedia.org/wiki/Change_data_capture) framework. It's an open-source feature that replicates TiDB's incremental changes to downstream platforms by subscribing to change logs in TiKV (TiDB's storage engine). It can restore data to a consistent state with any upstream timestamp Oracle (TSO) and provides the [TiCDC Open Protocol](https://pingcap.com/docs/dev/ticdc/ticdc-open-protocol/) to support other data consumers that subscribe to TiKV's data changes. 
+[TiDB 4.0](https://docs.pingcap.com/tidb/dev/release-4.0-ga) introduces [TiCDC](https://pingcap.com/docs/dev/ticdc/ticdc-overview/) as TiDB's [change data capture](https://en.wikipedia.org/wiki/Change_data_capture) framework. It's an open-source feature that replicates TiDB's incremental changes to downstream platforms by subscribing to change logs in TiKV (TiDB's storage engine). It can restore data to a consistent state with any upstream timestamp Oracle (TSO) and provides the [TiCDC Open Protocol](https://pingcap.com/docs/dev/ticdc/ticdc-open-protocol/) to support other data consumers that subscribe to TiKV's data changes.
 
 With **high data reliability** and **horizontal scalability** features, TiCDC provides **high-availability replication** services for [100 TB clusters with only milliseconds of latency](https://pingcap.com/blog/replication-latency-in-milliseconds-for-100-tb-clusters). In [TiDB 4.0.6](https://docs.pingcap.com/tidb/dev/release-4.0.6), TiCDC reaches general availability (GA), and you can use it in your production environment.
 
-In this post, we'll walk you through TiCDC's features, application scenarios, and real-world case studies. 
+In this post, we'll walk you through TiCDC's features, application scenarios, and real-world case studies.
 
 ![TiCDC architecture](media/ticdc-highly-available-architecture.jpg)
 <div class="caption-center"> TiCDC architecture </div>
@@ -28,7 +32,7 @@ TiCDC supports these features:
 
     TiCDC captures change logs from TiKV, which is highly available. This guarantees high availability of data. Even if TiCDC unexpectedly shuts down, when you restart it, it can still normally capture data.
 
-* **Horizontal scalability** 
+* **Horizontal scalability**
 
     Multiple TiCDC nodes can form a cluster. You can evenly schedule replication tasks to different nodes. When you have massive data, you can add nodes to mitigate replication pressure.
 
@@ -63,7 +67,7 @@ TiCDC provides real-time, high-throughput, and stable data subscription services
 
 ### Xiaohongshu
 
-[Xiaohongshu](https://en.wikipedia.org/wiki/Xiaohongshu) is a popular social media and e-commerce platform in China. The Xiaohongshu app allows users to post and share product reviews, travel blogs, and lifestyle stories via short videos and photos. By July 2019, it had over 300 million registered users. 
+[Xiaohongshu](https://en.wikipedia.org/wiki/Xiaohongshu) is a popular social media and e-commerce platform in China. The Xiaohongshu app allows users to post and share product reviews, travel blogs, and lifestyle stories via short videos and photos. By July 2019, it had over 300 million registered users.
 
 [Xiaohongshu uses TiDB](https://pingcap.com/case-studies/how-we-use-a-scale-out-htap-database-for-real-time-analytics-and-complex-queries) for their core applications in multiple scenarios, including:
 
@@ -71,13 +75,13 @@ TiCDC provides real-time, high-throughput, and stable data subscription services
 * During a large promotion, providing real-time data to a large display screen
 * Logistics warehousing
 * An e-commerce data hub
-* Content security review and analysis 
+* Content security review and analysis
 
 In the content security review and analysis scenario, TiDB in the upstream records security review data in real time, which is written by online applications, to implement real-time data monitoring and analysis.
 
-When TiCDC analyzes review data, it extracts TiDB's real-time stream data and sends it downstream to Flink for real-time calculation and aggregation. The calculation results are written back to TiDB for review data analysis, manual efficiency analysis, and management. 
+When TiCDC analyzes review data, it extracts TiDB's real-time stream data and sends it downstream to Flink for real-time calculation and aggregation. The calculation results are written back to TiDB for review data analysis, manual efficiency analysis, and management.
 
-Xiaohongshu calls TiCDC's internal API (which is defined by [sink interface](https://pkg.go.dev/github.com/pingcap/ticdc@v0.0.0-20200914115832-993bfabc4696/cdc/sink?tab=doc#Sink)) to customize their sink. They use the Canal Protocol to send data to Flink to connect to the existing application system. This significantly reduces the costs of refactoring the application system. 
+Xiaohongshu calls TiCDC's internal API (which is defined by [sink interface](https://pkg.go.dev/github.com/pingcap/ticdc@v0.0.0-20200914115832-993bfabc4696/cdc/sink?tab=doc#Sink)) to customize their sink. They use the Canal Protocol to send data to Flink to connect to the existing application system. This significantly reduces the costs of refactoring the application system.
 
 TiCDC's **efficient data replication** and **support for heterogeneous big data ecologies** have laid a solid foundation for the real-time processing of Xiaohongshu application data.
 
@@ -87,7 +91,7 @@ TiCDC's **efficient data replication** and **support for heterogeneous big data 
 
 Authome has run TiDB for more than two years, and it's used in important applications such as forum replies, resource pools, and friend management. For a big sales promotion on August 18, 2020, Autohome deployed TiDB in three DCs across two cities to serve applications like a bargain rush, [red packets](https://en.wikipedia.org/wiki/Red_envelope), and a lucky draw. TiCDC replicates TiDB cluster data to the MySQL database in the downstream in real time. The MySQL database is used as a backup in case of failures to improve the applications' capacity to tolerate disasters. TiCDC's replication latency is within seconds, which satisfies the real-time requirements for online sales promotion applications.
 
-Smart recommendation is Autohome's important application, and its underlying storage is the resource pool. The resource pool receives and gathers all kinds of information. After it processes data, data is used for applications like homepage recommendations, product displays, and search. Before Autohome used TiDB, the resource pool used MySQL as the storage layer, and used MySQL binlog to send data to [Elasticsearch](https://en.wikipedia.org/wiki/Elasticsearch) for use in search results. Due to MySQL's performance and capacity bottlenecks, after Autohome switched to TiDB, they used TiCDC instead of MySQL binlog to replicate heterogeneous data. TiCDC features **high availability**, **low latency**, **and support for large-scale clusters**, which guarantee applications are running stably. 
+Smart recommendation is Autohome's important application, and its underlying storage is the resource pool. The resource pool receives and gathers all kinds of information. After it processes data, data is used for applications like homepage recommendations, product displays, and search. Before Autohome used TiDB, the resource pool used MySQL as the storage layer, and used MySQL binlog to send data to [Elasticsearch](https://en.wikipedia.org/wiki/Elasticsearch) for use in search results. Due to MySQL's performance and capacity bottlenecks, after Autohome switched to TiDB, they used TiCDC instead of MySQL binlog to replicate heterogeneous data. TiCDC features **high availability**, **low latency**, **and support for large-scale clusters**, which guarantee applications are running stably.
 
 In addition, Autohome has used TiCDC as a base to develop an interface that outputs log data to Kafka to replicate massive heterogeneous data. It is running in the production environment and has been running stably for more than two months.
 
@@ -97,9 +101,9 @@ In addition, Autohome has used TiCDC as a base to develop an interface that outp
 
 Haier Smart Home's IT technology facilities are built on [Alibaba Cloud](https://en.wikipedia.org/wiki/Alibaba_Cloud). Its core application has these database requirements:
 
-* Support for the MySQL protocol 
+* Support for the MySQL protocol
 * Elastic scalability based on distributed transactions with strong consistency
-* Close integration with various big data technology ecosystems 
+* Close integration with various big data technology ecosystems
 
 [TiDB 4.0](https://docs.pingcap.com/tidb/stable/release-4.0-ga) meets all these requirements, so it's the ideal choice for Haier Smart Home.
 
@@ -109,7 +113,7 @@ Haier Smart Home uses TiCDC to replicate user information and user posts to Elas
 
 [Zhihu](https://en.wikipedia.org/wiki/Zhihu) which means "Do you know?" in classical Chinese, is the Quora of China: a question-and-answer website where all kinds of questions are created, answered, edited, and organized by its community of users.
 
-[Zhihu uses TiDB as their core database](https://pingcap.com/case-studies/lesson-learned-from-queries-over-1.3-trillion-rows-of-data-within-milliseconds-of-response-time-at-zhihu) in the Moneta application (which stores posts users have already read). It outputs logs to Kafka via the TiCDC Open Protocol for massive message processing. 
+[Zhihu uses TiDB as their core database](https://pingcap.com/case-studies/lesson-learned-from-queries-over-1.3-trillion-rows-of-data-within-milliseconds-of-response-time-at-zhihu) in the Moneta application (which stores posts users have already read). It outputs logs to Kafka via the TiCDC Open Protocol for massive message processing.
 
 As Zhihu's business volume grew, they encountered problems caused by the limitations of Kafka's architecture and historical version implementation. In the future, Zhihu's infrastructure will be cloud-native, and Pulsar supports native geo-replication, which is more in line with Zhihu's cloud-native infrastructure trend. Therefore, Zhihu replaced Kafka with Pulsar in some applications.
 

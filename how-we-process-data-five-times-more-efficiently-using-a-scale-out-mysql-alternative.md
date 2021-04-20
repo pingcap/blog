@@ -15,6 +15,8 @@ image: /images/blog/bestpay-tidb-case-study-banner.jpg
 
 **Author:** Yu Liu (Senior Architect, China Telecom Bestpay)
 
+**Transcreator:** [Coco Yi](https://github.com/yikeke); **Editor:** Tom Dewan
+
 ![(Banner image) How We Process Data Five Times More Efficiently Using a Scale-Out MySQL Alternative](media/bestpay-tidb-case-study-banner.jpg)
 
 [China Telecom Bestpay](https://www.crunchbase.com/organization/orange-finance) is a mobile payment and Internet finance subsidiary of [China Telecom Corp](https://www.chinatelecomglobal.com/). Bestpay supports more than 8 million offline merchant stores and 170 e-business platforms in China, with the commitment to provide a "safe, convenient, and trendy" payment solution. In 2019, Bestpay had 50 million monthly active users, 230 million transactions per month, and 1.75 trillion transactions per year.
