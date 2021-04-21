@@ -8,6 +8,10 @@ categories: ['Product']
 image: /images/blog/monitoring-metrics-relation-graph.png
 ---
 
+**Author:** [Shuang Chen](https://github.com/crazycs520) (Software Engineer at PingCAP)
+
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![Monitoring Metrics Relation Graph](media/monitoring-metrics-relation-graph.png)
 
 [TiDB](https://docs.pingcap.com/tidb/stable), an open-source, distributed SQL database, provides detailed monitoring metrics through Prometheus and Grafana. These metrics are often the key to troubleshooting performance problems in the cluster.

@@ -8,6 +8,10 @@ categories: ['Product']
 image: /images/blog/tidb-in-kubernetes.jpg
 ---
 
+**Author:** [Aylei Wu](https://github.com/aylei) (Cloud infrastructure engineer at PingCAP)
+
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![TiDB in Kubernetes](media/tidb-in-kubernetes.jpg)
 
 As [Kubernetes](https://github.com/kubernetes/kubernetes) reaches its full maturity, many organizations are building large scale Kubernetes-based infrastructures. However, considering the weakness of Kubernetes in orchestrating stateful applications, organizations hesitate to run their databases in it. Such concerns also affect users of [TiDB](https://docs.pingcap.com/tidb/stable), a cloud-native, distributed SQL database. But are these concerns valid, or are they just baseless worries?

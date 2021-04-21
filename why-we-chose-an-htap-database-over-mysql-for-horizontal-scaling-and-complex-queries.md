@@ -15,6 +15,8 @@ logo: /images/blog/customers/bigo-logo.png
 
 **Author:** Jiaqing Xu (DBA at BIGO)
 
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editors:** [Caitin Chen](https://github.com/CaitinChen), Tom Dewan
+
 ![HTAP database for BIGO](media/htap-database-bigo.jpg)
 
 Founded in 2014, [BIGO](https://www.bigo.sg/about) is a fast-growing social networking company based in Singapore. Based on our powerful audio and video processing, global real-time transmission, and content delivery network (CDN) technology, BIGO has launched products like Bigo Live (live video streaming), Likee (short-form video), and imo (video conferencing). BIGO now boasts nearly 400 million active users per month, and our products and services cover more than 150 countries and regions.

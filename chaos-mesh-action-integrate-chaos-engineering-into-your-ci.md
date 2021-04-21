@@ -8,6 +8,10 @@ categories: ['Engineering']
 image: /images/blog/chaos-mesh-action.png
 ---
 
+**Author:** [Xiang Wang](https://github.com/WangXiangUSTC) (Committer of Chaos Mesh)
+
+**Transcreator:** [Coco Yi](https://github.com/yikeke); **Editor:** Tom Dewan
+
 ![chaos-mesh-action - Integrate Chaos Engineering into Your CI](media/chaos-mesh-action.png)
 
 [Chaos Mesh](https://chaos-mesh.org) is a cloud-native chaos testing platform that orchestrates chaos in Kubernetes environments. While it's well received in the community with its rich fault injection types and easy-to-use dashboard, it was difficult to use Chaos Mesh with end-to-end testing or the continuous integration (CI) process. As a result, problems introduced during system development could not be discovered before the release.

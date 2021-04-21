@@ -8,7 +8,9 @@ categories: ['Product']
 image: /images/blog/financial-industry-disaster-recovery.png
 ---
 
-**Author:** Jun Yu (solution architect at PingCAP)
+**Author:** [Jun Yu](https://github.com/hashbone) (Solution architect at PingCAP)
+
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
 
 ![Financial industry disaster recovery](media/financial-industry-disaster-recovery.png)
 

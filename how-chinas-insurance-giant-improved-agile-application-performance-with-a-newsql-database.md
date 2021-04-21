@@ -15,6 +15,8 @@ image: /images/blog/china-insurance-giant-improved-agile-application-performance
 
 **Author:** Ping An Jin Guanjia Application Development Team
 
+**Transcreator:** [Coco Yi](https://github.com/yikeke); **Editor:** Tom Dewan
+
 ![How China's Insurance Giant Improved Agile Application Performance with a NewSQL Database](media/china-insurance-giant-improved-agile-application-performance-with-newsql-tidb-database.jpg)
 
 [Ping An Life Insurance](https://www.bloomberg.com/profile/company/OPAHWZ:CH) is a world-leading life insurance company under the [Ping An Insurance Group](https://wikipedia.org/wiki/Ping_An_Insurance). The company builds a one-stop mobile application to provide services such as insurance policies, life assistants, and health management. We are the development team behind the app.

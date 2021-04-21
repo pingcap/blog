@@ -15,6 +15,8 @@ logo: /images/blog/customers/bank-of-beijing-logo.png
 
 **Author:** Zhendong Chen (Software Development Engineer at Bank of Beijing)
 
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![A horizontal scaling database as a MySQL alternative](media/horizontal-scaling-database-in-bob.jpg)
 
 [Bank of Beijing](https://en.wikipedia.org/wiki/Bank_of_Beijing) (BOB) is an urban commercial bank based in Beijing, China. As of June 30, 2020, our total assets amounted to 2.88 trillion Yuan, and we hold a brand value of 59.7 billion Yuan. On the World Top 1000 Banks list, we rank No. 62 in terms of Tier-1 capital and have been in the World Top 100 for seven years in a row.

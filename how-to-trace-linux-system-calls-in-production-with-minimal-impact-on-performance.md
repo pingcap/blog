@@ -8,6 +8,10 @@ categories: ['Engineering']
 image: /images/blog/how-to-trace-linux-syscalls.jpg
 ---
 
+**Author:** [Wenbo Zhang](https://github.com/ethercflow) (Linux Kernel Engineer of the EE team at PingCAP)
+
+**Transcreator:** [Tom Xiong](https://github.com/TomShawn); **Editor:** Tom Dewan
+
 ![How to trace Linux System Calls in Production with Minimal Impact on Performance](media/how-to-trace-linux-syscalls.jpg)
 
 If you need to dynamically trace Linux process system calls, you might first consider strace. strace is simple to use and works well for issues such as "Why can't the software run on this machine?" However, if you're running a trace in a production environment, strace is NOT a good choice. It introduces a substantial amount of overhead. According to [a performance test](http://vger.kernel.org/~acme/perf/linuxdev-br-2018-perf-trace-eBPF/#/4/2) conducted by Arnaldo Carvalho de Melo, a senior software engineer at Red Hat, **the process traced using strace ran 173 times slower, which is disastrous for a production environment**.

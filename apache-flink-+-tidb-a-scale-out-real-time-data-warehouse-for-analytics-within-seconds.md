@@ -9,11 +9,13 @@ image: /images/blog/flink-tidb-real-time-analytics.jpg
 aliases: ['/blog/flink-+-tidb-a-scale-out-real-time-data-warehouse-for-second-level-analytics/']
 ---
 
-Author: Zhi Qi (Real-time Analytics R&D engineer at PingCAP)
+**Author:** [Zhi Qi](https://github.com/LittleFall) (Real-time Analytics R&D engineer at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
 
 ![Data warehousing for real-time analytics](media/flink-tidb-real-time-analytics.jpg)
 
-When a data-driven company grows to a certain size, traditional data storage can no longer meet its needs. For real-time business intelligence, you need a real-time data warehouse. Companies can use real-time data warehouses to implement real-time Online Analytical Processing (OLAP) analytics, real-time data panels, real-time application monitoring, and real-time data interface services. 
+When a data-driven company grows to a certain size, traditional data storage can no longer meet its needs. For real-time business intelligence, you need a real-time data warehouse. Companies can use real-time data warehouses to implement real-time Online Analytical Processing (OLAP) analytics, real-time data panels, real-time application monitoring, and real-time data interface services.
 
 **Some people think that a real-time data warehouse architecture is complex and difficult to operate and maintain.** Today, I will explain why that isn't true. [Apache Flink](https://flink.apache.org/flink-architecture.html) is a framework and distributed processing engine for stateful computations over unbounded and bounded data streams. [TiDB](https://docs.pingcap.com/tidb/stable/overview) is an open-source, distributed, Hybrid Transactional/Analytical Processing (HTAP) database. **Thanks to Flink 1.11's enhanced support for the SQL language and TiDB's HTAP capabilities, we've combined Flink and TiDB to build an efficient, easy-to-use, real-time data warehouse that features horizontal scalability and high availability.**
 
@@ -34,7 +36,7 @@ As technology improved, people had new requirements such as real-time recommenda
 
 A real-time data warehouse has three main data processing architectures: the Lambda architecture, the Kappa architecture, and the real-time OLAP variant architecture.
 
-The Lambda architecture maintains batch and stream layers, so it costs more to develop than the other two. Compared with the Kappa architecture, the real-time OLAP variant architecture can perform more flexible calculations, but it needs more real-time OLAP computing resources. 
+The Lambda architecture maintains batch and stream layers, so it costs more to develop than the other two. Compared with the Kappa architecture, the real-time OLAP variant architecture can perform more flexible calculations, but it needs more real-time OLAP computing resources.
 
 #### The Lambda architecture
 
@@ -65,7 +67,7 @@ Flink is a big data computing engine with low latency, high throughput, and unif
 
 TiDB 4.0 is a true HTAP database. In the real-time data warehouse architecture, you can use TiDB as application data source to perform transactional queries; you can also use it as a real-time OLAP engine for computing in analytical scenarios.
 
-Combining Flink and TiDB into a real-time data warehouse has these advantages: 
+Combining Flink and TiDB into a real-time data warehouse has these advantages:
 
 * **Fast speed.** You can process streaming data in seconds and perform real-time data analytics.
 * **Horizontal scalability.** You can increase computing power by adding nodes to both Flink and TiDB.
@@ -119,7 +121,7 @@ In Xiaohongshu's application architecture, Flink obtains data from TiDB and aggr
 ![Xiaohongshu's Flink + TiDB architecture](media/xiaohongshu-flink-tidb-architecture.jpg)
 <div class="caption-center"> Xiaohongshu's Flink + TiDB architecture </div>
 
-This process is a closed loop based on TiDB. TiDB transfers subsequent analytic tasks' `JOIN` operations to Flink and uses stream computing to relieve pressure. 
+This process is a closed loop based on TiDB. TiDB transfers subsequent analytic tasks' `JOIN` operations to Flink and uses stream computing to relieve pressure.
 
 Currently, this solution supports Xiaohongshu's content review, note label recommendations, and growth audit applications. It meets the challenge of high-throughput online applications and is running stably.
 
@@ -140,9 +142,9 @@ In this process, the primary tables in the data service can be joined in real ti
 
 [PatSnap](https://www.crunchbase.com/organization/patsnap) is a global patent search database that integrates 130 million patent data records and 170 million chemical structure data records from 116 countries. Its users can search, browse, translate patents, and generate patent analysis reports.
 
-When PatSnap replaced their original Segment + Redshift architecture with Kinesis + Flink + TiDB, they found that they didn't need to build an operational data store (ODS) layer. 
+When PatSnap replaced their original Segment + Redshift architecture with Kinesis + Flink + TiDB, they found that they didn't need to build an operational data store (ODS) layer.
 
-As a precomputing unit, Flink builds a Flink extract-transform-load (ETL) job for the application. This fully controls data saving rules and customizes the schema; that is, it only cleans the metrics that the application focuses on and writes them into TiDB for analytics and queries. 
+As a precomputing unit, Flink builds a Flink extract-transform-load (ETL) job for the application. This fully controls data saving rules and customizes the schema; that is, it only cleans the metrics that the application focuses on and writes them into TiDB for analytics and queries.
 
 PatSnap builds three layers on top of TiDB: data warehouse detail (DWD), data warehouse service (DWS), and analytical data store (ADS). These layers serve application statistics and list requirements. They are based on user, tenant, region and application metrics, as well as time windows of minutes or days. The upper application can directly use the constructed data and perform real-time analytics within seconds.
 
@@ -151,7 +153,7 @@ PatSnap builds three layers on top of TiDB: data warehouse detail (DWD), data wa
 
 After PatSnap adopted the new architecture, they found that:
 
-* Inbound data, inbound rules, and computational complexity were greatly reduced. 
+* Inbound data, inbound rules, and computational complexity were greatly reduced.
 * Queries, updates, and writes were much faster.
 * Reasonable data layering greatly simplified the TiDB-based real-time data warehouse, and made development, scaling, and maintenance easier.
 * This solution met requirements for different ad hoc queries, and they didn't need to wait for Redshift precompilation.
@@ -160,12 +162,12 @@ Currently, PatSnap is deploying this architecture to production. They use it for
 
 ### NetEase Games
 
-NetEase Games, affiliated with [NetEase, Inc.](https://en.wikipedia.org/wiki/NetEase), is a leading provider of self-developed PC-client and mobile games. As one of the seven largest game companies in the world, it has over 250 games in operation, some of which maintain millions of daily active users. In a [post](https://pingcap.com/case-studies/why-we-chose-tidb-over-other-mysql-based-and-newsql-storage-solutions) last year, they discussed why they chose TiDB over other MySQL-based and NewSQL storage solutions. 
+NetEase Games, affiliated with [NetEase, Inc.](https://en.wikipedia.org/wiki/NetEase), is a leading provider of self-developed PC-client and mobile games. As one of the seven largest game companies in the world, it has over 250 games in operation, some of which maintain millions of daily active users. In a [post](https://pingcap.com/case-studies/why-we-chose-tidb-over-other-mysql-based-and-newsql-storage-solutions) last year, they discussed why they chose TiDB over other MySQL-based and NewSQL storage solutions.
 
 In NetEase Games' billing application architecture:
 
 * Flink writes data from the data source to TiDB in real time.
-* TiDB serves as the analytics data source and the Flink cluster performs real-time stream calculations on the data to generate analytical reports. 
+* TiDB serves as the analytics data source and the Flink cluster performs real-time stream calculations on the data to generate analytical reports.
 
 NetEase Games has also developed the Flink job management platform to manage the job life cycle.
 

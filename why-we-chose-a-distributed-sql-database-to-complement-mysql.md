@@ -15,6 +15,8 @@ logo: /images/blog/customers/vipkid-logo.png
 
 **Author:** Chao Xu (Senior DBA Engineer at VIPKid)
 
+**Transcreator:** Tom Dewan; **Editor:** [Caitin Chen](https://github.com/CaitinChen)
+
 ![MySQL horizontal scaling for VIPKid](media/mysql-horizontal-scaling-vipkid.jpg)
 
 [VIPKid](https://en.wikipedia.org/wiki/VIPKid) is an online English education company based in China that serves children aged 4-15 and their parents. Through our online classroom portal and video chat platform, children in China can get a 25-minute English lesson from a fluent English speaking teacher in the United States or Canada. Currently, we have more than 700,000 paying students.

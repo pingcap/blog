@@ -8,6 +8,10 @@ categories: ['Engineering']
 image: /images/blog/tidb-cloud-features.png
 ---
 
+**Author:** [Ken Liu](https://github.com/iamxy) (PM of TiDB Cloud)
+
+**Transcreator:** [Coco Yi](https://github.com/yikeke); **Editor:** Tom Dewan
+
 ![TiDB Cloud Features](media/tidb-cloud-features.png)
 
 This June, we [announced](https://pingcap.com/blog/announcing-tidb-as-a-service-fully-managed-tidb-offering/) the beta release of [TiDB Cloud](https://pingcap.com/products/tidbcloud), the fully managed database service provided by PingCAP. TiDB Cloud offers fully managed [TiDB](https://docs.pingcap.com/tidb/stable/overview), the horizontally scaling, distributed SQL database that processes both transactional and analytical queries well. Our goal is to empower your applications with a reliable database service that **responds fast even during traffic peaks** and **provides real-time analytics on market changes** while **minimizing your operational costs**.

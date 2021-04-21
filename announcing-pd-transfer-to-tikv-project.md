@@ -8,6 +8,10 @@ tags: ['Announcement', 'CNCF', 'TiKV']
 categories: ['Community']
 ---
 
+**Author:** Maintainers of TiDB and TiKV
+
+**Editor:** [Calvin Weng](https://github.com/dcalvin)
+
 ![A distributed SQL database's documentation](media/pd-transfer-to-tikv-cloud-native.jpg)
 
 Dear fellow community members,

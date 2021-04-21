@@ -15,6 +15,8 @@ image: /images/blog/how-bank-of-china-uses-a-scale-out-database-to-support-zabbi
 
 **Author:** Yu Han (Engineer at Information Technology Operations Center, Bank of China)
 
+**Transcreator:** [Coco Yi](https://github.com/yikeke); **Editor:** Tom Dewan
+
 ![How Bank of China Uses a Scale-Out Database to Support Zabbix Monitoring at Scale](media/how-bank-of-china-uses-a-scale-out-database-to-support-zabbix-monitoring-at-scale.jpg)
 
 [Bank of China](https://en.wikipedia.org/wiki/Bank_of_China) is the fourth largest state-owned commercial bank in China. Since 2016, we've been using [Zabbix](https://www.zabbix.com/), a popular open-source monitoring solution, to monitor our IT infrastructure. We used to use MySQL as the backend storage for Zabbix; however, MySQL is not scalable enough to monitor IT environments on a large scale. After trying different solutions, we chose TiDB, a **MySQL-compatible**, **open-source**, **distributed SQL database** to replace MySQL as the backend for a large-scale Zabbix. (We call this collaboration **"TiZabbix"**.) With TiZabbix, we successfully monitor more than 10,000 hosts and query 18 TB of monitoring data.

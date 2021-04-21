@@ -2,18 +2,22 @@
 title: Celebrate TiKV Graduation within CNCF
 author: ['PingCAP']
 date: 2020-09-02
-summary: The Cloud Native Computing Foundation (CNCF) today just announced that TiKV has become the twelfth project to graduate, joining other graduated projects such as Kubernetes, Jaeger, Harbor, etc. 
+summary: The Cloud Native Computing Foundation (CNCF) today just announced that TiKV has become the twelfth project to graduate, joining other graduated projects such as Kubernetes, Jaeger, Harbor, etc.
 tags: ['TiKV', 'Announcement', 'CNCF']
 categories: ['Community']
 image: /images/blog/cloud-native-tikv-cncf-graduation.jpg
 press_release: true
 ---
 
-![TiKV, a cloud-native database, graduates from CNCF](media/cloud-native-tikv-cncf-graduation.jpg)       
+**Author:** PingCAP
 
-The [Cloud Native Computing Foundation](https://www.cncf.io/announcements/2020/09/02/cloud-native-computing-foundation-announces-tikv-graduation/) (CNCF) today just announced that [TiKV](https://docs.pingcap.com/tidb/stable/tidb-architecture#tikv-server) has become the twelfth project to graduate, joining other graduated projects such as Kubernetes, Jaeger, Harbor, etc. With graduation from CNCF, TiKV has demonstrated growing adoption, an open governance process, feature maturity, and a strong commitment to community, sustainability and inclusivity of the project. 
+**Editor:** [Wenting Liu](https://github.com/WT-Liu)
 
-Originally created by [PingCAP](https://pingcap.com/) as the storage backend for [TiDB](https://docs.pingcap.com/tidb/stable/overview),  TiKV is an open source distributed transactional key-value database built in [Rust](https://www.rust-lang.org). It provides transactional key-value APIs with ACID guarantees. The project provides a unifying distributed storage layer for applications that need data persistence, horizontal scalability, distributed transactions, high availability, and strong consistency, making it an ideal database for the next-generation cloud-native infrastructure. TiKV was accepted as a CNCF member project at the Sandbox level in August 2018, and as an incubating project in April 2019. 
+![TiKV, a cloud-native database, graduates from CNCF](media/cloud-native-tikv-cncf-graduation.jpg)
+
+The [Cloud Native Computing Foundation](https://www.cncf.io/announcements/2020/09/02/cloud-native-computing-foundation-announces-tikv-graduation/) (CNCF) today just announced that [TiKV](https://docs.pingcap.com/tidb/stable/tidb-architecture#tikv-server) has become the twelfth project to graduate, joining other graduated projects such as Kubernetes, Jaeger, Harbor, etc. With graduation from CNCF, TiKV has demonstrated growing adoption, an open governance process, feature maturity, and a strong commitment to community, sustainability and inclusivity of the project.
+
+Originally created by [PingCAP](https://pingcap.com/) as the storage backend for [TiDB](https://docs.pingcap.com/tidb/stable/overview),  TiKV is an open source distributed transactional key-value database built in [Rust](https://www.rust-lang.org). It provides transactional key-value APIs with ACID guarantees. The project provides a unifying distributed storage layer for applications that need data persistence, horizontal scalability, distributed transactions, high availability, and strong consistency, making it an ideal database for the next-generation cloud-native infrastructure. TiKV was accepted as a CNCF member project at the Sandbox level in August 2018, and as an incubating project in April 2019.
 
 "TiKV was one of our first Rust based projects and is truly a flexible and extensible cloud-native key-value store," said Chris Aniszczyk, CTO/COO of the Cloud Native Computing Foundation. "Since the project joined CNCF, we have been impressed with the project growth and desire to cultivate a global open source community."
 

@@ -8,4 +8,8 @@ categories: ['Company']
 image: /images/blog/pingcap-2020-year-in-review-newsql.jpg
 ---
 
+**Author:** PingCAP
+
+**Editor:** [Wenting Liu](https://github.com/WT-Liu)
+
 ![PingCAP 2020 Year in Review](media/pingcap-2020-year-in-review.jpg)

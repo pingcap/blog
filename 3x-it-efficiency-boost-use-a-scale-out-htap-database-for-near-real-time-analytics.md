@@ -16,6 +16,8 @@ redirectTag: ['Success-Story', 'TiDB', 'MySQL-Scalability']
 
 **Author:** Youzhi Zhu (Big Data Architect at ZTO Express)
 
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![Horizontally scaling database for real-time analytics](media/scale-out-htap-database-zto.jpg)
 
 [ZTO Express](https://www.crunchbase.com/organization/zto-express) is a leading express delivery company in China and one of the largest express delivery companies in the world. As of December 31, 2016, we provide express delivery service as well as other value-added logistics services in China, covering over 96% of China's cities and counties. On Nov 11, 2019, the day of an annual Chinese shopping festival, our sales promotion achieved over 200 million orders.

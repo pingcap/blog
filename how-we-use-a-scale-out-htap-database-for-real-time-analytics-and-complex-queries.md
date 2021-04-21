@@ -15,6 +15,8 @@ logo: /images/blog/customers/xiaohongshu-logo.png
 
 **Author:** Yihao Zhang (Senior Development Engineer at Xiaohongshu)
 
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![MySQL alternative: a scale-out HTAP database](media/mysql-alternative-database-at-xiaohongshu.jpg)
 
 [Xiaohongshu](https://en.wikipedia.org/wiki/Xiaohongshu) is a popular social media and e-commerce platform in China. Maybe you know us by our other name: RED or Little Red Book. The Xiaohongshu app allows users to post and share product reviews, travel blogs, and lifestyle stories via short videos and photos. By July 2019, we had over 300 million registered users.
