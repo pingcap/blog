@@ -8,7 +8,7 @@ categories: ['Product']
 image: /images/blog/tidb-in-kubernetes.jpg
 ---
 
-**Author:** [Aylei Wu](https://github.com/aylei)
+**Author:** [Aylei Wu](https://github.com/aylei) (Cloud infrastructure engineer at PingCAP)
 
 **Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
 

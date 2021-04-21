@@ -8,7 +8,7 @@ categories: ['Community']
 image: /images/blog/github-discussions.jpg
 ---
 
-**Author:** [Coco Yi](https://github.com/yikeke)
+**Author:** [Coco Yi](https://github.com/yikeke) (Tech Writer at PingCAP)
 
 **Transcreator:** [Charlotte Liu](https://github.com/CharLotteiu); **Editor:** Tom Dewan
 

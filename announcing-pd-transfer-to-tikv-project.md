@@ -10,7 +10,7 @@ categories: ['Community']
 
 **Author:** Maintainers of TiDB and TiKV
 
-**Editors:** [Caitin Chen](https://github.com/CaitinChen), [Queeny Jin](https://github.com/queenypingcap)
+**Editor:** [Calvin Weng](https://github.com/dcalvin)
 
 ![A distributed SQL database's documentation](media/pd-transfer-to-tikv-cloud-native.jpg)
 

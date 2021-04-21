@@ -11,7 +11,7 @@ categories: ['Engineering']
 **Authors:**
 
 - [Ben Ye](https://github.com/yeya24) (Chaos Mesh maintainer)
-- [Cwen Yin](https://github.com/cwen0) (Software Engineer at PingCAP)
+- [Cwen Yin](https://github.com/cwen0) (Chaos Mesh R&D engineer at PingCAP)
 
 **Editors**: [Calvin Weng](https://github.com/dcalvin), Tom Dewan
 

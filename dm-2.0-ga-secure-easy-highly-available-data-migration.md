@@ -11,7 +11,7 @@ press_release: true
 
 **Author:** PingCAP
 
-**Editor:** [Caitin Chen](https://github.com/CaitinChen), Tom Dewan
+**Editors:** [Caitin Chen](https://github.com/CaitinChen), Tom Dewan
 
 ![Data migration, database migration tool](media/data-migration-2.0.jpg)
 

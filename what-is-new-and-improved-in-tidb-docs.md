@@ -8,7 +8,7 @@ tags: ['Documentation']
 categories: ['Product']
 ---
 
-**Author:** [Lilian Lee](https://github.com/lilin90)
+**Author:** [Lilian Lee](https://github.com/lilin90) (Content Strategist at PingCAP)
 
 **Editor:** Tom Dewan
 

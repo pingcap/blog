@@ -8,7 +8,7 @@ categories: ['Product']
 image: /images/blog/monitoring-metrics-relation-graph.png
 ---
 
-**Author:** [Shuang Chen](https://github.com/crazycs520)
+**Author:** [Shuang Chen](https://github.com/crazycs520) (Software Engineer at PingCAP)
 
 **Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
 

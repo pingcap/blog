@@ -9,7 +9,7 @@ aliases: ['/blog/run-database-on-aws-with-better-performance-and-lower-cost/']
 image: /images/blog/tidb-on-aws-cloud-best-practices-banner.jpg
 ---
 
-**Author:** [Xinye Tao](https://github.com/tabokie)
+**Author:** [Xinye Tao](https://github.com/tabokie) (Cloud engineer at PingCAP)
 
 **Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
 

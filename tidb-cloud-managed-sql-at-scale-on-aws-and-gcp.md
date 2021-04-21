@@ -8,7 +8,7 @@ categories: ['Engineering']
 image: /images/blog/tidb-cloud-features.png
 ---
 
-**Author:** Ken Liu (PM of TiDB Cloud)
+**Author:** [Ken Liu](https://github.com/iamxy) (PM of TiDB Cloud)
 
 **Transcreator:** [Coco Yi](https://github.com/yikeke); **Editor:** Tom Dewan
 

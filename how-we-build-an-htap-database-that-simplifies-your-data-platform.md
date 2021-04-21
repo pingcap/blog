@@ -8,9 +8,9 @@ categories: ['Engineering']
 image: /images/blog/why-htap-matters.jpg
 ---
 
-**Author:** [Shawn Ma](https://github.com/ilovesoup)
+**Author:** [Shawn Ma](https://github.com/ilovesoup) (Tech Lead of the Realtime Analytics team at PingCAP)
 
-**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** [Caitin Chen](https://github.com/CaitinChen), Tom Dewan
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editors:** [Caitin Chen](https://github.com/CaitinChen), Tom Dewan
 
 ![Why an HTAP Database Matters](media/why-htap-matters.jpg)
 

@@ -8,7 +8,7 @@ categories: ['Community']
 image: /images/blog/making-htap-database-reality-what-i-learned-from-pingcap-vldb-paper.jpg
 ---
 
-**Author:** Xianlin Chen (DBA at PalFish)
+**Author:** Xianlin Chen (Head of Technology Hub at PalFish)
 
 **Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
 
