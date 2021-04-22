@@ -13,7 +13,7 @@ press_release: true
 
 **Editors:** [Calvin Weng](https://github.com/dcalvin), [Queeny Jin](https://github.com/queenypingcap)
 
-![Announcing New Operations in Japan](media/announcing-establishment-of-japan-office.png)
+![Announcing New Operations in Japan](media/announcing-establishment-of-japan-office.jpeg)
 
 TOKYO, JAPAN, APRIL 22, 2021 - In order to better serve the Japan market and support its growth, PingCAP, the enterprise-grade open-source distributed database provider, announced that the Japan office is formally established in Tokyo in April 2021.
 
