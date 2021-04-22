@@ -3,7 +3,7 @@ title: Announcing Establishment of Japan Office
 author: ['PingCAP']
 date: 2021-04-22
 summary: In order to better serve the Japan market and support its growth, PingCAP formally established a new office in Tokyo, Japan.
-image: /images/blog/announcing-establishment-of-japan-office.png
+image: /images/blog/announcing-establishment-of-japan-office.jpeg
 tags: ['Announcement']
 categories: ['Company']
 press_release: true
@@ -23,7 +23,7 @@ PingCAP’s flagship product, TiDB, is an open-source hybrid transactional and a
 
 In June 2020, PingCAP announced the beta release of [TiDB Cloud](https://en.pingcap.com/products/tidbcloud/), the fully managed TiDB service on AWS and GCP, which reduces the operational cost of using TiDB while allowing customers to focus on their applications development and not the complexities of their database.
 
-PingCAP has adopted open source as a core strategy of developing and promoting the next-gen database, especially in the context of cloud-native computing. TiDB has been open source since day one with its two sibling projects: TiKV, a distributed key-value storage, and Chaos Mesh®, a cloud-native chaos engineering platform. Both [TiKV](https//tikv.org/) and [Chaos Mesh®](https//www.chaos-mesh.org/) have been widely adopted around the world and are in [Cloud Native Computing Foundation](https://cncf.io) (CNCF) Graduated and Sandbox stages, respectively. In addition, PingCAP has been among the top 10 of the CNCF global contribution ranking list for the past 2 years in a row.
+PingCAP has adopted open source as a core strategy of developing and promoting the next-gen database, especially in the context of cloud-native computing. TiDB has been open source since day one with its two sibling projects: TiKV, a distributed key-value storage, and Chaos Mesh®, a cloud-native chaos engineering platform. Both [TiKV](https://tikv.org/) and [Chaos Mesh®](https://www.chaos-mesh.org/) have been widely adopted around the world and are in [Cloud Native Computing Foundation](https://cncf.io) (CNCF) Graduated and Sandbox stages, respectively. In addition, PingCAP has been among the top 10 of the CNCF global contribution ranking list for the past 2 years in a row.
 
 "With two projects hosted at CNCF, PingCAP has been an active contributing force to the broader cloud native community. We are glad to see PingCAP extend its global marketing and community efforts, and look forward to their contributions in fostering the development and adoption of cloud-native technologies worldwide." Says Priyanka Sharma, General Manager of CNCF, and Chris Aniszczyk, CTO of CNCF.
 
