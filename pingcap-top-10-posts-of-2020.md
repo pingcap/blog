@@ -30,10 +30,6 @@ From pondering the future of databases, to intrepid bug hunters, to TiDB case st
 
     In this post, PalFish explained why they chose TiDB over MongoDB and MySQL. The key factors were their application requirements and their perspective on NewSQL databases.
 
-* [Japan's Largest Mobile Payment Company Migrates from Aurora to a Scale-Out Database](https://pingcap.com/case-studies/japan-largest-mobile-payment-company-migrates-from-aurora-to-a-scale-out-database)
-
-    As PayPay's business grew, their payment management database became a bottleneck. Learn why PayPay chose TiDB over Aurora to handle their most crucial data and how they efficiently migrated to TiDB.
-
 * [Why We Chose a Distributed SQL Database to Complement MySQL](https://pingcap.com/case-studies/why-we-chose-a-distributed-sql-database-to-complement-mysql)
 
     VIPKid chose TiDB to manage its high data volume, highly concurrent write application. Learn how TiDB excels in that scenario, along with multidimensional queries, data life cycle management, and real-time analytics.

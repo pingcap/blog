@@ -106,11 +106,9 @@ TiDB Operator is the solid cornerstone on which we can enhance the stability of 
 * When all nodes in the Kubernetes cluster fail, TiDB Operator by default retains all stores and makes sure that no data is lost.
 * What if a disastrous failure happens, say, the data center is flooded? TiDB Operator regularly backs up your data, so you can restore your data to a recent time point.
 
-## Best practices: PayPay and Mashang Consumer Finance
+## Best practices: Mashang Consumer Finance
 
-How is TiDB Operator doing in real production environments? Let's look at two cases: PayPay and Mashang Consumer Finance.
-
-[PayPay](https://en.pingcap.com/case-studies/japan-largest-mobile-payment-company-migrates-from-aurora-to-a-scale-out-database) is the top mobile payment company in Japan. PayPay has deployed over 100 database nodes using TiDB Operator, including more than 30 nodes in the production environment managed by TiDB Operator. Back when PayPay conducted a [proof of concept](https://en.wikipedia.org/wiki/Proof_of_concept) (POC), they made a thorough disaster recovery drill, including various process failures, node failures, and AWS availability zone failures, as well as disaster recovery. They even simulated the whole AWS server going down to test if they could restore the cluster data through regular backups. To their relief, TiDB Operator passed all these tests, and PayPay gladly put their whole cluster on TiDB Operator and Kubernetes.
+How is TiDB Operator doing in real production environments? Let's look at the case of Mashang Consumer Finance.
 
 [Mashang Consumer Finance](https://www.crunchbase.com/organization/ms-finance), a Chinese financial services company, has put their system archive and batch processing services on TiDB, with over 60 physical nodes in the online cluster. After the company used TiDB Operator, their hybrid deployment hardware cost was reduced by 70%, compared to the previous physical machine deployment.
 
