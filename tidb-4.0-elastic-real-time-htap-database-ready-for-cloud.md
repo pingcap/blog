@@ -154,7 +154,7 @@ In the last year, we were often asked, "Why is TiDB so popular?"
 ![The TiDB project's stars on GitHub](media/tidb-stars-on-github.jpg)
 <div class="caption-center"> The TiDB project's stars on GitHub </div>
 
-We're grateful for the success of TiDB around the world and thrilled that our customers find TiDB so valuable. But the credit doesn't entirely belong to PingCAP. We gladly share it with the open-source community. After all, PingCAP is just part of that community. It's because of developers around the world—like Square, Azure, and Zoom in the United States, Dailymotion in France, and PayPay in Japan—who give us their feedback, file pull requests, and contribute code, that we can shape TiDB into what it is today and build TiDB's active open-source community.
+We're grateful for the success of TiDB around the world and thrilled that our customers find TiDB so valuable. But the credit doesn't entirely belong to PingCAP. We gladly share it with the open-source community. After all, PingCAP is just part of that community. It's because of developers around the world—like Square, Azure, and Zoom in the United States and Dailymotion in France—who give us their feedback, file pull requests, and contribute code, that we can shape TiDB into what it is today and build TiDB's active open-source community.
 
 When 4.0 was released, we made a word cloud to show the organizations that contribute to TiDB. We discovered that many organizations continually contribute to the TiDB community:
 
