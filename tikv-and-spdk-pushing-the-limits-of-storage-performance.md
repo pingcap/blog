@@ -1,7 +1,7 @@
 ---
 title: 'TiKV + SPDK: Pushing the Limits of Storage Performance'
 author: ["Ke'ao Yang"]
-date: 2021-04-25
+date: 2021-04-26
 summary: By introducing SPDK into TiKV, we enable the database to directly send instructions to NVMe disks, reducing read/write latency significantly.
 tags: ['Hackathon', 'TiKV']
 categories: ['Community']
