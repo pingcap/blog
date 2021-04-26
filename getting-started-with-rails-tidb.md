@@ -34,7 +34,7 @@ Before integrating with Rails, you need to deploy a TiDB cluster on your local m
 curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
 ```
 
-This will also add `$HOME/.tiup/bin` in your `PATH` environment variable,, so you can use TiUP directly.
+This will also add `$HOME/.tiup/bin` in your `PATH` environment variable, so you can use TiUP directly.
 
 ### Spin up a local cluster
 
@@ -85,7 +85,7 @@ TiDB provides [TiDB Dashboard](https://docs.pingcap.com/tidb/dev/dashboard-intro
 
 For more information on TiUP, see the [official documentation](https://docs.pingcap.com/tidb/stable/tiup-overview).
 
-## Configure Rails & TiDB
+## Configure Rails for TiDB
 
 Now that you have a running TiDB cluster, the next step is to integrate it with Rails.
 
@@ -99,7 +99,7 @@ rails new myapp --database=mysql
 
 ### Configure `database.yml`
 
-There are two configurations you need to pay attention in `database.yml`:
+There are two configurations you need to pay attention to in `database.yml`:
 
 - Set `port` to `4000`. The local TiDB cluster uses `4000` as the default port.
 - Set the database connection variable `tidb_enable_noop_functions` to `ON`. Rails needs to use the `get_lock` function, which is disabled in TiDB by default.
@@ -161,7 +161,7 @@ Because TiDB is compatible with MySQL, the usage is almost identical to that of 
 
 Now you can take a look at the generated data table:
 
-```
+```sql
 mysql> show create table users;
 + -------+------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------+
 | Table | Create Table |
