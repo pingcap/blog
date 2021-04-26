@@ -6,6 +6,7 @@ summary: TiDB 5.0 GA is released. As a one-stop HTAP solution, it delivers bette
 tags: ['Announcement', 'Release', 'HTAP', 'Real-time analytics']
 categories: ['Product']
 image: /images/blog/tidb-5.0-ga-one-stop-htap-solution.jpg
+press_release: true
 ---
 
 **Author:** PingCAP
