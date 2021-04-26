@@ -54,10 +54,6 @@ Besides, TiDB 5.0 has improved its performance in OLAP scenarios by introducing 
 
 * For TPC-H benchmark details, see [this report](https://docs.pingcap.com/tidb/v5.0/v5.0-performance-benchmarking-with-tpch).
 
-**Workload**
-
-16 tables, each with 10 million rows of data
-
 **Benchmark results** 
 
 ![TiDB 4.0 vs. TiDB 5.0 for TPC-H](media/tidb-4-vs-5-tpc-h.jpg)
