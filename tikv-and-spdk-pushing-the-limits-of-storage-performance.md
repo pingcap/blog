@@ -71,10 +71,10 @@ This solution solves the four problems we mentioned earlier: **it removes the sy
 To benchmark our experiment, we use [YCSB Workload A](https://github.com/brianfrankcooper/YCSB/wiki/Core-Workloads) (update heavy workload) to test the final I/O. As shown in the figures below, the results are beyond our expectations. The labels on data points refer to the number of client threads. Clearly, under the same latency, SPDK-based TiKV processes higher operations per second (OPS):
 
 ![YCSB Workload A read performance](media/tikv-and-spdk-ycsb-workload-a-read-performance.png)
-<div class="caption-center">YCSB Workload A read performance<div>
+<div class="caption-center">YCSB Workload A read performance</div>
 
 ![YCSB Workload A write performance](media/tikv-and-spdk-ycsb-workload-a-write-performance.png)
-<div class="caption-center">YCSB Workload A write performance<div>
+<div class="caption-center">YCSB Workload A write performance</div>
 
 ## Going forward
 
