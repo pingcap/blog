@@ -23,13 +23,12 @@ Today, we are proud to announce that [TiDB 5.0](https://docs.pingcap.com/tidb/v5
 
 ## High performance with multiple groundbreaking metrics
 
-Compared with version 4.0, TiDB 5.0 has achieved a noteworthy performance boost. By introducing [clustered indexes](https://docs.pingcap.com/tidb/v5.0/clustered-indexes), [async commit](https://docs.pingcap.com/tidb/v5.0/system-variables#tidb_enable_async_commit-new-in-v50), and [Coprocessor Cache](https://docs.pingcap.com/tidb/v5.0/coprocessor-cache#coprocessor-cache), **it has improved the sysbench and TPC-C benchmarks by 20% to 80% in OLTP scenarios.** Besides, it provides the [TiFlash MPP](https://docs.pingcap.com/tidb/v5.0/use-tiflash) framework. For a TPC-H performance test on 100 GB of data, the TiDB MPP engine's overall performance is 2 to 3 times that of Greenplum 6.15.0 or Apache Spark 3.1.1. For certain queries, the MPP engine's performance is even 7 times higher. The following are the metrics in some general performance test scenarios:
+Compared with version 4.0, TiDB 5.0 has achieved a noteworthy performance boost. By introducing [clustered indexes](https://docs.pingcap.com/tidb/v5.0/clustered-indexes), [async commit](https://docs.pingcap.com/tidb/v5.0/system-variables#tidb_enable_async_commit-new-in-v50), and [Coprocessor Cache](https://docs.pingcap.com/tidb/v5.0/coprocessor-cache#coprocessor-cache), **it has improved the sysbench and TPC-C benchmarks by 20% to 80% in OLTP scenarios.** The following are the metrics in some general performance test scenarios:
 
 **Hardware configuration**
 
 * For TPC-C benchmark details, see [this report](https://docs.pingcap.com/tidb/v5.0/v5.0-performance-benchmarking-with-tpcc).
 * For sysbench benchmark details, see [this report](https://docs.pingcap.com/tidb/v5.0/v5.0-performance-benchmarking-with-tpcc).
-* For TPC-H benchmark details, see [this report](https://docs.pingcap.com/tidb/v5.0/v5.0-performance-benchmarking-with-tpch).
 
 **Workload**
 
@@ -48,6 +47,18 @@ Compared with version 4.0, TiDB 5.0 has achieved a noteworthy performance boost.
 
 ![TiDB 4.0 vs. TiDB 5.0 for TPC-C](media/tidb-4-vs-5-tpc-c.jpg)
 <div class="caption-center"> TiDB 4.0 vs. TiDB 5.0 for TPC-C benchmarks (higher is better) </div>
+
+Besides, TiDB 5.0 has improved its performance in OLAP scenarios by introducing the [TiFlash MPP](https://docs.pingcap.com/tidb/v5.0/use-tiflash) computing model. For a TPC-H performance test, the TiDB MPP engine's overall performance is 2 to 3 times that of Greenplum 6.15.0 or Apache Spark 3.1.1. For certain queries, the MPP engine's performance is even 7 times higher.
+
+**Hardware configuration**
+
+* For TPC-H benchmark details, see [this report](https://docs.pingcap.com/tidb/v5.0/v5.0-performance-benchmarking-with-tpch).
+
+**Workload**
+
+16 tables, each with 10 million rows of data
+
+**Benchmark results** 
 
 ![TiDB 4.0 vs. TiDB 5.0 for TPC-H](media/tidb-4-vs-5-tpc-h.jpg)
 <div class="caption-center"> TiDB 4.0 vs. TiDB 5.0 for TPC-H benchmarks (lower is better) </div>
