@@ -30,6 +30,10 @@ From pondering the future of databases, to intrepid bug hunters, to TiDB case st
 
     In this post, PalFish explained why they chose TiDB over MongoDB and MySQL. The key factors were their application requirements and their perspective on NewSQL databases.
 
+* [Apache Flink + TiDB: A Scale-Out Real-Time Data Warehouse for Analytics Within Seconds](https://pingcap.com/blog/apache-flink-+-tidb-a-scale-out-real-time-data-warehouse-for-analytics-within-seconds/)
+
+    Do you think a real-time data warehouse's architecture is complex and hard to maintain? Not necessarily. By combining Apache Flink and TiDB, we offer an efficient, easy-to-use, real-time data warehouse with horizontal scalability and high availability.
+
 * [Why We Chose a Distributed SQL Database to Complement MySQL](https://pingcap.com/case-studies/why-we-chose-a-distributed-sql-database-to-complement-mysql)
 
     VIPKid chose TiDB to manage its high data volume, highly concurrent write application. Learn how TiDB excels in that scenario, along with multidimensional queries, data life cycle management, and real-time analytics.
