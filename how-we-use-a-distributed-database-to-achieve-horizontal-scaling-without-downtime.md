@@ -9,6 +9,7 @@ url: /success-stories/how-we-use-a-distributed-database-to-achieve-horizontal-sc
 customer: Bank of Beijing
 customerCategory: Financial Services
 logo: /images/blog/customers/bank-of-beijing-logo.png
+aliases: ['/blog/how-we-use-a-distributed-database-to-achieve-horizontal-scaling-without-downtime/']
 ---
 
 **Industry:** Banking

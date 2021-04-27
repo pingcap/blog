@@ -9,6 +9,7 @@ customer: WeBank
 customerCategory: Financial Services
 logo: /images/blog/customers/webank-logo.png
 image: /images/blog/tidb-as-mysql-alternative-database-in-webank.jpg
+aliases: ['/blog/how-we-reduced-batch-processing-time-by-58-percent-with-a-scale-out-mysql-alternative/']
 ---
 
 **Industry:** Banking
