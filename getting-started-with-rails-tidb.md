@@ -4,7 +4,7 @@ author: ['Hooopo']
 date: 2021-04-28
 summary: Integrating a complex ORM like ActiveRecord with TiDB can be difficult. This tutorial helps you get started with TiDB and Rails.
 tags: ['Tutorial']
-category: ['Community']
+categories: ['Community']
 image: /images/blog/getting-started-with-rails-tidb.jpg
 ---
 
