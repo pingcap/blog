@@ -208,7 +208,7 @@ In Rails, savepoints are introduced only when the transaction passes `true` to t
 
 From my experience, most Rails projects don't use savepoints very often, so migration wouldn't be much of a problem if needed. A savepoint is introduced when you perform migration, but if there's no concurrent migration, removing it won't bring unexpected consequences.
 
-## Reference
+## References
 
 * [What's New in TiDB 5.0](https://docs.pingcap.com/tidb/stable/release-5.0.0)
 * [`tidb_enable_noop_functions`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_enable_noop_functions-new-in-v40)
