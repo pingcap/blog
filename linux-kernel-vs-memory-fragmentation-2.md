@@ -38,19 +38,21 @@ Memory compaction for this zone breaks down into three major steps:
 1. Scan this zone from left to right for red pages of the MIGRATE_MOVABLE migration type.
 
     ![Search for movable pages](media/linux-kernel-movable-pages.png)
-<div class="caption-center"> Search for movable pages </div>
+    <div class="caption-center"> Search for movable pages </div>
 
 2. At the same time, scan this zone from right to left for free pages.
 
     ![Search for free pages](media/linux-kernel-free-pages.png)
+    <div class="caption-center"> Search for free pages </div>
 
 3. Shift movable pages at the bottom to free pages at the top, thus creating a contiguous chunk of free space.
 
     ![The small memory zone after memory compaction](media/a-small-memory-zone-after-memory-compaction.png)
+    <div class="caption-center"> The memory zone after memory compaction </div>
 
 This principle seems relatively simple, and the kernel also provides `/proc/sys/vm/compact_memory` as the interface for manually triggering memory compaction.
 
-However, as mentioned in [Part I](https://en.pingcap.com/blog/linux-kernel-vs-memory-fragmentation-1) and [Memory compaction issues](https://lwn.net/Articles/591998/), memory compaction is not very efficient in practice—at least for the most commonly-used kernel, v3.10—no matter whether it is triggered automatically or manually. Due to the high overhead it causes, it becomes a performance bottleneck instead.
+However, as mentioned in [Part I](https://pingcap.com/blog/linux-kernel-vs-memory-fragmentation-1) and [Memory compaction issues](https://lwn.net/Articles/591998/), memory compaction is not very efficient in practice—at least for the most commonly-used kernel, v3.10—no matter whether it is triggered automatically or manually. Due to the high overhead it causes, it becomes a performance bottleneck instead.
 
 The open source community did not abandon this feature but continued to optimize it in subsequent versions. For example, the community [introduced kcompactd](https://github.com/torvalds/linux/commit/698b1b3064) to the kernel in v4.6 and [made direct compaction more deterministic](https://lwn.net/Articles/686801/) in v4.8.
 
@@ -63,7 +65,7 @@ In kernel v3.10, memory compaction is performed under any of the following situa
 * Memory compaction is manually triggered via the `/proc` interface.
 * The system performs direct reclaim to meet higher-order memory requirements, including handling Transparent Huge Page (THP) page fault exceptions.
 
-In [Why We Disable Linux's THP Feature for Databases](https://en.pingcap.com/blog/why-we-disable-linux-thp-feature-for-databases), I described how THP slows down performance and recommended disabling this feature. I will put it aside in this article and mainly focus on the memory allocation path.
+In [Why We Disable Linux's THP Feature for Databases](https://pingcap.com/blog/why-we-disable-linux-thp-feature-for-databases), I described how THP slows down performance and recommended disabling this feature. I will put it aside in this article and mainly focus on the memory allocation path.
 
 ![Memory allocation in the slow path](media/memory-allocation-in-the-slow-path.png)
 <div class="caption-center"> Memory allocation in the slow path </div>
@@ -139,6 +141,6 @@ Another solution is to execute `drop cache` at the right time, but it may cause 
 
 ## Conclusion
 
-In [Part I](https://en.pingcap.com/blog/linux-kernel-vs-memory-fragmentation-1) of this post series, I briefly explained why the external fragmentation affects performance and introduced the efforts the community has made over the years in defragmentation. Here in Part II, I’ve focused on the defragmentation principles in the kernel v3.10 and how to observe memory fragmentation quantitatively and qualitatively.
+In [Part I](https://pingcap.com/blog/linux-kernel-vs-memory-fragmentation-1) of this post series, I briefly explained why the external fragmentation affects performance and introduced the efforts the community has made over the years in defragmentation. Here in Part II, I’ve focused on the defragmentation principles in the kernel v3.10 and how to observe memory fragmentation quantitatively and qualitatively.
 
 I hope this post series will be helpful for you! If you have any other thoughts about Linux memory management, welcome to join the [TiDB Community Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) workspace to share and discuss with us.
