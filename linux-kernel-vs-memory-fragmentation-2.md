@@ -8,13 +8,13 @@ categories: ['Engineering']
 image: /images/blog/linux-memory-fragmentation-and-defragmentation.png
 ---
 
-**Author:** Wenbo Zhang (Linux Kernel Engineer of the EE team at PingCAP)
+**Author:** [Wenbo Zhang](https://github.com/ethercflow) (Linux Kernel Engineer of the EE team at PingCAP)
 
 **Transcreator:** [Charlotte Liu](https://github.com/CharLotteiu); **Editor:** Tom Dewan
 
 ![Linux kernel memory fragmentation and defragmentation](media/linux-memory-fragmentation-and-defragmentation.png)
 
-In [Linux Kernel vs. Memory Fragmentation (Part I)](https://en.pingcap.com/blog/linux-kernel-vs-memory-fragmentation-1), I concluded that grouping by migration types only delays memory fragmentation, but does not fundamentally solve it. As the memory fragmentation increases and it does not have enough contiguous physical memory, performance degrades.
+In [Linux Kernel vs. Memory Fragmentation (Part I)](https://pingcap.com/blog/linux-kernel-vs-memory-fragmentation-1), I concluded that grouping by migration types only delays memory fragmentation, but does not fundamentally solve it. As the memory fragmentation increases and it does not have enough contiguous physical memory, performance degrades.
 
 Therefore, to mitigate the performance degradation, the Linux kernel community introduced **memory compaction** to the kernel.
 
@@ -22,7 +22,7 @@ In this post, I'll explain the principle of memory compaction, how to view the f
 
 ## Memory compaction
 
-Before memory compaction, the kernel used lumpy reclaim for defragmentation. However, this feature was removed from v3.10 (currently the most widely used kernel version). If you’d like to learn more, you can read about lumpy reclaim in the articles I listed in [A brief history of defragmentation](https://en.pingcap.com/blog/linux-kernel-vs-memory-fragmentation-1#a-brief-history-of-defragmentation). For now, let me bring your mind to memory compaction.
+Before memory compaction, the kernel used lumpy reclaim for defragmentation. However, this feature was removed from v3.10 (currently the most widely used kernel version). If you'd like to learn more, you can read about lumpy reclaim in the articles I listed in [A brief history of defragmentation](https://pingcap.com/blog/linux-kernel-vs-memory-fragmentation-1#a-brief-history-of-defragmentation). For now, let me bring your mind to memory compaction.
 
 ### Algorithm introduction
 
@@ -38,6 +38,7 @@ Memory compaction for this zone breaks down into three major steps:
 1. Scan this zone from left to right for red pages of the MIGRATE_MOVABLE migration type.
 
     ![Search for movable pages](media/linux-kernel-movable-pages.png)
+<div class="caption-center"> Search for movable pages </div>
 
 2. At the same time, scan this zone from right to left for free pages.
 
