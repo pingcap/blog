@@ -9,7 +9,9 @@ image: /images/blog/chaos-mesh-cncf-sandbox.jpg
 press_release: true
 ---
 
-**Author:** [Siddon Tang](https://github.com/cwen0) (Software Engineer at PingCAP)
+**Author:** [Siddon Tang](https://github.com/siddontang) (Chief Engineer at PingCAP)
+
+**Transcreator:** [Calvin Weng](https://github.com/dcalvin); **Editor:** [Queeny Jin](https://github.com/queenypingcap)
 
 ![HTAP database](media/chaos-mesh-cncf-sandbox.jpg)
 

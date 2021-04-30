@@ -8,6 +8,10 @@ categories: ['Product']
 image: /images/blog/troubleshoot-distributed-database-issues.jpg
 ---
 
+**Authors:** [Heng Long](https://github.com/lonng), [Shuang Chen](https://github.com/crazycs520) (Software Engineers at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![Troubleshoot distributed database issues](media/troubleshoot-distributed-database-issues.jpg)
 
 [TiDB](https://docs.pingcap.com/tidb/dev/overview) is an open-source, distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads. Ideally, a TiDB cluster should always be efficient and problem free. It should be stable, load-balanced, and have a reliable rate of queries per second (QPS). There shouldn't be any jitters (either in the cluster or on disk), and no hotspots, slow queries, or network fluctuations.

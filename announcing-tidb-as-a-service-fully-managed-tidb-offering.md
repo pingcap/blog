@@ -10,6 +10,10 @@ aliases: ['/blog/announcing-tidb-cloud-managed-as-a-service-and-in-the-marketpla
 press_release: true
 ---
 
+**Author:** PingCAP
+
+**Transcreator:** [Yajing Wang](https://github.com/anotherrachel); **Editors:** [Calvin Weng](https://github.com/dcalvin), [Queeny Jin](https://github.com/queenypingcap), Tom Dewan
+
 ![TiDB Cloud Beta](media/htap-tidb-cloud-beta.jpg)
 
 Today, we are thrilled to announce the beta release of TiDB Cloud, the fully-managed [TiDB](https://docs.pingcap.com/tidb/v4.0/overview) service delivered by [PingCAP](https://pingcap.com/). TiDB Cloud is the easiest, most economical, and most resilient way to unlock the full power of TiDB in the cloud, allowing the users to deploy and run TiDB clusters with just a few clicks.

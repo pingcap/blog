@@ -8,6 +8,10 @@ categories: ['Engineering']
 image: /images/blog/htap-database.jpg
 ---
 
+**Author:** [Shawn Ma](https://github.com/ilovesoup) (Tech Lead of the Real-time Analytics team at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![HTAP database](media/htap-database.jpg)
 
 [TiDB](https://docs.pingcap.com/tidb/dev/overview) is an open-source, distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads. 

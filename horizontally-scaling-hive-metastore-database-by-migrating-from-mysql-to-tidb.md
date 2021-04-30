@@ -15,6 +15,8 @@ logo: /images/blog/customers/zhihu-logo.png
 
 **Author:** Mengyu Hu (Platform Engineer at Zhihu)
 
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![MySQL horizontal scaling for Hive Metastore](media/horizontally-scale-hive-metastore.jpg)
 
 [Zhihu](https://en.wikipedia.org/wiki/Zhihu) which means "Do you know?" in classical Chinese, is the Quora of China: a question-and-answer website where all kinds of questions are created, answered, edited, and organized by the community of its users. As [China's biggest knowledge sharing platform](https://walkthechat.com/zhihu-chinas-largest-qa-platform-content-marketers-dream/), we have 220 million registered users and 30 million questions with more than 130 million answers on the site. In August 2019, we completed [$450 million in F-round funding](https://pandaily.com/zhihu-completes-largest-funding-round-ever-of-450-million/).
