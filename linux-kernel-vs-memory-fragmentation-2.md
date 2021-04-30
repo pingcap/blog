@@ -57,7 +57,6 @@ The open source community did not abandon this feature but continued to optimize
 
 In kernel v3.10, memory compaction is performed under any of the following situations:
 
-
 * The `kswapd` kernel thread is called to balance zones after a failed high-order allocation.
 * The` khugepaged` kernel thread is called to collapse a huge page.
 * Memory compaction is manually triggered via the `/proc` interface.
