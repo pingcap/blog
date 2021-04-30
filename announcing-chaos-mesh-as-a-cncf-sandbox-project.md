@@ -9,6 +9,8 @@ image: /images/blog/chaos-mesh-cncf-sandbox.jpg
 press_release: true
 ---
 
+**Author:** [Siddon Tang](https://github.com/cwen0) (Software Engineer at PingCAP)
+
 ![HTAP database](media/chaos-mesh-cncf-sandbox.jpg)
 
 We're thrilled to announce that [Chaos Mesh®](https://chaos-mesh.org/) is now officially accepted as a CNCF Sandbox project. It is also the second CNCF project from [PingCAP](http://www.pingcap.com), following [TiKV](http://tikv.org), the distributed Key-Value storage engine which is currently up for CNCF graduation. We'd like to thank all the contributors and adopters, without whom this could not be possible.

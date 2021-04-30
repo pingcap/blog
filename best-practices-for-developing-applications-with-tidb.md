@@ -7,6 +7,8 @@ tags: ['Best practice', 'How to']
 categories: ['Product']
 ---
 
+**Author:** [Tianshuang Qin](https://github.com/tshqin) (Principal Solutions Architect at PingCAP)
+
 ## 1. Introduction: target audiences and why this blog exists
 
 Target audience: Database architects, database administrators, infrastructure engineers, or application developers.

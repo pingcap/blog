@@ -8,7 +8,9 @@ categories: ['Product']
 image: /images/blog/database-replication.jpg
 ---
 
-Author: Tianshuang Qin (Principal Solutions Architect at PingCAP)
+**Author:** [Tianshuang Qin](https://github.com/tshqin) (Principal Solutions Architect at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
 
 ![Database replication](media/database-replication.jpg)
 
