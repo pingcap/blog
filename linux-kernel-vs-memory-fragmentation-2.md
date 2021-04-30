@@ -88,7 +88,7 @@ As for direct memory reclaim, it is not only performed by the kernel when the me
 
 As mentioned in the previous section, the kernel may perform memory reclaim or memory compaction when allocating memory. To make it easier to quantify the latency caused by direct memory reclaim and memory compaction for each participating thread, I committed two tools, [drsnoop](https://github.com/iovisor/bcc/blob/master/tools/drsnoop_example.txt) and [compactsnoop](https://github.com/iovisor/bcc/blob/master/tools/compactsnoop_example.txt), to the [BCC](https://github.com/iovisor/bcc) project.
 
-Both tools are based on kernel events and come with detailed documentation, but there is one thing I want to note:  to reduce the cost of introducing Berkeley Packet Filters (BPF), these two tools capture the latency of each corresponding event. Therefore, you may see from the output that each memory request corresponds to multiple latency results.
+Both tools are based on kernel events and come with detailed documentation, but there is one thing I want to note: to reduce the cost of introducing Berkeley Packet Filters (BPF), these two tools capture the latency of each corresponding event. Therefore, you may see from the output that each memory request corresponds to multiple latency results.
 
 The reason for the many-to-one relationship is that, for older kernels like v3.10, it is uncertain how many times the kernel will try to allocate during a memory allocation process in the slow path. The uncertainty also makes OOM Killer start to work either too early or too late, resulting in most tasks on the server being hung up for a long time.
 
@@ -131,7 +131,7 @@ Therefore, the monitoring interfaces and the kernel-events-based tools actually 
 
 The kernel is designed to take care of slow backend devices. For example, it implements the second chance method and the refault distance based on the LRU algorithm and does not support limiting the percentage of `page cache`. Some companies used to customize their own kernel to limit the `page cache` and tried to submit it to the upstream kernel community, but the community did not accept it. I think it may be because this feature causes problems such as working set refaults.
 
-Therefore,  to reduce the frequency of direct memory reclaim and mitigate fragmentation issues, it is a good choice to increase `vm.min_free_kbytes` (up to 5% of the total memory). This indirectly limits the percentage of `page cache` for scenarios with a lot of I/O operations, and the machine has more than 100 GB of memory.
+Therefore, to reduce the frequency of direct memory reclaim and mitigate fragmentation issues, it is a good choice to increase `vm.min_free_kbytes` (up to 5% of the total memory). This indirectly limits the percentage of `page cache` for scenarios with a lot of I/O operations, and the machine has more than 100 GB of memory.
 
 Although setting `vm.min_free_kbytes` to a bigger value wastes some memory, it is negligible. For example, if a server has 256 GB memory and you set `vm.min_free_kbytes` to `”4G”`, it only takes 1.5% of the total memory space.
 
