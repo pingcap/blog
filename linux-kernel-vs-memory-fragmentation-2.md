@@ -76,7 +76,7 @@ When the kernel allocates pages, if there are no available pages in the free lis
 2. If the memory allocation fails, which indicates that the memory may be slightly insufficient, the page allocator wakes up the `kswapd` thread to asynchronously reclaim pages and attempts to allocate pages again, also using the low watermark as the threshold.
 3. If the allocation fails again, it means that the memory shortage is severe. In this case, the kernel runs asynchronous memory compaction first.
 4. If the allocation still does not succeed after the async memory compaction, the kernel directly reclaims memory.
-5. After the direct memory reclaim, if the kernel doesn’t reclaim enough pages to meet the demand, it performs direct memory compaction. If it doesn’t reclaim a single page, the OOM Killer is called to deallocate memory.
+5. After the direct memory reclaim, if the kernel doesn't reclaim enough pages to meet the demand, it performs direct memory compaction. If it doesn't reclaim a single page, the OOM Killer is called to deallocate memory.
 
 The above steps are only a simplified description of the actual workflow. In real practice, it is more complicated and will be different depending on the requested memory order and allocation flags.
 
@@ -92,13 +92,13 @@ Both tools are based on kernel events and come with detailed documentation, but 
 
 The reason for the many-to-one relationship is that, for older kernels like v3.10, it is uncertain how many times the kernel will try to allocate during a memory allocation process in the slow path. The uncertainty also makes OOM Killer start to work either too early or too late, resulting in most tasks on the server being hung up for a long time.
 
-After the kernel merged the patch [mm: fixed 100% CPU kswapd busyloop on unreclaimable nodes](https://github.com/torvalds/linux/commit/c73322d0) in v4.12, the maximum number of direct memory reclaims is limited to 16. Let’s assume that the average latency of a direct memory reclaim is 10 ms. (Shrinking active or inactive LRU chain tables is time consuming for today’s servers with several hundred gigabytes of RAM. There is also an additional delay if the server needs to wait for a dirty page to be written back.)
+After the kernel merged the patch [mm: fixed 100% CPU kswapd busyloop on unreclaimable nodes](https://github.com/torvalds/linux/commit/c73322d0) in v4.12, the maximum number of direct memory reclaims is limited to 16. Let's assume that the average latency of a direct memory reclaim is 10 ms. (Shrinking active or inactive LRU chain tables is time consuming for today's servers with several hundred gigabytes of RAM. There is also an additional delay if the server needs to wait for a dirty page to be written back.)
 
 If a thread asks the page allocator for pages and gets enough memory after only one direct memory reclaim, the latency of this allocation increases by 10 ms. If the kernel tries 16 times before reclaiming enough memory spaces, then the increased latency of this allocation is 160 ms instead of 10 ms, which may severely degrade performance.
 
 #### View the fragmentation index
 
-Let’s come back to memory compaction. There are four main steps for the core logic of memory compaction:
+Let's come back to memory compaction. There are four main steps for the core logic of memory compaction:
 
 1. Determine whether a memory zone is suitable for memory compaction.
 2. Set the starting page frame number for scanning.
@@ -133,7 +133,7 @@ The kernel is designed to take care of slow backend devices. For example, it imp
 
 Therefore,  to reduce the frequency of direct memory reclaim and mitigate fragmentation issues, it is a good choice to increase `vm.min_free_kbytes` (up to 5% of the total memory). This indirectly limits the percentage of `page cache` for scenarios with a lot of I/O operations, and the machine has more than 100 GB of memory.
 
-Although setting `vm.min_free_kbytes` to a bigger value wastes some memory, it is negligible. For example, if a server has 256 GB memory and you set `vm.min_free_kbytes` to `”4G”`, it only takes 1.5% of the total memory space.
+Although setting `vm.min_free_kbytes` to a bigger value wastes some memory, it is negligible. For example, if a server has 256 GB memory and you set `vm.min_free_kbytes` to `"4G"`, it only takes 1.5% of the total memory space.
 
 The community apparently noticed the waste of memory as well, so the kernel merged the patch [mm: scale kswapd watermarks in proportion to memory](http://lkml.iu.edu/hypermail/linux/kernel/1602.3/02009.html) in v4.6 to optimize it.
 
@@ -141,6 +141,6 @@ Another solution is to execute `drop cache` at the right time, but it may cause 
 
 ## Conclusion
 
-In [Part I](https://pingcap.com/blog/linux-kernel-vs-memory-fragmentation-1) of this post series, I briefly explained why the external fragmentation affects performance and introduced the efforts the community has made over the years in defragmentation. Here in Part II, I’ve focused on the defragmentation principles in the kernel v3.10 and how to observe memory fragmentation quantitatively and qualitatively.
+In [Part I](https://pingcap.com/blog/linux-kernel-vs-memory-fragmentation-1) of this post series, I briefly explained why the external fragmentation affects performance and introduced the efforts the community has made over the years in defragmentation. Here in Part II, I've focused on the defragmentation principles in the kernel v3.10 and how to observe memory fragmentation quantitatively and qualitatively.
 
 I hope this post series will be helpful for you! If you have any other thoughts about Linux memory management, welcome to join the [TiDB Community Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) workspace to share and discuss with us.
