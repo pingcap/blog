@@ -17,7 +17,7 @@ aliases: ['/blog/tidb-on-arm-based-k8s-cluster-x86-performance-at-15-percent-low
 
 ## Benchmark purpose
 
-The following tests compare the performance of [TiDB](https://docs.pingcap.com/tidb/stable/), a MySQL compatible NewSQL database, running on an Arm-based Amazon Elastic Kubernetes Service (EKS) cluster and on an x86-based EKS cluster. The tests use an Online Transactional Processing (OLTP) workload, and the benchmarking tools are TPC-C and sysbench.
+The following tests compare the performance of [TiDB](https://docs.pingcap.com/tidb/stable/), a MySQL compatible NewSQL database, running on an Arm-based Amazon Elastic Kubernetes Service (EKS) cluster and on an x86-based EKS cluster. The tests use an Online Transactional Processing (OLTP) workload, and the benchmarking tools are TPC-C and sysbench. For more information on the inspiration of the benchmark, please refer to [AWS Startups Blog](https://aws.amazon.com/blogs/startups/achieve-better-price-to-performance-for-tidb-graviton2-processors/).
 
 ## Benchmark environment
 
@@ -210,6 +210,8 @@ The following table summarizes the disk that we used for different components.
 We used one c5.4xlarge EC2 instance as a benchmark node where TPC-C and sysbench are deployed.
 
 Each EKS cluster consists of seven worker nodes and one admin (control plane) node. Seven worker nodes serve as dedicated TiDB, TiKV, and PD nodes. 
+
+To better understand the role of each component and architecture diagram, please refer to [AWS Startups Blog](https://aws.amazon.com/blogs/startups/achieve-better-price-to-performance-for-tidb-graviton2-processors/).
 
 <table>
   <tr>
@@ -1651,13 +1653,13 @@ In the following price-performance table:
    <td>
    </td>
    <td><p style="text-align: right">
--16.00%</p>
+-20.64%</p>
 
    </td>
    <td>
    </td>
    <td><p style="text-align: right">
--16.21%</p>
+-20.77%</p>
 
    </td>
   </tr>
@@ -1665,5 +1667,5 @@ In the following price-performance table:
 
 ## Conclusion
 
-Benchmarking results from both TPC-C and sysbench have shown that the Graviton2 processor has better performance compared to the x86 processor. In some cases, Graviton2 outperforms x86 by up to 18%. After factoring in the hardware cost, the Graviton2 processor has a better price-performance ratio than the x86—on average 20% lower. The results are only based on the workloads (100 GB, 500 GB, 1 TB) we tested. In the future, we will include more complex and larger workloads with better EBS storage support. 
+Benchmarking results from both TPC-C and sysbench have shown that the Graviton2 processor has better performance compared to the x86 processor. In some cases, Graviton2 outperforms x86 by up to 18%. After factoring in the hardware cost, the Graviton2 processor has a better price-performance ratio than the x86—on average 20% lower. The results are only based on the workloads (100 GB, 500 GB, 1 TB) we tested. For limitations and future plans on the benchmark, please refer to [AWS Startups Blog](https://aws.amazon.com/blogs/startups/achieve-better-price-to-performance-for-tidb-graviton2-processors/).
  
