@@ -24,7 +24,7 @@ TiDB is the leading open-source, MySQL compatible, distributed NewSQL database i
 *   **Simplified database architecture**: Eliminate complex data migration between transactional and analytical workloads by storing data in a single database  
 *   **Real-time operational analytics**: Run real-time analytical queries with our hybrid transactional-analytical processing (HTAP) capabilities 
 
-TiDB has been growing for the past 6 years, and is now deployed in production by over 1500 companies worldwide. Open source since day one, TiDB has donated two projects to the Cloud Native Computing Foundation (CNCF) and currently has over 400 contributors to its [Github repository](https://github.com/pingcap/tidb).
+TiDB has been growing for the past 6 years, and is now deployed in production by over 1500 companies worldwide. Open source since day one, TiDB has donated two projects to the Cloud Native Computing Foundation (CNCF) and currently has over 400 contributors to its [GitHub repository](https://github.com/pingcap/tidb).
 
 “The mission of PingCAP is to make developing data-intensive applications easy at any scale,” said Li Shen, VP of PingCAP.
 
