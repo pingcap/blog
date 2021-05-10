@@ -19,7 +19,7 @@ TiDB is the leading open-source, MySQL compatible, distributed NewSQL database i
 
 *   **More control over your scaling**: Scale your performance (TiDB) and storage (TiKV) nodes separately 
 *   **High availability and reliability**: Ensure business continuity for your mission critical applications with our ACID-compliant cluster deployment
-*   **Scalable Multi-Master: **No more bottlenecks - scale without restrictions with read and write capability on every node
+*   **Scalable Multi-Master:** No more bottlenecks - scale without restrictions with read and write capability on every node
 *   **High concurrency**: Have thousands of users query your data at the same time without sacrificing performance 
 *   **Simplified database architecture**: Eliminate complex data migration between transactional and analytical workloads by storing data in a single database  
 *   **Real-time operational analytics**: Run real-time analytical queries with our hybrid transactional-analytical processing (HTAP) capabilities 
