@@ -20,9 +20,9 @@ TiDB is the leading open-source, MySQL compatible, distributed NewSQL database i
 *   **More control over your scaling**: Scale your performance (TiDB) and storage (TiKV) nodes separately 
 *   **High availability and reliability**: Ensure business continuity for your mission critical applications with our ACID-compliant cluster deployment
 *   **Scalable Multi-Master: **No more bottlenecks - scale without restrictions with read and write capability on every node
-*   **High Concurrency**: Have thousands of users query your data at the same time without sacrificing performance 
-*   **Simplified Database Architecture**: Eliminate complex data migration between transactional and analytical workloads by storing data in a single database  
-*   **Real Time Operational Analytics**: Run real-time analytical queries with our hybrid transactional-analytical processing (HTAP) capabilities 
+*   **High concurrency**: Have thousands of users query your data at the same time without sacrificing performance 
+*   **Simplified database architecture**: Eliminate complex data migration between transactional and analytical workloads by storing data in a single database  
+*   **Real-time operational analytics**: Run real-time analytical queries with our hybrid transactional-analytical processing (HTAP) capabilities 
 
 TiDB has been growing for the past 6 years, and is now deployed in production by over 1500 companies worldwide. Open source since day one, TiDB has donated two projects to the Cloud Native Computing Foundation (CNCF) and currently has over 400 contributors to its [Github repository](https://github.com/pingcap/tidb).
 
@@ -42,8 +42,8 @@ TiDB Cloud also simplifies deployment, scaling, and recovering from outages thro
 
 Ready to give TiDB Cloud a try? Choose from one of the public preview options:
 
-*   **48-Hour Free Trial**: For developers interested in a quick preview and try out a standard TiDB cluster for 48 hours.
-*   **Proof of Concep**t: For developers who want to test out their applications. Apply for a free two week proof-of-concept with unlimited cluster size and dedicated technical support.
-*   **Preview-on-Demand**: For developers who want unlimited use. Get unlimited usage with a special public preview discount.
+*   **48-Hour free trial**: For developers interested in a quick preview and try out a standard TiDB cluster for 48 hours.
+*   **Proof of concep**t: For developers who want to test out their applications. Apply for a free two week proof-of-concept with unlimited cluster size and dedicated technical support.
+*   **Preview-on-demand**: For developers who want unlimited use. Get unlimited usage with a special public preview discount.
 
 Learn more about TiDB Cloud with our [Quick Start Guide](https://docs.pingcap.com/tidbcloud/beta/tidb-cloud-quickstart) and [TiDB Cloud blog post](https://pingcap.com/blog/tidb-cloud-managed-sql-at-scale-on-aws-and-gcp). Make sure to follow us on [Twitter](https://twitter.com/PingCAP) to stay updated on TiDB news!
