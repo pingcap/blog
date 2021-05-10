@@ -16,6 +16,8 @@ notShowOnLogoWall: true
 
 **Author:** Tan To Nguyen Duy (DevOps Engineer at VNG Corporation)
 
+**Editors:** [Caitin Chen](https://github.com/CaitinChen), Tom Dewan
+
 ![TiDB at ZaloPay infrastructure](media/tidb-at-zalopay-infrastructure.jpg)
 
 ## Introducing ZaloPay

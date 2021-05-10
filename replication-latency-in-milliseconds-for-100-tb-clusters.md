@@ -8,6 +8,10 @@ categories: ['Product']
 image: /images/blog/cdc-in-database.jpg
 ---
 
+**Author:** [Fei Yang](https://github.com/amyangfei) (Software Engineer at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![Change data capture](media/cdc-in-database.jpg)
 
 [TiDB](https://pingcap.com/docs/stable/) is an open-source, distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads. Before 4.0, TiDB provided [TiDB Binlog](https://pingcap.com/docs/stable/reference/tidb-binlog/overview/#tidb-binlog-cluster-overview) to achieve near real-time replication to downstream platforms. But as time goes by, it's difficult for TiDB Binlog to meet rapidly changing requirements and effectively handle emerging scenarios. 

@@ -8,6 +8,10 @@ categories: ['Engineering']
 image: /images/blog/tidb-performance.jpg
 --- 
 
+**Authors:** [Wei Liu](https://github.com/Little-Wallace), [Shenghui Wu](https://github.com/wshwsh12) (Software Engineers at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![TiDB performance improved](media/tidb-performance.jpg)
 
 As our [previous post](https://pingcap.com/blog/tidb-4.0-preview-easier-to-use-production-ready-htap-database/) described, TiDB 4.0 is an easier-to-use, production-ready [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) database. Our long-term mission is to build a high-performance distributed SQL database to help you solve your business growth pains in [Online Transactional Processing](https://en.wikipedia.org/wiki/Online_transaction_processing) (OLTP) and real-time analytical scenarios. 

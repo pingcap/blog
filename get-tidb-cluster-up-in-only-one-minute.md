@@ -8,6 +8,10 @@ categories: ['Product']
 image: /images/blog/quickly-install-tidb-cluster.jpg
 ---
 
+**Author:** [Heng Long](https://github.com/lonng) (Software Engineer at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![Quickly install a TiDB cluster](media/quickly-install-tidb-cluster.jpg)
 
 [TiDB](https://pingcap.com/docs/stable/) is an open-source, distributed, [NewSQL](https://en.wikipedia.org/wiki/NewSQL) database that supports [hybrid transactional and analytical processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads. Nearly 1,000 companies in a variety of industries use TiDB in their production environments.

@@ -8,6 +8,10 @@ categories: ['Product']
 image: /images/blog/building-running-benchmarking-tikv-tidb.jpg
 ---
 
+**Author:** [Nick Cameron](https://github.com/nrc) (Database Engineer at PingCAP)
+
+**Editor:** [Caitin Chen](https://github.com/CaitinChen)
+
 ![Building, running, and benchmarking TiKV and TiDB](media/building-running-benchmarking-tikv-tidb.jpg)
 
 [TiDB](https://pingcap.com/docs/stable/) is a distributed, MySQL-compatible database. It is built on top of [TiKV](https://pingcap.com/docs/stable/architecture/#tikv-server), a distributed key-value store. Building these projects is easy - clone the Git repos, then run `make`. Unfortunately, running development builds is a bit more complicated. (Although hopefully it will get a lot easier in the near future thanks to TiUP). In this post, I'm going to go over how to build and run your own TiDB or TiKV, and how to run some benchmarks on those databases.
