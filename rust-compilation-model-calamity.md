@@ -8,7 +8,7 @@ categories: ['Engineering']
 image: /images/blog/rust-compile-time-adventures.png
 ---
 
-**Author:** [Brian Anderson](https://github.com/brson?locale=ja) (Senior Database Engineer at PingCAP)
+**Author:** [Brian Anderson](https://github.com/brson) (Senior Database Engineer at PingCAP)
 
 **Editor:** [Calvin Weng](https://github.com/dcalvin)
 
