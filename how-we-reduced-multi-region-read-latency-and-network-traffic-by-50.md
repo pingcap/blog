@@ -8,7 +8,7 @@ categories: ['Engineering']
 image: /images/blog/reduce-multi-region-read-latency-and-network-traffic.png
 ---
 
-**Authors:** [Tianyi Zhuang](https://github.com/TennyZhuang), [Hetian Zhu](https://github.com/Fullstop000), [Peng Qu](https://github.com/hicqu), [Haoxiang Lin](https://github.com/HaoxiangLin)
+**Authors:** [Tianyi Zhuang](https://github.com/TennyZhuang), [Hetian Zhu](https://github.com/Fullstop000), [Peng Qu](https://github.com/hicqu), Haoxiang Lin
 
 **Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
 
