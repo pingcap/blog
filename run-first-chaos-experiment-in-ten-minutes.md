@@ -1,12 +1,16 @@
 ---
 title: Run Your First Chaos Experiment in 10 Minutes
-author: ['Chengwen Yin']
+author: ['Cwen Yin']
 date: 2020-03-18
 summary: In this 10-minute tutorial, we will help you to quickly get started with Chaos Engineering and run your first chaos experiment with Chaos Mesh.
 tags: ['Chaos Mesh', 'How to']
 categories: ['Product']
 image: /images/blog/run-first-chaos-experiment-in-ten-minutes.jpg
 ---
+
+**Author:** [Cwen Yin](https://github.com/cwen0) (Software Engineer at PingCAP)
+
+**Transcreator:** [Yajing Wang](https://github.com/anotherrachel); **Editors:** [Calvin Weng](https://github.com/dcalvin), [Caitin Chen](https://github.com/CaitinChen), Tom Dewan
 
 ![Run your first chaos experiment in 10 minutes](media/run-first-chaos-experiment-in-ten-minutes.jpg)
 

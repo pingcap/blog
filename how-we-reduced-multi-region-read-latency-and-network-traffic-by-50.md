@@ -8,6 +8,10 @@ categories: ['Engineering']
 image: /images/blog/reduce-multi-region-read-latency-and-network-traffic.png
 ---
 
+**Authors:** [Tianyi Zhuang](https://github.com/TennyZhuang), [Hetian Zhu](https://github.com/Fullstop000), [Peng Qu](https://github.com/hicqu), Haoxiang Lin
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![reduce-multi-region-read-latency-and-network-traffic](media/reduce-multi-region-read-latency-and-network-traffic.png)
 
 In data-critical industries like the financial industry, data storage and access need a **high availability architecture**. Within this architecture, if a server goes down, the system can still provide services. But if a natural disaster like an earthquake occurs, there might be a network partition or, even worse, all the servers in the data center (DC) could fail. In this case, to guarantee system availability, we need a **remote disaster recovery architecture**. What's more, it's better to keep a long distance between data centers, so that a disaster in one region won't make a huge impact on another.

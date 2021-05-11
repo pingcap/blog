@@ -8,6 +8,10 @@ categories: ['Engineering']
 image: /images/blog/rust-compile-time-adventures.png
 ---
 
+**Author:** [Brian Anderson](https://github.com/brson) (Senior Database Engineer at PingCAP)
+
+**Editor:** [Caitin Chen](https://github.com/CaitinChen)
+
 ![Rust huge compilation units](media/rust-compile-time-adventures.png)
 
 The Rust programming language compiles fast software slowly.

@@ -8,6 +8,10 @@ categories: ['Company']
 image: /images/blog/remote-work-part-1.png
 ---
 
+**Author:** [Nick Cameron](https://github.com/nrc) (Database Engineer at PingCAP)
+
+**Editor:** [Caitin Chen](https://github.com/CaitinChen)
+
 ![Remote Work](media/remote-work-part-1.png)
 
 I've been working remotely (in various ways and at various companies) for nearly ten years. I love working remotely, I am happier and more productive. However, it takes some adjustment and it's not for everyone. Given that we are currently seeing the [world's largest ever experiment in remote working](https://www.latimes.com/business/story/2020-02-03/chinese-businesses-turn-to-remote-work-coronavirus), I thought now would be a good time for a few blog posts.

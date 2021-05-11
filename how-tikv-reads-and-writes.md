@@ -8,6 +8,10 @@ categories: ['Engineering']
 image: /images/blog/how-tikv-reads-and-writes.png
 ---
 
+**Author:** [Siddon Tang](https://github.com/siddontang) (Chief Engineer at PingCAP)
+
+**Transcreator:** [Calvin Weng](https://github.com/dcalvin)
+
 ![How TiKV reads and writes](media/how-tikv-reads-and-writes.png)
 
 This article introduces in detail how TiKV handles read and write operations. Together we will explore how TiKV, as a distributed database, stores the data contained in a write request and how it retrieves the corresponding data with consistency guaranteed.

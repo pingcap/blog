@@ -8,6 +8,10 @@ categories: ['Engineering']
 image: /images/blog/large-transactions.jpg
 ---
 
+**Author:** [Nick Cameron](https://github.com/nrc) (Database Engineer at PingCAP)
+
+**Editor:** [Caitin Chen](https://github.com/CaitinChen)
+
 ![Large transactions in TiDB](media/large-transactions.jpg)
 
 [TiDB](https://pingcap.com/docs/stable/) is an open-source, distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads. In [TiDB 4.0](https://pingcap.com/docs/stable/releases/release-4.0.0-rc.1/), we've extended the transaction system to handle large transactions. Previously, TiDB limited the number of reads and writes in a transaction. In version 4.0, there is a much larger size limit on transactions (10 GB). In this blog post, I'll describe how we implemented support for large transactions. This post won't explain TiDB's transactions, I'll have a post about that at some point.

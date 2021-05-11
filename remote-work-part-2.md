@@ -8,6 +8,10 @@ categories: ['Company']
 image: /images/blog/remote-work-part-2.png
 ---
 
+**Author:** [Nick Cameron](https://github.com/nrc) (Database Engineer at PingCAP)
+
+**Editor:** [Caitin Chen](https://github.com/CaitinChen)
+
 ![Remote work - part 2](media/remote-work-part-2.png)
 
 In my [last post](https://pingcap.com/blog/remote-work-part-1/) I talked a bit about some general issues with remote work. In this post I am going to focus on communication - probably the most important thing for remote workers to master. I am personally still working on this stuff - I'm a bit shy and an introvert and need to do better at keeping in touch.

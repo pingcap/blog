@@ -9,6 +9,10 @@ image: /images/blog/a-raft-based-htap-database.jpg
 aliases: ['/blog/vldb-2020-tidb-a-new-line-for-htap-databases/']
 ---
 
+**Author:** PingCAP
+
+**Editors:** [Queeny Jin](https://github.com/queenypingcap), Tom Dewan
+
 ![A Raft-based HTAP database](media/a-raft-based-htap-database.jpg)
 
 At [PingCAP](https://pingcap.com/), our goal is to build a database that is a single, real-time source of truth so that the applications and the businesses on top of it can adapt to uncertainty. As we built [TiDB](https://docs.pingcap.com/tidb/v4.0/overview), we benefited from databases and distributed systems research such as Raft and Spanner. Along the journey, we've developed some novel ideas, and we are thrilled to contribute them back to the academic community.

@@ -8,6 +8,10 @@ categories: ['Engineering']
 image: /images/blog/find-rust-program-bottlenecks-online-using-go-tool.jpg
 ---
 
+**Author:** [Ke'ao Yang](https://github.com/YangKeao) (Software Engineer at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![Find Rust program bottlenecks online using a Go tool](media/find-rust-program-bottlenecks-online-using-go-tool.jpg)
 
 Profiling large [Rust](https://en.wikipedia.org/wiki/Rust_(programming_language)) applications online is difficult. Current profilers are not up to the job.

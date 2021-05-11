@@ -9,7 +9,9 @@ image: /images/blog/htap-cloud-native-database.jpg
 press_release: true
 ---
 
-**Author:** Siddon Tang (Chief Architect at PingCAP)
+**Author:** [Siddon Tang](https://github.com/siddontang) (Chief Architect at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
 
 ![An HTAP, cloud-native database](media/htap-cloud-native-database.jpg)
 

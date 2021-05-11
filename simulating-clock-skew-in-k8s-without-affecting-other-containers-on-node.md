@@ -1,12 +1,16 @@
 ---
 title: Simulating Clock Skew in K8s Without Affecting Other Containers on the Node
-author: ['Chengwen Yin']
+author: ['Cwen Yin']
 date: 2020-04-20
 summary: As a cloud-native chaos engineering platform, Chaos Mesh supports TimeChaos, which simulates clock skew in containers or K8s for distributed systems to test system robustness, without affecting other containers on the node.
 tags: ['Chaos Mesh', 'Kubernetes', 'Chaos Engineering', 'Distributed system']
 categories: ['Engineering']
 image: /images/blog/clock-sync-chaos-engineering-k8s.jpg
 ---
+
+**Author:** [Cwen Yin](https://github.com/cwen0) (Software Engineer at PingCAP)
+
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editors:** [Caitin Chen](https://github.com/CaitinChen), [Calvin Weng](https://github.com/dcalvin), Tom Dewan
 
 ![Clock synchronization in distributed system](media/clock-sync-chaos-engineering-k8s.jpg)
 

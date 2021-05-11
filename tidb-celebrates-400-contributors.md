@@ -1,12 +1,16 @@
 ---
 title: TiDB Celebrates 400 Contributors
-author: ['Edward Huang']
+author: ['Ed Huang']
 date: 2020-03-05
 summary: The TiDB repository reaches the 400th contributor milestone. All our honors and achievements belong to the TiDB community, our beloved contributors, and distinguished committers.
 tags: ['Community news']
 categories: ['Community']
 image: /images/blog/tidb-celebrates-400-contributors.jpg
 ---
+
+**Author:** [Ed Huang](https://github.com/c4pt0r) (CTO at PingCAP)
+
+**Transcreator:** [Wenting Liu](https://github.com/WT-Liu); **Editors:** [Queeny Jin](https://github.com/queenypingcap), [Calvin Weng](https://github.com/dcalvin), [Caitin Chen](https://github.com/CaitinChen)
 
 ![TiDB celebrates 400 contributors](media/tidb-celebrates-400-contributors.jpg)
 

@@ -8,6 +8,10 @@ categories: ['Product']
 image: /images/blog/pessimistic-locking.jpg
 --- 
 
+**Author:** The Transaction team at PingCAP
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![Concurrency control in database](media/pessimistic-locking.jpg)
 
 It's critical for modern distributed databases to provide fully ACID transactions. Distributed transactions require some form of concurrency control to guarantee that transactions are executed serially. The choice of concurrency control algorithm affects transaction restrictions and performance under high contention. That's why we did something about it.

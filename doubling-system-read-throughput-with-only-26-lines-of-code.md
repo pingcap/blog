@@ -9,6 +9,10 @@ image: /images/blog/follower-read-load-balancing-consistent-read.png
 aliases: ['/blog/achieving-5x-qps-with-only-26-lines-of-code/']
 ---
 
+**Author:** [Ed Huang](https://github.com/c4pt0r) (CTO at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![Doubling System Read Throughput with Only 26 Lines of Code](media/follower-read-load-balancing-consistent-read.png)
 
 On Dec 20, 2019, we released [TiDB 3.1 Beta](https://pingcap.com/docs/v3.1/releases/3.1.0-beta/). In this version, [TiDB](https://en.wikipedia.org/wiki/TiDB) introduced two significant features, [Follower Read](https://pingcap.com/docs/v3.1/reference/performance/follower-read/) and [Backup & Restore (BR)](https://pingcap.com/docs/v3.1/how-to/maintain/backup-and-restore/br/), and enriched [optimizer hints](https://pingcap.com/docs/v3.1/reference/performance/optimizer-hints/).

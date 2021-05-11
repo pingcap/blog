@@ -8,6 +8,10 @@ categories: ['Product']
 image: /images/blog/troubleshoot-cluster-issues.jpg
 ---
 
+**Authors:** [Xiangsheng Zheng](https://github.com/hundundm), [Di'an Luo](https://github.com/andylokandy), [Wenxuan Shi](https://github.com/breeswish) (Software Engineers at PingCAP), [Ed Huang](https://github.com/c4pt0r) (CTO at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** [Queeny Jin](https://github.com/queenypingcap), Tom Dewan
+
 ![Diagnose performance issues](media/troubleshoot-cluster-issues.jpg)
 
 Have you seen what a database workload "looks" like?

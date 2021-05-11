@@ -8,6 +8,10 @@ categories: ['Product']
 image: /images/blog/never-worry-about-slow-queries.jpg
 ---
 
+**Authors:** [Kenan Yao](https://github.com/eurekaka), [Haibin Xie](https://github.com/lamxTyler) (Software Engineers at PingCAP), [Ed Huang](https://github.com/c4pt0r) (CTO at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![SQL execution plan optimization](media/never-worry-about-slow-queries.jpg)
 
 The SQL execution plan is a critical factor that affects SQL statement performance. The stability of the SQL execution plan heavily influences the entire cluster's performance. If a relational database's optimizer chooses a wrong execution plan for a query, it usually has a negative impact on the system; for example, operations might take longer to respond or the database might get overloaded.

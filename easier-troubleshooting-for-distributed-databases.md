@@ -8,6 +8,10 @@ categories: ['Product']
 image: /images/blog/troubleshoot-distributed-databases.jpg
 ---
 
+**Authors:** [Wenxuan Shi](https://github.com/breeswish), [Ming Zhang](https://github.com/djshow832), [Shuang Chen](https://github.com/crazycs520) (Software Engineers at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![Troubleshoot distributed database](media/troubleshoot-distributed-databases.jpg)
 
 It's challenging to troubleshoot issues in a distributed database because the information about the system is scattered in different machines.
