@@ -1,6 +1,6 @@
 ---
 title: Chaos Mesh - Your Chaos Engineering Solution for System Resiliency on Kubernetes
-author: ['CWen Yin']
+author: ['Cwen Yin']
 date: 2020-01-15
 summary: Recently, PingCAP open-sourced Chaos Mesh, a Chaos Engineering platform that features all-around fault injection methods for complex Kubernetes systems. Find out how this testing tool can make your applications more reliable.
 tags: ['Chaos Mesh', 'Chaos Engineering', 'Kubernetes']
