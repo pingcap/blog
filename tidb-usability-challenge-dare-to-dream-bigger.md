@@ -8,6 +8,10 @@ categories: ['Community']
 image: /images/blog/tidb-usability-challenge.jpg
 ---
 
+**Author:** PingCAP
+
+**Transcreator:** [Yajing Wang](https://github.com/anotherrachel), [Calvin Weng](https://github.com/dcalvin); **Editor:** [Caitin Chen](https://github.com/CaitinChen)
+
 ![TiDB Usability Challenge](media/tidb-usability-challenge.jpg)
 
 In community we trust! As the TiDB community expands and the TiDB project evolves, we're inspired to see contributors joining us and demonstrating their passion and pursuit of the open-source spirit. To get more people involved and included, we launched the TiDB Challenge Program, a series community program to bring TiDB to a new level in terms of stability, performance, and usability. With some amazing improvements in performance in season 1 last year, we are now pleased to announce that season 2 is ready for you.

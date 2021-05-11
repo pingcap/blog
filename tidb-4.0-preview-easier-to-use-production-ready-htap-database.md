@@ -8,6 +8,10 @@ categories: ['Product']
 image: /images/blog/easier-to-use-production-ready-htap-database.png
 ---
 
+**Author:** [Siddon Tang](https://github.com/siddontang) (Chief Engineer at PingCAP)
+
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![An easier-to-use, production-ready HTAP database](media/easier-to-use-production-ready-htap-database.png)
 
 In a previous post, our CTO Ed Huang shared his thoughts about the [future of databases](https://pingcap.com/blog/future-of-database-unified-infrastructure-to-adapt-intelligently/). We're glad that we've always been on the journey to "building a better database." It has been more than nine months since we released [TiDB 3.0](https://pingcap.com/blog/tidb-3.0-announcement/). On April 8, PingCAP's fifth anniversary, we released the first release candidate (RC) for our landmark TiDB 4.0. With a set of groundbreaking tools that makes TiDB easier to use than ever, TiDB 4.0 enhances its [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) capabilities and continues to solve issues for large-scale, distributed SQL databases.

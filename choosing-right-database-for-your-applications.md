@@ -15,6 +15,8 @@ logo: /images/blog/customers/shopee-logo.png
 
 **Authors:** Chunhui Liu and Chao Hong (Database Administrators at Shopee)
 
+**Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
+
 ![Choosing right database for your applications](media/choosing-right-database-for-your-applications.png)
 
 [Shopee](https://en.wikipedia.org/wiki/Shopee) is the leading e-commerce platform in Southeast Asia and Taiwan. It is a platform tailored for the region, providing customers with an easy, secure, and fast online shopping experience through strong payment and logistical support.

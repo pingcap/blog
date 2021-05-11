@@ -8,6 +8,10 @@ categories: ['Company']
 image: /images/blog/remote-work-part-3.png
 ---
 
+**Author:** [Nick Cameron](https://github.com/nrc) (Database Engineer at PingCAP)
+
+**Editor:** [Caitin Chen](https://github.com/CaitinChen)
+
 ![Remote work - part 3](media/remote-work-part-3.png)
 
 This is the third (and last, for now) post in a series on remote work. [My previous post](https://pingcap.com/blog/remote-work-part-2/) discussed some basics for remote work and communication. In this post, I'll talk a bit about some of the practicalities, specifically around work/life balance.

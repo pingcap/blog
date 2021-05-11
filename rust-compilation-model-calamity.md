@@ -8,6 +8,10 @@ categories: ['Engineering']
 image: /images/blog/rust-compile-time-adventures.png
 ---
 
+**Author:** [Brian Anderson](https://github.com/brson?locale=ja) (Senior Database Engineer at PingCAP)
+
+**Editor:** [Calvin Weng](https://github.com/dcalvin)
+
 ![Rust Compile Time Adventures with TiKV](media/rust-compile-time-adventures.png)
 
 _The Rust programming language was designed for slow compilation times._
