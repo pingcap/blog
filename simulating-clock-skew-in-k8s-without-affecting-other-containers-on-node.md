@@ -8,9 +8,9 @@ categories: ['Engineering']
 image: /images/blog/clock-sync-chaos-engineering-k8s.jpg
 ---
 
-**Author:** [Cwen Yin](https://github.com/cwen0) (Software Engineer at PingCAP), 
+**Author:** [Cwen Yin](https://github.com/cwen0) (Software Engineer at PingCAP)
 
-[Calvin Weng](https://github.com/dcalvin)
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editors:** [Caitin Chen](https://github.com/CaitinChen), [Calvin Weng](https://github.com/dcalvin), Tom Dewan
 
 ![Clock synchronization in distributed system](media/clock-sync-chaos-engineering-k8s.jpg)
 
