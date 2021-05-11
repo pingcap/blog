@@ -9,7 +9,7 @@ image: /images/blog/rust-compile-time-adventures.png
 aliases: ['/blog/Rust-s-Huge-Compilation-Units/']
 ---
 
-**Author:** [Brian Anderson](https://github.com/brson?locale=ja) (Senior Database Engineer at PingCAP)
+**Author:** [Brian Anderson](https://github.com/brson) (Senior Database Engineer at PingCAP)
 
 **Editor:** [Caitin Chen](https://github.com/CaitinChen)
 
