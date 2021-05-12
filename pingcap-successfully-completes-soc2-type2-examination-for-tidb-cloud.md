@@ -1,5 +1,5 @@
 ---
-title: PingCAP Successfully Completes SOC 2 Type2 Examination for TiDB Cloud
+title: PingCAP Successfully Completes SOC 2 Type 2 Examination for TiDB Cloud
 author: [PingCAP]
 date: 2021-05-10
 summary: We are proud to announce the completion of our first SOC 2 Type 2 examination for the TiDB Cloud service, which demonstrated the operating effectiveness of our controls designed to keep our service and our customers' data secure.
