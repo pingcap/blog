@@ -26,7 +26,7 @@ jobs:
     #- name: Verify internal links
     #  run: ./hack/verify-links.sh
     - name: Verify internal link anchors
-      run: ./hack/verify-link-anchors.sh
+      run: sudo ./hack/verify-link-anchors.sh
     - name: "Check control characters"
       run:
         wget https://raw.githubusercontent.com/CharLotteiu/pingcap-docs-checks/main/check-control-char.py;
