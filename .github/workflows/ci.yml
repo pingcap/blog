@@ -21,10 +21,10 @@ jobs:
     - name: Markdown lint
       uses: avto-dev/markdown-lint@v1
       with:
-        config: '.github/.markdownlint.yaml'
+        config: '.github/.markdownlint.yml'
         args: '.'
-    #- name: Verify internal links
-    #  run: ./hack/verify-links.sh
+    - name: Verify internal links
+      run: ./hack/verify-links-doc.sh
     - name: Verify internal link anchors
       run: sudo ./hack/verify-link-anchors.sh
     - name: "Check control characters"
