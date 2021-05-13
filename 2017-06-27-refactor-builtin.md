@@ -30,6 +30,7 @@ In order to accelerate expression evaluation, we recently refactored its framewo
     This method refers to MySQL rules, inferring the return value type according to the parameter of the built-in function.
 
     Different function signatures will be generated based on the number & type of the parameters, and the return value type of the function.
+
     See detailed description of the function signature in the appendix at the end of this article.
 
 3. Implement the `evalYY()` method on all the function signatures corresponding to the built-in function. YY represents the return value type of the function signature.
