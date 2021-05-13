@@ -35,8 +35,10 @@ In order to accelerate expression evaluation, we recently refactored its framewo
 3. Implement the `evalYY()` method on all the function signatures corresponding to the built-in function. YY represents the return value type of the function signature.
 
 4. Add tests
-in the [expression](https://github.com/pingcap/tidb/tree/master/expression) directory, refine tests about the implementation of the given function in the `TestXX()` method.
-In the executor directory, add tests at the SQL level.
+
+    In the [expression](https://github.com/pingcap/tidb/tree/master/expression) directory, refine tests about the implementation of the given function in the `TestXX()` method.
+
+    In the executor directory, add tests at the SQL level.
 
 5. Run `make dev` and ensure that all the test cases pass.
 
@@ -214,6 +216,7 @@ The evaluate the `<` expression, take the types of the two parameters into accou
 Similarly, for the `CONCAT` expression in the expression tree above, the parameters should be converted to string type before evaluation. For the expression '+', the parameters should be converted to double before evaluation.
 
 Therefore, before refactoring, the framework of expression evaluation needs to  **determine the data type of the parameter on each branch repeatedly** for every group of data involved. If the parameter type does not meet the evaluation rules of the expression, you need to convert it to the corresponding data type.
+
 Moreover, from the definition of the `Expression.eval ()` method, we can see that when evaluating, we must **continually wrap and unwrap intermediate results through the Datum structure**, which also increases time and capacity cost.
 
 In order to solve these two problems, we refactored the expression evaluation framework.

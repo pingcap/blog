@@ -57,7 +57,9 @@ I want to categorize and sort out the previously listed questions. In general, t
   - Manage the node state, including manually online/offline nodes and automatically offline faulty nodes.
 
 If the first type of requirements are met, the system supports multi-replica disaster recovery, dynamic scalability, tolerance of node failure and automatic disaster recovery.
+
 If the second type of requirements are met, the load of the system becomes more balanced and easier to manage.
+
 To meet these needs, we need to, first of all, collect enough information, such as the state of each node, information of each Raft Group and the statistics of business access and operation. Then we should set some policies for PD to formulate a schedule plan to meet the previous requirements according to this information and the schedule policy.
 
 [Back to the top](#top)
@@ -65,6 +67,7 @@ To meet these needs, we need to, first of all, collect enough information, such 
 ## The Basic Operations of Scheduling
 
 The basic operations of schedule are the simplest. In other word, what we can do to meet the schedule policy. This is the essence of the whole scheduler.
+
 The previous scheduler requirements seem to be complicated, but can be generalized into 3 operations:
 
 + Add a Replica.

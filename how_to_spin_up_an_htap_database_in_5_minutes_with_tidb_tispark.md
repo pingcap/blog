@@ -228,7 +228,9 @@ Now let's launch TiSpark, the last missing piece of our hybrid database puzzle.
     ```
 
     This will take a few minutes.
+
     **Result:** Now you can Spark!
+
     ![Now you can Spark](media/now_you_can_spark.png)
 
 3. Use the following command to set `TPCH_001` as default database:
