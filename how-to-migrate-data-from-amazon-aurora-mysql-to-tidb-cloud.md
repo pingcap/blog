@@ -114,7 +114,7 @@ Based on the [Amazon User Guide for Linux Instances](https://docs.aws.amazon.com
 
 6. Click **Review and Launch**.
 7. On the **Review** page, click **Launch**.
-8. On the **Select an existing key pair or create a new key pair** dialog box, choose **Create a new key pair **or** Choose an existing key pair** and click **Launch Instances**. If you choose **Create a new key pair**, click **Download Key Pair** and make sure that the key is accessible.
+8. On the **Select an existing key pair or create a new key pair** dialog box, choose **Create a new key pair** or **Choose an existing key pair** and click **Launch Instances**. If you choose **Create a new key pair**, click **Download Key Pair** and make sure that the key is accessible.
 
 For more details on how to launch an EC2 instance, see [AWS EC2 Get Started Guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html).
 

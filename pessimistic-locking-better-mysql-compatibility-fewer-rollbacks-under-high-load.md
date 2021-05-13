@@ -6,7 +6,9 @@ summary: With improvements in stability and functionality in TiDB 4.0, we finall
 tags: ['Transaction', 'Distributed SQL database', 'MySQL compatibility']
 categories: ['Product']
 image: /images/blog/pessimistic-locking.jpg
---- 
+---
+
+<!-- markdownlint-disable MD037 -->
 
 **Author:** The Transaction team at PingCAP
 
@@ -18,7 +20,7 @@ It's critical for modern distributed databases to provide fully ACID transaction
 
 Since 2015, we at [PingCAP](https://pingcap.com/) have been building [TiDB](https://docs.pingcap.com/tidb/v4.0/overview), an open-source, MySQL-compatible, distributed SQL database. When MySQL users use TiDB, they don't need to modify much application code and can onboard TiDB more easily. It's known that MySQL uses pessimistic locking as its concurrency control method to ensure data consistency. **TiDB supports pessimistic locking, which improves TiDB's compatibility with MySQL and reduces transaction rollback rates in high-conflict scenarios.** Before TiDB 4.0, pessimistic locking was an experimental feature. Now we've improved its performance, stability, and compatibility with MySQL. Pessimistic locking becomes generally available in TiDB 4.0.
 
-In this post, I'll explain what pessimistic locking is, how it behaves, and how it differs from the MySQL version of pessimistic locking. 
+In this post, I'll explain what pessimistic locking is, how it behaves, and how it differs from the MySQL version of pessimistic locking.
 
 ## What is pessimistic locking?
 
@@ -30,7 +32,7 @@ There are two common concurrency control mechanisms in the database field:
 Pessimistic concurrency control can solve some of the issues caused by optimistic concurrency control. TiDB now implements both pessimistic and optimistic concurrency control mechanisms, which means:
 
 * **Transaction commits in TiDB won't fail due to locking issues except deadlocks.**
-* **MySQL users can use TiDB more easily.** MySQL supports pessimistic locking by default. Now TiDB also supports pessimistic locking, so MySQL users don't need to modify much application code to get started with TiDB. 
+* **MySQL users can use TiDB more easily.** MySQL supports pessimistic locking by default. Now TiDB also supports pessimistic locking, so MySQL users don't need to modify much application code to get started with TiDB.
 
 To help you better understand the two locking models, let's take online shopping as an analogy.
 
@@ -46,7 +48,7 @@ Assume that there are two websites where you can shop online. To complete an ord
    </td>
   </tr>
   <tr>
-   <td>A 
+   <td>A
    </td>
    <td>Quick and usually succeeds
    </td>
@@ -54,7 +56,7 @@ Assume that there are two websites where you can shop online. To complete an ord
    </td>
   </tr>
   <tr>
-   <td>B 
+   <td>B
    </td>
    <td>Slower; if a product is out of stock, the request may fail
    </td>
@@ -71,11 +73,11 @@ Website A uses optimistic concurrency control. If you try to buy something, you 
 
 * You might fail to place an order.
 * If other people place an order for the same item before you, the inventory changes. You may encounter a conflict and have to reorder.
-* In scenarios with severe conflicts and high retry costs, for example, when you want to buy 10,000 items in a single order, you will probably fail to place an order. 
+* In scenarios with severe conflicts and high retry costs, for example, when you want to buy 10,000 items in a single order, you will probably fail to place an order.
 
 ### Pessimistic locking in online shopping
 
-Website B uses pessimistic locking. It assumes that other buyers who add the same item before you might also place an order before you. So the inventory you see doesn't include items which are already in someone else's cart. 
+Website B uses pessimistic locking. It assumes that other buyers who add the same item before you might also place an order before you. So the inventory you see doesn't include items which are already in someone else's cart.
 
 If you shop on Website B, you get this kind of experience:
 
@@ -222,7 +224,7 @@ This example shows that the TiDB pessimistic transaction's behavior is consisten
 
 Let's see what may happen when a deadlock occurs.
 
-Taking shopping online as an example, suppose that both User A and User B want to buy masks and disinfectant. User A has all the disinfectant in his shopping cart, but he doesn't have any masks; User B has all the masks in his shopping cart, but he doesn't have any disinfectant. 
+Taking shopping online as an example, suppose that both User A and User B want to buy masks and disinfectant. User A has all the disinfectant in his shopping cart, but he doesn't have any masks; User B has all the masks in his shopping cart, but he doesn't have any disinfectant.
 
 If both Users A and B want to buy masks and disinfectant successfully, they should wait for each other to release some masks or disinfectant. Thus, a deadlock occurs.
 
@@ -305,7 +307,7 @@ The following table shows a specific comparison. Note that `id` is the primary k
 <br/>
 Query OK, 0 rows affected (0.00 sec)
 <br/>
- 
+
 <br/>
 mysql> SELECT * FROM t WHERE id>=10 AND id&lt;11 FOR UPDATE;
 <br/>
@@ -323,7 +325,7 @@ mysql> SELECT * FROM t WHERE id>=10 AND id&lt;11 FOR UPDATE;
 <br/>
 Query OK, 0 rows affected (0.00 sec)
 <br/>
- 
+
 <br/>
 > SELECT * FROM t WHERE id>=10 AND id&lt;11 FOR UPDATE;
 <br/>
@@ -333,7 +335,7 @@ Query OK, 0 rows affected (0.00 sec)
 <br/>
 Query OK, 0 rows affected (0.00 sec)
 <br/>
- 
+
 <br/>
 > SELECT * FROM t WHERE id>=10 AND id&lt;11 FOR UPDATE;
 <br/>
@@ -348,7 +350,7 @@ When TiDB executes a DML statement that includes an embedded `SELECT`, TiDB does
 
 <table>
   <tr>
-   <td colspan="3" >CREATE TABLE t1 (a INT, b INT DEFAULT 0, PRIMARY KEY (a,b)); 
+   <td colspan="3" >CREATE TABLE t1 (a INT, b INT DEFAULT 0, PRIMARY KEY (a,b));
 <br/>
 INSERT INTO t1 (a,b) VALUES (1070109, 99);
 <br/>

@@ -8,7 +8,6 @@ aliases: ['/blog/2017/06/27/refactor-builtin/']
 categories: ['Community']
 ---
 
-
 In order to accelerate expression evaluation, we recently refactored its framework. This tutorial will show you how to use the new computational framework to rewrite or add a built-in function in TiDB.
 
 ## Table of Content

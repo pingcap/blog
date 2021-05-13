@@ -268,7 +268,7 @@ We're running **242 TiDB databases in 15 applications**. To name a few:
   <tr>
    <td>Financial company
    </td>
-   <td>The financial real-time data warehouse’s underlying data storage 
+   <td>The financial real-time data warehouse’s underlying data storage
    </td>
    <td>The financial real-time data warehouse’s underlying data storage
    </td>
@@ -286,4 +286,3 @@ Thanks to TiDB's horizontal scalability, high availability, and HTAP capabilitie
 Now, at 58.com, we use databases including MySQL, Redis, MongoDB, Elasticsearch, and TiDB. We receive about 800 billion visits per day. We have 4,000+ clusters, with 1,500+ physical servers.
 
 If you have any questions or you'd like to learn more about our experience with TiDB, you can join the [TiDB community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog).
-

@@ -35,7 +35,7 @@ To prepare the environment using QKE:
 
 1. Log in to the QingCloud [web console](https://console.qingcloud.com/).
 2. Create a Kubernetes cluster with KubeSphere installed. From the left **Container Platform** menu, select **KubeSphere (QKE)**. The platform allows you to install various KubeSphere components.
-3. Power on KubeSphere's app management feature. On the **Environment Setting** page, in the **Extra Modules** configuration** checkbox, select **ks-openpitrix** ([OpenPitrix](https://github.com/openpitrix/openpitrix)). (In this example, I selected three working nodes to make sure that I had enough resources for the deployment later. You can customize your configuration based on your needs.)
+3. Power on KubeSphere's app management feature. On the **Environment Setting** page, in the **Extra Modules** configuration checkbox, select **ks-openpitrix** ([OpenPitrix](https://github.com/openpitrix/openpitrix)). (In this example, I selected three working nodes to make sure that I had enough resources for the deployment later. You can customize your configuration based on your needs.)
 
     The cluster will be up and running in about 10 minutes.
 

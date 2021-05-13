@@ -150,7 +150,6 @@ To guarantee data persistence, Raftstore frequently issues synchronous writes. T
 
 Several EC2 types have one or more local [instance stores](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) attached. These SSD drives co-locate physically with the instance you create, and therefore perform much better than cloud storage. However, the content in instance stores can't persist or be transferred after the instance is terminated. These limitations make instance stores vulnerable to host failures or updates and unfit for storing critical application data. The following table compares network disk and local instance store, tested with fio on `m5d.2xlarge`:
 
-
 <table>
   <tr>
    <th rowspan="2">

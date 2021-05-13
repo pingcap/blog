@@ -154,11 +154,11 @@ At present, MySQL is used with [Hive](https://en.wikipedia.org/wiki/Apache_Hive)
 
   - This involves data migration and real-time synchronization of incremental data (DTS).
 
-        [Mydumper](https://github.com/maxbube/mydumper) + [Loader](https://pingcap.com/docs/dev/reference/tools/loader/) is used to export the data in MySQL and then import the data to TiDB; TiDB DM can be used to synchronize the incremental data from MySQL to TiDB.
+    [Mydumper](https://github.com/maxbube/mydumper) + [Loader](https://pingcap.com/docs/dev/reference/tools/loader/) is used to export the data in MySQL and then import the data to TiDB; TiDB DM can be used to synchronize the incremental data from MySQL to TiDB.
 
   - MySQL uses a large number of auto-increment IDs as the primary key. When the data of sharded MySQL is aggregated to TiDB, the conflict of auto-increment IDs should be resolved.
 
-        This issue can be fixed by removing the auto-increment IDs and building the unique primary key on TiDB. The new TiDB DM version also has the feature of automatically handling the primary key during the process of merging sharded tables.
+    This issue can be fixed by removing the auto-increment IDs and building the unique primary key on TiDB. The new TiDB DM version also has the feature of automatically handling the primary key during the process of merging sharded tables.
 
 - Data migration from Hive to TiDB and from TiDB to Hive.
 
@@ -166,8 +166,8 @@ At present, MySQL is used with [Hive](https://en.wikipedia.org/wiki/Apache_Hive)
 
   - For data migration from TiDB to Hive, using [TiDB Binlog](https://github.com/pingcap/tidb-binlog) (Pump + Drainer), an enterprise tool developed by PingCAP, is a good solution. Drainer can export data to Kafka, MySQL, and TiDB. We are currently considering the schema of using Drainer to output data to Kafka in order to synchronize data from TiDB to Hive, as shown in the diagram below.
 
-        ![Synchronization Data from TiDB to Hive](media/synchronization-data-from-tidb-to-hive.png)
-        <div class="caption-center"> Synchronization Data from TiDB to Hive </div>
+![Synchronization Data from TiDB to Hive](media/synchronization-data-from-tidb-to-hive.png)
+<div class="caption-center"> Synchronization Data from TiDB to Hive </div>
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('TiDB, the Key to a Better Life for Meituan's 290 Million Monthly Users', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>

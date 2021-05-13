@@ -140,7 +140,7 @@ This new database infrastructure has brought them the following benefits:
 * TiDB supports online **horizontal scalability**. To scale out or scale in, they can add or remove nodes in the storage or computing layer at any time. The scaling process is transparent to application operations and maintenance staff.
 * TiDB has **high performance for OLTP workloads**. Its performance might be slightly lower than that of Oracle, but this is because TiDB is a distributed database.
 * **OLTP and OLAP workloads are separated**, and the pressure on a single node is gone.
-* TiDB supports** more flexible data analytics from various angles**.
+* TiDB supports **more flexible data analytics from various angles**.
 * Our **hardware cost is reduced**.
 
 For more details on how ZTO Express uses TiDB, read [their story](https://pingcap.com/case-studies/3x-it-efficiency-boost-use-a-scale-out-htap-database-for-near-real-time-analytics) about their 300% IT efficiency boost.

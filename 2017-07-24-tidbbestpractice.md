@@ -223,4 +223,3 @@ Simply put, TiDB can be used in the following scenarios:
 + Don't want to use the sharding solutions
 + The access mode has no obvious hotspot
 + Transactions, strong consistency, and disaster recovery
-
