@@ -85,25 +85,25 @@ See the following details about how to use Raft:
 
 1. Define its own storage and implement the Raft Storage trait. See the following Storage trait interface:
 
-```rust
-    // initial_state returns the information about HardState and ConfState in Storage
-    fn initial_state(&self) -> Result<RaftState>;
+    ```rust
+        // initial_state returns the information about HardState and ConfState in Storage
+        fn initial_state(&self) -> Result<RaftState>;
 
-    // return the log entries in the [low, high] range
-    fn entries(&self, low: u64, high: u64, max_size: u64) -> Result<Vec<Entry>>;
+        // return the log entries in the [low, high] range
+        fn entries(&self, low: u64, high: u64, max_size: u64) -> Result<Vec<Entry>>;
 
-    // get the term of the log entry according to the corresponding log index
-    fn term(&self, idx: u64) -> Result<u64>;
+        // get the term of the log entry according to the corresponding log index
+        fn term(&self, idx: u64) -> Result<u64>;
 
-    // get the index from the first log entry at the current position
-    fn first_index(&self) -> Result<u64>;
+        // get the index from the first log entry at the current position
+        fn first_index(&self) -> Result<u64>;
 
-    // get the index from the last log entry at the current position
-    fn last_index(&self) -> Result<u64>;
+        // get the index from the last log entry at the current position
+        fn last_index(&self) -> Result<u64>;
 
-    // generate a current snapshot
-    fn snapshot(&self) -> Result<Snapshot>;
-```
+        // generate a current snapshot
+        fn snapshot(&self) -> Result<Snapshot>;
+    ```
 
 2. Create a raw node object and pass the corresponding configuration and customized storage instance to the object. About the configuration, we need to pay attention to `election_tick` and `heartbeat_tick`. Some of the Raft logics step by periodical ticks. For every Tick, the Leader will decide if the frequency of the heartbeat elapsing exceeds the frequency of the `heartbeat_tick`. If it does, the Leader will send heartbeats to the Followers and reset the elapse. For a Follower, if the frequency of the election elapsing exceeds the frequency of the `election_tick`, the Follower will initiate an election.
 

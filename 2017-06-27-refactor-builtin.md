@@ -28,10 +28,10 @@ In order to accelerate expression evaluation, we recently refactored its framewo
 
 2. Override the `XXFunctionClass.getFunction()` method:
 
- This method refers to MySQL rules, inferring the return value type according to the parameter of the built-in function.
+    This method refers to MySQL rules, inferring the return value type according to the parameter of the built-in function.
 
- Different function signatures will be generated based on the number & type of the parameters, and the return value type of the function.
- See detailed description of the function signature in the appendix at the end of this article.
+    Different function signatures will be generated based on the number & type of the parameters, and the return value type of the function.
+    See detailed description of the function signature in the appendix at the end of this article.
 
 3. Implement the `evalYY()` method on all the function signatures corresponding to the built-in function. YY represents the return value type of the function signature.
 
@@ -51,49 +51,49 @@ First, let's take a look at the [`expression/builtin_string.go`](https://github.
 
 1. Implement the `lengthFunctionClass.getFunction()` method. This method mainly accomplishes two tasks:
 
- 1). Infer the return value type of the `LEGNTH` function according to MySQL rules.
+    1. Infer the return value type of the `LEGNTH` function according to MySQL rules.
 
- 2). Generate function signature based on the number & type of parameters, and return value type of the `LENGTH` function. Because the `LENGTH` function only has one number & type of parameters, and return value type, we don't need to define a type for the new function signature. Instead, we modified the existing `builtinLengthSig`, so that it could be **composite with `baseIntBuiltinFunc`, which means that the return value type in the given function signature is int.**
+    2. Generate function signature based on the number & type of parameters, and return value type of the `LENGTH` function. Because the `LENGTH` function only has one number & type of parameters, and return value type, we don't need to define a type for the new function signature. Instead, we modified the existing `builtinLengthSig`, so that it could be **composite with `baseIntBuiltinFunc`, which means that the return value type in the given function signature is int.**
 
- ```go
- type builtinLengthSig struct {
-     baseIntBuiltinFunc
- }
- func (c *lengthFunctionClass) getFunction(args []Expression, ctx context.Context) (builtinFunc, error) {
+    ```go
+    type builtinLengthSig struct {
+        baseIntBuiltinFunc
+    }
+    func (c *lengthFunctionClass) getFunction(args []Expression, ctx context.Context) (builtinFunc, error) {
 
- //Infer the return value type of `LEGNTH` function according to MySQL rules
- tp := types.NewFieldType(mysql.TypeLonglong)
- tp.Flen = 10
- types.SetBinChsClnFlag(tp)
+    //Infer the return value type of `LEGNTH` function according to MySQL rules
+    tp := types.NewFieldType(mysql.TypeLonglong)
+    tp.Flen = 10
+    types.SetBinChsClnFlag(tp)
 
- //Generate function signature based on the number & type of parameters, and return value type. Note that after refactoring, instead of the `newBaseBuiltinFunc` method, the `newBaseBuiltinFuncWithTp` method is used here.
- //In the `newBaseBuiltinFuncWithTp` function declaration, `args` represents the function's parameters, `tp` represents the return value type of the function, and `argsTp` represents the correct types of all parameters in the function signature.
- // The number of parameters for `LENGTH` is 1, the parameter type is string, and the return value type is int. Therefore, `tp` here stands for the return value type of the function and `tpString` is used to identify the correct type of parameter. For a function with multiple parameters, when calling `newBaseBuiltinFuncWithTp`, we need to input the correct types of all parameters.
- bf, err := newBaseBuiltinFuncWithTp(args, tp, ctx, tpString)
-     if err != nil {
-            return nil, errors.Trace(err)
-     }
-     sig := &builtinLengthSig{baseIntBuiltinFunc{bf}}
-     return sig.setSelf(sig), errors.Trace(c.verifyArgs(args))
- }
- ```
+    //Generate function signature based on the number & type of parameters, and return value type. Note that after refactoring, instead of the `newBaseBuiltinFunc` method, the `newBaseBuiltinFuncWithTp` method is used here.
+    //In the `newBaseBuiltinFuncWithTp` function declaration, `args` represents the function's parameters, `tp` represents the return value type of the function, and `argsTp` represents the correct types of all parameters in the function signature.
+    // The number of parameters for `LENGTH` is 1, the parameter type is string, and the return value type is int. Therefore, `tp` here stands for the return value type of the function and `tpString` is used to identify the correct type of parameter. For a function with multiple parameters, when calling `newBaseBuiltinFuncWithTp`, we need to input the correct types of all parameters.
+    bf, err := newBaseBuiltinFuncWithTp(args, tp, ctx, tpString)
+        if err != nil {
+                return nil, errors.Trace(err)
+        }
+        sig := &builtinLengthSig{baseIntBuiltinFunc{bf}}
+        return sig.setSelf(sig), errors.Trace(c.verifyArgs(args))
+    }
+    ```
 
 2. Implement the `builtinLengthSig.evalInt()` method:
 
- ```go
- func (b *builtinLengthSig) evalInt(row []types.Datum) (int64, bool, error) {
-   // For the `builtinLengthSig` function signature, the parameter type is decided as string, so we can directly call the `b.args[0].EvalString()` method to calculate the parameter:
-     val, isNull, err := b.args[0].EvalString(row, b.ctx.GetSessionVars().StmtCtx)
-     if isNull || err != nil {
-            return 0, isNull, errors.Trace(err)
-     }
-     return int64(len([]byte(val))), false, nil
- }
- ```
+    ```go
+    func (b *builtinLengthSig) evalInt(row []types.Datum) (int64, bool, error) {
+    // For the `builtinLengthSig` function signature, the parameter type is decided as string, so we can directly call the `b.args[0].EvalString()` method to calculate the parameter:
+        val, isNull, err := b.args[0].EvalString(row, b.ctx.GetSessionVars().StmtCtx)
+        if isNull || err != nil {
+                return 0, isNull, errors.Trace(err)
+        }
+        return int64(len([]byte(val))), false, nil
+    }
+    ```
 
 [Back to the top](#top)
 
- <div class="trackable-btns">
+<div class="trackable-btns">
     <a href="/download" onclick="trackViews('Refactoring the Built-in Functions in TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Refactoring the Built-in Functions in TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>

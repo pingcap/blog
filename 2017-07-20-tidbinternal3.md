@@ -115,44 +115,45 @@ After gathering information, PD needs some policies to draw up a concrete schedu
 
 1. The number of Replica in a Region should be correct
 
- When PD finds that the number of Replica for a Region doesn't meet the requirement through the heartbeat of a Region Leader, it modifies the number through the Add/Remove Replica operations. This might occur when:
+    When PD finds that the number of Replica for a Region doesn't meet the requirement through the heartbeat of a Region Leader, it modifies the number through the Add/Remove Replica operations. This might occur when:
 
-+ a node drops and loses all data, leading to the lack of Replica in some Regions.
-+ a dropped node functions again and automatically joins in the cluster. In this case, there is a redundant Replica and needs to be removed.
-+ the administrator has modified the replica policy and the configuration of max-replicas.
+    + a node drops and loses all data, leading to the lack of Replica in some Regions.
+    + a dropped node functions again and automatically joins in the cluster. In this case, there is a redundant Replica and needs to be removed.
+    + the administrator has modified the replica policy and the configuration of max-replicas.
 
 2. Multiple Replicas of a Raft Group should not be in the same place
 
- Please pay attention that it is the same place, not the same node. In general, PD can only guarantee that multiple Replicas would not be in the same node, so as to avoid the problem that many Replicas get lost when a node fails. In an actual deployment scenario, the following requirements may come out:
+    Please pay attention that it is the same place, not the same node. In general, PD can only guarantee that multiple Replicas would not be in the same node, so as to avoid the problem that many Replicas get lost when a node fails. In an actual deployment scenario, the following requirements may come out:
 
-+ Multiple nodes are deployed on the same physical machine.
-+ TiKV nodes distribute on multiple servers. It is expected that when a server powers down, the system is still available.
-+ TiKV nodes distribute on multiple IDCs. When a datacenter powers down, the system is still available.
+    + Multiple nodes are deployed on the same physical machine.
+    + TiKV nodes distribute on multiple servers. It is expected that when a server powers down, the system is still available.
+    + TiKV nodes distribute on multiple IDCs. When a datacenter powers down, the system is still available.
 
- Essentially, what you need is a node that has the common location attribute and constitutes a minimum fault-tolerance unit. We hope that  inside this unit, multiple Replicas of a Region will not co-exist. At this time, you can configure labels to nodes and location-labels in PD to designate which label to be the location identifier. When distributing Replicas, the node that stores multiple Replicas of a Region will not have the same location identifier.
+    Essentially, what you need is a node that has the common location attribute and constitutes a minimum fault-tolerance unit. We hope that  inside this unit, multiple Replicas of a Region will not co-exist. At this time, you can configure labels to nodes and location-labels in PD to designate which label to be the location identifier. When distributing Replicas, the node that stores multiple Replicas of a Region will not have the same location identifier.
 
 3. Replicas are distributed evenly across Stores
-As the data storage capacity of each replica is fixed, if we maintain the balance of the number of replica on each node, the overall load will be more balanced.
+
+    As the data storage capacity of each replica is fixed, if we maintain the balance of the number of replica on each node, the overall load will be more balanced.
 
 4. The number of Leader is distributed evenly across Stores
 
- The Raft protocol reads and writes through Leader, so the computational load is mainly placed on Leader. Therefore, PD manages to distribute Leader among different stores.
+    The Raft protocol reads and writes through Leader, so the computational load is mainly placed on Leader. Therefore, PD manages to distribute Leader among different stores.
 
 5. The number of hotspot is distributed evenly across Stores
 
- When submitting information, each Store and Region Leader carry the information of the current access load, such as the read/write speed of Key. PD checks the hotspots and distributes them across nodes.
+    When submitting information, each Store and Region Leader carry the information of the current access load, such as the read/write speed of Key. PD checks the hotspots and distributes them across nodes.
 
 6. The storage space occupancy of each Store is roughly the same
 
- Each Store specifies a Capacity parameter when starting, which indicates the limit of the storage space of this Store. PD considers the remaining space of the node when scheduling.
+    Each Store specifies a Capacity parameter when starting, which indicates the limit of the storage space of this Store. PD considers the remaining space of the node when scheduling.
 
 7. Control the schedule speed so as not to affect the online service
 
- As scheduling operation consumes CPU, memory, disk I/O, and network bandwidth, we should not affect the online service. PD controls the number of ongoing operations and the default speed is conservative. If you want to speed up the scheduling (stop the service upgrade, add new nodes, wish to schedule as soon as possible, etc.), then you can manually accelerate it through pd-ctl.
+    As scheduling operation consumes CPU, memory, disk I/O, and network bandwidth, we should not affect the online service. PD controls the number of ongoing operations and the default speed is conservative. If you want to speed up the scheduling (stop the service upgrade, add new nodes, wish to schedule as soon as possible, etc.), then you can manually accelerate it through pd-ctl.
 
 8. Support offline nodes manually
 
- When offlining a node manually through pd-ctl, PD will move the data on the node away within a certain rate control. After that, it will put the node offline.
+    When offlining a node manually through pd-ctl, PD will move the data on the node away within a certain rate control. After that, it will put the node offline.
 
 [Back to the top](#top)
 
