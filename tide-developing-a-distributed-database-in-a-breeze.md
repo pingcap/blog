@@ -1,5 +1,5 @@
 ---
-title: "TiDE: Developing a Distributed Database in a Breeze"
+title: 'TiDE: Developing a Distributed Database in a Breeze'
 author: ['Baurine Huang', 'Yilong Li', 'Aylei Wu']
 date: 2021-05-13
 summary: TiDE is a VS Code extension for developing TiDB. It offers IDE, debugging, log search, Kubernetes integration, and VM management for TiDB clusters.
@@ -38,7 +38,7 @@ As you can see, the traditional workflow of developing TiDB is a lengthy and ted
 
 ## What is TiDE, and why do we need it?
 
-**Confucious said: "A craftsman must sharpen his tools to do his job."** That applies to TiDB developers (You!) as well. To reduce tedious work and improve efficiency, automation is a must. TiDE, a VS Code extension, automates your TiDB coding experience inside VS Code.
+**[Confucious](https://en.wikipedia.org/wiki/Confucius) (a Chinese philosopher and politician) said: "A craftsman must sharpen his tools to do his job."** That applies to TiDB developers (You!) as well. To reduce tedious work and improve efficiency, automation is a must. TiDE, a VS Code extension, automates your TiDB coding experience inside VS Code.
 
 When you enable TiDE, it creates a dedicated workspace for TiDB in VS Code, providing functionality that simplifies the development of TiDB.
 
