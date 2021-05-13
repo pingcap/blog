@@ -254,9 +254,7 @@ workload=pntlookup80
 knobs={rocksdb.writecf.bloom-filter-bits-per-key, rocksdb.defaultcf.bloom-filter-bits-per-key, rocksdb.writecf.optimize-filters-for-hits, rocksdb.defaultcf.block-size, rocksdb.defaultcf.disable-auto-compactions} metric=get_throughput
 ```
 
-In this experiment, we made several adjustments based on
-
-[Workload 2: point-lookup A](#heading=h.lr1dfqcxz51q), as described below:
+In this experiment, we made several adjustments based on [Workload 2: point-lookup A](#workload-2-point-lookup-a), as described below:
 
 * Set `optimize-filters-for-hits` in the writeCF. The default value for defaultCF is 0.
 * Set `bloom-filter-bits-per-key` in defaultCF and writeCF respectively, and use them as two knobs.
@@ -339,7 +337,7 @@ As indicated in the above experiments, although most of the recommended knobs ar
 * Some parameters have little effect on the results. For example, the scenario in which the parameter in question works is not triggered at all, or the hardware associated with it does not have a performance bottleneck.
 * Some parameters require the workload to run long enough to take effect. Therefore, dynamic adjustments may not show their effects immediately. For example, you must wait until the workload fills in the block cache to see the effect of increased block cache size on the overall cache hit.
 * The effect of some parameters is in contrary to expectations. It was later found that the parameter in question actually has side effects in certain scenarios (such as the above example of the Bloom filter).
-* Some workloads are not entirely read or written, and some other operations may be involved. DBAs are likely to ignore this when they manually predict the expected effect (such as the [write-heavy](#heading=h.2jz8y8o5zdxy) case). In an actual production environment, DBAs can't know in advance what kind of workload they will encounter. This is probably where automatic tuning should kick in.
+* Some workloads are not entirely read or written, and some other operations may be involved. DBAs are likely to ignore this when they manually predict the expected effect (such as the [write-heavy](#workload-1-write-heavy) case). In an actual production environment, DBAs can't know in advance what kind of workload they will encounter. This is probably where automatic tuning should kick in.
 
 ## Limitations
 

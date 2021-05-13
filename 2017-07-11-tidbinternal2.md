@@ -14,7 +14,7 @@ From Li SHEN: shenli@pingcap.com
 
 + [Mapping the Relational Model to the Key-Value Model](#mapping-the-relational-model-to-the-key-value-model)
 + [Metadata Management](#metadata-management)
-+ [Architecture of SQL on Key-Value](#architecture-of-sql-on-keyvalue)
++ [Architecture of SQL on Key-Value](#architecture-of-sql-on-key-value)
 + [SQL Computing](#sql-computing)
 + [Distributed SQL Operation](#distributed-sql-operation)
 + [Architecture of the SQL Layer](#architecture-of-the-sql-layer)

@@ -114,7 +114,7 @@ static int ena_clean_tx_irq(struct ena_ring *tx_ring, u32 budget)
 }
 ```
 
-It can be noted that the NIC driver responds to the transmit completion interrupt and the data reception interrupt by multiplexing `NET_RX`, while the context captured is in the lower half of the transmit completion interrupt. The NIC driver calls the `dev_kfree_skb` macro (`#define dev_kfree_skb(a) consume_skb(a)`) to release `sk_buffer` when performing post-transfer cleanup. Then it checks the TSQ_THROTTLED flag to determine where there is data waiting for the qdisc space when executing the `tcp_wfree` function. If there is any packet waiting, the sock object corresponding to the packet will be added to the TCP small queues (TSQ)[<sup>1</sup>](#1) of the current CPU, as shown below:
+It can be noted that the NIC driver responds to the transmit completion interrupt and the data reception interrupt by multiplexing `NET_RX`, while the context captured is in the lower half of the transmit completion interrupt. The NIC driver calls the `dev_kfree_skb` macro (`#define dev_kfree_skb(a) consume_skb(a)`) to release `sk_buffer` when performing post-transfer cleanup. Then it checks the TSQ_THROTTLED flag to determine where there is data waiting for the qdisc space when executing the `tcp_wfree` function. If there is any packet waiting, the sock object corresponding to the packet will be added to the TCP small queues (TSQ)[<sup>1</sup>](#reference) of the current CPU, as shown below:
 
 ```
 struct tsq_tasklet {
