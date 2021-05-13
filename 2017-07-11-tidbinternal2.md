@@ -55,6 +55,7 @@ TiDB supports both the Primary Index and Secondary Index. The function of Index 
 
 + Point query, which uses equivalent conditions such as Primary Key or Unique Key for a query, e.g. `select name from user where id=1;`, locating a certain row of data through index.
 + Range query, e.g. `select name from user where age > 30 and age < 35;`, querying the data that the age is between 30 and 35 through `idxAge`.
+
 There are two types of Indexes: Unique Index and Non-unique Index, both of which are supported by TiDB.
 
 After analyzing the characteristics of the data to be stored, let's move on to what we need to do to manipulate the data, including the Insert/Update/Delete/Select statements.
@@ -77,6 +78,7 @@ A globally ordered and distributed Key-Value engine satisfies the above needs. T
 Now let's see how this works in TiDB.
 
 TiDB allocates a `TableID` to each table, an `IndexID` to each index, and a `RowID` to each row. If the table has an integer Primary Key, then the value will be used as the `RowID`. The `TableID` is unique in the whole cluster while the `IndexID/RowID` unique in the table. All of these ID are int64.
+
 Each row of data is encoded into a Key-Value pair according to the following rule:
 
 ```
@@ -85,6 +87,7 @@ Value: [col1, col2, col3, col4]
 ```
 
 The `tablePrefix`/`recordPrefixSep` of the Key are specific string constants and used to differentiate other data in the Key-Value space.
+
 Index data is encoded into a Key-Value pair according to the following rule:
 
 ```
@@ -100,6 +103,7 @@ Value: null
 ```
 
 In this way, the unique Key of each row of data can be created.
+
 In the above rules, all `xxPrefix` of the Keys are string constants with the function of differentiating the namespace to avoid the conflict between different types of data.
 
 ```
@@ -225,6 +229,7 @@ The SQL requests will be sent directly or via a Load Balancer to tidb-server, wh
 ### Summary
 
 Up till now, we've known how data is stored and used for operation from the perspective of SQL. Information about the SQL layer, such as the principle of optimization and the detail of the distributed execution framework will be introduced in the future.
+
 In the next article, we will dwell on information about PD, especially the cluster management and schedule. This is an interesting part as you will see things that are invisible when using TiDB but important to the whole cluster.
 
 [Back to the top](#top)
