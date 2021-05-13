@@ -8,7 +8,7 @@ categories: ['Community']
 image: /images/blog/tide-developing-a-distributed-database-in-a-breeze.jpg
 ---
 
-**Authors:** [Baurine Huang](https://github.com/baurine), [Yilong Li](https://github.com/dragonly), [Aylei Wu](https://github.com/aylei) (Engineers at PingCAP)
+**Authors:** [Baurine Huang](https://github.com/baurine), [Yilong Li](https://github.com/dragonly), [Aylei Wu](https://github.com/aylei) (Software Engineers at PingCAP)
 
 **Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
 
