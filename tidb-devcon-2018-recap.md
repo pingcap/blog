@@ -97,8 +97,7 @@ On January 19th, one day before DevCon, [TiDB 1.1 Alpha](https://pingcap.com/doc
 * Hash-join is 3 times faster than the previous version.
 * Some complex queries using index are now more than 10x faster than the previous version.
 * Cost based optimizer (CBO) is smarter.
-* Loading data using the following statement is now 15x faster:
-`load data local infile 'output.csv' into table xxx;`
+* Loading data using the following statement is now 15x faster: `load data local infile 'output.csv' into table xxx;`
 
 ### TiDB Lightning
 
