@@ -54,8 +54,8 @@ The following diagram shows the commit process of an Async Commit transaction. Y
 
 To reach the goal of advancing the time when the transaction state is determined, there are two main issues that need to be addressed:
 
-* How to determine if all keys have been prewritten?
-* How to determine the Commit TS of a transaction?
+* How to determine if all keys have been prewritten
+* How to determine the Commit TS of a transaction
 
 ### How to find all the transaction keys
 
@@ -145,7 +145,7 @@ In summary, the Min Commit TS of each key takes the maximum value between the Ma
 
 ### One-phase commit (1PC)
 
-If a transaction only updates a non-index column of a record, or inserts a record without a secondary index, it only involves a single region. In this scenario, is it possible to complete the transaction commit in only one phase without using the distributed transaction protocol? Well, this is certainly possible, but the difficulty lies in how to determine the Commit TS for a one-phase commit transaction.
+If a transaction only updates a non-index column of a record, or inserts a record without a secondary index, it only involves a single [Region](https://docs.pingcap.com/tidb/stable/glossary#regionpeerraft-group). In this scenario, is it possible to complete the transaction commit in only one phase without using the distributed transaction protocol? Well, this is certainly possible, but the difficulty lies in how to determine the Commit TS for a one-phase commit transaction.
 
 With Async Commit providing a basis for calculating the Commit TS, the difficulty of the one-phase commit implementation is solved. We calculate the Commit TS of a one-phase commit transaction in the same way as Async Commit and commit the transaction directly through a single RPC with TiKV.
 
@@ -153,7 +153,7 @@ With Async Commit providing a basis for calculating the Commit TS, the difficult
 
 <div class="caption-center"> The one-phase commit process </div>
 
-One-phase commits do not use the distributed commit protocol, which reduces the number of TiKV write operations. So if a transaction[^4] involves only one region, using one-phase commit not only reduces transaction latency, but also improves data throughput.
+One-phase commits do not use the distributed commit protocol, which reduces the number of TiKV write operations. So if a transaction[^4] involves only one [Region](https://docs.pingcap.com/tidb/stable/glossary#regionpeerraft-group), using one-phase commit not only reduces transaction latency, but also improves data throughput.
 
 TiBD 5.0 introduces the one-phase commit feature as part of Async Commit.
 
@@ -283,9 +283,9 @@ Our tests also prove this. As shown in the below chart, when we enable Async Com
 
 <div class="caption-center"> Sysbench test result with the Async Commit feature enabled </div>
 
-As for transactions that involve only one region, the optimization of one-phase commit can reduce the latency of the transaction commit even more significantly. It can also improve the data throughput because it reduces the amount of writes to TiKV.
+As for transactions that involve only one [Region]((https://docs.pingcap.com/tidb/stable/glossary#regionpeerraft-group)), the optimization of one-phase commit can reduce the latency of the transaction commit even more significantly. It can also improve the data throughput because it reduces the amount of writes to TiKV.
 
-The chart below shows the result of testing sysbench oltp_update_non_index with a fixed 2,000 TPS. In this scenario, a transaction writes to only one Region. With one-phase commit enabled, the average latency is reduced by 46% and the 99th percentile latency is reduced by 35%.
+The chart below shows the result of testing sysbench oltp_update_non_index with a fixed 2,000 TPS. In this scenario, a transaction writes to only one [Region](https://docs.pingcap.com/tidb/stable/glossary#regionpeerraft-group). With one-phase commit enabled, the average latency is reduced by 46% and the 99th percentile latency is reduced by 35%.
 
 ![Test result with one-phase commit enabled](media/sysbench-test-result-with-the-one-phase-commit-feature-enabled.png)
 
@@ -311,7 +311,7 @@ If you are interested in discussing and planning the future development of TiKV 
 ## Notes
 
 [^1]:
-     In order to ensure that the Max TS of the new leader is large enough after the region leader transfers, TiKV also gets the latest timestamp from PD to update the Max TS after the region leader transfers and the region is merged.
+     In order to ensure that the Max TS of the new leader is large enough after the Region leader transfers, TiKV also gets the latest timestamp from PD to update the Max TS after the Region leader transfers and the Region is merged.
 
 [^2]:
      In the prewriting process, to prevent that a more recent snapshot read breaks this constraint, TiKV adds a memory lock to the prewrite key and temporarily blocks the read requests whose Start TSs are greater than or equal to the Min Commit TS.
@@ -320,7 +320,7 @@ If you are interested in discussing and planning the future development of TiKV 
      If the T1 and T2 commitment processes overlap, the logical order of their commits cannot be determined.
 
 [^4]:
-     To be precise, the one-phase commit feature should only be used when a transaction can be completed by a single TiKV request. In order to improve commit efficiency, larger transactions will be split into many requests, and in this case, even if they all involve the same single region, one-phase commit is not used.
+     To be precise, the one-phase commit feature should only be used when a transaction can be completed by a single TiKV request. In order to improve commit efficiency, larger transactions will be split into many requests, and in this case, even if they all involve the same single Region, one-phase commit is not used.
 
 [^5]:
      If you agree that the logical commit time of T1 is earlier than the start time of T2 (because the linearizability is not satisfied), then this case meets the snapshot isolation requirement.
