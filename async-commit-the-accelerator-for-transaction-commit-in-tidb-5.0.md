@@ -1,7 +1,7 @@
 ---
 title: Async Commit, the Accelerator for Transaction Commit in TiDB 5.0
 author: ['Yilin Chen']
-date: 2021-05-17
+date: 2021-05-18
 summary: As a major new feature introduced in TiDB 5.0, Async Commit can greatly reduce the latency of transaction commits. This post describes Async Commit's design ideas and its key implementation details.
 tags: ['TiDB 5.0', 'Transaction']
 categories: ['Engineering']
