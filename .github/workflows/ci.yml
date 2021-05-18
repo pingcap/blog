@@ -36,15 +36,6 @@ jobs:
       run:
         wget https://raw.githubusercontent.com/CharLotteiu/pingcap-docs-checks/main/check-manual-line-breaks.py;
         python3 check-manual-line-breaks.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md')
-
-  verify-links:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out
-      uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '12'
     - name: Verify internal links
       run: ./hack/verify-links-doc.sh
     # the script reports "#top" as dead anchor.
