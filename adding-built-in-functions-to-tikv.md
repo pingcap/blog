@@ -24,7 +24,7 @@ Before diving into our step-by-step guide on how to contribute, it's worth under
 
 Here's an illustration on how a statement like `select count(*) from t where a + b > 5` gets pushed down:
 
-![Pushing Down a Statement](/media/pushing-down-a-statement.png)
+![Pushing Down a Statement](media/pushing-down-a-statement.png)
 
 After TiKV receives these subtask expressions, the following steps are performed in a loop:
 
