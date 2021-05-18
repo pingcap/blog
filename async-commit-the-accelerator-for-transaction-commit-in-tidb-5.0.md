@@ -10,13 +10,13 @@ image: /images/blog/async-commit-the-accelerator-for-transaction-commit.jpg
 
 **Author:** [Yilin Chen](https://github.com/sticnarf) (Software Engineer at PingCAP, TiKV Commiter)
 
-**Editor:** Tom Dewan; [Charlotte Liu](https://github.com/CharLotteiu)
+**Editors:** Tom Dewan, [Charlotte Liu](https://github.com/CharLotteiu)
 
 ![Async Commit](media/async-commit-the-accelerator-for-transaction-commit.jpg)
 
-TiDB is an open source, distributed, scale-out MySQL alternative database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It provides native support for distributed transactions.
+[TiDB](https://docs.pingcap.com/tidb/stable) is an open source, distributed, scale-out MySQL alternative database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It provides native support for distributed transactions.
 
-As TiDB's developers, we have been working on implementing low-latency distributed transactions. Recently, TiDB 5.0 takes a big step to greatly reduce the latency of transaction commits—introducing the **Async Commit** feature.
+As TiDB's developers, we have been working on implementing low-latency distributed transactions. Recently, [TiDB 5.0](https://docs.pingcap.com/tidb/stable/release-5.0.0) takes a big step to greatly reduce the latency of transaction commits—introducing the **Async Commit** feature.
 
 This article describes Async Commit's design ideas and its key implementation details.
 
@@ -36,7 +36,7 @@ After the user sends a COMMIT statement to TiDB, TiDB has to go through at least
 2. Gets a timestamp from Placement Driver (PD) as the commit timestamp (Commit TS).
 3. Commits the primary key.
 
-The critical path for the entire commit process includes at least two round trips between TiDB and TiKV. Only secondary keys are committed asynchronously in the background.
+The critical path for the entire commit process includes at least two round trips between [TiDB](https://docs.pingcap.com/tidb/stable/tidb-architecture#tidb-server) and [TiKV](https://docs.pingcap.com/tidb/stable/tidb-architecture#tikv-server). Only secondary keys are committed asynchronously in the background.
 
 In TiDB's transaction model, TiDB nodes are like the coordinators of transactions, and TiKV nodes are the participants. In common two-phase commit implementations, the coordinator's data is stored locally, while in TiDB's transaction model, all transaction-related data is stored on TiKV. Therefore, theoretically the state of a transaction is determined at the end of the first phase, but TiDB needs to complete part of the second phase—storing the state of the transaction on TiKV—before it can return the determined transaction state to the user.
 
@@ -71,7 +71,7 @@ As for an Async Commit transaction, we need to know the states of all keys to de
 
 <div class="caption-center"> The primary key stores pointers to the secondary keys </div>
 
-The primary key actually stores a list of all secondary keys. Obviously, if a transaction contains a large number of keys, we cannot store them all on the primary key. So an Async Commit transaction cannot be too large. Currently, we only use Async Commit for transactions that contain up to 256 keys, and the total size of all keys must be no more than 4096 bytes.
+The primary key actually stores a list of all secondary keys. Obviously, if a transaction contains a large number of keys, we cannot store them all on the primary key. So an Async Commit transaction cannot be too large. Currently, we only use Async Commit for transactions that contain up to 256 keys, and the total size of all keys must be no more than 4,096 bytes.
 
 What's more, committing a large transaction takes a long time, so the latency improvement from reducing one round trip between TiDB and TiKV is not significant. Therefore, we also do not consider using a multi-level structure to support Async Commit for larger transactions.
 
@@ -275,9 +275,9 @@ As it is not very usual for such a special scenario to occur, we still offer use
 
 Async Commit moves the transaction completion point to the end of prewrite, making the commit of the primary key asynchronous. The more time consuming the primary key commit step is in the transaction, the more significant the improvement brought by Async Commit will be. Smaller transactions with fewer interactions can often gain large improvement through Async Commit.
 
-In the sysbench oltp_update_index scenario, a transaction only writes two keys, row record, and index. It is also an auto-commit transaction with no additional interaction, so theoretically Async Commit can significantly reduce its latency.
+In the sysbench `oltp_update_index` scenario, a transaction only writes two keys, row record, and index. It is also an auto-commit transaction with no additional interaction, so theoretically Async Commit can significantly reduce its latency.
 
-Our tests also prove this. As shown in the below chart, when we enable Async Commit and test sysbench oltp_update_index at a fixed 2,000 TPS, the average latency is reduced by 42% and the 99th percentile latency is reduced by 32%.
+Our tests also prove this. As shown in the below chart, when we enable Async Commit and test sysbench `oltp_update_index` at a fixed 2,000 TPS, the average latency is reduced by 42% and the 99th percentile latency is reduced by 32%.
 
 ![Test result with Async Commit enabled](media/sysbench-test-result-with-the-async-commit-feature-enabled.png)
 
