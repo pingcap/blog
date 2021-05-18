@@ -5,14 +5,14 @@ date: 2021-05-17
 summary: As a major new feature introduced in TiDB 5.0, Async Commit can greatly reduce the latency of transaction commits. This post describes Async Commit's design ideas and its key implementation details.
 tags: ['TiDB 5.0', 'Transaction']
 categories: ['Engineering']
-image: /images/blog/async-commit-the-accelerator-for-transaction-commit.png
+image: /images/blog/async-commit-the-accelerator-for-transaction-commit.jpg
 ---
 
 **Author:** [Yilin Chen](https://github.com/sticnarf) (Software Engineer at PingCAP, TiKV Commiter)
 
 **Editor:** Tom Dewan; [Charlotte Liu](https://github.com/CharLotteiu)
 
-![Async Commit](media/async-commit-the-accelerator-for-transaction-commit.png)
+![Async Commit](media/async-commit-the-accelerator-for-transaction-commit.jpg)
 
 TiDB is an open source, distributed, scale-out MySQL alternative database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It provides native support for distributed transactions.
 
