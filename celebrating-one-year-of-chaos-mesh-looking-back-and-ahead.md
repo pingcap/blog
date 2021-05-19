@@ -104,4 +104,4 @@ Chaos Mesh 2.0 is now in active development, and it includes community requireme
 
 Chaos Mesh has grown so much in the past year, yet it is still young, and we have just set sail towards our goal. In the meantime, we call for all of you to participate and help build the Chaos Engineering system ecology together!
 
-If you are interested in Chaos Mesh and would like to help us improve it, you're welcome to join [our Slack channel](https://cloud-native.slack.com/join/shared_invite/zt-fyy3b8up-qHeDNVqbz1j8HDY6g1cY4w#/) or submit your pull requests or issues to our [GitHub repository](https://github.com/chaos-mesh/chaos-mesh).
+If you are interested in Chaos Mesh and would like to help us improve it, you're welcome to join [our Slack channel](https://slack.cncf.io/) or submit your pull requests or issues to our [GitHub repository](https://github.com/chaos-mesh/chaos-mesh).

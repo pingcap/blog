@@ -80,7 +80,7 @@ The baseline of any data replication product is correctness. Compared with TiDB 
 We've verified TiCDC's replication correctness in the following ways:
 
 * Generated the [TiCDC replication model via TLA](https://github.com/pingcap/tla-plus/pull/27), which has been proved by a mathematics-based formal method. You can learn more about TLA+ [here](https://en.wikipedia.org/wiki/TLA%2B).
-* Passed multiple test scenarios integrated with [Chaos Mesh](https://github.com/pingcap/chaos-mesh).
+* Passed multiple test scenarios integrated with [Chaos Mesh](https://github.com/chaos-mesh).
 * Passed all of [TiDB Binlog's integration test cases](https://github.com/pingcap/tidb-binlog/tree/master/tests).
 * Successfully ran in our customers' production environments.
 

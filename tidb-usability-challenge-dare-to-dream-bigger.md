@@ -33,7 +33,7 @@ Here's what's new in this season:
   * [TiDB](https://github.com/pingcap/tidb/projects/26)
   * [TiKV](https://github.com/tikv/tikv/projects/20)
   * [PD](https://github.com/pingcap/pd/projects/2)
-  * [Chaos Mesh](https://github.com/pingcap/chaos-mesh/projects/14)
+  * [Chaos Mesh](https://github.com/chaos-mesh/projects/14)
   * [Data Migration](https://github.com/pingcap/dm/projects/1)
   * [Backup & Restore](https://github.com/pingcap/br/projects/1)
   * [client-rust](https://github.com/tikv/client-rust/projects/3)
@@ -75,7 +75,7 @@ We have prepared some learning materials to help you quickly get familiar with o
 
 * [TiDB documentation](https://pingcap.com/docs/) - concepts, user guide, and reference documents for TiDB.
 * [TiKV documentation](https://tikv.org/docs/3.0/concepts/overview/) - concepts, user guide, and reference documents for TiKV.
-* [Chaos Mesh documentation](https://github.com/pingcap/chaos-mesh/wiki) - user guide, and development guide for Chaos Mesh.
+* [Chaos Mesh documentation](https://github.com/chaos-mesh/wiki) - user guide, and development guide for Chaos Mesh.
 * [PingCAP Talent Plan](https://github.com/pingcap/talent-plan) - a series of training courses about writing distributed systems in Go and Rust with no previous experience of TiDB or TiKV required.
 * [Awesome Database Learning](https://github.com/pingcap/awesome-database-learning) - a list of learning materials to help you understand databases internals, including but not limited to: papers, blogs, courses, and talks.
 

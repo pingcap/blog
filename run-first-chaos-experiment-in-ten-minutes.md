@@ -16,9 +16,9 @@ image: /images/blog/run-first-chaos-experiment-in-ten-minutes.jpg
 
 Chaos Engineering is a way to test a production software system's robustness by simulating unusual or disruptive conditions. For many people, however, the transition from learning Chaos Engineering to practicing it on their own systems is daunting. It sounds like one of those big ideas that require a fully-equipped team to plan ahead. Well, it doesn't have to be. To get started with chaos experimenting, you may be just one suitable platform away.
 
-[Chaos Mesh](https://github.com/pingcap/chaos-mesh) is an **easy-to-use**, open-source, cloud-native Chaos Engineering platform that orchestrates chaos in Kubernetes environments. This 10-minute tutorial will help you quickly get started with Chaos Engineering and run your first chaos experiment with Chaos Mesh.
+[Chaos Mesh](https://github.com/chaos-mesh) is an **easy-to-use**, open-source, cloud-native Chaos Engineering platform that orchestrates chaos in Kubernetes environments. This 10-minute tutorial will help you quickly get started with Chaos Engineering and run your first chaos experiment with Chaos Mesh.
 
-For more information about Chaos Mesh, refer to our [previous article](https://pingcap.com/blog/chaos-mesh-your-chaos-engineering-solution-for-system-resiliency-on-kubernetes/) or the [chaos-mesh project](https://github.com/pingcap/chaos-mesh) on GitHub.
+For more information about Chaos Mesh, refer to our [previous article](https://pingcap.com/blog/chaos-mesh-your-chaos-engineering-solution-for-system-resiliency-on-kubernetes/) or the [chaos-mesh project](https://github.com/chaos-mesh) on GitHub.
 
 ## A preview of our little experiment
 
@@ -42,7 +42,7 @@ Before moving forward, make sure you have [Git](https://git-scm.com/) and [Docke
 1. Get Chaos Mesh:
 
     ```bash
-    git clone https://github.com/pingcap/chaos-mesh.git
+    git clone https://github.com/chaos-mesh.git
     cd chaos-mesh/
     ```
 
@@ -105,7 +105,7 @@ Now that everything is ready, it's time to run your chaos experiment!
 
 Chaos Mesh uses [CustomResourceDefinitions](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/) (CRD) to define chaos experiments. CRD objects are designed separately based on different experiment scenarios, which greatly simplifies the definition of CRD objects. Currently, CRD objects that have been implemented in Chaos Mesh include PodChaos, NetworkChaos, IOChaos, TimeChaos, and KernelChaos. Later, we'll support more fault injection types.
 
-In this experiment, we are using [NetworkChaos](https://github.com/pingcap/chaos-mesh/blob/master/examples/web-show/network-delay.yaml) for the chaos experiment. The NetworkChaos configuration file, written in YAML, is shown below:
+In this experiment, we are using [NetworkChaos](https://github.com/chaos-mesh/blob/master/examples/web-show/network-delay.yaml) for the chaos experiment. The NetworkChaos configuration file, written in YAML, is shown below:
 
 ```
 apiVersion: pingcap.com/v1alpha1
@@ -129,7 +129,7 @@ spec:
     cron: "@every 60s"
 ```
 
-For detailed descriptions of NetworkChaos actions, see [Chaos Mesh wiki](https://github.com/pingcap/chaos-mesh/wiki/Network-Chaos). Here, we just rephrase the configuration as:
+For detailed descriptions of NetworkChaos actions, see [Chaos Mesh wiki](https://github.com/chaos-mesh/wiki/Network-Chaos). Here, we just rephrase the configuration as:
 
 * target: `web-show`
 * mission: inject a `10ms` network delay every `60s`
@@ -151,7 +151,7 @@ To start NetworkChaos, do the following:
 ![Using Chaos Mesh to insert delays in web-show](media/using-chaos-mesh-to-insert-delays-in-web-show.png)
 <div class="caption-center"> Using Chaos Mesh to insert delays in web-show </div>
 
-Congratulations! You just stirred up a little bit of chaos. If you are intrigued and want to try out more chaos experiments with Chaos Mesh, check out [examples/web-show](https://github.com/pingcap/chaos-mesh/tree/master/examples/web-show).
+Congratulations! You just stirred up a little bit of chaos. If you are intrigued and want to try out more chaos experiments with Chaos Mesh, check out [examples/web-show](https://github.com/chaos-mesh/tree/master/examples/web-show).
 
 ### Delete the chaos experiment
 
@@ -189,4 +189,4 @@ Congratulations on your first successful journey into Chaos Engineering. How doe
 
 If you find a bug or think something is missing, feel free to file an issue, open a pull request (PR), or join us on the #sig-chaos-mesh channel in the [TiDB Community](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) slack workspace.
 
-GitHub: [https://github.com/pingcap/chaos-mesh](https://github.com/pingcap/chaos-mesh)
+GitHub: [https://github.com/chaos-mesh](https://github.com/chaos-mesh)
