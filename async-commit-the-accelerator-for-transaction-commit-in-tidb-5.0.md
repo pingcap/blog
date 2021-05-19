@@ -283,7 +283,7 @@ Our tests also prove this. As shown in the below chart, when we enable Async Com
 
 <div class="caption-center"> Sysbench test result with the Async Commit feature enabled </div>
 
-As for transactions that involve only one [Region]((https://docs.pingcap.com/tidb/stable/glossary#regionpeerraft-group)), the optimization of one-phase commit can reduce the latency of the transaction commit even more significantly. It can also improve the data throughput because it reduces the amount of writes to TiKV.
+As for transactions that involve only one [Region](https://docs.pingcap.com/tidb/stable/glossary#regionpeerraft-group), the optimization of one-phase commit can reduce the latency of the transaction commit even more significantly. It can also improve the data throughput because it reduces the amount of writes to TiKV.
 
 The chart below shows the result of testing sysbench oltp_update_non_index with a fixed 2,000 TPS. In this scenario, a transaction writes to only one [Region](https://docs.pingcap.com/tidb/stable/glossary#regionpeerraft-group). With one-phase commit enabled, the average latency is reduced by 46% and the 99th percentile latency is reduced by 35%.
 
