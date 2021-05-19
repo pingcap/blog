@@ -109,7 +109,7 @@ This code does the following:
 * The `selector` attribute limits the scope of chaos experiment to a specific scope. In this case, the scope is TiKV Pods for the TiDB cluster with the `tidb-cluster-demo` namespace.
 * The `scheduler` attribute defines the interval for each chaos fault action.
 
-For more details on CRD objects such as NetworkChaos and IOChaos, see the [Chaos-mesh documentation](https://github.com/chaos-mesh).
+For more details on CRD objects such as NetworkChaos and IOChaos, see the [Chaos-mesh documentation](https://chaos-mesh.org/docs).
 
 ## How does Chaos Mesh work?
 
@@ -158,7 +158,7 @@ Chaos Mesh runs on Kubernetes v1.12 or later. Helm, a Kubernetes package managem
     mv ./kind /some-dir-in-your-PATH/kind
 
     // get script
-    git clone https://github.com/chaos-mesh
+    git clone https://github.com/chaos-mesh/chaos-mesh
     cd chaos-mesh
     // start cluster
     hack/kind-cluster-build.sh
@@ -169,7 +169,7 @@ Chaos Mesh runs on Kubernetes v1.12 or later. Helm, a Kubernetes package managem
 2. If the Kubernetes cluster is ready, use [Helm](https://helm.sh/) and [Kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) to deploy Chaos Mesh:
 
     ```bash
-    git clone https://github.com/chaos-mesh.git
+    git clone https://github.com/chaos-mesh/chaos-mesh.git
     cd chaos-mesh
     // create CRD resource
     kubectl apply -f manifests/
@@ -225,7 +225,7 @@ The following chaos experiment simulates the TiKV Pods being frequently killed i
 
 We use a sysbench program to monitor the real-time QPS changes in the TiDB cluster. When errors are injected into the cluster, the QPS show a drastic jitter, which means a specific TiKV Pod has been deleted, and Kubernetes then re-creates a new TiKV Pod.
 
-For more YAML file examples, see <https://github.com/chaos-mesh/tree/master/examples>.
+For more YAML file examples, see <https://github.com/chaos-mesh/chaos-mesh/tree/master/examples>.
 
 ### Running chaos using the Kubernetes API
 
@@ -267,6 +267,6 @@ Moving forward, we will continuously improve the Chaos Mesh Dashboard, so that u
 
 If any of these sound interesting to you, join us in building a world class Chaos Engineering platform. May our applications dance in chaos on Kubernetes!
 
-If you find a bug or think something is missing, feel free to file an [issue](https://github.com/chaos-mesh/issues), open a PR, or join us on the #sig-chaos-mesh channel in the [TiDB Community](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) slack workspace.
+If you find a bug or think something is missing, feel free to file an [issue](https://github.com/chaos-mesh/chaos-mesh/issues), open a PR, or join us on the #sig-chaos-mesh channel in the [TiDB Community](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) slack workspace.
 
 GitHub: [https://github.com/chaos-mesh](https://github.com/chaos-mesh)
