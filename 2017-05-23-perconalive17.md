@@ -45,8 +45,6 @@ And first of all I want to ask a question: what would you do when your RDBMS is 
 
 So how to scale your relational database is a pain point of the entire industry.
 
-[Back to the top](#top)
-
 ## TiDB goal
 
 And there comes TiDB, when we were designing TiDB, we want to achieve the following goals:
@@ -79,8 +77,6 @@ These three components communicate with each other through gRPC.
 
 * Placement Driver is the managing component of the entire cluster and it stores the metadata, handles timestamp allocation request for ACID transaction, just like the TrueTime for Spanner, but we don't have the hardware. What's more, it's controlling the data movement for dynamic workload balance and failover.
 
-[Back to the top](#top)
-
 ## Storage stack
 
 Let's dive deep into the storage stack of TiKV.
@@ -98,8 +94,6 @@ Now we know that the actual data is stored in RocksDB. But how exactly is data o
 Region is a set of continuous key-value pairs in byte-order.
 
 ![Storage stack of TiKV](media/image_1.png)
-
-[Back to the top](#top)
 
 ## Safe split
 
@@ -135,8 +129,6 @@ When the split-log is written to WAL in the Leader, it is replicated by Raft and
 
 And finally, once the split-log is committed, all the replicas in the Raft group are safely split into two regions on each TiKV node. There is no data lost in the process as the correctness of the split procedure is ensured by Raft.
 
-[Back to the top](#top)
-
 ## Scale out
 
 We've talked about split. Now let's see how TiKV scales out. Our project is as scalable as NoSQL system, which means you can easily increase the capacity or balance the workload by adding more machines.
@@ -154,8 +146,6 @@ Step 2, TiKV adds a Replica of Region 1 to Node E. Therefore, Region 1 contains 
 The final step, TiKV removes the replica of Region One from Node A. Now the data is balanced and the cluster scales out from 4 nodes to 5 nodes. In the process of scale-out, this data movement will occur in different regions. The result of the scheduling is that the number of regions is as equal as possible in every physical node.
 
 This is how TiKV scales out.
-
-[Back to the top](#top)
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('A Brief Introduction of TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -178,8 +168,6 @@ Cost based optimizer, aka CBO, is to optimize a plan by calculating the query co
 
 Distributed join will be covered later.
 
-[Back to the top](#top)
-
 ## TiDB SQL layer overview
 
 ![TiDB SQL layer overview](media/image_8.png)
@@ -193,8 +181,6 @@ Inside the SQL core layer, we need to maintain the session context which include
 Then comes the core layer of the SQL engine, the Optimizer. There are two optimizers, the logical optimizer and the physical optimizer. The first step is logical optimization which transfers each AST node into a logical plan and optimizes the SQL logic. Based on the logical plan, the Physical Optimizer makes the physical plan which is then executed by the distributed executor. Here, the optimizer is like a boss who makes plans, and the executor is like the employees who execute the plan and perform the RPC call. During the execution, interactions with the storage layer are inevitable, such as accessing data, computing, and so on.
 
 There are also other crucial components like Privilege Manager, Schema Manager, DDL Worker, GC worker, BG Job Worker, just to name a few.
-
-[Back to the top](#top)
 
 ## What Happens behind a query
 
@@ -210,8 +196,6 @@ This is the physical plan of the SQL statement. The SQL layer and the storage la
 
 There are several advantages in this approach: First, there are more nodes involved in the computing and therefore, the computing becomes faster. Second, the network transmission is greatly reduced because after filtering and aggregation, the computing can easily access the data because the data is close.
 
-[Back to the top](#top)
-
 ## Distributed join (HashJoin)
 
 Now, let's see a little more complex query: we have two tables, left and right. Now I write a simple join query, let's see what happens behind a join.
@@ -223,8 +207,6 @@ For this query, optimizer may choose hashjoin, because HashJoin performs well in
 To join the tables mentioned in the previous query, TiKV reads the tables in parallel. When reading the smaller table, TiKV starts to build a Hash Table in memory. When reading the bigger table, the data is sent to several Join Workers. When the Hash Table is finished, all the Join Workers will be notified to start Join in stream and output the Joined Table.
 
 TiDB's SQL layer currently supports 3 kinds of distributed join type, hashjoin / sort merge join (when the optimizer thinks even the smallest table is too large to fit in memory and the predicates contains indexed column, optimizer would choose sort merge join) / index lookup join.
-
-[Back to the top](#top)
 
 ## Tools matter
 
@@ -242,8 +224,6 @@ On the other hand, TiDB can output binlogs too. We build TiDB Binlog toolset to 
 
 For data migration, we don't have our own tool. We use Mydumper/Loader for data backup and restore in parallel. you can use Mydumper to export data from MySQL and MyLoader to import the data into TiDB.
 
-[Back to the top](#top)
-
 ## Use cases
 
 Currently, there are about 20 customers using our products in production environments and more than 200 PoC users contacting us or trying our products.
@@ -255,8 +235,6 @@ Let's compare the query elapse between TiDB and MySQL. As you can see from the a
 ![Distributed OLTP](media/image_14.png)
 
 Another customer is using TiDB as the drop-in replacement for MySQL for OLTP workload. You can see from the graph that the latency of 80% query is lower than 3ms and the average query latency is about 5 ms. Besides, it is quite stable.
-
-[Back to the top](#top)
 
 ## Sysbench
 
@@ -276,8 +254,6 @@ For Insert, we have the same result as Read.
 
 This is TiDB, SQL at Scale.
 
-[Back to the top](#top)
-
 ## Roadmap
 
 The final section of my speech is our roadmap to the future:
@@ -291,5 +267,3 @@ The final section of my speech is our roadmap to the future:
 * We are going to make TiDB integrate with Kubernetes, which makes it very easy to set up a large cluster.
 
 Once again, we are honored to attend this conference and I hope that there will be more excellent databases. Thank you so much!
-
-[Back to the top](#top)

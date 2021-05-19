@@ -93,8 +93,6 @@ First, let's take a look at the [`expression/builtin_string.go`](https://github.
     }
     ```
 
-[Back to the top](#top)
-
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('Refactoring the Built-in Functions in TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Refactoring the Built-in Functions in TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
@@ -149,8 +147,6 @@ func (s *testEvaluatorSuite) TestLength(c *C) {
     c.Assert(f.isDeterministic(), IsTrue)
 }
 ```
-
-[Back to the top](#top)
 
 #### Test the implementation of `LENGTH` at the SQL level
 
@@ -222,8 +218,6 @@ Moreover, from the definition of the `Expression.eval ()` method, we can see tha
 
 In order to solve these two problems, we refactored the expression evaluation framework.
 
-[Back to the top](#top)
-
 ### After refactoring...
 
 The refactored framework has two advantages:
@@ -253,5 +247,3 @@ In this way, in the **executing phase**, for every `ScalarFunction`, it is guara
  The `WrapWithCastAsXX ()` method can convert an expression to the corresponding type.
 
 - For a function signature, its return value type has been determined, so when defining, you need to combine it with the corresponding `baseXXBuiltinFunc` and implement the `evalXX ()` method. Note that XX should only be one of the six types listed above.
-
-[Back to the top](#top)

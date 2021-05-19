@@ -38,6 +38,5 @@ jobs:
         python3 check-manual-line-breaks.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md')
     - name: Verify internal links
       run: ./hack/verify-links-doc.sh
-    # the script reports "#top" as dead anchor.
-    # - name: Verify internal link anchors
-    #  run: ./hack/verify-link-anchors.sh
+    - name: Verify internal link anchors
+      run: ./hack/verify-link-anchors.sh

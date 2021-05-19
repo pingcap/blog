@@ -35,8 +35,6 @@ From [the first blog of TiDB internal](https://pingcap.com/blog/2017-07-11-tidbi
 
 It is easy to solve the above questions one by one, but once mixed up, it becomes difficult. It seems that some questions just need to consider the internal situation of a single Raft Group, for example, whether to add replicas is determined by if the number is enough. But actually, where to add this replica needs a global view. The whole system is changing dynamically: situations like Region splitting, node joining, node failing and hotspot accessing changes occur constantly. The schedule system also needs to keep marching towards the best state. Without a component that can master, schedule and configure the global information, it is hard to meet these needs. Therefore, we need a central node to control and adjust the overall situation of the system. So here comes the Placement Driver (PD) module.
 
-[Back to the top](#top)
-
 ## The Requirements of Scheduling
 
 I want to categorize and sort out the previously listed questions. In general, there are two types:
@@ -62,8 +60,6 @@ If the second type of requirements are met, the load of the system becomes more 
 
 To meet these needs, we need to, first of all, collect enough information, such as the state of each node, information of each Raft Group and the statistics of business access and operation. Then we should set some policies for PD to formulate a schedule plan to meet the previous requirements according to this information and the schedule policy.
 
-[Back to the top](#top)
-
 ## The Basic Operations of Scheduling
 
 The basic operations of schedule are the simplest. In other word, what we can do to meet the schedule policy. This is the essence of the whole scheduler.
@@ -75,8 +71,6 @@ The previous scheduler requirements seem to be complicated, but can be generaliz
 + Transfer the role of Leader among different Replicas of a Raft Group.
 
 The Raft protocol happens to meet these requirements: the `AddReplica`, `RemoveReplica` and `TransferLeader` commands support the three basic operations.
-
-[Back to the top](#top)
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('TiDB Internal (III) - Scheduling', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -109,8 +103,6 @@ Schedule depends on the information gathering of the whole cluster. Simply put, 
 - data reading/writing speed
 
 Through these two kinds of heartbeats, PD gathers the information of the whole cluster and then makes decisions. What's more, PD makes more accurate decisions by getting extra information through the management interface. For example, when the heartbeat of a Store is interrupted, PD has no idea whether it is temporarily or permanently. PD can only waits for a period of time (30 minutes by default); if there is still no heartbeat, PD considers that the Store has been offline and it needs to move all Regions on the Store away. However, if an Operations staff manually offline a machine, he needs to tell PD through its management interface that the Store is unavailable. In this case, PD will immediately move all Regions on the Store away.
-
-[Back to the top](#top)
 
 ## The Policy of Scheduling
 
@@ -158,8 +150,6 @@ After gathering information, PD needs some policies to draw up a concrete schedu
 
     When offlining a node manually through pd-ctl, PD will move the data on the node away within a certain rate control. After that, it will put the node offline.
 
-[Back to the top](#top)
-
 ## The implementation of Scheduling
 
 Now let's see the schedule process.
@@ -171,5 +161,3 @@ PD gets the detail data of the cluster by constantly gathering information throu
 This blog discloses information you might not find elsewhere. We hope that you've had a better understanding about what needs to be considered to build a distributed storage system for scheduling and how to decouple policies and implementation to support a more flexible expansion of policy.
 
 We hope these three blogs ([Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1), [Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2), and [Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3)) can help you understand the basic concepts and implementation principles of TiDB. In the future, more blogs about TiDB from code to architecture are on their way!
-
-[Back to the top](#top)

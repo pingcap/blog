@@ -49,8 +49,6 @@ All right, let's begin. First,  what is TiKV. TiKV is a distributed Key-Value da
 
 * **Working with TiDB like Spanner with F1:** Using TiKV as a backend storage engine of TiDB, we can provide the best distributed relational database.
 
-[Back to the top](#top)
-
 ### We need a language with...
 
 As you see, TiKV has many powerful features. To develop these features, we also need a powerful programming language. The language should have:
@@ -74,8 +72,6 @@ At first, we considered using Go, but then gave up this idea. Go has GC which fi
 Besides, although we can use Goroutine to write the concurrent logic easily, we still can't neglect the runtime expenses of the scheduler. We met a problem a few days ago: we used multi goroutines to select the same context but found that the performance was terrible, so we had to use one sub context for one goroutine, then the performance became better.
 
 More seriously, CGO has heavy expenses, but we need to call RocksDB API without delay. For the above reasons, we didn't choose Go even this is the favorite language in our team.
-
-[Back to the top](#top)
 
 ### So we turned to Rust...
 
@@ -106,8 +102,6 @@ Rust has no GC expenses, so we won't meet the "stop the world" problem. Calling 
 
 ### We made a hard but great decision: Use Rust!
 
-[Back to the top](#top)
-
 ### TiKV Timeline
 
 ![TiKV timeline](media/timeline.jpg)
@@ -131,8 +125,6 @@ TiKV provides a simple Key-Value API including SET, GET, DELETE to let user use 
 Above the Raft layer, it is MVCC. All the keys saved in TiKV must contain a globally unique timestamp, which is allocated by Placement Driver. TiKV uses it to support distributed transactions.
 
 On the top layer, it is the KV and coprocessor API layer for handling client requests.
-
-[Back to the top](#top)
 
 ### Multi-Raft
 
@@ -168,8 +160,6 @@ After that, the leader of region 1 is in Node B now, then we add a new replica o
 
 Then we remove the replica of region 1 from Node A. All these are executed by the Placement Driver automatically. What we only need is to add node, if we find the system is busy. Very easy, right?
 
-[Back to the top](#top)
-
 ### A simple write flow
 
 ![A simple write flow](media/write.jpg)
@@ -190,8 +180,6 @@ For **storage**, we use rust-rocksdb to access RocksDB.
 
 For **monitoring**, we wrote a rust client for Prometheus, and this client is recommended in the official wiki. For profiling, we use the jemallocator with enabling profile feature and use clippy to check our codes.
 
-[Back to the top](#top)
-
 ### TODO...
 
 Ok, that's what we have done and are doing. Here are what we will do in the future:
@@ -209,5 +197,3 @@ Ok, that's what we have done and are doing. Here are what we will do in the futu
 * Be a strong advocate of Rust in China.
 
 ![Attendees at the 1st Rust Meetup](media/group.jpg)
-
-[Back to the top](#top)

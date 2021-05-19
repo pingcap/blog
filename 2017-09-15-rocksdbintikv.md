@@ -64,8 +64,6 @@ OK, let's begin. Why did we decided to use RocksDB instead of LevelDB, WiredTige
 
 * What's more, RocksDB has an very active community. If we have questions, we can easily ask for help. Many RocksDB team members and us are even WeChat (a very popular IM tool in China) friends, we can talk to each other directly.
 
-[Back to the top](#top)
-
 ## How are we using RocksDB?
 
 ### TiKV Architecture
@@ -99,8 +97,6 @@ We will append every new Raft log to the region. For example, we first append lo
 ![Key and Version](media/keyandversion.png)
 
 The version is embedded in the key as a suffix, and used for ACID transaction support. But transaction management is not our topic today, so I just skip it.
-
-[Back to the top](#top)
 
 ### Prefix Iterator
 
@@ -136,8 +132,6 @@ However, since we only need to do GC before a specified safe point, and most key
 So we create an MVCC property collector to collect the version information, including the maximum and minimum timestamp, the row number and version number. Then every time before scanning a range, we can check these properties to see if we can skip the GC procedure or not.
 
 For example, if we find the minimal timestamp in the table property is bigger than the safe point, we can immediately skip scanning the range.
-
-[Back to the top](#top)
 
 ### Ingest the SST File
 
@@ -180,5 +174,3 @@ We also added features and fixed some bugs, like these. Because TiKV can only ca
 In the future, we are planning DeleteRange API, which is a very useful for us. But now we found some bugs [2752](https://github.com/facebook/rocksdb/issues/2752) and [2833](https://github.com/facebook/rocksdb/issues/2833), we are trying our best to fix them, of course, together with the RocksDB team.
 
 And we will try to use BLOB DB when it's stable. On the other hand, we will also try different memtable types to speed up the insert performance, and use partitioned indexes and filters for SATA disks.
-
-[Back to the top](#top)

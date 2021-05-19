@@ -73,8 +73,6 @@ A globally ordered and distributed Key-Value engine satisfies the above needs. T
 + To get a row of data quickly. Assume that we can create a certain or some Keys, when locating this row, we'd be able to use the Seek method provided by TiKV to quickly locate this row of data.
 + To scan the whole table. If the table can be mapped to the Range of Key, then all data can be got by scanning from StartKey to EndKey. The way to manipulate Index data is similar.
 
-[Back to the top](#top)
-
 Now let's see how this works in TiDB.
 
 TiDB allocates a `TableID` to each table, an `IndexID` to each index, and a `RowID` to each row. If the table has an integer Primary Key, then the value will be used as the `RowID`. The `TableID` is unique in the whole cluster while the `IndexID/RowID` unique in the table. All of these ID are int64.
@@ -116,8 +114,6 @@ var(
 
 Note that the Key encoding solution of either Row or Index has the same prefix. Specifically speaking, all Rows in a Table has the same prefix, so does data of Index. These data with the same prefix is arranged together in the Key space of TiKV. In other words, we just need to carefully design the encoding solution of the suffix, ensuing the comparison relation remains unchanged, then Row or Index data can be stored in TiKV orderly. The solution of maintaining the relation unchanged before and after encoding is called `Memcomparable`. As for any type of value, the comparison result of two objects before encoding is consistent with that of the byte array after encoding (Note: both Key and Value of TiKV are the primitive byte array). For more detailed information, please refer to the [codec package](https://github.com/pingcap/tidb/tree/master/util/codec) of TiDB. When adopting this encoding solution, all Row data of a table will be arranged in the Key space of TiKV according to the RowID order. So will the data of a certain Index, according to the ColumnValue order of Index.
 
-[Back to the top](#top)
-
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('TiDB Internal (II) - Computing', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Internal (II) - Computing', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
@@ -155,8 +151,6 @@ t10_i1_30_3 --> null
 
 The previous encoding rules help you to understand the above example. We hope that you can realize the reason why we chose this mapping solution and the purpose of doing so.
 
-[Back to the top](#top)
-
 ### Metadata Management
 
 After explaining how data and index of a table is mapped to Key-Value, this section introduces the storage of metadata.
@@ -165,8 +159,6 @@ Both Database and Table have metadata, which refers to its definition and variou
 
 Apart from this, a specialized Key-Value stores the version of the current Schema information. TiDB uses the Online Schema change algorithm of Google F1. A background thread constantly checks whether the Schema version stored on TiKV has changed. If so, it manages to get the updates within a certain period of time. For more detailed information, please refer to [The Implementation of Asynchronous Schema Change of TiDB (In Chinese)](https://github.com/ngaut/builddatabase/blob/master/f1/schema-change-implement.md).
 
-[Back to the top](#top)
-
 ### Architecture of SQL on Key-Value
 
 The following diagram shows the entire architecture of TiDB:
@@ -174,8 +166,6 @@ The following diagram shows the entire architecture of TiDB:
 ![TiDB architecture](media/tidbarchitecture.png)
 
 The main function of the TiKV Cluster is to serve as the Key-Value engine to store data, which is thoroughly introduced in the last column. This article focuses on the SQL layer, i.e. the TiDB Servers. Nodes of this layer are stateless, storing no data, and each of them is completely equivalent. TiDB Server is responsible for handling user requests and executing SQL operation logic.
-
-[Back to the top](#top)
 
 ### SQL Computing
 
@@ -200,8 +190,6 @@ This solution works though it still has the following drawbacks:
 2. It is not applicable to all rows. Data that doesn't meet the conditions doesn't need to be read.
 3. The value of the rows that meet the conditions is meaningless. What we need here is just the number of rows.
 
-[Back to the top](#top)
-
 ### Distributed SQL Operation
 
 It is simple to avoid the above drawbacks.
@@ -224,12 +212,8 @@ The previous sections introduce some functions of the SQL layer and I hope you h
 
 The SQL requests will be sent directly or via a Load Balancer to tidb-server, which then parses the MySQL Protocol Packet for the request content. After that, it performs syntax parsing, makes and optimizes the query plan and executes the plan to access and process data. As all data is stored in the TiKV cluster. Tidb-server needs to interact with tikv-server for accessing data during the process. Finally, tidb-server needs to return the query result to users.
 
-[Back to the top](#top)
-
 ### Summary
 
 Up till now, we've known how data is stored and used for operation from the perspective of SQL. Information about the SQL layer, such as the principle of optimization and the detail of the distributed execution framework will be introduced in the future.
 
 In the next article, we will dwell on information about PD, especially the cluster management and schedule. This is an interesting part as you will see things that are invisible when using TiDB but important to the whole cluster.
-
-[Back to the top](#top)
