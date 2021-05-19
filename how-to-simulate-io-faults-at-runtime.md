@@ -136,6 +136,6 @@ I've discussed how we implement fault injection to simulate I/O faults at runtim
 + ioctl is not supported.
 + Chaos Mesh does not immediately determine whether a filesystem is successfully mounted. It does so only after one second.
 
-If you are interested in Chaos Mesh and would like to help us improve it, you're welcome to join [our Slack channel](https://cloud-native.slack.com/join/shared_invite/zt-fyy3b8up-qHeDNVqbz1j8HDY6g1cY4w#/) or submit your pull requests or issues to our [GitHub repository](https://github.com/chaos-mesh/chaos-mesh).
+If you are interested in Chaos Mesh and would like to help us improve it, you're welcome to join [our Slack channel](https://slack.cncf.io/) or submit your pull requests or issues to our [GitHub repository](https://github.com/chaos-mesh/chaos-mesh).
 
 This is the first post in a series on Chaos Mesh implementation. If you want to see how other types of fault injection are implemented, stay tuned.
