@@ -26,7 +26,7 @@ During the past 5 years, TiDB has powered the businesses of around 1,000 compani
 
 ## Why TiDB Cloud?
 
-TiDB Cloud is a comprehensive, fully-managed solution, where the PingCAP team will deliver a full suite of services and enterprise-grade tools to deploy, manage, maintain, backup, and upgrade a TiDB deployment for you. Optimized for mission-critical and massive-scale transactional and analytical workloads, TiDB Cloud is ideal for companies who want to get the most value out of TiDB for their specific use cases, with the least amount of operational overhead and cost. 
+TiDB Cloud is a comprehensive, fully-managed solution, where the PingCAP team will deliver a full suite of services and enterprise-grade tools to deploy, manage, maintain, backup, and upgrade a TiDB deployment for you. Optimized for mission-critical and massive-scale transactional and analytical workloads, TiDB Cloud is ideal for companies who want to get the most value out of TiDB for their specific use cases, with the least amount of operational overhead and cost.
 
 * Highly secure
 
@@ -34,7 +34,7 @@ TiDB Cloud is a comprehensive, fully-managed solution, where the PingCAP team wi
 
 * Cost-effective, no growing pains
 
-    When you need to increase the database storage capacity or throughput, all you need is a few clicks on the UI, and everything will happen automatically. After the traffic peaks, TiDB Cloud helps scale in clusters and move back to the most optimal operational configuration to save costs. 
+    When you need to increase the database storage capacity or throughput, all you need is a few clicks on the UI, and everything will happen automatically. After the traffic peaks, TiDB Cloud helps scale in clusters and move back to the most optimal operational configuration to save costs.
 
 * Any cloud, no vendor lock-in
 
@@ -42,7 +42,7 @@ TiDB Cloud is a comprehensive, fully-managed solution, where the PingCAP team wi
 
 * Always up-to-date with the best TiDB features
 
-    TiDB Cloud runs on the latest stable version of TiDB. You always have access to new features, performance improvements, and fixes. 
+    TiDB Cloud runs on the latest stable version of TiDB. You always have access to new features, performance improvements, and fixes.
 
 * Around-the-clock support
 
@@ -54,6 +54,6 @@ TiDB Cloud is immediately available on Amazon Web Service (AWS) and Google Cloud
 
 ## Getting started today
 
-Ready to give TiDB Cloud a try? Click [here](https://pingcap.com/products/tidbcloud/trial). Early beta users will get $4,500 worth of credits with full benefits of TiDB Enterprise Subscription.
+Ready to give TiDB Cloud a try? Click [here](https://tidbcloud.com/signup). Early beta users will get $4,500 worth of credits with full benefits of TiDB Enterprise Subscription.
 
 To learn more about TiDB Cloud, check out our [documentation](https://docs.pingcap.com/tidbcloud/beta). Our upcoming webinar will also give you a detailed product introduction and demo. More exciting updates on the way, so stay tuned!

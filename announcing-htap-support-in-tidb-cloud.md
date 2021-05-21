@@ -38,4 +38,4 @@ By introducing [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview),
 
 With HTAP support in TiDB Cloud, the process of legacy modernization could not be simpler.   Just imagine: creating an HTAP-enabled TiDB cluster in the cloud of your choice with just a few clicks and having the best of both the OLTP and OLAP worlds in a one-stop solution.
 
-Want to see for yourself? Apply now for a two-week free trial [here](https://pingcap.com/products/tidbcloud/trial/).
+Want to see for yourself? Apply now for a two-week free trial [here](https://tidbcloud.com/signup).
