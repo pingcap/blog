@@ -3,7 +3,7 @@ title: 'TiDB 5.0 GA: A One-Stop HTAP Solution Delivering Speed, Stability, and S
 author: ['PingCAP']
 date: 2021-04-12
 summary: TiDB 5.0 GA is released. As a one-stop HTAP solution, it delivers better and more stable OLTP performance and enhanced OLAP performance with a Massively Parallel Processing engine.
-tags: ['Announcement', 'Release', 'HTAP', 'Real-time analytics']
+tags: ['Announcement', 'Release', 'HTAP', 'Real-time analytics', 'TiDB 5.0']
 categories: ['Product']
 image: /images/blog/tidb-5.0-ga-one-stop-htap-solution.jpg
 press_release: true
