@@ -88,7 +88,7 @@ Two years ago, we began to develop TiDB Cloud. Today, it can seamlessly "dance i
 ![TiDB Cloud](media/tidb-cloud.jpg)
 <div class="caption-center"> TiDB Cloud </div>
 
-If you don't want to install or maintain TiDB, you can [try TiDB Cloud](https://pingcap.com/products/tidbcloud/trial). Currently, TiDB Cloud supports two cloud platforms, Amazon Web Services (AWS) and Google Cloud Platform (GCP). If you're using AWS or GCP, you can easily use TiDB with just a few clicks. It's truly an "out of the box" solution. We're also developing TiDB Cloud to make it support other cloud platforms.
+If you don't want to install or maintain TiDB, you can [try TiDB Cloud](https://tidbcloud.com/signup). Currently, TiDB Cloud supports two cloud platforms, Amazon Web Services (AWS) and Google Cloud Platform (GCP). If you're using AWS or GCP, you can easily use TiDB with just a few clicks. It's truly an "out of the box" solution. We're also developing TiDB Cloud to make it support other cloud platforms.
 
 ![Out-of-the-box TiDB Cloud](media/out-of-the-box-tidb-cloud.jpg)
 <div class="caption-center"> Out-of-the-box TiDB Cloud </div>

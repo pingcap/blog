@@ -11,18 +11,18 @@ press_release: true
 
 ![TiDB Cloud in Public Preview](media/tidb-cloud-in-public-preview.jpg)
 
-We are excited to announce the public preview of TiDB Cloud, the fully-managed TiDB service by PingCAP. With TiDB Cloud, customers can now easily use TiDB on Amazon Web Services and Google Cloud to quickly build modern, mission critical applications.
+We are excited to announce the public preview of [TiDB Cloud](https://pingcap.com/products/tidbcloud/), the fully-managed TiDB service by PingCAP. With TiDB Cloud, customers can now easily use TiDB on Amazon Web Services and Google Cloud to quickly build modern, mission critical applications.
 
 ## Get the full power of TiDB
 
 TiDB is the leading open-source, MySQL compatible, distributed NewSQL database in the industry that supports hybrid transactional and analytical processing (HTAP), which allows business to run real-time analytical queries. It also features horizontal scalability, strong consistency, and high availability.
 
-* **More control over your scaling**: Scale your performance (TiDB) and storage (TiKV) nodes separately 
+* **More control over your scaling**: Scale your performance (TiDB) and storage (TiKV) nodes separately
 * **High availability and reliability**: Ensure business continuity for your mission critical applications with our ACID-compliant cluster deployment
 * **Scalable Multi-master**: No more bottlenecks - scale without restrictions with read and write capability on every node
-* **High concurrency**: Have thousands of users query your data at the same time without sacrificing performance 
-* **Simplified database architecture**: Eliminate complex data migration between transactional and analytical workloads by storing data in a single database  
-* **Real-time operational analytics**: Run real-time analytical queries with our hybrid transactional-analytical processing (HTAP) capabilities 
+* **High concurrency**: Have thousands of users query your data at the same time without sacrificing performance
+* **Simplified database architecture**: Eliminate complex data migration between transactional and analytical workloads by storing data in a single database
+* **Real-time operational analytics**: Run real-time analytical queries with our hybrid transactional-analytical processing (HTAP) capabilities
 
 TiDB has been growing for the past 6 years, and is now deployed in production by over 1500 companies worldwide. Open source since day one, TiDB has donated two projects to the Cloud Native Computing Foundation (CNCF) and currently has over 400 contributors to its [GitHub repository](https://github.com/pingcap/tidb).
 
@@ -40,7 +40,7 @@ TiDB Cloud also simplifies deployment, scaling, and recovering from outages thro
 
 ## Get started today
 
-Ready to give TiDB Cloud a try? Choose from one of the public preview options:
+Ready to give TiDB Cloud a try? Click [here](https://tidbcloud.com/signup) and choose from one of the public preview options:
 
 * **48-Hour free trial**: For developers interested in a quick preview and try out a standard TiDB cluster for 48 hours.
 * **Proof of concept**: For developers who want to test out their applications. Apply for a free two week proof-of-concept with unlimited cluster size and dedicated technical support.
