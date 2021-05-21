@@ -169,4 +169,4 @@ Generally, because Hadoop doesn't support high-speed, real-time queries, we can'
 
 Within a couple of months of its GA release, TiDB 4.0 HTAP with the columnar engine has gained more than 20 production use cases. It helps users build their real-time reporting, fraud detection, CRM, data-mart, and real-time campaign monitoring. For more information, feel free to talk to us in the [TiDB Slack channel](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog).
 
-HTAP support is also available on [TiDB Cloud](https://en.pingcap.com/products/tidbcloud), the fully managed TiDB service. Apply now for a 2-week free trial [here](https://tidbcloud.com/signup).
+HTAP support is also available on [TiDB Cloud](https://pingcap.com/products/tidbcloud), the fully managed TiDB service. Apply now for a 2-week free trial [here](https://tidbcloud.com/signup).
