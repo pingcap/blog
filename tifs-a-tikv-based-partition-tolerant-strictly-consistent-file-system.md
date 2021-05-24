@@ -277,7 +277,7 @@ Before the benchmarking, we had the following projections:
 
 * When both the file block and load block are 4 KB, if the load block increases, **_T<sub>f</sub>_**, **_T<sub>n</sub>_**, and **_T<sub>s</sub>_** increase; therefore, **_IOPS_** decreases.
 * When the file block is 64 KB or 1 MB:
-    * If the load block is smaller than the file block, **_T<sub>n</sub>_** and **_T<sub>s </sub>_**barely change, but **_T<sub>f</sub>_** increases; therefore, **_IOPS_** decreases.
+    * If the load block is smaller than the file block, **_T<sub>n</sub>_** and **_T<sub>s </sub>_** barely change, but **_T<sub>f</sub>_** increases; therefore, **_IOPS_** decreases.
     * If the load block is larger than the file block, **_T<sub>f</sub>_**, **_T<sub>n</sub>_**, and **_T<sub>s</sub>_** all increase; therefore, **_IOPS_** decreases.
 
 As you can see in the diagram, the variation is almost identical to our projections.
