@@ -84,7 +84,7 @@ To prepare the environment using QKE:
 
 ## Deploy TiDB Operator
 
-[TiDB Operator](https://github.com/pingcap/tidb-operator) is an automatic operation system for TiDB clusters in Kubernetes. It provides a full management life-cycle for TiDB, including deployment, upgrades, scaling, backup, fail-over, and configuration changes. With TiDB Operator, TiDB can run seamlessly in Kubernetes clusters deployed on public or private clouds. Before you deploy a TiBD cluster, you should first deploy TiDB Operator on KubeSphere.
+[TiDB Operator](https://github.com/pingcap/tidb-operator) is an automatic operation system for TiDB clusters in Kubernetes. It provides a full management life-cycle for TiDB, including deployment, upgrades, scaling, backup, fail-over, and configuration changes. With TiDB Operator, TiDB can run seamlessly in Kubernetes clusters deployed on public or private clouds. Before you deploy a TiDB cluster, you should first deploy TiDB Operator on KubeSphere.
 
 1. Create a project (also known as a namespace) to run the TiDB cluster. On the **Projects** page, click **Create**.
 2. After the project is created, navigate to **Applications** and click **Deploy New Application**.
