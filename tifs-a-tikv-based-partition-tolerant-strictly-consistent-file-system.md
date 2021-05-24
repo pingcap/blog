@@ -256,8 +256,8 @@ Theoretically, there are three major factors that influence the read/write perfo
 
 Let's first take a look at IOPS. Because sequential reads and writes perform I/O operations linearly, each I/O operation is a transaction in TiKV. If we ignore the minor differences between each operation, the duration of an I/O operation, **_T_**, is the reciprocal of **_IOPS_**. In addition, if we don't count stream processing, we can consider **_T_** as the linear addition of the following four variables:
 
-* **_T<sub>f</sub> _**: the I/O duration of [FUSE](https://en.wikipedia.org/wiki/Filesystem_in_Userspace).
-* **_T<sub>c</sub> _**: the logical duration of TiFS.
+* **_T<sub>f</sub>_**: the I/O duration of [FUSE](https://en.wikipedia.org/wiki/Filesystem_in_Userspace).
+* **_T<sub>c</sub>_**: the logical duration of TiFS.
 * **_T<sub>n</sub>_** : the network transmission time.
 * **_T<sub>s</sub>_** : the logical duration of TiKV.
 
