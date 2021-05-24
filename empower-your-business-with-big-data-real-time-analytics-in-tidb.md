@@ -83,7 +83,7 @@ One of **TiDB's biggest strengths is its HTAP architecture**. In TiDB, the row s
 TiDB also **supports elastic scaling**:
 
 * When TiDB is running, you can elastically scale out or scale in the cluster components without affecting the production environment.
-* TiBD's architecture separates computing and storage, so you can scale computing nodes and storage nodes independently.
+* TiDB's architecture separates computing and storage, so you can scale computing nodes and storage nodes independently.
 
 TiDB **supports standard SQL syntax and the MySQL protocol**:
 
