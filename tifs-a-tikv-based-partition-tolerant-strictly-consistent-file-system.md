@@ -1,5 +1,5 @@
 ---
-title: TiFS, a TiKV-based Partition Tolerant, Strictly Consistent File System
+title: TiFS, a TiKV-Based Partition Tolerant, Strictly Consistent File System
 author: ['Hexi Lee']
 date: 2021-05-24
 summary: TiFS is a distributed file system built upon TiKV. It is partition tolerant, strictly consistent, and most efficient for reading and writing small files or other complicated file system operations.
@@ -18,11 +18,11 @@ TiKV is a distributed key-value storage engine, featuring strong consistency and
 
 At [TiDB Hackathon 2020](https://pingcap.com/community/events/hackathon2020/), **our team built a TiKV-based distributed POSIX file system, [TiFS](https://github.com/Hexilee/tifs)**, which inherits the powerful features of TiKV and also taps into TiKV's possibilities beyond data storage.
 
-In this post, I'll walk you through every detail of TiFS: **how we came up with the idea, how we implemented the file system, and** **its benchmarking results**. Let the hacking begin!
+In this post, I'll walk you through every detail of TiFS: **how we came up with the idea, how we implemented the file system, and its benchmarking results**. Let the hacking begin!
 
 ## Why build a file system based on TiKV?
 
-A “distributed” system has multiple processes cooperating across machines; TiKV has that as well. Being a distributed database means it easily scales out and is fault tolerant by nature.
+A "distributed" system has multiple processes cooperating across machines; TiKV has that as well. Being a distributed database means it easily scales out and is fault tolerant by nature.
 
 A friend of mine once wanted to try out TiDB but had only one server. I told him that he could run a TiKV instance on each disk, achieving data disaster tolerance, and wouldn't need RAID anymore!
 
@@ -227,7 +227,7 @@ The **file index** key includes the inode number of its parent directory in big-
 
 ### Consistency
 
-TiKV supports both optimistic and pessimistic transactions. However, since the Rust client only supports pessimistic transactions experimentally, and pessimistic transactions may reduce performance when transactions don't conflict, **we implement TiFS by optimistic  transactions only**.
+TiKV supports both optimistic and pessimistic transactions. However, since the Rust client only supports pessimistic transactions experimentally, and pessimistic transactions may reduce performance when transactions don't conflict, **we implement TiFS by optimistic transactions only**.
 
 
 ## Various scenarios
@@ -258,8 +258,8 @@ Let's first take a look at IOPS. Because sequential reads and writes perform I/O
 
 * **_T<sub>f</sub>_**: the I/O duration of [FUSE](https://en.wikipedia.org/wiki/Filesystem_in_Userspace).
 * **_T<sub>c</sub>_**: the logical duration of TiFS.
-* **_T<sub>n</sub>_** : the network transmission time.
-* **_T<sub>s</sub>_** : the logical duration of TiKV.
+* **_T<sub>n</sub>_**: the network transmission time.
+* **_T<sub>s</sub>_**: the logical duration of TiKV.
 
 Accordingly, we have this equation:
 
