@@ -272,6 +272,7 @@ For read operations, **_T<sub>f</sub>_** is positively correlated to the size of
 **The following diagram shows how the sequential read IOPS varies with the size of load blocks.** The four lines represent different filesystem block sizes and data replicas.
 
 ![Read IOPS benchmarking results](media/tifs-read-iops-benchmarking-results.png)
+<div class="caption-center">Read IOPS benchmarking results</div>
 
 Before the benchmarking, we had the following projections:
 
@@ -289,6 +290,7 @@ When TiFS sequentially writes data, if the load block is smaller than the file b
 **The following line chart shows how the sequential write IOPS varies with the size of the load blocks.** When the file blocks are 1 MB (see the yellow line), the **_IOPS_** is largest while the file block and load block are equivalent.
 
 ![Write IOPS benchmarking results](media/tifs-write-iops-benchmarking-results.png)
+<div class="caption-center">Write IOPS benchmarking results</div>
 
 Moreover, we can see that the red line almost overlaps the blue line on the first two data points. This means when the load block and file block are 4 KB or 64 KB, their **_IOPS_** values are nearly the same. Under such circumstances, the minimum traffic per second is 4 KB * 110 = 440 KB, and the maximum is 64 KB * 100 = 6.25 MB, both putting little pressure on the network and disks. When the traffic is small enough, it is safe to say that **_IOPS_** reaches its upper limit, so the major factor of **_T<sub>n</sub>_** becomes network latency. (In local testing, **_T<sub>n</sub>_** is considered 0 ms.)
 
@@ -303,8 +305,10 @@ The following two bar charts compare the read and write speeds in different clus
 > [Titan](https://github.com/tikv/titan) is a RocksDB Plugin for key-value separation, inspired by [WiscKey](https://www.usenix.org/system/files/conference/fast16/fast16-papers-lu.pdf), to reduce write amplification.
 
 ![Read speed benchmarking results](media/tifs-read-speed-benchmarking-results.png)
+<div class="caption-center">Read speed benchmarking results</div>
 
 ![Write speed benchmarking results](media/tifs-write-speed-benchmarking-results.png)
+<div class="caption-center">Write speed benchmarking results</div>
 
 From the charts, we can see that **the write speed is mostly affected by the file block size and whether Titan is enabled**, and that the read speed is only slightly fluctuating. This is because the smaller the file block is, the more key-value pairs TiKV writes into, which takes more time. But RocksDB performs poorly with large file blocks, so enabling Titan can reduce unnecessary value copy and thus improve performance.
 
