@@ -32,7 +32,7 @@ As illustrated in [TiDB Operator Source Code Reading (I): Overview](https://ping
 
 ### Entry point
 
-Starting from `cmd/controller-manager/main.go`,  `tidb-controller-manager` first loads kubeconfig to access the kube-apiserver. It then uses a series of `NewController` functions to load the init function of each controller.
+Starting from `cmd/controller-manager/main.go`, `tidb-controller-manager` first loads kubeconfig to access the kube-apiserver. It then uses a series of `NewController` functions to load the init function of each controller.
 
 ```go
 controllers := []Controller{
