@@ -1,6 +1,6 @@
 ---
 title: Why We Chose a Scale-Out Data Warehouse for Real-Time Analytics
-author: ['PatSnap']
+author: ['Mingxing Qu', 'Liang Li']
 date: 2021-05-31
 summary: As PatSnap's businesses developed, their data size quickly grew. To perform real-time analytics, they replaced their Segment + Amazon Redshift data analytics architecture with a TiDB + Apache Flink data warehouse solution.
 image: /images/blog/free-real-time-data-analytics-tools.jpg
@@ -12,7 +12,10 @@ logo: /images/blog/customers/patsnap-logo.png
 
 **Industry:** Artificial Intelligence
 
-**Author:** PatSnap
+**Authors:**
+
+- Mingxing Qu (Architect at PatSnap Data Warehouse Team)
+- Liang Li (Senior DBA at PatSnap Data Warehouse Team)
 
 **Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
 
