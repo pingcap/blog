@@ -64,7 +64,7 @@ After we adopted the TiDB + Flink architecture, we found that:
 
 * Inbound data, inbound rules, and computational complexity are greatly reduced.
 * Queries, updates, and writes are much faster.
-* Reasonable data layering greatly simplifies the TiDB-based real-time data warehouse, and makes development, scaling, and maintenance easier. **Our query performance for complex reports remarkably increases.** In many application scenarios, our queries' data currency greatly improves. Previously, after some data was generated, it took one day to retrieve queries for business use. But now, they are near real time for analytics. 
+* Reasonable data layering greatly simplifies the TiDB-based real-time data warehouse, and makes development, scaling, and maintenance easier. Our query performance for complex reports remarkably increases. In many application scenarios, our queries' data currency greatly improves. Previously, after some data was generated, it took one day to retrieve queries for business use. But now, they are near real time for analytics. 
 * This solution meets requirements for different ad hoc queries, and we don't need to wait for Redshift precompilation.
 
 If you want to know more details about our story or have any questions, you're welcome to join the [TiDB community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) and send your feedback. 
