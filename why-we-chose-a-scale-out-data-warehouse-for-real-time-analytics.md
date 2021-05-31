@@ -8,6 +8,7 @@ tags: ['HTAP', 'Real-time analytics']
 customer: PatSnap
 customerCategory: Internet
 logo: /images/blog/customers/patsnap-logo.png
+notShowOnLogoWall: true
 ---
 
 **Industry:** Artificial Intelligence
