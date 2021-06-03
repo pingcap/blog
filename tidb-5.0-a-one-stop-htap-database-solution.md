@@ -20,7 +20,7 @@ To deliver a better one-stop Hybrid Transactional/Analytical Processing (HTAP) s
 
 * [Why the current tech stack fails to meet business demands](#the-current-tech-stack-cant-keep-up)
 * [What's new in TiDB 5.0's HTAP architecture](#the-evolution-of-tidbs-htap-architecture)
-* [How TiDB 5.0 serves different scenarios in one stack](#tidb-5.0-one-stack-to-serve-all-scenarios)
+* [How TiDB 5.0 serves different scenarios in one stack](#tidb-50-one-stack-to-serve-all-scenarios)
 
 ## The current tech stack can't keep up
 
