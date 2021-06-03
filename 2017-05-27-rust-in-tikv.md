@@ -25,7 +25,7 @@ This is the speech Siddon Tang gave at the 1st Rust Meetup in Beijing on April 1
 - [Scale out](#scale-out)
 - [A simple write flow](#a-simple-write-flow)
 - [Key technologies](#key-technologies)
-- [Future plan](#todo...)
+- [Future plan](#todo)
 
 ![Siddon Tang at the 1st Rust Meetup in Beijing](media/tangsir.jpg)
 
