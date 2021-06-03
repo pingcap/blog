@@ -1,5 +1,5 @@
 ---
-title: 'TiDB 5.0: a One-Stop HTAP Database Solution'
+title: 'TiDB 5.0: A One-Stop HTAP Database Solution'
 author: ['Shawn Ma']
 date: 2021-06-03
 summary: TiDB 5.0 features a comprehensive HTAP solution enhanced by an MPP analytical query engine. This article introduces the new TiDB 5.0 HTAP architecture and how TiDB 5.0 serves various transactional & analytical hybrid workload scenarios.
@@ -12,9 +12,9 @@ image: /images/blog/tidb-5.0-a-one-stop-htap-database-solution.jpg
 
 **Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
 
-![TiDB 5.0: a One-Stop HTAP Database Solution](media/tidb-5.0-a-one-stop-htap-database-solution.jpg)
+![TiDB 5.0: an open source SQL database for real-time anlytics](media/tidb-5.0-a-one-stop-htap-database-solution.jpg)
 
-**Many companies need to analyze large-scale data in real time**. It allows them to identify potential risks, efficiently allocate their resources, and serve their customers quickly. However, the more data you hold in your DMBS, the longer it takes to retrieve and process data. As you amass more data over time, it's harder and harder to process it in real time.
+**Many companies need to analyze large-scale data in real time**. It allows them to identify potential risks, efficiently allocate their resources, and serve their customers quickly. However, the more data you hold in your DBMS, the longer it takes to retrieve and process data. As you amass more data over time, it's harder and harder to process it in real time.
 
 To deliver a better one-stop Hybrid Transactional/Analytical Processing (HTAP) service, TiDB, an open-source, distributed SQL database, has released [version 5.0](https://docs.pingcap.com/tidb/stable/release-5.0.0). In this article, I will cover:
 
@@ -144,7 +144,7 @@ Second, TiDB is also an OLTP database that responds to creates, reads, updates, 
 
 If your company has more than one data source in the foreground—financing, ERP, sales, warehouses, click stream, user profile—each of them may store their data in their own database. To achieve a real-time, single source of truth for hot data, **you can integrate the data into TiDB via CDC or Kafka, building a data hub layer**.
 
-A data hub is a layer between the application and the data warehouse.  It stores data in only a period of time, while a data warehouse stores all historical data. A data hub tends to store hot data for real-time queries or processes highly-concurrent requests, while offline data warehouses and data lakes often provide less fresh data for reporting and BI queries.
+A data hub is a layer between the application and the data warehouse. It stores data in only a period of time, while a data warehouse stores all historical data. A data hub tends to store hot data for real-time queries or processes highly-concurrent requests, while offline data warehouses and data lakes often provide less fresh data for reporting and BI queries.
 
 ![TiDB in the data hub scenario](media/tidb-5.0-htap-data-hub-scenario.jpg)
 <div class="caption-center">TiDB in the data hub scenario</div>
