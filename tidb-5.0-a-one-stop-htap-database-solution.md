@@ -12,7 +12,7 @@ image: /images/blog/tidb-5.0-a-one-stop-htap-database-solution.jpg
 
 **Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
 
-![TiDB 5.0: an open source SQL database for real-time anlytics](media/tidb-5.0-a-one-stop-htap-database-solution.jpg)
+![TiDB 5.0: an open source SQL database for real-time analytics](media/tidb-5.0-a-one-stop-htap-database-solution.jpg)
 
 **Many companies need to analyze large-scale data in real time**. It allows them to identify potential risks, efficiently allocate their resources, and serve their customers quickly. However, the more data you hold in your DBMS, the longer it takes to retrieve and process data. As you amass more data over time, it's harder and harder to process it in real time.
 
