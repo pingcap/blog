@@ -15,7 +15,7 @@ redirectTag: ['Engineering', 'TiDB', 'Golang', 'MySQL-Scalability', 'Open-Source
 - [Architecture](#architecture)
 - [Protocol](#protocol)
 - [Raft](#raft)
-- [Placement Driver (PD)](#placement-driver-pd)
+- [Placement Driver (PD)](#placement-driver)
 - [Transaction](#transaction)
 - [Coprocessor](#coprocessor)
 - [Key processes analysis](#key-processes-analysis)
