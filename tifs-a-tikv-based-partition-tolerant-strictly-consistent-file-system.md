@@ -8,6 +8,8 @@ categories: ['Engineering']
 image: /images/blog/tifs-a-tikv-based-partition-tolerant-strictly-consistent-file-system.jpg
 ---
 
+<!-- markdownlint-disable MD037 -->
+
 **Author:** [Hexi Lee](https://github.com/Hexilee) (Software Engineer Intern at PingCAP)
 
 **Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
@@ -224,11 +226,9 @@ The **file index** key includes the inode number of its parent directory in big-
 +--------+------------------------------------------+----------------------------------------------+
 ```
 
-
 ### Consistency
 
 TiKV supports both optimistic and pessimistic transactions. However, since the Rust client only supports pessimistic transactions experimentally, and pessimistic transactions may reduce performance when transactions don't conflict, **we implement TiFS by optimistic transactions only**.
-
 
 ## Various scenarios
 
