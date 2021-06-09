@@ -177,4 +177,4 @@ Now, our OLTP and OLAP applications are not truly physically separated on key-va
 
 If you'd like to learn more about our experience with TiDB, you can join the [TiDB community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog).
 
-If you'd like to try TiDB in a cloud environment, consider [TiDB Cloud](https://pingcap.com/products/tidbcloud), the fully-managed database service with HTAP support. You can apply for a two-week free trial [here](https://pingcap.com/products/tidbcloud/trial/).
+If you'd like to try TiDB in a cloud environment, consider [TiDB Cloud](https://pingcap.com/products/tidbcloud), the fully-managed database service with HTAP support. You can apply for a two-week free trial [here](https://tidbcloud.com/signup).

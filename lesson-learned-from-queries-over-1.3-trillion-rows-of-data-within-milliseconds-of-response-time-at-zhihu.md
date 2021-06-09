@@ -8,7 +8,7 @@ url: /success-stories/lesson-learned-from-queries-over-1.3-trillion-rows-of-data
 customer: Zhihu
 customerCategory: Internet
 notShowOnLogoWall: true
-aliases: ['/blog/use-case-tidb-in-eleme/']
+aliases: ['/blog/use-case-tidb-in-eleme/', '/case-studies/gaining-3x-throughput-by-migrating-from-aurora-to-a-scale-out-mysql-alternative/', '/case-studies/japan-largest-mobile-payment-company-migrates-from-aurora-to-a-scale-out-database/', '/case-studies/category/company/Paytm-Labs/', '/case-studies/category/company/PayPay/']
 logo: /images/blog/customers/zhihu-logo.png
 ---
 

@@ -155,7 +155,7 @@ With Async Commit providing a basis for calculating the Commit TS, the difficult
 
 One-phase commits do not use the distributed commit protocol, which reduces the number of TiKV write operations. So if a transaction[^4] involves only one [Region](https://docs.pingcap.com/tidb/stable/glossary#regionpeerraft-group), using one-phase commit not only reduces transaction latency, but also improves data throughput.
 
-TiBD 5.0 introduces the one-phase commit feature as part of Async Commit.
+TiDB 5.0 introduces the one-phase commit feature as part of Async Commit.
 
 ## Causal consistency
 

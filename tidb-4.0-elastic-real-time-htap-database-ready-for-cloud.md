@@ -88,7 +88,7 @@ Two years ago, we began to develop TiDB Cloud. Today, it can seamlessly "dance i
 ![TiDB Cloud](media/tidb-cloud.jpg)
 <div class="caption-center"> TiDB Cloud </div>
 
-If you don't want to install or maintain TiDB, you can [try TiDB Cloud](https://pingcap.com/products/tidbcloud/trial). Currently, TiDB Cloud supports two cloud platforms, Amazon Web Services (AWS) and Google Cloud Platform (GCP). If you're using AWS or GCP, you can easily use TiDB with just a few clicks. It's truly an "out of the box" solution. We're also developing TiDB Cloud to make it support other cloud platforms.
+If you don't want to install or maintain TiDB, you can [try TiDB Cloud](https://tidbcloud.com/signup). Currently, TiDB Cloud supports two cloud platforms, Amazon Web Services (AWS) and Google Cloud Platform (GCP). If you're using AWS or GCP, you can easily use TiDB with just a few clicks. It's truly an "out of the box" solution. We're also developing TiDB Cloud to make it support other cloud platforms.
 
 ![Out-of-the-box TiDB Cloud](media/out-of-the-box-tidb-cloud.jpg)
 <div class="caption-center"> Out-of-the-box TiDB Cloud </div>
@@ -179,7 +179,7 @@ Finally, let's talk about our experience in chaos engineering. There is a common
 
 The figure above graphically represents the connections within Amazon's and Netflix's microservices. These connections are actually much more complicated than spider webs. Therefore, we need a system to simulate all possible faults, let the faults happen continuously, and take precautions to enhance the robustness of the system.
 
-Therefore, when we were developing TiDB, we built a system called **[Chaos Mesh®](https://github.com/pingcap/chaos-mesh), a cloud-native Chaos Engineering platform that orchestrates chaos experiments in Kubernetes environments. It features all-around fault injection methods for complex systems in Kubernetes, covering faults in the Pod, the network, the file system, and even the kernel**.
+Therefore, when we were developing TiDB, we built a system called **[Chaos Mesh®](https://github.com/chaos-mesh), a cloud-native Chaos Engineering platform that orchestrates chaos experiments in Kubernetes environments. It features all-around fault injection methods for complex systems in Kubernetes, covering faults in the Pod, the network, the file system, and even the kernel**.
 
 For example, Chaos Mesh can simulate a disk failure. In our test environment, if the disk breaks every minute, the network is isolated every minute. Although this situation rarely occurs in reality, if it does, it causes a catastrophic failure.
 
