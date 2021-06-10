@@ -2,7 +2,7 @@
 title: Managing Your Data Lifecycle with Time to Live Tables
 author: ['Xiaoguang Sun']
 date: 2021-06-10
-summary: Time to live, or TTL, is a mechanism to manage the data lifecycle in a system. In TiDB Hackathon 2020, a team introduced TTL tables into TiDB to enable automatic management of the data lifecycle.
+summary: Time to live, or TTL, is a mechanism to manage the data lifecycle in a system. At TiDB Hackathon 2020, a team introduced TTL tables into TiDB to enable automatic management of the data lifecycle.
 tags: ['Hackathon']
 categories: ['Community']
 image: /images/blog/manage-data-lifecycle-with-time-to-live-tables-in-distributed-sql-database.jpg
