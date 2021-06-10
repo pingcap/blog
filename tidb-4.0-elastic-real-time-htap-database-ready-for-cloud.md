@@ -170,7 +170,7 @@ If you want to learn more about TiDB, you can attend online or offline training 
 
 You might be ambitious and want to write a distributed database of your own. No problem. Our [Talent Plan](https://github.com/pingcap/talent-plan) program offers courses in how to build a distributed database's computing and storage layers step by step. There will be tutors from all over the world to help you review your code or tasks.
 
-## Bonus: Chaos Mesh®<sup> </sup>
+## Bonus: Chaos Mesh®
 
 Finally, let's talk about our experience in chaos engineering. There is a common understanding in the software field that all foreseeable accidents will eventually occur. We must accept the fact that complex systems are unavoidable, and we must do our best to keep them stable and resilient. Today, the complexity of the entire system is not only limited to the database, but extends to all parts of the business, and ultimately settles in the quality of services the system provides to users.
 
