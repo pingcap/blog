@@ -83,7 +83,7 @@ By using [Ververica](https://www.ververica.com/)'s [flink-connector-mysql-cdc](h
 ![An architecture with MySQL as data source](media/architecture-with-mysql-as-data-source.jpg)
 <div class="caption-center"> An architecture with MySQL as data source </div>
 
-This architecture is simple and convenient. When you've prepared corresponding databases and tables for both MySQL and TiDB, you can write Flink SQL statements to register and submit tasks. You can try this architecture in the section [Try Flink + TiDB with Docker Compose](#try-flink-+-tidb-with-docker-compose).
+This architecture is simple and convenient. When you've prepared corresponding databases and tables for both MySQL and TiDB, you can write Flink SQL statements to register and submit tasks. You can try this architecture in the section [Try Flink + TiDB with Docker Compose](#try-flink--tidb-with-docker-compose).
 
 ### Connecting Kafka to Flink
 

@@ -194,14 +194,14 @@ Now we will grab some sample data that we can play around with.
 
     **Result:** You can see the `TPCH_001` database on the list. That's the sample data we just ported over.
 
- ![Imported data](media/imported_data.png)
+    ![Imported data](media/imported_data.png)
 
     Now let's go into `TPCH_001`:
 
- ```sql
- USE TPCH_001;
- SHOW TABLES;
- ```
+    ```sql
+    USE TPCH_001;
+    SHOW TABLES;
+    ```
 
     **Result:** You can see all the tables in `TPCH_001`, like `NATION`, `ORDERS`, etc.
 
@@ -228,7 +228,9 @@ Now let's launch TiSpark, the last missing piece of our hybrid database puzzle.
     ```
 
     This will take a few minutes.
+
     **Result:** Now you can Spark!
+
     ![Now you can Spark](media/now_you_can_spark.png)
 
 3. Use the following command to set `TPCH_001` as default database:

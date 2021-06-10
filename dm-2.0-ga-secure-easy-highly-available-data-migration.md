@@ -125,4 +125,3 @@ DM 2.0 reduces the risks of replicating data from MySQL to TiDB in real time, av
 You can [use TiUP to quickly deploy a DM cluster](https://docs.pingcap.com/tidb-data-migration/v2.0/deploy-a-dm-cluster-using-tiup) and [create a data migration task](https://docs.pingcap.com/tidb-data-migration/v2.0/quick-start-create-task) to migrate data from MySQL to TiDB. If you're using a DM 1.0 cluster, you can [use TiUP to import and upgrade it to 2.0](https://docs.pingcap.com/tidb-data-migration/v2.0/maintain-dm-using-tiup#import-and-upgrade-a-dm-10-cluster-deployed-using-dm-ansible).
 
 If you are interested in DM's development plan, you can check out its [roadmap](https://github.com/pingcap/dm/blob/master/roadmap.md) on GitHub. You're welcome to contribute pull requests and open issues to DM. You can also join our [community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) and send us your feedback.
-

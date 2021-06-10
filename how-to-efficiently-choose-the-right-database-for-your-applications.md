@@ -14,9 +14,9 @@ categories: ['Community']
 
 ![Database selection criteria](media/how-to-choose-database.jpg)
 
-Finding the right database solution for your application is not easy. At [iQIYI](https://en.wikipedia.org/wiki/IQIYI), one of the largest online video sites in the world, we're experienced in database selection across several fields: Online Transactional Processing (OLTP), Online Analytical Processing (OLAP), Hybrid Transaction/Analytical Processing (HTAP), SQL, and NoSQL. 
+Finding the right database solution for your application is not easy. At [iQIYI](https://en.wikipedia.org/wiki/IQIYI), one of the largest online video sites in the world, we're experienced in database selection across several fields: Online Transactional Processing (OLTP), Online Analytical Processing (OLAP), Hybrid Transaction/Analytical Processing (HTAP), SQL, and NoSQL.
 
-Today, I'll share with you: 
+Today, I'll share with you:
 
 * [What criteria to use for selecting a database](#database-selection-criteria)
 * [What databases we use at iQIYI](#what-databases-we-use-at-iqiyi)
@@ -25,7 +25,7 @@ Today, I'll share with you:
 
 I hope this post can help you easily find the right database for your applications.
 
-## Database selection criteria 
+## Database selection criteria
 
 When choosing a database, different people use different criteria:
 
@@ -36,10 +36,10 @@ When choosing a database, different people use different criteria:
     * **Operation and maintenance costs**:
 
         * A reliable monitoring and alerting system
-        * Support for backup and restore 
-        * Reasonable upgrade and migration costs 
-        * An active support community 
-        * Ease of performance tuning 
+        * Support for backup and restore
+        * Reasonable upgrade and migration costs
+        * An active support community
+        * Ease of performance tuning
         * Ease of troubleshooting
 
     * **Service stability:**
@@ -80,7 +80,7 @@ At iQIYI, we mainly use these databases:
 Because there are so many types of databases at iQIYI, application developers might not know which database is suitable for their application scenario. Therefore, we categorized these databases by application scenario and database interface, and we built a matrix:
 
 * The X-axis represents application scenarios: OLTP vs. OLAP.
-* The Y-axis represents database interfaces: SQL vs. NoSQL. 
+* The Y-axis represents database interfaces: SQL vs. NoSQL.
 
 ![All databases at iQIYI](media/databases-types-at-iqiyi.jpg)
 <div class="caption-center"> All databases at iQIYI </div>
@@ -107,7 +107,7 @@ This matrix has these characteristics:
 
 ## Practical decision trees for efficiently choosing a database
 
-I'd like to recommend our database selection trees. We developed these trees based on our DBAs' and application developers' experience. 
+I'd like to recommend our database selection trees. We developed these trees based on our DBAs' and application developers' experience.
 
 ### How to efficiently choose a relational database
 
@@ -115,7 +115,7 @@ When you select a relational database, you can:
 
 1. Consider your data volume and database scalability.
 
-2. Make a decision based on: 
+2. Make a decision based on:
 
     * Whether the database has a cold backup system
     * Whether to use the TokuDB storage engine
@@ -140,4 +140,3 @@ I'd like to share with you some tips for selecting a database:
 * **Think carefully before you give up on a solution.** Are you abandoning a system because it doesn't work? Or because you're not using it properly? It's difficult to get rid of your solution, so be clear about why you're giving up on it. For example, before you make a decision, compare your TPC-C or Sysbench benchmarks.
 * **Keep a good attitude towards self-development.** When you need to develop your own database, you can refer to and use some mature products. Don't build things from scratch if you don't need to.
 * **Embrace open-source products.** For example, [TiDB](https://docs.pingcap.com/tidb/stable/overview) is an open-source, distributed SQL database. It has an active community, and currently has 26,000 stars on [GitHub](https://github.com/pingcap/tidb). Our previous post described how TiDB helped us [scale out our database and achieve high availability](https://pingcap.com/case-studies/tidb-in-iqiyi). Currently, in the production environment, we have 88 TiDB clusters, with more than 1,200 nodes. There's no reason why you have to go it alone.
- 

@@ -35,7 +35,7 @@ At this party, the team behind TiDB announced exciting news, shared the project'
   - [Import & Export Tools](#import--export-tools)
     - [TiDB Syncer](#tidb-syncer)
     - [TiDB Binlog](#tidb-binlog)
-    - [TiDB Lightning](#tidb-lightning-1)
+    - [TiDB Lightning](#tidb-lightning-a-high-speed-data-importing-tool)
   - [Wormhole--Enterprise synchronization tool](#wormhole--enterprise-synchronization-tool)
   - [TiDB Insight](#tidb-insight)
   - [Monitoring & Alerting](#monitoring--alerting)
@@ -97,8 +97,7 @@ On January 19th, one day before DevCon, [TiDB 1.1 Alpha](https://pingcap.com/doc
 * Hash-join is 3 times faster than the previous version.
 * Some complex queries using index are now more than 10x faster than the previous version.
 * Cost based optimizer (CBO) is smarter.
-* Loading data using the following statement is now 15x faster:
-`load data local infile 'output.csv' into table xxx;`
+* Loading data using the following statement is now 15x faster: `load data local infile 'output.csv' into table xxx;`
 
 ### TiDB Lightning
 
@@ -197,7 +196,7 @@ After recapping all the news and developments from an exciting and productive 20
 * Geo-Index (2018 Q4-2019 Q1)
 * Window function (2018 Q4)
 
-Last but not least, we want to thank all the attendees for braving the cold to participate in the first (but definitely not the last) TiDB DevCon, all the speakers from our customer companies to share their use cases and best practices, and all the amazing contributors to the vibrant and growing TiDB community. We know you have big hopes for 2018; we won't let you down.  
+Last but not least, we want to thank all the attendees for braving the cold to participate in the first (but definitely not the last) TiDB DevCon, all the speakers from our customer companies to share their use cases and best practices, and all the amazing contributors to the vibrant and growing TiDB community. We know you have big hopes for 2018; we won't let you down.
 
 ![DevCon 2018 group photo](media/group-photo.png)
 

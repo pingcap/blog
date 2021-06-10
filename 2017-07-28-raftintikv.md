@@ -32,8 +32,6 @@ Below is TiKV's overall architecture:
 
 **Region:** Region is the smallest unit of data movement and it refers to the actual data extent in Store. Each Region has multiple replicas, each of which is placed in different Stores and these replicas make up a Raft group.
 
-[Back to the top](#top)
-
 ## Raft
 
 TiKV uses the Raft algorithm to implement the strong consistency of data in a distributed environment. For detailed information about Raft, please refer to the paper [In Search of an Understandable Consensus Algorithm](https://web.stanford.edu/~ouster/cgi-bin/papers/raft-atc14) and [the official website](https://raft.github.io/). Simply put, Raft is a model of replication log + State Machine. We can only write through a Leader and the Leader will replicate the command to its Followers in the form of log. When the majority of nodes in the cluster receive this log, this log has been committed and can be applied into the State Machine.
@@ -131,8 +129,6 @@ When calling relevant logic of Raft from outside, users need to handle the persi
 
 Note that the above Storage interface is just for Raft. But actually we also use this Storage to store data like Raft log and so we need to provide other interfaces, such as `MemStorage` in Raft storage.rs for testing. You can refer to `MemStorage` to implement your Storage.
 
-[Back to the top](#top)
-
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('A TiKV Source Code Walkthrough - Raft in TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('A TiKV Source Code Walkthrough - Raft in TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
@@ -173,8 +169,6 @@ pub struct Config {
 `max_inflight_msgs`: Limit the maximum number of in-flight message in replication. The default value is 256.
 
 Here is the detailed implication of tick: TiKV's Raft is timing-driven. Assume that we call the Raft tick once every 100ms and when we call the tick times of `headtbeat_tick`, the Leader will send heartbeats to its Follower.
-
-[Back to the top](#top)
 
 ### RawNode
 
@@ -249,5 +243,3 @@ When the outside finds that a `RawNode` has been ready and gets `Ready`, it will
 6. Apply `committed_entries` to State Machine.
 
 7. Call `advance` to inform Raft that `ready` has been processed.
-
-[Back to the top](#top)

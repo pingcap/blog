@@ -12,7 +12,7 @@ categories: ['Engineering']
 + [Placement Driver](#placement-driver)
 + [Raftstore](#raftstore)
   - [Region](#region)
-  - [RocksDB / Keys Prefix](#rocksdb-keys-prefix)
+  - [RocksDB / Keys Prefix](#rocksdb--keys-prefix)
   - [Peer Storage](#peer-storage)
   - [Peer](#peer)
   - [Multi-raft](#multi-raft)
@@ -37,8 +37,6 @@ The Client trait of PD is easy to understand, most of which are the set/get oper
 **`ask_split/report_split`**: When a Region needs to split, it will inform PD through `ask_split` and PD then generates the ID of the newly-split Region. After split successfully, Region informs PD through `report_split`.
 
 By the way, we will make PD support gRPC protocol in the future, so the `ClientAPI` will have some changes.
-
-[Back to the top](#top)
 
 ## Raftstore
 
@@ -97,8 +95,6 @@ message Peer {
 **`start_key`**, **`end_key`**: Stand for the range of this Region [start_key, end_key). To the very first region, start and end key are both empty, and TiKV handles it in a special way internally.
 
 **`peers`**: The node information included in the current Region. To a Raft Group, we usually have three replicas, each of which is a Peer. Peer's `id` is also globally allocated by PD and `store_id` indicates the Store of this Peer.
-
-[Back to the top](#top)
 
 ### RocksDB / Keys Prefix
 
@@ -168,8 +164,6 @@ message RegionLocalState {
 
 **`RegionLocalStaste`:** Used to store Region information and the corresponding Peer state on this Store. `Normal` indicates that this Peer is normal, `Applying` means this Peer hasn't finished the `apply snapshot` operation and `Tombstone` shows that this Peer has been removed from Region and cannot join in Raft Group.
 
-[Back to the top](#top)
-
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('The Design and Implementation of Multi-raft', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('The Design and Implementation of Multi-raft', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
@@ -231,8 +225,6 @@ pub const JOB_STATUS_FAILED: usize = 5;
 
 For example, the state `JOB_STATUS_RUNNING**`** indicates that applying snapshot is in progress. Currently, `JOB_STATUS_FAILED` is not allowed. In other words, if the applying snapshot fails, the system would panic.
 
-[Back to the top](#top)
-
 ### Peer
 
 Peer encapsulates `Raft RawNode`. Those `Propose` and `ready` operations towards Raft are done in Peer.
@@ -267,8 +259,6 @@ pub trait Transport: Send + Clone {
 
 It only has one function: `send`. Transport implemented by TiKV will send the needed message to the Server layer which then sends to other nodes.
 
-[Back to the top](#top)
-
 ### Multi-raft
 
 Peer is a replica of a single Region. TiKV supports Multi-raft, so for a Store, we need to manage multiple Region replicas, which are managed systematically in the Store class.
@@ -294,5 +284,3 @@ After each `EventLoop`, i.e. inside the tick call-back of mio, Store will perfor
 ## Summary
 
 In this blog, I've shared the details about Multi-raft, one of TiKV's key technologies. In the subsequent sections, we will introduce Transaction, Coprocessor, and how Placement Drivers schedules the entire cluster. Stay tuned!
-
-[Back to the top](#top)

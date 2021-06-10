@@ -98,7 +98,9 @@ TiDB supports the complete secondary indexes which are also global indexes. Many
 
 - For columns with a high degree of differentiation, the number of filtered rows is remarkably reduced though index.
 - If there are multiple query criteria, you can choose composite indexes. Note to put the columns with equivalent condition before composite index.
+
   For example, for a commonly-used query is `select * from t where c1 = 10 and c2 = 100 and c3 > 10`, you can create a composite index `Index cidx (c1, c2, c3)`. In this way, you can use the query criterion to create an index prefix and then Scan.
+
 - The difference between query through indexes and directly scan Table
 
 TiDB has implemented global indexes, so indexes and data of the Table are not necessarily on data sharding. When querying through indexes, it should firstly scan indexes to get the corresponding row ID and then use the row ID to get the data. Thus, this method involves two network requests and has a certain performance overhead.
@@ -121,9 +123,12 @@ The following two conditions don't have the problem of two accesses:
  As data is distributed across many Regions, TiDB makes query concurrently. But the concurrency by default is not high in case it consumes lots of system resources. Besides, as for the OLTP query, it doesn't involve a large amount of data and the low concurrency is enough. But for the OLAP Query, the concurrency is high and TiDB modifies the query concurrency through System Variable.
 
 - [tidb\_distsql\_scan\_concurrency](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-distsql-scan-concurrency):
- The concurrency of scanning data, including scanning the Table and index data.
+
+    The concurrency of scanning data, including scanning the Table and index data.
+
 - [tidb\_index\_lookup\_size](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-index-lookup-size):
- If it needs to access the index to get row IDs before accessing Table data, it uses a batch of row IDs as a single request to access Table data. This parameter can set the size of Batch. The larger Batch increases latency while the smaller one may lead to more queries. The proper size of this parameter is related to the amount of data that the query involves. Generally, no modification is required.
+
+    If it needs to access the index to get row IDs before accessing Table data, it uses a batch of row IDs as a single request to access Table data. This parameter can set the size of Batch. The larger Batch increases latency while the smaller one may lead to more queries. The proper size of this parameter is related to the amount of data that the query involves. Generally, no modification is required.
 
 - [tidb\_index\_lookup\_concurrency](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-index-lookup-concurrency): If it needs to access the index to get row IDs before accessing Table data, the concurrency of getting data through row IDs every time is modified through this parameter.
 
@@ -223,4 +228,3 @@ Simply put, TiDB can be used in the following scenarios:
 + Don't want to use the sharding solutions
 + The access mode has no obvious hotspot
 + Transactions, strong consistency, and disaster recovery
-

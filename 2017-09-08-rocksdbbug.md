@@ -92,6 +92,7 @@ Now we know how to delete a key in RocksDB, but what if we want to delete a rang
 ```
 
 In the table, it looks like:
+
 <table>
   <tr>
     <td>key</td>
@@ -142,6 +143,7 @@ Let's see how the DeleteRange feature from RocksDB comes to rescue. In the above
 ```
 
 In the table, it looks like:
+
 <table>
   <tr>
     <td>key</td>
@@ -190,8 +192,6 @@ Everything worked great until one of our test clusters panicked?
 
 The panicked cluster, which we named it Cluster A, was running a branch with the DeleteRange feature, so that's why we started hunting the DeleteRange bug.
 
-[Back to the top](#top)
-
 ### Round 1
 
 There are 4 TiKV instances KV1, KV2, KV3, and KV4 in Cluster A, and the consistency check showed that we had an abnormal replica R2 in KV2, and two normal replicas R1 and R3 in KV1 and KV3. We used tikv-ctl to print out the diff of R2 and R1 to see what's wrong. The diff showed that R2 had lost some ranges of data, and some deleted data reappeared too. Since we were testing the DeleteRange branch in this cluster, we guessed that this could happen if a DeleteRange entry dropped some entries in a wrong way during the compaction.
@@ -217,8 +217,6 @@ Luckily, we noticed in the `MANIFEST` file that something was wrong in Level-1 o
 ![Issues for Files 185808 and 185830](media/rocksdbbug0.png)
 
 Once we confirmed that something must be wrong here, we reported this discovery to RocksDB with the `MANIFEST` file.
-
-[Back to the top](#top)
 
 Meanwhile, we tried to keep investigating this problem further. Since file 185830 was wrong, let's trace back to see which compaction generated this file. The `LOG` file showed that file 185830 was generated in compaction [JOB 10654] where the input files of [JOB 10654] \(texts below were edited and combined together to make them more easy to trace):
 
@@ -249,5 +247,3 @@ RocksDB plays a significant role in TiKV, thanks for the support from the RocksD
 1. Protect your crime scene well. Some bugs are hard to reproduce, so seize every opportunity.
 2. Collect more evidence before diving into the details. It's inefficient to hunt with no clear direction. What's worse is that it's easy to go too deep in a wrong direction.
 3. It's important to test new features (especially those with high risks) carefully under different conditions, some bugs rarely happen but can be destructive. Time tries truth.
-
-[Back to the top](#top)

@@ -15,11 +15,11 @@ redirectTag: ['Engineering', 'TiDB', 'Golang', 'MySQL-Scalability', 'Open-Source
 - [Architecture](#architecture)
 - [Protocol](#protocol)
 - [Raft](#raft)
-- [Placement Driver (PD)](#placement-driver-pd)
+- [Placement Driver (PD)](#placement-driver)
 - [Transaction](#transaction)
 - [Coprocessor](#coprocessor)
 - [Key processes analysis](#key-processes-analysis)
-  - [Key-Value operation](#keyvalue-operation)
+  - [Key-Value operation](#key-value-operation)
   - [Membership Change](#membership-change)
   - [Split](#split)
 
@@ -71,8 +71,6 @@ There are following ways for external applications to connect to TiKV:
 * For the Transactional Key-Value features, implement `kvrpcpb.proto`.
 * For the Push-Down features, implement `coprocessor.proto`. See [tipb](https://github.com/pingcap/tipb) for detailed push-down protocol.
 
-[Back to the Top](#top)
-
 ## Raft
 
 TiKV uses the Raft algorithm to ensure the data consistency in the distributed systems. For more information, see [The Raft Consensus Algorithm](https://raft.github.io/).
@@ -85,25 +83,25 @@ See the following details about how to use Raft:
 
 1. Define its own storage and implement the Raft Storage trait. See the following Storage trait interface:
 
-```rust
-    // initial_state returns the information about HardState and ConfState in Storage
-    fn initial_state(&self) -> Result<RaftState>;
+    ```rust
+        // initial_state returns the information about HardState and ConfState in Storage
+        fn initial_state(&self) -> Result<RaftState>;
 
-    // return the log entries in the [low, high] range
-    fn entries(&self, low: u64, high: u64, max_size: u64) -> Result<Vec<Entry>>;
+        // return the log entries in the [low, high] range
+        fn entries(&self, low: u64, high: u64, max_size: u64) -> Result<Vec<Entry>>;
 
-    // get the term of the log entry according to the corresponding log index
-    fn term(&self, idx: u64) -> Result<u64>;
+        // get the term of the log entry according to the corresponding log index
+        fn term(&self, idx: u64) -> Result<u64>;
 
-    // get the index from the first log entry at the current position
-    fn first_index(&self) -> Result<u64>;
+        // get the index from the first log entry at the current position
+        fn first_index(&self) -> Result<u64>;
 
-    // get the index from the last log entry at the current position
-    fn last_index(&self) -> Result<u64>;
+        // get the index from the last log entry at the current position
+        fn last_index(&self) -> Result<u64>;
 
-    // generate a current snapshot
-    fn snapshot(&self) -> Result<Snapshot>;
-```
+        // generate a current snapshot
+        fn snapshot(&self) -> Result<Snapshot>;
+    ```
 
 2. Create a raw node object and pass the corresponding configuration and customized storage instance to the object. About the configuration, we need to pay attention to `election_tick` and `heartbeat_tick`. Some of the Raft logics step by periodical ticks. For every Tick, the Leader will decide if the frequency of the heartbeat elapsing exceeds the frequency of the `heartbeat_tick`. If it does, the Leader will send heartbeats to the Followers and reset the elapse. For a Follower, if the frequency of the election elapsing exceeds the frequency of the `election_tick`, the Follower will initiate an election.
 
@@ -137,8 +135,6 @@ In TiKV, each Raft group corresponds to a Region. At the very beginning, there i
 
 Of course, where there is Split, there is Merge. If there are very few data in two adjacent Regions, these two regions can merge to one big Region. Region Merge is in the TiKV roadmap but it is not implemented yet.
 
-[Back to the Top](#top)
-
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('A Deep Dive into TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('A Deep Dive into TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
@@ -166,8 +162,6 @@ The current functions of PD are as follows:
 
     2). The regular triggering: PD checks if the whole system needs scheduling on a regular bases. If PD finds out that there is not enough space on a certain Store or that there are too many leader Regions on a certain Store and the load is too high, PD will select a Region from the Store and move the replicas to another Store.
 
-[Back to the Top](#top)
-
 ## Transaction
 
 The transaction model in TiKV is inspired by [Google Percolator](http://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/36726.pdf) and [Themis from Xiaomi](https://github.com/XiaoMi/themis) with the following optimizations:
@@ -194,8 +188,6 @@ Let's see how a transaction is executed:
 
     3). During the Commit phase, requests are sent to the TiKV servers with `PrimaryKey`. The process of how TiKV handles commit is to clean up the Locks from the PrimaryKey phase and write corresponding commit records with commitTS. When the `PrimaryKey` commit finishes, the transaction is committed. The Locks that remain on other Keys can get the commit state and the corresponding commitTS by retrieving the state of the `Primarykey`. But in order to reduce the cost of cleaning up Locks afterwards, the practical practice is to submit all the Keys that are involved in the transaction asynchronously on the backend.
 
-[Back to the Top](#top)
-
 ## Coprocessor
 
 Similar to HBase, TiKV provides the Coprocessor support. But for the time being, Coprocessor cannot be dynamically loaded, it has to be statically compiled to the code.
@@ -215,8 +207,6 @@ Let's take an example of `select count(*) from t1` to show how a complete push-d
 3. Region 1 and Region 2 traverse their snapshots to get the corresponding data and and calculate `count()`.
 
 4. Each Region returns the result of `count()` to TiDB and TiDB consolidates and outputs the total result.
-
-[Back to the Top](#top)
 
 ## Key processes analysis
 
@@ -250,8 +240,6 @@ Of course, we will optimize the reading requests for better performance in the f
 
 These optimizations are mentioned in the Raft paper and they have been supported by etcd. We will introduce them into TiKV as well in the future.
 
-[Back to the Top](#top)
-
 ### Membership Change
 
 To ensure the data safety, there are multiple replicas on different stores. Each replica is another replica's Peer. If there aren't enough replicas for a certain Region, we will add new replicas; on the contrary, if the numbers of the replicas for a certain Region exceeds the threshold, we will remove some replicas.
@@ -267,8 +255,6 @@ In TiKV, the change of the Region replicas are completed by the Raft Membership 
 It should be noted that even if the Membership Change completes, it only means that the Replica information is added to the meta by the Region. Later if the Leader finds that if there is no data in the new Follower, it will send snapshot to it.
 
 It should also be noted that the Membership Change implementation in TiKV and etcd is different from what's in the Raft paper. In the Raft paper, if a new peer is added, it is added to the Region meta at the Propose command. But to simplify, TiKV and etcd don't add the peer information to the Region meta until the log is applied.
-
-[Back to the Top](#top)
 
 ### Split
 
@@ -297,5 +283,3 @@ Assuming the base size of Region 1 is 64MB. A complete spit process is as follow
 6. The Split request is submitted through the Raft process and then applied. For TiKV, the splitting of a Region is to change the range of the original Region and then create another Region. All these changes involves only the change of the Region meta, the real data under the hood is not moved, so it is very fast for Region to split in TiKV.
 
 7. When the Splitting completes, TiKV sends the latest information about the Left Region and Right Region to PD.
-
-[Back to the Top](#top)

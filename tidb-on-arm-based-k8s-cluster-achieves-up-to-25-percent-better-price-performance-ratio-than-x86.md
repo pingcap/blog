@@ -7,7 +7,7 @@ tags: ['Benchmark']
 categories: ['Product']
 image: /images/blog/tidb-on-eks-arm-vs-x86-benchmark.jpg
 aliases: ['/blog/tidb-on-arm-based-k8s-cluster-x86-performance-at-15-percent-lower-cost/', '/blog/tidb-on-arm-based-k8s-cluster-is-15-percent-cheaper-than-x86-with-same-performance/']
---- 
+---
 
 **Author:** Ron Xing (Customer Support Engineer at PingCAP)
 
@@ -209,7 +209,7 @@ The following table summarizes the disk that we used for different components.
 
 We used one c5.4xlarge EC2 instance as a benchmark node where TPC-C and sysbench are deployed.
 
-Each EKS cluster consists of seven worker nodes and one admin (control plane) node. Seven worker nodes serve as dedicated TiDB, TiKV, and PD nodes. 
+Each EKS cluster consists of seven worker nodes and one admin (control plane) node. Seven worker nodes serve as dedicated TiDB, TiKV, and PD nodes.
 
 To better understand the role of each component and architecture diagram, please refer to [AWS Startups Blog](https://aws.amazon.com/blogs/startups/achieve-better-price-to-performance-for-tidb-graviton2-processors/).
 
@@ -341,7 +341,7 @@ The TiDB cluster software versions and the sysbench tool version are listed belo
 
 In the following cost examples:
 
-* Cost calculations are based on the on-demand rate for instances in the **US West (Oregon)** and **Asia Pacific (Singapore) **regions** **in US dollars (USD) per month. 
+* Cost calculations are based on the on-demand rate for instances in the **US West (Oregon)** and **Asia Pacific (Singapore)** regions in US dollars (USD) per month.
 * Monthly calculations are based on 730 hours of usage per month.
 
 ### Storage
@@ -727,7 +727,7 @@ Here are the configurations and costs of our Intel Xeon Platinum 8000 series pro
 
 The following tables summarize the total costs per month in the **US West (Oregon)** and **Asian Pacific (Singapore)** regions. All costs are in US dollars per month.
 
-AWS US West (Oregon) 
+AWS US West (Oregon)
 
 <table>
   <tr>
@@ -862,8 +862,8 @@ As you review the following benchmark tests, keep in mind that these are prelimi
 To facilitate benchmarking, TiUP has integrated the bench component, which provides two workloads for stress testing: TPC-C and TPC-H. The commands and flags are as follows:
 
 ```shell
-tiup bench 
-Starting component `bench`: /Users/joshua/.tiup/components/bench/v0.0.1/bench 
+tiup bench
+Starting component `bench`: /Users/joshua/.tiup/components/bench/v0.0.1/bench
 Benchmark database with different workloads
 
 Usage:
@@ -883,8 +883,8 @@ Flags:
   -H, --host string         Database host (default "127.0.0.1")
       --ignore-error        Ignore error when running workload
       --interval duration   Output interval time (default 10s)
-      --isolation int       Isolation Level 0: Default, 1: ReadUncommitted, 
-                            2: ReadCommitted, 3: WriteCommitted, 4: RepeatableRead, 
+      --isolation int       Isolation Level 0: Default, 1: ReadUncommitted,
+                            2: ReadCommitted, 3: WriteCommitted, 4: RepeatableRead,
                             5: Snapshot, 6: Serializable, 7: Linerizable
       --max-procs int       runtime.GOMAXPROCS
   -p, --password string     Database password
@@ -1184,7 +1184,7 @@ In the following price-performance table:
 
 * The tpmC values are derived from the average tpmC among 300, 500, and 800 threads.
 * The total system costs for the US and APAC regions reflect the estimated five year hardware cost.
-* The price-performance ratios compare x86 and Graviton2 Arm processors. A lower cost for more performance is better. 
+* The price-performance ratios compare x86 and Graviton2 Arm processors. A lower cost for more performance is better.
 * All costs are in US dollars.
 
 <table>
@@ -1451,7 +1451,7 @@ Results for 300, 600, and 900 threads are listed below. Since the QPS and TPS in
    </td>
   </tr>
   <tr>
-   <td>x86 P95 latency (ms) 
+   <td>x86 P95 latency (ms)
    </td>
    <td><p style="text-align: right">
 155.80</p>
@@ -1668,4 +1668,3 @@ In the following price-performance table:
 ## Conclusion
 
 Benchmarking results from both TPC-C and sysbench have shown that the Graviton2 processor has better performance compared to the x86 processor. In some cases, Graviton2 outperforms x86 by up to 18%. After factoring in the hardware cost, the Graviton2 processor has a better price-performance ratio than the x86—on average 20% lower. The results are only based on the workloads (100 GB, 500 GB, 1 TB) we tested. For limitations and future plans on the benchmark, please refer to [AWS Startups Blog](https://aws.amazon.com/blogs/startups/achieve-better-price-to-performance-for-tidb-graviton2-processors/).
- 

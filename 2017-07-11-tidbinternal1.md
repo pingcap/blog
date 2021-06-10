@@ -32,17 +32,18 @@ I believe the best way to work on a technology is to dive deeply into an open so
 
 This is the first of our series of articles.
 
-[Back to the top](#top)
-
 ### Storing data
 
 ![Storing data](media/database.png)
 
 I'd like to begin with the most fundamental function of a database -- storing data.
+
 There are lots of ways to store data and the easiest one is building a data structure in the memory to store data sent by users. For example, use an array to store data and add a new entry to the array when receiving a piece of data. This solution is simple, meets the basic needs and has good performance. But its drawback outweighs the advantages. The biggest problem is that as all data is stored in the memory, if the server stops or restarts, data would get lost.
 
 To achieve data persistence, we can store data in the non-volatile storage medium, disk for example. We create a file on disk and append a new record to the file when receiving data. This is a durable storage solution.
+
 But this is not enough. What if the disk is broken? To avoid the bad track of a disk, we can use RAID (Redundant Array of Independent Disks) for standalone redundant storage. However, what if the entire machine goes down? What if there is an outbreak of fire? RAID is no safe house.
+
 Another solution is to store data in the network or use hardware or software for storage and replication. But the problem is how to guarantee the consistency between replicas. Securing the intactness and correctness of data is the basic requirement, the following problems are far more demanding:
 
 + Does the database support disaster recovery of multi-datacenter?
@@ -56,8 +57,6 @@ All these problems are difficult to solve. But an excellent database storage sys
 For this, we have developed TiKV. Now, I want to share with you the design philosophy and basic concept of TiKV.
 
 As we are talking about TiKV, I hope you can forget any concept about SQL and focus on how to implement TiKV, a huge distributed ordered Map that is of high performance and reliability.
-
-[Back to the top](#top)
 
 #### Key-Value
 
@@ -74,13 +73,12 @@ You might wonder the relation between the storage model that I'm talking about a
 
 Any durable storage engine stores data on disk and TiKV is no exception. But TiKV doesn't write data to disk directly. Instead, it stores data in RocksDB and then RocksDB is responsible for the data storage. The reason is that it costs a lot to develop a standalone storage engine, especially a high-performance standalone engine. You need to do all kinds of detailed optimization. Fortunately, we found that RocksDB is an excellent open source standalone storage engine that meets all of our requirements. Besides, as the Facebook team keeps optimizing it, we can enjoy a powerful and advancing standalone engine without investing much effort. But of course we contribute a few lines of code to RocksDB and we hope that this project would get better. In a word, you can regard RocksDB as a standalone Key-Value Map.
 
-[Back to the top](#top)
-
 #### Raft
 
 Finding an effective, reliable and local storage solution is the important first step of this complex project. Now we are facing with a more difficult thing: how to secure the intactness and correctness of data when a single machine fails?
-A good way is to replicate data to multiple machines. Then, when one machine crashes, we have replicas on other machines. But it is noted that the replicate solution should be reliable, effective and can deal with the situation of an invalid replica.
-It sounds difficult but Raft makes it possible.
+
+A good way is to replicate data to multiple machines. Then, when one machine crashes, we have replicas on other machines. But it is noted that the replicate solution should be reliable, effective and can deal with the situation of an invalid replica. It sounds difficult but Raft makes it possible.
+
 Raft is a consensus algorithm and an equivalent to Paxos while Raft is easier to understand. Those who are interested in Raft can refer to [this paper](https://raft.github.io/raft.pdf) for more details. I want to point out that the Raft paper only presents a basic solution and the performance would be bad if strictly follow the paper. We have made numerous optimizations to implement Raft and for more detail, please refer to [this blog](optimizing-raft-in-tikv.md) written by our Chief Architect, Tang Liu.
 
 Raft is a consensus algorithm and offers three important functions:
@@ -95,8 +93,6 @@ TiKV uses Raft to replicate data and each data change will be recorded as a Raft
 
 In summary, through the standalone RocksDB, we can store data on a disk rapidly; through Raft, we can replicate data to multiple machines in case of machine failure. Data is written through the interface of Raft instead of to RocksDB. Thanks to the implementation of Raft, we have a distributed Key-Value and no longer need to worry about machine failure.
 
-[Back to the top](#top)
-
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('TiDB Internal (I) - Data Storage', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Internal (I) - Data Storage', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
@@ -107,7 +103,9 @@ In summary, through the standalone RocksDB, we can store data on a disk rapidly;
 In this section, I want to introduce a very important concept: Region. It is the foundation to comprehend a series of mechanism.
 
 Before we begin, let's forget about Raft and try to picture that all the data only has one replica.
+
 As I mentioned earlier, TiKV is seen as a huge but ordered Key-Value Map. To implement the horizontal scalability of storage, we need to distribute data among multiple machines.
+
 For a Key-Value system, there are two typical solutions to distribute data among multiple machines. One is to create Hash and select the corresponding storage node according to the Hash value; the other is to use Range and store a segment of serial Key in a storage node. TiKV chose the second solution and divided the whole Key-Value space into many segments. Each segment consists of a series of adjacent Key and we call such segment “Region”. There is a size limit for each Region to store data (the default value is 64MB and the size can be configured). Each Region can be described by a left-close-right-open interval, which is from StartKey to EndKey.
 
 ![Region in TiKV](media/region.png)
@@ -127,11 +125,9 @@ Now let's move to the second task. TiKV replicates data in Regions, which means 
 
 The following diagram shows the whole picture about Region and Raft group.
 
- ![Region and Raft group](media/raft-region.png)
+![Region and Raft group](media/raft-region.png)
 
 As we distribute and replicate data in Regions, we have a distributed Key-Value system that, to some extent, has the capability of disaster recovery. You no longer need to worry about the capacity or the problem of data loss caused by disk failure. This is cool but not perfect. We need more functions.
-
-[Back to the top](#top)
 
 #### MVCC
 
@@ -166,8 +162,6 @@ With MVCC, the Key array in TiKV looks like this:
 
 It is noted that as for multiple versions of a Key, we put the bigger number first (you can review the Key-Value section in which I mentioned that Key is an ordered array). In this way, when a user gets the Value by Key + &lt;Version&gt;, he can construct the Key of MVCC with Key and Version, which is Key-&lt;Version&gt;. Then he can directly Seek(Key-Version) and locate the first position that is greater than or equal to this Key-Version. For more detail, see [MVCC in TiKV](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/).
 
-[Back to the top](#top)
-
 #### Transaction
 
 Transaction of TiKV adopts the Percolator model and has lots of optimizations. I don't want to dive deep since you can read the paper and our articles(Currently in Chinese). What I want to say is that transaction in TiKV uses the optimistic lock. During the execution process, it will not detect write conflict. Only in the commit phase will it detect conflicts. The transaction that finishes committing earlier will be written successfully while the other would retry. If the write conflict of the business is not serious, the performance of this model is very good. For example, it works well to randomly update some rows of data in a large table. However, if the write conflict is severe, the performance would be bad. Take counter as an extreme example. The situation that many clients update a few rows at the same time leads to serious conflicts and numerous invalid retry.
@@ -175,5 +169,3 @@ Transaction of TiKV adopts the Percolator model and has lots of optimizations. I
 #### Miscellaneous
 
 Up to now, I have introduced the basic concept and some details of TiKV, the layered structure of this distributed and transactional Key-Value engine and how to implement multi-datacenter disaster recovery. I'll introduce how to construct the SQL layer on top of the storage model of Key-Value in the next article.
-
-[Back to the top](#top)

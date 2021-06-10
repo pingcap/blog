@@ -310,17 +310,12 @@ If you are interested in discussing and planning the future development of TiKV 
 <!-- Footnotes themselves at the bottom. -->
 ## Notes
 
-[^1]:
-     In order to ensure that the Max TS of the new leader is large enough after the Region leader transfers, TiKV also gets the latest timestamp from PD to update the Max TS after the Region leader transfers and the Region is merged.
+[^1]: In order to ensure that the Max TS of the new leader is large enough after the Region leader transfers, TiKV also gets the latest timestamp from PD to update the Max TS after the Region leader transfers and the Region is merged.
 
-[^2]:
-     In the prewriting process, to prevent that a more recent snapshot read breaks this constraint, TiKV adds a memory lock to the prewrite key and temporarily blocks the read requests whose Start TSs are greater than or equal to the Min Commit TS.
+[^2]: In the prewriting process, to prevent that a more recent snapshot read breaks this constraint, TiKV adds a memory lock to the prewrite key and temporarily blocks the read requests whose Start TSs are greater than or equal to the Min Commit TS.
 
-[^3]:
-     If the T1 and T2 commitment processes overlap, the logical order of their commits cannot be determined.
+[^3]: If the T1 and T2 commitment processes overlap, the logical order of their commits cannot be determined.
 
-[^4]:
-     To be precise, the one-phase commit feature should only be used when a transaction can be completed by a single TiKV request. In order to improve commit efficiency, larger transactions will be split into many requests, and in this case, even if they all involve the same single Region, one-phase commit is not used.
+[^4]: To be precise, the one-phase commit feature should only be used when a transaction can be completed by a single TiKV request. In order to improve commit efficiency, larger transactions will be split into many requests, and in this case, even if they all involve the same single Region, one-phase commit is not used.
 
-[^5]:
-     If you agree that the logical commit time of T1 is earlier than the start time of T2 (because the linearizability is not satisfied), then this case meets the snapshot isolation requirement.
+[^5]: If you agree that the logical commit time of T1 is earlier than the start time of T2 (because the linearizability is not satisfied), then this case meets the snapshot isolation requirement.
