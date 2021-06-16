@@ -27,23 +27,23 @@ As our businesses developed, our data size quickly grew. Previously, we used the
 
 In this post, we'll share why we adopted TiDB + Flink, how we use this data warehouse, and what benefits it brings us.
 
-## Our paint points
+## Our pain points
 
 As our businesses develop and our users quickly grow, during business operations, we deeply rely on real-time data analytics and result reports to analyze user behaviors. We need real-time market data, operational data for specific scenarios, and traffic and service analysis.
 
 Originally, we used the Segment + Amazon Redshift data analytics architecture and only built the operational data store (ODS) layer. We couldn't control data write rules and schemas. In addition, we needed to write complex extract-transform-load (ETL) job scripts for ODS. To complete data requests from upper-level applications, we needed to calculate various metrics based on application requirements. Redshift stored a large amount of data, and it calculated data slowly. This lowered external service efficiency.
 
-## Why we chose the TiDB + Flink real-time data warehouse 
+## Why we chose the TiDB + Flink real-time data warehouse
 
 After we compared multiple solutions, we decided to use the TiDB + Flink real-time data warehouse solution to improve our data analytical capabilities.
 
-[TiDB](https://docs.pingcap.com/tidb/stable/overview) is an open-source, distributed, Hybrid Transactional/Analytical Processing (HTAP) database. It's a one-stop solution for both Online Transactional Processing (OLTP) and Online Analytical Processing (OLAP) workloads. TiDB's architecture integrates row storage and column storage. Its storage uses separated nodes to ensure that OLTP and OLAP workloads don't interfere with each other. 
+[TiDB](https://docs.pingcap.com/tidb/stable/overview) is an open-source, distributed, Hybrid Transactional/Analytical Processing (HTAP) database. It's a one-stop solution for both Online Transactional Processing (OLTP) and Online Analytical Processing (OLAP) workloads. TiDB's architecture integrates row storage and column storage. Its storage uses separated nodes to ensure that OLTP and OLAP workloads don't interfere with each other.
 
 [Apache Flink](https://flink.apache.org/flink-architecture.html) is a big data computing engine with low latency, high throughput, and unified stream- and batch-processing. It's widely used in scenarios with high real-time computing requirements and provides exactly-once semantics.
 
 Combining TiDB and Flink into a real-time data warehouse has these advantages:
 
-* **Fast speed.** You can process streaming data in seconds and perform real-time data analytics. 
+* **Fast speed.** You can process streaming data in seconds and perform real-time data analytics.
 * **Horizontal scalability.** You can increase computing power by adding nodes to both Flink and TiDB.
 * **High availability.** With TiDB, if an instance fails, the cluster service is unaffected, and the data remains complete and available. Flink supports multiple backup and restore measures for jobs or instances.
 * **Low learning and configuration costs.** TiDB is highly compatible with the MySQL protocol. In Flink 1.11, you can use the Flink SQL syntax and powerful connectors to write and submit tasks.
@@ -67,7 +67,7 @@ After we adopted the TiDB + Flink architecture, we found that:
 
 * Inbound data, inbound rules, and computational complexity are greatly reduced.
 * Queries, updates, and writes are much faster.
-* Reasonable data layering greatly simplifies the TiDB-based real-time data warehouse, and makes development, scaling, and maintenance easier. Our query performance for complex reports remarkably increases. In many application scenarios, our queries' data currency greatly improves. Previously, after some data was generated, it took one day to retrieve queries for business use. But now, they are near real time for analytics. 
+* Reasonable data layering greatly simplifies the TiDB-based real-time data warehouse, and makes development, scaling, and maintenance easier. Our query performance for complex reports remarkably increases. In many application scenarios, our queries' data currency greatly improves. Previously, after some data was generated, it took one day to retrieve queries for business use. But now, they are near real time for analytics.
 * This solution meets requirements for different ad hoc queries, and we don't need to wait for Redshift precompilation.
 
-If you want to know more details about our story or have any questions, you're welcome to join the [TiDB community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) and send your feedback. 
+If you want to know more details about our story or have any questions, you're welcome to join the [TiDB community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) and send your feedback.
