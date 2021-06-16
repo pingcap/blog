@@ -39,7 +39,7 @@ After we compared multiple solutions, we decided to use the TiDB + Flink real-ti
 
 [TiDB](https://docs.pingcap.com/tidb/stable/overview) is an open-source, distributed, Hybrid Transactional/Analytical Processing (HTAP) database. It's a one-stop solution for both Online Transactional Processing (OLTP) and Online Analytical Processing (OLAP) workloads. TiDB's architecture integrates row storage and column storage. Its storage uses separated nodes to ensure that OLTP and OLAP workloads don't interfere with each other.
 
-[Apache Flink](https://flink.apache.org/flink-architecture.html) is a big data computing engine with low latency, high throughput, and unified stream- and batch-processing. It's widely used in scenarios with high real-time computing requirements and provides exactly-once semantics.
+[Apache Flink](https://flink.apache.org/flink-architecture.html) is a big data computing engine with low latency, high throughput, and unified stream- and batch-processing. It is widely used in scenarios with high real-time computing requirements and provides exactly-once semantics.
 
 Combining TiDB and Flink into a real-time data warehouse has these advantages:
 
