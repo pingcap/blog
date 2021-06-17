@@ -26,7 +26,7 @@ In this post, we'll share our pain points, why we chose TiDB, how we use it now,
 
 ## Our pain points
 
-As our businesses developed, our data volume rapidly increased, and we gradually found our original database solution's shortcomings in data processing and storage. **Our data architecture system couldn't meet our new application scenarios' requirements. **Therefore, we looked for a solution among various distributed databases that were widely used in the internet industry.
+As our businesses developed, our data volume rapidly increased, and we gradually found our original database solution's shortcomings in data processing and storage. **Our data architecture system couldn't meet our new application scenarios' requirements.** Therefore, we looked for a solution among various distributed databases that were widely used in the internet industry.
 
 ## Our database requirements
 
