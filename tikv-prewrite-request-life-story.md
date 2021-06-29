@@ -73,7 +73,7 @@ The following are the corresponding steps that the raftstore thread performs in 
 * Step [2](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/components/raftstore/src/store/fsm/store.rs#L802-L827): Reads the Raft command out of the peer's mailbox.
 * Step [3](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/components/raftstore/src/store/fsm/peer.rs#L508): Splits the Raft command into a Raft Read Index request and a snapshot callback.
 * Step [4](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/components/raftstore/src/store/peer.rs#L2716-L2721): Hands over the Raft Read Index request to the raft-rs library to be processed by the `step` function.
-* Step[ 5](https://github.com/tikv/raft-rs/blob/91a60ce417d55d4ca4d96b29963e3e3fa7f7d8d7/src/raft.rs#L1907-L1942): The raft-rs library prepares the network messages to be sent and saves it in the message buffer.
+* Step [5](https://github.com/tikv/raft-rs/blob/91a60ce417d55d4ca4d96b29963e3e3fa7f7d8d7/src/raft.rs#L1907-L1942): The raft-rs library prepares the network messages to be sent and saves it in the message buffer.
 * Step [6](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/components/raftstore/src/store/peer.rs#L2737): Stores the snapshot callback in the peer's pending reads queue.
 * Step [7](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/components/batch-system/src/batch.rs#L295-L314): Returns to the beginning of this phase and processes other peers with the same workflow.
 
