@@ -83,7 +83,7 @@ This concludes the Read Propose phase. Before the prewrite request can make prog
 
 ## The Read Apply phase
 
-After a “long” wait (a few milliseconds are actually long for a computer), the TiKV node that sends the network message finally receives responses from other follower nodes, and saves the reply messages in the peer's mailbox. Now the prewrite request enters the Read Apply phase. The following figure shows the workflow in this phase:
+After a "long" wait (a few milliseconds are actually long for a computer), the TiKV node that sends the network message finally receives responses from other follower nodes, and saves the reply messages in the peer's mailbox. Now the prewrite request enters the Read Apply phase. The following figure shows the workflow in this phase:
 
 ![Read Apply phase workflow](media/read-apply-phase-workflow.png)
 <div class="caption-center"> Read Apply phase workflow </div>
@@ -139,7 +139,7 @@ The Write Propose phase is over. Now, as with the end of the Read Propose phase,
 
 ## The Write Commit phase
 
-After another “long” wait, follower nodes respond to the Leader node and bring the prewrite request to the Write Commit phase.
+After another "long" wait, follower nodes respond to the Leader node and bring the prewrite request to the Write Commit phase.
 
 ![Write Commit phase workflow](media/write-commit-phase-workflow.png)
 <div class="caption-center"> Write Commit phase workflow </div>
