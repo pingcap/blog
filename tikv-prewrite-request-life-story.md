@@ -16,7 +16,7 @@ image: /images/blog/tikv-prewrite-request-life-story.png
 
 [TiKV](https://tikv.org/) is a distributed key-value storage engine, which is based on the designs of Google Spanner, F1, and HBase. However, TiKV is much simpler to manage because it does not depend on a distributed file system.
 
-As introduced in [A Deep Dive into TiKV](https://en.pingcap.com/blog/2016-11-09-Deep-Dive-into-TiKV#transaction) and [How TiKV Reads and Writes](https://en.pingcap.com/blog/how-tikv-reads-and-writes#percolator), TiKV applies a 2-phase commit (2PC) algorithm inspired by [Google Percolator](http://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/36726.pdf) to support distributed transactions. These two phases are `Prewrite` and `Commit`.
+As introduced in [A Deep Dive into TiKV](https://pingcap.com/blog/2016-11-09-Deep-Dive-into-TiKV#transaction) and [How TiKV Reads and Writes](https://pingcap.com/blog/how-tikv-reads-and-writes#percolator), TiKV applies a 2-phase commit (2PC) algorithm inspired by [Google Percolator](http://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/36726.pdf) to support distributed transactions. These two phases are `Prewrite` and `Commit`.
 
 In this article, I'll explore the execution workflow of a TiKV request in the prewrite phase, and give a top-down description of how the prewrite request of an [optimistic transaction](https://docs.pingcap.com/tidb/stable/optimistic-transaction) is executed within the multiple modules of the [Region](https://docs.pingcap.com/tidb/stable/glossary#regionpeerraft-group) leader. This information will help you clarify the resource usage of TiKV requests and learn about the related source code in TiKV.
 
@@ -37,7 +37,7 @@ A TiKV prewrite request begins with a gRPC prewrite request from the network app
 It may not be easy to understand just by looking at the figure, so below I will describe exactly what the gRPC thread does step by step. The number of each step links to the corresponding source code:
 
 * Step [1](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/src/server/service/kv.rs#L1791): Transforms the Prewrite protobuf message into [Mutations](https://github.com/tikv/tikv/blob/5024ad08fc7101ba25f17c46b0264cd27d733bb1/src/storage/mod.rs#L70) that can be understood in the transaction layer. Mutation represents the write operation of a key.
-* Step [2](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/src/server/service/kv.rs#L1790): Creates a channel and uses the channel sender  to construct a gRPC Notify Callback.
+* Step [2](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/src/server/service/kv.rs#L1790): Creates a channel and uses the channel sender to construct a gRPC Notify Callback.
 * Step [3](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/src/server/service/kv.rs#L150): Constructs the channel receiver as a gRPC respond task and submits it to the gRPC task queue to wait for notification.
 * Step [4](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/src/storage/txn/scheduler.rs#L329): Combines the gRPC notify callback and Mutations as a transaction task.
 * Step [5](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/src/storage/txn/scheduler.rs#L330): Gets latches for the Transaction layer and stores the gRPC notify callback in the transaction task slots.
@@ -125,7 +125,7 @@ Now it's time for the raftstore thread to propose the write operations. The foll
 ![Write Propose phase workflow](media/write-propose-phase-workflow.png)
 <div class="caption-center"> Write Propose phase workflow </div>
 
-The first three steps in this phase are the same as those in the previous sections. I won't  repeat them here. Let's go through the remaining steps:
+The first three steps in this phase are the same as those in the previous sections. I won't repeat them here. Let's go through the remaining steps:
 
 * Step [4](https://github.com/tikv/raft-rs/blob/91a60ce417d55d4ca4d96b29963e3e3fa7f7d8d7/src/raw_node.rs#L324-L333): raft-rs saves the net message to the message buffer.
 * Step [5](https://github.com/tikv/raft-rs/blob/91a60ce417d55d4ca4d96b29963e3e3fa7f7d8d7/src/raft.rs#L1895-L1904): raft-rs appends the Raft log to the write batch.
@@ -149,7 +149,7 @@ After another "long" wait, follower nodes respond to the Leader node and bring t
 * Steps [4](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/components/raftstore/src/store/peer_storage.rs#L749-L799), [5](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/components/raftstore/src/store/peer_storage.rs#L749-L799), and [6](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/components/raftstore/src/store/peer_storage.rs#L749-L799): The raftstore thread collects committed Raft entries from the Raft Engine.
 * Step [7](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/components/raftstore/src/store/peer.rs#L1858-L1879): The raftstore thread collects the proposals associated with the committed Raft entries from the internal proposal queue.
 * Step [8](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/components/raftstore/src/store/peer.rs#L1880-L1886): The raftstore thread assembles Raft-committed entries and associated proposals into an apply task.
-* Step  [9](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/components/raftstore/src/store/peer.rs#L1887-L1888): The raftstore thread sends the task to the apply thread.
+* Step [9](https://github.com/tikv/tikv/blob/6708ce171792df02e1e90e1fe1e67e424d1586c8/components/raftstore/src/store/peer.rs#L1887-L1888): The raftstore thread sends the task to the apply thread.
 
 With the Write Commit phase coming to an end, the raftstore thread completes all its tasks. Next, the baton is handed over to the apply thread.
 
