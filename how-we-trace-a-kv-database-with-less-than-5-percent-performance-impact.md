@@ -99,7 +99,7 @@ Rust offers two structures in `std` to measure time:
 
 #### Coarse time
 
-If you need efficient time measurement, coarse time is usually a good choice. Coarse time can be obtained by passing `CLOCK_MONOTONIC_COARSE` to the `clock_gettime` system call in Linux. The Rust community provides the `[coarsetime](https://docs.rs/coarsetime/0.1.18/coarsetime/)` crate to read coarse time easily:
+If you need efficient time measurement, coarse time is usually a good choice. Coarse time can be obtained by passing `CLOCK_MONOTONIC_COARSE` to the `clock_gettime` system call in Linux. The Rust community provides the [`coarsetime`](https://docs.rs/coarsetime/0.1.18/coarsetime/) crate to read coarse time easily:
 
 {{< copyable "" >}}
 
@@ -150,7 +150,7 @@ Some modern x86 architecture CPUs provide features to ensure the TSC increments 
 
 Even if TSC is constant, it cannot be used to measure time. In the x86 architecture, **TSC registers are not guaranteed to be synchronized among all CPU cores**. The following figure shows the measured TSC on a laptop produced in 2020 equipped with the latest x64 CPU at that time. As we can see, among the 16 cores, CPU 0's TSC value has an offset.
 
-!TSC values for 16 CPU cores](media/tsc-values-for-16-cpu-cores.jpg)
+![TSC values for 16 CPU cores](media/tsc-values-for-16-cpu-cores.jpg)
 <div class="caption-center"> TSC values for 16 CPU cores </div>
 
 Recall that in tracing, each span needs two timestamps, representing the start and end of the event. Due to the thread scheduling, the reads of the two timestamps may happen on different CPU cores. As a result, the delta of the two TSC values can produce incorrect elapsed time **when the TSC is not synchronized between cores.**
@@ -281,7 +281,7 @@ TiKV maintains a thread-local structure `LocalSpanLine` for each thread. It gene
 ![LocalSpanLine in TiKV](media/localspanline-in-tikv.jpg)
 <div class="caption-center"> LocalSpanLine in TiKV </div>
 
-Because `LocalSpan`, `LocalSpanLine`, and `LocalCollector` are all thread-local, they don't introduce contentions** **and **don't harm caches**. As a result, the performance is extremely high: it only takes 4 ns to push a span into a local vector, as simple as a `Vec::push`.
+Because `LocalSpan`, `LocalSpanLine`, and `LocalCollector` are all thread-local, they don't introduce contentions and **don't harm caches**. As a result, the performance is extremely high: it only takes 4 ns to push a span into a local vector, as simple as a `Vec::push`.
 
 In addition, when constructing the span hierarchy, thread-local variables can be used to implement the **implicit context** mechanism: **users don't need to modify the function signature to pass the tracing context**, which greatly reduces the intrusion of existing code.
 
@@ -571,7 +571,7 @@ From an implementation point of view, `NormalSpan` information is not recorded i
 However, `NormalSpan` and `LocalSpan` are not completely isolated. TiKV connects them through the following interactive methods. A set of `LocalSpan`s collected from `LocalCollector` **can be mounted on `NormalSpan` as a subtree,** as shown in the following figure. The number of mounts is unlimited. By allowing many-to-many mounting methods, TiKV supports tracing batch scenarios to a certain extent. Most tracing libraries in the community do not offer this.
 
 ![`LocalSpan`s can be mounted on `NormalSpan`](media/localspan-can-be-mounted-on-normalspan.jpg)
-<div class="caption-center"> `LocalSpan`s can be mounted on `NormalSpan` </div>
+<div class="caption-center"> LocalSpans can be mounted on NormalSpan </div>
 
 The above implementation forms **the fast and slow paths of span collection.** They work together to complete the recording of a request's execution path information:
 
@@ -604,7 +604,7 @@ for req in listener.incoming() {
 }
 ```
 
-By using the "guard,” the span can be ended automatically when the scope exits. In addition to returning the root span, `Span::root(event)` also returns a collector. The collector has a one-to-one correspondence with the root span. When the request is completed, we can call the collector's collect method to collect all spans generated on the execution path. 
+By using the "guard," the span can be ended automatically when the scope exits. In addition to returning the root span, `Span::root(event)` also returns a collector. The collector has a one-to-one correspondence with the root span. When the request is completed, we can call the collector's collect method to collect all spans generated on the execution path. 
 
 {{< copyable "" >}}
 
@@ -682,34 +682,34 @@ To record asynchronous functions, the steps are slightly different:
 
 2. Bind the future to a span. Wrap the task with the future adapter `in_span` provided by minitrace-rust. 
 
-In the Rust asynchronous context, a task refers to the future spawned to an executor, also known as the root future. For example, the following `foo_async` is a task:
+    In the Rust asynchronous context, a task refers to the future spawned to an executor, also known as the root future. For example, the following `foo_async` is a task:
 
-{{< copyable "" >}}
+    {{< copyable "" >}}
 
-```
-executor::spawn(
+    ```
+    executor::spawn(
 
-  foo_async()
+      foo_async()
 
-);
-```
+    );
+    ```
 
-Suppose you want to trace a task like `foo_async` and bind it to a span created by `Span::from_local_parent(event)`. The application code is as follows:
+    Suppose you want to trace a task like `foo_async` and bind it to a span created by `Span::from_local_parent(event)`. The application code is as follows:
 
-{{< copyable "" >}}
+    {{< copyable "" >}}
 
-```
-executor::spawn(
+    ```
+    executor::spawn(
 
-  foo_async().in_span(Span::from_local_parent("Task: foo_async"))
+      foo_async().in_span(Span::from_local_parent("Task: foo_async"))
 
-);
-```
+    );
+    ```
 
 The following figure shows the result of the trace:
 
 ![Trace the `foo_async` task](media/trace-foo-async-task.jpg)
-<div class="caption-center"> Trace the `foo_async` task </div>
+<div class="caption-center"> Trace the foo_async task </div>
 
 ## Conclusion
 
