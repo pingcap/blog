@@ -2,7 +2,7 @@
 title: How We Trace a KV Database with Less than 5% Performance Impact 
 author: ['Zhenchi Zhong']
 date: 2021-06-30
-summary: The TiKV database has higher performance requirements than a regular application, so tracing tools must have minimal impact. Learn how we trace TiKV requests while impacting performance less than 5%.
+summary: As a key-value database, TiKV has much higher performance requirements than a regular application, so tracing tools must have minimal impact. Learn how we trace TiKV requests while impacting performance less than 5%.
 tags: ['TiKV']
 categories: ['Engineering']
 image: /images/blog/key-value-database-tracing-tools.jpg
@@ -180,13 +180,13 @@ When the TSC offset is calculated, the **process of obtaining the TSC values mus
 {{< copyable "" >}}
 
 ```
-fn set_affinity(cpuid: usize) -> Result&lt;(), Error> {
+fn set_affinity(cpuid: usize) -> Result<(), Error> {
 
   use libc::{cpu_set_t, sched_setaffinity, CPU_SET};
 
   use std::mem::{size_of, zeroed};
 
-  let mut set = unsafe { zeroed::&lt;cpu_set_t>() };
+  let mut set = unsafe { zeroed::<cpu_set_t>() };
 
   unsafe { CPU_SET(cpuid, &mut set) };
 
@@ -198,7 +198,7 @@ fn set_affinity(cpuid: usize) -> Result&lt;(), Error> {
 
           0, // Defaults to current thread
 
-          size_of::&lt;cpu_set_t>(),
+          size_of::<cpu_set_t>(),
 
           &set as *const _,
 
@@ -219,7 +219,7 @@ fn set_affinity(cpuid: usize) -> Result&lt;(), Error> {
 }
 ```
 
-Now, we know the TSC offset of each CPU core. Next, we need to find out which CPU core we're working on. This can be obtained by **using the RDTSCP command**, which helps us atomically get the TSC value and CPU ID at the same time.
+Now, we know the TSC offset of each CPU core. Next, we need to find out which CPU core we're working on. This can be known by **using the RDTSCP command**, which helps us atomically get the TSC value and CPU ID at the same time.
 
 The Rust code is as follows:
 
@@ -238,7 +238,7 @@ fn tsc_with_cpuid() -> (u64, usize) {
 
   use core::arch::x86_64::__rdtscp;
 
-  let mut aux = std::mem::MaybeUninit::&lt;u32>::uninit();
+  let mut aux = std::mem::MaybeUninit::<u32>::uninit();
 
   let tsc = unsafe { __rdtscp(aux.as_mut_ptr()) };
 
@@ -257,7 +257,7 @@ fn tsc_with_cpuid() -> (u64, usize) {
 }
 ```
 
-The high-precision time measurement has been extracted into a Rust library named [minstant](https://github.com/zhongzc/minstant.git), which can be reused for similar requirements.
+The high-precision and efficient time measurement solution described above has been extracted into a Rust library named [minstant](https://github.com/zhongzc/minstant.git), which can be reused for similar requirements.
 
 ### Span collection
 
@@ -289,7 +289,7 @@ Now, let's take a closer look at the implementation details of `LocalSpan` creat
 
 `LocalSpanLine` maintains a container, `SpanQueue`, to load the ongoing or completed `LocalSpan`s. "Ongoing" means that the start time of the event indicated by `LocalSpan` is known, but the end time is not. The `LocalSpan`s are stored in the `Vec` structure inside `SpanQueue`.
 
-In addition, as mentioned above, we use implicit context to construct the parent-child dependency between `LocalSpan`s. This process relies on the `next_parent_id` variable that is maintained by `SpanQueue`.
+To construct the parent-child dependency between `LocalSpan`s implicitly, the context passing relies on the `next_parent_id` variable that is maintained by `SpanQueue`.
 
 Next, we will use some examples to describe the process in detail.
 
@@ -337,7 +337,7 @@ Index
    </td>
    <td>09:00
    </td>
-   <td>&lt;N/A>
+   <td><N/A>
    </td>
    <td>root
    </td>
@@ -432,7 +432,7 @@ As mentioned above, in addition to recording the start and end time of each even
    </td>
    <td>09:00
    </td>
-   <td>&lt;N/A>
+   <td><N/A>
    </td>
    <td>root
    </td>
@@ -446,7 +446,7 @@ As mentioned above, in addition to recording the start and end time of each even
    </td>
    <td>09:01
    </td>
-   <td>&lt;N/A>
+   <td><N/A>
    </td>
    <td>foo
    </td>
@@ -477,7 +477,7 @@ When bar is over, it updates bar's end time and the `next_parent_id` variable ba
    </td>
    <td>09:00
    </td>
-   <td>&lt;N/A>
+   <td><N/A>
    </td>
    <td>root
    </td>
@@ -562,7 +562,7 @@ We can connect these records in series to form the following trace tree structur
 
 #### Normal span
 
-Although the recording of `LocalSpan` is efficient, it's not flexible enough due to its thread-local implementation. For example, in an asynchronous scenario, the generation and termination of some spans occur in different threads, and the thread-local implementation doesn't work any longer.
+Although the recording of `LocalSpan` is efficient, it’s not flexible enough due to its thread-local implementation. For example, in an asynchronous scenario, the creation and termination of some spans occur in different threads, so that the thread-local implementation doesn’t work any longer.
 
 For these problems, TiKV retains the thread-safe span recording method described at the beginning of the article: `crossbeam::channel` collects a single span at a time. This is called a `NormalSpan`.
 
