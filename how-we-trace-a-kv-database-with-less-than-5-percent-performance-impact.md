@@ -12,7 +12,7 @@ image: /images/blog/key-value-database-tracing-tools.jpg
 
 **Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
 
-![Key-value database tracing](images/key-value-database-tracing-tools.jpg)
+![Key-value database tracing](media/key-value-database-tracing-tools.jpg)
 
 [TiKV](https://tikv.org/) is a distributed key-value database. It has higher performance requirements than a regular application, so tracing tools must have minimal impact. This article describes **how we achieved tracing all requests' time consumption in TiKV with less than 5% performance impact**.
 
