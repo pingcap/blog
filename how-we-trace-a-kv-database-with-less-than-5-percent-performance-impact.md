@@ -66,7 +66,7 @@ In this article, unless otherwise specified, we used the following test platform
 * Memory: 32 GB
 * Disk: NVM Express<sup>®</sup> (NVMe) SSD
 
-TiKV is written in Rust. The Rust community has several off-the-shelf tracing libraries, for example, [tokio-tracing](https://github.com/tokio-rs/tracing),[ rustracing](https://github.com/sile/rustracing), and[ open-telemetry](https://github.com/open-telemetry/opentelemetry-rust). They all follow the OpenTracing specification, but **their performance is not ideal**. We discovered that TiKV's performance can be reduced by more than 50% when introducing these libraries.
+TiKV is written in Rust. The Rust community has several off-the-shelf tracing libraries, for example, [tokio-tracing](https://github.com/tokio-rs/tracing), [rustracing](https://github.com/sile/rustracing), and [open-telemetry](https://github.com/open-telemetry/opentelemetry-rust). They all follow the OpenTracing specification, but **their performance is not ideal**. We discovered that TiKV's performance can be reduced by more than 50% when introducing these libraries.
 
 TiKV's **tracing implementation impacts performance by less than 5% by tracing and collecting spans efficiently, which only takes 20 ns**.
 
