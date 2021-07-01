@@ -336,7 +336,7 @@ Suppose we have a foo event. It occurs at 09:00 and lasts until 09:03:
    </td>
    <td>09:00
    </td>
-   <td><N/A>
+   <td>N/A
    </td>
    <td>root
    </td>
@@ -430,7 +430,7 @@ As mentioned above, in addition to recording the start and end time of each even
    </td>
    <td>09:00
    </td>
-   <td><N/A>
+   <td>N/A
    </td>
    <td>root
    </td>
@@ -444,7 +444,7 @@ As mentioned above, in addition to recording the start and end time of each even
    </td>
    <td>09:01
    </td>
-   <td><N/A>
+   <td>N/A
    </td>
    <td>foo
    </td>
@@ -475,7 +475,7 @@ When bar is over, it updates bar's end time and the `next_parent_id` variable ba
    </td>
    <td>09:00
    </td>
-   <td><N/A>
+   <td>N/A
    </td>
    <td>root
    </td>
