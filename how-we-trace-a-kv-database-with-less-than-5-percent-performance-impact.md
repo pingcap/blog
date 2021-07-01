@@ -316,8 +316,7 @@ Suppose we have a foo event. It occurs at 09:00 and lasts until 09:03:
 
 <table>
   <tr>
-   <td>
-Index
+   <td>Index
    </td>
    <td>Event
    </td>
@@ -354,8 +353,7 @@ At the end of foo (at 09:03), the user submits the index and informs `SpanQueue`
 
 <table>
   <tr>
-   <td>
-Index
+   <td>Index
    </td>
    <td>Event
    </td>
@@ -436,7 +434,7 @@ As mentioned above, in addition to recording the start and end time of each even
    </td>
    <td>root
    </td>
-   <td rowspan="2" >bar
+   <td rowspan="2">bar
    </td>
   </tr>
   <tr>
@@ -481,7 +479,7 @@ When bar is over, it updates bar's end time and the `next_parent_id` variable ba
    </td>
    <td>root
    </td>
-   <td rowspan="2" >foo
+   <td rowspan="2">foo
    </td>
   </tr>
   <tr>
@@ -526,7 +524,7 @@ Finally, by repeating the above steps, `SpanQueue` records the information of th
    </td>
    <td>root
    </td>
-   <td rowspan="3" >root
+   <td rowspan="3">root
    </td>
   </tr>
   <tr>
@@ -570,7 +568,7 @@ From an implementation point of view, `NormalSpan` information is not recorded i
 
 However, `NormalSpan` and `LocalSpan` are not completely isolated. TiKV connects them through the following interactive methods. A set of `LocalSpan`s collected from `LocalCollector` **can be mounted on `NormalSpan` as a subtree,** as shown in the following figure. The number of mounts is unlimited. By allowing many-to-many mounting methods, TiKV supports tracing batch scenarios to a certain extent. Most tracing libraries in the community do not offer this.
 
-![`LocalSpan`s can be mounted on `NormalSpan`](media/localspan-can-be-mounted-on-normalspan.jpg)
+![LocalSpans can be mounted on NormalSpan](media/localspan-can-be-mounted-on-normalspan.jpg)
 <div class="caption-center"> LocalSpans can be mounted on NormalSpan </div>
 
 The above implementation forms **the fast and slow paths of span collection.** They work together to complete the recording of a request's execution path information:
@@ -708,7 +706,7 @@ To record asynchronous functions, the steps are slightly different:
 
 The following figure shows the result of the trace:
 
-![Trace the `foo_async` task](media/trace-foo-async-task.jpg)
+![Trace the foo_async task](media/trace-foo-async-task.jpg)
 <div class="caption-center"> Trace the foo_async task </div>
 
 ## Conclusion
