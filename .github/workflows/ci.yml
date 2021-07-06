@@ -39,6 +39,7 @@ jobs:
     - name: "Check Chinese punctuation"
       run:
         wget https://raw.githubusercontent.com/CharLotteiu/pingcap-docs-checks/main/check-zh-punctuation.py;
+        pip3 install zhon;
         python3 check-zh-punctuation.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md')
     - name: Verify internal links
       run: ./hack/verify-links-doc.sh
