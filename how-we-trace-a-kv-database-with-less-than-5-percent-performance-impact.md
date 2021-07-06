@@ -31,6 +31,7 @@ TiKV has a complete log and metric system, but lacks traces. Therefore, when we 
 
 * **There is no correlation between observation data.** To trace and diagnose the system, you must understand all the operations in a request and their corresponding metrics. Few people have such comprehensive knowledge.
 * **It's difficult to trace request jitters.** Monitoring metrics such as AVG, P99, and MAX don't reflect requests' performance jitter when request payloads are mixed together.
+
 **Tracing solves the two problems.** Now, I'll share in detail how we implemented high-performance tracing in TiKV. It is still an experimental feature in TiKV, and, to open it, you need a specific code branch. If you're interested, follow [Introduce tracing framework (#8981)](https://github.com/tikv/tikv/pull/8981) on GitHub.
 
 ## Basic concepts
