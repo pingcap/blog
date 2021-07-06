@@ -36,6 +36,10 @@ jobs:
       run:
         wget https://raw.githubusercontent.com/CharLotteiu/pingcap-docs-checks/main/check-manual-line-breaks.py;
         python3 check-manual-line-breaks.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md')
+    - name: "Check Chinese punctuation"
+      run:
+        wget https://raw.githubusercontent.com/CharLotteiu/pingcap-docs-checks/main/check-zh-punctuation.py;
+        python3 check-zh-punctuation.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md')
     - name: Verify internal links
       run: ./hack/verify-links-doc.sh
     - name: Verify internal link anchors
