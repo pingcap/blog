@@ -16,7 +16,7 @@ image: /images/blog/celebrating-one-year-of-chaos-mesh.jpg
 
 It's been a year since Chaos Mesh was first open-sourced on GitHub. Chaos Mesh started out as a mere fault injection tool and is now heading towards the goal of building a chaos engineering ecology. Meanwhile, the Chaos Mesh community was also built from scratch and has helped [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) join CNCF as a Sandbox project.
 
-In this article, we will share with you how Chaos Mesh has grown and changed in the past year and also discuss its future goals and plans。
+In this article, we will share with you how Chaos Mesh has grown and changed in the past year and also discuss its future goals and plans.
 
 ## The project: thrive with a clear goal in mind
 
