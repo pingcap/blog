@@ -54,15 +54,15 @@ In addition, Chaos Mesh directly reuses Kubernetes' native permission mechanism 
 
 In July 2020, Chaos Mesh was successfully [accepted as a CNCF Sandbox project](https://pingcap.com/blog/announcing-chaos-mesh-as-a-cncf-sandbox-project). This shows that Chaos Mesh has received initial recognition from the cloud native community. At the same time, it means that Chaos Mesh has a clear mission: to promote the application of chaos engineering in the cloud native field and to cooperate with other cloud native projects so we can grow together.
 
-### Grafana 
+### Grafana
 
 To further improve the observability of chaos experiments, we have included a separate [Grafana plug-in](https://github.com/chaos-mesh/chaos-mesh-datasource) for Chaos Mesh, which allows users to directly display real-time chaos experiment information on the application monitoring panel. This way, users can simultaneously observe the running status of the application and the current chaos experiment information.
 
-### Github Action 
+### Github Action
 
-To enable users to run chaos experiments even during the development phase, we developed the [chaos-mesh-action](https://github.com/chaos-mesh/chaos-mesh-action) project, [allowing Chaos Mesh to run in the workflow of GitHub Actions](https://pingcap.com/blog/chaos-mesh-action-integrate-chaos-engineering-into-your-ci). This way, Chaos Mesh can easily be integrated into daily system development and testing. 
+To enable users to run chaos experiments even during the development phase, we developed the [chaos-mesh-action](https://github.com/chaos-mesh/chaos-mesh-action) project, [allowing Chaos Mesh to run in the workflow of GitHub Actions](https://pingcap.com/blog/chaos-mesh-action-integrate-chaos-engineering-into-your-ci). This way, Chaos Mesh can easily be integrated into daily system development and testing.
 
-### TiPocket 
+### TiPocket
 
 [TiPocket](https://github.com/pingcap/tipocket) is [an automated test platform](https://pingcap.com/blog/building-automated-testing-framework-based-on-chaos-mesh-and-argo) that integrates Chaos Mesh and Argo, a workflow engine designed for Kubernetes. TiPocket is designed to be a fully automated chaos engineering testing loop for [TiDB](https://docs.pingcap.com/tidb/stable), a distributed database. There are a number of steps when we conduct chaos experiments, including deploying applications, running workloads, injecting exceptions, and business checks. To fully automate these steps, Argo was integrated into TiPocket. Chaos Mesh provides rich fault injection, while Argo provides flexible orchestration and scheduling.
 
@@ -87,16 +87,16 @@ Cloud native has been in the DNA of Chaos Mesh since the very beginning. Joining
 
 ### A friendly and supportive community
 
-The quality of the open source community determines whether our adopters and contributors are willing to stick around and get involved in the community for the long run. In this regard, we've been working hard on: 
+The quality of the open source community determines whether our adopters and contributors are willing to stick around and get involved in the community for the long run. In this regard, we've been working hard on:
 
-* Continuously enriching documentation and optimizing its structure. So far, we have developed a complete set of documentation for different groups of audiences, including [a user guide](https://chaos-mesh.org/docs/user_guides/installation/) and [developer guide](https://chaos-mesh.org/docs/development_guides/development_overview), [quick start guides](https://chaos-mesh.org/docs/get_started/get_started_on_kind), [use cases](https://chaos-mesh.org/docs/use_cases/multi_data_centers), and [a contributing guide](https://github.com/chaos-mesh/chaos-mesh/blob/master/CONTRIBUTING.md). All are constantly updated per each release. 
+* Continuously enriching documentation and optimizing its structure. So far, we have developed a complete set of documentation for different groups of audiences, including [a user guide](https://chaos-mesh.org/docs/user_guides/installation/) and [developer guide](https://chaos-mesh.org/docs/development_guides/development_overview), [quick start guides](https://chaos-mesh.org/docs/get_started/get_started_on_kind), [use cases](https://chaos-mesh.org/docs/use_cases/multi_data_centers), and [a contributing guide](https://github.com/chaos-mesh/chaos-mesh/blob/master/CONTRIBUTING.md). All are constantly updated per each release.
 * Working with the community to publish blog posts, tutorials, use cases, and chaos engineering practices. So far, we've produced 26 Chaos Mesh related articles. Among them is an [interactive tutorial](https://chaos-mesh.org/interactiveTutorial), published on O'Reilly's Katakoda site. These materials make a great complement to the documentation.
 * Repurposing and amplifying videos and tutorials generated in community meetings, webinars, and meetups.
 * Valuing and responding to community feedback and queries.
 
 ## Looking ahead
 
-Google's recent global outage reminded us of the importance of system reliability, and it highlighted the importance of chaos engineering. Liz Rice, CNCF TOC Chair, shared [The 5 technologies to watch in 2021](https://twitter.com/CloudNativeFdn/status/1329863326428499971), and chaos engineering is on top of the list. We boldly predict that chaos engineering is about to enter a new stage in the near future. 
+Google's recent global outage reminded us of the importance of system reliability, and it highlighted the importance of chaos engineering. Liz Rice, CNCF TOC Chair, shared [The 5 technologies to watch in 2021](https://twitter.com/CloudNativeFdn/status/1329863326428499971), and chaos engineering is on top of the list. We boldly predict that chaos engineering is about to enter a new stage in the near future.
 
 Chaos Mesh 2.0 is now in active development, and it includes community requirements such as an embedded workflow engine to support the definition and management of more flexible chaos scenarios, application state checking mechanisms, and more detailed experiments reports. Follow along through the project [roadmap](https://github.com/chaos-mesh/chaos-mesh/blob/master/ROADMAP.md).
 
