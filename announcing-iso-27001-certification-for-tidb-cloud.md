@@ -13,7 +13,7 @@ press_release: true
 
 PingCAP is proud to announce today that the company has achieved the International Organization for Standardization (ISO) 27001:2013 certification for TiDB Cloud. Following an extensive audit process, the certification was issued by British Standards Institution (BSI), an ANAB-accredited certification body headquartered in London. 
 
-ISO/IEC 27001:2013 is a globally recognized standard that sets out the policies and requirements for establishing, implementing, maintaining and continually improving an information security management system (ISMS). In order to get certified, a neutral, independent agency conducts the audit and assesses all the operations in the context of the business, including business continuity, marketing process, cybersecurity, privacy protection, HR, IT systems, etc.
+ISO/IEC 27001:2013 is a globally recognized standard that sets out the policies and requirements for establishing, implementing, maintaining, and continually improving an information security management system (ISMS). In order to get certified, a neutral, independent agency conducts the audit and assesses all the operations in the context of the business, including business continuity, marketing process, cybersecurity, privacy protection, HR, IT systems, etc.
 
 [TiDB Cloud](https://pingcap.com/products/tidbcloud/) is the fully-managed service of TiDB, a distributed SQL database. With TiDB Cloud, customers can easily use TiDB on Amazon Web Services and Google Cloud to quickly build modern, mission critical applications. 
 
