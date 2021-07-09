@@ -10,7 +10,7 @@ image: /images/blog/tidb-5.1-easily-build-your-mission-critical-applications-at-
 
 **Author:** PingCAP
 
-**Transcreator:** [Caitin Chen](https://github.com/CaitinChen), [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+**Transcreators:** [Ran Huang](https://github.com/ran-huang), [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
 
 ![TiDB 5.1: Easily Build Your Mission-Critical Applications at Any Scale](media/tidb-5.1-easily-build-your-mission-critical-applications-at-any-scale.png)
 
