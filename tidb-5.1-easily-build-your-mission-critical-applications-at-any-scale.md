@@ -46,7 +46,7 @@ Data from multiple upstream MySQL clusters are often aggregated into a single Ti
 
 [Stale Read](https://docs.pingcap.com/tidb/v5.1/stale-read) is suited for scenarios with frequent reads and few writes and that tolerate data staleness. For example, when a Twitter user sends a tweet, the system receives thousands or even millions of read requests. A slight delay in seeing the tweet is acceptable. This scenario brings huge concurrent read pressure to the database and may cause read hotspots. Read hotspots can cause uneven load distribution among nodes and make the overall throughput a bottleneck.
 
-**Stale Read allows TiDB to read historical data of a specified time from any replica. The replica doesn't have to be the Leader. **Therefore, Stale Read significantly reduces the load pressure on the node and nearly doubles the overall throughput.
+**Stale Read allows TiDB to read historical data of a specified time from any replica. The replica doesn't have to be the Leader.** Therefore, Stale Read significantly reduces the load pressure on the node and nearly doubles the overall throughput.
 
 ```sql
 /* for example, you can enable Stale Read by setting the current transaction to query data from five seconds ago */
@@ -126,7 +126,7 @@ TiDB 5.1 also introduces a new metadata file organization of the backup module (
 
 ### Strengthened reliability for large-scale cluster maintenance
 
-The larger a TiDB cluster, the longer it takes to perform maintenance operations such as scaling the cluster, upgrading hardware, and migrating nodes.** TiDB 5.1 significantly enhances the performance of data migration during scaling.** Test results showed:
+The larger a TiDB cluster, the longer it takes to perform maintenance operations such as scaling the cluster, upgrading hardware, and migrating nodes. **TiDB 5.1 significantly enhances the performance of data migration during scaling.** Test results showed:
 
 * In a 100-node cluster, TiDB 5.1 reduces the time for migrating all data across data centers by 20%.
 * TiDB 5.1 reduces the time for taking a node offline or migrating data from a node by about 40%.
