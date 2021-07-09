@@ -1,11 +1,11 @@
 ---
 title: 'TiDB 5.1: Easily Build Your Mission-Critical Applications at Any Scale'
 author: ['PingCAP']
-date: 2021-07-07
+date: 2021-07-09
 summary: TiDB 5.1 is released. It features more stable latency, optimized MPP performance and stability, and more convenient maintenance. Developers and DBAs can more easily build mission-critical applications at any scale.
 tags: ['Announcement', 'Release']
 categories: ['Product']
-image: /images/blog/
+image: /images/blog/tidb-5.1-easily-build-your-mission-critical-applications-at-any-scale.png
 ---
 
 **Author:** PingCAP
