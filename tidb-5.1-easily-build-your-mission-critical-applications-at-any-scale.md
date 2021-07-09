@@ -146,4 +146,4 @@ The larger a TiDB cluster, the longer it takes to perform maintenance operations
 
 ## Acknowledgements
 
-Thanks to Xiaomi, Qihoo 360, Zhihu, iQiyi, Li Auto, Sina, Huya TV, Xiaodian, KY Express, EMAR Online, and all our community developers. Their invaluable and continuous help in designing, developing, and testing TiDB 5.1 helps us improve release after release.
+Thanks to Xiaomi, Zhihu, iQiyi, Li Auto, Sina, Huya TV, Xiaodian, KY Express, EMAR Online, and all our community developers. Their invaluable and continuous help in designing, developing, and testing TiDB 5.1 helps us improve release after release.
