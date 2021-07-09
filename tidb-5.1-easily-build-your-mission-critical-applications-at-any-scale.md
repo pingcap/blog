@@ -26,15 +26,50 @@ Today, we are proud to announce our [TiDB 5.1 release](https://docs.pingcap.com/
 
 ## TiDB 5.1 highlights
 
-Our new release supports the Common Table Expression of the ANSI SQL99 standard. You can write more concise and easier-to-maintain SQL code. It helps you easily deal with complex application logic and develop applications more efficiently.
+**Our new release supports the Common Table Expression of the ANSI SQL99 standard.** You can write more concise and easier-to-maintain SQL code. It helps you easily deal with complex application logic and develop applications more efficiently.
 
-MPP is faster and more stable and helps you make real-time decisions more quickly. TiDB 5.1 supports partitioned tables in MPP mode and optimized function expressions and operators. These features improve TiDB's real-time analytic performance by more than 10 times. With enhanced memory management and load balancing, TiDB is faster and more efficient for analytical queries.
+**MPP is faster and more stable and helps you make real-time decisions more quickly.** TiDB 5.1 supports partitioned tables in MPP mode and optimized function expressions and operators. These features improve TiDB's real-time analytic performance by more than 10 times. With enhanced memory management and load balancing, TiDB is faster and more efficient for analytical queries.
 
-When large amounts of writes suddenly flow to the database, when the cluster needs scaling in or scaling out, or when online data is imported or backed up, TiDB 5.1's long-tail query latency becomes more stable. TiDB can reduce query latency for different workloads by 20%–70%. TiDB has greatly increased its query stability under high workloads—especially for mission-critical applications in the financial industry that require low latency.
+**Query latency is significantly reduced for different workloads by 20%-70%.** When large amounts of writes suddenly flow to the database, when the cluster needs scaling in or scaling out, or when online data is imported or backed up, TiDB 5.1's long-tail query latency becomes more stable. TiDB has greatly increased its query stability under high workloads—especially for mission-critical applications in the financial industry that require low latency.
 
-The new release also supports changing column types to be more compatible with MySQL. It introduces Stale Read mode, which scatters read hotspots in read-write separation scenarios to significantly improve read throughput. It introduces new system tables to quickly locate lock conflicts in high-concurrency transactions. It optimizes the statistical information analytical engine to make the optimizer more accurately select an index. This guarantees efficient and stable application queries.
+**The new release also improves MySQL compatibility that makes it easier to migrate TiDB without changing application code.** TiDB now supports changing column types.
 
-TiBD 5.1 makes it easier to operate and maintain large clusters, and it further reduces DBA's workload. TiDB 5.1's cluster scaling and data migration speeds have increased by about 40%. This improves the reliability of large-scale cluster operation and maintenance and reduces the backup and recovery time of large-scale clusters. By optimizing the auto-recovery mechanism after the change data capture (CDC) data link is temporarily interrupted, TiDB improves the reliability of data replication.
+**TiBD 5.1 makes it easier to operate and maintain large clusters, and it further reduces DBA's workload.** TiDB 5.1's cluster scaling and data migration speeds have increased by about 40%. This improves the reliability of large-scale cluster operation and maintenance and reduces the backup and recovery time of large-scale clusters. By optimizing the auto-recovery mechanism after the change data capture (CDC) data link is temporarily interrupted, TiDB improves the reliability of data replication.
+
+## More flexible application development
+
+### Support for changing column types
+
+Data from multiple upstream MySQL clusters are often aggregated into a single TiDB cluster via binlog. Previously, TiDB didn't support changing column types. If the table column type was changed in the upstream MySQL cluster, the data replication between MySQL and TiDB was interrupted. **TiDB 5.1 adds support for Data Definition Language (DDL) statements that change column types.** This solves the issue above and makes TiDB more compatible with MySQL.
+
+### Stale Read (experimental feature)
+
+[Stale Read](https://docs.pingcap.com/tidb/v5.1/stale-read) is suited for scenarios with frequent reads and few writes and that tolerate data staleness. For example, when a Twitter user sends a tweet, the system receives thousands or even millions of read requests. A slight delay in seeing the tweet is acceptable. This scenario brings huge concurrent read pressure to the database and may cause read hotspots. Read hotspots can cause uneven load distribution among nodes and make the overall throughput a bottleneck.
+
+**Stale Read allows TiDB to read historical data of a specified time from any replica. The replica doesn't have to be the Leader. **Therefore, Stale Read significantly reduces the load pressure on the node and nearly doubles the overall throughput.
+
+```sql
+/* for example, you can enable Stale Read by setting the current transaction to query data from five seconds ago */
+> SET TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL 5 SECOND;
+> SELECT * FROM T;
+```
+
+### Quickly locate lock conflict (experimental feature)
+
+The application logic needs to handle concurrent transactions carefully. Once a table lock occurs, it can have a huge impact on the online application. DBAs need to quickly locate the cause of the lock to ensure that the application returns to normal.
+
+TiDB 5.1 introduces [Lock View](https://docs.pingcap.com/tidb/v5.1/troubleshoot-lock-conflicts#use-lock-view-to-troubleshoot-issues-related-to-pessimistic-locks). **Lock View allows DBAs to quickly locate the transaction and SQL statement that cause the table lock, making it much easier to resolve lock conflict issues.**
+
+The following shows how you can use Lock View to quickly locate the transaction and SQL statement that cause the locked table:
+
+![TiDB's Lock View helps you quickly locate lock conflict](media/tidb-5.1-lock-view-quickly-locate-lock-conflict.jpg)
+<div class="caption-center">Lock View</div>
+
+### Faster and more accurate statistical analysis
+
+As an application's data continues to change, the table's statistics can become outdated. In turn, the optimizer execution plans are less accurate and queries are slower. DBAs run the `ANALYZE` operation to rebuild the table statistics.
+
+TiDB 5.1 optimizes the performance of the `ANALYZE` sampling algorithm. **It can now, on average, generate statistics 50% faster.** This release also introduces a new statistical data type that allows the optimizer to more accurately select indexes.
 
 ## Common Table Expression: write SQL statements more efficiently
 
@@ -80,41 +115,6 @@ The following results are measured with TPC-C benchmarking in an AWS EC2 r5b.4xl
 
 * When the operating cluster scales in TiKV from six nodes to three nodes, P99 is reduced by **20%** and P999 reduces by **15%**.
 * When 200 GB data is imported into TiDB online, P99 reduces by **71%** and P999 reduces by **70%**.
-
-## More flexible application development
-
-### Support for changing column types
-
-Data from multiple upstream MySQL clusters are often aggregated into a single TiDB cluster via binlog. Previously, TiDB didn't support changing column types. If the table column type was changed in the upstream MySQL cluster, the data replication between MySQL and TiDB was interrupted. **TiDB 5.1 adds support for Data Definition Language (DDL) statements that change column types.** This solves the issue above and makes TiDB more compatible with MySQL.
-
-### Stale Read (experimental feature)
-
-[Stale Read](https://docs.pingcap.com/tidb/v5.1/stale-read) is suited for scenarios with frequent reads and few writes and that tolerate data staleness. For example, when a Twitter user sends a tweet, the system receives thousands or even millions of read requests. A slight delay in seeing the tweet is acceptable. This scenario brings huge concurrent read pressure to the database and may cause read hotspots. Read hotspots can cause uneven load distribution among nodes and make the overall throughput a bottleneck.
-
-**Stale Read allows TiDB to read historical data of a specified time from any replica. The replica doesn't have to be the Leader. **Therefore, Stale Read significantly reduces the load pressure on the node and nearly doubles the overall throughput.
-
-```sql
-/* for example, you can enable Stale Read by setting the current transaction to query data from five seconds ago */
-> SET TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL 5 SECOND;
-> SELECT * FROM T;
-```
-
-### Quickly locate lock conflict (experimental feature)
-
-The application logic needs to handle concurrent transactions carefully. Once a table lock occurs, it can have a huge impact on the online application. DBAs need to quickly locate the cause of the lock to ensure that the application returns to normal.
-
-TiDB 5.1 introduces [Lock View](https://docs.pingcap.com/tidb/v5.1/troubleshoot-lock-conflicts#use-lock-view-to-troubleshoot-issues-related-to-pessimistic-locks). **Lock View allows DBAs to quickly locate the transaction and SQL statement that cause the table lock, making it much easier to resolve lock conflict issues.**
-
-The following shows how you can use Lock View to quickly locate the transaction and SQL statement that cause the locked table:
-
-![TiDB's Lock View helps you quickly locate lock conflict](media/tidb-5.1-lock-view-quickly-locate-lock-conflict.jpg)
-<div class="caption-center">Lock View</div>
-
-### Faster and more accurate statistical analysis
-
-As an application's data continues to change, the table's statistics can become outdated. In turn, the optimizer execution plans are less accurate and queries are slower. DBAs run the `ANALYZE` operation to rebuild the table statistics.
-
-TiDB 5.1 optimizes the performance of the `ANALYZE` sampling algorithm. **It can now, on average, generate statistics 50% faster.** This release also introduces a new statistical data type that allows the optimizer to more accurately select indexes.
 
 ## Strengthened reliability for large-scale cluster maintenance and data transmission
 
