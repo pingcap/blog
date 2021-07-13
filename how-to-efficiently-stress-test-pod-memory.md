@@ -125,7 +125,7 @@ PID PPID USER     STAT   VSZ %VSZ CPU %CPU COMMAND
   48    29 node     R     1568   0%   1   0% top
 ```
 
-You can see that `stress-ng` instances are injected into the Pod. There is a 60 MiB rise in the Pod, which we didn't expect. The [`stress-ng` documentation](https://manpages.ubuntu.com/manpages/artful/man1/stress-ng.1.html#:~:text=is%20not%20available.-,--vm-bytes%20N,-mmap%20N%20bytes) indicates that the increase should 200 MiB (4 * 50 MiB).
+You can see that `stress-ng` instances are injected into the Pod. There is a 60 MiB rise in the Pod, which we didn't expect. The [`stress-ng` documentation](https://manpages.ubuntu.com/manpages/artful/man1/stress-ng.1.html#:~:text=is%20not%20available.-,--vm-bytes%20N,-mmap%20N%20bytes) indicates that the increase should be 200 MiB (4 * 50 MiB).
 
 Let's increase the stress by changing the memory stress from 50 MiB to 3,000 MiB. This should break the Pod's memory limit. I'll delete the chaos experiment, modify the memory size, and reapply it.
 
