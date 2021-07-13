@@ -3,7 +3,7 @@ title: Remote Work - Part 1
 author: ['Nick Cameron']
 date: 2020-02-12
 summary: Nick has been working remotely for nearly ten years. In this post, he introduces why you might benefit from remote work and some of the things that make remote work successful.
-tags: ['Remote work']
+tags: ['Careers']
 categories: ['Company']
 image: /images/blog/remote-work-part-1.png
 ---

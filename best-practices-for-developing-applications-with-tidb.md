@@ -3,7 +3,7 @@ title: Best Practices for Developing Applications with TiDB
 date: 2019-06-19
 author: ['Tianshuang Qin']
 summary: This article shows how to efficiently develop high-quality applications with TiDB, an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads and can serve as a scale-out MySQL database without manual sharding.
-tags: ['Best practice', 'How to']
+tags: ['Best practice', 'Tutorial']
 categories: ['Product']
 ---
 
@@ -314,7 +314,7 @@ select a,b,c from tablename where a<predicate>'<value1>' and b<predicate>'<value
     ```
 
 - If the predicate is `=` or `in` for both condition **a** and condition **b**, composite index (a,b,c)` can be used for condition **c**, for example:
-  
+
     ```sql
     select a,b,c from tablename where a in (1,2,3) and b=5 and c='abc'
     ```

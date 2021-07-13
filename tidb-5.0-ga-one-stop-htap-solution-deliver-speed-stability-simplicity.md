@@ -3,7 +3,7 @@ title: 'TiDB 5.0 GA: A One-Stop HTAP Solution Delivering Speed, Stability, and S
 author: ['PingCAP']
 date: 2021-04-12
 summary: TiDB 5.0 GA is released. As a one-stop HTAP solution, it delivers better and more stable OLTP performance and enhanced OLAP performance with a Massively Parallel Processing engine.
-tags: ['Announcement', 'Release', 'HTAP', 'Real-time analytics', 'TiDB 5.0']
+tags: ['Announcement', 'Release', 'HTAP', 'Real-time analytics']
 categories: ['Product']
 image: /images/blog/tidb-5.0-ga-one-stop-htap-solution.jpg
 press_release: true
@@ -18,7 +18,7 @@ press_release: true
 Today, we are proud to announce that [TiDB 5.0](https://docs.pingcap.com/tidb/v5.0/release-5.0.0) has reached general availability (GA). This release marks a significant milestone in our commitment to providing our customers with an open-source, elastic, Hybrid Transactional/Analytical Processing (HTAP) database for mission-critical applications and providing a single and real-time source of truth. Version 5.0 introduces:
 
 * **Remarkable improvements in performance and stability**. TiDB 5.0 has more powerful [OLTP capabilities](https://docs.pingcap.com/tidb/v5.0/release-5.0.0) for mission-critical applications.
-* **A Massively Parallel Processing (MPP) architecture.** This architecture, based on TiDB's analytical engine, [TiFlash](https://docs.pingcap.com/tidb/v5.0/tiflash-overview), is now available in TiDB. **It enables users to perform real-time interactive business intelligence (BI) analytics.** It provides a one-stop data service solution for fast-growing businesses and data-driven innovation scenarios and accelerates TiDB's entry into more large-scale enterprises' digital scenarios. 
+* **A Massively Parallel Processing (MPP) architecture.** This architecture, based on TiDB's analytical engine, [TiFlash](https://docs.pingcap.com/tidb/v5.0/tiflash-overview), is now available in TiDB. **It enables users to perform real-time interactive business intelligence (BI) analytics.** It provides a one-stop data service solution for fast-growing businesses and data-driven innovation scenarios and accelerates TiDB's entry into more large-scale enterprises' digital scenarios.
 * **Safer and easier:** The Raft Joint Consensus algorithm introduced in TiDB 5.0 improves the system availability during Raft membership change. Data desensitization is also supported to avoid leaking sensitive information. TiDB 5.0 offers multiple data migration and data sharing tools, which facilitate data importing, exporting, and recovering. Enhanced [`EXPLAIN`](https://docs.pingcap.com/tidb/v5.0/sql-statement-explain) and [`EXPLAIN ANALYZE`](https://docs.pingcap.com/tidb/v5.0/sql-statement-explain-analyze) statements help users more efficiently diagnose query performance problems. TiDB 5.0 makes it easier than ever before for enterprises to build and scale applications on TiDB and enables enterprises to build a converged, simplified, and reliable distributed database platform.
 
 ## High performance with multiple groundbreaking metrics
@@ -54,7 +54,7 @@ Besides, TiDB 5.0 has improved its performance in OLAP scenarios by introducing 
 
 * For TPC-H benchmark details, see [this report](https://docs.pingcap.com/tidb/v5.0/v5.0-performance-benchmarking-with-tpch).
 
-**Benchmark results** 
+**Benchmark results**
 
 ![TiDB 4.0 vs. TiDB 5.0 for TPC-H](media/tidb-4-vs-5-tpc-h.jpg)
 <div class="caption-center"> TiDB 4.0 vs. TiDB 5.0 for TPC-H benchmarks (lower is better) </div>
@@ -76,7 +76,7 @@ See [this report](https://docs.pingcap.com/tidb/v5.0/v5.0-performance-benchmarki
 
 ### Maintain your cluster more easily
 
-In TiDB 5.0, [TiUP](https://docs.pingcap.com/tidb/v5.0/tiup-overview) checks the environment with a single command line. It offers repair suggestions and automatically repairs environmental problems. We've optimized the operation logic so that you can more quickly deploy standard TiDB clusters in the production environment. 
+In TiDB 5.0, [TiUP](https://docs.pingcap.com/tidb/v5.0/tiup-overview) checks the environment with a single command line. It offers repair suggestions and automatically repairs environmental problems. We've optimized the operation logic so that you can more quickly deploy standard TiDB clusters in the production environment.
 
 In this release, TiUP upgrade is application-unaware. During the upgrade process, the performance jitter is within 10 to 30 seconds.
 
@@ -122,4 +122,4 @@ To meet security compliance requirements, TiDB supports desensitizing data, such
 
 This post only shows a few of highlights in TiDB 5.0. For a full list of features, check out [What's New in TiDB 5.0](https://docs.pingcap.com/tidb/v5.0/release-5.0.0). If you're interested, you can [download TiDB 5.0](https://pingcap.com/download/) and give it a try. You're also welcome to join our [community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) and send us your feedback.
 
-We'd like to give special thanks to the members of our TiDB community—both developers and users—who have contributed to the TiDB ecosystem. Since TiDB 4.0 was released, 538 contributors have submitted 12,513 pull requests to help us improve TiDB and achieve our 5.0 milestone. We have always been fully committed to the open source community and we believe the open community, the open ecosystem and the open minds will continue to enable and empower TiDB to evolve. 
+We'd like to give special thanks to the members of our TiDB community—both developers and users—who have contributed to the TiDB ecosystem. Since TiDB 4.0 was released, 538 contributors have submitted 12,513 pull requests to help us improve TiDB and achieve our 5.0 milestone. We have always been fully committed to the open source community and we believe the open community, the open ecosystem and the open minds will continue to enable and empower TiDB to evolve.

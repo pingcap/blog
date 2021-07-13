@@ -3,7 +3,7 @@ title: 'Always Fun, Always On: How TiDB Helps iQiyi Deliver Streaming Videos'
 author: ['Boshuai Zhu']
 date: 2018-10-18
 summary: As our business grew exponentially, we were overwhelmed trying to handle the mounting data until we found TiDB, a MySQL-compatible NewSQL hybrid transactional and analytical processing (HTAP) database, built and supported by PingCAP. Now we no longer worry about data volume and can bring high-quality entertainment services to our users with more confidence than before.
-tags: ['High availability ', 'Scalability', 'MySQL']
+tags: ['High availability', 'Scalability', 'MySQL']
 url: /success-stories/tidb-in-iqiyi/
 customer: iQiyi
 customerCategory: Internet

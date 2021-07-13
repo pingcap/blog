@@ -2,7 +2,7 @@
 title: 'BookMyShow.com: More Uptime, 30% Less Operational Cost with TiDB'
 date: 2019-03-15
 summary: With TiDB, BookMyShow has experienced increased uptime and availability, since TiDB automatically partitions and distributes data across the cluster. Meanwhile, operational and maintenance cost has been reduced by 30%. No engineer needs to be fully dedicated to database operations anymore. This post will introduce why BookMyShow chose TiDB over Greenplum by illustrating how TiDB solved their pain points.
-tags: ['Consistency']
+tags: ['ACID transaction']
 url: /success-stories/tidb-in-bookmyshow/
 customerCategory: Internet
 customer: BookMyShow

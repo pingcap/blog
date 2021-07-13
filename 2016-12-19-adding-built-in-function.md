@@ -2,7 +2,7 @@
 title: Adding Built-in Functions
 date: 2016-12-19
 summary: TiDB code is updated and the procedure of adding built-in functions is greatly simplified. This document describes how to add built-in functions to TiDB.
-tags: ['How to', 'SQL engine']
+tags: ['Tutorial']
 aliases: ['/blog/2016/12/19/adding-built-in-function/']
 categories: ['Community']
 ---

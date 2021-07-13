@@ -3,7 +3,7 @@ title: Travelling Back in Time and Reclaiming the Lost Treasures
 author: ['Ewan Chou']
 date: 2016-11-15
 summary: This document introduces the History Read feature in TiDB.
-tags: ['MVCC']
+tags: ['Transaction']
 aliases: ['/blog/2016/11/15/Travelling-Back-in-Time-and-Reclaiming-the-Lost-Treasures/', '/blog/2016/11/15/travelling-back-in-time-and-reclaiming-the-lost-treasures/']
 categories: ['Product']
 ---

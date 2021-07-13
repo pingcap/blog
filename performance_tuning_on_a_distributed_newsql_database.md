@@ -3,7 +3,7 @@ title: How to Do Performance Tuning on TiDB, a Distributed NewSQL Database
 author: ['Jinpeng Zhang']
 date: 2018-03-16
 summary: Doing performance tuning on distributed systems is no joking matter. It’s much more complicated than on a single node server, and bottlenecks can pop up anywhere, from system resources in a single node or subcomponent, to cooperation between nodes, to even network bandwidth. Performance tuning is a practice that aims to find these bottlenecks and address them, in order to reveal more bottlenecks and address them as well, until the system reaches an optimal performance level. In this article, I will share some best practices on how to tune "write" operations in TiDB to achieve maximum performance.
-tags: ['Performance tuning', 'TiKV', 'Distributed system', 'How to']
+tags: ['Performance tuning', 'TiKV', 'Distributed system', 'Tutorial']
 categories: ['Engineering']
 ---
 
@@ -54,7 +54,7 @@ Our transaction model is inspired by [Percolator](https://research.google.com/pu
 
 Briefly speaking, it is a two-phase commit protocol with prewrite and commit.
 
-There's a lot more under the hood in each of these components, but a macro-level understanding is enough to set the scene for performance tuning. Now, let's dig into four specific tuning techniques.  
+There's a lot more under the hood in each of these components, but a macro-level understanding is enough to set the scene for performance tuning. Now, let's dig into four specific tuning techniques.
 
 ### Tuning Technique #1: Scheduler
 
@@ -119,7 +119,7 @@ I hope this article helps you get a good sense of some common bottleneck scenari
 
 2. When the total CPU usage of the scheduler workers in TiKV's scheduler model exceeds scheduler-worker-pool-size * 80%, increase scheduler-worker-pool-size.
 
-3. When writing task reads the 'write' column family frequently and the block-cache hit rate is below 90%, increase its block-cache-size in RocksDB.  
+3. When writing task reads the 'write' column family frequently and the block-cache hit rate is below 90%, increase its block-cache-size in RocksDB.
 
 4. Use batch insert to improve performance on "write" operations.
 
