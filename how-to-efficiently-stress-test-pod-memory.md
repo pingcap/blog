@@ -1,5 +1,5 @@
 ---
-title: How to efficiently stress test Pod memory
+title: How to Efficiently Stress Test Pod Memory
 author: ['Yinghao Wang']
 date: 2021-07-13
 summary: Chaos Mesh provides StressChaos, a tool that allows you to inject CPU and memory stress into your Pod. Learn how to get the most of StressChaos.
