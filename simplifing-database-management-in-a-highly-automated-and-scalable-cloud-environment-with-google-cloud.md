@@ -8,7 +8,7 @@ categories: ['Product']
 image: /images/blog/pingcap-simplifing-database-management-with-google-cloud.jpg
 ---
 
-![Simplifying Database Management in a Highly Automated and Scalable Cloud Environment with Google Cloud](media/pingcap-simplifing-database-management-with-google-cloud.jpg)
+![Simplifying Database Management in a Highly Automated and Scalable Cloud Environment with Google Cloud](media/pingcap-simplifying-database-management-with-google-cloud.jpg)
 
 ## Google Cloud results
 
