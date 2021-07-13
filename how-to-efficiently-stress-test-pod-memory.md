@@ -142,7 +142,7 @@ Kubernetes limits the container memory usage through the [cgroup](https://man7.o
 524288000
 ```
 
-The output is displayed in bytes and translates to 500 * 1024 * 1024 (500 MiB).
+The output is displayed in bytes and translates to 500 \* 1024 \* 1024 (500 MiB).
 
 Requests are used only for scheduling where to place the Pod. The Pod does not have a memory limit or request, but it can be seen as the sum of all its containers.
 
@@ -247,9 +247,9 @@ Kubernetes tries to evict Pods that use too much memory (but not more memory tha
 
 Keep in mind that Kubernetes **does not** support swap. Even if you have a node with swap enabled, Kubernetes creates containers with `swappiness=0`, which means swap is actually disabled. That is mainly for performance concerns.
 
-`memory.usage_in_bytes` equals `resident set` plus `cache`, and `total_inactive_file` is memory in `cache` that the OS can retrieve when the memory is running out. `memory.usage_in_bytes - total_inactive_file` is called `working_set`. You can get this `working_set` value by `kubectl top pod &lt;your pod> --containers`. Kubernetes uses this value to decide whether or not to evict your Pods.
+`memory.usage_in_bytes` equals `resident set` plus `cache`, and `total_inactive_file` is memory in `cache` that the OS can retrieve when the memory is running out. `memory.usage_in_bytes - total_inactive_file` is called `working_set`. You can get this `working_set` value by `kubectl top pod <your pod> --containers`. Kubernetes uses this value to decide whether or not to evict your Pods.
 
-Kubernetes periodically inspects memory usage. If a container's memory usage increases too quickly or the container cannot be evicted, the OOM killer is invoked. Kubernetes has its way of protecting its own process, so the OOM killer always picks the container. When a container is killed, it may or may not be restarted, depending on your restart policy. If it is killed, when you execute `kubectl describe pod &lt;your pod>`, you will see it is restarted and the reason is `OOMKilled`.
+Kubernetes periodically inspects memory usage. If a container's memory usage increases too quickly or the container cannot be evicted, the OOM killer is invoked. Kubernetes has its way of protecting its own process, so the OOM killer always picks the container. When a container is killed, it may or may not be restarted, depending on your restart policy. If it is killed, when you execute `kubectl describe pod <your pod>`, you will see it is restarted and the reason is `OOMKilled`.
 
 Another thing worth mentioning is the kernel memory. Since v1.9, Kubernetes enables kernel memory support by default. It is also a feature of cgroup memory subsystems. You can limit container kernel memory usage. Unfortunately, this causes a cgroup leak on kernel versions up to v4.2. You can either upgrade your kernel to v4.3 or disable the feature.
 
