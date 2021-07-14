@@ -55,11 +55,11 @@ Generally speaking, there are following three types of subqueries:
 
 For the simple subqueries like Existential Test, the common practice is to rewrite them to `SemiJoin`. But it is barely explored in the literature about the generic algorithm and what kind of subqueries need to remove the correlation. For those subqueries whose correlation cannot be removed, the common practice in databases is to execute in Nested Loop, which is called correlated execution.
 
-TiDB inherits the subquery strategy in SQL Server [1]. It introduces the `Apply` operator to use algebraic representation for subqueries which is called normalization, and then removes the correlation based on the cost information.
+TiDB inherits the subquery strategy in SQL Server [^1]. It introduces the `Apply` operator to use algebraic representation for subqueries which is called normalization, and then removes the correlation based on the cost information.
 
 ## The `Apply` operator
 
-The reason why subqueries are difficult to optimize is that a subquery cannot be represented as a logic operator like `Projection` or `Join`, which makes it difficult to find a generic algorithm for subquery transformation. So the first thing is to introduce a logical operation that can represent the subqueries: the `Apply` operator, which is also called `d-Join`[2].
+The reason why subqueries are difficult to optimize is that a subquery cannot be represented as a logic operator like `Projection` or `Join`, which makes it difficult to find a generic algorithm for subquery transformation. So the first thing is to introduce a logical operation that can represent the subqueries: the `Apply` operator, which is also called `d-Join`[^2].
 The semantics of the `Apply` operator is:
 
 \\[
@@ -133,7 +133,7 @@ Other rules to remove correlation can be formally represented as:
 
 \\(R\ A^\times\ (\mathcal{G}^1\_FE) = \mathcal{G}\_{A\bigcup \mathrm{attr}(R),F'} (R\ A^{LOJ}\ E) \\) (9)
 
-Based on the above rules, the correlation among all the SQL subqueries can be removed [3]. But the (5), (6), and (7) rules are seldom used because the  the query cost is increased as a result of the rules about common expression.
+Based on the above rules, the correlation among all the SQL subqueries can be removed [^3]. But the (5), (6), and (7) rules are seldom used because the  the query cost is increased as a result of the rules about common expression.
 Take the following SQL statement as an example:
 
 ```
@@ -177,7 +177,7 @@ Theoretically, the above 9 rules have solved the correlation removal problem. Bu
 
 ## Aggregation and subquery
 
-In the previous section, the final statement is not completely optimized. The aggregation function above `OuterJoin` and `InnerJoin` can be pushed down[4]. If `OutJoin` cannot be simplified, the formal representation of the push-down rule is:
+In the previous section, the final statement is not completely optimized. The aggregation function above `OuterJoin` and `InnerJoin` can be pushed down[^4]. If `OutJoin` cannot be simplified, the formal representation of the push-down rule is:
 
 \\[
 \mathcal{G\_{A,F}}(S\ LOJ\_p\ R)=\pi\_C(S\ LOJ\_p(\mathcal{G}\_{A-attr(S),F}R))
@@ -193,10 +193,10 @@ It is very common to use aggregation functions together with subqueries. The gen
 
 ## References
 
-[1] C. Galindo-Legaria and M. Joshi. "Orthogonal optimization of subqueries and aggregation". In: _Proc. of the ACM SIGMOD Conf. on Management of Data (2001)_, pp. 571–581.
+[^1]: C. Galindo-Legaria and M. Joshi. "Orthogonal optimization of subqueries and aggregation". In: _Proc. of the ACM SIGMOD Conf. on Management of Data (2001)_, pp. 571–581.
 
-[2] D. Maier, Q. Wang and L. Shapiro. _Algebraic unnesting of nested object queries_. Tech. rep. CSE-99-013. Oregon Graduate Institute, 1999.
+[^2]: D. Maier, Q. Wang and L. Shapiro. _Algebraic unnesting of nested object queries_. Tech. rep. CSE-99-013. Oregon Graduate Institute, 1999.
 
-[3] C. A. Galindo-Legaria. _Parameterized queries and nesting equivalences_. Tech. rep. MSR-TR-2000-31. Microsoft, 2001.
+[^3]: C. A. Galindo-Legaria. _Parameterized queries and nesting equivalences_. Tech. rep. MSR-TR-2000-31. Microsoft, 2001.
 
-[4] W. Yan and P.-A. Larson. "Eager aggregation and lazy aggregation". In: _Proc. Int. Conf. on Very Large Data Bases (VLDB)_ (1995), pp. 345–357.
+[^4]: W. Yan and P.-A. Larson. "Eager aggregation and lazy aggregation". In: _Proc. Int. Conf. on Very Large Data Bases (VLDB)_ (1995), pp. 345–357.

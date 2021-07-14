@@ -159,23 +159,26 @@ We can also change the I/O return value. Below we inject an `EINTR` for read and
 
 Sometimes, we want to do **fault injection in specific places** like:
 
- fn save_snapshot() {
-
+```
+fn save_snapshot() {
   save_data();
   save_meta();
- }
+}
+```
 
 We do this because, for example, we want to see the system panic after the snapshot data is saved, but meta is not yet. How can we do this? We can use a mechanism called [`fail`](https://www.freebsd.org/cgi/man.cgi?query=fail&sektion=9&apropos=0&manpath=FreeBSD%2B10.0-RELEASE). Using `fail` we can inject the fault exactly where we want it. In Go, we can use [`gofail`](https://github.com/coreos/gofail) and in Rust, we can use [`fail-rs`](https://github.com/pingcap/fail-rs).
 
 For the above example, now we can do:
 
- fn save_snapshot() {
+```
+fn save_snapshot() {
 
   save_data();
 
   fail_point!("snapshot");
   save_meta();
- }
+}
+```
 
 In this example, we inject a fail point with name "snapshot," and then we can trigger it to throw a panic message like `FAILPOINTS=snapshot=panic(msg) cargo run`.
 

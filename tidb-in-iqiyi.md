@@ -148,6 +148,7 @@ The [Syncer](https://pingcap.com/docs/tools/syncer/) architecture is as follows:
 <div class="caption-center"> Figure 5: Syncer architecture </div>
 
 However, Syncer currently cannot display real-time delay information in Grafana. This is a drawback for the applications that are sensitive to synchronization delay. The good news is that PingCAP is working on this issue, and they have refactored Syncer to automatically deal with the primary key conflict of table partition. With Syncer and TiDB, users can quickly synchronize data from multiple MySQL clusters in real time.
+
 We have two requirements for high availability of the database:
 
 - The service is still available even if the server goes down.
@@ -168,6 +169,7 @@ Throughout the process, the PingCAP team offered us timely and expert-level help
 ## Lessons Learned
 
 The most attractive features of TiDB are horizontal scalability and high availability.
+
 The data that a standalone database can hold is limited. If the policy of MySQL sharding + proxy is applied, the maintenance cost will go up whether the proxy is on the client or the server.
 
 What's worse, the query efficiency fails to meet the performance demands in many scenarios. In addition, the proxy does not support transactions well and cannot guarantee data consistency.

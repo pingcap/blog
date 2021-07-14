@@ -66,6 +66,7 @@ INSERT INTO `tbl` VALUES (19, 20, 21), (22, 23, 24), (25, 26, 27);
 ```
 
 Inside Lightning, each table would be associated with a KV encoder, which is in fact a TiDB instance using an in-memory storage ("mocktikv"). Thus after executing an INSERT statement, the KV encoder would record the result into a memory buffer (containing the data itself and also the indices), which Lightning can read out as the resulting KV pairs. In this way, we could easily convert the SQL statement into KV pairs using the same rules as TiDB itself.
+
 After KV pairs are obtained, they will be passed to Importer.
 
 <div class="trackable-btns">

@@ -115,8 +115,6 @@ See the following list for all the packages and their main functions:
 - [tidb-server](https://github.com/pingcap/tidb/tree/master/tidb-server)
 
     The [main.go](https://github.com/pingcap/tidb/blob/master/tidb-server/main.go) file of the TiDB Server which is mainly the codes to start the server.
-    The [main.go](https://github.com/pingcap/tidb/blob/master/tidb-server/main.go) file of the TiDB Server which is mainly the codes to start the server.
-    The [main.go](https://github.com/pingcap/tidb/blob/master/tidb-server/main.go) file of the TiDB Server which is mainly the codes to start the server.
 
 - [server](https://github.com/pingcap/tidb/tree/master/server)
 
@@ -266,8 +264,6 @@ There are following types of optimization methods:
 
 - History based optimizer: optimize a plan according to the history query information
 
-    This type of optimizer is seldom used, especially in OLTP databases.
-    This type of optimizer is seldom used, especially in OLTP databases.
     This type of optimizer is seldom used, especially in OLTP databases.
 
 The codes for the TiDB optimizer is included in the [plan](https://github.com/pingcap/tidb/tree/rc2.3/plan) package. The package is mainly to transform an AST to a query plan tree. The nodes of the tree are different types of logical operator and physical operator. All sorts of optimization towards the query plan are all based on the methods of calling the root node, optimizing all the related nodes recursively, then transforming and trimming each node on the tree.
