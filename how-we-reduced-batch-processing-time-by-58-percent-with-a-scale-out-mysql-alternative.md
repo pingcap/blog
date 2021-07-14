@@ -57,7 +57,7 @@ TiDB attracted us, because it had these advantages:
 
 ## How we're using TiDB as an alternative to MySQL
 
-So far, we've deployed TiDB in dozens of application systems in the production environment. **These systems‘ data volumes range from hundreds of gigabytes to dozens of terabytes.** Currently, multiple important systems are under proof of concept (POC) or are ready  for the production environment.
+So far, we've deployed TiDB in dozens of application systems in the production environment. **These systems' data volumes range from hundreds of gigabytes to dozens of terabytes.** Currently, multiple important systems are under proof of concept (POC) or are ready  for the production environment.
 
 Today, I'll introduce how we're using TiDB in two important scenarios:
 

@@ -115,9 +115,9 @@ You can wait the future to be finished, and multiple futures can be combined int
 
 ## Futures in Rust
 
-So what about futures in Rust?  
+So what about futures in Rust?
 
-In Rust, future has already been supported by [Alex](https://github.com/alexcrichton). Thanks, Alex!  
+In Rust, future has already been supported by [Alex](https://github.com/alexcrichton). Thanks, Alex!
 
 Based on the Rust trait, the future is zero cost, which means that you don't need to do extra heap allocation or dynamic dispatch. Future is easy to use, you can combine many futures into a chain, and use the combinator like an Iterator API.
 
@@ -332,7 +332,7 @@ Client:
 let (sink, future) = client_streaming(service, method);
 sink = sink.send(request).wait().unwrap();
 sink = sink.send(request).wait().unwrap();
-……
+......
 let response = future.wait();
 ```
 
@@ -421,7 +421,7 @@ let (future, tag) = CallTag::batch_pair();
 // create a tag and let gRPC manages its lifetime
 let tag_box = Box:new(tag);
 let tag_ptr = Box::into_raw(tag_box) as _;
-call_start_batch(…, tag_ptr);
+call_start_batch(..., tag_ptr);
 ```
 
 ### Unary Future

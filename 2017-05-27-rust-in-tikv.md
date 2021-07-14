@@ -31,7 +31,7 @@ This is the speech Siddon Tang gave at the 1st Rust Meetup in Beijing on April 1
 
 Hello everyone, today I will talk about how we use Rust in [TiKV](https://github.com/pingcap/tikv).
 
-Before we begin, let me introduce myself. My name is Siddon Tang, the Chief Architect of PingCAP. Before I joined PingCAP, I had worked at Kingsoft and Tencent. I love open source and have developed some projects like LedisDB, go-mysql, etc…
+Before we begin, let me introduce myself. My name is Siddon Tang, the Chief Architect of PingCAP. Before I joined PingCAP, I had worked at Kingsoft and Tencent. I love open source and have developed some projects like LedisDB, go-mysql, etc...
 
 At first, I will explain the reason why we chose Rust to develop TiKV, then show you the architecture of TiKV briefly and the key technologies. In the end, I will introduce what we plan to do in the future.
 
@@ -43,7 +43,7 @@ All right, let's begin. First,  what is TiKV. TiKV is a distributed Key-Value da
 
 * **Horizontal scalability:** We can add some nodes directly if we find that the rapidly growing data will soon exceed the system capacity.
 
-* **Consistent distributed transaction:** We use an optimized, two phase commit protocol, based on Google Percolator, to support distributed transactions. You can use "begin" to start a transaction, then do something, then use “commit” or “rollback” to finish the transaction.
+* **Consistent distributed transaction:** We use an optimized, two phase commit protocol, based on Google Percolator, to support distributed transactions. You can use "begin" to start a transaction, then do something, then use "commit" or "rollback" to finish the transaction.
 
 * **Coprocessor for distributed computing:** Just like HBase, we support a coprocessor framework to let user do computing in TiKV directly.
 
@@ -55,7 +55,7 @@ As you see, TiKV has many powerful features. To develop these features, we also 
 
 * **Fast speed:** We take the performance of TiKV very seriously, so we need a language which runs very fast at runtime.
 
-* **Memory safety**: As a program that is going to run for a long time, we don't want to meet any memory problem, such as dangling pointer, memory leak, etc…
+* **Memory safety**: As a program that is going to run for a long time, we don't want to meet any memory problem, such as dangling pointer, memory leak, etc...
 
 * **Thread safety**: We must guarantee data consistency all the time, so any data race problem must be avoided.
 

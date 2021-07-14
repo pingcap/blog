@@ -89,7 +89,7 @@ GitHub recently introduced a new feature, **Discussions**, to bring together the
 
 ## Overview of Discussions
 
-> "Software communities don't just write code together. They brainstorm feature ideas, help new users get their bearings, and collaborate on best ways to use the software. …Conversations need their own place—that's what GitHub Discussions is for." [GitHub Blog: New from Satellite 2020](https://github.blog/2020-05-06-new-from-satellite-2020-github-codespaces-github-discussions-securing-code-in-private-repositories-and-more/)
+> "Software communities don't just write code together. They brainstorm feature ideas, help new users get their bearings, and collaborate on best ways to use the software. ...Conversations need their own place—that's what GitHub Discussions is for." [GitHub Blog: New from Satellite 2020](https://github.blog/2020-05-06-new-from-satellite-2020-github-codespaces-github-discussions-securing-code-in-private-repositories-and-more/)
 
 Discussions is a beta feature that GitHub launched earlier 2020. At first, it was only open to a few select projects, such as Next.js and Office 365 CLI.
 
@@ -226,7 +226,7 @@ As a fan of GitHub, I am very glad that this company keeps expanding the possibi
 
 On [Hacker News](https://news.ycombinator.com/item?id=22388639), however, some developers expressed their concern about the expansion of the "GitHub Kingdom":
 
-> GitHub is slowly eating the surrounding cities. Github pages replaced our hosted sites. Projects replaced Trello/Waffle and friends. Actions replaced Travis/CircleCI. Sponsors is about to hit Patreon, and now Discussions aims for a piece of StackOverflow pie…
+> GitHub is slowly eating the surrounding cities. Github pages replaced our hosted sites. Projects replaced Trello/Waffle and friends. Actions replaced Travis/CircleCI. Sponsors is about to hit Patreon, and now Discussions aims for a piece of StackOverflow pie...
 >
 > I think they are doing great in terms of performance and UI. It's hard to resist the convenience of having everything linked together in a coherent way. But this will probably backfire in the future.
 

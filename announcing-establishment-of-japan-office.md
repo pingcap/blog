@@ -17,9 +17,9 @@ press_release: true
 
 TOKYO, JAPAN, APRIL 22, 2021 - In order to better serve the Japan market and support its growth, PingCAP, the enterprise-grade open-source distributed database provider, announced that the Japan office is formally established in Tokyo in April 2021.
 
-"PingCAP’s vision is to make growth easier for global innovation leaders," Says Max Liu, CEO at PingCAP, "With a rising demand for open source infrastructure solutions like TiDB, Japan is an important market for us. We are excited about our new operations in Japan and are committed to serving the region’s fast growing customers with their digital transformation journey while contributing to the local open source market.”
+"PingCAP's vision is to make growth easier for global innovation leaders," Says Max Liu, CEO at PingCAP, "With a rising demand for open source infrastructure solutions like TiDB, Japan is an important market for us. We are excited about our new operations in Japan and are committed to serving the region's fast growing customers with their digital transformation journey while contributing to the local open source market."
 
-PingCAP’s flagship product, TiDB, is an open-source hybrid transactional and analytical (HTAP) database featuring horizontal scalability, strong consistency, and high availability with MySQL compatibility. Over the last 5 years, TiDB has been adopted and battle-tested by more than 1,500 companies globally across multiple industries such as finance, e-commerce, payment, online video, gaming, logistics, media, manufacturing, and travel.
+PingCAP's flagship product, TiDB, is an open-source hybrid transactional and analytical (HTAP) database featuring horizontal scalability, strong consistency, and high availability with MySQL compatibility. Over the last 5 years, TiDB has been adopted and battle-tested by more than 1,500 companies globally across multiple industries such as finance, e-commerce, payment, online video, gaming, logistics, media, manufacturing, and travel.
 
 In June 2020, PingCAP announced the beta release of [TiDB Cloud](https://pingcap.com/products/tidbcloud/), the fully managed TiDB service on AWS and GCP, which reduces the operational cost of using TiDB while allowing customers to focus on their applications development and not the complexities of their database.
 

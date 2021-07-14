@@ -107,7 +107,7 @@ A TiKV store contains multiple Regions. In Raft RocksDB, we use the Region ID as
 1_N-> Log {a = N}
 2_1-> Log {b = 2}
 2_2-> Log {b = 3}
-…
+...
 2_N-> Log {b = N}
 ```
 

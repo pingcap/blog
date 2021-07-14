@@ -145,7 +145,7 @@ When a client reads or writes data, it uses the following process:
     {startKey1, endKey1}   ->     {Region1, NodeA}
     {startKey2, endKey2}   ->     {Region2, NodeB}
     {startKey3, endKey3}   ->     {Region3, NodeC}
-    …
+    ...
     ```
 
 2. According to the key accessed by the user, the client checks and obtains the following information:

@@ -1,7 +1,7 @@
 ---
 title: Landing Your First Rust Pull Request in TiKV
 date: 2018-08-03
-summary: This guide is intended to show how you can land your first Pull Request (PR) in Rust to contribute to TiKV in less than 30 minutes. But before we do that, here’s some helpful background.
+summary: This guide is intended to show how you can land your first Pull Request (PR) in Rust to contribute to TiKV in less than 30 minutes. But before we do that, here's some helpful background.
 tags: ['TiKV', 'Rust', 'How to']
 categories: ['Community']
 ---

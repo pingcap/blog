@@ -148,7 +148,7 @@ Figure 7. Data Loading Performance: Titan's performance is 70% higher than Rocks
 
 ![Update performance](media/update-performance.png)
 
-Figure 8. Update Performance: Titan's performance in update scenarios is 180% higher than RocksDB. This is mainly attributable to Titan's excellent read performance and optimal GC algorithm.  
+Figure 8. Update Performance: Titan's performance in update scenarios is 180% higher than RocksDB. This is mainly attributable to Titan's excellent read performance and optimal GC algorithm.
 
 ![Output size](media/output-size.png)
 
@@ -195,7 +195,7 @@ options.create_if_missing = true;
 rocksdb::Status status =
 rocksdb::titandb::TitanDB::Open(options, "/tmp/testdb", &db);
  (status.ok());
- …
+ ...
 ```
 
 or

@@ -14,7 +14,7 @@ logo: /images/blog/customers/iqiyi-logo.png
 
 **Author:** Boshuai Zhu (Senior Infrastructure Engineer at iQiyi)
 
-[iQiyi](https://en.wikipedia.org/wiki/IQiyi), formerly Qiyi, is the Netflix of China: the country's [largest online video-on-demand platform](https://www.thewrap.com/paramount-signs-licensing-deal-with-chinas-largest-online-video-platform-iqiyi/). With “Always Fun, Always Fine” as our brand's motto, we are committed to providing users with high-resolution, authentic media content including movies, TV dramas, variety shows, documentaries, animations and travel programs. On March 29, 2018, our company IPO'ed on the NASDAQ and raised $2.25 billion.
+[iQiyi](https://en.wikipedia.org/wiki/IQiyi), formerly Qiyi, is the Netflix of China: the country's [largest online video-on-demand platform](https://www.thewrap.com/paramount-signs-licensing-deal-with-chinas-largest-online-video-platform-iqiyi/). With "Always Fun, Always Fine" as our brand's motto, we are committed to providing users with high-resolution, authentic media content including movies, TV dramas, variety shows, documentaries, animations and travel programs. On March 29, 2018, our company IPO'ed on the NASDAQ and raised $2.25 billion.
 
 Since our business has grown rapidly, our data size has also soared. This has placed enormous pressure on our backend system, especially the MySQL cluster. We experienced the suffocating pain of tackling immense data until we found [TiDB](http://bit.ly/tidb_repo_publication), a MySQL-compatible NewSQL hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database, built and supported by PingCAP. Finally, we can properly manage our data.
 
@@ -97,7 +97,7 @@ The following issues occurred during our adoption of TiDB, but were quickly reso
 
 - After we migrated to TiDB for the Risk Monitoring Center, we successfully upgraded the TiDB cluster and modified the parameters of TiKV nodes. Generally, these operations did not affect the online services.
 
-    During the upgrade of TiKV nodes, some errors occurred such as “Region is unavailable [try again later]” and “TiKV server timeout.” This was due to the lag of cache information, which is unavoidable in a distributed system. But it does not affect the services as long as the application has a retry mechanism.
+    During the upgrade of TiKV nodes, some errors occurred such as "Region is unavailable [try again later]" and "TiKV server timeout." This was due to the lag of cache information, which is unavoidable in a distributed system. But it does not affect the services as long as the application has a retry mechanism.
 
 - We are amazed by the fact that no matter how much the data increases (as shown in Figure 2), the response time remains stable, thanks to the automatic Region splitting strategy of TiKV (as shown in Figure 3), the storage layer of TiDB. Tables in TiDB are split automatically to several parts of equal size (96 MB by default but configurable) based on the data size of a table. These Regions are scheduled to various storage nodes by a series of complex schedule algorithms. For a specific query, however big its data size is, TiDB quickly locates the corresponding Region, guaranteeing timely query response.
 

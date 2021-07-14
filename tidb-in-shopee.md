@@ -51,7 +51,7 @@ Our risk control system detects abnormal behaviors and fraudulent transactions f
 ![Data collection and processing in the risk control system](media/data-collection-and-processing-in-the-risk-control-system.png)
 <div class="caption-center"> Figure 3: Data collection and processing in the risk control system </div>
 
-This approach began to show its limitations as the major shopping season approached. During one major 2018 promotion event, the number of orders exceeded 11 million, 4.5 times larger than the previous year. On December 12, 2018, another major online shopping day known as “Double 12”, the number of orders reached an all-time high in Shopee history -- 12 million.
+This approach began to show its limitations as the major shopping season approached. During one major 2018 promotion event, the number of orders exceeded 11 million, 4.5 times larger than the previous year. On December 12, 2018, another major online shopping day known as "Double 12", the number of orders reached an all-time high in Shopee history -- 12 million.
 
 Although we enabled [InnoDB Transparent Page Compression](https://dev.mysql.com/doc/refman/8.0/en/innodb-page-compression.html) to compress the data size by half and increased the MySQL server storage space from 2.5TB to 6TB as a temporary fix, we knew we needed a horizontally scalable database solution for the long term.
 
@@ -79,7 +79,7 @@ Before choosing TiDB, we carefully researched and compared the pros and cons of 
 
 - **Supports elastic horizontal scalability.** We can scale the database horizontally simply by adding new TiKV nodes when the data size increases.
 - **Guarantees strong data consistency with auto partitioning.** All the data in TiDB is automatically partitioned into smaller chunks, and automatically replicated and made strongly consistent by executing the [Raft Consensus Algorithm](https://raft.github.io/). This implementation saves us time and reduces operational cost of manually partitioning and managing tables.
-- **Highly compatible with the MySQL protocol.** We can use TiDB as if we were using MySQL, almost like “a MySQL with infinite capacity”, so to speak. This compatibility also lowers migration cost and keeps our application development productive because developers do not have to learn a new database.
+- **Highly compatible with the MySQL protocol.** We can use TiDB as if we were using MySQL, almost like "a MySQL with infinite capacity", so to speak. This compatibility also lowers migration cost and keeps our application development productive because developers do not have to learn a new database.
 - **Supports online DDL.** We can add new columns and indices without downtime.
 
 **Disadvantage:**
@@ -104,7 +104,7 @@ During the traffic migration process, we benefited a great deal from the doublew
 
 - We acquired enough time to get familiar with the TiDB behavior. Because of the doublewrite approach, the traffic switching process took several months, during which our R&D and DBA teams were able to learn more about how TiDB works and behaves.
 - Before stopping the doublewrite operation, the application traffic could roll back to MySQL if TiDB encountered some issues, making the migration process relatively risk free.
-- It gave us an opportunity to refactor the database. Shopee users are distributed among 7 regions. Before the application traffic was migrated to TiDB, all risk control logs were stored in the same logical database. This time we stored the log data into 7 different logical databases (`rc_sg`, `rc_my`, `rc_ph`, …, `rc_tw`) according to user regions. This way, we could customize a specific data structure for each region.
+- It gave us an opportunity to refactor the database. Shopee users are distributed among 7 regions. Before the application traffic was migrated to TiDB, all risk control logs were stored in the same logical database. This time we stored the log data into 7 different logical databases (`rc_sg`, `rc_my`, `rc_ph`, ..., `rc_tw`) according to user regions. This way, we could customize a specific data structure for each region.
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('Shopping on Shopee, the TiDB Way', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>

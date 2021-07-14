@@ -146,7 +146,7 @@ FROM CUSTOMER WHERE 1000000 <
 FROM ORDER WHERE O_CUSTKEY = C_CUSTKEY)
 ```
 
-The two “CUSTKEY”s are the primary keys. When the statement is transformed to `Apply`, it is represented as:
+The two "CUSTKEY"s are the primary keys. When the statement is transformed to `Apply`, it is represented as:
 
 \\[
 \sigma\_{1000000<X}(CUSTOMER\ A^\times\ \mathcal{G}^1\_{X=SUM(O\\\_PRICE)}(\sigma\_{O\\\_CUSTKEY=C\\\_CUSTKEY}ORDERS))
@@ -190,13 +190,13 @@ The \\(\pi\_C\\) above `Join` is to convert NULL to the default value when the a
 + The aggregations in the \\(\mathcal{G}\\) function only uses the columns in `R`.
 
 It is very common to use aggregation functions together with subqueries. The general solution is to use the formal representation of `Apply`, and remove the correlation based on the rules, then apply the push-down rules of the aggregation function for further optimization.
-  
+
 ## References
 
-[1] C. Galindo-Legaria and M. Joshi. “Orthogonal optimization of subqueries and aggregation”. In: _Proc. of the ACM SIGMOD Conf. on Management of Data (2001)_, pp. 571–581.
+[1] C. Galindo-Legaria and M. Joshi. "Orthogonal optimization of subqueries and aggregation". In: _Proc. of the ACM SIGMOD Conf. on Management of Data (2001)_, pp. 571–581.
 
 [2] D. Maier, Q. Wang and L. Shapiro. _Algebraic unnesting of nested object queries_. Tech. rep. CSE-99-013. Oregon Graduate Institute, 1999.
 
 [3] C. A. Galindo-Legaria. _Parameterized queries and nesting equivalences_. Tech. rep. MSR-TR-2000-31. Microsoft, 2001.
 
-[4] W. Yan and P.-A. Larson. “Eager aggregation and lazy aggregation”. In: _Proc. Int. Conf. on Very Large Data Bases (VLDB)_ (1995), pp. 345–357.
+[4] W. Yan and P.-A. Larson. "Eager aggregation and lazy aggregation". In: _Proc. Int. Conf. on Very Large Data Bases (VLDB)_ (1995), pp. 345–357.

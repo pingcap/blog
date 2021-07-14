@@ -177,7 +177,7 @@ We're running **242 TiDB databases in 15 applications**. To name a few:
 
 <li>7.2 TB</li>
 
-<li>In the past 6 months, 7 flash memory cards have been damaged in these applications. But <strong>thanks to TiDB’s high availability, they didn’t affect our businesses</strong>.
+<li>In the past 6 months, 7 flash memory cards have been damaged in these applications. But <strong>thanks to TiDB's high availability, they didn't affect our businesses</strong>.
 </li>
 </ul>
    </td>
@@ -268,9 +268,9 @@ We're running **242 TiDB databases in 15 applications**. To name a few:
   <tr>
    <td>Financial company
    </td>
-   <td>The financial real-time data warehouse’s underlying data storage
+   <td>The financial real-time data warehouse's underlying data storage
    </td>
-   <td>The financial real-time data warehouse’s underlying data storage
+   <td>The financial real-time data warehouse's underlying data storage
    </td>
    <td>Thousands of tables
    </td>
