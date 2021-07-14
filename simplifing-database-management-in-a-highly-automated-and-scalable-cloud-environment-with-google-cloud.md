@@ -23,9 +23,6 @@ To handle their ever-growing amount of data, enterprise database software users 
 
 The company introduced its flagship product, TiDB (Titanium database), an open source, one-stop database platform supporting hybrid transactional and analytical processing, a technology that greatly reduces data processing and retrieval time while allowing real-time data analytics. Featuring rapid data processing, cost-effective scalability and high availability, TiDB has quickly become one of the leading open source database platforms in the world. It was [selected by InfoWorld](https://www.infoworld.com/article/3306454/the-best-open-source-software-for-data-storage-and-analytics.html) in 2018 as one of the best open source software for data storage and has been adopted by more than 1,500 companies across multiple industries and regions.
 
->"Google Cloud has an extensive network of infrastructure worldwide with a stable connection. This allows us to quickly deploy our service and expand users globally. Instead of spending months building data centers on our own, we can easily set up our service in a new region in less than one week."
--- Queeny Jin, Head of International Marketing and Community, PingCAP
-
 According to Queeny Jin, Head of International Marketing and Community at PingCAP, the team's continuous effort to improve the user experience is what led to the success of TiDB. This is why in late 2019, PingCAP decided to deploy TiDB in a cloud environment to develop TiDB Cloud, a fully managed database as a service (DBaaS) to further simplify database management for its customers.
 
 "By integrating our database service with a cloud platform, we can offer a database solution with all the advantages of cloud services like quick deployment and reliability," explains Jin. "TiDB Cloud lets users launch their database clusters with just a few clicks and spend less time and effort on maintenance work."
@@ -39,9 +36,6 @@ For PingCAP, one advantage of using Google Cloud is its ability to shorten the t
 As a result, PingCAP successfully reduced the time to market for TiDB Cloud to three months and launched the beta version in June 2020. Jin believes that without the Google Cloud tools, the whole development process could take up to one year.
 
 Currently, PingCAP runs the VM instances of TiDB Cloud on Compute Engine and harnesses [Container Registry](https://cloud.google.com/container-registry) to store Docker images of its database platform. [Cloud DNS](https://cloud.google.com/dns) is used to perform domain name resolution of PingCAP's external and internal systems, while [Cloud Storage](https://cloud.google.com/storage) stores the snapshot copies of its customers' database clusters for data recovery when needed. It also employs [Persistent Disk](https://cloud.google.com/persistent-disk) as storage of its customers' database.
-
->"Thanks to the highly automated and scalable environment supported by GKE, we're able to cut 25% of operational costs and have less than 10 engineers to manage all the development and operational work."
--- Queeny Jin, Head of International Marketing and Community, PingCAP
 
 ## Enhancing operational efficiency in a highly automated and scalable cloud environment
 
@@ -66,9 +60,6 @@ With Google Cloud, PingCAP delivers on its vision of making TiDB a trusted datab
 ## Easy collaboration across the company with Google Workspace
 
 Since its launch, PingCAP relies on [Google Workspace](https://workspace.google.com/) to coordinate and execute daily work, which allows its nearly 500 employees around the world to cooperate efficiently without building its own internal work system.
-
->"We have very high confidence in the technologies of Google Cloud, and its open ecosystem is aligned with our belief in open source platforms. As a result, we're convinced that Google Cloud can continue to help optimize our product along with the growth of our user community."
--- Queeny Jin, Head of International Marketing and Community, PingCAP
 
 ## Improving user experience with advanced analytics powered by AI and ML
 
