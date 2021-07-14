@@ -10,12 +10,12 @@ image: /images/blog/pingcap-simplifing-database-management-with-google-cloud.jpg
 
 ![Simplifying Database Management in a Highly Automated and Scalable Cloud Environment with Google Cloud](media/pingcap-simplifying-database-management-with-google-cloud.jpg)
 
-## Google Cloud results
-
-* Accelerates product launch process around the world with widely distributed cloud infrastructure and cross-region networks
-* Reduces time to market from one year to three months with flexible cloud tools
-* Cuts 25% of operational costs by timely adjusting resources used according to needs with GKE
-* Supports highly automated and scalable database as a service while ensuring data security and compliance with local regulations
+> **Google Cloud results**
+>
+>* Accelerates product launch process around the world with widely distributed cloud infrastructure and cross-region networks
+>* Reduces time to market from one year to three months with flexible cloud tools
+>* Cuts 25% of operational costs by timely adjusting resources used according to needs with GKE
+>* Supports highly automated and scalable database as a service while ensuring data security and compliance with local regulations
 
 Database software is an indispensable part of a company's daily operations. It is used not only for storing and compiling records, but also running websites and applications. As enterprises around the world increasingly go digital, the demand for database software continues to surge. From 2021 to 2023, the global database software market is [expected to reach an average annual growth of 12%](https://www.thebusinessresearchcompany.com/report/database-software-market).
 
