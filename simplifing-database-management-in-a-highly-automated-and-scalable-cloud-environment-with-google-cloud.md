@@ -1,7 +1,7 @@
 ---
 title: Simplifying Database Management in a Highly Automated and Scalable Cloud Environment with Google Cloud
-author: [Google Cloud]
-date: 2021-07-14
+date: 2021-07-15
+author: ['PingCAP']
 summary: To simplify the development of data-intensive applications of all sizes for global enterprises, PingCAP deploys its database service on Google Cloud, creating a fully managed database-as-a-service TiDB Cloud with high automation, scalability, ease of use, and security compliance.
 tags: ['TiDB Cloud', 'Cloud']
 categories: ['Product']
