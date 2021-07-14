@@ -88,6 +88,7 @@ This `start` function in the example above explains how the storage struct runs.
 Then functions like `async_get` and `async_batch_get` in the `storage` struct will send the corresponding commands to the channel, which can be obtained by the scheduler to execute asynchronously.
 
 The MVCC layer is called in [Scheduler](https://github.com/pingcap/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/txn/scheduler.rs#L763).
+
 The storage receives commands from clients and sends commands as messages to the scheduler. Then the scheduler will process the command or [call corresponding asynchronous function](https://github.com/pingcap/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/txn/scheduler.rs#L643). There are two types of operations - read and write. Read is implemented in [MvccReader](https://github.com/tikv/tikv/blob/1050931de5d9b47423f997d6fc456bd05bd234a7/src/storage/mvcc/reader.rs#L20), which is easy to understand so we will not elaborate on it. Let's focus on write, which is the core of MVCC implementation.
 
 ### MVCC
