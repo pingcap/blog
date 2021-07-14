@@ -71,4 +71,4 @@ To increase the work efficiency of its marketing department, PingCAP plans to em
 
 "We have very high confidence in the technologies of Google Cloud, and its open ecosystem is aligned with our belief in open source platforms. As a result, we're convinced that Google Cloud can continue to help optimize our product along with the growth of our user community," concludes Jin.
 
-_This post was originally published on the [Google cloud](https://cloud.google.com/customers/pingcap) website._
+_This post was originally published on the [Google Cloud](https://cloud.google.com/customers/pingcap) website._
