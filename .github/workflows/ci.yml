@@ -20,8 +20,7 @@ jobs:
         python3 check-file-encoding.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md')
     - name: "Check front matters"
       run:
-        wget https://raw.githubusercontent.com/ran-huang/pingcap-blog-checks/master/check-front-matters.py;
-        python3 check-front-matters.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md')
+        python3 ./.github/check-front-matters.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md')
     - name: Markdown lint
       uses: avto-dev/markdown-lint@v1
       with:
