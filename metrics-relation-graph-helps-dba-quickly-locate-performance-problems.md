@@ -32,19 +32,19 @@ The metrics relation graph presents database metrics as parent-child relationshi
 * The total duration of the item
 * The percentage the item duration takes up in the whole query duration
 
-In each parent box, the total duration = its own duration + its child box’s duration. Take the following box as an example:
+In each parent box, the total duration = its own duration + its child box's duration. Take the following box as an example:
 
 ![The metrics relation graph parent box](media/monitoring-metrics-relation-graph-parent-box.png)
 <div class="caption-center">A parent box</div>
 
-The `tidb_execute` item’s total duration is 19,306.46 s, accounting for 89.40% of the total query duration. Of this duration, the `tidb_execute` item itself only consumes 9,070.18 s, and its child items consume the rest.
+The `tidb_execute` item's total duration is 19,306.46 s, accounting for 89.40% of the total query duration. Of this duration, the `tidb_execute` item itself only consumes 9,070.18 s, and its child items consume the rest.
 
 If you hover the cursor over this box, you can see the detailed information about this monitoring item: its description, total count, average time, average P99 (99th percentile) duration, and so on.
 
 ![The metrics relation graph detailed information](media/monitoring-metrics-relation-graph-detailed-info.png)
 <div class="caption-center">The detailed information of a monitoring item</div>
 
-The size and color of each box is proportional to the percentage of the item’s duration in the total query duration. Therefore, the items that take up too much time clearly stand out in the diagram. You can easily focus on these items and follow the parent-child link to locate the root cause of the problem.
+The size and color of each box is proportional to the percentage of the item's duration in the total query duration. Therefore, the items that take up too much time clearly stand out in the diagram. You can easily focus on these items and follow the parent-child link to locate the root cause of the problem.
 
 ### Example 1 - investigating slow cluster response time
 
@@ -71,13 +71,13 @@ Assume that you need to load a large batch of data into your TiDB cluster, but t
 ![tidb_query_total_time example 2](media/monitoring-metrics-relation-graph-tidb_query_total_time-2.png)
 <div class="caption-center">tidb_query_total_time example 2</div>
 
-Note the shaded box near the bottom of the tree: ‘tikv_raftstore_propose_wait’. This box indicates that the “propose” process of TiKV’s Raftstore has a long wait duration. This usually means that Raftstore has hit a bottleneck. Next, you can check the metrics of Raftstore CPU and the latency of the append log and apply log. If Raftstore’s thread CPU utilization is low, then the root cause may be in the disk. For more troubleshooting information, you can refer to [TiKV Performance Map](https://asktug.com/_/tidb-performance-map/#/tikv) or [Troubleshoot High Disk I/O Usage in TiDB](https://docs.pingcap.com/tidb/stable/troubleshoot-high-disk-io). You may also check [whether there’s a hotspot](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues) in the cluster.
+Note the shaded box near the bottom of the tree: 'tikv_raftstore_propose_wait'. This box indicates that the "propose" process of TiKV's Raftstore has a long wait duration. This usually means that Raftstore has hit a bottleneck. Next, you can check the metrics of Raftstore CPU and the latency of the append log and apply log. If Raftstore's thread CPU utilization is low, then the root cause may be in the disk. For more troubleshooting information, you can refer to [TiKV Performance Map](https://asktug.com/_/tidb-performance-map/#/tikv) or [Troubleshoot High Disk I/O Usage in TiDB](https://docs.pingcap.com/tidb/stable/troubleshoot-high-disk-io). You may also check [whether there's a hotspot](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues) in the cluster.
 
 ## Try it out
 
 To generate a metrics relation graph, you need to deploy TiDB 4.0.7 (or later) and [Prometheus](https://prometheus.io/), an open-source monitoring system. We recommend you [deploy TiDB using TiUP](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup), which automatically deploys Prometheus along with the cluster.
 
-Once you’ve deployed TiDB, you can login to [TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-intro) to view the overall status of the cluster. In the **Cluster Diagnostics** page, configure the range start time and range duration, and click **Generate Metrics Relation**. Your metrics relation graph is ready!
+Once you've deployed TiDB, you can login to [TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-intro) to view the overall status of the cluster. In the **Cluster Diagnostics** page, configure the range start time and range duration, and click **Generate Metrics Relation**. Your metrics relation graph is ready!
 
 ![Generate a metrics relation graph](media/monitoring-metrics-relation-graph-generate.png)
 <div class="caption-center">Generate a metrics relation graph</div>
@@ -88,4 +88,4 @@ The metrics relation graph is aimed to help users quickly grasp the relationship
 
 In the future, we plan to integrate this feature with the [TiDB Performance Map](https://asktug.com/_/tidb-performance-map/#/) so that it can show the relationships between other associated monitoring items and even with their configurations. With this powerful feature, DBAs will be able to diagnose TiDB clusters with less effort and more efficiency.
 
-If you’re interested in the metics relation graph, feel free to visit [our repository](https://github.com/pingcap-incubator/tidb-dashboard) to contribute to the code or raise your question.
+If you're interested in the metics relation graph, feel free to visit [our repository](https://github.com/pingcap-incubator/tidb-dashboard) to contribute to the code or raise your question.

@@ -402,4 +402,4 @@ git clone https://github.com/pingcap/pd.git
 git clone https://github.com/tikv/tikv.git
 ```
 
-*This post was originally published on [Nick Cameron‘s blog](https://www.ncameron.org/blog/building-running-and-benchmarking-tikv-and-tidb/).*
+*This post was originally published on [Nick Cameron's blog](https://www.ncameron.org/blog/building-running-and-benchmarking-tikv-and-tidb/).*

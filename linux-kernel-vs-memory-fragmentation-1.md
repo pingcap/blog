@@ -125,7 +125,7 @@ Before I start, I want to recommend some good reads. The following articles show
   </tr>
 </table>
 
-Now, let‘s get started.
+Now, let's get started.
 
 ## Linux buddy memory allocator
 
@@ -225,4 +225,4 @@ As the memory fragmentation increases and it does not have enough contiguous phy
 
 In my next article, I'll introduce more methods that the kernel uses to regulate memory fragmentation.
 
-To be continued…
+To be continued...

@@ -2,7 +2,7 @@
 title: 'TiSpark: More Data Insights, Less ETL'
 author: ['Shawn Ma']
 date: 2018-07-10
-summary: The motivation behind building TiSpark was to enable real-time analytics on TiDB without the delay and challenges of ETL. Extract, transform, and load (ETL)--a process to extract data from operational databases, transform that data, then load it into a database designed to supporting analytics--has been one of the most complex, tedious, error-prone, and therefore disliked tasks for many data engineers. However, it was a necessary evil to make data useful, because there hasn’t been good solutions on the market to render ETL obsolete--until now.
+summary: The motivation behind building TiSpark was to enable real-time analytics on TiDB without the delay and challenges of ETL. Extract, transform, and load (ETL)--a process to extract data from operational databases, transform that data, then load it into a database designed to supporting analytics--has been one of the most complex, tedious, error-prone, and therefore disliked tasks for many data engineers. However, it was a necessary evil to make data useful, because there hasn't been good solutions on the market to render ETL obsolete--until now.
 tags: ['TiSpark', 'HTAP', 'Real-time analytics']
 categories: ['Product']
 ---
@@ -66,7 +66,7 @@ group by class;
 The above query contains two predicates, each of which matches an index. TiSpark will first analyze the predicates combination and "approximate" how many rows will be returned if a specific index is applied. The goal here is to find a way to access the table with minimum cost. The process of finding an access path will be explained later. For now, let's first look at how predicates are processed.
 
 ### Path 1: Primary Index
-  
+
 Assume we pick the `studentID` index, the primary index, to access the table. The process is as follows:
 
 1. Transform the predicates "studentId >= 8000 and studentId < 10100" into a close-open interval on studentID: [8000, 10100);
@@ -104,7 +104,7 @@ Another optimization we've implemented is aggregation pushdown. TiSpark will rew
 
 ## Why Use TiSpark?
 
-Because TiDB as a whole is a distributed NewSQL database, storing data sizes that are far larger than what can be stored in a single machine, it's natural to layer a distributed compute engine like Spark on top of it. Without TiSpark, you would need do things the old way: do a daily dump of all your data into a Hadoop/Hive cluster or another data warehouse before you can analyze it--a situation many of our customers like [Mobike](https://pingcap.com/case-studies/tidb-in-mobike) avoided by adopting TiDB with TiSpark. If you want to run queries on “fresh” data, not stale ones that are at least one day old, then TiSpark shines. Plus, you no longer need to manage and maintain any ETL pipelines, saving your team lots of time, resources, and headaches.
+Because TiDB as a whole is a distributed NewSQL database, storing data sizes that are far larger than what can be stored in a single machine, it's natural to layer a distributed compute engine like Spark on top of it. Without TiSpark, you would need do things the old way: do a daily dump of all your data into a Hadoop/Hive cluster or another data warehouse before you can analyze it--a situation many of our customers like [Mobike](https://pingcap.com/case-studies/tidb-in-mobike) avoided by adopting TiDB with TiSpark. If you want to run queries on "fresh" data, not stale ones that are at least one day old, then TiSpark shines. Plus, you no longer need to manage and maintain any ETL pipelines, saving your team lots of time, resources, and headaches.
 
 ## What's Next?
 

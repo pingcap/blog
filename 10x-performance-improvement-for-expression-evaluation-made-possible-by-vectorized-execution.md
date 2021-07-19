@@ -2,7 +2,7 @@
 title: 10x Performance Improvement for Expression Evaluation Made Possible by Vectorized Execution and the Community
 author: ['Yuanjia Zhang']
 date: 2019-11-29
-summary: We vectorized 360+ built-in functions along with the TiDB community. Vectorized execution has greatly improved the expression evaluation performance. Some functions even achieved 10x performance. Here is our vectorization story. 
+summary: We vectorized 360+ built-in functions along with the TiDB community. Vectorized execution has greatly improved the expression evaluation performance. Some functions even achieved 10x performance. Here is our vectorization story.
 tags: ['Query execution']
 categories: ['Engineering']
 image: /images/blog/vectorized-execution.png
@@ -24,7 +24,7 @@ Benefited by these optimizations, [TiDB 2.0](https://pingcap.com/blog/tidb-2-0-a
 
 Later, we released [TiDB 2.1](https://pingcap.com/blog/tidb-2.1-ga-Battle-tested-to-handle-an-unpredictable-world/) and [TiDB 3.0](https://pingcap.com/blog/tidb-3.0-announcement/), and our vectorized execution engine has become more stable. We're now developing TiDB 4.0, which includes vectorizing expressions to further improve TiDB's performance.
 
-In this post, I'll deep dive into why we need vectorized execution, how we implement it, how we managed to vectorize more than 360 functions along with community contributors, and our thoughts about the future.  
+In this post, I'll deep dive into why we need vectorized execution, how we implement it, how we managed to vectorize more than 360 functions along with community contributors, and our thoughts about the future.
 
 ## Why do we need vectorized execution?
 
@@ -137,7 +137,7 @@ The following table lists each `builtinArithmeticMultiplyRealSig` function task 
   </tr>
 </table>
 
-As the table reveals, every time this function performs a multiplication, only 8 out of 82 (9+30+28+8+7=82) instructions are doing the “real” multiplication. That's only about 10% of the total instructions. The other 90% are considered interpretation overhead. Once we vectorized this function, its performance was improved by nearly nine times. See [PR #12543](https://github.com/pingcap/tidb/pull/12543).
+As the table reveals, every time this function performs a multiplication, only 8 out of 82 (9+30+28+8+7=82) instructions are doing the "real" multiplication. That's only about 10% of the total instructions. The other 90% are considered interpretation overhead. Once we vectorized this function, its performance was improved by nearly nine times. See [PR #12543](https://github.com/pingcap/tidb/pull/12543).
 
 ### Batch processing reduces interpretation overhead
 
@@ -169,13 +169,13 @@ To explain the reason, let me briefly introduce TiDB's `Chunk` structure, which 
 
 At the end of 2017, we were working on vector optimization and introduced the concept of a `Chunk`. A `Chunk` is composed of multiple columns.
 
-There are two types of columns:  
+There are two types of columns:
 
 * Fixed-length columns, in which the data has a specified length that cannot be changed.
 * Variable-length columns, in which the data length can change.
 
 ![TiDB's Chunk structure](media/tidb-chunk-structure.png)
-<div class="caption-center"> TiDB's Chunk structure </div>  
+<div class="caption-center"> TiDB's Chunk structure </div>
 
 No matter whether the data length is fixed or variable, data in columns are contiguously stored in memory in the `Column.data` field (which is an array). If the data length varies, `Column.offset` records the data offset. If the data is with fixed length, no offset is recorded.
 
@@ -234,7 +234,7 @@ For this function:
 
 1. The first two lines apply for `ColumnBuffer` in the cache pool to cache the data of the right child (second parameter). The data of the left child (first parameter) is stored in memory which is pointed to the `result` pointer.
 
-2. `Columns.MergeNulls(cols…)` merges `NULL` flags of multiple columns. This method is like `result.nulls[i] = result.nulls[i] || buf.nulls[i]`. `Column` internally uses a bitmap to maintain `NULL` flags. When this function is called, a column does a bitwise operation to merge `NULL`s.
+2. `Columns.MergeNulls(cols...)` merges `NULL` flags of multiple columns. This method is like `result.nulls[i] = result.nulls[i] || buf.nulls[i]`. `Column` internally uses a bitmap to maintain `NULL` flags. When this function is called, a column does a bitwise operation to merge `NULL`s.
 
 3. A loop directly multiplies the data of the left and right child nodes.
 
@@ -261,7 +261,7 @@ The results above show vectorized execution is four times faster than row-based 
 The following figure compares the performance of various less than (`LT`) functions before and after vectorization. The horizontal axis indicates the `LT` functions for testing, and the vertical axis represents the execution duration (in nanoseconds) to complete an operation.
 
 ![Before-and-after performance comparison for various LT functions](media/performance-comparison-for-various-lt-functions.png)
-<div class="caption-center"> Before-and-after performance comparison for various LT functions </div>  
+<div class="caption-center"> Before-and-after performance comparison for various LT functions </div>
 
 The following figure compares the performance of arithmetic functions before and after vectorization:
 

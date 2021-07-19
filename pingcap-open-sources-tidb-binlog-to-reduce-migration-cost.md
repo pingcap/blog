@@ -1,7 +1,7 @@
 ---
 title: 'PingCAP Open-Sources TiDB Binlog to Reduce Migration Cost'
 date: 2019-05-06
-summary: Our team at PingCAP is excited to announce that we are open-sourcing our own binlog implementation, TiDB Binlog. TiDB Binlog is a tool we’ve been developing in-house (until now) to collect binary log data from TiDB server and provide real-time data backup and replication.
+summary: Our team at PingCAP is excited to announce that we are open-sourcing our own binlog implementation, TiDB Binlog. TiDB Binlog is a tool we've been developing in-house (until now) to collect binary log data from TiDB server and provide real-time data backup and replication.
 tags: ['Ecosystem tools']
 categories: ['Product']
 press_release: true

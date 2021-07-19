@@ -197,7 +197,7 @@ create table t (
    c2 varchar(20),
    c3 double
 )
-select * from t where c1 + CONCAT( c2, c3 < “1.1” )
+select * from t where c1 + CONCAT( c2, c3 < "1.1" )
 ```
 
 About the `where` condition in the `select` statement shown above:

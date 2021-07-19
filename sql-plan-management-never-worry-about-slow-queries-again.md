@@ -211,7 +211,7 @@ If the statistics are not updated in time to reflect these sudden data changes, 
 
 ### With SQL Plan Management
 
-As mentioned above, SPM lets you use a new SQL syntax `CREATE BINDING FOR …(query) USING …(query_with_hint)` to bind an execution plan to a type of queries. You can use commands to use a different execution plan in real time, and you don't need to modify the application code. This way, you don't need to relaunch the application.
+As mentioned above, SPM lets you use a new SQL syntax `CREATE BINDING FOR ...(query) USING ...(query_with_hint)` to bind an execution plan to a type of queries. You can use commands to use a different execution plan in real time, and you don't need to modify the application code. This way, you don't need to relaunch the application.
 
 In the case above, DBAs only need to execute the following command in the database:
 

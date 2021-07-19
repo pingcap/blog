@@ -21,7 +21,7 @@ image: /images/blog/bestpay-tidb-case-study-banner.jpg
 
 [China Telecom Bestpay](https://www.crunchbase.com/organization/orange-finance) is a mobile payment and Internet finance subsidiary of [China Telecom Corp](https://www.chinatelecomglobal.com/). Bestpay supports more than 8 million offline merchant stores and 170 e-business platforms in China, with the commitment to provide a "safe, convenient, and trendy" payment solution. In 2019, Bestpay had 50 million monthly active users, 230 million transactions per month, and 1.75 trillion transactions per year.
 
-I am a senior architect at Bestpay. My colleagues and I must constantly improve the efficiency of our software to keep pace with our company's rapid growth and to respond to fierce market competition. One area in which we have made great strides is our database. After careful investigation, we migrated to [TiDB](https://docs.pingcap.com/tidb/stable), a **MySQL-compatible**, **open-source**, **distributed SQL database**, which boosted the overall performance of Bestpay's application system by 3–5 times.
+I am a senior architect at Bestpay. My colleagues and I must constantly improve the efficiency of our software to keep pace with our company's rapid growth and to respond to fierce market competition. One area in which we have made great strides is our database. After careful investigation, we migrated to [TiDB](https://docs.pingcap.com/tidb/stable), a **MySQL-compatible**, **open-source**, **distributed SQL database**, which boosted the overall performance of Bestpay's application system by 3-5 times.
 
 In this blog post, I will introduce the outcomes we achieved with TiDB, the difficulties we overcame, how we migrated to TiDB step-by-step, and why we put our faith in TiDB.
 
@@ -39,7 +39,7 @@ Currently, Bestpay's application layer and core platform layer both use TiDB to 
 
     **The performance of the reconciliation platform has increased by 2 times**. For example:
 
-    * To reconcile UnionPay cardless payments, the original MySQL solution took 3–5 minutes. Now, TiDB only takes 1–2 minutes.
+    * To reconcile UnionPay cardless payments, the original MySQL solution took 3-5 minutes. Now, TiDB only takes 1-2 minutes.
     * To reconcile WeChat Pay payments, the original MySQL solution took 3 minutes. Now, TiDB only takes about 1 minute.
 
 * Personal billing

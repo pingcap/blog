@@ -106,7 +106,7 @@ Before we begin, let's forget about Raft and try to picture that all the data on
 
 As I mentioned earlier, TiKV is seen as a huge but ordered Key-Value Map. To implement the horizontal scalability of storage, we need to distribute data among multiple machines.
 
-For a Key-Value system, there are two typical solutions to distribute data among multiple machines. One is to create Hash and select the corresponding storage node according to the Hash value; the other is to use Range and store a segment of serial Key in a storage node. TiKV chose the second solution and divided the whole Key-Value space into many segments. Each segment consists of a series of adjacent Key and we call such segment “Region”. There is a size limit for each Region to store data (the default value is 64MB and the size can be configured). Each Region can be described by a left-close-right-open interval, which is from StartKey to EndKey.
+For a Key-Value system, there are two typical solutions to distribute data among multiple machines. One is to create Hash and select the corresponding storage node according to the Hash value; the other is to use Range and store a segment of serial Key in a storage node. TiKV chose the second solution and divided the whole Key-Value space into many segments. Each segment consists of a series of adjacent Key and we call such segment "Region". There is a size limit for each Region to store data (the default value is 64MB and the size can be configured). Each Region can be described by a left-close-right-open interval, which is from StartKey to EndKey.
 
 ![Region in TiKV](media/region.png)
 
@@ -121,7 +121,7 @@ These two tasks are very important and I'll go through them one by one.
 
 As for the first task, data is divided into many Regions according to the Key and all data in each Region is stored in one node. One component in our system is responsible to evenly distribute Regions to all nodes of the cluster. This, on the one hand, implements the horizontal scalability of the storage capacity (when a new node is added, the system will automatically schedule Regions on other nodes); on the other hand, load balancing is achieved (the situation that one node has many data but others have few will not happen). At the same time, to guarantee that the upper client can access to the data needed, another component will record the distribution of Regions among the nodes. In other words, you can query the exact Region of a Key and the node of that Region placed through any Key. I'll share more information about these two components later.
 
-Now let's move to the second task. TiKV replicates data in Regions, which means data in one Region will have multiple replicas with the name “Replica”. Raft is used to achieve the data consistency among the Replicas. Multiple Replicas of one Region are saved in different nodes, which constitutes a Raft Group. One Replica serves as the Leader of the Group and the others as the Follower. All reads and writes are conducted through the Leader and then Leader replicates to Follower.
+Now let's move to the second task. TiKV replicates data in Regions, which means data in one Region will have multiple replicas with the name "Replica". Raft is used to achieve the data consistency among the Replicas. Multiple Replicas of one Region are saved in different nodes, which constitutes a Raft Group. One Replica serves as the Leader of the Group and the others as the Follower. All reads and writes are conducted through the Leader and then Leader replicates to Follower.
 
 The following diagram shows the whole picture about Region and Raft group.
 
@@ -138,7 +138,7 @@ TiKV implements MVCC by appending Version to Key. Without MVCC, TiKV's data layo
 ```
 ~~  Key1 -> Value
 ~~  Key2 -> Value
-~~  ……
+~~  ......
 ~~  KeyN -> Value
 
 ```
@@ -149,15 +149,15 @@ With MVCC, the Key array in TiKV looks like this:
 ~~  Key1-Version3 -> Value
 ~~  Key1-Version2 -> Value
 ~~  Key1-Version1 -> Value
-~~  ……
+~~  ......
 ~~  Key2-Version4 -> Value
 ~~  Key2-Version3 -> Value
 ~~  Key2-Version2 -> Value
 ~~  Key2-Version1 -> Value
-~~  ……
+~~  ......
 ~~  KeyN-Version2 -> Value
 ~~  KeyN-Version1 -> Value
-~~  ……
+~~  ......
 ```
 
 It is noted that as for multiple versions of a Key, we put the bigger number first (you can review the Key-Value section in which I mentioned that Key is an ordered array). In this way, when a user gets the Value by Key + &lt;Version&gt;, he can construct the Key of MVCC with Key and Version, which is Key-&lt;Version&gt;. Then he can directly Seek(Key-Version) and locate the first position that is greater than or equal to this Key-Version. For more detail, see [MVCC in TiKV](https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/).

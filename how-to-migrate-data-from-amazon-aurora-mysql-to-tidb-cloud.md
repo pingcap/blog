@@ -16,7 +16,7 @@ image: /images/blog/aurora-alternative-tidb-cloud.jpg
 
 [TiDB](https://docs.pingcap.com/tidb/stable/overview) is an open-source, distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/HTAP) (HTAP) workloads. TiDB Cloud is a fully-managed TiDB service delivered by [PingCAP](https://pingcap.com/) and is the easiest, most economical, and most resilient way to unlock the full power of TiDB in the cloud.
 
-You can smoothly migrate data to TiDB from any MySQL-compatible database. In this article, we’ll show you how to migrate your data from Amazon Aurora MySQL to [TiDB Cloud](https://pingcap.com/products/tidbcloud) using the open-source [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) and [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) tools. Dumpling _exports_ data from any MySQL-compatible database, and TiDB Lightning _imports_ it into TiDB.
+You can smoothly migrate data to TiDB from any MySQL-compatible database. In this article, we'll show you how to migrate your data from Amazon Aurora MySQL to [TiDB Cloud](https://pingcap.com/products/tidbcloud) using the open-source [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) and [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) tools. Dumpling _exports_ data from any MySQL-compatible database, and TiDB Lightning _imports_ it into TiDB.
 
 To migrate data, do the following:
 
@@ -50,7 +50,7 @@ TiDB supports the following collations:
 * `utf8mb4_general_bin`
 * `utf8_general_bin`
 
-You can learn more about [Character Sets and Collations](https://docs.pingcap.com/tidb/stable/character-set-and-collation) in the TiDB documentation. To verify which character set you’re using, follow the steps in [Check the database character set settings](#check-the-database-collation-settings).
+You can learn more about [Character Sets and Collations](https://docs.pingcap.com/tidb/stable/character-set-and-collation) in the TiDB documentation. To verify which character set you're using, follow the steps in [Check the database character set settings](#check-the-database-collation-settings).
 
 ### Stop writing data while exporting data to the Aurora database
 
@@ -82,7 +82,7 @@ From the same VPC as your Amazon Aurora instance, launch the EC2 instance. You w
 
 ### Launch the EC2 instance
 
-In this section, we’ll prepare an EC2 instance to run the migration tools. You need to pay attention to two issues:
+In this section, we'll prepare an EC2 instance to run the migration tools. You need to pay attention to two issues:
 
 * The instance should be in the same VPC as your Amazon Aurora service. This helps you smoothly connect to Amazon Aurora.
 * Ensure that the free disk space is larger than the size of your data.
@@ -166,7 +166,7 @@ The result shows an `Empty set`, which means the database is suitable to migrate
 Empty set (0.04 sec)
 ```
 
-If TiDB doesn’t support the collations that you’re using, convert your collations to supported types. For more information on collation settings, see [Character Sets and Collations](https://docs.pingcap.com/tidb/stable/character-set-and-collation).
+If TiDB doesn't support the collations that you're using, convert your collations to supported types. For more information on collation settings, see [Character Sets and Collations](https://docs.pingcap.com/tidb/stable/character-set-and-collation).
 
 ### Set up VPC peering for network access to TiDB Cloud
 
@@ -226,7 +226,7 @@ The TiDB Toolkit package includes Dumpling and TiDB Lighting.
 
 To import data into TiDB Cloud, replace the content included in angle brackets based on your TiDB Cloud cluster settings, and execute the following commands. If the size of your data is too large, you could use `tmux` or `nohup` to keep the TiDB Lightning process up.
 
-For security purposes, the TiKV backend isn’t exposed to the customer. For now, we use TiDB Lightning’s TiDB-backend mode to import data.
+For security purposes, the TiKV backend isn't exposed to the customer. For now, we use TiDB Lightning's TiDB-backend mode to import data.
 
 {{< copyable "shell-regular" >}}
 
@@ -254,6 +254,6 @@ When the `tidb-lightning` process completes, The TiDB cluster on TiDB Cloud will
 
 ## Conclusion
 
-In this article, we showed how to do a full-data migration from Amazon Aurora to TiDB Cloud using Dumpling and TiDB Lightning. After the migration, the data and structure is the same on both TiDB Cloud and in the Aurora source cluster. Full-data migration is especially useful if you want to verify TiDB Cloud’s features using a copy of your Amazon Aurora data. We sincerely hope you found this article helpful.
+In this article, we showed how to do a full-data migration from Amazon Aurora to TiDB Cloud using Dumpling and TiDB Lightning. After the migration, the data and structure is the same on both TiDB Cloud and in the Aurora source cluster. Full-data migration is especially useful if you want to verify TiDB Cloud's features using a copy of your Amazon Aurora data. We sincerely hope you found this article helpful.
 
-And stay tuned. In a future article, we’ll be discussing _incremental replication_.
+And stay tuned. In a future article, we'll be discussing _incremental replication_.
