@@ -3,7 +3,7 @@ title: 'Pessimistic Locking: Better MySQL Compatibility, Fewer Rollbacks Under H
 author: [Transaction team]
 date: 2020-05-22
 summary: With improvements in stability and functionality in TiDB 4.0, we finally remove the experimental label for pessimistic locking, making it a generally available feature. See how pessimistic locking behaves in TiDB.
-tags: ['Transaction', 'Distributed SQL database', 'MySQL compatibility']
+tags: ['Transaction']
 categories: ['Product']
 image: /images/blog/pessimistic-locking.jpg
 ---

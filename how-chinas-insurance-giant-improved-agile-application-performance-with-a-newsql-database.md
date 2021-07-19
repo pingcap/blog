@@ -3,7 +3,7 @@ title: "How China's Insurance Giant Improved Agile Application Performance with 
 author: ['Ping An Jin Guanjia Application Development Team']
 date: 2020-12-08
 summary: Ping An Life Insurance shares a case where TiDB helped them support 100 billion RMB payment volume in a single day, the pain points before they used TiDB, how they use TiDB, and why they chose TiDB.
-tags: ['MySQL compatibility', 'NewSQL', 'Data replication', 'Disaster recovery']
+tags: ['NewSQL', 'Data replication', 'Disaster recovery']
 url: /success-stories/how-chinas-insurance-giant-improved-agile-application-performance-with-a-newsql-database/
 customer: Ping An Life Insurance
 customerCategory: Financial Services

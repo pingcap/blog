@@ -3,7 +3,7 @@ title: Celebrate TiKV Graduation within CNCF
 author: ['PingCAP']
 date: 2020-09-02
 summary: The Cloud Native Computing Foundation (CNCF) today just announced that TiKV has become the twelfth project to graduate, joining other graduated projects such as Kubernetes, Jaeger, Harbor, etc.
-tags: ['TiKV', 'Announcement', 'CNCF']
+tags: ['TiKV', 'Announcement', 'Community news']
 categories: ['Community']
 image: /images/blog/cloud-native-tikv-cncf-graduation.jpg
 press_release: true

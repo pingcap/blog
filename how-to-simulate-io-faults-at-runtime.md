@@ -3,12 +3,12 @@ title: How to Simulate I/O Faults at Runtime
 author: [Ke'ao Yang]
 date: 2021-01-08
 summary: This post dives deep into how we implement the IOChaos experiment without using a sidecar.
-tags: ['Chaos Mesh', 'Chaos Engineering', 'Fault injection']
+tags: ['Chaos Engineering']
 categories: ['Engineering']
 image: /images/blog/how-to-simulate-io-faults-at-runtime.jpg
 ---
 
-**Author:** Ke'ao Yang (Software Engineer at PingCAP) 
+**Author:** Ke'ao Yang (Software Engineer at PingCAP)
 
 **Transcreator:** [Tom Xiong](https://github.com/TomShawn); **Editor:** Tom Dewan
 
@@ -36,7 +36,7 @@ But ChaosFS has several problems:
 Before Chaos Mesh 1.0, we used the [mutating admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) to implement IOChaos. This technique addressed the three problems lists above and allowed us to:
 
 + Run scripts in the target container. This action changed the target directory of the ChaosFS's backend filesystem (for example, from `/mnt/a` to `/mnt/a_bak`) so that we could mount ChaosFS to the target path (`/mnt/a`).
-Modify the command that starts the Pod. For example, we could modify the original command `/app` to `/waitfs.sh /app`.
++ Modify the command that starts the Pod. For example, we could modify the original command `/app` to `/waitfs.sh /app`.
 + The `waitfs.sh` script kept checking whether the filesystem was successfully mounted. If it was mounted, `/app` was started.
 + Add a new container in the Pod to run ChaosFS. This container needed to share a volume with the target container (for example, `/mnt`), and then we mounted this volume to the target directory (for example, `/mnt/a`). We also properly enabled [mount propagation](https://kubernetes.io/docs/concepts/storage/volumes/#mount-propagation) for this volume's mount to penetrate the share to host and then penetrate slave to the target.
 

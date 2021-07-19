@@ -4,7 +4,7 @@ author: ['Chunhui Liu', 'Chao Hong']
 date: 2020-03-11
 summary: With so many databases on the market, choosing the right fit for your app is not an easy task. As a leading e-commerce platform in Southeast Asia and Taiwan, Shopee has an effective strategy for database selection. Learn from their experience.
 image: /images/blog/choosing-right-database-for-your-applications.png
-tags: ['Database selection', 'MySQL', 'Sharding']
+tags: ['Database selection', 'MySQL', 'No sharding']
 url: /success-stories/choosing-right-database-for-your-applications/
 customer: Shopee
 customerCategory: Internet

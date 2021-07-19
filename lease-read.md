@@ -3,7 +3,7 @@ title: How TiKV Uses "Lease Read" to Guarantee High Performances, Strong Consist
 author: ['Siddon Tang']
 date: 2018-11-14
 summary: This post discusses Raft Log Read, `ReadIndex` Read, and Lease Read, and why TiKV adopts the Lease Read approach.
-tags: ['TiKV', 'Consistency', 'Raft']
+tags: ['TiKV', 'Raft']
 categories: ['Engineering']
 ---
 

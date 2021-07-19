@@ -4,7 +4,7 @@ author: ['Lilian Lee']
 date: 2020-08-13
 summary: Along with the rapid releases of TiDB products and projects, we also constantly update and improve our TiDB documentation. This post covers recent big changes, new content, and improvements in TiDB documentation.
 image: /images/blog/distributed-sql-database-documentation.jpg
-tags: ['Documentation']
+tags: ['Announcement']
 categories: ['Product']
 ---
 

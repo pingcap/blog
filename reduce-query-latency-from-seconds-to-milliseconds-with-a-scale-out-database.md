@@ -4,7 +4,7 @@ author: ['China Zheshang Bank']
 date: 2021-06-17
 summary: As China Zheshang Bank's data size boomed, their databases couldn't meet their requirements for data storage and analytics. They switched to TiDB to scale out their databases and perform real-time analytics.
 image: /images/blog/open-source-sql-database-scale-out-mysql-bank.jpg
-tags: ['Scalability', 'Transaction', 'High availability', 'HTAP', 'Real-time analytics']
+tags: ['Scalability', 'ACID transaction', 'High availability', 'HTAP', 'Real-time analytics']
 customer: China Zheshang Bank
 customerCategory: Financial Services
 logo: /images/blog/customers/china-zheshang-bank-logo.png
@@ -20,7 +20,7 @@ logo: /images/blog/customers/china-zheshang-bank-logo.png
 
 [China Zheshang Bank](https://en.wikipedia.org/wiki/China_Zheshang_Bank) is a national joint-stock commercial bank based in China. We aim to provide customers with open, efficient, flexible, and shared comprehensive financial services. By the end of June 2020, we had established 260 branches throughout the country. In terms of total assets, we ranked 97th on the "Top 1000 World Banks 2020" list by the British magazine [The Banker](https://en.wikipedia.org/wiki/The_Banker).
 
-As our businesses grew, our data size boomed. Our databases couldn't meet our requirements for data storage and analytics. After comparing multiple distributed databases, we adopted [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, Hybrid Transactional/Analytical Processing (HTAP) database. Thanks to TiDB, we can easily scale out our databases and perform real-time analytics. In our telecom fraud risk inquiry system, **our query latency is reduced from tens of seconds to tens of _milliseconds_**. 
+As our businesses grew, our data size boomed. Our databases couldn't meet our requirements for data storage and analytics. After comparing multiple distributed databases, we adopted [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, Hybrid Transactional/Analytical Processing (HTAP) database. Thanks to TiDB, we can easily scale out our databases and perform real-time analytics. In our telecom fraud risk inquiry system, **our query latency is reduced from tens of seconds to tens of _milliseconds_**.
 
 In this post, we'll share our pain points, why we chose TiDB, how we use it now, and our plans for it in the future.
 
@@ -58,7 +58,7 @@ Currently, we have deployed TiDB in two DCs in the local city and use five data 
 
 The telecom fraud risk inquiry system saves nationwide telecom anti-fraud data, including transaction accounts and transaction amounts. The system supports querying and monitoring suspicious transactions. It analyzes the characteristics of the transaction amount, number of transactions, type, time, frequency, and recipient and payer. If it finds an abnormal transaction, the transaction will be suspended or it will be immediately reported to the public security authorities.
 
-The telecom anti-fraud system has exceeded 2 billion rows of data in a single table, and the data size increases by millions of rows of data every day. **Our former OLAP database couldn't meet our expectations for data storage and application query performance.** 
+The telecom anti-fraud system has exceeded 2 billion rows of data in a single table, and the data size increases by millions of rows of data every day. **Our former OLAP database couldn't meet our expectations for data storage and application query performance.**
 
 **But TiDB can elastically scale.** Simply by adding nodes, we can improve the system performance and throughput. Besides, TiDB supports storing and querying massive structural data. Therefore, **our SQL queries' processing time is reduced from tens of seconds to tens of milliseconds**. Thanks to [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview/), a data import tool, we can quickly import millions of data records in a single issued data file to meet the application operational window requirements.
 
@@ -66,7 +66,7 @@ The telecom anti-fraud system has exceeded 2 billion rows of data in a single ta
 
 Based on the foreign exchange supervision requirements, the foreign exchange transaction management system needs to collect, import, store, analyze, and mine foreign exchange transaction data. Related data requires long-term storage. We expect that, in the next few years, the data scale will reach one billion rows. Our previous database Oracle needed sharding. This increased our operations, maintenance, and development costs.
 
-**We switched from Oracle to TiDB and found**: 
+**We switched from Oracle to TiDB and found**:
 
 * TiDB's distributed architecture meets our needs for data scalability.
 * TiDB's elastic scalability helps achieve data auto-rebalancing. The scaling process is transparent to application operations and maintenance staff.

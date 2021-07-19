@@ -3,7 +3,7 @@ title: How We Compiled a Golang Database in the Browser Using WebAssembly
 author: ['Joshua Zhou']
 date: 2019-11-16
 summary: We compiled a Golang database (TiDB) into an in-browser database using WebAssembly (Wasm). This post introduces why and how we built an in-browser database.
-tags: ['Go', 'WebAssembly', 'Hackathon']
+tags: ['Go', 'Hackathon']
 categories: ['Engineering']
 image: /images/blog/how-we-compiled-a-golang-database-in-the-browser-using-webassembly.png
 ---
@@ -289,7 +289,7 @@ Imagine if a user wanted to test the compatibility between TiDB and MySQL. It wo
 
 However, in TiDB we have features such as `load stats` and `load data` to read and load content from files into the databases, see [for more information](https://pingcap.com/docs/v3.0/reference/sql/statements/load-data/). But as we mentioned earlier, this was not possible for a browser.
 
-To resolve this issue, we did the following:  
+To resolve this issue, we did the following:
 
 1. Opened the browser's `upload` window so users could choose a file and upload it to TiDB:
 

@@ -3,7 +3,7 @@ title: Metrics Relation Graph Helps DBAs Quickly Locate Performance Problems in 
 author: ['Shuang Chen']
 date: 2020-10-29
 summary: 'TiDB v4.0.7 introduced a new feature: the metrics relation graph. It helps users clearly see the relationship between different performance metrics in a database cluster and thus quickly locate the root causes of performance problems.'
-tags: ['Troubleshooting', 'Monitoring']
+tags: ['Troubleshooting']
 categories: ['Product']
 image: /images/blog/monitoring-metrics-relation-graph.png
 ---

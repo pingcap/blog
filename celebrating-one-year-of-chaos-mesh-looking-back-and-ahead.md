@@ -3,7 +3,7 @@ title: 'Celebrating One Year of Chaos Mesh: Looking Back and Ahead'
 author: ['Cwen Yin', 'Calvin Weng']
 date: 2021-02-05
 summary: Chaos Mesh started out as a mere fault injection tool and is now heading towards the goal of building a Chaos Engineering ecology. Meanwhile, the Chaos Mesh community was also built from scratch and has helped Chaos Mesh join CNCF as a Sandbox project.
-tags: ['Chaos Mesh', 'Chaos Engineering']
+tags: ['Chaos Engineering', 'Chaos Engineering']
 categories: ['Community']
 image: /images/blog/celebrating-one-year-of-chaos-mesh.jpg
 ---

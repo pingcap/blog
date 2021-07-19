@@ -3,7 +3,7 @@ title: Run Your First Chaos Experiment in 10 Minutes
 author: ['Cwen Yin']
 date: 2020-03-18
 summary: In this 10-minute tutorial, we will help you to quickly get started with Chaos Engineering and run your first chaos experiment with Chaos Mesh.
-tags: ['Chaos Mesh', 'How to']
+tags: ['Chaos Engineering', 'Tutorial']
 categories: ['Product']
 image: /images/blog/run-first-chaos-experiment-in-ten-minutes.jpg
 ---

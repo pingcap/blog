@@ -3,7 +3,7 @@ title: How TSQ Becomes a Performance Bottleneck for TiKV in AWS ARM Environment
 author: ['Wenbo Zhang']
 date: 2019-08-26
 summary: Explore into Linux kernel to find out how TSQ becomes a performance bottleneck for TiKV in an AWS ARM environment.
-tags: ['ARM', 'TiKV', 'Linux']
+tags: ['TiKV', 'Linux']
 categories: ['Engineering']
 ---
 

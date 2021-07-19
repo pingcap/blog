@@ -4,7 +4,7 @@ author: ['Shaun Chong', 'Mengnan Gong']
 date: 2021-03-18
 summary: Ninja Van is a leading logistics company in Southeast Asia. They chose TiDB over Vitess and CockroachDB to scale out their databases on Kubernetes.
 image: /images/blog/mysql-alternative-database-on-k8s-ninja-van.jpg
-tags: ['NewSQL', 'Kubernetes', 'Scalability', 'TiDB Operator']
+tags: ['NewSQL', 'Kubernetes', 'Scalability']
 customer: Ninja Van
 customerCategory: Internet
 logo: /images/blog/customers/ninja-van-logo.png
@@ -24,7 +24,7 @@ aliases: ['/blog/choose-a-mysql-alternative-over-vitess-and-crdb-to-scale-out-ou
 
 [Ninja Van](https://www.crunchbase.com/organization/ninja-van-2) is Southeast Asia's fastest growing last-mile logistics company. We are now in six countries in Southeast Asia. Our customers include Amazon, Shopee, Lazada, Lineman, GradExpress, Zilingo, Tokopedia, and Sendo.
 
-We deliver upwards of 1.5 million parcels a day. As our data size rapidly grew, our databases faced great pressure, and we had significant issues in ProxySQL, sharding, and Galera. **After we compared Vitess, CockroachDB (CRDB), and [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, MySQL-compatible, distributed SQL database, we found that TiDB is an optimal solution. Now, we've achieved database scalability with TiDB on Kubernetes (K8s).** 
+We deliver upwards of 1.5 million parcels a day. As our data size rapidly grew, our databases faced great pressure, and we had significant issues in ProxySQL, sharding, and Galera. **After we compared Vitess, CockroachDB (CRDB), and [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, MySQL-compatible, distributed SQL database, we found that TiDB is an optimal solution. Now, we've achieved database scalability with TiDB on Kubernetes (K8s).**
 
 This post discusses our applications' pain points, why we chose TiDB over Vitess and CockroachDB, how we're using TiDB on K8s, and our future plans with TiDB.
 
@@ -46,7 +46,7 @@ We ran MySQL with a Galera plugin, which formed a high availability (HA) multi-p
 In this diagram:
 
 * The microservice is on the left.
-* The Galera cluster is on the right. 
+* The Galera cluster is on the right.
 * They are connected by ProxySQL, an open-source project that is an SQL-aware layer. ProxySQL lets you define query rules, and you can also use it to maintain high availability.
 
 **The cluster diagram indicates that one node is a "virtual primary database."** When you have replication, and if replications are asynchronous, you sometimes have delays going to the other nodes. If a task requires strict consistency—like deductions from an account—the writes will go to the virtual primary. If you want to have a consistent read, you should also read from the virtual primary, because you risk getting stale data if you read it from the other nodes.
@@ -60,19 +60,19 @@ We can use ProxySQL to achieve consistent reads, but it's not very write scalabl
 One of the ProxySQL use cases is that you can perform sharding. However, sharding has drawbacks:
 
 * Anything more granular than schema-based sharding requires changes to the application.
-* Once you use sharding, it's very difficult to go back. After your data is distributed across nodes, you can no longer perform `JOIN` operations. You need to shift so-called "cross-shard joins" to the application layer. 
+* Once you use sharding, it's very difficult to go back. After your data is distributed across nodes, you can no longer perform `JOIN` operations. You need to shift so-called "cross-shard joins" to the application layer.
 * You must add read/write split rules to each shard.
 
 Based on these reasons, we've refrained from doing application-level sharding.
 
-#### Galera's disadvantages 
+#### Galera's disadvantages
 
 Galera has these issues:
 
-* **It's very time-consuming to manage a large number of clusters**—even when we automate a lot of tasks. To be more efficient, we decided to group multiple schemas into Galera clusters so we would have fewer clusters. 
+* **It's very time-consuming to manage a large number of clusters**—even when we automate a lot of tasks. To be more efficient, we decided to group multiple schemas into Galera clusters so we would have fewer clusters.
 * Multiple schemas per cluster don't work very well because **Galera isn't write scalable**.
-* **Intra-cluster communication** due to the replication uses precious IOPS. 
-* When writes are blocked to allow the cluster to catch up, it could result in **flow control issues**. 
+* **Intra-cluster communication** due to the replication uses precious IOPS.
+* When writes are blocked to allow the cluster to catch up, it could result in **flow control issues**.
 
 Another challenge was that our OLTP volume and write volume were growing rapidly, and we also needed to add more schemas. We needed a new, easier-to-use database. But what kind?
 
@@ -80,12 +80,12 @@ Another challenge was that our OLTP volume and write volume were growing rapidly
 
 Our major requirements were:
 
-* **The database should be as MySQL compatible as possible.** We want to minimize the changes to our core. 
+* **The database should be as MySQL compatible as possible.** We want to minimize the changes to our core.
 * **Horizontal scalability.** We should be able to easily add or remove nodes as our data needs change.
 * **High availability.** We want a 24/7, highly available database solution.
 * **Ease of operations.** For example, scaling up the nodes should be as easy as possible. We want to be able to do non-locking DDLs right out of the box.
 * **Change data capture (CDC).** The database must support CDC because CDC is core to our use case. We use CDC for data ingestion into our data lake in Parquet. We use CDC to index such core data in Elasticsearch, and we use it to update our cache as well. It's critical.
-* **Monitoring.** We are very data driven. We want to know when something's going wrong so that we can respond to it. Availability and performance are very critical to us. 
+* **Monitoring.** We are very data driven. We want to know when something's going wrong so that we can respond to it. Availability and performance are very critical to us.
 * **Cloud-native.** Last year, we tried to push everything to K8s, so K8s support is essential.
 
 ## Why we chose TiDB over Vitess and CockroachDB
@@ -99,7 +99,7 @@ For Vitess, we've done a thorough investigation and exploration. Here are some p
 * Vitess would cause disruptive changes to our current database schemas. Although Vitess handles the sharding automatically, it still requires some disruptive schema changes like cleaning up foreign keys. On the other hand, TiDB doesn't support foreign key constraints but still can digest our current schemas and queries.
 * Vitess provides `READ COMMITTED` semantics when executing cross-shard queries. This differs from MySQL and TiDB, which defaults to `REPEATABLE READ`.
 * Vitess has [a long list of unsupported queries](https://github.com/vitessio/vitess/blob/master/go/vt/vtgate/planbuilder/testdata/unsupported_cases.txt), and some of them are used in our services. In general, TiDB has better MySQL compatibility.
-* By default, Vitess does not support transactions that span across shards. Although there is a 2PC mechanism implemented in Vitess, even the authors of Vitess themselves don't recommend that you enable that feature due to the significant impact on performance. 
+* By default, Vitess does not support transactions that span across shards. Although there is a 2PC mechanism implemented in Vitess, even the authors of Vitess themselves don't recommend that you enable that feature due to the significant impact on performance.
 * Operations are relatively heavy and complicated in Vitess.
 * Vitess is not ready for Kubernetes. When we started investigating Vitess in July 2020, Vitess Operator was used to run and manage Vitess on Kubernetes. However, it was unstable and not production ready, so instead we deployed the Vitess cluster manually on Kubernetes without Vitess Operator.
 
@@ -276,7 +276,7 @@ In Ninja Van, many operations rely on local warehouse, fleet, ops, and Business 
 
 ### What is TiDB?
 
-[TiDB is](https://docs.pingcap.com/tidb/stable/overview) an open-source, MySQL-compatible, NewSQL database built by [PingCAP](https://pingcap.com/) and its open-source community. 
+[TiDB is](https://docs.pingcap.com/tidb/stable/overview) an open-source, MySQL-compatible, NewSQL database built by [PingCAP](https://pingcap.com/) and its open-source community.
 
 It features horizontal scalability, strong consistency, and high availability. It's a one-stop solution for both OLTP and OLAP workloads. You can learn more about TiDB's architecture [here](https://docs.pingcap.com/tidb/v4.0/architecture).
 
@@ -287,18 +287,18 @@ It features horizontal scalability, strong consistency, and high availability. I
 As shown in the diagram below, there are two main parts:
 
 * TiDB Operator and a reconciliation loop
-* The custom resource, which in this scenario is the TiDB cluster 
+* The custom resource, which in this scenario is the TiDB cluster
 
 ![How TiDB Operator works](media/how-tidb-operator-works.jpg)
 <div class="caption-center"> How TiDB Operator works </div>
 
-After you deploy the cluster, TiDB Operator takes note of any changes you make. It then makes any adjustments needed to make your current state match the desired state. 
+After you deploy the cluster, TiDB Operator takes note of any changes you make. It then makes any adjustments needed to make your current state match the desired state.
 
-Let's look at some examples. 
+Let's look at some examples.
 
 #### Scaling up a cluster
 
-Let's say we only have one [TiKV](https://docs.pingcap.com/tidb/stable/tidb-architecture#tikv-server) node (TiDB's storage engine), and we want to scale up to three. Simply change the `replicas` number: 
+Let's say we only have one [TiKV](https://docs.pingcap.com/tidb/stable/tidb-architecture#tikv-server) node (TiDB's storage engine), and we want to scale up to three. Simply change the `replicas` number:
 
 `replicas: 3`
 
@@ -324,9 +324,9 @@ There is a huge performance increase between local and regional solid-state driv
 
 However, before you try that, keep in mind the following:
 
-* **If you run K8s on the cloud, disable auto-repair or auto-upgrade.** When you auto-repair or auto-upgrade your node, it actually could be replaced by another machine. You will lose your data because your SSD is tied to the machine. 
+* **If you run K8s on the cloud, disable auto-repair or auto-upgrade.** When you auto-repair or auto-upgrade your node, it actually could be replaced by another machine. You will lose your data because your SSD is tied to the machine.
 * **Handle the disk remount carefully.** We use the local volume provisioner to expose the local SSD in K8s. But the local SSD is actually a daemon set running on K8s. Both of these daemons are set, and your machine could restart at any time. You don't want to accidentally reformat your disk and lose your data.
-* **Periodically back up the cluster and, if possible, have a standby cluster**. Even if the worst case happens, you still have a way to recover. 
+* **Periodically back up the cluster and, if possible, have a standby cluster**. Even if the worst case happens, you still have a way to recover.
 
 #### Limitations in MySQL compatibility
 
@@ -342,7 +342,7 @@ Developers have worked hard to make TiDB as MySQL compatible as possible. Howeve
     * Recreate the column with the type you want; you can't alter the current one.
     * Establish a schema review workflow with your infrastructure team or DBA. This will eliminate many unnecessary type changes after your schema is created.
 
-* **MySQL and TiDB have different case sensitivities and collations.** 
+* **MySQL and TiDB have different case sensitivities and collations.**
 
     * MySQL's default collations are typically general collations, end in `_general_ci`, and are case _insensitive_. TiDB's default collations are binary collations, end in `_bin`, and are case _sensitive_.
     * If a user is not aware of the case sensitivity of the database, their queries may have unexpected results.
@@ -399,7 +399,7 @@ We all believe that TiDB is the perfect choice for our next-generation HTAP data
 
 TiDB is highly MySQL compatible, and it makes our lives much easier. However, as a distributed system, TiDB has certain characteristics that are fundamentally different from MySQL. For example, in MySQL (with the InnoDB storage engine), the auto-increment primary key is widely used and considered a best practice. This is mainly due to the way that MySQL InnoDB indexes and stores the data. Having an auto-increment primary key can avoid unnecessary data movement, page split, and memory fragmentation.
 
-In TiDB, data is stored in TiKV as regions. Having an auto-increment primary key will lead all the write traffic to one of the TiKV instances before one region is filled. As a result, the write traffic is imbalanced across the cluster. 
+In TiDB, data is stored in TiKV as regions. Having an auto-increment primary key will lead all the write traffic to one of the TiKV instances before one region is filled. As a result, the write traffic is imbalanced across the cluster.
 
 Most of our knowledge about MySQL still applies to TiDB, but not all of it. We need a change of mindset to release the full potential of a distributed system like TiDB.
 
@@ -407,7 +407,7 @@ Most of our knowledge about MySQL still applies to TiDB, but not all of it. We n
 
 Currently, we rely on Maxwell to capture DB changes and sync them to a data lake. Maxwell can capture the executed SQL statements, and we used it to customize some logic on the consumer side. However, TiCDC cannot capture the SQL statements as it receives changes on TiKV, and it doesn't have information from the SQL layer. We have no choice but to introduce a MySQL instance as a relay to forward the SQL statements. It's not the most elegant approach, and it introduces extra complexity to the whole structure, but it works. We will see how we can improve this in the future.
 
-### Migrating to TiDB 
+### Migrating to TiDB
 
 We hope we can migrate from MySQL to TiDB on K8s with minimal downtime, and we've developed a plan for this as well. It requires two-way sync between the original MySQL instance and the TiDB cluster we want to migrate to. First, migrate MySQL to TiDB to move the data, and then, as a plan B, synchronize MySQL with TiDB to keep the MySQL instance in sync. If anything happens, we can rollback to MySQL in the shortest time.
 

@@ -3,7 +3,7 @@ title: "TiDB in the Browser: Running a Golang Database on WebAssembly"
 author: ['Queeny Jin']
 date: 2019-11-06
 summary: This post introduces how you can run TiDB directly in a web browser, how it is possible, and what the limitations are.
-tags: ['Go', 'WebAssembly', 'Hackathon']
+tags: ['Go', 'Hackathon']
 categories: ['Engineering']
 image: /images/blog/tidb-in-the-browser-running-a-golang-database-on-webassembly.png
 ---
@@ -53,7 +53,7 @@ As cool as it is, the tool has the following very important limitations, limitin
 
 * TiDB-Wasm includes TiDB server only. TiDB is the stateless MySQL component of the TiDB platform (check other components in the [TiDB Architecture](https://docs.pingcap.com/tidb/v4.0/architecture)). Compiled to Wasm, this tool is **only** suitable for experimenting with SQL and testing out TiDB compatibility with MySQL queries.
 
-* The Wasm binary file is close to 70 MB and compressed to 13 MB. The database and the data you create in TiDB-Wasm are written to memory, and therefore consume a lot of memory resources.  
+* The Wasm binary file is close to 70 MB and compressed to 13 MB. The database and the data you create in TiDB-Wasm are written to memory, and therefore consume a lot of memory resources.
 
 * TiDB-Wasm does not support most of the web browsers on mobile devices yet.
 

@@ -3,7 +3,7 @@ title: How I Enabled TiKV Coprocessor to Support ENUM and SET Calculations
 author: ['Xuanwo']
 date: 2021-04-09
 summary: A TiKV contributor participated in the Coprocessor support ENUM/SET project and implemented these two calculations. This helped improve TiKV's calculation performance.
-tags: ['TiKV', 'CNCF']
+tags: ['TiKV', 'Community news']
 categories: ['Community']
 image: /images/blog/tikv-coprocessor-support-enum-set-calculations.jpg
 ---
@@ -22,7 +22,7 @@ In this post, I'll share with you some background information about my project, 
 
 ### What is the LFX Mentorship Program?
 
-The [LFX Mentorship Programs](https://lfx.linuxfoundation.org/tools/mentorship/) teach developers—many of whom are first-time open source contributors—to effectively experiment, learn, and contribute to open source communities. The Cloud Native Computing Foundation (CNCF) uses these programs as a CNCF mentorship platform. TiKV is a CNCF-graduated project. It proposed the Coprocessor support ENUM/SET project. 
+The [LFX Mentorship Programs](https://lfx.linuxfoundation.org/tools/mentorship/) teach developers—many of whom are first-time open source contributors—to effectively experiment, learn, and contribute to open source communities. The Cloud Native Computing Foundation (CNCF) uses these programs as a CNCF mentorship platform. TiKV is a CNCF-graduated project. It proposed the Coprocessor support ENUM/SET project.
 
 ### Introduction to `ENUM` and `SET`
 
@@ -108,7 +108,7 @@ In the past, **all calculation tasks involving `ENUM` or `SET` could not be push
     }
     ```
 
-    The most exciting thing is that we can implement these functions without waiting for TiDB to support pushdowns. In order to support `ENUM` and `SET` pushdown, both TiDB and TiKV need to implement it. But my work makes it possible to implement the TiKV side without TiDB's support. 
+    The most exciting thing is that we can implement these functions without waiting for TiDB to support pushdowns. In order to support `ENUM` and `SET` pushdown, both TiDB and TiKV need to implement it. But my work makes it possible to implement the TiKV side without TiDB's support.
 
 5. I implemented `ENUM` and `SET` support for each aggregate function, including [`COUNT`](https://github.com/tikv/tikv/pull/9143), [`FIRST`](https://github.com/tikv/tikv/pull/9135), [`SUM`](https://github.com/tikv/tikv/pull/9148), [`AVG`](https://github.com/tikv/tikv/pull/9186), [`MAX`](https://github.com/tikv/tikv/pull/9146) and [`MIN`](https://github.com/tikv/tikv/pull/9184). This way, I made TiKV support `ENUM` and `SET`.
 
@@ -116,7 +116,7 @@ In the past, **all calculation tasks involving `ENUM` or `SET` could not be push
 
 ### Export the mod before compilation
 
-When I was trying to implement `ChunkedVecSet`, I had a disagreement with a repository Maintainer. Because I modified enums, to avoid introducing too many changes in a single PR, I implemented the mod but didn't export it. As a result, the mod couldn't be compiled. 
+When I was trying to implement `ChunkedVecSet`, I had a disagreement with a repository Maintainer. Because I modified enums, to avoid introducing too many changes in a single PR, I implemented the mod but didn't export it. As a result, the mod couldn't be compiled.
 
 I planned to complete this part in my future PR, but the Maintainer insisted that a PR should be the smallest compilable unit.
 

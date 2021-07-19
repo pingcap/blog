@@ -4,7 +4,7 @@ author: ['Leitao Guo']
 date: 2021-02-16
 summary: Learn how to efficiently find the right database for your applications.
 image: /images/blog/how-to-choose-database.jpg
-tags: ['How to', 'Database selection']
+tags: ['Tutorial']
 categories: ['Community']
 ---
 

@@ -4,7 +4,7 @@ author: ['Yihao Zhang']
 date: 2020-10-02
 summary: Xiaohongshu receives more than 100 million rows of data every day. They adopted TiDB because it supports both transactional and analytical queries, real-time data analytics, and horizontal scalability.
 image: /images/blog/mysql-alternative-database-at-xiaohongshu.jpg
-tags: ['HTAP', 'TiFlash', 'Real-time analytics', 'Scalability', 'MySQL', 'MySQL sharding']
+tags: ['HTAP', 'TiFlash', 'Real-time analytics', 'Scalability', 'MySQL', 'No sharding']
 url: /success-stories/how-we-use-a-scale-out-htap-database-for-real-time-analytics-and-complex-queries/
 customer: Xiaohongshu
 customerCategory: Internet
