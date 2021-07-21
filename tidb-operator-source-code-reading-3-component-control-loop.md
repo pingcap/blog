@@ -154,7 +154,7 @@ When a component needs to obtain the startup parameters from TiDB Operator, the 
 
 The `getNewPDSetForTidbCluster` function obtains a new StatefulSet template, which contains the references of the newly generated Service and ConfigMap. The function uses the latest status and spec to generate other items, such as `env`, `container`, and `volume`.
 
-This new StatefulSet then goes through three processes: rolling update, scaling, and failover. Finally, the `UpdateStatefulSet` function compares the existing StatefulSet and the new one and  determines whether to update the existing one.
+This new StatefulSet then goes through three processes: rolling update, scaling, and failover. Finally, the `UpdateStatefulSet` function compares the existing StatefulSet and the new one and determines whether to update the existing one.
 
 ##### Rolling update
 
