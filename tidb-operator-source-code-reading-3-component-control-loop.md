@@ -10,6 +10,8 @@ image: /images/blog/tidb-operator-source-code-reading-3-component-control-loop.j
 
 **Author:** Yiwen Chen (Committer of TiDB Operator, Software Engineer at PingCAP)
 
+**Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
+
 ![TiDB Operator Source Code Reading (III): The Component Control Loop](media/tidb-operator-source-code-reading-3-component-control-loop.jpg)
 
 > _Previous articles in this series:_
