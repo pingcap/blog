@@ -1,7 +1,7 @@
 ---
 title: 'Flink on TiDB: Reliable, Convenient Real-Time Data Service'
 author: ['Jia Lin']
-date: 2021-07-26
+date: 2021-07-28
 summary: Combining Flink and TiDB provide powerful support for real-time data processing. In this article, a NetEase senior engineer introduces how they use Flink on TiDB to guarantee end-to-end exactly-once semantics.
 tags: ['Real-time analytics']
 categories: ['Engineering']
