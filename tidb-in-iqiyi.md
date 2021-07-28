@@ -144,7 +144,7 @@ In the incremental synchronization process, we used Syncer, which aggregated dat
 
 The [Syncer](https://pingcap.com/docs/tools/syncer/) architecture is as follows:
 
-![Figure 5: Syncer architecture](https://download.pingcap.com/images/success-stories/syncer-architecture-in-iqiyi.png)
+![Figure 5: Syncer architecture](media/syncer-architecture.png)
 <div class="caption-center"> Figure 5: Syncer architecture </div>
 
 However, Syncer currently cannot display real-time delay information in Grafana. This is a drawback for the applications that are sensitive to synchronization delay. The good news is that PingCAP is working on this issue, and they have refactored Syncer to automatically deal with the primary key conflict of table partition. With Syncer and TiDB, users can quickly synchronize data from multiple MySQL clusters in real time.

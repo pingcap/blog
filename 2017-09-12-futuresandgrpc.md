@@ -8,7 +8,7 @@ aliases: ['/blog/2017/09/12/futuresandgrpc/']
 categories: ['Engineering']
 ---
 
-This is the speech Tang Liu (tl@pingcap.com) gave at the Bay Area Rust Meetup August 2017. <!--The link is broken [See the video](https://air.mozilla.org/bay-area-rust-meetup-august-2017/).-->
+This is the speech Tang Liu (tl@pingcap.com) gave at the Bay Area Rust Meetup August 2017.
 
 <!-- TOC -->
 
