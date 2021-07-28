@@ -1,6 +1,10 @@
 name: Links
 
-on: [pull_request]
+on:
+  repository_dispatch:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 1"
 
 jobs:
   linkChecker:
@@ -11,13 +15,14 @@ jobs:
       - name: Link Checker
         uses: lycheeverse/lychee-action@v1.0.8
         with:
-          args: -E --exclude-mail --verbose --no-progress --accept 429 *.md
+          args: -E --exclude-mail --verbose --no-progress --accept 429 -- *.md
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      #- name: Create Issue From File
-      #  uses: peter-evans/create-issue-from-file@v3
-      #  with:
-      #    title: Link Checker Report
-      #    content-filepath: ./lychee/out.md
-      #    labels: report, automated issue
+      - name: Create Issue From File
+        uses: peter-evans/create-issue-from-file@v3
+        with:
+          title: Broken Link Detected
+          content-filepath: ./lychee/out.md
+          labels: bug
+          assignees: ran-huang
