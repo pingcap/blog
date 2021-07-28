@@ -161,7 +161,7 @@ When 4.0 was released, we made a word cloud to show the organizations that contr
 ![TiDB contributors' organizations](media/tidb-contributors-organizations.jpg)
 <div class="caption-center"> TiDB contributors' organizations </div>
 
-At the same time, what surprises me is the community's creativity. For example, TiDB Contributor Dongpo Liu visualized the [top 100 contributors](https://rustin-liu.github.io/Ti2020/) like this:
+At the same time, what surprises me is the community's creativity. For example, TiDB Contributor Dongpo Liu visualized the [top 100 contributors](https://hi-rustin.github.io/Ti2020/) like this:
 
 ![TiDB's top 100 contributors](media/tidb-top-100-contributors.jpg)
 <div class="caption-center"> TiDB's top 100 contributors </div>

@@ -9,7 +9,7 @@ categories: ['Product']
 
 **Author**: Shawn Ma is a Tech Lead at PingCAP in the OLAP team. Previously, he was Tech Lead at Netease and Quantcast. He received his Masters in Computer Science from University of California--Irvine.
 
-When we released [TiDB 2.0](http://bit.ly/tidb_2_0) in April, part of that announcement also included the release of [TiSpark](https://github.com/pingcap/tispark) 1.0--an integral part of the TiDB platform that makes complex analytics on "fresh" transactional data possible. Since then, many people in the TiDB community have been asking for more information about TiSpark. In this post, I will explain the motivation, inner workings, and future roadmap of this project.
+When we released [TiDB 2.0](https://pingcap.com/blog/tidb-2-0-announcement) in April, part of that announcement also included the release of [TiSpark](https://github.com/pingcap/tispark) 1.0--an integral part of the TiDB platform that makes complex analytics on "fresh" transactional data possible. Since then, many people in the TiDB community have been asking for more information about TiSpark. In this post, I will explain the motivation, inner workings, and future roadmap of this project.
 
 ## Motivation
 
@@ -66,7 +66,7 @@ group by class;
 The above query contains two predicates, each of which matches an index. TiSpark will first analyze the predicates combination and "approximate" how many rows will be returned if a specific index is applied. The goal here is to find a way to access the table with minimum cost. The process of finding an access path will be explained later. For now, let's first look at how predicates are processed.
 
 ### Path 1: Primary Index
-  
+
 Assume we pick the `studentID` index, the primary index, to access the table. The process is as follows:
 
 1. Transform the predicates "studentId >= 8000 and studentId < 10100" into a close-open interval on studentID: [8000, 10100);

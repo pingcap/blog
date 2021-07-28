@@ -26,7 +26,7 @@ So we are all set up for you in Hacktoberfest - labeled [suitable issues](https:
 
 How can you participate? It could not be easier with the following steps:
 
-1. Sign up for [Hacktoberfest](https://hacktoberfest.digitalocean.com/login) using your GitHub account between Oct 1 and Oct 31.
+1. Sign up for [Hacktoberfest](https://hacktoberfest.digitalocean.com) using your GitHub account between Oct 1 and Oct 31.
 2. Pick up an issue. Note that the issues are still being updated, but you don't have to be limited to issues with the Hacktoberfest label, which only serves as a starting point.
 3. Start coding and submit your PRs. Again the PR does not need to be corresponding to the labeled issue.
 4. Our maintainers review your PRs. Once you successfully merged, or have gained approval for 4 or more of them, the PRs will be automatically counted on the Hacktoberfest end, and you will be eligible to claim your SWAG.

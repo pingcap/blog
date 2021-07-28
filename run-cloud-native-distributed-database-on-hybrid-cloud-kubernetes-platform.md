@@ -27,7 +27,7 @@ Before you can deploy TiDB, you need a Kubernetes cluster. Installing the cluste
 
 Fortunately, KubeSphere's sponsor, QingCloud, provides a highly-functional platform that enables you to quickly deploy Kubernetes and KubeSphere at the same time with just a few clicks. (You can also deploy Kubernetes by itself.)
 
-In this tutorial, I use QingCloud Kubernetes Engine (QKE) to prepare the environment, which creates virtual machines, configures networks, and sets storage for you. If you don't use QKE, you may also directly use instances on QingCloud to [install KubeSphere and Kubernetes](https://kubesphere.io/docs/installing-on-linux/public-cloud/kubesphere-on-qingcloud-instance/) by yourself.
+In this tutorial, I use QingCloud Kubernetes Engine (QKE) to prepare the environment, which creates virtual machines, configures networks, and sets storage for you. If you don't use QKE, you may also directly use instances on QingCloud to [install KubeSphere and Kubernetes](https://kubesphere.io/docs/installing-on-linux/public-cloud/install-kubesphere-on-qingcloud-vms/) by yourself.
 
 Note: You can install KubeSphere on any infrastructure. We just use the QingCloud platform as an example. For more details, see the [KubeSphere documentation](https://kubesphere.io/docs/).
 

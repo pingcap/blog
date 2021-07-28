@@ -39,7 +39,7 @@ TiDB checked all of those boxes, and in fact, its performance has exceeded our e
 
 TiDB is an open source, NewSQL, scalable hybrid transactional and analytical processing ([HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing_(HTAP))) database built by the PingCAP team and the open source community. It aims to break down the traditional separation between an OLTP database and an OLAP database, and offer a one-stop solution that enables real-time business analysis on live transactional data.
 
-![Figure 1: TiDB Platform Architecture](https://download.pingcap.com/images/success-stories/tidb-htap-architecture.png)
+![Figure 1: TiDB Platform Architecture](media/meituan-tidb-architecture.png)
 <div class="caption-center"> Figure 1: TiDB Platform Architecture </div>
 
 Inside the TiDB Platform, there are several components:

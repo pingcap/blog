@@ -34,7 +34,7 @@ Currently, most database automatic tuning research, including OtterTune's, adopt
 
 ### The machine learning model
 
-AutoTiKV uses the [same Gaussian process regression (GPR) as OtterTune does to recommend new knobs](http://www-users.cselabs.umn.edu/classes/Spring-2019/csci8980/papers/tuning.pdf). This is a nonparametric model based on the Gaussian distribution. The benefits of GPR are:
+AutoTiKV uses the same Gaussian process regression (GPR) as OtterTune does to recommend new knobs. This is a nonparametric model based on the Gaussian distribution. The benefits of GPR are:
 
 * Compared with other popular methods like neural networks, GPR is a nonparametric model which is less compute intensive. Also, in conditions with fewer training samples, GPR outperforms neural networks.
 * GPR estimates the distribution of the sample—the mean of X, m(X), and its standard deviation, s(X). If there is not much data around X, s(X) is overly large. This indicates a large deviation between sample X and the other data points. We can understand intuitively that if there is insufficient data, the uncertainty is large, and this is reflected in the large standard deviation. Conversely, when the data is sufficient, the uncertainty is reduced, and the standard deviation decreases.

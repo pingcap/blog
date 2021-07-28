@@ -16,7 +16,7 @@ jobs:
       - name: Link Checker
         uses: lycheeverse/lychee-action@v1.0.8
         with:
-          args: -E --exclude-mail --verbose --no-progress --accept 429 -- *.md
+          args: -E --exclude-mail -v -i -n -a 429 -t 45 --exclude https://charts.pingcap.org/ --exclude https://451research.com/* --exclude http://localhost* -- *.md
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 

@@ -25,7 +25,7 @@ Before moving on to elastic scalability, I'd like to talk about several sharding
 
 Sharding is a database partitioning strategy that splits your datasets into smaller parts and stores them in different physical nodes. The unit for data movement and balance is a sharding unit. Each physical node in the cluster stores several sharding units.
 
-Two commonly-used sharding strategies are range-based sharding and hash-based sharding. The choice of the sharding strategy changes according to different types of systems. A typical example is the data distribution of a Hadoop Distributed File System (HDFS) DataNode, shown in Figure 1 (source: [Distributed Systems: GFS/HDFS/Spanner](http://energystudy.synergylabs.org/courses/15-440-Fall2017/lectures/16-gfs_hdfs_spanner.pdf)).
+Two commonly-used sharding strategies are range-based sharding and hash-based sharding. The choice of the sharding strategy changes according to different types of systems. A typical example is the data distribution of a Hadoop Distributed File System (HDFS) DataNode, shown in Figure 1 (source: Distributed Systems: GFS/HDFS/Spanner)<!-- the link is broken (source: [Distributed Systems: GFS/HDFS/Spanner](http://energystudy.synergylabs.org/courses/15-440-Fall2017/lectures/16-gfs_hdfs_spanner.pdf))-->.
 
 ![Data distribution of HDFS DataNode](media/data-distribution-of-hdfs-dataNode.png)
 <div class="caption-center"> Figure 1. Data distribution of HDFS DataNode </div>

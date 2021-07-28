@@ -305,7 +305,7 @@ If you'd like to learn more about the Async Commit design, you can read the [des
 
 ### Join our community
 
-If you are interested in discussing and planning the future development of TiKV distributed transactions, you're welcome to join the [Transaction SIG](https://developer.tidb.io/sig/transaction) and find us in the [TiKV Community Slack](https://slack.tidb.io/invite?team=tikv-wg&channel=sig-transaction&ref=community-sig) space.
+If you are interested in discussing and planning the future development of TiKV distributed transactions, you're welcome to join the [Transaction SIG](https://tikv.github.io/sig-transaction/) and find us in the [TiKV Community Slack](https://slack.tidb.io/invite?team=tikv-wg&channel=sig-transaction&ref=community-sig) space.
 
 <!-- Footnotes themselves at the bottom. -->
 ## Notes

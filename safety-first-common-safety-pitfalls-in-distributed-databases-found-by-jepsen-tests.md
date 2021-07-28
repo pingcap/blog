@@ -27,7 +27,7 @@ We'll refer to [*serializability*](https://jepsen.io/consistency/models/serializ
 
 Testing a distributed system like [TiDB](https://en.wikipedia.org/wiki/TiDB) isn't easy! Because these systems depend on multiple nodes coordinating there is a lot of room for failures. Networks and hardware aren't reliable, and when multiple nodes are involved, the probability of failure is much higher. Even still, deployments (and even nodes!) are highly variable in scale, OS, hardware, and workloads. It's impossible to test all of them.
 
-Is all hope lost? No! In [Why Is Random Testing Effective for Partition Tolerance Bugs?](https://people.mpi-sws.org/~fniksic/popl2018/paper.pdf) Majumdar and Niksic formalized many failure scenarios and discussed how even a small, random subset of possibilities can be sufficient to achieve a specific coverage goal.
+Is all hope lost? No! In [Why Is Random Testing Effective for Partition Tolerance Bugs?](https://dl.acm.org/doi/10.1145/3158134) Majumdar and Niksic formalized many failure scenarios and discussed how even a small, random subset of possibilities can be sufficient to achieve a specific coverage goal.
 
 It's fairly rare to see projects and articles tackling the same kind of content as Jepsen. Vendors aren't always honest (by mistake or not) about what they do and don't guarantee. Projects like Jepsen, produced independently and rigorously, that test these claims are reinvigorating when compared to often banal marketing copy.
 

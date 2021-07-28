@@ -8,7 +8,7 @@ aliases: ['/blog/2017/09/12/futuresandgrpc/']
 categories: ['Engineering']
 ---
 
-This is the speech Tang Liu (tl@pingcap.com) gave at the Bay Area Rust Meetup August 2017. [See the video](https://air.mozilla.org/bay-area-rust-meetup-august-2017/).
+This is the speech Tang Liu (tl@pingcap.com) gave at the Bay Area Rust Meetup August 2017. <!--The link is broken [See the video](https://air.mozilla.org/bay-area-rust-meetup-august-2017/).-->
 
 <!-- TOC -->
 
@@ -115,9 +115,9 @@ You can wait the future to be finished, and multiple futures can be combined int
 
 ## Futures in Rust
 
-So what about futures in Rust?  
+So what about futures in Rust?
 
-In Rust, future has already been supported by [Alex](https://github.com/alexcrichton). Thanks, Alex!  
+In Rust, future has already been supported by [Alex](https://github.com/alexcrichton). Thanks, Alex!
 
 Based on the Rust trait, the future is zero cost, which means that you don't need to do extra heap allocation or dynamic dispatch. Future is easy to use, you can combine many futures into a chain, and use the combinator like an Iterator API.
 
