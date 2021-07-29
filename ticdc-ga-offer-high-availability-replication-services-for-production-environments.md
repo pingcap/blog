@@ -81,7 +81,7 @@ In the content security review and analysis scenario, TiDB in the upstream recor
 
 When TiCDC analyzes review data, it extracts TiDB's real-time stream data and sends it downstream to Flink for real-time calculation and aggregation. The calculation results are written back to TiDB for review data analysis, manual efficiency analysis, and management.
 
-Xiaohongshu calls TiCDC's internal API (which is defined by [sink interface](https://pkg.go.dev/github.com/pingcap/ticdc@v0.0.0-20200914115832-993bfabc4696/cdc/sink?tab=doc#Sink)) to customize their sink. They use the Canal Protocol to send data to Flink to connect to the existing application system. This significantly reduces the costs of refactoring the application system.
+Xiaohongshu calls TiCDC's internal API (which is defined by [sink interface](https://pkg.go.dev/github.com/pingcap/ticdc@v0.0.0-20210728071617-f2526c1e9802/cdc/sink)) to customize their sink. They use the Canal Protocol to send data to Flink to connect to the existing application system. This significantly reduces the costs of refactoring the application system.
 
 TiCDC's **efficient data replication** and **support for heterogeneous big data ecologies** have laid a solid foundation for the real-time processing of Xiaohongshu application data.
 
