@@ -4,7 +4,7 @@ author: ['Ben Ye', 'Chengwen Yin']
 date: 2020-08-17
 summary: This article describes how we use TiPocket, an automated testing framework, to build a full Chaos Engineering testing loop for TiDB.
 image: /images/blog/automated-chaos-testing-framework.jpg
-tags: ['Chaos Mesh', 'Chaos Engineering']
+tags: ['Chaos Engineering']
 categories: ['Engineering']
 ---
 

@@ -3,7 +3,7 @@ title: Introduction to Analytics Queries for the MySQL DBA
 author: ['Morgan Tocker']
 date: 2019-03-28
 summary: This post introduces some simple use cases of analytics queries where a MySQL DBA can expand their repertoire and answer some basic business questions by writing SQL queries with window functions.
-tags: ['MySQL', 'How to']
+tags: ['MySQL', 'Tutorial']
 categories: ['Product']
 ---
 

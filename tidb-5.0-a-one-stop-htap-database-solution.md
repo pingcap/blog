@@ -3,7 +3,7 @@ title: 'TiDB 5.0: A One-Stop HTAP Database Solution'
 author: ['Shawn Ma']
 date: 2021-06-03
 summary: TiDB 5.0 features a comprehensive HTAP solution enhanced by an MPP analytical query engine. This article introduces the new TiDB 5.0 HTAP architecture and how TiDB 5.0 serves various transactional & analytical hybrid workload scenarios.
-tags: ['HTAP', 'TiDB 5.0', 'Real-time analytics']
+tags: ['HTAP', 'Real-time analytics']
 categories: ['Product']
 image: /images/blog/tidb-5.0-a-one-stop-htap-database-solution.jpg
 ---

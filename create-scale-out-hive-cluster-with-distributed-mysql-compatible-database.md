@@ -4,7 +4,7 @@ author: ['Mengyu Hu']
 date: 2020-08-04
 summary: This post shows how to deploy a Hive cluster with TiDB to achieve horizontal scalability of Hive Metastore.
 image: /images/blog/horizontal-scaling-hive.jpg
-tags: ['Scalability', 'How to']
+tags: ['Scalability', 'Tutorial']
 categories: ['Engineering']
 ---
 

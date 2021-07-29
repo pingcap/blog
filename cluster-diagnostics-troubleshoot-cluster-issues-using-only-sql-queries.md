@@ -3,7 +3,7 @@ title: 'Cluster Diagnostics: Troubleshoot Cluster Issues Using Only SQL Queries'
 author: ['Heng Long', 'Shuang Chen']
 date: 2020-07-01
 summary: TiDB 4.0 introduces cluster diagnostics, a built-in widget in TiDB Dashboard, which lets you diagnose cluster problems within a specified time range. You can summarize the diagnostic results and cluster-related load monitoring information in a diagnostic report.
-tags: ['Troubleshooting', 'Distributed SQL database']
+tags: ['Troubleshooting']
 categories: ['Product']
 image: /images/blog/troubleshoot-distributed-database-issues.jpg
 ---
@@ -71,7 +71,7 @@ The description for each field is as follows:
 * P999: The execution time, in seconds, that 99.9% of the monitoring samples fall below.
 * P99: The execution time, in seconds, that 99% of monitoring samples fall below.
 * P90: The execution time, in seconds, that 90% of monitoring samples fall below.
-* P80: The execution time, in seconds, that 80% of monitoring samples fall below. 
+* P80: The execution time, in seconds, that 80% of monitoring samples fall below.
 
 ## How to generate diagnostic reports
 
@@ -100,7 +100,7 @@ Here are two cases that show how cluster diagnostics helped us quickly find syst
 
 Cluster diagnostics automatically diagnoses system faults and potential problems in the current cluster. This feature lets you inspect the cluster as a whole and analyze the system for bottlenecks. You don't have to check the monitoring information for nodes one by one. Diagnostic results are output to the `information_schema.inspection_result` system table. When you query this table, you trigger diagnostics. When you encounter a problem, you can first query this table to find the cause.
 
-The automatic diagnostics is based on a series of built-in diagnostic rules, and it gives diagnostic results by querying the cluster information. 
+The automatic diagnostics is based on a series of built-in diagnostic rules, and it gives diagnostic results by querying the cluster information.
 
 Currently, diagnostic rules are as follows:
 
@@ -125,7 +125,7 @@ Let's look at an example. In the following monitoring interface, the query's 999
 ![P999 latency and QPS jittered](media/qps-jitter.jpg)
 <div class="caption-center"> The 999th percentile latency and QPS suddenly jittered </div>
 
-To diagnose the cluster problem in a specified time range, we used the `time_range` SQL hint to specify it: 
+To diagnose the cluster problem in a specified time range, we used the `time_range` SQL hint to specify it:
 
 ```
 mysql>select /*+ time_range("2020-03-30 23:45:00", "2020-03-30 23:50:00") */ * from inspection_result;
@@ -161,10 +161,10 @@ SELECT GREATEST(t1.avg_value,t2.avg_value)/LEAST(t1.avg_value,
          t1.avg_value as t1_avg_value,
          t2.avg_value as t2_avg_value,
          t2.comment
-FROM 
+FROM
     (SELECT /*+ time_range("2020-03-03 17:08:00", "2020-03-03 17:11:00")*/ *
     FROM information_schema.metrics_summary ) t1
-JOIN 
+JOIN
     (SELECT /*+ time_range("2020-03-03 17:18:00", "2020-03-03 17:21:00")*/ *
     FROM information_schema.metrics_summary ) t2
     ON t1.metrics_name = t2.metrics_name
@@ -188,6 +188,6 @@ At last, we found the root of the problem. During t1 and t2, we were running the
 
 ## Summary
 
-The cluster diagnostics feature simplifies and streamlines TiDB cluster monitoring. Say goodbye to multiple tools and multiple learning curves. Further, you can monitor and analyze the entire cluster at the same time. No more checking each node individually. 
+The cluster diagnostics feature simplifies and streamlines TiDB cluster monitoring. Say goodbye to multiple tools and multiple learning curves. Further, you can monitor and analyze the entire cluster at the same time. No more checking each node individually.
 
-Cluster diagnostics is a work in progress. We're still adding some diagnostic rules, and we look forward to feedback and advice from the open-source community. If you'd like to help us, join our [community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) and share your idea with us. 
+Cluster diagnostics is a work in progress. We're still adding some diagnostic rules, and we look forward to feedback and advice from the open-source community. If you'd like to help us, join our [community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) and share your idea with us.
