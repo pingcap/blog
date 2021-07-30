@@ -1,6 +1,7 @@
 import re
 import sys
 import os
+from datetime import date
 
 def check_front_matter(filename):
 
@@ -19,6 +20,8 @@ def check_front_matter(filename):
 
         dashes = 0
         word = ''
+        publish_date = date.today()
+        banner_date = date(2019,11,29) # blogs before this date don't have banner
 
         for line in file:
             if re.match(r'(-){3}', line) and dashes == 0: #front matter begins
@@ -27,6 +30,10 @@ def check_front_matter(filename):
                 break
             else:
                 word = line[:line.find(':')]
+                if word == 'date':
+                    publish_date = date.fromisoformat(line[line.find(':')+2:-1])
+                    if publish_date < banner_date:
+                        return 0 # don't check blogs before 2019-11-29
                 frontMatter.append(word)
 
         for item in common:
