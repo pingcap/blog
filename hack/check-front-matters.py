@@ -1,4 +1,6 @@
-import re, sys, os
+import re
+import sys
+import os
 from datetime import date
 
 def check_front_matter(filename):
