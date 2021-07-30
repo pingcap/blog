@@ -133,7 +133,7 @@ In addition, our new database infrastructure based on TiDB has brought us the fo
 * TiDB supports **data analytics of more application dimensions**.
 * Our **hardware cost is reduced**.
 
-### Reducing our cost per order by 17.1％
+### Reducing our cost per order by 17.1%
 
 Currently, we have more than 100 TiDB physical nodes and more than 200 TiDB instances in the production environment. They mainly serve bills, the settlement center, the order center, the waybill center, the message center, and smart transshipment-related applications.
 

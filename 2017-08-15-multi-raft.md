@@ -114,7 +114,7 @@ I want to highlight the Key format of some important metadata and I'll skip the 
 
 + 0x03: Used to store `RaftApplyState`
 
-+ 0x03：Used to store some local metadata of Region. 0x03 is followed by the Raft Region ID and a Suffix to represent different subtypes.
++ 0x03: Used to store some local metadata of Region. 0x03 is followed by the Raft Region ID and a Suffix to represent different subtypes.
 
 + 0x01: Used to store `RegionLocalState`
 

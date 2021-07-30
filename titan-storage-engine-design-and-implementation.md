@@ -119,9 +119,9 @@ We used [go-ycsb](https://github.com/pingcap/go-ycsb), a GO port of [YCSB](https
 
 ### Test environment
 
-- CPU: Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz（40 cores）
-- Memory: 128 GB（TiKV memory usage is limited under 32 GB via Cgroup）
-- Disk: SATA SSD 1.5 TB（[fio](https://linux.die.net/man/1/fio) test: read IOPS and write IOPS for 4 KB block size hybrid random read/write are respectively 43.8 KB and 18.7 KB)
+- CPU: Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz (40 cores)
+- Memory: 128 GB (TiKV memory usage is limited under 32 GB via Cgroup)
+- Disk: SATA SSD 1.5 TB ([fio](https://linux.die.net/man/1/fio) test: read IOPS and write IOPS for 4 KB block size hybrid random read/write are respectively 43.8 KB and 18.7 KB)
 
 ### Test plan
 

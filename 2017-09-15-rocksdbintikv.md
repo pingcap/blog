@@ -54,7 +54,7 @@ OK, let's begin. Why did we decided to use RocksDB instead of LevelDB, WiredTige
 
 * First of all, RocksDB is fast. We can keep high write/read speed even there's a lot of data in a single instance.
 
-* And of course, RocksDB is stable. I know that RocksDB team does lots of stress tests to guarantee the stability；
+* And of course, RocksDB is stable. I know that RocksDB team does lots of stress tests to guarantee the stability;
 
 * And it's easy to be embedded. We can call RocksDB's C API in Rust directly through FFI, because TiKV is written in Rust.
 

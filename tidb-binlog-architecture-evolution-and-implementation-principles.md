@@ -323,9 +323,9 @@ The following example illustrates the mechanism of conflict detection:
 ```sql
 SQL1: update itest set id = 4, name = "c", age = 15 where id = 3;     key: 3, 4
 
-SQL2:  update itest set id = 5, name = "b", age = 14 where id = 2;   key：5, 2
+SQL2:  update itest set id = 5, name = "b", age = 14 where id = 2;   key: 5, 2
 
-SQL3：delete from itest where id = 3;                                               key: 3
+SQL3: delete from itest where id = 3;                                               key: 3
 ```
 
 The SQL statements are shown above and `id` is the primary key of the table. The conflict detection mechanism in Drainer works as follows to guarantee data consistency:

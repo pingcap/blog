@@ -29,7 +29,7 @@ categories: ['Engineering']
 
 ## Introduction to subqueries
 
-Subquery is a query within another SQL query. A common subquery is embedded within the `FROM` clause, for example：
+Subquery is a query within another SQL query. A common subquery is embedded within the `FROM` clause, for example:
 
 ```
 SELECT ID FROM (SELECT * FROM SRC) AS T
