@@ -16,7 +16,7 @@ At re:Invent 2017, Amazon Web Services (AWS) announced [Amazon Time Sync Service
 
 Time synchronization remains a hard nut to crack in distributed systems, especially for distributed databases such as [TiDB](https://github.com/pingcap/tidb) where time is used to confirm the order of the transaction to guarantee the ACID compliance.
 
-In this post, I will introduce the existing solutions to tackle the time synchronization issue in distributed systems, as well as their pros and cons. I will also share why we chose to use the timestamp oracle (TSO) from [Google Percolator](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36726.pdf) in TiDB.  
+In this post, I will introduce the existing solutions to tackle the time synchronization issue in distributed systems, as well as their pros and cons. I will also share why we chose to use the timestamp oracle (TSO) from [Google Percolator](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36726.pdf) in TiDB.
 
 ## Order of the events
 
@@ -62,7 +62,7 @@ Using this can easily determine the order of events. For example, assuming we ha
 
 We use `C(A)` and `C(B)` as the counter value of the events, if events `A` and `B` happen in one process, and `A` happens before `B`, we can know that `C(A) < C(B)`. If `A` and `B` happen in different processes, we can also know `C(A) < C(B)` based on the message, so if A happens before B, we can infer `C(A) < C(B)`. But if `C(A) < C(B)`,  it doesn't necessarily mean that A happens before B.
 
-If the two events are not causally related (no communication between the processes), we can't determine the order of the events. We can use [vector clock](http://zoo.cs.yale.edu/classes/cs426/2012/lab/bib/fidge88timestamps.pdf) to fix this. But whether it's logical clock or vector clock, they both have a disadvantage: we can't know what time the event happens because both of the two clocks merely record the order of the events instead of the time.
+If the two events are not causally related (no communication between the processes), we can't determine the order of the events. We can use vector clock to fix this. But whether it's logical clock or vector clock, they both have a disadvantage: we can't know what time the event happens because both of the two clocks merely record the order of the events instead of the time.
 
 To get the chronological order of the events, we have to go back to square one and use real time. But we can't depend on Network Time Protocol (NTP) directly because it has some errors and the time is not accurate, so what should we do?
 

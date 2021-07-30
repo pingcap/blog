@@ -3,12 +3,12 @@ title: Futures and gRPC in Rust
 author: ['Siddon Tang']
 date: 2017-09-12
 summary: This is the speech Siddon Tang gave at Bay Area Rust Meetup August 2017.
-tags: ['TiKV', 'Rust', 'gRPC']
+tags: ['TiKV', 'Rust']
 aliases: ['/blog/2017/09/12/futuresandgrpc/']
 categories: ['Engineering']
 ---
 
-This is the speech Tang Liu (tl@pingcap.com) gave at the Bay Area Rust Meetup August 2017. [See the video](https://air.mozilla.org/bay-area-rust-meetup-august-2017/).
+This is the speech Tang Liu (tl@pingcap.com) gave at the Bay Area Rust Meetup August 2017.
 
 <!-- TOC -->
 

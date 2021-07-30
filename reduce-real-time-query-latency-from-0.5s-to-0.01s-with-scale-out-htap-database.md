@@ -3,7 +3,7 @@ title: Reducing Real-Time Query Latency from 0.5 s to 0.01 s with a Scale-Out HT
 author: ['Xianqi Jin', 'Fan Zhang']
 date: 2021-02-18
 summary: As Autohome's businesses quickly grew, their huge data size placed great pressure on their SQL Server database. To scale out their database and perform real-time analytics, they migrated from SQL Server to TiDB and use TiDB in multiple important apps.
-tags: ['MySQL sharding', 'Scalability', 'High availability', 'HTAP', 'Real-time analytics']
+tags: ['No sharding', 'Scalability', 'High availability', 'HTAP', 'Real-time analytics']
 customer: Autohome
 customerCategory: Internet
 logo: /images/blog/customers/autohome-logo.png
@@ -24,7 +24,7 @@ image: /images/blog/mysql-horizontal-scaling-database-autohome.jpg
 
 [Autohome](https://www.crunchbase.com/organization/autohome) is the leading online destination for automobile consumers in China. It's one of the most visited auto websites in the world. We provide professionally produced and user-generated content, a comprehensive automobile library, and extensive automobile listing information, covering the entire car purchase and ownership cycle.
 
-The Autohome community forum is one of our oldest applications, with 100 million+ daily visits and 1 billion+ daily interface calls. As our data size rapidly grew, SQL Server became our database bottleneck. **Sharding didn't meet our app requirements**, and **scaling database capacity affected apps.** We looked for a new database solution. 
+The Autohome community forum is one of our oldest applications, with 100 million+ daily visits and 1 billion+ daily interface calls. As our data size rapidly grew, SQL Server became our database bottleneck. **Sharding didn't meet our app requirements**, and **scaling database capacity affected apps.** We looked for a new database solution.
 
 After we compared [TiDB](https://docs.pingcap.com/tidb/stable/overview), Apache Ignite, and CockroachDB, we chose TiDB, an open-source, distributed, Hybrid Transactional/Analytical Processing (HTAP) database. Thanks to its horizontal scalability, now we can easily scale out our database, and our transactional **99th percentile latency is within 12 ms.**
 
@@ -35,7 +35,7 @@ This post introduces how TiDB helps us achieve database scaling and real-time an
 * [Our forum reply app's pain points](#our-pain-points-for-the-community-forum-reply-app)
 * [Why we chose TiDB over Ignite and CockroachDB](#our-exploration-of-distributed-sql-databases)
 * [How we use TiDB in the forum reply app](#how-we-use-tidb-in-the-autohome-forum-reply-application)
-* [Why and how we use TiDB in our big sales promotion app](#introducing-tidb-to-our-big-sales-promotion) 
+* [Why and how we use TiDB in our big sales promotion app](#introducing-tidb-to-our-big-sales-promotion)
 
 ## Our pain points for the community forum reply app
 
@@ -43,7 +43,7 @@ Over the past 14 years, the Autohome community forum has grown to 100 million+ p
 
 ### Database sharding didn't meet our app requirements
 
-The Autohome forum reply database stores replies to posts. When SQL Server's single table was too large, database performance degraded. To solve this issue, we sharded the reply database based on the post ID. The result was 100+ shards and 1,000+ tables in the reply database. 
+The Autohome forum reply database stores replies to posts. When SQL Server's single table was too large, database performance degraded. To solve this issue, we sharded the reply database based on the post ID. The result was 100+ shards and 1,000+ tables in the reply database.
 
 However, our applications developed and application requirements changed, and **when we wanted to implement some application requirements, sharding couldn't meet our needs**. We hoped that data was logically in a single table.
 
@@ -90,7 +90,7 @@ We conducted many functionality, performance, exception, and application access 
 
 #### OLTP testing for TiDB
 
-We tested TiDB against 20 million rows of data and 500 concurrent threads in an OLTP scenario. 
+We tested TiDB against 20 million rows of data and 500 concurrent threads in an OLTP scenario.
 
 As the following figure shows, **TiDB's 99th percentile response time was within 16 ms**. This met our application requirement. **When the amount of data increased, TiDB showed even greater advantages.** In addition, we can add TiDB or [TiKV](https://docs.pingcap.com/tidb/dev/tikv-overview) nodes to improve read and write performance.
 
@@ -391,9 +391,9 @@ We made a detailed migration plan and migrated from SQL Server to TiDB. If you'd
 ![TiDB's 99th and 99.9th percentile response times](media/tidb-99th-and-99.9th-percentile-response-times.jpg)
 <div class="caption-center"> TiDB's 99th and 99.9th percentile response times </div>
 
-In September 2019, we ran the distributed database TiDB in the production environment. Since then, it has been running stably. 
+In September 2019, we ran the distributed database TiDB in the production environment. Since then, it has been running stably.
 
-Next, we'll introduce how we use TiDB in our yearly big sales promotion party. 
+Next, we'll introduce how we use TiDB in our yearly big sales promotion party.
 
 ## Introducing TiDB to our big sales promotion
 
@@ -493,15 +493,15 @@ For the sales promotion, we deployed TiDB in three DCs across two cities, with f
 
 As this diagram shows:
 
-* TiFlash is TiDB's columnar storage engine. This makes TiDB a true HTAP database. TiFlash provides the same snapshot isolation level of consistency as TiKV and ensures that the latest data is read. 
+* TiFlash is TiDB's columnar storage engine. This makes TiDB a true HTAP database. TiFlash provides the same snapshot isolation level of consistency as TiKV and ensures that the latest data is read.
 
     During the big sales promotion party, we used TiFlash to display real-time data on a large screen.
 
-* [TiCDC](https://docs.pingcap.com/tidb/dev/ticdc-overview/) is an open-source feature that replicates TiDB's incremental changes to downstream platforms by subscribing to change logs in TiKV. It also provides [TiCDC Open Protocol](https://pingcap.com/docs/dev/ticdc/ticdc-open-protocol/) to support other systems that subscribe to TiKV's data changes. 
+* [TiCDC](https://docs.pingcap.com/tidb/dev/ticdc-overview/) is an open-source feature that replicates TiDB's incremental changes to downstream platforms by subscribing to change logs in TiKV. It also provides [TiCDC Open Protocol](https://pingcap.com/docs/dev/ticdc/ticdc-open-protocol/) to support other systems that subscribe to TiKV's data changes.
 
     In our cluster, it replicated TiDB cluster data to the downstream MySQL database in real time. TiCDC's replication latency was within seconds, which satisfied our real-time requirements for online sales promotion applications.
 
-* The MySQL database was used as a backup in case of failures to improve the applications' capacity to tolerate disasters. 
+* The MySQL database was used as a backup in case of failures to improve the applications' capacity to tolerate disasters.
 
 ### TiDB stress tests
 
@@ -574,6 +574,6 @@ During the big sales promotion, TiDB showed good performance and supported our b
 
 As our community forum's visits and posts continued to increase, the huge data size placed great pressure on our SQL Server database. To scale out our database, we migrated from SQL Server to TiDB. We no longer need to worry about troublesome database sharding.
 
-We've run TiDB for more than two years, and it's used in important applications such as forum replies, resource pools, and friend management. We also deployed TiDB in three DCs across two cities for our 2020 big sales promotion applications. This solution guaranteed our data high availability and helped us achieve real-time HTAP. We could scale out or scale in our database as needed. In addition, TiCDC's high availability and low latency, as well as support for large-scale clusters has made a big impression on us. 
+We've run TiDB for more than two years, and it's used in important applications such as forum replies, resource pools, and friend management. We also deployed TiDB in three DCs across two cities for our 2020 big sales promotion applications. This solution guaranteed our data high availability and helped us achieve real-time HTAP. We could scale out or scale in our database as needed. In addition, TiCDC's high availability and low latency, as well as support for large-scale clusters has made a big impression on us.
 
 If you have any questions or want detailed information about our experience, you could join the [TiDB community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog).

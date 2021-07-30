@@ -4,7 +4,7 @@ author: ['Max Liu']
 date: 2020-08-06
 summary: At TiDB DevCon 2020, Max Liu, CEO at PingCAP, gave a keynote speech. He believes that today's database should be more flexible, more real-time, and easier to use, and TiDB, an elastic, cloud-native, real-time HTAP database, is exactly that kind of database.
 image: /images/blog/cloud-native-distributed-sql-database.jpg
-tags: ['Community news', 'DevCon', 'HTAP', 'Cloud-native', 'Chaos Mesh']
+tags: ['Community news', 'DevCon', 'HTAP', 'Cloud-native', 'Chaos Engineering']
 categories: ['Product']
 ---
 
@@ -161,7 +161,7 @@ When 4.0 was released, we made a word cloud to show the organizations that contr
 ![TiDB contributors' organizations](media/tidb-contributors-organizations.jpg)
 <div class="caption-center"> TiDB contributors' organizations </div>
 
-At the same time, what surprises me is the community's creativity. For example, TiDB Contributor Dongpo Liu visualized the [top 100 contributors](https://rustin-liu.github.io/Ti2020/) like this:
+At the same time, what surprises me is the community's creativity. For example, TiDB Contributor Dongpo Liu visualized the [top 100 contributors](https://hi-rustin.github.io/Ti2020/) like this:
 
 ![TiDB's top 100 contributors](media/tidb-top-100-contributors.jpg)
 <div class="caption-center"> TiDB's top 100 contributors </div>

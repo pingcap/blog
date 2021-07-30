@@ -22,7 +22,7 @@ Ever since writing the first line of code of TiDB in May 2015, I have witnessed 
 
 * Kai Li ([GitHub ID: kayaklee](https://github.com/kayaklee)), Head of Database Team, [Meituan](https://en.wikipedia.org/wiki/Meituan)
 * Di Wu ([GitHub ID: foxmailed](https://github.com/foxmailed)), Head of Database Middleware/Distributed Database, [Toutiao.com](https://www.toutiao.com/)
-* Yulai Li ([GitHub ID: blacktear23](https://github.com/blacktear23)), Architect, [SpeedyCloud](http://www.speedycloud.cc/)
+* Yulai Li ([GitHub ID: blacktear23](https://github.com/blacktear23)), Architect, SpeedyCloud)
 * Chuan Du ([GitHub ID: spongedu](https://github.com/spongedu)), Senior Engineer, [Tencent Cloud](https://intl.cloud.tencent.com/)
 * Jun-Seok Heo ([GitHub ID: dbjoa](https://github.com/dbjoa)), Samsung Electronics | Cloud Database Engineering
 

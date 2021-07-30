@@ -1,0 +1,28 @@
+name: Links
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 1"
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v1.0.8
+        with:
+          args: -E --exclude-mail -v -i -n -a 429 -t 45 --exclude https://charts.pingcap.org/ --exclude https://451research.com/* --exclude http://localhost* --exclude https://www.crunchbase.com/* --exclude http://www.sunline-i.com/ --exclude https://angel.co/* -- *.md
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Create Issue From File
+        uses: peter-evans/create-issue-from-file@v3
+        with:
+          title: Broken Link Detected
+          content-filepath: ./lychee/out.md
+          labels: bug
+          assignees: ran-huang

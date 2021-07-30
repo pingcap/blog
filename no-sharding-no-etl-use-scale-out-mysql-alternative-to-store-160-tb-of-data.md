@@ -3,7 +3,7 @@ title: 'No Sharding, No ETL: Use a Scale-Out MySQL Alternative to Store 160+ TB 
 author: ['Chunlei Liu', 'Kai Xuan']
 date: 2021-01-14
 summary: As 58.com's business quickly grew, they encountered a database bottleneck. To scale out their databases and simplify database maintenance, they migrated from MySQL to TiDB, a highly available MySQL alternative.
-tags: ['MySQL', 'MySQL sharding', 'Scalability', 'High availability', 'HTAP', 'Real-time analytics']
+tags: ['MySQL', 'No sharding', 'Scalability', 'High availability', 'HTAP', 'Real-time analytics']
 image: /images/blog/no-mysql-sharding-no-etl-scale-out-mysql-alternative.jpg
 customer: 58.com
 customerCategory: Internet

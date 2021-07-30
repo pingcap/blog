@@ -193,4 +193,4 @@ The workflow in this phase is mainly performed by the transaction worker:
 
 This article introduces the eight phases of a successful prewrite request and focuses on the workflow within each phase. I hope this post can help you clarify the resource usage of TiKV requests and give you a deeper understanding of TiKV.
 
-For more TiKV implementation details, see the [TiKV documentation](https://tikv.org/docs/3.0/concepts/overview/) and [deep dive](https://tikv.org/deep-dive/introduction/). If you have any questions or ideas, feel free to join the [TiKV Transaction SIG](https://developer.tidb.io/sig/transaction) and share them with us!
+For more TiKV implementation details, see the [TiKV documentation](https://tikv.org/docs/3.0/concepts/overview/) and [deep dive](https://tikv.org/deep-dive/introduction/). If you have any questions or ideas, feel free to join the [TiKV Transaction SIG](https://tikv.github.io/sig-transaction/) and share them with us!

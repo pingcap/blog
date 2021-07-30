@@ -30,7 +30,7 @@ In turn, Zalo is a key product of the Vietnamese conglomerate VNG. ZaloPay is bu
 
 ![ZaloPay](media/zalopay.jpg)
 
-ZaloPay ranked as the 3rd payment application of the year at the 2018 Tech Awards ceremony held by [VnExpress](https://vnexpress.vn/) newspaper (The most common newspaper in Vietnam). While competitors MoMo took the top spot, followed by ViettelPay, in the recent time, the rising reign of GrabPay by Moca, VinID powered by VinGroup, AirPay by SEA,... making the game more intense.
+ZaloPay ranked as the 3rd payment application of the year at the 2018 Tech Awards ceremony held by [VnExpress](https://e.vnexpress.net/) newspaper (The most common newspaper in Vietnam). While competitors MoMo took the top spot, followed by ViettelPay, in the recent time, the rising reign of GrabPay by Moca, VinID powered by VinGroup, AirPay by SEA,... making the game more intense.
 
 ## What is TiDB?
 

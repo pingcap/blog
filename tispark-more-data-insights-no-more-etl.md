@@ -9,7 +9,7 @@ categories: ['Product']
 
 **Author**: Shawn Ma is a Tech Lead at PingCAP in the OLAP team. Previously, he was Tech Lead at Netease and Quantcast. He received his Masters in Computer Science from University of California--Irvine.
 
-When we released [TiDB 2.0](http://bit.ly/tidb_2_0) in April, part of that announcement also included the release of [TiSpark](https://github.com/pingcap/tispark) 1.0--an integral part of the TiDB platform that makes complex analytics on "fresh" transactional data possible. Since then, many people in the TiDB community have been asking for more information about TiSpark. In this post, I will explain the motivation, inner workings, and future roadmap of this project.
+When we released [TiDB 2.0](https://pingcap.com/blog/tidb-2-0-announcement) in April, part of that announcement also included the release of [TiSpark](https://github.com/pingcap/tispark) 1.0--an integral part of the TiDB platform that makes complex analytics on "fresh" transactional data possible. Since then, many people in the TiDB community have been asking for more information about TiSpark. In this post, I will explain the motivation, inner workings, and future roadmap of this project.
 
 ## Motivation
 

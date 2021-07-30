@@ -3,7 +3,7 @@ title: 'ZaloPay: Using a Scale-Out MySQL Alternative to Serve Millions of Users'
 author: ['Tan To Nguyen Duy']
 date: 2020-09-17
 summary: A DevOps engineer in ZaloPay, Vietnam's most popular mobile payment application, shared why his team chose TiDB as ZaloPay's merchant platform core database. He talked about their pain points, how they use TiDB, and what he likes about it the most.
-tags: ['HTAP', 'DevCon', 'TiSpark', 'Real-time analytics']
+tags: ['HTAP', 'TiSpark', 'Real-time analytics']
 url: /success-stories/zalopay-using-a-scale-out-mysql-alternative-to-serve-millions-of-users/
 customer: VNG
 customerCategory: Financial Services
@@ -19,7 +19,7 @@ image: /images/blog/zalopay-choosing-scale-out-mysql-alternative-database-tidb.j
 
 ![ZaloPay: Using a Scale-Out MySQL Alternative to Serve Millions of Users](media/zalopay-choosing-scale-out-mysql-alternative-database-tidb.jpg)
 
-VNG is a leading internet technology company in Vietnam. Their flagship product, Zalo, is the most popular chat platform in Vietnam. [ZaloPay](https://www.facebook.com/zalopay.engineering/) is a mobile payment application built on top of Zalo. Today, more than 100 million users worldwide use ZaloPay to transfer money and make payments.
+VNG is a leading internet technology company in Vietnam. Their flagship product, Zalo, is the most popular chat platform in Vietnam. [ZaloPay](https://www.linkedin.com/company/zalopay) is a mobile payment application built on top of Zalo. Today, more than 100 million users worldwide use ZaloPay to transfer money and make payments.
 
 As the company's business rapidly expanded, data storage and data processing became a major and immediate concern. They needed a new infrastructure that could respond to the booming business.
 

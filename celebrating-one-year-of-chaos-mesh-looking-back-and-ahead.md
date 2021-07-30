@@ -3,7 +3,7 @@ title: 'Celebrating One Year of Chaos Mesh: Looking Back and Ahead'
 author: ['Cwen Yin', 'Calvin Weng']
 date: 2021-02-05
 summary: Chaos Mesh started out as a mere fault injection tool and is now heading towards the goal of building a Chaos Engineering ecology. Meanwhile, the Chaos Mesh community was also built from scratch and has helped Chaos Mesh join CNCF as a Sandbox project.
-tags: ['Chaos Mesh', 'Chaos Engineering']
+tags: ['Chaos Engineering', 'Chaos Engineering']
 categories: ['Community']
 image: /images/blog/celebrating-one-year-of-chaos-mesh.jpg
 ---
@@ -90,7 +90,7 @@ Cloud native has been in the DNA of Chaos Mesh since the very beginning. Joining
 The quality of the open source community determines whether our adopters and contributors are willing to stick around and get involved in the community for the long run. In this regard, we've been working hard on:
 
 * Continuously enriching documentation and optimizing its structure. So far, we have developed a complete set of documentation for different groups of audiences, including [a user guide](https://chaos-mesh.org/docs/user_guides/installation/) and [developer guide](https://chaos-mesh.org/docs/development_guides/development_overview), [quick start guides](https://chaos-mesh.org/docs/get_started/get_started_on_kind), [use cases](https://chaos-mesh.org/docs/use_cases/multi_data_centers), and [a contributing guide](https://github.com/chaos-mesh/chaos-mesh/blob/master/CONTRIBUTING.md). All are constantly updated per each release.
-* Working with the community to publish blog posts, tutorials, use cases, and chaos engineering practices. So far, we've produced 26 Chaos Mesh related articles. Among them is an [interactive tutorial](https://chaos-mesh.org/interactiveTutorial), published on O'Reilly's Katakoda site. These materials make a great complement to the documentation.
+* Working with the community to publish blog posts, tutorials, use cases, and chaos engineering practices. So far, we've produced 26 Chaos Mesh related articles. Among them is an [interactive tutorial](https://chaos-mesh.org/interactive-tutorial), published on O'Reilly's Katakoda site. These materials make a great complement to the documentation.
 * Repurposing and amplifying videos and tutorials generated in community meetings, webinars, and meetups.
 * Valuing and responding to community feedback and queries.
 

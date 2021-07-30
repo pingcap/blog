@@ -2,8 +2,8 @@
 title: Implement Raft in Rust
 author: ['Siddon Tang']
 date: 2018-05-22
-summary: As an open-source distributed scalable HTAP database, TiDB uses the Raft Consensus Algorithm in its distributed transactional key-value storage engine, TiKV, to ensure data consistency, auto-failover, and fault tolerance. TiDB has thus far been used by more than 200 companies in their production environments in a wide range of industries, from e-commerce and food delivery, to fintech, media, gaming, and travel. 
-tags: ['TiKV', 'Rust', 'Raft', 'How to']
+summary: As an open-source distributed scalable HTAP database, TiDB uses the Raft Consensus Algorithm in its distributed transactional key-value storage engine, TiKV, to ensure data consistency, auto-failover, and fault tolerance. TiDB has thus far been used by more than 200 companies in their production environments in a wide range of industries, from e-commerce and food delivery, to fintech, media, gaming, and travel.
+tags: ['TiKV', 'Rust', 'Raft', 'Tutorial']
 categories: ['Engineering']
 ---
 <!-- markdownlint-disable -->
@@ -138,14 +138,14 @@ loop {
 
 There are three steps to this process before `handle_raft_ready`:
 
-1. You can call the `step` function when you receive the Raft messages from other nodes. 
+1. You can call the `step` function when you receive the Raft messages from other nodes.
 
     Calling `Raft::step` will change the memory state of `Raft`.
 
 2. Use the `propose` function to drive the Raft node when the client sends a request to the Raft server. You can call `propose` to add the request to the Raft log explicitly.
 
     In most cases, the client needs to wait for a response for the request. For example, if the client writes a value to a key and wants to know whether the write succeeds or not, but the write flow is asynchronous in Raft, so the write log entry must be replicated to other followers, then committed and at last applied to the state machine, so here we need a way to notify the client after the write is finished.
-  
+
     One simple way is to use a unique ID for the client request, and save the associated callback function in a hash map. When the log entry is applied, we can get the ID from the decoded entry, call the corresponding callback, and notify the client.
 
 3. You need a timer to run the Raft node regularly. In the above example, we used Rust channel `recv_timeout`.
@@ -162,7 +162,7 @@ When your Raft node is driven and run, Raft may enter a `Ready` state. You need 
 
 2. Check whether `entries` is empty or not. If not empty, it means that there are newly added entries but has not been committed yet, we must append the entries to the Raft log.
 
-3. Check whether `hs` is empty or not. If not empty, it means that the `HardState` of the node has changed. For example, the node may vote for a new leader, or the commit index has been increased. We must persist the changed `HardState`.  
+3. Check whether `hs` is empty or not. If not empty, it means that the `HardState` of the node has changed. For example, the node may vote for a new leader, or the commit index has been increased. We must persist the changed `HardState`.
 
 4. Check whether `messages` is empty or not. If not, it means that the node will send messages to other nodes. There has been an optimization for sending messages: if the node is leader, this can be done together with step 1 in parallel.
 
