@@ -170,7 +170,7 @@ To log in to your GCP user account, do the following:
 
 4. Paste the verification code from the browser to the gcloud command line.
 
-    ![Paste the verification code](media/paste-verification-cod.jpg)
+    ![Paste the verification code](media/paste-verification-code.jpg)
 
     Our user account should now be associated with gcloud.
 
