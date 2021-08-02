@@ -209,7 +209,6 @@ ls -al .ssh
 
 ![The .ssh directory](media/ssh-directory.jpg)
 
-
 There are no actual keys in this directory. We can use gcloud to create the SSH keys that TiUP will need.
 
 When you run the following command, you will be prompted to enter a passphrase. For simplicity, do not enter a passphrase. Just hit Return to provide an empty passphrase.
@@ -248,7 +247,6 @@ host myip.opendns.com resolver1.opendns.com
 ```
 
 ![The command prompt does not include tidb-vm](media/command-prompt-does-not-include-tidb-vm.jpg)
-
 
 Notice the blurred-out IP address above. This is the IP address used in the following steps. Your IP address will be different and unique. 
 
