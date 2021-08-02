@@ -51,7 +51,7 @@ Notice that I'm using a user account; not a service account. Usually a service a
 
 In the following example, I have the `compute` configuration set for region and zone. Setting this information is optional. In this tutorial, when we use gcloud commands we will specify where the resource is located.
 
-![gcloud commands](meida/gcloud-commands.jpg)
+![gcloud commands](media/gcloud-commands.jpg)
 
 ## Create a GCP instance
 
