@@ -332,7 +332,7 @@ Client:
 let (sink, future) = client_streaming(service, method);
 sink = sink.send(request).wait().unwrap();
 sink = sink.send(request).wait().unwrap();
-……
+......
 let response = future.wait();
 ```
 
@@ -421,7 +421,7 @@ let (future, tag) = CallTag::batch_pair();
 // create a tag and let gRPC manages its lifetime
 let tag_box = Box:new(tag);
 let tag_ptr = Box::into_raw(tag_box) as _;
-call_start_batch(…, tag_ptr);
+call_start_batch(..., tag_ptr);
 ```
 
 ### Unary Future

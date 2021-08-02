@@ -8,7 +8,7 @@ categories: ['Company']
 image: /images/blog/future-of-atabase.png
 ---
 
-**Author:** [Ed Huang](https://github.com/c4pt0r) (CTO at PingCAP) 
+**Author:** [Ed Huang](https://github.com/c4pt0r) (CTO at PingCAP)
 
 **Transcreator:** [Queeny Jin](https://github.com/queenypingcap)
 
@@ -34,7 +34,7 @@ According to [Niklaus Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth), Progr
 
 If only we could design the data governance strategy and the architecture to serve as a single and real-time source of truth, there would be no limitation on data storage capacity, no limitation on consistency, and hardly any manual operations and maintenance. The system and the applications on top of it could scale on-demand, perform real-time data analytics so the business can adapt to the world of uncertainties and sometimes even chaos.
 
-## Is it possible, a single and real-time source of truth？
+## Is it possible, a single and real-time source of truth?
 
 Back when we started 5 years ago, it was impossible. Because as you can see, at the heart of it, is a database platform that could cover all the use cases and different workloads. Before we started, no database solutions on the market could fulfill that. How about Hadoop for big data analysis? How about NoSQL database solutions for scalability? Or even shard your relational database using middleware? They all have one common problem: tradeoff.
 

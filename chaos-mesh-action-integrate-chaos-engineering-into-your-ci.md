@@ -189,7 +189,7 @@ PING busybox-1.busybox.busybox.svc (10.244.0.6): 56 data bytes
 64 bytes from 10.244.0.6: seq=7 ttl=63 time=0.111 ms
 64 bytes from 10.244.0.6: seq=8 ttl=63 time=0.070 ms
 64 bytes from 10.244.0.6: seq=9 ttl=63 time=0.077 ms
-……
+......
 ```
 
 The output indicates a regular series of 10-millisecond delays that last about 5 seconds each. This is consistent with the chaos configuration we injected into chaos-mesh-action.

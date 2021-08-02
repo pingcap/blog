@@ -29,15 +29,15 @@ There are many new features, improvements, and enhancements in 2.1. To check out
 
 ### Smarter Optimizer
 
-The optimizer is the brain of the database. In 2.1, we've made significant improvements to make TiDB's brain, its cost-based optimizer (CBO), smarter so it knows how to speed up more complex queries without human intervention. For example, the new CBO can make smarter index choices on Index Join, along with optimizations on outer table and correlated subquery, to speed up complex queries automatically.  
+The optimizer is the brain of the database. In 2.1, we've made significant improvements to make TiDB's brain, its cost-based optimizer (CBO), smarter so it knows how to speed up more complex queries without human intervention. For example, the new CBO can make smarter index choices on Index Join, along with optimizations on outer table and correlated subquery, to speed up complex queries automatically.
 
-We also added additional knobs that you can turn manually as “hint”, for Join, UPDATE, DELETE, and other queries, so even if the CBO does not generate a good query plan, you can intervene to keep performance up to par and consistent.
+We also added additional knobs that you can turn manually as "hint", for Join, UPDATE, DELETE, and other queries, so even if the CBO does not generate a good query plan, you can intervene to keep performance up to par and consistent.
 
 ### Faster Executor
 
 TiDB 2.1 includes major improvements to the execution of certain physical plans to increase performance, especially for hash aggregation and projection, by adding multi-thread execution. We also re-architected the aggregation framework to support vectorized computation.
 
-Because of these improvements, TiDB 2.1 performances much better in OLAP scenarios than 2.0, as shown in our latest TPC-H benchmark in the “Performance Benchmark” section below. This performance boost further strengthens TiDB's capabilities as an HTAP database.
+Because of these improvements, TiDB 2.1 performances much better in OLAP scenarios than 2.0, as shown in our latest TPC-H benchmark in the "Performance Benchmark" section below. This performance boost further strengthens TiDB's capabilities as an HTAP database.
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('TiDB 2.1 GA: Battle-Tested to Handle an Unpredictable World', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
@@ -78,7 +78,7 @@ In addition, users can now also use EXPLAIN ANALYZE to see additional execution 
 
 Hotspot formation is one of the biggest enemies to a performant distributed database. It is also one of the most unpredictable -- you never know when and how hotspots could form to create bottlenecks in your system.
 
-Thus, in this new version we did a lot of work to make TiDB smarter at detecting hotspot formation more quickly by aggregating additional system metadata to be monitored continuously. We also further optimized TiDB's ability to execute hotspot scheduling policy -- breaking up and distributing hotspots with more efficiency and lower system cost. Lastly, 2.1 also makes available an interface where users can manually break up Regions in specific TiKV nodes to remove hotspots, which can be useful in extreme situations where the system cannot respond quickly enough to remove hotspots automatically.  
+Thus, in this new version we did a lot of work to make TiDB smarter at detecting hotspot formation more quickly by aggregating additional system metadata to be monitored continuously. We also further optimized TiDB's ability to execute hotspot scheduling policy -- breaking up and distributing hotspots with more efficiency and lower system cost. Lastly, 2.1 also makes available an interface where users can manually break up Regions in specific TiKV nodes to remove hotspots, which can be useful in extreme situations where the system cannot respond quickly enough to remove hotspots automatically.
 
 ### More Efficient Garbage Collection
 

@@ -119,9 +119,9 @@ We used [go-ycsb](https://github.com/pingcap/go-ycsb), a GO port of [YCSB](https
 
 ### Test environment
 
-- CPU: Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz（40 cores）
-- Memory: 128 GB（TiKV memory usage is limited under 32 GB via Cgroup）
-- Disk: SATA SSD 1.5 TB（[fio](https://linux.die.net/man/1/fio) test: read IOPS and write IOPS for 4 KB block size hybrid random read/write are respectively 43.8 KB and 18.7 KB)
+- CPU: Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz (40 cores)
+- Memory: 128 GB (TiKV memory usage is limited under 32 GB via Cgroup)
+- Disk: SATA SSD 1.5 TB ([fio](https://linux.die.net/man/1/fio) test: read IOPS and write IOPS for 4 KB block size hybrid random read/write are respectively 43.8 KB and 18.7 KB)
 
 ### Test plan
 
@@ -148,7 +148,7 @@ Figure 7. Data Loading Performance: Titan's performance is 70% higher than Rocks
 
 ![Update performance](media/update-performance.png)
 
-Figure 8. Update Performance: Titan's performance in update scenarios is 180% higher than RocksDB. This is mainly attributable to Titan's excellent read performance and optimal GC algorithm.  
+Figure 8. Update Performance: Titan's performance in update scenarios is 180% higher than RocksDB. This is mainly attributable to Titan's excellent read performance and optimal GC algorithm.
 
 ![Output size](media/output-size.png)
 
@@ -195,7 +195,7 @@ options.create_if_missing = true;
 rocksdb::Status status =
 rocksdb::titandb::TitanDB::Open(options, "/tmp/testdb", &db);
  (status.ok());
- …
+ ...
 ```
 
 or

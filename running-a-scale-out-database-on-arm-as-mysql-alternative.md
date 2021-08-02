@@ -75,7 +75,7 @@ To make sure that TiDB goes well with ARM for our application, we ran benchmarki
    </td>
    <td>Two Huawei Kunpeng 920 processors (32 cores)
    </td>
-   <td>Two <a href="https://ark.intel.com/content/www/us/en/ark/products/91767/intel-xeon-processor-e5-2650-v4-30m-cache-2-20-ghz.html">Intel 2650 v4</a> processors (12 cores). <br/> Owing to Intel’s <a href="https://en.wikipedia.org/wiki/Hyper-threading">hyper-threading technology</a>, x86 has in fact 48 cores available.
+   <td>Two <a href="https://ark.intel.com/content/www/us/en/ark/products/91767/intel-xeon-processor-e5-2650-v4-30m-cache-2-20-ghz.html">Intel 2650 v4</a> processors (12 cores). <br/> Owing to Intel's <a href="https://en.wikipedia.org/wiki/Hyper-threading">hyper-threading technology</a>, x86 has in fact 48 cores available.
    </td>
   </tr>
   <tr>

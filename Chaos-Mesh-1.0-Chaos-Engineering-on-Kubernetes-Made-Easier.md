@@ -17,7 +17,7 @@ press_release: true
 
 Today, we are proud to announce the general availability of Chaos Mesh® 1.0, following its entry into CNCF as a [sandbox project](https://pingcap.com/blog/announcing-chaos-mesh-as-a-cncf-sandbox-project) in July, 2020.
 
-Chaos Mesh 1.0 is a major milestone in the project’s development. After 10 months of effort within the open-source community, Chaos Mesh is now ready in terms of functionality, scalability, and ease of use. Here are some highlights.
+Chaos Mesh 1.0 is a major milestone in the project's development. After 10 months of effort within the open-source community, Chaos Mesh is now ready in terms of functionality, scalability, and ease of use. Here are some highlights.
 
 ## Powerful chaos support
 

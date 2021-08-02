@@ -6,7 +6,7 @@ summary: TiGraph can manipulate graph data and relational data in one transactio
 tags: ['Hackathon', 'Benchmark', 'Transaction']
 categories: ['Community']
 image: /images/blog/add-graph-mode-to-a-relational-database.jpg
---- 
+---
 
 **Authors:** [Heng Long](https://github.com/lonng), [Shuang Chen](https://github.com/crazycs520), [Wenjun Huang](https://github.com/wjhuang2016) (Software Engineers at PingCAP)
 
@@ -41,18 +41,18 @@ TiGraph's technology stack is consistent with TiDB's from the upper layer to the
 
     We added two execution operators:
 
-    * `GraphTagReader`. It reads the graph data's vertex data. 
+    * `GraphTagReader`. It reads the graph data's vertex data.
     * `Traverse`. It traverses the graph based on specified edges.
 
     Graph calculation contains three parts: graph traversal, subgraph matching, and graph aggregation. Our Hackathon demo focused on graph traversal. Later, when we continue to develop this project, we'll design subgraph matching and graph aggregation operators.
 
 ## Impressive benchmark metrics
 
-Because time was limited at Hackathon, TiGraph only implemented the key-value logic in TiDB. In [TiKV](https://docs.pingcap.com/tidb/stable/tikv-overview), TiDB's distributed storage engine, we had no time to re-implement TiGraph in Rust. For testing we used Unistore, TiDB's built-in storage engine. 
+Because time was limited at Hackathon, TiGraph only implemented the key-value logic in TiDB. In [TiKV](https://docs.pingcap.com/tidb/stable/tikv-overview), TiDB's distributed storage engine, we had no time to re-implement TiGraph in Rust. For testing we used Unistore, TiDB's built-in storage engine.
 
 Regarding the data size, at the beginning, we planned to generate 1 million vertices and 40 million edges. At four degrees of separation, we found that TiGraph could return a result while TiDB could not. This was because:
 
-* We chose Unistore, which is for unit tests, instead of TiKV, which we use in production. 
+* We chose Unistore, which is for unit tests, instead of TiKV, which we use in production.
 * In this scenario, there is no advantage to using a relational database, so TiDB couldn't return results.
 
 ![TiGraph's benchmarks](media/tigraph-benchmarks.jpg)
@@ -78,7 +78,7 @@ First, we designed a set of clauses that is highly extensible and highly compati
 ```
 -- Gremlin
 g.V().has("name","John").     -- Get the vertex with the name "John."
-  out("knows").               -- Traverse the people that John knows (John'sfirst-degree connections). 
+  out("knows").               -- Traverse the people that John knows (John'sfirst-degree connections).
   out("knows").               -- Traverse the people that John's acquaintances know (John's second-degree connections).
   values("name")              -- Get these people's names.
 ```
@@ -98,7 +98,7 @@ SELECT * FROM people WHERE name="John"
 
 This clause includes two parts:
 
-* The query result of the `SELECT… FROM …` statement is the starting point for graph traversal (the `TRAVERSE` clause).
+* The query result of the `SELECT... FROM ...` statement is the starting point for graph traversal (the `TRAVERSE` clause).
 * The `TRAVERSE` clause specifies the `EDGE` we want to traverse and uses graph traversal to query the starting point's second-degree connection.
 
 By contrast, if we used TiDB's existing SQL syntax without extending it, the statement would be:
@@ -124,7 +124,7 @@ Comparing the two examples above, we can see that:
 
 * TiGraph's syntax is SQL styled and very expressive.
 
-* TiGraph introduces the `TRAVERSE` clause to express graph traversal. This clause can seamlessly interact with TiDB relational queries' other clauses in combination. Therefore, **we can reuse TiDB's existing execution operators and expressions, and the learning cost for users is very low**. 
+* TiGraph introduces the `TRAVERSE` clause to express graph traversal. This clause can seamlessly interact with TiDB relational queries' other clauses in combination. Therefore, **we can reuse TiDB's existing execution operators and expressions, and the learning cost for users is very low**.
 
     For example, we can reuse the `WHERE`, `ORDER BY`, and `LIMIT` by adding filter conditions to the edge and input the result of graph traversal (the `TRAVERSE` clause) to the `ORDER BY LIMIT` clause:
 
@@ -159,7 +159,7 @@ Through the user's relationship network to detect their association with the ris
 
 * It can detect whether the user's multi-layer social relationship conforms to normal graph characteristics. If it's an isolated subgraph, it may be a fake relationship network, and the user is at high risk. For example, they may be on a block list or associated with a high-risk node.
 * It can spot whether there are high-risk nodes in the multi-layer relationship network, such as risky nodes in the second degree of separation.
-* It can use the Google Personal Rank and PageRank algorithms to calculate nodes' risk degrees in a relational network. 
+* It can use the Google Personal Rank and PageRank algorithms to calculate nodes' risk degrees in a relational network.
 
 For organized and large-scale digital financial frauds, TiGraph could quickly analyze a criminal gang in a complex and help staff reach timely decisions about fraud blocking.
 

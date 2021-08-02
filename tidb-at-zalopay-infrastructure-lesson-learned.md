@@ -24,7 +24,7 @@ notShowOnLogoWall: true
 
 ZaloPay is a mobile payment application serving user's daily life and business needs, firstly launched in 2017. It is relatively competitive compared to MoMo, GrabPay by Moca, ViettelPay, etc.
 
-Similar to AliPay which is one of three tenets of the “iron triangle” (aka e-commerce and logistics). GrabPay is as an enabler on the Grab ecosystem and WeChat Pay is on a social media platform.
+Similar to AliPay which is one of three tenets of the "iron triangle" (aka e-commerce and logistics). GrabPay is as an enabler on the Grab ecosystem and WeChat Pay is on a social media platform.
 
 In turn, Zalo is a key product of the Vietnamese conglomerate VNG. ZaloPay is built on the top of [Zalo](https://zalo.me/), the most popular messenger app in Vietnam which was launched in 2012, with > 100M active users so far.
 

@@ -294,7 +294,7 @@ Something interesting drew our attention during this experiment. If we look at t
 * 20, 2019-08-22 16:09:26, [3. 1. 0. 0. 0.], [4.24397000e+04 1.20590000e+04 8.68403016e+10 5.07300000e+01]
 * 30, 2019-08-23 03:03:42, [3. 1. 1. 0. 0.], [4.30542000e+04 1.18890000e+04 8.68628124e+10 5.10200000e+01]
 
-The only difference between their knobs is that the Bloom filter (`optimize-filters-for-hits==True`) is enabled for sample 20, while it's disabled for sample 30. However, the throughput of sample 20 is even a bit lower than sample 30, which is completely different from our expectations. To find out what happened, we took a closer look at the Grafana charts of the two samples. (In both cases, `block-cache-size` was 12.8 GB.）
+The only difference between their knobs is that the Bloom filter (`optimize-filters-for-hits==True`) is enabled for sample 20, while it's disabled for sample 30. However, the throughput of sample 20 is even a bit lower than sample 30, which is completely different from our expectations. To find out what happened, we took a closer look at the Grafana charts of the two samples. (In both cases, `block-cache-size` was 12.8 GB.)
 
 ![Block cache hit comparison](media/block-cache-hit-comparison.png)
 <div class="caption-center"> Block cache hit comparison </div>

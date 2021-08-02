@@ -1,5 +1,5 @@
 ---
-title: How We Trace a KV Database with Less than 5% Performance Impact 
+title: How We Trace a KV Database with Less than 5% Performance Impact
 author: ['Zhenchi Zhong']
 date: 2021-06-30
 summary: As a key-value database, TiKV has much higher performance requirements than a regular application, so tracing tools must have minimal impact. Learn how we trace TiKV requests while impacting performance less than 5%.
@@ -126,7 +126,7 @@ To support tracing at microseconds or even nanoseconds precision while keeping p
 
 The TSC register has existed in modern x86 architecture CPUs since the Pentium processor introduced in 2003. It records the number of CPU clock cycles since reset. When the CPU clock rate is constant, it can be used for high-precision timing.
 
-**The TSC meets the requirements of monotonic increase, high precision, and high performance at the same time.** In our test environment, it only takes 15 ns to fetch TSC twice. 
+**The TSC meets the requirements of monotonic increase, high precision, and high performance at the same time.** In our test environment, it only takes 15 ns to fetch TSC twice.
 
 The TSC register cannot be used directly. When it's used as a time source, it has several problems that affect the accuracy, as listed below.
 
@@ -170,7 +170,7 @@ In the example above, the elapsed TSC (tsc2 - tsc1) is even negative!
 To solve this problem, **TiKV synchronizes the TSC value of each core by calculating TSC offsets:**
 
 1. TiKV arbitrarily takes two TSC values at two physical times on each core.
-2. The physical time is used as the x-axis, and the TSC values are used as the y-axis. They can be used to form a line. 
+2. The physical time is used as the x-axis, and the TSC values are used as the y-axis. They can be used to form a line.
 3. The TSC offset of each core is the gap of the line at y-axis, as shown in the following figure:
 
 ![TSC value offset](media/tsc-value-offset.jpg)
@@ -270,7 +270,7 @@ Common methods to perform thread-safe span collection are:
 * `std::sync::mpsc::Receiver<Span>`
 * `crossbeam::channel::Receiver<Span>`
 
-Among these methods, `crossbeam::channel` is the best choice. It takes about 40 ns to send and collect a span. This is not the end. To improve performance, TiKV uses a different method than the above three to collect spans: 
+Among these methods, `crossbeam::channel` is the best choice. It takes about 40 ns to send and collect a span. This is not the end. To improve performance, TiKV uses a different method than the above three to collect spans:
 
 1. For the same thread, TiKV only collects spans on the local thread without any resource contention.
 2. A batch of spans are collected and sent to the global collector.
@@ -311,7 +311,7 @@ Suppose we have a foo event. It occurs at 09:00 and lasts until 09:03:
 `SpanQueue`'s initial state is empty, and `next_parent_id` is `root`. When foo occurs at 09:00, `SpanQueue` performs the following:
 
 1. Adds a new record and fills in the event name `foo`, start time `09:00`, and end time `empty`.
-2. Assigns `next_parent_id`'s value to foo's parent. 
+2. Assigns `next_parent_id`'s value to foo's parent.
 3. Updates `next_parent_id` to `foo`.
 4. Returns the index value `0` to receive the notification of the event end and backfill the end time.
 
@@ -561,7 +561,7 @@ We can connect these records in series to form the following trace tree structur
 
 #### Normal span
 
-Although the recording of `LocalSpan` is efficient, it’s not flexible enough due to its thread-local implementation. For example, in an asynchronous scenario, the creation and termination of some spans occur in different threads, so that the thread-local implementation doesn’t work any longer.
+Although the recording of `LocalSpan` is efficient, it's not flexible enough due to its thread-local implementation. For example, in an asynchronous scenario, the creation and termination of some spans occur in different threads, so that the thread-local implementation doesn't work any longer.
 
 For these problems, TiKV retains the thread-safe span recording method described at the beginning of the article: `crossbeam::channel` collects a single span at a time. This is called a `NormalSpan`.
 
@@ -603,7 +603,7 @@ for req in listener.incoming() {
 }
 ```
 
-By using the "guard," the span can be ended automatically when the scope exits. In addition to returning the root span, `Span::root(event)` also returns a collector. The collector has a one-to-one correspondence with the root span. When the request is completed, we can call the collector's collect method to collect all spans generated on the execution path. 
+By using the "guard," the span can be ended automatically when the scope exits. In addition to returning the root span, `Span::root(event)` also returns a collector. The collector has a one-to-one correspondence with the root span. When the request is completed, we can call the collector's collect method to collect all spans generated on the execution path.
 
 {{< copyable "" >}}
 
@@ -679,7 +679,7 @@ To record asynchronous functions, the steps are slightly different:
     }
     ```
 
-2. Bind the future to a span. Wrap the task with the future adapter `in_span` provided by minitrace-rust. 
+2. Bind the future to a span. Wrap the task with the future adapter `in_span` provided by minitrace-rust.
 
     In the Rust asynchronous context, a task refers to the future spawned to an executor, also known as the root future. For example, the following `foo_async` is a task:
 

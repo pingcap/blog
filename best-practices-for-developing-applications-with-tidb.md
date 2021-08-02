@@ -291,7 +291,7 @@ The optimizer determines whether to use indexes.
 You can't use an index when the query predicate is among the following:
 
 ```
-like '%...'，like '%...%'，not like '%...'，not like '%...%'，<=>
+like '%...', like '%...%', not like '%...', not like '%...%', <=>
 ```
 
 > **Note:**
@@ -335,7 +335,7 @@ Also, composite index `(a,b,c)` is available for the query structured as `select
 
 Write-back in batch job scenarios is a general cause of write hotspots. TiKV is a range-based key-value system, where the key determines which Region is written. The value of a key depends on the following:
 
-- When the primary key is an integer (`int`, `bigint`…), the key is the primary key.
+- When the primary key is an integer (`int`, `bigint`...), the key is the primary key.
 - When TiDB creates a hidden column (`_tidb_rowid`) for the table, the key is the hidden column.
 
 ### 6.1 Use `SHARD_ROW_ID_BITS` to scatter the write hotspot
@@ -362,7 +362,7 @@ This section describes some SQL syntax best practices in TiDB.
 
 ### 7.1 `create table as select` is not supported
 
-The current version of TiDB does not support the `create table as select …` statement. To achieve the same result, you must modify two statements in combination: `create table like …`and `insert into select …`. `create table like…` supports replicating the schema of the corresponding table.
+The current version of TiDB does not support the `create table as select ...` statement. To achieve the same result, you must modify two statements in combination: `create table like ...`and `insert into select ...`. `create table like...` supports replicating the schema of the corresponding table.
 
 ### 7.2 Use full `GROUP BY`to guarantee stable result sets
 

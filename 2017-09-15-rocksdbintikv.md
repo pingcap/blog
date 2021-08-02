@@ -34,7 +34,7 @@ This is the speech Siddon Tang gave at the [RocksDB meetup](https://www.meetup.c
 
 Hi every one,  thanks for having me here, the RocksDB team.
 
-Today, I will talk about how we use [RocksDB](https://github.com/facebook/rocksdb) in [TiKV](https://github.com/pingcap/tikv). Before we start, I will introduce myself briefly. My name is Siddon Tang, chief engineer of PingCAP. Now I am working on [TiDB](https://github.com/pingcap/tidb), the next generation SQL database; and [TiKV](https://github.com/pingcap/tikv), a distributed transactional key-value store. I am an open source lover and I have developed some open source projects like LedisDB (BTW, the backend engine is also RocksDB), go-mysql, go-mysql-elasticsearch, etc…
+Today, I will talk about how we use [RocksDB](https://github.com/facebook/rocksdb) in [TiKV](https://github.com/pingcap/tikv). Before we start, I will introduce myself briefly. My name is Siddon Tang, chief engineer of PingCAP. Now I am working on [TiDB](https://github.com/pingcap/tidb), the next generation SQL database; and [TiKV](https://github.com/pingcap/tikv), a distributed transactional key-value store. I am an open source lover and I have developed some open source projects like LedisDB (BTW, the backend engine is also RocksDB), go-mysql, go-mysql-elasticsearch, etc...
 
 ## Agenda
 
@@ -54,7 +54,7 @@ OK, let's begin. Why did we decided to use RocksDB instead of LevelDB, WiredTige
 
 * First of all, RocksDB is fast. We can keep high write/read speed even there's a lot of data in a single instance.
 
-* And of course, RocksDB is stable. I know that RocksDB team does lots of stress tests to guarantee the stability；
+* And of course, RocksDB is stable. I know that RocksDB team does lots of stress tests to guarantee the stability;
 
 * And it's easy to be embedded. We can call RocksDB's C API in Rust directly through FFI, because TiKV is written in Rust.
 

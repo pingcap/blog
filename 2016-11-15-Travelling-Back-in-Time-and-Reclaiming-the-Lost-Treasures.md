@@ -76,7 +76,7 @@ This is the simplified version of how TiDB implements MVCC.
 
 Originally, TiDB reads data based on the historical time which is automatically obtained by the system as a transaction starts. Setting the `tidb_snapshot` session variable is merely enabling TiDB to read data using the time specified by the user to replace the time automatically obtained by the system.
 
-You might wonder that if all the versions are kept, will the space occupied by the data inflate indefinitely？This leads to how TiDB collects garbage.
+You might wonder that if all the versions are kept, will the space occupied by the data inflate indefinitely? This leads to how TiDB collects garbage.
 
 #### The Garbage Collection (GC) mechanism in TiDB
 

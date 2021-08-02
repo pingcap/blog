@@ -2,7 +2,7 @@
 title: Doubling System Read Throughput with Only 26 Lines of Code
 author: ['Edward Huang']
 date: 2020-02-05
-summary: The Follower Read feature lets any follower replica in a Region serve a read request under the premise of strongly consistent reads. It reduces the load on the Raft leader and improves the read throughput of the TiDB cluster. Read this post to learn more. 
+summary: The Follower Read feature lets any follower replica in a Region serve a read request under the premise of strongly consistent reads. It reduces the load on the Raft leader and improves the read throughput of the TiDB cluster. Read this post to learn more.
 tags: ['Raft', 'TiKV']
 categories: ['Product']
 image: /images/blog/follower-read-load-balancing-consistent-read.png
@@ -113,7 +113,7 @@ TiKV uses an asynchronous Apply, which might violate linearizability. Although t
 Although we can't ensure linearizability for the Raft layer, Follower Read can guarantee snapshot isolation for the database distributed transaction layer. If you're familiar with the [Percolator algorithm](http://www.matrixscience.com/help/percolator_help.html), you can get that:
 
 * When we execute a point get query, we use `UINT64_MAX` as the timestamp to read data. Because only one row of data in only one Region is accessed, we can guarantee snapshot isolation for a transaction.
-* If the data for the committed timestamp (ts) can be read on the follower, but other SQL statements within the same transaction temporarily can't read this ts on the leader, a lock inevitably occurs. The subsequent processing of the lock can guarantee snapshot isolation.  
+* If the data for the committed timestamp (ts) can be read on the follower, but other SQL statements within the same transaction temporarily can't read this ts on the leader, a lock inevitably occurs. The subsequent processing of the lock can guarantee snapshot isolation.
 
 The two facts above ensure that when Follower Read is enabled, TiDB's transaction still implements snapshot isolation. Thus, transaction correctness isn't affected.
 
@@ -492,7 +492,7 @@ This feature seems simple, but it's really important. In the future, we'll use i
 
 ### Strategies for varied-heat data
 
-You might ask me a question: if I run a large query on a table, will it affect the ongoing [online transaction processing](https://en.wikipedia.org/wiki/Online_transaction_processing) (OLTP) transaction？Although we have an I/O priority queue built in TiKV, which prioritizes important OLTP requests, it still consumes the resources of the machine with the leader state.
+You might ask me a question: if I run a large query on a table, will it affect the ongoing [online transaction processing](https://en.wikipedia.org/wiki/Online_transaction_processing) (OLTP) transaction? Although we have an I/O priority queue built in TiKV, which prioritizes important OLTP requests, it still consumes the resources of the machine with the leader state.
 
 A corner case is a small hot table with many more read operations than write operations. Although hot data is cached in memory, when the data is extremely hot, a CPU or network I/O bottleneck occurs.
 

@@ -85,23 +85,23 @@ message Binlog {
     # The binlog types, including Prewrite, Commit, Rollback, and so on.
     optional BinlogType  tp = 1 [(gogoproto.nullable) = false];
 
-    # The “start_ts” in the Prewrite, Commit, and Rollback types of binlog, used to record the ts when a transaction starts.
+    # The "start_ts" in the Prewrite, Commit, and Rollback types of binlog, used to record the ts when a transaction starts.
     optional int64  start_ts = 2 [(gogoproto.nullable) = false];
 
-    # “commit_ts” records the ts when a transaction ends, and only records it in the Commit type of binlog.
+    # "commit_ts" records the ts when a transaction ends, and only records it in the Commit type of binlog.
     optional int64  commit_ts = 3 [(gogoproto.nullable) = false];
 
-    # “prewrite_key” is recorded only in the Prewrite type of binlog.
+    # "prewrite_key" is recorded only in the Prewrite type of binlog.
     # It is the primary key of a transaction, used to query whether the transaction is committed.
     optional bytes  prewrite_key = 4;
 
-    # “prewrite_value” is recorded in the Prewrite type of binlog, used to record the change of each row of data.
+    # "prewrite_value" is recorded in the Prewrite type of binlog, used to record the change of each row of data.
     optional bytes  prewrite_value = 5;
 
-    # “ddl_query” records the DDL statements.
+    # "ddl_query" records the DDL statements.
     optional bytes  ddl_query = 6;
 
-    # “ddl_job_id” records the job ID of DDL statements.
+    # "ddl_job_id" records the job ID of DDL statements.
     optional int64  ddl_job_id = 7 [(gogoproto.nullable) = false];
 }
 ```
@@ -211,7 +211,7 @@ type Status struct {
     # The Pump/Drainer service address
     Addr string `json:"host"`
 
-    # The Pump/Drainer state. Optional values are: “online”, “pausing”, “paused”, “closing”, “offline”.
+    # The Pump/Drainer state. Optional values are: "online", "pausing", "paused", "closing", "offline".
     State string `json:"state"`
 
     # Whether Pump/Drainer is alive. (Currently, this field is not used.)
@@ -240,9 +240,9 @@ Based on the information that Pump reports to PD and the actual situation of the
 
 The methods that Pump Client uses to divide Pump instances are as follows:
 
-- During initialization, Pump Client gets the information of all Pump instances from PD, adds the Pump instances with the “online” state to the list of available Pump instances, and adds other Pump instances to the unavailable node list.
+- During initialization, Pump Client gets the information of all Pump instances from PD, adds the Pump instances with the "online" state to the list of available Pump instances, and adds other Pump instances to the unavailable node list.
 
-- Pump sends a heartbeat to PD at regular intervals and updates its own state. Pump Client monitors the status information in PD reported by Pump, and timely updates the Pump information maintained in the memory. If the state is changed from non-online to “online”, then this Pump instance is added to the available Pump instance list; otherwise, it is added to the unavailable node list.
+- Pump sends a heartbeat to PD at regular intervals and updates its own state. Pump Client monitors the status information in PD reported by Pump, and timely updates the Pump information maintained in the memory. If the state is changed from non-online to "online", then this Pump instance is added to the available Pump instance list; otherwise, it is added to the unavailable node list.
 
 - When TiDB writes binlog to Pump, if the Pump instance still fails to write the binlog after retrying multiple times, Pump Client will add this Pump instance to the unavailable list.
 
@@ -323,9 +323,9 @@ The following example illustrates the mechanism of conflict detection:
 ```sql
 SQL1: update itest set id = 4, name = "c", age = 15 where id = 3;     key: 3, 4
 
-SQL2:  update itest set id = 5, name = "b", age = 14 where id = 2;   key：5, 2
+SQL2:  update itest set id = 5, name = "b", age = 14 where id = 2;   key: 5, 2
 
-SQL3：delete from itest where id = 3;                                               key: 3
+SQL3: delete from itest where id = 3;                                               key: 3
 ```
 
 The SQL statements are shown above and `id` is the primary key of the table. The conflict detection mechanism in Drainer works as follows to guarantee data consistency:

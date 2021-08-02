@@ -176,7 +176,7 @@ Instead, it's better to use multiple connections like TPC-C and sysbench do. Not
 
 ### Dig into the why
 
-A good benchmark report doesn't just show off numbers and state “X is faster” — that's not interesting! _Why_ is X faster? Is it because of mistakes? Or is it the result of deliberate choices that had consequences?
+A good benchmark report doesn't just show off numbers and state "X is faster" — that's not interesting! _Why_ is X faster? Is it because of mistakes? Or is it the result of deliberate choices that had consequences?
 
 Talking about why one test subject is faster not only makes the results more interesting, it also makes them more legitimate. If an author can explain why results differ, it demonstrates that they performed the necessary research to make an accurate benchmark.
 

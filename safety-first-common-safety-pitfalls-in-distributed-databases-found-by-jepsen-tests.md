@@ -187,7 +187,7 @@ During my review of Jepsen history, some interesting notes came up that may be o
 
 ### Serializability vs strict serializability: casual reverse
 
-In the [CockroachDB analysis](https://jepsen.io/analyses/cockroachdb-beta-20160829), Jepsen talks about the differences between [*strict serializability*](https://jepsen.io/consistency/models/strict-serializable) and *serializability*. Serializability, but not “strict serializability”, means it was possible for reads to fail to observe the most recent transactions.
+In the [CockroachDB analysis](https://jepsen.io/analyses/cockroachdb-beta-20160829), Jepsen talks about the differences between [*strict serializability*](https://jepsen.io/consistency/models/strict-serializable) and *serializability*. Serializability, but not "strict serializability", means it was possible for reads to fail to observe the most recent transactions.
 
 Strict serializability means that operations should appear to have some order consistency with the real-time ordering. It implies both serializability and linearizability.
 

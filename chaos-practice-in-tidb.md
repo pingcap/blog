@@ -39,7 +39,7 @@ In TiDB, we apply Chaos Engineering to observe the state of our system, make hyp
 
 One of the advanced principles in Chaos Engineering is to run experiments in a production environment. Before deploying TiDB for our users, we have to ensure it's battle-tested. However, we can't perform these experiments in our customers' production environment, because they entrust TiDB with their most mission-critical data. What we *can* do is create our own "battlefield,"--an internal production environment.
 
-Currently, we are using TiDB to power [Jira](https://www.atlassian.com/software/jira) for our internal issues tracking and project management work, "eating our own dog food," so to speak. With this setup, we can run Chaos experiments on Jira. Without any warning, we would inject faults to jeopardize all aspects of the Jira system while our own employees are using it for their daily tasks, in order to simulate a series of cascading “accidents” to identify possible system loopholes. We call this practice “military drill,” and it occurs frequently during our daily operations. In the following sections, I will walk through how we do fault injection and automate the process.
+Currently, we are using TiDB to power [Jira](https://www.atlassian.com/software/jira) for our internal issues tracking and project management work, "eating our own dog food," so to speak. With this setup, we can run Chaos experiments on Jira. Without any warning, we would inject faults to jeopardize all aspects of the Jira system while our own employees are using it for their daily tasks, in order to simulate a series of cascading "accidents" to identify possible system loopholes. We call this practice "military drill," and it occurs frequently during our daily operations. In the following sections, I will walk through how we do fault injection and automate the process.
 
 ## How TiDB does Fault Injection
 
@@ -159,23 +159,26 @@ We can also change the I/O return value. Below we inject an `EINTR` for read and
 
 Sometimes, we want to do **fault injection in specific places** like:
 
- fn save_snapshot() {
-
+```
+fn save_snapshot() {
   save_data();
   save_meta();
- }
+}
+```
 
 We do this because, for example, we want to see the system panic after the snapshot data is saved, but meta is not yet. How can we do this? We can use a mechanism called [`fail`](https://www.freebsd.org/cgi/man.cgi?query=fail&sektion=9&apropos=0&manpath=FreeBSD%2B10.0-RELEASE). Using `fail` we can inject the fault exactly where we want it. In Go, we can use [`gofail`](https://github.com/coreos/gofail) and in Rust, we can use [`fail-rs`](https://github.com/pingcap/fail-rs).
 
 For the above example, now we can do:
 
- fn save_snapshot() {
+```
+fn save_snapshot() {
 
   save_data();
 
   fail_point!("snapshot");
   save_meta();
- }
+}
+```
 
 In this example, we inject a fail point with name "snapshot," and then we can trigger it to throw a panic message like `FAILPOINTS=snapshot=panic(msg) cargo run`.
 
@@ -260,7 +263,7 @@ Schrodinger can be implemented in 5 steps:
 
 Schrodinger can now run tests in 7 different clusters simultaneously, 24/7 without stop. This frees up our team from manual testing; we just need to configure the testing environments and tasks.
 
-For future development, we will continue optimizing the process to make our Chaos Monkey smarter. Instead of always manually setting up testing environments and tasks, we are working on ways to make Schrodinger "study" the cluster and figure out how to inject fault automatically. Netflix has already been doing research in this area and published a related paper: [Automating Failure Testing Research at Internet Scale](https://people.ucsc.edu/~palvaro/socc16.pdf). We are building off this research to advance our own R&D effort, and will share our progress soon!  
+For future development, we will continue optimizing the process to make our Chaos Monkey smarter. Instead of always manually setting up testing environments and tasks, we are working on ways to make Schrodinger "study" the cluster and figure out how to inject fault automatically. Netflix has already been doing research in this area and published a related paper: [Automating Failure Testing Research at Internet Scale](https://people.ucsc.edu/~palvaro/socc16.pdf). We are building off this research to advance our own R&D effort, and will share our progress soon!
 
 ## TLA+ in TiDB
 

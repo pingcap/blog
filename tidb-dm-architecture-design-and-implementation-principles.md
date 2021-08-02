@@ -131,7 +131,7 @@ name-of-router-rule:
 ```
 
 - `name-of-router-rule`: the rule name, specified by the user. When a same rule needs to be applied to multiple upstream instances, you can define only one rule that can be referenced by different instances.
-- `schema-pattern`: the pattern that matches the upstream schema name. It supports wildcard characters (such as “*”) as the suffix. In this example, `schema_*` matches both the two schemas.
+- `schema-pattern`: the pattern that matches the upstream schema name. It supports wildcard characters (such as "*") as the suffix. In this example, `schema_*` matches both the two schemas.
 - `table-pattern`: the pattern that matches the upstream table name. Its usage is similar to that of `schema-pattern`. In this example, `table_*` matches both the two tables.
 - `target-schema`: the name of the target schema. The data matched will be routed into this schema.
 - `target-table`: the name of the target table. The data that matches the schema name and table name are routed to this table in the `target-schema`.
@@ -240,12 +240,12 @@ As for the sharding DDL replication within one TiDB DM, we can generalize some c
 
 From the above characteristics, we can see some functional restrictions as follows:
 
-- The upstream sharded table must execute the same DDL (“same” meaning they are the same after transformation by table router) in the same sequence. For example, in Table 1, Row a is added before Row b while in Table 2, Row b is added before Row a. The different sequences are not allowed for DDL execution.
+- The upstream sharded table must execute the same DDL ("same" meaning they are the same after transformation by table router) in the same sequence. For example, in Table 1, Row a is added before Row b while in Table 2, Row b is added before Row a. The different sequences are not allowed for DDL execution.
 - Within a logical group, all upstream sharded tables that correspond to DM-workers should execute DDL. For example, when the upstream sharded table that corresponds to DM-worker-2 does not execute DDL, the other DM-workers that have already executed DDL will pause the replication and wait for DM-worker-2 to receive DDL from its corresponding upstream.
 - Latency will increase during the data replication due to the waiting.
 - When the incremental replication begins, all upstream sharded tables must be consistent in structure. Only this will ensure that DML from different tables can be replicated to an established structure in downstream and that the DDL of the subsequent sharded tables can be correctly matched and replicated.
 
-In the example above, there is only one sharded table to be merged in the upstream MySQL instance that corresponds to each DM-worker. But in actual scenarios, there may be multiple sharded tables to be merged in a MySQL instance, and one such scenario is where we introduce table router and column mapping in the above section. With this scenario, the replication of sharding DDL becomes more complex. Assume that in a MySQL instance there are 2 tables to be merged, `table_1` and `table_2`. See the following figure：
+In the example above, there is only one sharded table to be merged in the upstream MySQL instance that corresponds to each DM-worker. But in actual scenarios, there may be multiple sharded tables to be merged in a MySQL instance, and one such scenario is where we introduce table router and column mapping in the above section. With this scenario, the replication of sharding DDL becomes more complex. Assume that in a MySQL instance there are 2 tables to be merged, `table_1` and `table_2`. See the following figure:
 
 ![Two tables to be merged](media/two-tables-to-be-merged.png)
 
@@ -257,7 +257,7 @@ Because data comes from the same MySQL instance, all the data is obtained from t
 4. At `t3`, it receives the DDL of  `table_2`.
 5. From `t4` on, both tables receive the DML of `schema V2`.
 
-If we do no special operation to DDL during the data replication, when the DDL of `table_1` is replicated to downstream and changes the table structure of downstream, the DML of `table_2` `schema V1` will not be replicated as normal. Therefore, within a single DM-worker, we have created logical sharding groups which are similar to those within a DM-master. But the group members are the different sharded tables in the same upstream MySQL instance.  
+If we do no special operation to DDL during the data replication, when the DDL of `table_1` is replicated to downstream and changes the table structure of downstream, the DML of `table_2` `schema V1` will not be replicated as normal. Therefore, within a single DM-worker, we have created logical sharding groups which are similar to those within a DM-master. But the group members are the different sharded tables in the same upstream MySQL instance.
 
 But when DM-worker coordinates the replication among sharding groups within a DM-worker, the coordination is not entirely the same as that performed by DM-master. The reasons are:
 

@@ -12,9 +12,9 @@ image: /images/blog/how-we-compiled-a-golang-database-in-the-browser-using-webas
 
 As Queeny Jin mentioned in her article, [TiDB in the Browser: Running a Golang Database on WebAssembly](https://pingcap.com/blog/tidb-in-the-browser-running-a-golang-database-on-webassembly/), we compiled TiDB into an in-browser database using WebAssembly (Wasm). We're very proud of this pilot project because it opens a door to an entirely new world for both Golang and Wasm:
 
-* It is probably the first Golang database that's been compiled to Wasm. As “[Golang weekly (issue 287)](https://golangweekly.com/issues/287)” put it, “The author wonders if a database like TiDB written in Go can run in a web browser, what about other complex Go apps? Go's WebAssembly future is looking quite positive.”
+* It is probably the first Golang database that's been compiled to Wasm. As "[Golang weekly (issue 287)](https://golangweekly.com/issues/287)" put it, "The author wonders if a database like TiDB written in Go can run in a web browser, what about other complex Go apps? Go's WebAssembly future is looking quite positive."
 
-* Besides [SQLite](https://github.com/kripken/sql.js/), Wasm has one more database example that can run inside the browser. As [Database Weekly (issue 279)](https://dbweekly.com/issues/279) put it, ”If a database like TiDB written in Go can run in the browser, what about other complex Go apps or other database systems?”
+* Besides [SQLite](https://github.com/kripken/sql.js/), Wasm has one more database example that can run inside the browser. As [Database Weekly (issue 279)](https://dbweekly.com/issues/279) put it, "If a database like TiDB written in Go can run in the browser, what about other complex Go apps or other database systems?"
 
 What's most exciting is that beginning database users now have an easy way to learn to write SQL statements or test new databases. They don't have to download an entire database and go through the complex setup and configuration process to be able to write SQL. They can simply point their browser to [https://tour.tidb.io/](https://tour.tidb.io/), wait a few seconds for the TiDB database to load, and then start to write SQL statements.
 
@@ -30,7 +30,7 @@ The rest of this blog will dive deep into how and why we built an in-browser dat
 
 _We had a lot of fun—and learned a lot—from our little adventure at TiDB Hackathon 2019. If you want to make your own Golang applications run in a browser, here are some suggestions:_
 
-* _As [WebAssembly Weekly - Issue #100](https://wasmweekly.news/issue-100/) mentioned, "WebAssembly support for Go applications is very much in its infancy.” For example, Golang hasn't fully supported WASI, and goleveldb doesn't support Wasm/js. Be discreet before you go too deep, and clearly understand the use cases for your application._
+* _As [WebAssembly Weekly - Issue #100](https://wasmweekly.news/issue-100/) mentioned, "WebAssembly support for Go applications is very much in its infancy." For example, Golang hasn't fully supported WASI, and goleveldb doesn't support Wasm/js. Be discreet before you go too deep, and clearly understand the use cases for your application._
 
 * _Make sure your application doesn't have third-party platform-specific dependencies that can't be compiled to Wasm._
 
@@ -118,7 +118,7 @@ Plan 2 had its own problem because it meant we would probably detach ourselves f
 
 Was there a third way? Could we make a special case where TiDB didn't depend on these two libraries when we compile the Wasm binary format, but when it came to the binary format for other platforms like Linux, it's business as usual?
 
-With this goal in mind, we did some homework. We found that even though `mathutil` was called many times, only the following functions were used: `MinUint64`, `MaxUint64`，`MinInt32`，`MaxInt32`, etc. So we had an idea:
+With this goal in mind, we did some homework. We found that even though `mathutil` was called many times, only the following functions were used: `MinUint64`, `MaxUint64`, `MinInt32`, `MaxInt32`, etc. So we had an idea:
 
 1. Create the `mathutil` directory, then the `mathutil_linux.go` and `mathutil_js.go` files.
 
