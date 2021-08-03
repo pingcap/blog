@@ -33,7 +33,7 @@ Before you try the steps in this article, make sure you have:
 
 **Preparing your environment**
 
-The following diagram shows prerequisite operations. Each row indicates where you perform the corresponding task: either on your **Local** computer (or laptop) or on a **GCP instance**, which is a virtual machine instance that we will create in GCP. 
+The following diagram shows prerequisite operations. Each row indicates where you perform the corresponding task: either on your **Local** computer (or laptop) or on a **GCP instance**, which is a virtual machine instance that we will create in GCP.
 
 ![Prerequisite and TiUP/TiDB operations architecture](media/prerequisite-and-tiup-tidb-operations-architecture.jpg)
 <div class="caption-center"> Prerequisite and TiUP/TiDB operations architecture </div>
@@ -79,7 +79,7 @@ gcloud compute instances list
 
 ![gcloud compute instances list](media/gcloud-compute-instances-list.jpg)
 
-If you get an error and cannot create an instance, most likely you do not have valid permissions with the GCP account that gcloud is associated with. 
+If you get an error and cannot create an instance, most likely you do not have valid permissions with the GCP account that gcloud is associated with.
 
 ## SSH into the new GCP Instance
 
@@ -100,12 +100,12 @@ The server we connect to via SSH has a prompt that references the tidb-vm instan
 
 ![Change the gcloud account](media/change-gcloud-account.jpg)
 <div class="caption-center"> Change the gcloud account </div>
- 
+
 **gcloud account**
 
 We should now be logged into the GCP instance tidb-vm.
 
-To validate our level of access, we can display a list of our GCP instances: 
+To validate our level of access, we can display a list of our GCP instances:
 
 ```
 gcloud compute instances lists
@@ -117,7 +117,7 @@ Even though you may not get an error, I recommend following the instructions bel
 
 ![change from a service account to your user account](media/change-to-user-account.jpg)
 
-To check what account we are running, run the following command: 
+To check what account we are running, run the following command:
 
 ```
 gcloud auth list
@@ -137,7 +137,7 @@ To change from a service account to a user account:
 4. "Allow" Google account.
 5. Copy and paste the code to gcloud.
 
-To start the process, run the following command: 
+To start the process, run the following command:
 
 ```
 gcloud auth login
@@ -248,7 +248,7 @@ host myip.opendns.com resolver1.opendns.com
 
 ![The command prompt does not include tidb-vm](media/command-prompt-does-not-include-tidb-vm.jpg)
 
-Notice the blurred-out IP address above. This is the IP address used in the following steps. Your IP address will be different and unique. 
+Notice the blurred-out IP address above. This is the IP address used in the following steps. Your IP address will be different and unique.
 
 Let's go back to our GCP instance and look at the current firewall rules:
 
@@ -280,7 +280,7 @@ gcloud compute firewall-rules create access-from-home \
 
   --description="Allow traffic from my personal computer" \
 
-  --source-ranges="<Your Local IP>/32" 
+  --source-ranges="<Your Local IP>/32"
 ```
 
 I added port 2379 to the above command. This port is different from the one shown below.
