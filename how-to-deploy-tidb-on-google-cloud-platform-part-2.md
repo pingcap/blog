@@ -30,7 +30,7 @@ In [Part 1](https://pingcap.com/blog/how-to-deploy-tidb-on-google-cloud-platform
 
 ## Before you begin
 
-In [Part 1](https://hackmd.io/vmqIH4SMRIOUyvqOhExqsw) we had set up the following:
+In [Part 1](https://pingcap.com/blog/how-to-deploy-tidb-on-google-cloud-platform-part-1) we had set up the following:
 
 * GCP instance
 * gcloud associated with a User Account
