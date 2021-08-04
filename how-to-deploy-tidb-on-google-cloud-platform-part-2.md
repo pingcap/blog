@@ -18,7 +18,7 @@ image: /images/blog/deploy-tidb-on-google-cloud-platform-1.jpg
 
 Welcome to the second of a two-part blog series on getting a simple TiDB cluster up and running on Google Cloud Platform. The goal is to let you quickly set up TiDB and become familiar with its benefits. In [Part 1](https://pingcap.com/blog/how-to-deploy-tidb-on-google-cloud-platform-part-1), we created a GCP instance. Here in Part 2, we will install, configure, and run TiDB on that instance.
 
-By the end of this article, your architecture may look similar to the following:.
+By the end of this article, your architecture may look similar to the following:
 
 ![A TiDB/GCP reference architecture](media/tidb-gcp-reference-architecture.jpg)
 <div class="caption-center"> A TiDB/GCP reference architecture </div>
