@@ -311,7 +311,7 @@ Here we can see that the GCP instance's external IP address is 34.83.139.90. (Yo
 
 ### TiDB Dashboard
 
-In a browser on your local computer, provide the URL that starts with your GCP instance IP address, port number 2379, and, at the end, add `/dashboard`. My URL is http://34.83.139.90:2379/dashboard. The IP address for your GCP instance will be different.
+In a browser on your local computer, provide the URL that starts with your GCP instance IP address, port number 2379, and, at the end, add `/dashboard`. My URL is <http://34.83.139.90:2379/dashboard>. The IP address for your GCP instance will be different.
 
 You shouldn't need to login, so go ahead and click the "Sign In" button:
 
