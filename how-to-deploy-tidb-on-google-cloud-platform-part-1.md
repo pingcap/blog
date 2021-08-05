@@ -194,7 +194,7 @@ To log in to your GCP user account, do the following:
 
 ## Create SSH keys for TiUP
 
-Now, we will use [TiUP](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create TiDB clusters. Think of TiUP as a package manager that makes it easier to manage different cluster components in the TiDB ecosystem.
+Think of [TiUP](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) as a package manager that makes it easier to manage different cluster components in the TiDB ecosystem. We will install TiUP in Part 2, but here we will go ahead and configure SSH for TiUP.
 
 ![Create SSH keys for TiUP](media/create-ssh-keys-for-tiup.jpg)
 <div class="caption-center"> Create SSH keys for TiUP </div>
@@ -310,4 +310,4 @@ sudo apt-get install mysql-client
 
 ## Summary
 
-You should now have a GCP instance set up where you'll be able to install and run a simple TiDB environment. Check out Part 2 where we install and run TiDB!
+You should now have a GCP instance set up where you'll be able to install and run a simple TiDB environment. Check out [Part 2](https://pingcap.com/blog/how-to-deploy-tidb-on-google-cloud-platform-part-2) where we install and run TiDB!
