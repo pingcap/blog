@@ -18,13 +18,13 @@ Today, we are excited to introduce the [TiDB Incubator Program](https://github.c
 
 ## About the TiDB Incubator Program
 
-The [TiDB community](https://github.com/pingcap/community) is composed of developers, users, and partners in the TiDB ecosystem, and we're dedicated to building "the database of the future" and the sustainable ecosystem for it. With the continued efforts, love, and support from the entire community, the TiDB ecosystem continues to evolve. More and more open source projects are now part of the great TiDB family, such as [TiKV](https://github.com/tikv/tikv), the open-source distributed transaction Key-Value database, [Weir](https://github.com/tidb-incubator/weir), the service-oriented TiDB database management platform, and [TiBigData](https://github.com/tidb-incubator/TiBigData), the bigdata component used to link TiDB and Apache Flink. 
+The [TiDB community](https://github.com/pingcap/community) is composed of developers, users, and partners in the TiDB ecosystem, and we're dedicated to building "the database of the future" and the sustainable ecosystem for it. With the continued efforts, love, and support from the entire community, the TiDB ecosystem continues to evolve. More and more open source projects are now part of the great TiDB family, such as [TiKV](https://github.com/tikv/tikv), the open-source distributed transaction Key-Value database, [Weir](https://github.com/tidb-incubator/weir), the service-oriented TiDB database management platform, and [TiBigData](https://github.com/tidb-incubator/TiBigData), the bigdata component used to link TiDB and Apache Flink.
 
-In the future, more projects will sprout, grow, mature, and even develop into independent projects in the TiDB community. To help these projects obtain more resources and help from the community, we started the TiDB Incubator Program. 
+In the future, more projects will sprout, grow, mature, and even develop into independent projects in the TiDB community. To help these projects obtain more resources and help from the community, we started the TiDB Incubator Program.
 
 ## What does the incubator program mean for your project?
 
-Joining the incubating program means that your project is a "good fit" in the TiDB ecosystem with a range of validated scenarios, and that your project will be benefiting from the support and stewardship of the TiDB community. 
+Joining the incubating program means that your project is a "good fit" in the TiDB ecosystem with a range of validated scenarios, and that your project will be benefiting from the support and stewardship of the TiDB community.
 
 During the incubation process, the TiDB community will provide technical and specification guidance. The process also ensures incubating projects have the correct licensing, up-to-date boilerplate documents, a healthy community process, and that they are developed in accordance with the TiDB Community [Code of Conduct](https://github.com/pingcap/community/blob/master/CODE_OF_CONDUCT.md). Once an incubating project reaches [a desired level of maturity](https://github.com/pingcap/community/blob/master/incubator/projects-approval-criteria.md), it becomes a Graduated project. The TiDB community will provide comprehensive marketing support to help them quickly gain the attention of the community and the public.
 

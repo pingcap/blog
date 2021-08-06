@@ -94,7 +94,7 @@ Since PingCAP began building TiDB more than three years ago, the database has be
 
 One of those items is a fully-managed TiDB-as-a-service offering that can be used in any cloud setting—public, private, or hybrid. PingCAP has been working on an enterprise-grade, fully-managed TiDB offering based on Kubernetes, and the first version was recently released. You can sign up for it [HERE](https://pingcap.com/products/tidbcloud).
 
-Another project PingCAP just launched is TiDB Academy--a set of self-paced, hands-on courses designed to help database administrators, devops pros, and system architects understand the architecture, design choices, strengths, and trade-offs of TiDB. The first course, "Distributed Database with TiDB for MySQL DBAs," is ready for enrollment. 
+Another project PingCAP just launched is TiDB Academy--a set of self-paced, hands-on courses designed to help database administrators, devops pros, and system architects understand the architecture, design choices, strengths, and trade-offs of TiDB. The first course, "Distributed Database with TiDB for MySQL DBAs," is ready for enrollment.
 
 And if you just want to give TiDB a spin, check out our [TiDB Quick Start Guide](https://pingcap.com/docs/QUICKSTART/).
 
