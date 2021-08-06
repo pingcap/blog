@@ -42,8 +42,8 @@ jobs:
         python3 check-zh-punctuation.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md')
     - name: Verify internal links
       run: ./hack/verify-links-doc.sh
-    - name: Verify internal link anchors
-      run: ./hack/verify-link-anchors.sh
+    #- name: Verify internal link anchors
+    #  run: ./hack/verify-link-anchors.sh
     - name: "Check manual line breaks"
       run:
         wget https://raw.githubusercontent.com/CharLotteiu/pingcap-docs-checks/main/check-manual-line-breaks.py;

@@ -2,7 +2,7 @@
 title: Early Impressions of Go from a Rust Programmer
 author: ['Nick Cameron']
 date: 2020-02-26
-summary: Nick Cameron is a long-time Rust programmer who has recently started using Go. In this post, he talks about his early impressions of Go. Read this post to learn more. 
+summary: Nick Cameron is a long-time Rust programmer who has recently started using Go. In this post, he talks about his early impressions of Go. Read this post to learn more.
 tags: ['Go', 'Rust']
 categories: ['Engineering']
 image: /images/blog/early-impressions-of-go-from-a-rust-programmer.jpg
