@@ -402,15 +402,15 @@ From your local computer, run the following gcloud commands.
 The delete command may take a few minutes to complete.
 
 ```
-tiup cluster list
+gcloud compute instances list
 ```
 
 ```
-tiup cluster destroy tidb-test
+gcloud compute instances delete tidb-vm
 ```
 
 ```
-tiup cluster list
+gcloud compute instances list
 ```
 
 ![Delete the tidb-vm instance](media/delete-tidb-vm-instance.jpg)
