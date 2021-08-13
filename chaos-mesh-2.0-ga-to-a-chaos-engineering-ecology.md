@@ -10,7 +10,7 @@ image: /images/blog/chaos-mesh-2.0-ga-to-a-chaos-engineering-ecology.png
 
 **Author:** [Zhiqiang Zhou](https://github.com/STRRL)
 
-**Transcreator:** [Mila Wu](https://github.com/milasuperstar), **Editor:** [Yajing Wang](https://github.com/anotherrachel)
+**Transcreator:** [Mila Wu](https://github.com/milasuperstar); **Editor:** [Yajing Wang](https://github.com/anotherrachel)
 
 ![Chaos Mesh 2.0 GA: To a Chaos Engineering Ecology](media/chaos-mesh-2.0-ga-to-a-chaos-engineering-ecology.png)
 
