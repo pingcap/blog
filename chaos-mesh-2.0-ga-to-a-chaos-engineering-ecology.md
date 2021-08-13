@@ -1,5 +1,5 @@
 ---
-title: 'Chaos Mesh<sup>®</sup> 2.0 GA: To a Chaos Engineering Ecology'
+title: 'Chaos Mesh® 2.0 GA: To a Chaos Engineering Ecology'
 author: ['Zhiqiang Zhou']
 date: 2021-08-13
 summary: 'Chaos Mesh 2.0 GA: an exciting release, marking a solid milestone towards the chaos engineering ecology that we hope to build.'
