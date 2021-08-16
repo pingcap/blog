@@ -129,7 +129,7 @@ spec:
     cron: "@every 60s"
 ```
 
-For detailed descriptions of NetworkChaos actions, see [Chaos Mesh wiki](https://chaos-mesh.org/docs/chaos_experiments/networkchaos_experiment). Here, we just rephrase the configuration as:
+For detailed descriptions of NetworkChaos actions, see [Chaos Mesh wiki](https://chaos-mesh.org/docs/simulate-network-chaos-on-kubernetes/). Here, we just rephrase the configuration as:
 
 * target: `web-show`
 * mission: inject a `10ms` network delay every `60s`
