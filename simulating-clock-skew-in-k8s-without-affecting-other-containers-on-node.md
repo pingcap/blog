@@ -26,7 +26,7 @@ Currently, there are well-recognized [solutions to synchronize clocks](https://p
 
 Then how can we test global snapshot consistency in a distributed system? The answer is obvious: we can simulate clock skew to test whether distributed systems can keep a consistent global snapshot under abnormal clock conditions. Some testing tools support simulating clock skew in containers, but they have an impact on physical nodes.
 
-[TimeChaos](https://chaos-mesh.org/docs/chaos_experiments/timechaos_experiment) is a tool that **simulates clock skew in containers to test how it impacts your application without affecting the whole node**. This way, we can precisely identify the potential consequences of clock skew and take measures accordingly.
+[TimeChaos](https://chaos-mesh.org/docs/simulate-time-chaos-on-kubernetes/) is a tool that **simulates clock skew in containers to test how it impacts your application without affecting the whole node**. This way, we can precisely identify the potential consequences of clock skew and take measures accordingly.
 
 ## Various approaches for simulating clock skew we've explored
 
@@ -130,7 +130,7 @@ spec:
     cron: "@every 1m"
 ```
 
-During this test, Chaos Mesh injects TimeChaos into a chosen PD Pod every 1 millisecond for 10 seconds. Within the duration, the time acquired by PD will have a 600 second offset from the actual time. For further details, see [Chaos Mesh Wiki](https://chaos-mesh.org/docs/chaos_experiments/timechaos_experiment).
+During this test, Chaos Mesh injects TimeChaos into a chosen PD Pod every 1 millisecond for 10 seconds. Within the duration, the time acquired by PD will have a 600 second offset from the actual time. For further details, see [Chaos Mesh Wiki](https://chaos-mesh.org/docs/simulate-time-chaos-on-kubernetes/).
 
 Let's create a TimeChaos experiment using the `kubectl apply` command:
 

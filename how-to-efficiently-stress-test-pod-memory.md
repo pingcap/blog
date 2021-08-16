@@ -14,7 +14,7 @@ image: /images/blog/how-to-efficiently-stress-test-kubernetes-pod-memory.jpg
 
 ![How to efficiently stress test Pod memory in Kubernetes](media/how-to-efficiently-stress-test-kubernetes-pod-memory.jpg)
 
-[Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) is a cloud-native Chaos Engineering platform that orchestrates chaos on Kubernetes environments. Among its various tools, Chaos Mesh provides [StressChaos](https://chaos-mesh.org/docs/chaos_experiments/stresschaos_experiment), which allows you to inject CPU and memory stress into your Pod. This tool can be useful when you test or benchmark a CPU-sensitive or memory-sensitive program and want to know its behavior under pressure.
+[Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) is a cloud-native Chaos Engineering platform that orchestrates chaos on Kubernetes environments. Among its various tools, Chaos Mesh provides [StressChaos](https://chaos-mesh.org/docs/simulate-heavy-stress-on-kubernetes/), which allows you to inject CPU and memory stress into your Pod. This tool can be useful when you test or benchmark a CPU-sensitive or memory-sensitive program and want to know its behavior under pressure.
 
 However, as we tested and used StressChaos, we found some issues in usability and performance. For example, StressChaos uses far less memory than we configured.
 
@@ -22,7 +22,7 @@ To correct these issues, we developed a new set of tests. In this article, I'll 
 
 ## Injecting stress into a target Pod
 
-Before you continue, you need to [install Chaos Mesh](https://chaos-mesh.org/docs/user_guides/installation) in your cluster.
+Before you continue, you need to [install Chaos Mesh](https://chaos-mesh.org/docs/production-installation-using-helm/) in your cluster.
 
 To begin with, I'll walk you through how to inject StressChaos into a target Pod. For demonstration purposes, I'll use [hello-kubernetes](https://github.com/paulbouwer/hello-kubernetes), a demo app managed by [helm charts](https://helm.sh/). The first step is to clone the `hello-kubernetes` repo and modify the chart to give it a resource limit.
 

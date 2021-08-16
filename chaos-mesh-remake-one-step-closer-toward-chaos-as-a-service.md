@@ -79,7 +79,7 @@ With new Chaos Dashboard and chaosd, the optimized architecture of Chaos Mesh is
 
 Another improvement is observability, namely how to tell if an experiment is carried out successfully.
 
-Before the improvement, you had to manually check the experiment metrics. If you injected [StressChaos](https://chaos-mesh.org/docs/chaos_experiments/stresschaos_experiment) into a Pod, you had to enter the Pod to see if there was a `stress-ng` process and then use `top` commands to check CPU and memory utilization. These metrics told you whether your StressChaos experiment was created successfully.
+Before the improvement, you had to manually check the experiment metrics. If you injected [StressChaos](https://chaos-mesh.org/docs/simulate-heavy-stress-on-kubernetes/) into a Pod, you had to enter the Pod to see if there was a `stress-ng` process and then use `top` commands to check CPU and memory utilization. These metrics told you whether your StressChaos experiment was created successfully.
 
 To streamline the process, we now integrate `node_exporter` into `chaos-daemon` and chaosd to collect node metrics. We also deploy `kube-state-metrics` in the Kubernetes cluster, combined with cadvisor, to collect Kubernetes metrics. The collected metrics are saved and visualized by Prometheus and Grafana, which provide a simple method for you to check the experiment status.
 
@@ -125,7 +125,7 @@ In terms of data format, chaosd just consumes and registers CRD data in JSON for
 
 ### Plugins
 
-Chaos Mesh has limited support for plugins. You can only [add a new Chaos](https://chaos-mesh.org/docs/development_guides/develop_a_new_chaos/) by registering a CRD in Kubernetes API. This brings about two problems:
+Chaos Mesh has limited support for plugins. You can only [add a new Chaos](https://chaos-mesh.org/docs/add-new-chaos-experiment-type/) by registering a CRD in Kubernetes API. This brings about two problems:
 
 * You must develop the plugin using Golang, the same language in which Chaos Mesh is written.
 * You must merge the extended code into the Chaos Mesh project. Because Chaos Mesh doesn't have a security mechanism like Berkeley Packet Filter (BPF), merging plugin code may introduce extra risks.
