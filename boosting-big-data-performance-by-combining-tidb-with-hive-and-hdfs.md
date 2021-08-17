@@ -1,8 +1,8 @@
 ---
 title: Boosting Big Data Performance by Combining TiDB with Hive and HDFS
 author: ['Mengyu Hu']
-date: 2021-08-13
-summary: Zhihu, China's biggest knowledge sharing platform, uses TiDB to complement their big data architecture. TiDB helps them build a large query alert system for Hive and accelerate NameNode RPC requests in HDFS.
+date: 2021-08-17
+summary: Zhihu, China's largest knowledge sharing platform, uses TiDB to complement their big data architecture. TiDB helps them build a large query alert system for Hive and accelerate NameNode RPC requests in HDFS.
 tags: ['Big data']
 customer: Zhihu
 customerCategory: Internet
@@ -18,7 +18,7 @@ image: /images/blog/zhihu-boosting-big-data-performance-by-combining-tidb-with-h
 
 ![Boosting Big Data Performance by Combining TiDB with Hive and HDFS](media/zhihu-boosting-big-data-performance-by-combining-tidb-with-hive-and-hdfs.png)
 
-[Zhihu](https://en.wikipedia.org/wiki/Zhihu) is [China's biggest knowledge sharing platform](https://walkthechat.com/zhihu-chinas-largest-qa-platform-content-marketers-dream/), with over 220 million registered users and more than 310 million answers on our website. In March 2021, [we went public on the New York Stock Exchange](https://www.reuters.com/article/us-zhihu-ipo-idUSKBN2BI0L6) and were valued at about $5.3 billion.
+[Zhihu](https://en.wikipedia.org/wiki/Zhihu) is [China's largest knowledge sharing platform](https://walkthechat.com/zhihu-chinas-largest-qa-platform-content-marketers-dream/), with over 220 million registered users and more than 310 million answers on our website. In March 2021, [we went public on the New York Stock Exchange](https://www.reuters.com/article/us-zhihu-ipo-idUSKBN2BI0L6) and were valued at about $5.3 billion.
 
 As our business grew, we wanted to improve our infrastructure. We [horizontally scaled Apache Hive Metastore by migrating from MySQL to TiDB](https://pingcap.com/case-studies/horizontally-scaling-hive-metastore-database-by-migrating-from-mysql-to-tidb), a distributed SQL database, and decided to put TiDB into other big data applications as well. After migration, **the execution time of large queries decreased from 30-40 seconds to 6-7 seconds**. We were thrilled by the power of [TiDB](https://pingcap.com/products/tidb).
 
