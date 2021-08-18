@@ -4,8 +4,8 @@ author: ['Tianyi Wang']
 date: 2021-08-19
 summary: 'This article introduces a new solution for real-time data warehouse: Pravega + TiDB. This combination resolves Kafka's data persistence dilemma and provides auto scaling capabilities.'
 tags: ['Real-time analytics', 'Big data']
-categories: ['Product']
-image: /images/blog/
+categories: ['Community']
+image: /images/blog/building-a-real-time-data-warehouse-with-tidb-and-pravega.jpg
 ---
 
 **Author:** [Tianyi Wang](https://github.com/wangtianyi2004) (Database architect at PingCAP)
