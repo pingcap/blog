@@ -110,7 +110,7 @@ With the MPP computing engine, **TiDB can anticipate the coming traffic peak and
 
 With the help of Flink, TiDB teams up with Pravega to build a real-time, high-throughput, stable data warehouse. This data warehouse is able to meet various user requirements for big data and handle OLTP and OLAP workloads in one stop.
 
-To better showcase the usage of Pravega and TiDB, we provide a [demo based on docker-compose](https://github.com/wangtianyi2004/tidb-pravega-quick-start), which demonstrates how data flows from Pravega through Flink to TiDB. You can write and commit Flink jobs via Flink SQL client and observe the execution at `&lt;HOST_IP>:8081`.
+To better showcase the usage of Pravega and TiDB, we provide a [demo based on docker-compose](https://github.com/wangtianyi2004/tidb-pravega-quick-start), which demonstrates how data flows from Pravega through Flink to TiDB. You can write and commit Flink jobs via Flink SQL client and observe the execution at `<HOST_IP>:8081`.
 
 ## Join us!
 
