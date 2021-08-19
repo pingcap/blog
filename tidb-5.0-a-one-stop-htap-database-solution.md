@@ -95,7 +95,7 @@ Different storage structures usually respond to different types of workloads:
 
 In TiDB's MPP mode, TiFlash complements TiDB's computing capabilities. When dealing with OLAP workloads, TiDB steps back to be a master node. The user sends a request to TiDB server, and all TiDB servers perform table joins and submit the result to the optimizer for decision making. The optimizer assesses all the possible execution plans (row-based, column-based, indexes, single-server engine, and MPP engine) and chooses the optimal one.
 
-![TiDB's MPP mode](media/tidb-5.0-htap-mpp-mode.jpg)
+![TiDB's MPP mode](media/tidb-5.0-mpp-mode.jpg)
 <div class="caption-center">TiDB's MPP mode</div>
 
 The following diagram shows how the analytical engine breaks down and processes the execution plan in TiDB's MPP mode. Each dotted box represents the physical border of a node.
