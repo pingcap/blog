@@ -1,14 +1,14 @@
 ---
 title: 'Securing Online Gaming: Combine Chaos Engineering with DevOps Practices'
 author: ['Zhaojun Wu']
-date: 2021-08-23
+date: 2021-08-24
 summary: "Tencent Interactive Entertainment Group is known as the publisher of some of the most popular video games. This article shares why and how they use chaos engineering in their DevOps workflow."
-tags: ['Chaos Mesh', 'Chaos engineering']
+tags: ['Chaos engineering']
 categories: ['Community']
 image: /images/blog/securing-online-gaming-combine-chaos-engineering-with-devops-practices.png
 ---
 
-**Author:** [Tianyi Wang](https://github.com/wangtianyi2004) (Senior DevOps Engineer at Tencent Interactive Entertainment Group)
+**Author:** [Zhaojun Wu] (Senior DevOps Engineer at Tencent Interactive Entertainment Group)
 
 **Transcreator:** [Yajing Wang](https://github.com/anotherrachel); **Editor:** Tom Dewan
 
@@ -80,7 +80,6 @@ In IEG, **chaos engineering is generally summarized as a closed loop with severa
 
     Repeat chaos experiments to see if the system's performance meets expectations. If it does, design another testing plan.
 
-![Five phases of chaos engineering in IEG](media/five-phases-of-chaos-engineering-in-ieg.png)
 <img src="media/five-phases-of-chaos-engineering-in-ieg.png" width="400">
 <div class="caption-center">Five phases of chaos engineering in IEG</div>
 
