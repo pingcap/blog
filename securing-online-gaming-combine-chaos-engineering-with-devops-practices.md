@@ -24,11 +24,11 @@ A cloud-native DevOps solution frees our events operator from the growing number
 
 Currently, almost all IEG operation services run in TKE. Elastic scaling promises faster capacity expansion and reduction of cloud services thanks to cloud-native technology.
 
-In addition, we expect the iterations to be easier. A best practice is to break down the large, hard-to-maintain service into many “smaller” services that we can maintain independently. “Small” services have less code and simpler logic, with lower handover and training costs. We as developers continue to practice this kind of microservices architecture as part of DevOps initiatives. Yet similar issues persist. As the number of services increases, so does the complexity of making calls between them. **Worse, if one “small” service fails, it could set off a chain reaction that brings all the services down—a microservice dependency hell.**
+In addition, we expect the iterations to be easier. A best practice is to break down the large, hard-to-maintain service into many "smaller" services that we can maintain independently. "Small" services have less code and simpler logic, with lower handover and training costs. We as developers continue to practice this kind of microservices architecture as part of DevOps initiatives. Yet similar issues persist. As the number of services increases, so does the complexity of making calls between them. **Worse, if one "small" service fails, it could set off a chain reaction that brings all the services down—a microservice dependency hell.**
 
-The thing is, fault tolerance varies by service. Some support downgrading, while others don’t. Not to mention that some services are unable to provide timely alerts or lack an effective debugging tool. As a result, debugging services has become a tricky and increasingly pressing issue in our day-to-day work.
+The thing is, fault tolerance varies by service. Some support downgrading, while others don't. Not to mention that some services are unable to provide timely alerts or lack an effective debugging tool. As a result, debugging services has become a tricky and increasingly pressing issue in our day-to-day work.
 
-But we can’t just let it be. What if the unstable performance constantly chases our players away? What if there is a catastrophic failure? 
+But we can't just let it be. What if the unstable performance constantly chases our players away? What if there is a catastrophic failure? 
 
 ## Let there be faults
 
@@ -36,7 +36,7 @@ Netflix introduced the idea of chaos engineering. This approach tests the resili
 
 This is exactly how we avoid the worst-case scenario. Fault injection, in my opinion, is now a must-do in every technical team. In our early test cases, developers would bring down a node before launching a service to see if the primary node automatically switched to the secondary node and if disaster recovery worked. 
 
-**But chaos engineering is more than fault injection.** It is a field that constantly drives new techniques, professional testing tools, and solid theories. That’s why we continue to explore it.
+**But chaos engineering is more than fault injection.** It is a field that constantly drives new techniques, professional testing tools, and solid theories. That's why we continue to explore it.
 
 IEG officially launched its chaos engineering project over a year ago. We wanted to do this right the first time. The key is to select a chaos engineering tool that supports running experiments in the Kubernetes environment. **After a careful comparison, we believe [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) is our best option** because:
 
@@ -55,8 +55,8 @@ IEG officially launched its chaos engineering project over a year ago. We wanted
 
 Our chaos engineering team embedded Chaos Mesh into our continuous integration and continuous delivery pipelines. As shown in the diagram below, Chaos Mesh now plays an important role in our operation platform. We use Chaos Mesh's dashboard API to create, run, and delete chaos experiments and monitor them on our own platform. We can simulate basic system-level faults in Pods, container, network, and IO.
 
-![Chaos Mesh embedded in IEG’s operation platform](media/chaos-mesh-embedded-in-iegs-operation-platform.png)
-<div class="caption-center">Chaos Mesh embedded in IEG’s operation platform</div>
+![Chaos Mesh embedded in IEG's operation platform](media/chaos-mesh-embedded-in-iegs-operation-platform.png)
+<div class="caption-center">Chaos Mesh embedded in IEG's operation platform</div>
 
 In IEG, **chaos engineering is generally summarized as a closed loop with several key phases**:
 
@@ -65,11 +65,11 @@ In IEG, **chaos engineering is generally summarized as a closed loop with severa
 2. Design a testing plan. 
     The testing plan must specify the target, scope, fault to be injected, monitoring metrics, etc. Make sure the testing is well-controlled. 
 3. Execute chaos experiments and review the results. 
-    Compare the system’s performance before and after the chaos experiment. 
+    Compare the system's performance before and after the chaos experiment. 
 4. Resolve any issues that may arise. 
     Fix found issues and upgrade the system for the follow-up experiment. 
 5. Repeat chaos experiments and verify performance. 
-    Repeat chaos experiments to see if the system’s performance meets expectations. If it does, design another testing plan.
+    Repeat chaos experiments to see if the system's performance meets expectations. If it does, design another testing plan.
 
 ![Five phases of chaos engineering in IEG](media/five-phases-of-chaos-engineering-in-ieg.png)
 <img src="media/five-phases-of-chaos-engineering-in-ieg.png" width="400">
@@ -87,14 +87,14 @@ There is no need to shut down the entire system to see if our games are still av
 
 ### Red teaming
 
-Understandably, our team members grew bored of regular chaos experiments. After all, it’s something like telling your left hand to fight against your right hand. Here at IEG, **we integrate a testing practice called red teaming into chaos engineering to ensure that our system resiliency improves in an organic way**. Red teaming is similar to penetration testing, but more targeted. It requires a group of testers to emulate real-world attacks from an outsider’s perspective. If I were in charge of IT operations, I would simulate faults to specific services, and check to see whether my developer colleges were doing a good job. If I found any potential faults, well, be prepared for some “hard talk.” On the other hand, developers would actively perform chaos experiments and make sure no risk was left behind to avoid being blamed. 
+Understandably, our team members grew bored of regular chaos experiments. After all, it's something like telling your left hand to fight against your right hand. Here at IEG, **we integrate a testing practice called red teaming into chaos engineering to ensure that our system resiliency improves in an organic way**. Red teaming is similar to penetration testing, but more targeted. It requires a group of testers to emulate real-world attacks from an outsider's perspective. If I were in charge of IT operations, I would simulate faults to specific services, and check to see whether my developer colleges were doing a good job. If I found any potential faults, well, be prepared for some "hard talk." On the other hand, developers would actively perform chaos experiments and make sure no risk was left behind to avoid being blamed. 
 
 <img src="media/the-red-teaming-process-in-ieg.png" width="500">
 <div class="caption-center">The red teaming process in IEG<div>
 
 ### Dependency analysis
 
-It’s important to manage dependencies for microservices. In our case, non-core services cannot be the bottleneck for core services. Fortunately, with chaos engineering, we can run dependency analysis simply by injecting faults into called services and observing how badly the main service is affected. Based on the results, we can optimize the service calling chain in a specific scenario.
+It's important to manage dependencies for microservices. In our case, non-core services cannot be the bottleneck for core services. Fortunately, with chaos engineering, we can run dependency analysis simply by injecting faults into called services and observing how badly the main service is affected. Based on the results, we can optimize the service calling chain in a specific scenario.
 
 ### Automated fault detection and diagnosis
 
