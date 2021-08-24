@@ -60,15 +60,22 @@ Our chaos engineering team embedded Chaos Mesh into our continuous integration a
 
 In IEG, **chaos engineering is generally summarized as a closed loop with several key phases**:
 
-1. Improve overall system resilience. 
-    Build a chaos testing platform that we can modify as our needs change. 
+1. Improve overall system resilience.
+
+    Build a chaos testing platform that we can modify as our needs change.
+
 2. Design a testing plan. 
-    The testing plan must specify the target, scope, fault to be injected, monitoring metrics, etc. Make sure the testing is well-controlled. 
-3. Execute chaos experiments and review the results. 
-    Compare the system's performance before and after the chaos experiment. 
-4. Resolve any issues that may arise. 
-    Fix found issues and upgrade the system for the follow-up experiment. 
-5. Repeat chaos experiments and verify performance. 
+    The testing plan must specify the target, scope, fault to be injected, monitoring metrics, etc. Make sure the testing is well-controlled.
+
+3. Execute chaos experiments and review the results.
+
+    Compare the system's performance before and after the chaos experiment.
+
+4. Resolve any issues that may arise.
+
+    Fix found issues and upgrade the system for the follow-up experiment.
+
+5. Repeat chaos experiments and verify performance.
     Repeat chaos experiments to see if the system's performance meets expectations. If it does, design another testing plan.
 
 ![Five phases of chaos engineering in IEG](media/five-phases-of-chaos-engineering-in-ieg.png)
