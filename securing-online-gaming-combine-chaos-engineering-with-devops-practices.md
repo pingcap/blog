@@ -8,7 +8,7 @@ categories: ['Community']
 image: /images/blog/securing-online-gaming-combine-chaos-engineering-with-devops-practices.png
 ---
 
-**Author:** [Zhaojun Wu] (Senior DevOps Engineer at Tencent Interactive Entertainment Group)
+**Author:** Zhaojun Wu (Senior DevOps Engineer at Tencent Interactive Entertainment Group)
 
 **Transcreator:** [Yajing Wang](https://github.com/anotherrachel); **Editor:** Tom Dewan
 
