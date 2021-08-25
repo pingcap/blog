@@ -3,7 +3,7 @@ title: 'Securing Online Gaming: Combine Chaos Engineering with DevOps Practices'
 author: ['Zhaojun Wu']
 date: 2021-08-24
 summary: "Tencent Interactive Entertainment Group is known as the publisher of some of the most popular video games. This article shares why and how they use chaos engineering in their DevOps workflow."
-tags: ['Chaos engineering']
+tags: ['Chaos Engineering']
 categories: ['Community']
 image: /images/blog/securing-online-gaming-combine-chaos-engineering-with-devops-practices.png
 ---
@@ -98,7 +98,7 @@ There is no need to shut down the entire system to see if our games are still av
 Understandably, our team members grew bored of regular chaos experiments. After all, it's something like telling your left hand to fight against your right hand. Here at IEG, **we integrate a testing practice called red teaming into chaos engineering to ensure that our system resiliency improves in an organic way**. Red teaming is similar to penetration testing, but more targeted. It requires a group of testers to emulate real-world attacks from an outsider's perspective. If I were in charge of IT operations, I would simulate faults to specific services, and check to see whether my developer colleges were doing a good job. If I found any potential faults, well, be prepared for some "hard talk." On the other hand, developers would actively perform chaos experiments and make sure no risk was left behind to avoid being blamed. 
 
 ![The red teaming process in IEG](media/the-red-teaming-process-in-ieg.png)
-<div class="caption-center">The red teaming process in IEG<div>
+<div class="caption-center">The red teaming process in IEG</div>
 
 ### Dependency analysis
 
