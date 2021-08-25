@@ -80,7 +80,7 @@ In IEG, **chaos engineering is generally summarized as a closed loop with severa
 
     Repeat chaos experiments to see if the system's performance meets expectations. If it does, design another testing plan.
 
-<img src="media/five-phases-of-chaos-engineering-in-ieg.png" width="500"></img>
+<img src="media/five-phases-of-chaos-engineering-in-ieg.png" width="500" />
 <div class="caption-center">Five phases of chaos engineering in IEG</div>
 
 We frequently **test the performance of services under high CPU usage**, for example. We begin by orchestrating and scheduling experiments. Following that, we run experiments and monitor the performance of related services. Multiple monitoring metrics, such as QPS, latency, response success, are immediately visible through the operation platform. The platform then generates reports for us to review, so we can check whether these experiments met our expectations.
