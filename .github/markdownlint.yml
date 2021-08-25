@@ -63,3 +63,6 @@ no-alt-text: true
 # MD046
 code-block-style:
   style: fenced
+
+# MD047 - File should end with a single newline character
+single-trailing-newline: true
