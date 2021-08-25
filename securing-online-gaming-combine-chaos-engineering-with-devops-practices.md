@@ -80,7 +80,7 @@ In IEG, **chaos engineering is generally summarized as a closed loop with severa
 
     Repeat chaos experiments to see if the system's performance meets expectations. If it does, design another testing plan.
 
-<img src="media/five-phases-of-chaos-engineering-in-ieg.png" width="400">
+<img src="media/five-phases-of-chaos-engineering-in-ieg.png" width="500"></img>
 <div class="caption-center">Five phases of chaos engineering in IEG</div>
 
 We frequently **test the performance of services under high CPU usage**, for example. We begin by orchestrating and scheduling experiments. Following that, we run experiments and monitor the performance of related services. Multiple monitoring metrics, such as QPS, latency, response success, are immediately visible through the operation platform. The platform then generates reports for us to review, so we can check whether these experiments met our expectations.
@@ -97,7 +97,7 @@ There is no need to shut down the entire system to see if our games are still av
 
 Understandably, our team members grew bored of regular chaos experiments. After all, it's something like telling your left hand to fight against your right hand. Here at IEG, **we integrate a testing practice called red teaming into chaos engineering to ensure that our system resiliency improves in an organic way**. Red teaming is similar to penetration testing, but more targeted. It requires a group of testers to emulate real-world attacks from an outsider's perspective. If I were in charge of IT operations, I would simulate faults to specific services, and check to see whether my developer colleges were doing a good job. If I found any potential faults, well, be prepared for some "hard talk." On the other hand, developers would actively perform chaos experiments and make sure no risk was left behind to avoid being blamed. 
 
-<img src="media/the-red-teaming-process-in-ieg.png" width="500">
+![The red teaming process in IEG](media/the-red-teaming-process-in-ieg.png)
 <div class="caption-center">The red teaming process in IEG<div>
 
 ### Dependency analysis
