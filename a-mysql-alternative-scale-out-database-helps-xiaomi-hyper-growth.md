@@ -69,7 +69,7 @@ Not only does TiDB solve all our problems, it also brings added bonuses we didn'
     * [BR](https://docs.pingcap.com/tidb/dev/backup-and-restore-tool), a tool for distributed backup and recovery.
 * **Cross-data-center disaster recovery**. In our practice, TiDB performs excellently when deployed across data centers. The latency is minimal. We can easily deploy TiDB in three data centers across two cities for disaster tolerance.
 * **Data encryption at rest and in flight**. TiDB supports both [encryption at rest](https://docs.pingcap.com/tidb/stable/encryption-at-rest) (transparent data encryption) and [encryption in flight](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers) (Transport Layer Security). Applying these features can greatly simplify application logic.
-* **HTAP triples performance. **Some of our core applications have Hybrid Transactional and Analytical Processing (HTAP) workloads. After we enabled [TiDB's HTAP feature](https://pingcap.com/blog/tidb-5.0-a-one-stop-htap-database-solution), our overall analytical performance increased by more than three times:
+* **HTAP triples performance.** Some of our core applications have Hybrid Transactional and Analytical Processing (HTAP) workloads. After we enabled [TiDB's HTAP feature](https://pingcap.com/blog/tidb-5.0-a-one-stop-htap-database-solution), our overall analytical performance increased by more than three times:
 
 <table>
   <tr>
