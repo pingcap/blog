@@ -56,7 +56,7 @@ In the recommendation process, these two properties need to be balanced. Excessi
 
 Applying GPR with Bayesian optimization can help us achieve this balance. As mentioned earlier, GPR can help us estimate m(X) and s(X), where m(X) can be used as the characterization value for exploitation, and s(X) can be used as the characterization value for exploration.
 
-We use the [Upper Confidence Bound (UCB)](https://www.cse.wustl.edu/~garnett/cse515t/spring_2015/files/lecture_notes/12.pdf) algorithm as the acquisition function. Suppose we need to find an X to make the Y value as large as possible, and U(X) is the definition of the acquisition function. Therefore, U(X) = m(X) + k*s(X), where k > 0 is an adjustable coefficient. We only need to find the X to make U(X) as large as possible.
+We use the Upper Confidence Bound (UCB) algorithm as the acquisition function. Suppose we need to find an X to make the Y value as large as possible, and U(X) is the definition of the acquisition function. Therefore, U(X) = m(X) + k*s(X), where k > 0 is an adjustable coefficient. We only need to find the X to make U(X) as large as possible.
 
 * If U(X) is large, either m(X) or s(X) may be large.
 * If s(X) is large, it means the difference among the data is large, and there is not much data around X. Therefore, the algorithm must explore new points in unknown areas.
