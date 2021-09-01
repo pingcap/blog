@@ -10,7 +10,7 @@ categories: ['Product']
 
 **Author:** PingCAP
 
-**Transcreator:** [Yajing Wang](https://github.com/anotherrachel); **Editor:** Tom Dewan; [Queeny Jin](https://github.com/queenypingcap)
+**Transcreator:** [Yajing Wang](https://github.com/anotherrachel); **Editors:** Tom Dewan, [Queeny Jin](https://github.com/queenypingcap)
 
 ![Announcing TiDB 5.2](media/announcing-tidb-5.2.png)
 
