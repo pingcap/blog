@@ -8,7 +8,7 @@ categories: ['Engineering']
 image: /images/blog/raft-and-high-availability-in-tikv-and-tidb.png
 ---
 
-**Author:** Rick Golba (Marketing at PingCAP)
+**Author:** Rick Golba (Product Marketing Manager at PingCAP)
 
 **Editors:** [Calvin Weng](https://github.com/dcalvin), [Ran Huang](https://github.com/ran-huang)
 
