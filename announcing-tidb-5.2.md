@@ -6,6 +6,7 @@ summary: We are proud to announce our the release of TiDB 5.2. TiDB 5.2 focuses 
 image: /images/blog/announcing-tidb-5.2.png
 tags: ['Announcement']
 categories: ['Product']
+press_release: true
 ---
 
 **Author:** PingCAP
