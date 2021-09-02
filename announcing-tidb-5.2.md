@@ -1,5 +1,5 @@
 ---
-title: Announcing TiDB 5.2
+title: TiDB 5.2 - Translytical Processing Made Easier and Faster
 author: ['PingCAP']
 date: 2021-09-01
 summary: We are proud to announce our the release of TiDB 5.2. TiDB 5.2 focuses on real-world scenarios, aiming to push the boundaries of transactional and analytical processing even further to meet the demands of massive, real-time data processing.
