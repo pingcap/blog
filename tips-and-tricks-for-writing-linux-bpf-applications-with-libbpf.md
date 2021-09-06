@@ -161,7 +161,7 @@ You can see the complete code in [hardirqs.bpf.c](https://github.com/iovisor/bcc
 
 Beginning in Linux 4.6, BPF hash maps perform memory pre-allocation by default and introduce the `BPF_F_NO_PREALLOC` flag. The motivation for doing so is to avoid kprobe + bpf deadlocks. The community had tried other solutions, but in the end, pre-allocating all the map elements was the simplest solution and didn't affect the user space visible behavior.
 
-When full map pre-allocation is too memory expensive, define the map with the `BPF_F_NO_PREALLOC` flag to keep old behavior. For details, see [bpf: map pre-alloc](https://lore.kernel.org/patchwork/cover/656547/). When the map size is not large (such as `MAX_ENTRIES` = 256), this flag is not necessary. `BPF_F_NO_PREALLOC` is slower.
+When full map pre-allocation is too memory expensive, define the map with the `BPF_F_NO_PREALLOC` flag to keep old behavior. For details, see [bpf: map pre-alloc](https://lwn.net/Articles/679074/). When the map size is not large (such as `MAX_ENTRIES` = 256), this flag is not necessary. `BPF_F_NO_PREALLOC` is slower.
 
 Here is an example:
 
