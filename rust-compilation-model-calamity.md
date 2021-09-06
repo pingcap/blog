@@ -223,7 +223,7 @@ The situation isn't hopeless. Not at all. There is always work going on to impro
   * Enabled by default if the optimization level is less than 3.
   * Developed by [@michaelwoerister](https://github.com/michaelwoerister)
 * [Cranelift backend](https://www.reddit.com/r/rust/comments/enxgwh/cranelift_backend_for_rust/)
-  * Reduced debug compile times by used [cranelift](https://github.com/bytecodealliance/cranelift) for code generation.
+  * Reduced debug compile times by using [cranelift](https://github.com/bytecodealliance/cranelift) for code generation.
   * Developed by [@bjorn3](https://github.com/bjorn3)
 * [perf.rust-lang.org](https://perf.rust-lang.org/)
   * Rust's compile-time performance is tracked in detail. Benchmarks continue to be added.
