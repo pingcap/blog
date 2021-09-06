@@ -162,7 +162,7 @@ Moreover, for `INSERT ON DUPLICATE KEY UPDATE` statements, if the application su
 ![KeyBy to resolve conflict](media/flink-on-tidb-keyby-to-resolve-conflict.jpg)
 <div class="caption-center">KeyBy to resolve conflict</div>
 
-An application team that used to see fluctuating request duration tried the solution above, and reduced the request duration by an order of magnitude. The 999th percentile dropped from 4 seconds to lower than 20 milliseconds.
+An application team that used to see fluctuating request duration tried the solution above and reduced the request duration by an order of magnitude. The 999th percentile dropped from 4 seconds to lower than 20 milliseconds.
 
 ![Request duration improved](media/flink-on-tidb-request-duration-improved.jpg)
 <div class="caption-center">Request duration improved</div>
