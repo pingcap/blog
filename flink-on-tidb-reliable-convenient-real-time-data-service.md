@@ -147,20 +147,25 @@ Flink provides the official JDBC sink, but the implementation is simple, and it 
 
 Flink writes the main thread into a buffer page. When the page is full, Flink changes the page and creates a thread to flush data to TiDB.
 
-![Flink's synchronous flush](media/flink-on-tidb-flink-synchronous-flush.png)
+![Flink's synchronous flush](media/flink-on-tidb-flink-synchronous-flush-1.jpg)
 <div class="caption-center">Flink's synchronous flush</div>
 
-Our sink implementation is different. We use a blocking queue for flow control. Data is written into a buffer page. When the page is full, an async thread is immediately created to flush data to TiDB. This improves QPS performance without FIFO semantics. Our test shows that our performance increases from the official 30,000+ QPS to nearly 100,000.
+Our sink implementation is different. We use a blocking queue for flow control. Data is written into a buffer page. When the page is full, an async thread is immediately created to flush data to TiDB. This improves QPS performance when the application doesn't require FIFO semantics. Our test shows that our performance increases from the official 10,000+ QPS to 30,000+.
 
-![JFlink's async flush](media/flink-on-tidb-jflink-async-flush.jpg)
+![JFlink's async flush](media/flink-on-tidb-jflink-async-flush-1.jpg)
 <div class="caption-center">Our async flush</div>
 
 Implementing at-least-once for the sink is more complicated. If we want to make sure data is written to the sink at least once, we must ensure that when the checkpoint is completed, the sink is clean (all data is flushed). We need to include the checkpoint thread, the main thread for flush, and the page-changing thread. The checkpoint is only completed when all the data is flushed to the sink. In this design, once the checkpoint is completed, the sink is definitely clean and all the data is correctly updated in TiDB.
 
-![Flush on Checkpoint mechanism](media/flink-on-tidb-flush-on-checkpoint-mechanism.jpg)
-<div class="caption-center">Flush on Checkpoint mechanism</div>
+Moreover, for `INSERT ON DUPLICATE KEY UPDATE` statements, if the application supports async batch transaction commit, we can perform a `KeyBy` operation on the unique key before the data goes to the sink. This operation resolves transaction conflict in advance and avoids the probable conflict caused by async commit. The preprocessing significantly raises the sink's throughput to 150,000 OPS.
 
-After our optimization, the system achieves 100,000 operations per second (OPS).
+![KeyBy to resolve conflict](media/flink-on-tidb-keyby-to-resolve-conflict.jpg)
+<div class="caption-center">KeyBy to resolve conflict</div>
+
+An application team that used to see fluctuating request duration tried the solution above and reduced the request duration by an order of magnitude. The 999th percentile dropped from 4 seconds to lower than 20 milliseconds.
+
+![Request duration improved](media/flink-on-tidb-request-duration-improved.jpg)
+<div class="caption-center">Request duration improved</div>
 
 ### How we use Flink on TiDB
 
