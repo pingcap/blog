@@ -150,7 +150,7 @@ Flink writes the main thread into a buffer page. When the page is full, Flink ch
 ![Flink's synchronous flush](media/flink-on-tidb-flink-synchronous-flush-1.jpg)
 <div class="caption-center">Flink's synchronous flush</div>
 
-Our sink implementation is different. We use a blocking queue for flow control. Data is written into a buffer page. When the page is full, an async thread is immediately created to flush data to TiDB. This improves QPS performance without FIFO semantics. Our test shows that our performance increases from the official 10,000+ QPS to 30,000+.
+Our sink implementation is different. We use a blocking queue for flow control. Data is written into a buffer page. When the page is full, an async thread is immediately created to flush data to TiDB. This improves QPS performance when the application doesn't require FIFO semantics. Our test shows that our performance increases from the official 10,000+ QPS to 30,000+.
 
 ![JFlink's async flush](media/flink-on-tidb-jflink-async-flush-1.jpg)
 <div class="caption-center">Our async flush</div>
