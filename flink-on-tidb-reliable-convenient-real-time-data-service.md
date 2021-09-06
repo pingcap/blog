@@ -157,12 +157,12 @@ Our sink implementation is different. We use a blocking queue for flow control. 
 
 Implementing at-least-once for the sink is more complicated. If we want to make sure data is written to the sink at least once, we must ensure that when the checkpoint is completed, the sink is clean (all data is flushed). We need to include the checkpoint thread, the main thread for flush, and the page-changing thread. The checkpoint is only completed when all the data is flushed to the sink. In this design, once the checkpoint is completed, the sink is definitely clean and all the data is correctly updated in TiDB.
 
-Moreover, for `INSERT ON DUPLICATE KEY UPDATE` statements, if the application supports async batch transaction commit, we can perform a `KeyBy` operation on the unique key before sink. This operation resolves transaction conflict in advance and avoids the probable conflict caused by async commit. The pre-processing significantly raises the sink's throughput to 150,000 OPS.
+Moreover, for `INSERT ON DUPLICATE KEY UPDATE` statements, if the application supports async batch transaction commit, we can perform a `KeyBy` operation on the unique key before the data goes to the sink. This operation resolves transaction conflict in advance and avoids the probable conflict caused by async commit. The preprocessing significantly raises the sink's throughput to 150,000 OPS.
 
 ![KeyBy to resolve conflict](media/flink-on-tidb-keyby-to-resolve-conflict.jpg)
 <div class="caption-center">KeyBy to resolve conflict</div>
 
-An application team that used to see fluctuating request duration tries our solution above, and successfully reduced request duration by an order of magnitude. The 999th percentile drops from 4 seconds to lower than 20 miliseconds.
+An application team that used to see fluctuating request duration tried the solution above, and reduced the request duration by an order of magnitude. The 999th percentile dropped from 4 seconds to lower than 20 milliseconds.
 
 ![Request duration improved](media/flink-on-tidb-request-duration-improved.jpg)
 <div class="caption-center">Request duration improved</div>
