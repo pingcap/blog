@@ -87,15 +87,15 @@ Use [TiDB Docker Compose](https://github.com/pingcap/tidb-docker-compose) to set
 To setup a set of containers with this tool run the following:
 
 ```
-$ git clone https://github.com/pingcap/tidb-docker-compose.git
-$ cd tidb-docker-compose && docker-compose pull 
-$ docker-compose up -d
+git clone https://github.com/pingcap/tidb-docker-compose.git
+cd tidb-docker-compose && docker-compose pull 
+docker-compose up -d
 ```
 
 Now you can connect with a MySQL client:
 
 ```
-$ mysql -h 127.0.0.1 -P 4000 -u root --comments
+mysql -h 127.0.0.1 -P 4000 -u root --comments
 ```
 
 ## Use TiDB Operator with minikube or kind
