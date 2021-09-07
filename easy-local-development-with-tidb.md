@@ -67,7 +67,7 @@ In the output of the `tiup playground` command as shown above you can see the in
 Additional tips for working with playgrounds:
 
 * You can specify the version you want to run with `tiup playground v4.0.14` for example.
-* With `tiup -T myapp playground` you can put a nametag on the playground. This is useful when you use multiple playgrounds. This also allows you to more easily find the data directory of the playground to inspect the logs etc. For example with the “myapp” tag you can find the datadir on `~/.tiup/data/myapp` with subdirectories for the various components. Setting a tag also lets you keep the data after stopping the playground.
+* With `tiup -T myapp playground` you can put a nametag on the playground. This is useful when you use multiple playgrounds. This also allows you to more easily find the data directory of the playground to inspect the logs etc. For example with the "myapp" tag you can find the datadir on `~/.tiup/data/myapp` with subdirectories for the various components. Setting a tag also lets you keep the data after stopping the playground.
 * The `tiup playground` command has options to set the number of instances per component. This can be used to set the number of TiFlash instances to 0 in case you for example don't intend to use the HTAP functionality.
 * You can add `--monitor=false` if you don't want to use monitoring tools like Grafana and Prometheus. This is useful if you want to save resources on your local machine.
 
