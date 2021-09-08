@@ -37,7 +37,7 @@ In this article, I'll describe:
 * In 2013, we introduced HBase as Pinterest's first NoSQL database system. Since then, HBase has been very popular, and it has been serving many of our critical services. Based on HBase, we’ve built a columnar data store, a graph service, and a number of other applications.
 * In 2015, we introduced RocksDB as a high performance C++ based storage engine. It powers our key-value (KV) store and machine learning serving applications. 
 * In 2017, customers wanted us to add more features to our NoSQL databases—for example, distributed transactions. NoSQL users asked for secondary indexing. We built a number of middle layer systems to meet these requests.
-* In 2021, we’re again seeing many use cases that require a sweet spot between SQL and NoSQL. Users want NoSQL kind of scalability but they also want to enjoy SQL-like features. This leads us to think: will a distributed SQL database be a promising technology for our next-generation storage service?
+* In 2021, we're again seeing many use cases that require a sweet spot between SQL and NoSQL. Users want NoSQL kind of scalability but they also want to enjoy SQL-like features. This leads us to think: will a distributed SQL database be a promising technology for our next-generation storage service?
 
 ![Evolution of Pinterest online storage](media/evolution-of-pinterest-online-storage.jpg)
 <div class="caption-center"> Evolution of Pinterest online storage </div>
