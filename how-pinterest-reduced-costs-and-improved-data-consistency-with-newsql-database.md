@@ -154,7 +154,7 @@ TiDB has given us:
 
 * **Greatly reduced system complexity and stronger consistency**, because TiDB provides distributed transactions
 * **Reduced** **infrastructure cost**, because the number of components is reduced
-* **Comparable performance—and sometimes even better performance—**for the same type of queries
+* **Comparable performance—and sometimes even better performance**—for the same type of queries
 
 This is the result of just one of our use cases. We evaluated other use cases, and, in general, we are satisfied with TiDB’s performance and reliability.
 
