@@ -145,7 +145,7 @@ We did a dark traffic evaluation with Pinterest production traffic. We used Ixia
 
 In this figure:
 
-* The graph on the left shows Ixia’s architecture. As you can see, it’s pretty complicated. It has HBase and a CDC pipeline. It has Ixia and a thrift server. It also uses Memcache and a search engine.
+* The graph on the left shows Ixia's architecture. As you can see, it's pretty complicated. It has HBase and a CDC pipeline. It has Ixia and a thrift server. It also uses Memcache and a search engine.
 * On the right side is our dark traffic application built on top of TiDB.
 
 In contrast, the TiDB architecture is much simpler.
