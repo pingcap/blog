@@ -138,7 +138,7 @@ TiDB is an open-source, distributed SQL database that supports Hybrid Transactio
 
 ### Evaluation with TiDB
 
-We did a dark traffic evaluation with Pinterest production traffic. We used Ixia as the target system. It’s our near real-time indexing system on HBase, as shown in the following figure:
+We did a dark traffic evaluation with Pinterest production traffic. We used Ixia as the target system. It's our near real-time indexing system on HBase, as shown in the following figure:
 
 ![Dark traffic evaluation](media/dark-traffic-evaluation.jpg)
 <div class="caption-center"> Dark traffic evaluation </div>
