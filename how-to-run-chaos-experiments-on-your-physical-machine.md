@@ -4,7 +4,6 @@ author: ['Xiang Wang']
 date: 2021-09-14
 summary: This article describes how to use chaosd to simulate faults on physical machines. You can run chaosd as a command-line tool or as a service.
 tags: ['Chaos Engineering', 'MySQL']
-customer: Xiaomi
 categories: ['Community']
 image: /images/blog/how-to-run-chaos-experiments-on-your-physical-machine.png
 ---
@@ -15,12 +14,11 @@ image: /images/blog/how-to-run-chaos-experiments-on-your-physical-machine.png
 
 ![How to run chaos experiments on your physical machine](media/how-to-run-chaos-experiments-on-your-physical-machine.png)
 
-
-[Chaos Mesh®](https://github.com/chaos-mesh/chaos-mesh) is a cloud-native Chaos Engineering platform that orchestrates chaos in Kubernetes environments. With Chaos Mesh, you can simulate a variety of failures, and use Chaos Dashboard, a web UI, to manage chaos experiments directly. Since it was open-sourced, Chaos Mesh has been adopted by many companies to ensure their systems’ resilience and robustness. But over the past year, we have frequently heard requests from the community asking how to run chaos experiments when the services are not deployed on Kubernetes.
+[Chaos Mesh®](https://github.com/chaos-mesh/chaos-mesh) is a cloud-native Chaos Engineering platform that orchestrates chaos in Kubernetes environments. With Chaos Mesh, you can simulate a variety of failures, and use Chaos Dashboard, a web UI, to manage chaos experiments directly. Since it was open-sourced, Chaos Mesh has been adopted by many companies to ensure their systems' resilience and robustness. But over the past year, we have frequently heard requests from the community asking how to run chaos experiments when the services are not deployed on Kubernetes.
 
 ## What is chaosd
 
-To meet the growing needs of chaos testing on physical machines, we are excited to present an enhanced toolkit called chaosd. You might find the name familiar. That’s because it evolved from `chaos-daemon`, a key component in Chaos Mesh. At TiDB Hackathon 2020, we [refactored chaosd to make it more than a command-line tool](https://en.pingcap.com/blog/chaos-mesh-remake-one-step-closer-toward-chaos-as-a-service#refactor-chaosd). Now with [chaosd v1.0.1](https://github.com/chaos-mesh/chaosd/releases/tag/v1.0.1), you can simulate specific errors that target physical machines, and then, undo the chaos experiments like nothing had happened. 
+To meet the growing needs of chaos testing on physical machines, we are excited to present an enhanced toolkit called chaosd. You might find the name familiar. That's because it evolved from `chaos-daemon`, a key component in Chaos Mesh. At TiDB Hackathon 2020, we [refactored chaosd to make it more than a command-line tool](https://en.pingcap.com/blog/chaos-mesh-remake-one-step-closer-toward-chaos-as-a-service#refactor-chaosd). Now with [chaosd v1.0.1](https://github.com/chaos-mesh/chaosd/releases/tag/v1.0.1), you can simulate specific errors that target physical machines, and then, undo the chaos experiments like nothing had happened. 
 
 ## Benefits of chaosd
 
@@ -32,7 +30,7 @@ chaosd has the following advantages:
 
 * **Multiple work modes**: You can use chaosd as a command-line tool or as a service.
 
-Without further ado, let’s give it a try.  
+Without further ado, let's give it a try.
 
 ## How to use chaosd
 
@@ -50,7 +48,7 @@ Unzip the file. It contains two file folders:
 
 * `chaosd` contains the tool entry of chaosd.
 
-* `tools` contains the tools needed to perform the chaos experiment, including [stress-ng](https://wiki.ubuntu.com/Kernel/Reference/stress-ng) (to simulate stress scenarios), [Byteman](https://github.com/chaos-mesh/byteman) (to simulate JVM application faults), and  PortOccupyTool (to simulate network faults).
+* `tools` contains the tools needed to perform the chaos experiment, including [stress-ng](https://wiki.ubuntu.com/Kernel/Reference/stress-ng) (to simulate stress scenarios), [Byteman](https://github.com/chaos-mesh/byteman) (to simulate JVM application faults), and PortOccupyTool (to simulate network faults).
 
 ### 2. Create a chaos experiment
 
@@ -70,7 +68,7 @@ Attack network successfully, uid: c55a84c5-c181-426b-ae31-99c8d4615dbe
 
 In this simulation, the ens33 network interface card cannot send network packets to or receive packets from chaos-mesh.org. The reason why you have to use `sudo` commands is that the chaos experiment modifies network rules, which require root privileges.
 
-Also, don’t forget to save the `uid` of the chaos experiment. You’ll be entering that later as part of the recovery process. 
+Also, don't forget to save the `uid` of the chaos experiment. You'll be entering that later as part of the recovery process. 
 
 ### 3. Verify the results
 
@@ -81,7 +79,7 @@ ping chaos-mesh.org
 PING chaos-mesh.org (185.199.109.153) 56(84) bytes of data. 
 ```
 
-When you execute the command, it’s very likely that the site won’t respond. Press `CTRL`+`C` to stop the ping process. You should be able to see the statistics of the `ping` command: `100% packet loss`.
+When you execute the command, it's very likely that the site won't respond. Press `CTRL`+`C` to stop the ping process. You should be able to see the statistics of the `ping` command: `100% packet loss`.
 
 Example output:
 
