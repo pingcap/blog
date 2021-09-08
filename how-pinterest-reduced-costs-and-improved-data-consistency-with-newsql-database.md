@@ -160,7 +160,7 @@ This is the result of just one of our use cases. We evaluated other use cases, a
 
 ## TiDB challenges and opportunities
 
-We really appreciate the continuous support from the TiDB community and [PingCAP](https://pingcap.com/). As we continue our collaboration, we’re thinking about new challenges and how and where we can make TiDB even more useful and powerful for companies like Pinterest. For example:
+We really appreciate the continuous support from the TiDB community and [PingCAP](https://pingcap.com/). As we continue our collaboration, we're thinking about new challenges and how and where we can make TiDB even more useful and powerful for companies like Pinterest. For example:
 
 * TiDB has gained a lot of community popularity, and it’s still maturing. We are looking forward to more product maturity and more functionalities over time.
 * We also want to see online recovery when we have a quorum loss.
