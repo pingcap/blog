@@ -156,7 +156,7 @@ TiDB has given us:
 * **Reduced** **infrastructure cost**, because the number of components is reduced
 * **Comparable performance—and sometimes even better performance**—for the same type of queries
 
-This is the result of just one of our use cases. We evaluated other use cases, and, in general, we are satisfied with TiDB’s performance and reliability.
+This is the result of just one of our use cases. We evaluated other use cases, and, in general, we are satisfied with TiDB's performance and reliability.
 
 ## TiDB challenges and opportunities
 
