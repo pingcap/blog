@@ -16,9 +16,9 @@ image: /images/blog/securing-online-gaming-combine-chaos-engineering-with-devops
 
 Interactive Entertainment Group (IEG) is a division of Tencent Holdings that focuses on the development of online video games and other digital content such as live broadcasts. It is well-known for being the publisher of some of the most popular video games.
 
-In this article, I will explain why and how we introduce chaos engineering into our DevOps process. 
+In this article, I will explain why and how we introduce chaos engineering into our DevOps process.
 
-For each day, we handle over 10,000,000 total visits, and, during peak hours, we process over 1,000,000 queries per second (QPS). To guarantee players a fun and engaging experience, we launch various daily or seasonal game events. Sometimes, that means we must update the event code over 500 times per day. As our user base grows, the total amount of data quickly multiplies. Currently, the figure stands at 200 terabytes. We have to manage the massive user queries and rapid release iterations, and we managed it well. 
+For each day, we handle over 10,000,000 total visits, and, during peak hours, we process over 1,000,000 queries per second (QPS). To guarantee players a fun and engaging experience, we launch various daily or seasonal game events. Sometimes, that means we must update the event code over 500 times per day. As our user base grows, the total amount of data quickly multiplies. Currently, the figure stands at 200 terabytes. We have to manage the massive user queries and rapid release iterations, and we managed it well.
 
 A cloud-native DevOps solution frees our events operator from the growing number of online events. We developed a pipeline that takes care of everything they need, from writing code to launching events in production environments: once new event codes are detected, the operation platform automatically builds images from them and deploys the image to Tencent Kubernetes Engine (TKE). You might be wondering how long this entire automated process takes: only 5 minutes.
 
@@ -28,13 +28,13 @@ In addition, we expect the iterations to be easier. A best practice is to break 
 
 The thing is, fault tolerance varies by service. Some support downgrading, while others don't. Not to mention that some services are unable to provide timely alerts or lack an effective debugging tool. As a result, debugging services has become a tricky and increasingly pressing issue in our day-to-day work.
 
-But we can't just let it be. What if the unstable performance constantly chases our players away? What if there is a catastrophic failure? 
+But we can't just let it be. What if the unstable performance constantly chases our players away? What if there is a catastrophic failure?
 
 ## Let there be faults
 
 Netflix introduced the idea of chaos engineering. This approach tests the resilience of the system against all kinds of edgy cases by injecting faults in a non-production environment to achieve ideal system reliability. According to [one Gartner article](https://www.gartner.com/smarterwithgartner/the-io-leaders-guide-to-chaos-engineering/), by 2023, 40% of organizations will use chaos engineering to meet their top DevOps objectives, reducing unplanned downtime by 20%.
 
-This is exactly how we avoid the worst-case scenario. Fault injection, in my opinion, is now a must-do in every technical team. In our early test cases, developers would bring down a node before launching a service to see if the primary node automatically switched to the secondary node and if disaster recovery worked. 
+This is exactly how we avoid the worst-case scenario. Fault injection, in my opinion, is now a must-do in every technical team. In our early test cases, developers would bring down a node before launching a service to see if the primary node automatically switched to the secondary node and if disaster recovery worked.
 
 **But chaos engineering is more than fault injection.** It is a field that constantly drives new techniques, professional testing tools, and solid theories. That's why we continue to explore it.
 
@@ -42,14 +42,14 @@ IEG officially launched its chaos engineering project over a year ago. We wanted
 
 * It is a Cloud Native Computing Foundation (CNCF) Sandbox project with a friendly and productive community.
 * It does not intrude on existing applications.
-* It provides a web UI and a variety of fault injection types, as shown in the image below. 
+* It provides a web UI and a variety of fault injection types, as shown in the image below.
 
 ![A comparison of chaos engineering tools](media/a-comparison-of-chaos-engineering-tools.png)
 <div class="caption-center">A comparison of chaos engineering tools</div>
 
 > **Note:**
 >
-> This comparison is outdated and is intended simply to compare fault injection features supported by Chaos Mesh with other well-known chaos engineering platforms. It is not intended to favor or position one project over another. Any corrections are welcome. 
+> This comparison is outdated and is intended simply to compare fault injection features supported by Chaos Mesh with other well-known chaos engineering platforms. It is not intended to favor or position one project over another. Any corrections are welcome.
 
 ## Build a chaos testing platform
 
@@ -64,7 +64,7 @@ In IEG, **chaos engineering is generally summarized as a closed loop with severa
 
     Build a chaos testing platform that we can modify as our needs change.
 
-2. Design a testing plan. 
+2. Design a testing plan.
 
     The testing plan must specify the target, scope, fault to be injected, monitoring metrics, etc. Make sure the testing is well-controlled.
 
@@ -95,10 +95,10 @@ There is no need to shut down the entire system to see if our games are still av
 
 ### Red teaming
 
-Understandably, our team members grew bored of regular chaos experiments. After all, it's something like telling your left hand to fight against your right hand. Here at IEG, **we integrate a testing practice called red teaming into chaos engineering to ensure that our system resiliency improves in an organic way**. Red teaming is similar to penetration testing, but more targeted. It requires a group of testers to emulate real-world attacks from an outsider's perspective. If I were in charge of IT operations, I would simulate faults to specific services, and check to see whether my developer colleges were doing a good job. If I found any potential faults, well, be prepared for some "hard talk." On the other hand, developers would actively perform chaos experiments and make sure no risk was left behind to avoid being blamed. 
+Understandably, our team members grew bored of regular chaos experiments. After all, it's something like telling your left hand to fight against your right hand. Here at IEG, **we integrate a testing practice called red teaming into chaos engineering to ensure that our system resiliency improves in an organic way**. Red teaming is similar to penetration testing, but more targeted. It requires a group of testers to emulate real-world attacks from an outsider's perspective. If I were in charge of IT operations, I would simulate faults to specific services, and check to see whether my developer colleges were doing a good job. If I found any potential faults, well, be prepared for some "hard talk." On the other hand, developers would actively perform chaos experiments and make sure no risk was left behind to avoid being blamed.
 
-![The red teaming process in IEG](media/the-red-teaming-process-in-ieg.png)
-<div class="caption-center">The red teaming process in IEG</div>
+<img src="media/the-red-teaming-process-in-ieg.png" width="500">
+<div class="caption-center">The red teaming process in IEG<div>
 
 ### Dependency analysis
 
@@ -112,7 +112,7 @@ We are also exploring AI bots to help us detect and diagnose faults. As services
 
 Currently, on average, more than 50 people run chaos experiments each week, running more than 150 tests, and detecting more than 100 problems in total.
 
-Gone are the days when performing fault injection requires a handwritten script, which can be a tough thing to do for those who are unfamiliar with it. **The benefits of combining chaos engineering with DevOps practices are obvious: within a few minutes, you can orchestrate various fault types by simply dragging and dropping, execute them with a single click, and monitor the results in real-time—all in one platform.** 
+Gone are the days when performing fault injection requires a handwritten script, which can be a tough thing to do for those who are unfamiliar with it. **The benefits of combining chaos engineering with DevOps practices are obvious: within a few minutes, you can orchestrate various fault types by simply dragging and dropping, execute them with a single click, and monitor the results in real-time—all in one platform.**
 
 ![Chaos engineering with DevOps ensures efficient fault injection](media/chaos-engineering-with-devops-ensures-efficient-fault-injection.png)
 <div class="caption-center">Chaos engineering with DevOps ensures efficient fault injection</div>
