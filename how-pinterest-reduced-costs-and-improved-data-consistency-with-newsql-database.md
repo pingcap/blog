@@ -117,7 +117,7 @@ As a result, we looked for new storage solutions that can gracefully handle thos
 
 ## In search of new storage
 
-Currently, we have a gap in our storage solutions. We’re missing:
+Currently, we have a gap in our storage solutions. We're missing:
 
 * Functionalities like **distributed transactions** from which we can get stronger consistency when needed and good performance, which is very important for online applications.
 * **SQL compatibility** so that we can execute expressive queries and provide our users with a seamless experience.
