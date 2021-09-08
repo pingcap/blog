@@ -34,7 +34,6 @@ jobs:
       run:
         wget https://raw.githubusercontent.com/pingcap/docs/master/scripts/check-tags.py;
         python3 check-tags.py $(git diff-tree --name-only --no-commit-id -r upstream/master...HEAD -- '*.md')
-        #echo "checked files are $(git diff-tree --name-only --no-commit-id -r upstream/master...HEAD -- '.md')";
     - name: "Check Chinese punctuation"
       run:
         wget https://raw.githubusercontent.com/pingcap/docs/master/scripts/check-zh-punctuation.py;
