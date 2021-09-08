@@ -108,7 +108,7 @@ Zen had two major pain points:
 
 Ixia is our in-house index data store. It is built on top of HBase + Muse (our in-house index engine). We use CDC for asynchronous indexing. Source of truth data is written to HBase, and we build indexes asynchronously in the search engine.
 
-Ixia’s major pain points were:
+Ixia's major pain points were:
 
 * **Occasional index failures and inconsistencies**. This frustrated customers, and we spent many hours helping them debug inconsistency-related issues.
 * **Problem diagnosis could be time-consuming** due to system complexity.
