@@ -6,7 +6,7 @@ summary: Pinterest used the HBase ecosystem for their data storage. But this inf
 tags: ['Scalability']
 customer: Pinterest
 customerCategory: Internet
-logo: /images/blog/customers/pinterest-logo.png
+logo: /images/blog/customers/pinterest-logo-1.png
 image: /images/blog/pinterest-reduced-costs-and-improved-data-consistency-with-newsql-database.jpg
 ---
 
@@ -35,7 +35,7 @@ In this article, I'll describe:
 
 * In 2012, we introduced sharded MySQL into Pinterest's tech stack. We used it to store the core data models including pins, boards, and users.
 * In 2013, we introduced HBase as Pinterest's first NoSQL database system. Since then, HBase has been very popular, and it has been serving many of our critical services. Based on HBase, we've built a columnar data store, a graph service, and a number of other applications.
-* In 2015, we introduced RocksDB as a high performance C++ based storage engine. It powers our key-value (KV) store and machine learning serving applications. 
+* In 2015, we introduced RocksDB as a high performance C++ based storage engine. It powers our key-value (KV) store and machine learning serving applications.
 * In 2017, customers wanted us to add more features to our NoSQL databases—for example, distributed transactions. NoSQL users asked for secondary indexing. We built a number of middle layer systems to meet these requests.
 * In 2021, we're again seeing many use cases that require a sweet spot between SQL and NoSQL. Users want NoSQL kind of scalability but they also want to enjoy SQL-like features. This leads us to think: will a distributed SQL database be a promising technology for our next-generation storage service?
 
@@ -68,11 +68,11 @@ In this ecosystem:
 
 ### Problems with HBase
 
-Over the years, HBase served us well. However, we faced a number of challenges, including: 
+Over the years, HBase served us well. However, we faced a number of challenges, including:
 
 * **High maintenance cost**
 
-    Over the past eight years, because of the old HBase version we used, we suffered from long-standing tech debt. HBase was a complicated system, and it had high barriers to entry. As a result, it took a lot of effort to keep HBase up and running. This was one of our top pain points. 
+    Over the past eight years, because of the old HBase version we used, we suffered from long-standing tech debt. HBase was a complicated system, and it had high barriers to entry. As a result, it took a lot of effort to keep HBase up and running. This was one of our top pain points.
 
 * **Limited functionalities**
 
@@ -90,7 +90,7 @@ Over the years, HBase served us well. However, we faced a number of challenges, 
 
 Our customers also had pain points with our existing HBase system.
 
-#### Pain points with Zen 
+#### Pain points with Zen
 
 Zen is our in-house graph service that provides a graph data model. Essentially, users can do CRUD operations with a data model of nodes and edges. They can define customized indexes like unique, non-unique, edge query, or local indexes.
 
@@ -113,7 +113,7 @@ Ixia's major pain points were:
 * **Occasional index failures and inconsistencies**. This frustrated customers, and we spent many hours helping them debug inconsistency-related issues.
 * **Problem diagnosis could be time-consuming** due to system complexity.
 
-As a result, we looked for new storage solutions that can gracefully handle those situations for us. 
+As a result, we looked for new storage solutions that can gracefully handle those situations for us.
 
 ## In search of new storage
 
