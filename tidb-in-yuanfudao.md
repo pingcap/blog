@@ -39,7 +39,7 @@ In the end, the backend developers of yuanfudao.com decided to use a distributed
 TiDB is an open source distributed Hybrid Transactional/Analytical Processing (HTAP) database. It features horizontal scalability, strong consistency, and high availability. Users can regard TiDB as a standalone database with an infinite storage capacity. TiDB is nonintrusive to business and can elegantly replace the traditional sharding solutions such as database middleware and database sharding while at the same time maintaining the ACID properties of transactions. Instead of paying too much attention to the details of database scaling, developers are freed to focus on business development, which greatly improves the R&D productivity.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('How TiDB tackles fast data growth and complex queries for yuanfudao.com', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('How TiDB tackles fast data growth and complex queries for yuanfudao.com', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How TiDB tackles fast data growth and complex queries for yuanfudao.com', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

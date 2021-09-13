@@ -98,7 +98,7 @@ Because TrueTime has the clock uncertainty bound  `ε`, so for every transaction
 The biggest hurdle to adopting TrueTime is that it depends on special hardware, such as GPS clocks and atomic clocks, which many companies do not have.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Tick or Tock? Keeping Time and Order in Distributed Databases', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Tick or Tock? Keeping Time and Order in Distributed Databases', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Tick or Tock? Keeping Time and Order in Distributed Databases', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

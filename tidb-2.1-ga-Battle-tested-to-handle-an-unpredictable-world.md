@@ -40,7 +40,7 @@ TiDB 2.1 includes major improvements to the execution of certain physical plans 
 Because of these improvements, TiDB 2.1 performances much better in OLAP scenarios than 2.0, as shown in our latest TPC-H benchmark in the "Performance Benchmark" section below. This performance boost further strengthens TiDB's capabilities as an HTAP database.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('TiDB 2.1 GA: Battle-Tested to Handle an Unpredictable World', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('TiDB 2.1 GA: Battle-Tested to Handle an Unpredictable World', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB 2.1 GA: Battle-Tested to Handle an Unpredictable World', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

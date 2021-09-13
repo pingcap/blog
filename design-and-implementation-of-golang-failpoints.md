@@ -7,7 +7,7 @@ tags: ['Go']
 categories: ['Engineering']
 ---
 
-Generally, a large complex system consists of multiple components. To test this system, it is essential to simulate faults in each component. Further, we should integrate fault simulation into the automated testing system without being intrusive to the testing system. We judge the correctness and stability of the system by automatically activating fault points in automated testing to simulate faults and observing whether the final result meets our expectations.  
+Generally, a large complex system consists of multiple components. To test this system, it is essential to simulate faults in each component. Further, we should integrate fault simulation into the automated testing system without being intrusive to the testing system. We judge the correctness and stability of the system by automatically activating fault points in automated testing to simulate faults and observing whether the final result meets our expectations.
 
 Manual testing can be expensive or lack the fine-grained control we need. For example, it could be disastrous to simulate a network anomaly by plugging and unplugging the network cable in a distributed system or to simulate a disk failure by damaging the disks in a storage system. Therefore, we need some automated methods to perform deterministic fault testing.
 
@@ -190,7 +190,7 @@ It marks the part that needs rewriting during the AST rewriting phase and has th
 - `func Label(label string) {}`
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Try to Fix Two Linux Kernel Bugs While Testing TiDB Operator in K8s', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Try to Fix Two Linux Kernel Bugs While Testing TiDB Operator in K8s', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Try to Fix Two Linux Kernel Bugs While Testing TiDB Operator in K8s', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
@@ -531,7 +531,7 @@ In addition to the three examples above, you can create more complex cases. For 
 - The construction and index of a slice
 - Dynamic initialization of a structure
 
-Actually, you can inject a failpoint anywhere you can call a function. Just imagine more cases.  
+Actually, you can inject a failpoint anywhere you can call a function. Just imagine more cases.
 
 ## Best practices for failpoint naming
 

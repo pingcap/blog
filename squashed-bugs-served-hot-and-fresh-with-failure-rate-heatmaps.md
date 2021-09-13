@@ -2,7 +2,7 @@
 title: Squashed Bugs, Served Hot and Fresh with Failure Rate Heatmaps
 author: ['Qinyuan Du']
 date: 2019-12-18
-summary: At TiDB Hackathon 2019, a team won the third prize by building a bot that helps quickly locate bugs in the code. Read this post to get more details. 
+summary: At TiDB Hackathon 2019, a team won the third prize by building a bot that helps quickly locate bugs in the code. Read this post to get more details.
 tags: ['Bug fix', 'Hackathon']
 categories: ['Engineering']
 image: /images/blog/automatic-debug.png
@@ -103,7 +103,7 @@ Also, as shown below, we implemented a SQL fuzzing demonstration page that shows
 <div class="caption-center"> Colored BNF grammars for SQL </div>
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Squashed Bugs, Served Hot and Fresh with Failure Rate Heatmaps', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Squashed Bugs, Served Hot and Fresh with Failure Rate Heatmaps', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Squashed Bugs, Served Hot and Fresh with Failure Rate Heatmaps', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

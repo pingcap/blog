@@ -36,6 +36,10 @@ Based on their feedback, TiDB 5.2 focuses on real-world scenarios, aiming to pus
 This post shows only a few of the highlights in TiDB 5.2. For a full list of features and improvements, check out the [TiDB 5.2 Release Notes](https://docs.pingcap.com/tidb/stable/release-5.2.0).
 
 <div class="trackable-btns">
+    <a href="https://pingcap.com/download" onclick="trackViews('TiDB 5.2 - Translytical Processing Made Easier and Faster', 'download-tidb-btn-middle')"><button>Get TiDB Now</button></a>
+     <a href="https://pingcap.com/contact-us" onclick="trackViews('TiDB 5.2 - Translytical Processing Made Easier and Faster', 'contact-us-middle')"><button>Request a Demo</button></a>
+</div>
+<div class="trackable-btns">
     <div class="PingCAP-TrackGABtns">
       <div class="trackable-btns">
         <a href="https://pingcap.com/download" class="button is-primary is-outlined is-rounded">Get TiDB Now</a>
@@ -66,13 +70,13 @@ Mission-critical applications require low query latency to maintain a consistent
 
 This release balances the range of data regions when executing data definition language (DDL) statements and enables you to index large tables faster.
 
-When a storage node is slow, the Leader is automatically transferred to other normally functional nodes to manage traffic. If a single node jitters, this ensures the entire cluster's overall throughput. 
+When a storage node is slow, the Leader is automatically transferred to other normally functional nodes to manage traffic. If a single node jitters, this ensures the entire cluster's overall throughput.
 
 The memory usage of Raft log caches and Raft messages are strictly limited, which prevents OOM issues for TiKV under heavy write workloads.
 
 ### Optimized cluster resource usage
 
-TiDB 5.2 allows you to prioritize hotspots and balance cluster resources based on the QPS. You can make cluster CPU distribution more balanced, avoiding the bottlenecks caused by a single node. To verify its performance, we simulated a scenario in which hotspots were observed within a small table. The results showed that the CPU usage was significantly optimized, while the number of QPS nearly doubled. You can also schedule hotspots for TiFlash's analytical processing (AP) engine, which is a huge step farther for load balancing in HTAP scenarios.   
+TiDB 5.2 allows you to prioritize hotspots and balance cluster resources based on the QPS. You can make cluster CPU distribution more balanced, avoiding the bottlenecks caused by a single node. To verify its performance, we simulated a scenario in which hotspots were observed within a small table. The results showed that the CPU usage was significantly optimized, while the number of QPS nearly doubled. You can also schedule hotspots for TiFlash's analytical processing (AP) engine, which is a huge step farther for load balancing in HTAP scenarios.
 
 ### Enhanced data migration efficiency
 
@@ -104,7 +108,7 @@ SQL Plan Management (SPM) is a set of functions that execute SQL bindings to man
 
 ## Real-time insights for faster business decisions
 
-When businesses need to make quick decisions, real-time business intelligence is crucial. But how can we maintain this agility as data size grows? 
+When businesses need to make quick decisions, real-time business intelligence is crucial. But how can we maintain this agility as data size grows?
 
 **TiFlash supports query execution in MPP mode, which maximizes computing resources and achieves query performance in real time.** The more functions or operators TiFlash supports, the more SQL statements TiDB can push down to TiFlash for calculations. In other words, the efficiency of related queries will be considerably improved even if only one more function or operator is supported in each release.
 
@@ -130,13 +134,13 @@ All these exciting features and improvements makes TiDB applicable for the follo
 
     * Enhanced cluster resource usage by optimizing the hotspot scheduling algorithm and implementing QPS-based statistics. TiFlash, the columnar storage engine, now also supports hotspot scheduling.
 
-    * Increased data migration efficiency by cutting the data replication latency of the TiDB Data Migration tool (DM). Under a load pressure of 200,000 queries per second (QPS), is it under one second 99% of the time. 
+    * Increased data migration efficiency by cutting the data replication latency of the TiDB Data Migration tool (DM). Under a load pressure of 200,000 queries per second (QPS), is it under one second 99% of the time.
 
 * Scenario 2: When performing real-time queries, the data retrieval process might become unstable, and the efficiency will differ based on the data size to query.
-    
-    * Improved index selection by introducing the heuristic query optimization and improving cost estimation accuracy. 
 
-    * Improved the usability of SQL Plan Management when creating bindings. 
+    * Improved index selection by introducing the heuristic query optimization and improving cost estimation accuracy.
+
+    * Improved the usability of SQL Plan Management when creating bindings.
 
 * Scenario 3: Complex real-time queries hinder timely business decisions.
 
@@ -148,7 +152,7 @@ All these exciting features and improvements makes TiDB applicable for the follo
 
     * Increased MPP robustness by preventing deadlocks.
 
-    * Enhanced capability for high concurrent full-table queries up to 30 or more under heavy write workloads. This can reduce or eliminate out-of-memory (OOM) errors. 
+    * Enhanced capability for high concurrent full-table queries up to 30 or more under heavy write workloads. This can reduce or eliminate out-of-memory (OOM) errors.
 
     * Reduced the impact on the application side when maintaining TiFlash cluster. The system can recover from an unstable state automatically or with manual intervention. New queries from the front-end will not be interrupted during scaling.
 

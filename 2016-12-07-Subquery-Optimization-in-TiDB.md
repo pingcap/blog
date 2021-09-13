@@ -60,6 +60,7 @@ TiDB inherits the subquery strategy in SQL Server [^1]. It introduces the `Apply
 ## The `Apply` operator
 
 The reason why subqueries are difficult to optimize is that a subquery cannot be represented as a logic operator like `Projection` or `Join`, which makes it difficult to find a generic algorithm for subquery transformation. So the first thing is to introduce a logical operation that can represent the subqueries: the `Apply` operator, which is also called `d-Join`[^2].
+
 The semantics of the `Apply` operator is:
 
 $$
@@ -95,7 +96,7 @@ $$
 The `C` Projection is to transform NULL to false. But the more common practice is: If the output of the `Apply` operator is directly used by the query predicate, it is converted to `SemiJoin`.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Subquery Optimization in TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Subquery Optimization in TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Subquery Optimization in TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

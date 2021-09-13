@@ -148,7 +148,7 @@ The final step, TiKV removes the replica of Region One from Node A. Now the data
 This is how TiKV scales out.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('A Brief Introduction of TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('A Brief Introduction of TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('A Brief Introduction of TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

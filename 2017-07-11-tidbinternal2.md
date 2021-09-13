@@ -115,7 +115,7 @@ var(
 Note that the Key encoding solution of either Row or Index has the same prefix. Specifically speaking, all Rows in a Table has the same prefix, so does data of Index. These data with the same prefix is arranged together in the Key space of TiKV. In other words, we just need to carefully design the encoding solution of the suffix, ensuing the comparison relation remains unchanged, then Row or Index data can be stored in TiKV orderly. The solution of maintaining the relation unchanged before and after encoding is called `Memcomparable`. As for any type of value, the comparison result of two objects before encoding is consistent with that of the byte array after encoding (Note: both Key and Value of TiKV are the primitive byte array). For more detailed information, please refer to the [codec package](https://github.com/pingcap/tidb/tree/master/util/codec) of TiDB. When adopting this encoding solution, all Row data of a table will be arranged in the Key space of TiKV according to the RowID order. So will the data of a certain Index, according to the ColumnValue order of Index.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('TiDB Internal (II) - Computing', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('TiDB Internal (II) - Computing', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Internal (II) - Computing', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

@@ -102,7 +102,7 @@ Beyond these main components, TiDB also has an ecosystem of tools, such as [Ansi
 * Online schema changes
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Lesson Learned from Queries over 1.3 Trillion Rows of Data Within Milliseconds of Response Time at Zhihu.com', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Lesson Learned from Queries over 1.3 Trillion Rows of Data Within Milliseconds of Response Time at Zhihu.com', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Lesson Learned from Queries over 1.3 Trillion Rows of Data Within Milliseconds of Response Time at Zhihu.com', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

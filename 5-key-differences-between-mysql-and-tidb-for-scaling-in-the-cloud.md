@@ -42,7 +42,7 @@ By contrast, TiDB uses RocksDB as the storage engine with TiKV. RocksDB has adva
 Note that both MySQL and TiDB support an API that allows new storage engines to be made available. For example, Percona Server and MariaDB both support RocksDB as an option.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('5 Key Differences Between MySQL and TiDB for Scaling in the Cloud', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('5 Key Differences Between MySQL and TiDB for Scaling in the Cloud', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('5 Key Differences Between MySQL and TiDB for Scaling in the Cloud', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

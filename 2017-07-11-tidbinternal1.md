@@ -94,7 +94,7 @@ TiKV uses Raft to replicate data and each data change will be recorded as a Raft
 In summary, through the standalone RocksDB, we can store data on a disk rapidly; through Raft, we can replicate data to multiple machines in case of machine failure. Data is written through the interface of Raft instead of to RocksDB. Thanks to the implementation of Raft, we have a distributed Key-Value and no longer need to worry about machine failure.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('TiDB Internal (I) - Data Storage', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('TiDB Internal (I) - Data Storage', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Internal (I) - Data Storage', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

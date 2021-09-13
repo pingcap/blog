@@ -96,7 +96,7 @@ Rust is thread safe, so there won't be any data race problem. All the safety are
 Rust has no GC expenses, so we won't meet the "stop the world" problem. Calling C through FFI is very fast, so we don't worry the performance reduction when calling the RocksDB API. At last, Rust has an official package manager, Cargo, we can find many libraries and use them directly.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Rust in TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Rust in TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Rust in TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

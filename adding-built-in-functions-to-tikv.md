@@ -66,13 +66,13 @@ Take [`MultiplyIntUnsigned`](https://github.com/pingcap/tikv/pull/3277) as an ex
 
     | `Eval` Function in TiDB       | Return Value Type in TiKV|
     | ------------- |:-------------|
-    | evalInt    | Result\<Option\<i64\>\> |
-    | evalReal    | Result\<Option\<i64\>\> |
-    | evalString | Result\<Option\<Cow\<'a, [u8]\>\>\> |
-    | evalDecimal    | Result\<Option\<Cow\<'a, Decimal\>\>\> |
-    | evalTime    | Result\<Option\<Cow\<'a, Time\>\>\> |
-    | evalDuration    | Result\<Option\<Cow\<'a, Duration\>\>\> |
-    | evalJSON    | Result\<Option\<Cow\<'a, Json\>\>\> |
+    | evalInt    | `Result<Option<i64>>` |
+    | evalReal    | `Result<Option<i64>>` |
+    | evalString | `Result<Option<Cow<'a, [u8]>>>` |
+    | evalDecimal    | `Result<Option<Cow<'a, Decimal>>>` |
+    | evalTime    | `Result<Option<Cow<'a, Time>>>` |
+    | evalDuration    | `Result<Option<Cow<'a, Duration>>>` |
+    | evalJSON    | `Result<Option<Cow<'a, Json>>>` |
 
     Thus, in TiDB's `builtinArithmeticMultiplyIntUnsignedSig`, it implements the `evalInt` method, so the return value type of this function `multiply_int_unsigned` should be `Result<Option<i64>>`.
 
@@ -184,7 +184,7 @@ To add argument check:
 2. Add the check for the number of the expression arguments as the implemented signatures do.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Landing Your First Rust Pull Request in TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Landing Your First Rust Pull Request in TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Landing Your First Rust Pull Request in TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

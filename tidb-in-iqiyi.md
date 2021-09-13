@@ -125,7 +125,7 @@ The following picture shows the TiDB Lightning architecture:
 <div class="caption-center"> Figure 4: TiDB Lightning implementation architecture </div>
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Always Fun, Always On: How TiDB Helps iQiyi Deliver Streaming Videos', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Always Fun, Always On: How TiDB Helps iQiyi Deliver Streaming Videos', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Always Fun, Always On: How TiDB Helps iQiyi Deliver Streaming Videos', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

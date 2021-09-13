@@ -257,7 +257,7 @@ Conclusion:
 * TiDB is compatible with the MySQL protocol, which means few code modifications and low migration costs.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('NetEase Games: Why We Chose TiDB over Other MySQL-based and NewSQL Storage Solutions', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('NetEase Games: Why We Chose TiDB over Other MySQL-based and NewSQL Storage Solutions', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('NetEase Games: Why We Chose TiDB over Other MySQL-based and NewSQL Storage Solutions', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

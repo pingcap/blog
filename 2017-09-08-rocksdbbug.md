@@ -180,7 +180,7 @@ In the table, it looks like:
 Now, if we try to get "a", we will encounter the `DELETE_RANGE` first, and return that "a" is not found. That's good, we don't need to scan all data anymore, and the size of a DeleteRange entry can be ignored in face of a large range. So we planned to use the DeleteRange feature in TiKV and started to test it.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('How We Found a Data Corruption Bug in RocksDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('How We Found a Data Corruption Bug in RocksDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How We Found a Data Corruption Bug in RocksDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

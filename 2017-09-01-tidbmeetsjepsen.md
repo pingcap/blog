@@ -31,7 +31,7 @@ Jepsen consists of 6 nodes, one control node and five controlled nodes (by defau
 
 ### DB
 
-DB encapsulates the download, deployment, startup and shutdown commands of the target system. The core function consists of setup and teardown. When Jepsen is testing TiDB, setup is responsible for downloading binaries and starting PD (Placement Driver), TiKV and TiDB in turn while teardown shutdowns the entire TiDB cluster and deletes logs.
+DB encapsulates the download, deployment, startup and shutdown commands of the target system. The core function consists of setup and teardown. When Jepsen is testing TiDB, setup is responsible for downloading binaries and starting PD (Placement Driver), TiKV and TiDB in turn while teardown shutdowns the entire TiDB cluster and deletes logs.
 
 ### Client
 
@@ -61,7 +61,7 @@ After introducing the `parts` type into the tests, a `time-out` error occurs whe
 Generator, the event generator of Jepsen, interweaves the operations of Client with that of Nemesis and generates specific execute statements for the entire test process.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('When TiDB Meets Jepsen', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('When TiDB Meets Jepsen', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('When TiDB Meets Jepsen', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

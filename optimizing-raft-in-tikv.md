@@ -62,7 +62,7 @@ So the entire Raft process becomes as follows:
 The benefit of using asynchronous apply is that we are now able to append and apply log in parallel. Although to a client, its single request still needs to go through the whole Raft process; to multiple clients, the overall concurrency and throughput have improved.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('A TiKV Source Code Walkthrough – Raft Optimization', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('A TiKV Source Code Walkthrough – Raft Optimization', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('A TiKV Source Code Walkthrough – Raft Optimization', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
@@ -88,7 +88,7 @@ TiKV uses `ReadIndex` and Lease Read to optimize the Raft Read operation, but th
 
 Thus, currently, we are trying to asynchronously implement Lease Read in another thread. We'll move the Leader Lease judgment to another thread, and the thread in Raft will update Lease regularly through messages. In this way, we can guarantee that the write process of Raft will not influence that of read.
 
-We are also trying to append the Raft log in another thread at the same time. We will compare the performance of the two approaches and choose the better one later.  
+We are also trying to append the Raft log in another thread at the same time. We will compare the performance of the two approaches and choose the better one later.
 
 ## Summary
 
