@@ -207,7 +207,7 @@ The situation isn't hopeless. Not at all. There is always work going on to impro
   * Performs constant propagation on MIR, which reduces duplicated LLVM work on monomorphized functions
   * Developed by [@wesleywiser](https://github.com/wesleywiser)
 * [MIR optimizations](https://github.com/rust-lang/rust/pulls?q=mir-opt)
-  * Optimizing MIR should be faster than optimizeng monomorphized LLVM IR
+  * Optimizing MIR should be faster than optimizing monomorphized LLVM IR
   * Not in stable compilers yet
   * Developed by [@wesleywiser](https://github.com/wesleywiser) and others
 * cargo build -Ztimings ([1](https://internals.rust-lang.org/t/exploring-crate-graph-build-times-with-cargo-build-ztimings/10975),[2](https://github.com/rust-lang/cargo/issues/7405))
