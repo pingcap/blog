@@ -266,7 +266,7 @@ jdbc:mysql://192.168.1.20:4000/dbname?tidb_constraint_check_in_place=1
 ```
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Best Practices for Developing Applications with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Best Practices for Developing Applications with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Best Practices for Developing Applications with TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
@@ -307,13 +307,13 @@ A composite index in TiDB is structured as `key tablekeyname (a,b,c)`. Like othe
 select a,b,c from tablename where a<predicate>'<value1>' and b<predicate>'<value2>' and c<predicate>'<value3>';
 ```
 
-- If the predicate of condition **a** is `=`or `in`, composite index `(a,b,c)` can be used with query condition **b**, for example:
+- If the predicate of condition **a** is `=` or `in`, composite index `(a,b,c)` can be used with query condition **b**, for example:
 
     ```sql
     select a,b,c from tablename where a=1 and b<5 and c='abc'
     ```
 
-- If the predicate is `=` or `in` for both condition **a** and condition **b**, composite index (a,b,c)` can be used for condition **c**, for example:
+- If the predicate is `=` or `in` for both condition **a** and condition **b**, composite index `(a,b,c)` can be used for condition **c**, for example:
 
     ```sql
     select a,b,c from tablename where a in (1,2,3) and b=5 and c='abc'

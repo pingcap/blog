@@ -192,7 +192,7 @@ In the [CockroachDB analysis](https://jepsen.io/analyses/cockroachdb-beta-201608
 Strict serializability means that operations should appear to have some order consistency with the real-time ordering. It implies both serializability and linearizability.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Safety First! Common Safety Pitfalls in Distributed Databases Found by Jepsen Tests', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Safety First! Common Safety Pitfalls in Distributed Databases Found by Jepsen Tests', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Safety First! Common Safety Pitfalls in Distributed Databases Found by Jepsen Tests', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

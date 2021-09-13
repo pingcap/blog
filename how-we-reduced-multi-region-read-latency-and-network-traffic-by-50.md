@@ -86,7 +86,7 @@ The optimization is effective, as shown in the following figure:
 <div class="caption-center"> Read request processing with Follower Read enabled </div>
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('How We Reduced Multi-region Read Latency and Network Traffic by 50%', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('How We Reduced Multi-region Read Latency and Network Traffic by 50%', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How We Reduced Multi-region Read Latency and Network Traffic by 50%', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

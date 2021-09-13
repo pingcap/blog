@@ -137,7 +137,7 @@ Here is how these components streamline a chaos experiment:
 3. When admission-webhooks receives a Pod creation request, the Pod object to be created is dynamically updated; for example, it is injected into the sidecar container and the Pod.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Chaos Mesh - Your Chaos Engineering Solution for System Resiliency on Kubernetes', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Chaos Mesh - Your Chaos Engineering Solution for System Resiliency on Kubernetes', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Chaos Mesh - Your Chaos Engineering Solution for System Resiliency on Kubernetes', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

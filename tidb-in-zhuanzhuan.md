@@ -72,7 +72,7 @@ Based on the testing results, we recommended these use-case scenarios:
 After the functional testing and stress testing, we felt confident  that TiDB met our requirements, so we began pre-production adoption. We mounted TiDB on the online MySQL and used it as MySQL's secondary to synchronize online data. Then we migrated some online read traffic from MySQL to TiDB, to see whether the TiDB cluster met the needs of application access. It turned out that TiDB could handle that well.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Managing the Surging Data Volume of a Fast-Growing Marketplace with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Managing the Surging Data Volume of a Fast-Growing Marketplace with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Managing the Surging Data Volume of a Fast-Growing Marketplace with TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

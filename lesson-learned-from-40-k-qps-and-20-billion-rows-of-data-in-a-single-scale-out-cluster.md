@@ -113,7 +113,7 @@ TiKV has the following [features](https://tikv.org/docs/3.0/concepts/features/):
 * [Flexible APIs](https://tikv.org/docs/3.0/concepts/architecture)
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('How We Achieved 40 K QPS and 20+ Billion Rows of Data in a Single Scale-out Cluster', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('How We Achieved 40 K QPS and 20+ Billion Rows of Data in a Single Scale-out Cluster', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How We Achieved 40 K QPS and 20+ Billion Rows of Data in a Single Scale-out Cluster', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

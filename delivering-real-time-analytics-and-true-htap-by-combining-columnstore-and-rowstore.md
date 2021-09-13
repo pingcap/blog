@@ -128,7 +128,7 @@ Generally, OLAP systems use column-oriented storage, and so does TiFlash. TiFlas
 * It works naturally with a vectorized engine without need of transformation.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Delivering Real-time Analytics and True HTAP by Combining Columnstore and Rowstore', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Delivering Real-time Analytics and True HTAP by Combining Columnstore and Rowstore', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Delivering Real-time Analytics and True HTAP by Combining Columnstore and Rowstore', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
@@ -255,14 +255,3 @@ Currently, we're running a [proof of concept](https://en.wikipedia.org/wiki/Proo
 Finally, we would like to extend our appreciation for the excellent work of the ClickHouse team. Without their work, we couldn't have sailed our TiFlash journey so smoothly.
 
 If you're interested in TiFlash technologies, you can contact me at [weiwan@pingcap.com](mailto:weiwan@pingcap.com).
-
-<div style="margin-top: 5rem; margin-bottom: 2rem;text-align: left;">
-<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
-<script dangerouslySetInnerHTML={{ __html: `
-  hbspt.forms.create({
- portalId: "4466002",
- formId: "62420aae-0006-4369-8bdd-532b7469f9be"
-});
-`}}>
-</script>
-</div>

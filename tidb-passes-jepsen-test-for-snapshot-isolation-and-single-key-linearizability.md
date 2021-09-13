@@ -38,7 +38,7 @@ To disable or enable the transaction retry, users can configure both `tidb_retry
 This behavior is expected for TiDB server. We decided to adopt the fail-fast approach when we first designed TiDB, so that DBAs and operation engineers can quickly discover and identify issues at the deployment stage. If the startup fails because of errors with some processes, or the system restarts frequently after startup, an alerting system is available to inform the DBAs and operation engineers timely as well. In a production environment, we use `systemd` to ensure that the service can be restarted even if there are any issues.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('TiDB Passes Jepsen Test for Snapshot Isolation and Single-Key Linearizability', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('TiDB Passes Jepsen Test for Snapshot Isolation and Single-Key Linearizability', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Passes Jepsen Test for Snapshot Isolation and Single-Key Linearizability', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
@@ -62,8 +62,8 @@ To ensure all regions in the cluster have enough replicas before providing servi
 
 Admittedly, there is always room for improvement in our documentation. Thanks to Jepsen tests, here are some immediate fixes per issues found in the test report:
 
-> **Comment from Jepsen report:** "The documentation is therefore somewhat confusing: some of its descriptions of repeatable read actually refer to repeatable read, and other parts refer to snapshot isolation."  
-  
+> **Comment from Jepsen report:** "The documentation is therefore somewhat confusing: some of its descriptions of repeatable read actually refer to repeatable read, and other parts refer to snapshot isolation."
+
 - **Fix:** We have updated our [transactional isolation](https://pingcap.com/docs/dev/reference/transactions/transaction-isolation/#difference-between-tidb-and-ansi-repeatable-read) documentation to state that "TiDB allows some phantoms (P3), but does not allow strict phantoms (A3)" to clear the inconsistency implied in our documentation.
 
 > **Comments from Jepsen report:** "TiDB's automatic transaction retry mechanism was documented, but poorly'", "The documentation for auto-retries was titled "Description of optimistic transactions", and it simply said that the automatic-retry mechanism "cannot guarantee the final result is as expected" — but did not describe how."

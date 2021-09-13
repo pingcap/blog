@@ -77,7 +77,7 @@ In this heatmap, we can see a bright line. This means that the data reads or wri
 Note that the key ranges that correspond to the bright line are hotspots, which are usually the performance bottlenecks.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Key Visualizer: Observe Distributed Databases to Discover the Unknowns', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Key Visualizer: Observe Distributed Databases to Discover the Unknowns', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Key Visualizer: Observe Distributed Databases to Discover the Unknowns', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

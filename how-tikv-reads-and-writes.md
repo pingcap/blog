@@ -136,7 +136,7 @@ The client caches the relevant Region information locally, and proceed with subs
 PD also provides the global timing service. In the Percolator transaction model, we know that both the start and the commit points of a transaction need a timestamp, which is allocated by PD in our implementation.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('How TiKV Reads and Writes', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('How TiKV Reads and Writes', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How TiKV Reads and Writes', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

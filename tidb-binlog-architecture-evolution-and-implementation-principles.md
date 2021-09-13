@@ -195,7 +195,7 @@ We already know that multiple Pump instances compose a cluster and handle the re
 Pump Client is integrated into TiDB in the form of a package. See [Pump Client code](https://github.com/pingcap/tidb-tools/tree/v2.1.0/tidb-binlog/pump_client).
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('TiDB Tools (I): TiDB Binlog Architecture Evolution and Implementation Principles', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('TiDB Tools (I): TiDB Binlog Architecture Evolution and Implementation Principles', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Tools (I): TiDB Binlog Architecture Evolution and Implementation Principles', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

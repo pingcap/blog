@@ -53,7 +53,7 @@ Ultimately, flexible scalability for your technical needs is crucial for busines
 And the three main use cases where TiDB shines are: MySQL Scalability, HTAP real-time analytics, and unifying data storage.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('TiDB: Architecture and Use Cases of A Cloud-Native NewSQL Database', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('TiDB: Architecture and Use Cases of A Cloud-Native NewSQL Database', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB: Architecture and Use Cases of A Cloud-Native NewSQL Database', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

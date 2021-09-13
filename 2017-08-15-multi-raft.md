@@ -165,7 +165,7 @@ message RegionLocalState {
 **`RegionLocalStaste`:** Used to store Region information and the corresponding Peer state on this Store. `Normal` indicates that this Peer is normal, `Applying` means this Peer hasn't finished the `apply snapshot` operation and `Tombstone` shows that this Peer has been removed from Region and cannot join in Raft Group.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('The Design and Implementation of Multi-raft', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('The Design and Implementation of Multi-raft', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('The Design and Implementation of Multi-raft', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

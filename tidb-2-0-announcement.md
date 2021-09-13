@@ -2,7 +2,7 @@
 title: TiDB 2.0 is Ready - Faster, Smarter, and Battle-Tested
 author: ['Shen Li']
 date: 2018-04-29
-summary: TiDB 2.0 is released! We absorbed insights and feedbacks from our customers, listened to requests and issues from our community, and reflected internally on our ultimate vision of building a distributed hybrid transactional and analytical processing database that scales itself, heals itself, and lives in the cloud. 
+summary: TiDB 2.0 is released! We absorbed insights and feedbacks from our customers, listened to requests and issues from our community, and reflected internally on our ultimate vision of building a distributed hybrid transactional and analytical processing database that scales itself, heals itself, and lives in the cloud.
 tags: ['Release', 'HTAP']
 categories: ['Product']
 press_release: true
@@ -63,7 +63,7 @@ We also introduced `Chunk`, a new internal data encoding method where a chunk of
 * Vector computing is made possible in certain circumstances and cache miss rate of CPU is reduced.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('TiDB 2.0 is Ready - Faster, Smarter, and Battle-Tested', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('TiDB 2.0 is Ready - Faster, Smarter, and Battle-Tested', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB 2.0 is Ready - Faster, Smarter, and Battle-Tested', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

@@ -60,7 +60,7 @@ However, the disadvantages to this approach are also glaring. MySQL has been aro
 You might ask: isn't writing a MySQL layer from scratch really difficult. Yes and no. It does take a long time if you plan to rebuild every single feature of MySQL. But if you are more strategic and forgo certain functions, like stored procedures, that are not longer widely used, then your workload becomes much more manageable. (Here's the [full list](https://github.com/pingcap/docs/blob/1543a00bea4f9f171c30a1102867a0d9065909dc/sql/mysql-compatibility.md#unsupported-features) of MySQL functions TiDB currently doesn't support.) Plus, you can use a new programming language like Go to build (and maintain), which actually increases productivity and efficiency over time.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('9 Why's to Ask When Evaluating a Distributed Database', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('9 Why's to Ask When Evaluating a Distributed Database', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('9 Why's to Ask When Evaluating a Distributed Database', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

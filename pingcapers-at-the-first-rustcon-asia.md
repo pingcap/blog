@@ -30,7 +30,7 @@ Normally we use a language to implement our designs, but how often do we get to 
 <div class="caption-center"> Qu Peng, TiKV team engineer, at RustCon Asia </div>
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('PingCAPers at the First RustCon Asia!', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('PingCAPers at the First RustCon Asia!', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('PingCAPers at the First RustCon Asia!', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
@@ -51,6 +51,6 @@ Meanwhile, the Rust workshops on the following days also provided a great opport
 ![Nick Cameron is helping the "students"](media/nick-cameron-is-helping-the-students.png)
 <div class="caption-center"> Nick Cameron is helping the "students" </div>
 
-The first RustCon Asia was absolutely a success. All of this indicates the thriving global community and the rise of visibility of Rust. As a committed user and promoter of Rust, we are glad to be part of the Rust community and grow together with it. We look forward to more interesting stuff at next year's RustCon Asia!  
+The first RustCon Asia was absolutely a success. All of this indicates the thriving global community and the rise of visibility of Rust. As a committed user and promoter of Rust, we are glad to be part of the Rust community and grow together with it. We look forward to more interesting stuff at next year's RustCon Asia!
 
 Finally, we would like to express our thanks to Cryptape and Baidu X-Lab. It was truly a pleasure working with these two companies as co-organizers, and we are honored to be part of the event with them. We can't wait to continue this collaboration for next year's conference and together let's build a stronger Rust community here in Asia.

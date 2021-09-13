@@ -170,7 +170,7 @@ At present, MySQL is used with [Hive](https://en.wikipedia.org/wiki/Apache_Hive)
 <div class="caption-center"> Synchronization Data from TiDB to Hive </div>
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('TiDB, the Key to a Better Life for Meituan's 290 Million Monthly Users', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('TiDB, the Key to a Better Life for Meituan's 290 Million Monthly Users', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB, the Key to a Better Life for Meituan's 290 Million Monthly Users', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

@@ -50,7 +50,7 @@ Compared with the similar features of other databases, the History Read feature 
 - Even if operations like Drop Table and Drop Database are executed, old data can still be retrieved in TiDB.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('Travelling Back in Time and Reclaiming the Lost Treasures', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('Travelling Back in Time and Reclaiming the Lost Treasures', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Travelling Back in Time and Reclaiming the Lost Treasures', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

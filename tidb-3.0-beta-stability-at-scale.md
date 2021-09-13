@@ -10,7 +10,7 @@ press_release: true
 
 Author: Li Shen, VP of Engineering at PingCAP
 
-Last weekend, PingCAP hosted the second annual TiDB DevCon in Beijing, with a packed crowd of more than **700** developers, customers, and contributors. Among the many announcements that were made on TiDB's core product, roadmap, and ecosystem was the release of TiDB 3.0 beta. Here's a rundown of the highlights.  
+Last weekend, PingCAP hosted the second annual TiDB DevCon in Beijing, with a packed crowd of more than **700** developers, customers, and contributors. Among the many announcements that were made on TiDB's core product, roadmap, and ecosystem was the release of TiDB 3.0 beta. Here's a rundown of the highlights.
 
 ![Me on stage at TiDB DevCon 2019](media/me-on-stage-at-tidb-devcon-2019.png)
 
@@ -23,7 +23,7 @@ As our team brainstormed and roadmapped TiDB's future, taking in valuable sugges
 **Multi-thread Raftstore:** As you may know, the consensus algorithm that underpins TiDB's strong consistency and high availability characteristics is Raft. As a distributed database serves more production traffic, concurrency increases and Raft becomes a bottleneck that can impact performance due to limitations in Raft's original design. Thus, we built a new implementation where multiple Raft communication threads can be processed concurrently, leading to improved performance. Based on our internal testing, in TiDB with multi-thread raftstore `INSERT` performance increases as concurrency increases. We will release additional benchmark information soon for those interested in reproducing what we see.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('TiDB 3.0 Beta: Stability at Scale', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://pingcap.com/download" onclick="trackViews('TiDB 3.0 Beta: Stability at Scale', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB 3.0 Beta: Stability at Scale', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
