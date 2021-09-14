@@ -111,7 +111,7 @@ As you can see, chaosd is fairly easy to use. But we can make it easier—a dash
 
 We will continue to enhance its usability and implement more functionalities such as managing chaos experiments run with chaosd as well as those run with Chaos Mesh. This will provide a consistent and unified user experience for chaos testing on Kubernetes and physical machines. The architecture below is just a simple example:
 
-![Chaos Mesh's optimized architecture](media/chaos-mesh's-optimized-architecture.png)
+![Chaos Mesh's optimized architecture](media/chaos-mesh-optimized-architecture1.png)
 <div class="caption-center"><a href="chaos-mesh-remake-one-step-closer-toward-chaos-as-a-service.md#developing-chaos-mesh-towards-caas" target="_blank">Chaos Mesh's optimized architecture</a></div>
 
 ### Add more fault injection types
