@@ -38,7 +38,7 @@ To disable or enable the transaction retry, users can configure both `tidb_retry
 This behavior is expected for TiDB server. We decided to adopt the fail-fast approach when we first designed TiDB, so that DBAs and operation engineers can quickly discover and identify issues at the deployment stage. If the startup fails because of errors with some processes, or the system restarts frequently after startup, an alerting system is available to inform the DBAs and operation engineers timely as well. In a production environment, we use `systemd` to ensure that the service can be restarted even if there are any issues.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('TiDB Passes Jepsen Test for Snapshot Isolation and Single-Key Linearizability', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('TiDB Passes Jepsen Test for Snapshot Isolation and Single-Key Linearizability', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Passes Jepsen Test for Snapshot Isolation and Single-Key Linearizability', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

@@ -136,7 +136,7 @@ In TiKV, each Raft group corresponds to a Region. At the very beginning, there i
 Of course, where there is Split, there is Merge. If there are very few data in two adjacent Regions, these two regions can merge to one big Region. Region Merge is in the TiKV roadmap but it is not implemented yet.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('A Deep Dive into TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('A Deep Dive into TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('A Deep Dive into TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

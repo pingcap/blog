@@ -201,7 +201,7 @@ Based on the `Chunk` implementation and the Golang characteristics, we optimized
 Based on these optimizations, our expression vectorization evaluation interface has become what it is today.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('10x Performance Improvement for Expression Evaluation Made Possible by Vectorized Execution and the Community', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('10x Performance Improvement for Expression Evaluation Made Possible by Vectorized Execution and the Community', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('10x Performance Improvement for Expression Evaluation Made Possible by Vectorized Execution and the Community', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

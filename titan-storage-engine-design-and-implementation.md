@@ -174,7 +174,7 @@ Since day one, our primary design goal has been compatibility with RocksDB. Ther
 All other APIs except the Open interface share consistent parameters and return values with RocksDB. Existing projects only require minor changes to upgrade RocksDB instances smoothly to Titan. However, it is noteworthy that Titan does not support rollback to RocksDB.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('Titan: A RocksDB Plugin to Reduce Write Amplification', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('Titan: A RocksDB Plugin to Reduce Write Amplification', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Titan: A RocksDB Plugin to Reduce Write Amplification', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

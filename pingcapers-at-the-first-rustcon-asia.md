@@ -30,7 +30,7 @@ Normally we use a language to implement our designs, but how often do we get to 
 <div class="caption-center"> Qu Peng, TiKV team engineer, at RustCon Asia </div>
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('PingCAPers at the First RustCon Asia!', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('PingCAPers at the First RustCon Asia!', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('PingCAPers at the First RustCon Asia!', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

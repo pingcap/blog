@@ -212,7 +212,7 @@ See the following list for all the packages and their main functions:
     The execution interface for distributed SQL. If the storage engine at the bottom supports distributed executor, it can send requests through this interface. See [The distributed executor](#the-distributed-executor) for further information.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('About the TiDB Source Code', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('About the TiDB Source Code', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('About the TiDB Source Code', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

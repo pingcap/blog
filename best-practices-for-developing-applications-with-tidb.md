@@ -266,7 +266,7 @@ jdbc:mysql://192.168.1.20:4000/dbname?tidb_constraint_check_in_place=1
 ```
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('Best Practices for Developing Applications with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('Best Practices for Developing Applications with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Best Practices for Developing Applications with TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

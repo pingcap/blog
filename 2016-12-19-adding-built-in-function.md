@@ -58,7 +58,7 @@ The following procedure describes how to add a built-in function.
 5. Run the `make dev` command and make sure all the test cases can pass.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('Adding Built-in Functions', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('Adding Built-in Functions', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Adding Built-in Functions', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

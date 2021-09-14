@@ -63,7 +63,7 @@ We also introduced `Chunk`, a new internal data encoding method where a chunk of
 * Vector computing is made possible in certain circumstances and cache miss rate of CPU is reduced.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('TiDB 2.0 is Ready - Faster, Smarter, and Battle-Tested', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('TiDB 2.0 is Ready - Faster, Smarter, and Battle-Tested', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB 2.0 is Ready - Faster, Smarter, and Battle-Tested', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

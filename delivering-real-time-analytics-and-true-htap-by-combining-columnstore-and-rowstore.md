@@ -128,7 +128,7 @@ Generally, OLAP systems use column-oriented storage, and so does TiFlash. TiFlas
 * It works naturally with a vectorized engine without need of transformation.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('Delivering Real-time Analytics and True HTAP by Combining Columnstore and Rowstore', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('Delivering Real-time Analytics and True HTAP by Combining Columnstore and Rowstore', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Delivering Real-time Analytics and True HTAP by Combining Columnstore and Rowstore', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

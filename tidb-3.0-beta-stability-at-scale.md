@@ -23,7 +23,7 @@ As our team brainstormed and roadmapped TiDB's future, taking in valuable sugges
 **Multi-thread Raftstore:** As you may know, the consensus algorithm that underpins TiDB's strong consistency and high availability characteristics is Raft. As a distributed database serves more production traffic, concurrency increases and Raft becomes a bottleneck that can impact performance due to limitations in Raft's original design. Thus, we built a new implementation where multiple Raft communication threads can be processed concurrently, leading to improved performance. Based on our internal testing, in TiDB with multi-thread raftstore `INSERT` performance increases as concurrency increases. We will release additional benchmark information soon for those interested in reproducing what we see.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('TiDB 3.0 Beta: Stability at Scale', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('TiDB 3.0 Beta: Stability at Scale', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB 3.0 Beta: Stability at Scale', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

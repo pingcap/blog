@@ -78,7 +78,7 @@ Assume we pick the `studentID` index, the primary index, to access the table. Th
 ![Primary Index Path](media/primary-index-path.png)
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('TiSpark: More Data Insights, Less ETL', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('TiSpark: More Data Insights, Less ETL', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiSpark: More Data Insights, Less ETL', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
