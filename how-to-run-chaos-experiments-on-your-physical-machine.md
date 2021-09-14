@@ -1,9 +1,9 @@
 ---
-title: How to run chaos experiments on your physical machine
+title: How to Run Chaos Experiments on Your Physical Machine
 author: ['Xiang Wang']
 date: 2021-09-14
 summary: This article describes how to use chaosd to simulate faults on physical machines. You can run chaosd as a command-line tool or as a service.
-tags: ['Chaos Engineering']
+tags: ['Chaos Engineering', 'Tutorial']
 categories: ['Community']
 image: /images/blog/how-to-run-chaos-experiments-on-your-physical-machine.png
 ---
@@ -112,7 +112,7 @@ As you can see, chaosd is fairly easy to use. But we can make it easier—a dash
 We will continue to enhance its usability and implement more functionalities such as managing chaos experiments run with chaosd as well as those run with Chaos Mesh. This will provide a consistent and unified user experience for chaos testing on Kubernetes and physical machines. The architecture below is just a simple example:
 
 ![Chaos Mesh's optimized architecture](media/chaos-mesh's-optimized-architecture.png)
-<a href="chaos-mesh-remake-one-step-closer-toward-chaos-as-a-service.md#developing-chaos-mesh-towards-caas" target="_blank">Chaos Mesh's optimized architecture</a>
+<div class="caption-center"><a href="chaos-mesh-remake-one-step-closer-toward-chaos-as-a-service.md#developing-chaos-mesh-towards-caas" target="_blank">Chaos Mesh's optimized architecture</a></div>
 
 ### Add more fault injection types
 
