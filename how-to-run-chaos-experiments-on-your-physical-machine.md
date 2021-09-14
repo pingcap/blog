@@ -3,7 +3,7 @@ title: How to run chaos experiments on your physical machine
 author: ['Xiang Wang']
 date: 2021-09-14
 summary: This article describes how to use chaosd to simulate faults on physical machines. You can run chaosd as a command-line tool or as a service.
-tags: ['Chaos Engineering', 'MySQL']
+tags: ['Chaos Engineering']
 categories: ['Community']
 image: /images/blog/how-to-run-chaos-experiments-on-your-physical-machine.png
 ---
@@ -18,7 +18,7 @@ image: /images/blog/how-to-run-chaos-experiments-on-your-physical-machine.png
 
 ## What is chaosd
 
-To meet the growing needs of chaos testing on physical machines, we are excited to present an enhanced toolkit called chaosd. You might find the name familiar. That's because it evolved from `chaos-daemon`, a key component in Chaos Mesh. At TiDB Hackathon 2020, we [refactored chaosd to make it more than a command-line tool](https://en.pingcap.com/blog/chaos-mesh-remake-one-step-closer-toward-chaos-as-a-service#refactor-chaosd). Now with [chaosd v1.0.1](https://github.com/chaos-mesh/chaosd/releases/tag/v1.0.1), you can simulate specific errors that target physical machines, and then, undo the chaos experiments like nothing had happened. 
+To meet the growing needs of chaos testing on physical machines, we are excited to present an enhanced toolkit called chaosd. You might find the name familiar. That's because it evolved from `chaos-daemon`, a key component in Chaos Mesh. At TiDB Hackathon 2020, we [refactored chaosd to make it more than a command-line tool](https://en.pingcap.com/blog/chaos-mesh-remake-one-step-closer-toward-chaos-as-a-service#refactor-chaosd). Now with [chaosd v1.0.1](https://github.com/chaos-mesh/chaosd/releases/tag/v1.0.1), you can simulate specific errors that target physical machines, and then, undo the chaos experiments like nothing had happened.
 
 ## Benefits of chaosd
 
@@ -44,7 +44,7 @@ To download chaosd, run the following command:
 curl -fsSL -o chaosd-v1.0.1-linux-amd64.tar.gz https://mirrors.chaos-mesh.org/chaosd-v1.0.1-linux-amd64.tar.gz
 ```
 
-Unzip the file. It contains two file folders: 
+Unzip the file. It contains two file folders:
 
 * `chaosd` contains the tool entry of chaosd.
 
@@ -118,7 +118,7 @@ We will continue to enhance its usability and implement more functionalities suc
 
 Currently, chaosd provides six fault injection types. We plan to develop more types that have been supported by Chaos Mesh, including HTTPChaos and IOChaos.
 
-If you are interested in helping us improve chaosd, you are welcome to [pick an issue](https://github.com/chaos-mesh/chaosd/labels/help%20wanted) and get started! 
+If you are interested in helping us improve chaosd, you are welcome to [pick an issue](https://github.com/chaos-mesh/chaosd/labels/help%20wanted) and get started!
 
 ## Try it out!
 
