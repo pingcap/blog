@@ -164,7 +164,7 @@ void tcp_wfree(struct sk_buff *skb)
 ```
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('TSQ becomes a performance bottleneck in AWS ARM environment', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('TSQ becomes a performance bottleneck in AWS ARM environment', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TSQ becomes a performance bottleneck in AWS ARM environment', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

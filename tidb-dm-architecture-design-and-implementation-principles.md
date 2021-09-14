@@ -143,7 +143,7 @@ Now let's take a look at the internals of TiDB DM:
 3. After executing the replaced SQL statements to the downstream TiDB, the router replication based on table names are completed. For the detailed implementation of the router rules, see [table-router pkg source code](https://github.com/pingcap/tidb-tools/tree/master/pkg/table-router) in TiDB-Tools.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('TiDB Tools (III): TiDB DM Architecture Design and Implementation Principles', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('TiDB Tools (III): TiDB DM Architecture Design and Implementation Principles', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Tools (III): TiDB DM Architecture Design and Implementation Principles', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

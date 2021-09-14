@@ -107,7 +107,7 @@ During the traffic migration process, we benefited a great deal from the doublew
 - It gave us an opportunity to refactor the database. Shopee users are distributed among 7 regions. Before the application traffic was migrated to TiDB, all risk control logs were stored in the same logical database. This time we stored the log data into 7 different logical databases (`rc_sg`, `rc_my`, `rc_ph`, ..., `rc_tw`) according to user regions. This way, we could customize a specific data structure for each region.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('Shopping on Shopee, the TiDB Way', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('Shopping on Shopee, the TiDB Way', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Shopping on Shopee, the TiDB Way', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

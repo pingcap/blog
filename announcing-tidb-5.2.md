@@ -36,13 +36,13 @@ Based on their feedback, TiDB 5.2 focuses on real-world scenarios, aiming to pus
 This post shows only a few of the highlights in TiDB 5.2. For a full list of features and improvements, check out the [TiDB 5.2 Release Notes](https://docs.pingcap.com/tidb/stable/release-5.2.0).
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('TiDB 5.2 - Translytical Processing Made Easier and Faster', 'download-tidb-btn-middle')"><button>Get TiDB Now</button></a>
+    <a href="/download" onclick="trackViews('TiDB 5.2 - Translytical Processing Made Easier and Faster', 'download-tidb-btn-middle')"><button>Get TiDB Now</button></a>
      <a href="https://pingcap.com/contact-us" onclick="trackViews('TiDB 5.2 - Translytical Processing Made Easier and Faster', 'contact-us-middle')"><button>Request a Demo</button></a>
 </div>
 <div class="trackable-btns">
     <div class="PingCAP-TrackGABtns">
       <div class="trackable-btns">
-        <a href="https://pingcap.com/download" class="button is-primary is-outlined is-rounded">Get TiDB Now</a>
+        <a href="/download" class="button is-primary is-outlined is-rounded">Get TiDB Now</a>
         <a href="https://pingcap.com/contact-us" class="button is-primary is-outlined is-rounded">Request a Demo</a>
       </div>
     </div>

@@ -61,7 +61,7 @@ After introducing the `parts` type into the tests, a `time-out` error occurs whe
 Generator, the event generator of Jepsen, interweaves the operations of Client with that of Nemesis and generates specific execute statements for the entire test process.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('When TiDB Meets Jepsen', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('When TiDB Meets Jepsen', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('When TiDB Meets Jepsen', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

@@ -70,7 +70,7 @@ Inside Lightning, each table would be associated with a KV encoder, which is in 
 After KV pairs are obtained, they will be passed to Importer.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('TiDB Tools (II): Introducing TiDB Lightning', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('TiDB Tools (II): Introducing TiDB Lightning', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Tools (II): Introducing TiDB Lightning', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

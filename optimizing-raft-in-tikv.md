@@ -62,7 +62,7 @@ So the entire Raft process becomes as follows:
 The benefit of using asynchronous apply is that we are now able to append and apply log in parallel. Although to a client, its single request still needs to go through the whole Raft process; to multiple clients, the overall concurrency and throughput have improved.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('A TiKV Source Code Walkthrough – Raft Optimization', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('A TiKV Source Code Walkthrough – Raft Optimization', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('A TiKV Source Code Walkthrough – Raft Optimization', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

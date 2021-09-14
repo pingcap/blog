@@ -73,7 +73,7 @@ impl Storage {
 This `start` function in the example above explains how the storage struct runs.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('MVCC in TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('MVCC in TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('MVCC in TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

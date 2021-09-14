@@ -181,7 +181,7 @@ The future library provides two synchronization channels. One-shot is for SPSC a
 ![Two synchronization channels](media/synchronization.png)
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('Futures and gRPC in Rust', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('Futures and gRPC in Rust', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Futures and gRPC in Rust', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 

@@ -108,7 +108,7 @@ TiDB has implemented global indexes, so indexes and data of the Table are not ne
 If the query involves lots of rows, scanning index proceeds concurrently. When the first batch of results is returned, getting the data of Table can then proceed. Therefore, this is a parallel + Pipeline model. Though the two accesses create overhead, the latency is not high.
 
 <div class="trackable-btns">
-    <a href="https://pingcap.com/download" onclick="trackViews('TiDB Best Practices', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/download" onclick="trackViews('TiDB Best Practices', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Best Practices', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
