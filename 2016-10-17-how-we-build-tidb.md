@@ -223,7 +223,8 @@ About Placement Driver, this concept comes from the original paper of Google Spa
 And thanks to Raft, within itself, Placement Driver is a cluster too and it is also highly available.
 
 <div class="trackable-btns">
-    <TrackGABtns blogName="How we build TiDB" />
+    <a href="/download" onclick="trackViews('How We Build TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How We Build TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
 ### Raft
