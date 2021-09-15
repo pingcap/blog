@@ -169,3 +169,5 @@ We really appreciate the continuous support from the TiDB community and [PingCAP
 * Because we have a very big ecosystem on HBase, how do we achieve zero downtime migration from HBase to TiDB also remains an open question.
 
 If you'd like to learn more about our experience with TiDB, or if you have any questions, you can join the [TiDB community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog). If you're interested, you could get started with TiDB [here](https://pingcap.com/download).
+
+*This article is based on a talk given by Lianghong Xu at PingCAP DevCon 2021.*
