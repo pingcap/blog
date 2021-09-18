@@ -4,7 +4,7 @@ author: ['Huachao HUANG']
 date: 2017-09-08
 summary: Data was corrupted. A cluster panicked. The crime scene was compromised. What happened? Detective Huang went all lengths to locate the criminal and solved it once and for all.
 tags: ['Bug fix', 'RocksDB']
-aliases: ['/blog/2017/09/08/rocksdbbug/']
+aliases: ['/blog/2017/09/08/rocksdbbug/', '/blog/2017-09-08-rocksdbbug']
 categories: ['Engineering']
 ---
 

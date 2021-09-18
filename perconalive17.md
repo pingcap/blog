@@ -4,7 +4,7 @@ author: ['Ed Huang']
 date: 2017-05-23
 summary: This is the speech Edward Huang gave at Percona Live Open Source Database Conference 2017.
 tags: ['Architecture', 'TiKV', 'Distributed system']
-aliases: ['/blog/2017/05/23/perconalive17/']
+aliases: ['/blog/2017/05/23/perconalive17/', '/blog/2017-05-23-perconalive17']
 categories: ['Product']
 ---
 

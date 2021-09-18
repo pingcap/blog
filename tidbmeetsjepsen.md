@@ -4,7 +4,7 @@ author: ['Peng XU']
 date: 2017-09-01
 summary: What happens when TiDB meets Jepsen?
 tags: ['Jepsen test']
-aliases: ['/blog/2017/09/01/tidbmeetsjepsen/']
+aliases: ['/blog/2017/09/01/tidbmeetsjepsen/', '/blog/2017-09-01-tidbmeetsjepsen']
 categories: ['Engineering']
 ---
 

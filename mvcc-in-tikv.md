@@ -4,7 +4,7 @@ author: ['Ivan Yang']
 date: 2016-11-17
 summary: This document gives an overview of MVCC implementation in TiKV.
 tags: ['TiKV', 'Transaction']
-aliases: ['/blog/2016/11/17/mvcc-in-tikv/']
+aliases: ['/blog/2016/11/17/mvcc-in-tikv/', '/blog/2016-11-17-mvcc-in-tikv']
 categories: ['Engineering']
 ---
 

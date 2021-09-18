@@ -4,7 +4,7 @@ author: ['Li SHEN']
 date: 2017-07-11
 summary: This is the second one of three blogs to introduce TiDB internal.
 tags: ['Architecture', 'TiKV']
-aliases: ['/blog/2017/07/11/tidbinternal2/']
+aliases: ['/blog/2017/07/11/tidbinternal2/', '/blog/2017-07-11-tidbinternal2']
 categories: ['Engineering']
 ---
 
