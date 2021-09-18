@@ -8,6 +8,7 @@ customer: Pinterest
 customerCategory: Internet
 logo: /images/blog/customers/pinterest-logo-1.png
 image: /images/blog/pinterest-reduced-costs-and-improved-data-consistency-with-newsql-database.jpg
+notShowOnLogoWall: true
 ---
 
 **Industry:** Media and Entertainment
