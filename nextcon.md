@@ -4,7 +4,7 @@ author: ['Li SHEN']
 date: 2017-10-10
 summary: This is the speech Li SHEN gave at the 3rd NEXTCON.
 tags: ['Architecture', 'Scalability']
-aliases: ['/blog/2017/10/10/nextcon/'，’/blog/2017-10-10-nextcon‘]
+aliases: ['/blog/2017/10/10/nextcon/', '/blog/2017-10-10-nextcon']
 categories: ['Product']
 ---
 
