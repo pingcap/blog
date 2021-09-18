@@ -3,7 +3,7 @@ title: About the TiDB Source Code
 date: 2017-01-06
 summary: The target audience of this document is the contributors in the TiDB community. The document aims to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process.
 tags: ['Architecture', 'Query execution']
-aliases: ['/blog/2017/01/06/about-the-tidb-source-code/']
+aliases: ['/blog/2017/01/06/about-the-tidb-source-code/', '/blog/2017-01-06-about-the-tidb-source-code']
 categories: ['Engineering']
 ---
 

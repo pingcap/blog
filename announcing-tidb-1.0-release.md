@@ -4,7 +4,7 @@ date: 2017-10-17
 summary: TiDB is compatible with MySQL, strong consistent and highly available.
 tags: ['Release']
 categories: ['Product']
-aliases: ['/blog/2017/10/17/announcement/']
+aliases: ['/blog/2017/10/17/announcement/', '/blog/2017-10-17-announcement']
 press_release: true
 ---
 

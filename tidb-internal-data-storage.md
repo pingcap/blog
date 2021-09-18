@@ -4,7 +4,7 @@ author: ['Li SHEN']
 date: 2017-07-11
 summary: This is the first one of three blogs to introduce TiDB internal.
 tags: ['TiKV', 'Raft', 'Transaction']
-aliases: ['/blog/2017/07/11/tidbinternal1/']
+aliases: ['/blog/2017/07/11/tidbinternal1/', '/blog/2017-07-11-tidbinternal1]
 categories: ['Engineering']
 ---
 
