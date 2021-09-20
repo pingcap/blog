@@ -17,7 +17,7 @@ PingCAP is proud to announce a collaboration with the [Advanced Software Technol
 
 The collaboration will also strive to improve the TiDB codebase. Through a dedicated testing team and [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh), a cloud-native chaos engineering platform, PingCAP supports the open-source approach, which allows contributors from all over the world to shape and improve the project. They collaborate with multiple universities and internet companies on advanced research such as how to improve the system's robustness.
 
-"We are excited about the research collaboration with ETH Zürich, " says Zhou Qiang, a software engineer at PingCAP. "We can diversify PingCAP's open-source ecosystem, and bring more surprises to the database industry by leveraging the world's leading technology."
+"We are excited about the research collaboration with ETH Zürich, " says Zhou Qiang, the team lead of efficiency engineering at PingCAP. "We can diversify PingCAP's open-source ecosystem, and bring more surprises to the database industry by leveraging the world's leading technology."
 
 ETH Zurich has been involved with TIDB and the open-source community since 2020. ETH Zürich has shared papers and tech talks with the community, and PingCAP has used this information to strengthen the TiDB codebase by optimizing transaction testing.
 
