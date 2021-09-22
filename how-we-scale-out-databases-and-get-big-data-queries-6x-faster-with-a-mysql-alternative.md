@@ -185,25 +185,15 @@ We compared the performance of the original MySQL architecture and the current T
    </td>
    <td>SQL 1
    </td>
-   <td><p style="text-align: right">
-3</p>
-
+   <td>3
    </td>
-   <td><p style="text-align: right">
-8</p>
-
+   <td>8
    </td>
-   <td><p style="text-align: right">
-1.6</p>
-
+   <td>1.6
    </td>
-   <td><p style="text-align: right">
-80.0</p>
-
+   <td>80.0
    </td>
-   <td><p style="text-align: right">
-4.0</p>
-
+   <td>4.0
    </td>
   </tr>
   <tr>
@@ -211,25 +201,15 @@ We compared the performance of the original MySQL architecture and the current T
    </td>
    <td>SQL 2
    </td>
-   <td><p style="text-align: right">
-3</p>
-
+   <td>3
    </td>
-   <td><p style="text-align: right">
-4</p>
-
+   <td>4
    </td>
-   <td><p style="text-align: right">
-1.0</p>
-
+   <td>1.0
    </td>
-   <td><p style="text-align: right">
-75.0</p>
-
+   <td>75.0
    </td>
-   <td><p style="text-align: right">
-3.0</p>
-
+   <td>3.0
    </td>
   </tr>
   <tr>
@@ -237,25 +217,15 @@ We compared the performance of the original MySQL architecture and the current T
    </td>
    <td>SQL 3
    </td>
-   <td><p style="text-align: right">
-2</p>
-
+   <td>2
    </td>
-   <td><p style="text-align: right">
-2</p>
-
+   <td>2
    </td>
-   <td><p style="text-align: right">
-1.7</p>
-
+   <td>1.7
    </td>
-   <td><p style="text-align: right">
-15.0</p>
-
+   <td>15.0
    </td>
-   <td><p style="text-align: right">
-0.2</p>
-
+   <td>0.2
    </td>
   </tr>
   <tr>
@@ -263,25 +233,15 @@ We compared the performance of the original MySQL architecture and the current T
    </td>
    <td>SQL 4
    </td>
-   <td><p style="text-align: right">
-576</p>
-
+   <td>576
    </td>
-   <td><p style="text-align: right">
-622</p>
-
+   <td>622
    </td>
-   <td><p style="text-align: right">
-30</p>
-
+   <td>30
    </td>
-   <td><p style="text-align: right">
-95.2</p>
-
+   <td>95.2
    </td>
-   <td><p style="text-align: right">
-19.7</p>
-
+   <td>19.7
    </td>
   </tr>
   <tr>
@@ -289,25 +249,15 @@ We compared the performance of the original MySQL architecture and the current T
    </td>
    <td>SQL 5
    </td>
-   <td><p style="text-align: right">
-149</p>
-
+   <td>149
    </td>
-   <td><p style="text-align: right">
-685</p>
-
+   <td>685
    </td>
-   <td><p style="text-align: right">
-10</p>
-
+   <td>10
    </td>
-   <td><p style="text-align: right">
-98.5</p>
-
+   <td>98.5
    </td>
-   <td><p style="text-align: right">
-67.5</p>
-
+   <td>67.5
    </td>
   </tr>
   <tr>
@@ -315,25 +265,15 @@ We compared the performance of the original MySQL architecture and the current T
    </td>
    <td>SQL 6
    </td>
-   <td><p style="text-align: right">
-83</p>
-
+   <td>83
    </td>
-   <td><p style="text-align: right">
-124</p>
-
+   <td>124
    </td>
-   <td><p style="text-align: right">
-32</p>
-
+   <td>32
    </td>
-   <td><p style="text-align: right">
-74.2</p>
-
+   <td>74.2
    </td>
-   <td><p style="text-align: right">
-2.9</p>
-
+   <td>2.9
    </td>
   </tr>
   <tr>
@@ -341,25 +281,15 @@ We compared the performance of the original MySQL architecture and the current T
    </td>
    <td>SQL 7
    </td>
-   <td><p style="text-align: right">
-19</p>
-
+   <td>19
    </td>
-   <td><p style="text-align: right">
-37</p>
-
+   <td>37
    </td>
-   <td><p style="text-align: right">
-2.0</p>
-
+   <td>2.0
    </td>
-   <td><p style="text-align: right">
-94.6</p>
-
+   <td>94.6
    </td>
-   <td><p style="text-align: right">
-17.5</p>
-
+   <td>17.5
    </td>
   </tr>
   <tr>
@@ -367,25 +297,15 @@ We compared the performance of the original MySQL architecture and the current T
    </td>
    <td>SQL 8
    </td>
-   <td><p style="text-align: right">
-3</p>
-
+   <td>3
    </td>
-   <td><p style="text-align: right">
-5</p>
-
+   <td>5
    </td>
-   <td><p style="text-align: right">
-12.0</p>
-
+   <td>12.0
    </td>
-   <td><p style="text-align: right">
--140.0</p>
-
+   <td>-140.0
    </td>
-   <td><p style="text-align: right">
--0.6</p>
-
+   <td>-0.6
    </td>
   </tr>
   <tr>
@@ -393,25 +313,15 @@ We compared the performance of the original MySQL architecture and the current T
    </td>
    <td>SQL 9
    </td>
-   <td><p style="text-align: right">
-8</p>
-
+   <td>8
    </td>
-   <td><p style="text-align: right">
-12</p>
-
+   <td>12
    </td>
-   <td><p style="text-align: right">
-1.0</p>
-
+   <td>1.0
    </td>
-   <td><p style="text-align: right">
-91.7</p>
-
+   <td>91.7
    </td>
-   <td><p style="text-align: right">
-11.0</p>
-
+   <td>11.0
    </td>
   </tr>
 </table>
