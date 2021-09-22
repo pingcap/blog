@@ -107,7 +107,6 @@ We chose TiDB because:
 
     In real-world cases, TiDB turns on high compression and uses three copies of the data by default. Compared to MySQL with dual copies, TiDB often has lower storage cost.
 
-
     In addition, TiDB has a rich ecosystem, and it's easy to operate and maintain. It supports one-command scaling in or out, automatic high availability, and online data definition language (DDL). It has low usage costs in most scenarios.
 
 * **It guarantees strong consistency**.
