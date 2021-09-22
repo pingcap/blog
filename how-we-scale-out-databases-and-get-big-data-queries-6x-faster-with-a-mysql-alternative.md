@@ -12,7 +12,7 @@ image: /images/blog/huya-live-scale-out-databases-with-newsql-database.jpg
 
 **Industry:** Live Streaming
 
-**Author:** [Hualiang Huang](https://github.com/zhongzc) (Head of the Database Team & Architect at Huya Live)
+**Author:** Hualiang Huang (Head of the Database Team & Architect at Huya Live)
 
 **Transcreator:** [Caitin Chen](https://github.com/anotherrachel); **Editor:** Tom Dewan
 
