@@ -105,6 +105,11 @@ This matrix has these characteristics:
 
     These databases are neutral, and we call them HTAP databases, such as TiDB. When the amount of data is small, they have good performance. When the data size is large or the queries are complex, their performance is not bad. Generally, to meet different application needs, we use different storage engines and query engines.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('INSERT TITLE', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('INSERT TITLE', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  </div>
+
 ## Practical decision trees for efficiently choosing a database
 
 I'd like to recommend our database selection trees. We developed these trees based on our DBAs' and application developers' experience.

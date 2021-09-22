@@ -241,6 +241,11 @@ That's all for the tour. When you inject StressChaos into your Pods, we have two
 
 In the future, we'll create a more detailed StressChaos document.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('INSERT TITLE', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('INSERT TITLE', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  </div>
+
 ## Dive deeper into Kubernetes memory management
 
 Kubernetes tries to evict Pods that use too much memory (but not more memory than their limits). Kubernetes gets your Pod memory usage from `/sys/fs/cgroup/memory/memory.usage_in_bytes` and subtracts it by the `total_inactive_file` line in `memory.stat`.

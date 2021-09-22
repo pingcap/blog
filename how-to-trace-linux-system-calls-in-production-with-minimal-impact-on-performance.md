@@ -95,6 +95,10 @@ Let's look at some common uses of perf.
 
 Those are some of the most common uses of perf. If you'd like to know more (especially about perf-trace), see the [Linux manual page](https://man7.org/linux/man-pages/man1/perf-trace.1.html). From the manual pages, you will learn that perf-trace can filter tasks based on PIDs or thread IDs (TIDs), but that it has no convenient support for containers and the Kubernetes (K8s) environments. Don't worry. Next, we'll discuss a tool that can easily trace system calls in containers and in K8s environments that uses cgroup v2.
 
+<div class="trackable-btns">
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('INSERT TITLE', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  </div>
+
 ## Traceloop, a performance profiler for cgroup v2 and K8s
 
 Traceloop provides better support for tracing Linux system calls in the containers or K8s environments that use cgroup v2. You might be unfamiliar with traceloop but know BPF Compiler Collection (BCC) pretty well. (Its front-end is implemented using Python or C++.) In the IO Visor Project, BCC's parent project, there is another project named gobpf that provides Golang bindings for the BCC framework. Based on gobpf, traceloop is developed for environments of containers and K8s. The following illustration shows the traceloop architecture:
