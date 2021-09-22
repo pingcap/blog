@@ -327,6 +327,11 @@ We compared the performance of the original MySQL architecture and the current T
 
 After we switched to TiDB + TiFlash, **we implemented data scalability, and our overall queries were more than two times faster.**
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('How We Scale Out Databases and Get Big Data Queries 6x Faster with a MySQL Alternative', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/contact-us" onclick="trackViews('How We Scale Out Databases and Get Big Data Queries 6x Faster with a MySQL Alternative', 'contact-us-middle')"><button>Request a Demo</button></a>
+</div>
+
 ### Replacing MySQL Group Replication (MGR) with TiDB
 
 MGR lets users create a server group for fault-tolerant replication. Data write conflicts of multiple nodes caused a large number of transaction rollbacks. Large transactions per second (TPS) and delay jitters occurred. Therefore, MGR was suitable for scenarios with few writes and high read loads.
