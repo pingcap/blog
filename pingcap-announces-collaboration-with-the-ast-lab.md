@@ -5,11 +5,11 @@ date: 2021-09-20
 summary: PingCAP is proud to announce a collaboration with the Advanced Software Technologies Lab (AST) at ETH Zürich to research DBMS testing based on TiDB.
 tags: ['Announcement']
 categories: ['Company']
-image: /images/blog/pingcap-announces-collaboration-with-the-ast-lab.png
+image: /images/blog/pingcap-announces-collaboration-with-the-ast-lab1.png
 press_release: true
 ---
 
-![PingCAP Announces Collaboration with the Advanced Software Technologies Lab at ETH Zürich to Explore DBMS Testing](media/pingcap-announces-collaboration-with-the-ast-lab.png)
+![PingCAP Announces Collaboration with the Advanced Software Technologies Lab at ETH Zürich to Explore DBMS Testing](media/pingcap-announces-collaboration-with-the-ast-lab1.png)
 
 PingCAP is proud to announce a collaboration with the [Advanced Software Technologies Lab (AST)](https://ast.ethz.ch/) at ETH Zürich to research DBMS testing based on [TiDB](https://github.com/pingcap/tidb), an open-source distributed NewSQL database. The goal of the partnership is, through joint efforts from industry and academia, to improve the state of art in DBMS testing. Together with ETH Zürich, PingCAP will continue to advance database technologies, nurture talent in related areas, and explore new ways to develop infrastructure solutions.
 
