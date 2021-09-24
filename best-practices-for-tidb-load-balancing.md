@@ -1,7 +1,7 @@
 ---
 title: Best Practices for TiDB Load Balancing
 author: ['Daniël van Eeden']
-date: 2021-09-24
+date: 2021-09-28
 summary: Load balancing helps you distribute application connections over multiple servers and reroute connections if a TiDB instance becomes unavailable. This article talks about the best practices for TiDB load balancing.
 tags: ['Best practice']
 categories: ['Product']
@@ -10,7 +10,7 @@ image: /images/blog/best-practices-for-tidb-load-balancing.png
 
 **Author:** Daniël van Eeden (Technical Support Engineer at PingCAP)
 
-**Editors:** Ran Huang, Tom Dewan
+**Editors:** [Ran Huang](https://github.com/ran-huang), Tom Dewan
 
 ![Best Practices for TiDB Load Balancing](media/best-practices-for-tidb-load-balancing.png)
 
