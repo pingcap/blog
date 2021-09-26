@@ -5,7 +5,7 @@ date: 2020-09-30
 summary: This post helps Ruby on Rails developers get started with TiDB and use it as the backend storage layer of Rails applications.
 tags: ['Tutorial']
 categories: ['Community']
-image: /images/blog/build-rails-apps-with-tidb-banner.png
+image: /images/blog/build-rails-apps-with-a-newsql-database.png
 ---
 
 **Author:** [Matt Wang](https://github.com/hooopo) (Engineer at PingCAP, moderator of Ruby-China community)
