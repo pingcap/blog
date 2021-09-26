@@ -14,7 +14,7 @@ image: /images/blog/build-rails-apps-with-tidb-banner.png
 
 ![Build a Rails App with TiDB](media/build-rails-apps-with-tidb-banner.png)
 
-If you are a Ruby on Rails developer, I think you’ll really enjoy this article. It aims to help you get started with [TiDB](https://github.com/pingcap/tidb), an open-source NewSQL database, and use it to power up your Rails applications. 
+If you are a Ruby on Rails developer, I think you'll really enjoy this article. It aims to help you get started with [TiDB](https://github.com/pingcap/tidb), an open-source NewSQL database, and use it to power up your Rails applications. 
 
 ## Use TiDB to build up your Ruby on Rails applications
 
@@ -111,7 +111,7 @@ development:
  database: tidb_rails_development
 ```
 
-Now, TiDB is already set up and ready to use with  your Rails app. You don’t have to configure anything else. 
+Now, TiDB is already set up and ready to use with your Rails app. You don't have to configure anything else. 
 
 ### Step 3: Create a database
 
@@ -216,4 +216,4 @@ irb(main):003:0> User.first
 
 Pretty simple, huh? Try TiDB now to develop your Rails applications! 
 
-If you have any question or feedback about TiDB during your app building, feel free to contact us. You’re also welcome to [join our Slack channel](https://slack.tidb.io/invite?team=tidb-community&channel=sig-k8s&ref=pingcap-blog) to have direct conversations with us, or [join us on GitHub](https://github.com/pingcap/tidb) to help improve TiDB further. 
+If you have any question or feedback about TiDB during your app building, feel free to contact us. You're also welcome to [join our Slack channel](https://slack.tidb.io/invite?team=tidb-community&channel=sig-k8s&ref=pingcap-blog) to have direct conversations with us, or [join us on GitHub](https://github.com/pingcap/tidb) to help improve TiDB further. 
