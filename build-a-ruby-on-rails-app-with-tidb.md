@@ -72,7 +72,7 @@ Rails 6.1.4
 $ rails new tidb-rails --database=mysql --api
 ```
 
-2. Add[ activerecord-tidb-adapter](https://github.com/pingcap/activerecord-tidb-adapter) to Gemfile. Activerecord-tidb-adapter allows you to use TiDB as a backend for ActiveRecord and Rails apps.
+2. Add[activerecord-tidb-adapter](https://github.com/pingcap/activerecord-tidb-adapter) to Gemfile. Activerecord-tidb-adapter allows you to use TiDB as a backend for ActiveRecord and Rails apps.
 
 ```
 $ bundle add activerecord-tidb-adapter --version "~> 6.1.0"
