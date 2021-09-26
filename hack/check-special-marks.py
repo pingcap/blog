@@ -26,5 +26,5 @@ if __name__ == "__main__":
                 count+=1
 
     if count:
-        print("Please take a closer look at the above files. They may have incorrectly converted '>' to '&lt;'. \n")
+        print("Please take a closer look at the above files. They may have incorrectly converted '<' to '&lt;'. \n")
         exit(1)
