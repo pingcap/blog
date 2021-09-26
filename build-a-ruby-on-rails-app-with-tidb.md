@@ -8,7 +8,7 @@ categories: ['Community']
 image: /images/blog/build-rails-apps-with-tidb-banner.png
 ---
 
-**Author:** [Matt Wang](https://github.com/zhongzc) (Engineer at PingCAP, moderator of Ruby-China community) 
+**Author:** [Matt Wang](https://github.com/hooopo) (Engineer at PingCAP, moderator of Ruby-China community) 
 
 **Editor:** [Fendy Feng](https://github.com/septemberfd), Tom Dewan
 
@@ -20,7 +20,7 @@ If you are a Ruby on Rails developer, I think you'll really enjoy this article. 
 
 [TiDB](https://github.com/pingcap/tidb) is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability.
 
-To build apps with Rails, TiDB offers you MySQL interfaces which can be used as the backend database layers. TiDB allows you to use Active Record Object Relational Mapping (ORM) directly, and also provides you with an alternative: the [activerecord-tidb-adapter](https://github.com/pingcap/activerecord-tidb-adapter), a lightweight extension of Active Record that offers compatible patches and TiDB-exclusive functions such as[Sequence](https://docs.pingcap.com/tidb/stable/sql-statement-create-sequence). 
+To build apps with Rails, TiDB offers you MySQL interfaces which can be used as the backend database layers. TiDB allows you to use Active Record Object Relational Mapping (ORM) directly, and also provides you with an alternative: the [activerecord-tidb-adapter](https://github.com/pingcap/activerecord-tidb-adapter), a lightweight extension of Active Record that offers compatible patches and TiDB-exclusive functions such as [Sequence](https://docs.pingcap.com/tidb/stable/sql-statement-create-sequence). 
 
 ## Getting started with TiDB
 
@@ -34,10 +34,9 @@ Deploy a TiDB cluster on your local machine.
 
 1. Install TiUP.
 
-TiDB provides a smooth deployment experience using [TiUP](https://docs.pingcap.com/tidb/dev/tiup-overview), a package manager for you to manage different cluster components easily in the TiDB ecosystem. 
+TiDB provides a smooth deployment experience using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview), a package manager for you to manage different cluster components easily in the TiDB ecosystem. 
 
 ```shell
-
 $ curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
 ```
 
@@ -46,7 +45,6 @@ $ curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.
 Start a TiDB nightly instance by running the `tiup playground` command:  
 
 ```shell
-
 $ tiup playground  nightly
 ```
 
@@ -62,17 +60,15 @@ mysql --host 127.0.0.1 --port 4000 -u root -p
 
 ```
 $ ruby -v
-
 ruby 2.7.0
 
 $ rails -v
-
 Rails 6.1.4
 
 $ rails new tidb-rails --database=mysql --api
 ```
 
-2. Add[activerecord-tidb-adapter](https://github.com/pingcap/activerecord-tidb-adapter) to Gemfile. Activerecord-tidb-adapter allows you to use TiDB as a backend for ActiveRecord and Rails apps.
+2. Add [activerecord-tidb-adapter](https://github.com/pingcap/activerecord-tidb-adapter) to Gemfile. Activerecord-tidb-adapter allows you to use TiDB as a backend for ActiveRecord and Rails apps.
 
 ```
 $ bundle add activerecord-tidb-adapter --version "~> 6.1.0"
@@ -81,33 +77,19 @@ $ bundle add activerecord-tidb-adapter --version "~> 6.1.0"
 3. After you create a new app, edit `config/database.yml` to configure the connection setting to TiDB. 
 
 ```yaml
-
 default: &default
-
  adapter: tidb
-
  encoding: utf8mb4
-
  collation: utf8mb4_general_ci
-
- pool: &lt;%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
+ pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
  host: 127.0.0.1
-
  port: 4000
-
  variables:
-
    tidb_enable_noop_functions: ON
-
  username: root
-
  password:
-
 development:
-
  &lt;<: *default
-
  database: tidb_rails_development
 ```
 
@@ -134,7 +116,6 @@ Before you play with your app with TiDB, you need to define the model and migrat
 ```
 $ bundle exec rails g model user email:string name:string gender:integer
 ...
-
 $ vim ./db/migrate/20210826174523_create_users.rb # edit
 ```
 
@@ -142,23 +123,14 @@ $ vim ./db/migrate/20210826174523_create_users.rb # edit
 
 ```
 class CreateUsers &lt; ActiveRecord::Migration[6.1]
-
  def change
-
    create_table :users do |t|
-
      t.string :email, index: {unique: true}
-
      t.string :name
-
      t.integer :gender
-
      t.timestamps
-
    end
-
  end
-
 end
 ``` 
 
@@ -166,13 +138,9 @@ end
 
 ```
 $ bundle exec rails db:migrate
-
 == 20210826174523 CreateUsers: migrating ======================================
-
 -- create_table(:users)
-
   -> 0.1717s
-
 == 20210826174523 CreateUsers: migrated (0.1717s) =============================
 ```
 
@@ -180,35 +148,21 @@ $ bundle exec rails db:migrate
 
 ```
 $ bundle exec rails c
-
 Running via Spring preloader in process 13378
-
 Loading development environment (Rails 6.1.4.1)
-
 irb(main):001:0> 30.times.each { |i| User.create!(email: "user-#{i}@example.com", name: "user-#{i}", gender: i % 3) }
-
   (1.2ms)  select version()
-
  TRANSACTION (0.8ms)  BEGIN
-
  User Create (93.5ms)  INSERT INTO `users` (`email`, `name`, `gender`, `created_at`, `updated_at`) VALUES ('user-0@example.com', 'user-0', 0, '2021-08-26 17:50:40.661945', '2021-08-26 17:50:40.661945')
-
  TRANSACTION (14.9ms)  COMMIT
-
 ...
 
 => 30
-
 irb(main):002:0> User.count
-
   (8.9ms)  SELECT COUNT(*) FROM `users`
-
 => 30
-
 irb(main):003:0> User.first
-
  User Load (5.8ms)  SELECT `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1
-
 => #&lt;User id: 1, email: "user-0@example.com", name: "user-0", gender: 0, created_at: "2021-08-26 17:50:40.661945000 +0000", updated_at: "2021-08-26 17:50:40.661945000 +0000">
 ```
 
