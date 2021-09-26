@@ -78,7 +78,7 @@ To view the Prometheus:[ http://127.0.0.1:9090](http://127.0.0.1:9090/)
 To view the Grafana:[ ](http://127.0.0.1:3000/)http://127.0.0.1:3000
 ```
 
-Among them, &lt;127.0.0.1:2379> is the [Placement Driver](https://github.com/tikv/pd) (PD) address, which manages and schedules the TiKV cluster. JuiceFS will interact with TiKV through this address. The other two addresses are Prometheus and Grafana services, which are used for monitoring and data visualization of TiKV clusters.
+Among them, <127.0.0.1:2379> is the [Placement Driver](https://github.com/tikv/pd) (PD) address, which manages and schedules the TiKV cluster. JuiceFS will interact with TiKV through this address. The other two addresses are Prometheus and Grafana services, which are used for monitoring and data visualization of TiKV clusters.
 
 **Note**: The playground component of TiUP is mainly used to quickly build a minimal test cluster of TiDB and TiKV in the local environment. For production environment deployment, please refer to [TiKV Official Document](https://tikv.org/docs/5.1/deploy/install/install/).
 
@@ -185,13 +185,13 @@ Parameter Description:
 If you see output similar to the following, the file system was created successfully:
 
 ```
-2021/08/12 23:28:36.932241 juicefs[101222] &lt;INFO>: Meta address: tikv://127.0.0.1:2379/mystor
+2021/08/12 23:28:36.932241 juicefs[101222] <INFO>: Meta address: tikv://127.0.0.1:2379/mystor
 [2021/08/12 23:28:36.932 +08:00] [INFO] [client.go:214] ["[pd] create pd client with endpoints"] [pd-address="[127.0.0.1:2379]"]
 [2021/08/12 23:28:36.935 +08:00] [INFO] [base_client.go:346] ["[pd] switch leader"] [new-leader=http://127.0.0.1:2379] [old-leader=]
 [2021/08/12 23:28:36.935 +08:00] [INFO] [base_client.go:126] ["[pd] init cluster id"] [cluster-id=6995548759432331426]
 [2021/08/12 23:28:36.935 +08:00] [INFO] [client.go:238] ["[pd] create tso dispatcher"] [dc-location=global]
-2021/08/12 23:28:36.936892 juicefs[101222] &lt;INFO>: Data uses minio://127.0.0.1:9000/mystor/mystor/
-2021/08/12 23:28:36.976722 juicefs[101222] &lt;INFO>: Volume is formatted as {Name:mystor UUID:0c9594a8-fe2c-463c-a4b6-eb815f38c843 Storage:minio Bucket:http://127.0.0.1:9000/mystor AccessKey:minioadmin SecretKey:removed BlockSize:4096 Compression:none Shards:0 Partitions:0 Capacity:0 Inodes:0 EncryptKey:}
+2021/08/12 23:28:36.936892 juicefs[101222] <INFO>: Data uses minio://127.0.0.1:9000/mystor/mystor/
+2021/08/12 23:28:36.976722 juicefs[101222] <INFO>: Volume is formatted as {Name:mystor UUID:0c9594a8-fe2c-463c-a4b6-eb815f38c843 Storage:minio Bucket:http://127.0.0.1:9000/mystor AccessKey:minioadmin SecretKey:removed BlockSize:4096 Compression:none Shards:0 Partitions:0 Capacity:0 Inodes:0 EncryptKey:}
 ```
 
 ### Mount the file system
@@ -207,14 +207,14 @@ The `sudo` command is used here to mount the file system as a super user. The pu
 If you see output similar to the following, the file system is mounted successfully:
 
 ```
-2021/08/12 23:34:44.288136 juicefs[101873] &lt;INFO>: Meta address: tikv://127.0.0.1:2379/mystor
+2021/08/12 23:34:44.288136 juicefs[101873] <INFO>: Meta address: tikv://127.0.0.1:2379/mystor
 [2021/08/12 23:34:44.288 +08:00] [INFO] [client.go:214] ["[pd] create pd client with endpoints"] [pd-address="[127.0.0.1:2379]"]
 [2021/08/12 23:34:44.291 +08:00] [INFO] [base_client.go:346] ["[pd] switch leader"] [new-leader=http://127.0.0.1:2379] [old-leader=]
 [2021/08/12 23:34:44.291 +08:00] [INFO] [base_client.go:126] ["[pd] init cluster id"] [cluster-id=6995548759432331426]
 [2021/08/12 23:34:44.291 +08:00] [INFO] [client.go:238] ["[pd] create tso dispatcher"] [dc-location=global]
-2021/08/12 23:34:44.296270 juicefs[101873] &lt;INFO>: Data use minio://127.0.0.1:9000/mystor/mystor/
-2021/08/12 23:34:44.296768 juicefs[101873] &lt;INFO>: Disk cache (/var/jfsCache/0c9594a8-fe2c-463c-a4b6-eb815f38c843/): capacity (1024 MB), free ratio (10%), max pending pages (15)
-2021/08/12 23:34:44.800551 juicefs[101873] &lt;INFO>: OK, mystor is ready at /home/herald/jfs
+2021/08/12 23:34:44.296270 juicefs[101873] <INFO>: Data use minio://127.0.0.1:9000/mystor/mystor/
+2021/08/12 23:34:44.296768 juicefs[101873] <INFO>: Disk cache (/var/jfsCache/0c9594a8-fe2c-463c-a4b6-eb815f38c843/): capacity (1024 MB), free ratio (10%), max pending pages (15)
+2021/08/12 23:34:44.800551 juicefs[101873] <INFO>: OK, mystor is ready at /home/herald/jfs
 ```
 
 Use the `df` command to see the mounting status of the file system:

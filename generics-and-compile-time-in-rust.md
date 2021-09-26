@@ -189,7 +189,7 @@ Notice that the only difference between these two cases is that the first
 ToString`. The first is using static dispatch, and the second dynamic.
 
 In Rust `&impl ToString` is essentially shorthand for a type parameter argument
-that is only used once, like in the earlier example `fn print&lt;T: ToString&gt;(v:
+that is only used once, like in the earlier example `fn print<T: ToString>(v:
 T)`.
 
 Note that in these examples we have to use `inline(never)` to defeat the

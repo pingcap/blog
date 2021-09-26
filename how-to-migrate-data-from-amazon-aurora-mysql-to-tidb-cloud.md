@@ -199,7 +199,7 @@ The TiDB Toolkit package includes Dumpling and TiDB Lighting.
     wget -qO- https://download.pingcap.org/tidb-toolkit-latest-linux-amd64.tar.gz|tar -xzv -C tidb-toolkit-latest-linux-amd64 --strip-components 1
     ```
 
-2. Use Dumpling to export the data from Amazon Aurora. Based on your environment, replace the content in angle brackets (&lt;&gt;), and then execute the following commands.
+2. Use Dumpling to export the data from Amazon Aurora. Based on your environment, replace the content in angle brackets (`<>`), and then execute the following commands.
 
     {{< copyable "shell-regular" >}}
 
