@@ -105,7 +105,7 @@ The load balancer only needs access to the TiDB servers (by default on TCP port 
 
 We recommend that you use `http://<ip_of_tidb>:10080/status` as the health check because it supports the _graceful shutdown_ feature. This feature allows you to drain client connections before you shut down a TiDB Server, and it reduces the impact on applications. To benefit from this feature, you must set the [`graceful-wait-before-shutdown` variable](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#graceful-wait-before-shutdown-new-in-v50) to a non-zero value.
 
-You should avoid health checks that check for `read_only` or other MySQL or InnoDB-specific variables. These variables are often implemented as “noop” on TiDB.
+You should avoid health checks that check for `read_only` or other MySQL or InnoDB-specific variables. These variables are often implemented as "noop" on TiDB.
 
 ## Where to put your load balancer
 
@@ -377,7 +377,7 @@ You can create the load balancer manually with the AWS EC2 Dashboard (as shown b
 ![AWS EC2 Create Network Load Balancer](media/aws-ec2-create-network-load-balancer.png)
 <div class="caption-center">AWS EC2 Create Network Load Balancer</div>
 
-1. Choose “Network Load Balancer” for the load balancer type. Depending on your requirements you need to select “Internet-facing” or “Internal”.
+1. Choose "Network Load Balancer" for the load balancer type. Depending on your requirements you need to select "Internet-facing" or "Internal".
 2. Configure the listener to use TCP Port 3306 or 4000.
 3. Create a target group with the IP addresses of your TiDB instances. Depending on the port you have configured for TiDB, choose port 3306 or 4000.
 
