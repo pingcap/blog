@@ -12,7 +12,7 @@ image: /images/blog/build-rails-apps-with-tidb-banner.png
 
 **Editor:** [Fendy Feng](https://github.com/septemberfd), Tom Dewan
 
-![Build a Rails App with TiDB](media/build-rails-apps-with-tidb-banner.png)
+![Build a Rails App with a NewSQL Database](media/build-rails-apps-with-a-newsql-database.png)
 
 If you are a Ruby on Rails developer, I think you'll really enjoy this article. It aims to help you get started with [TiDB](https://github.com/pingcap/tidb), an open-source NewSQL database, and use it to power up your Rails applications.
 
