@@ -96,7 +96,7 @@ Let's look at some common uses of perf.
 Those are some of the most common uses of perf. If you'd like to know more (especially about perf-trace), see the [Linux manual page](https://man7.org/linux/man-pages/man1/perf-trace.1.html). From the manual pages, you will learn that perf-trace can filter tasks based on PIDs or thread IDs (TIDs), but that it has no convenient support for containers and the Kubernetes (K8s) environments. Don't worry. Next, we'll discuss a tool that can easily trace system calls in containers and in K8s environments that uses cgroup v2.
 
 <div class="trackable-btns">
-  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('INSERT TITLE', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How to Trace Linux System Calls in Production with Minimal Impact on Performance', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
   </div>
 
 ## Traceloop, a performance profiler for cgroup v2 and K8s

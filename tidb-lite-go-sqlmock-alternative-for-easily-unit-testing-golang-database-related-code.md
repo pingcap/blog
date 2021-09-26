@@ -177,8 +177,8 @@ In contrast, when we use tidb-lite for our unit testing, we only need to focus o
 TiDB is also highly compatible with the MySQL protocol. Using tidb-lite can almost completely simulate the MySQL environment.
 
 <div class="trackable-btns">
-  <a href="/download" onclick="trackViews('INSERT TITLE', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
-  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('INSERT TITLE', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  <a href="/download" onclick="trackViews('tidb-lite: A go-sqlmock Alternative for Easily Unit Testing Golang Database-Related Code', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('tidb-lite: A go-sqlmock Alternative for Easily Unit Testing Golang Database-Related Code', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
   </div>
 
 ## Using tidb-lite
