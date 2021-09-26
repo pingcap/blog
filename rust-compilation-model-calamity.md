@@ -158,6 +158,11 @@ For years Rust [slowly boiled](https://en.wikipedia.org/wiki/Boiling_frog) in it
 
 Too many tired metaphors in this section. Sorry about that.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('The Rust Compilation Model Calamity', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('The Rust Compilation Model Calamity', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  </div>
+
 ### Early decisions that favored run-time over compile-time
 
 If Rust is designed for poor compile time, then what are those designs specifically? I describe a few briefly here. The next episode in this series will go into further depth. Some have greater compile-time impact than others, but I assert that all of them cause more time to be spent in compilation than alternative designs.

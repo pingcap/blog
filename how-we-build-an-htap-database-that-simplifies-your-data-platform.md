@@ -92,6 +92,11 @@ To enable TiFlash replication, you only need a single command:
 mysql> ALTER TABLE orders SET TIFLASH REPLICA 2;
 ```
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('How We Build an HTAP Database That Simplifies Your Data Platform', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How We Build an HTAP Database That Simplifies Your Data Platform', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  </div>
+
 ### Asynchronous replication with real-time and consistent reads
 
 In TiFlash, the data replication is asynchronous. This design has two advantages:
