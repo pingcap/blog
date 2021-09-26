@@ -215,7 +215,7 @@ My previous article [Why We Disable Linux's THP Feature for Databases](https://e
 
     ![Linux ftrace events' fields](media/linux-ftrace-events-fields.png)
 
-    To analyze the number of external memory fragmentation events, focus on **the events with `fallback_order &lt; pageblock order`**. In the x86_64 environment, `pageblock order` is 9.
+    To analyze the number of external memory fragmentation events, focus on **the events with `fallback_order <; pageblock order`**. In the x86_64 environment, `pageblock order` is 9.
 
 4. Clean up the events:
 
