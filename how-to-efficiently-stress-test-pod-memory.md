@@ -242,7 +242,6 @@ That's all for the tour. When you inject StressChaos into your Pods, we have two
 In the future, we'll create a more detailed StressChaos document.
 
 <div class="trackable-btns">
-  <a href="/download" onclick="trackViews('How to Efficiently Stress Test Pod Memory', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
   <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How to Efficiently Stress Test Pod Memory', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
   </div>
 

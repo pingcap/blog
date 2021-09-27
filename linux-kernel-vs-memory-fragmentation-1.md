@@ -125,6 +125,10 @@ Before I start, I want to recommend some good reads. The following articles show
   </tr>
 </table>
 
+<div class="trackable-btns">
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Linux Kernel vs. Memory Fragmentation (Part I)', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  </div>
+
 Now, let's get started.
 
 ## Linux buddy memory allocator

@@ -157,6 +157,11 @@ COPYRIGHT:
 
 You can also visit the [JuiceFS GitHub Releases](https://github.com/juicedata/juicefs/releases) page to select other versions for manual installation.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('Getting Started with JuiceFS Using TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Getting Started with JuiceFS Using TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  </div>
+
 ## Use TiKV in JuiceFS
 
 Here I refer to [JuiceFS Quick Start Guide](https://github.com/juicedata/juicefs/blob/main/docs/en/quick_start_guide.md#2-object-storage), and build a MinIO object storage locally. The access address is <http://127.0.0.1:9000>, and `Access Key ID` and `Access Key Secret` are both `minioadmin`.

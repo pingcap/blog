@@ -123,7 +123,6 @@ Anyway, last time I bootstrapped Rust a few months ago, it took over five hours.
 The Rust language developers became acclimated to Rust's poor self-hosting times and failed to recognize or address the severity of the problem of bad compile times during Rust's crucial early design phase.
 
 <div class="trackable-btns">
-    <a href="/download" onclick="trackViews('The Rust Compilation Model Calamity', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('The Rust Compilation Model Calamity', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
