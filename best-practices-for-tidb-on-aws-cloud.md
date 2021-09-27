@@ -228,6 +228,11 @@ To demonstrate the importance of SSD caching, we use EnhanceIO (an [open-source 
 
 SSD caching does not bring extra risk to data integrity because we only use local disks as read-only cache. Furthermore, several SSD caching solutions, including EnhanceIO, support hot plugging, so you can dynamically configure the caching strategy while the service stays up.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('Best Practices for TiDB on AWS Cloud', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Best Practices for TiDB on AWS Cloud', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  </div>
+
 ### I/O rate limiting
 
 As discussed before, the access latency of EBS is sensitive to I/O throughput. This poses a great threat to performance stability for systems like TiKV that rely on background compaction to provide sustained service. The following graph shows that an increase in the read/write flow causes a decrease in the write operations per second (compaction flow is displayed inverted to illustrate the matching pattern):

@@ -82,6 +82,10 @@ The above steps are only a simplified description of the actual workflow. In rea
 
 As for direct memory reclaim, it is not only performed by the kernel when the memory is severely insufficient, but also triggered due to memory fragmentation in practical scenarios. In a certain period, these two situations may occur simultaneously.
 
+<div class="trackable-btns">
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Linux Kernel vs. Memory Fragmentation (Part II)', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  </div>
+
 ### How to analyze memory compaction
 
 #### Quantify the performance latency

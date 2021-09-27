@@ -78,7 +78,7 @@ To view the Prometheus:[ http://127.0.0.1:9090](http://127.0.0.1:9090/)
 To view the Grafana:[ ](http://127.0.0.1:3000/)http://127.0.0.1:3000
 ```
 
-Among them, <127.0.0.1:2379> is the [Placement Driver](https://github.com/tikv/pd) (PD) address, which manages and schedules the TiKV cluster. JuiceFS will interact with TiKV through this address. The other two addresses are Prometheus and Grafana services, which are used for monitoring and data visualization of TiKV clusters.
+Among them, `<127.0.0.1:2379>` is the [Placement Driver](https://github.com/tikv/pd) (PD) address, which manages and schedules the TiKV cluster. JuiceFS will interact with TiKV through this address. The other two addresses are Prometheus and Grafana services, which are used for monitoring and data visualization of TiKV clusters.
 
 **Note**: The playground component of TiUP is mainly used to quickly build a minimal test cluster of TiDB and TiKV in the local environment. For production environment deployment, please refer to [TiKV Official Document](https://tikv.org/docs/5.1/deploy/install/install/).
 
@@ -156,6 +156,11 @@ COPYRIGHT:
 ```
 
 You can also visit the [JuiceFS GitHub Releases](https://github.com/juicedata/juicefs/releases) page to select other versions for manual installation.
+
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('Getting Started with JuiceFS Using TiKV', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Getting Started with JuiceFS Using TiKV', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  </div>
 
 ## Use TiKV in JuiceFS
 

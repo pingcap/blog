@@ -155,6 +155,10 @@ int BPF_PROG(irq_handler_entry)
 
 You can see the complete code in [hardirqs.bpf.c](https://github.com/iovisor/bcc/blob/master/libbpf-tools/hardirqs.bpf.c).
 
+<div class="trackable-btns">
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Tips and Tricks for Writing Linux BPF Applications with libbpf', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  </div>
+
 ## Maps
 
 ### Reduce pre-allocation overhead

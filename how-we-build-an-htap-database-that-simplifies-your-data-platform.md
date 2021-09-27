@@ -106,6 +106,11 @@ Though the replication is asynchronous, the application always read the latest d
 
 When the application reads data from the learner replica in TiFlash, the application sends a read validation to the Leader replica in TiKV and then receives information about the replication progress. If the progress does not finish, the latest data is not replicated to the learner replica, and the learner replica waits until it obtains the latest data. The whole wait duration is as small as tens to hundreds of milliseconds, unless the system reaches peak utilization.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('How We Build an HTAP Database That Simplifies Your Data Platform', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How We Build an HTAP Database That Simplifies Your Data Platform', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  </div>
+
 ### An optimizer for intelligent selection
 
 Note that the column and row stores are not two independent systems, but one organic whole. How can the two stores coordinate? Well, the trick is in our optimizer.
