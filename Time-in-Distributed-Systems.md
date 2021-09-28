@@ -114,34 +114,32 @@ Based on NTP, HLC can only read time from NTP, but it won't change it. HLC conta
 
 * `c`: the logical clock
 
- To compare the order of two events, we can first check their `l` time, if equal, we can check `c` time, for any two events `e` and `f`, if `e` happened before `f`, we can know `(l.e, c.e) < (l.f, c.f)`.
+To compare the order of two events, we can first check their `l` time, if equal, we can check `c` time, for any two events `e` and `f`, if `e` happened before `f`, we can know `(l.e, c.e) < (l.f, c.f)`.
 
 The HLC algorithm for node `j`:
 
 1. Initialize `l.j = 0` and `c.j = 0` when node `j` starts up.
-
 2. Send a message to another node, or a local event happens:
 
- ```
- l'.j = l.j
- l.j = max(l'.j, pt.j)
- if (l.j = l'.j) then c.j = c.j + 1 else c.j = 0
- Timestamp with l.j, c.j
- ```
+    ```
+    l'.j = l.j
+    l.j = max(l'.j, pt.j)
+    if (l.j = l'.j) then c.j = c.j + 1 else c.j = 0
+    Timestamp with l.j, c.j
+    ```
 
 3. Receive a message from node `m`.
 
- ```
- l'.j = l.j
+    ```
+    l'.j = l.j
 
-l.j = max(l'.j, l.m, pt.j)
-if (l.j = l'.j = l.m) then c.j = max(c.j, c.m) + 1
-    else if (l.j = l'.j) then c.j = c.j + 1
-    else if (l.j = l.m) then c.j = c.m + 1
-    else c.j = 0
-Timestamp with l.j, c.j
-
- ```
+    l.j = max(l'.j, l.m, pt.j)
+    if (l.j = l'.j = l.m) then c.j = max(c.j, c.m) + 1
+        else if (l.j = l'.j) then c.j = c.j + 1
+        else if (l.j = l.m) then c.j = c.m + 1
+        else c.j = 0
+    Timestamp with l.j, c.j
+    ```
 
 As we can see, HLC is very easy to implement and doesn't depend on hardware. But HLC is not the silver bullet to solve the time synchronization problem of distributed systems. HLC still needs to guarantee `|l.e - pt.e| <= ε` to make HLC bounded, because sometimes the user wants to use the physical timestamp to query the events directly, and if the HLC is not unbounded, we can't know whether the event happens or not at this time.
 
@@ -160,7 +158,6 @@ As a distributed relational database, [TiDB](https://github.com/pingcap/tidb) su
 Using TSO to allocate timestamp is simple, but it has the following disadvantages:
 
 1. Single point of failure
-
 2. Network latency
 
 For problem 1,  we embed [etcd](https://github.com/coreos/etcd) and use the [Raft](https://raft.github.io/) consensus algorithm to make the service highly available and consistent.
