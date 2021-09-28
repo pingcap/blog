@@ -176,11 +176,11 @@ Next question: why did our shell exit? Exit code 137 indicates "failure as conta
     Exit Code:    1
 ......
 Events:
- Type     Reason     Age                 From               Message
- ----     ------     ----                 ----               -------
+  Type     Reason     Age                 From               Message
+  ----     ------     ----                 ----               -------
 ......
- Warning Unhealthy 10m (x4 over 16m)   kubelet           Readiness probe failed: Get "http://10.244.1.19:8080/": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
- Normal   Killing   10m (x2 over 16m)   kubelet           Container hello-kubernetes failed liveness probe, will be restarted
+  Warning Unhealthy 10m (x4 over 16m)   kubelet           Readiness probe failed: Get "http://10.244.1.19:8080/": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+  Normal   Killing   10m (x2 over 16m)   kubelet           Container hello-kubernetes failed liveness probe, will be restarted
 ......
 ```
 

@@ -144,31 +144,18 @@ func (s *builtinArithmeticMultiplyIntUnsignedSig) evalInt(row types.Row) (val in
 To implement the same function in Rust for TiKV, it should be:
 
 ```rust
-
- pub fn multiply_int_unsigned(
-
-       &self,
-
-       ctx: &mut EvalContext,
-
-       row: &[Datum],
-
-   ) -> Result<Option<i64>> {
-
-       let lhs = try_opt!(self.children[0].eval_int(ctx, row));
-
-       let rhs = try_opt!(self.children[1].eval_int(ctx, row));
-
-       let res = (lhs as u64).checked_mul(rhs as u64).map(|t| t as i64);
-
-       // TODO: output expression in error when column's name pushed down.
-
-       res.ok_or_else(|| Error::overflow("BIGINT UNSIGNED", &format!("({} * {})", lhs, rhs)))
-
-           .map(Some)
-
-   }
-
+pub fn multiply_int_unsigned(
+  &self,
+  ctx: &mut EvalContext,
+  row: &[Datum],
+) -> Result<Option<i64>> {
+  let lhs = try_opt!(self.children[0].eval_int(ctx, row));
+  let rhs = try_opt!(self.children[1].eval_int(ctx, row));
+  let res = (lhs as u64).checked_mul(rhs as u64).map(|t| t as i64);
+  // TODO: output expression in error when column's name pushed down.
+  res.ok_or_else(|| Error::overflow("BIGINT UNSIGNED", &format!("({} * {})", lhs, rhs)))
+      .map(Some)
+}
 ```
 
 ### Step 5: Add argument check
@@ -203,99 +190,56 @@ For our example function, `MultiplyIntUnsigned`, the final return value type is 
 For this example, the test code implemented in TiKV is as follows:
 
 ```rust
+#[test]
+fn test_multiply_int_unsigned() {
+    let cases = vec![
+        (Datum::I64(1), Datum::I64(2), Datum::U64(2)),
+        (
+            Datum::I64(i64::MIN),
+            Datum::I64(1),
+            Datum::U64(i64::MIN as u64),
+        ),
+        (
+            Datum::I64(i64::MAX),
+            Datum::I64(1),
+            Datum::U64(i64::MAX as u64),
+        ),
+        (Datum::U64(u64::MAX), Datum::I64(1), Datum::U64(u64::MAX)),
+    ];
 
-    #[test]
+    let mut ctx = EvalContext::default();
 
-   fn test_multiply_int_unsigned() {
+    for (left, right, exp) in cases {
+        let lhs = datum_expr(left);
+        let rhs = datum_expr(right);
+        let mut op = Expression::build(
+            &mut ctx,
+            scalar_func_expr(ScalarFuncSig::MultiplyIntUnsigned, &[lhs, rhs]),
+        ).unwrap();
+        op.mut_tp().set_flag(types::UNSIGNED_FLAG as u32);
+        let got = op.eval(&mut ctx, &[]).unwrap();
+        assert_eq!(got, exp);
+    }
 
-       let cases = vec![
+    // test overflow
+    let cases = vec![
+        (Datum::I64(-1), Datum::I64(2)),
+        (Datum::I64(i64::MAX), Datum::I64(i64::MAX)),
+        (Datum::I64(i64::MIN), Datum::I64(i64::MIN)),
+    ];
 
-           (Datum::I64(1), Datum::I64(2), Datum::U64(2)),
-
-           (
-
-               Datum::I64(i64::MIN),
-
-               Datum::I64(1),
-
-               Datum::U64(i64::MIN as u64),
-
-           ),
-
-           (
-
-               Datum::I64(i64::MAX),
-
-               Datum::I64(1),
-
-               Datum::U64(i64::MAX as u64),
-
-           ),
-
-           (Datum::U64(u64::MAX), Datum::I64(1), Datum::U64(u64::MAX)),
-
-       ];
-
-       let mut ctx = EvalContext::default();
-
-       for (left, right, exp) in cases {
-
-           let lhs = datum_expr(left);
-
-           let rhs = datum_expr(right);
-
-           let mut op = Expression::build(
-
-               &mut ctx,
-
-               scalar_func_expr(ScalarFuncSig::MultiplyIntUnsigned, &[lhs, rhs]),
-
-           ).unwrap();
-
-           op.mut_tp().set_flag(types::UNSIGNED_FLAG as u32);
-
-           let got = op.eval(&mut ctx, &[]).unwrap();
-
-           assert_eq!(got, exp);
-
-       }
-
-       // test overflow
-
-       let cases = vec![
-
-           (Datum::I64(-1), Datum::I64(2)),
-
-           (Datum::I64(i64::MAX), Datum::I64(i64::MAX)),
-
-           (Datum::I64(i64::MIN), Datum::I64(i64::MIN)),
-
-       ];
-
-       for (left, right) in cases {
-
-           let lhs = datum_expr(left);
-
-           let rhs = datum_expr(right);
-
-           let mut op = Expression::build(
-
-               &mut ctx,
-
-               scalar_func_expr(ScalarFuncSig::MultiplyIntUnsigned, &[lhs, rhs]),
-
-           ).unwrap();
-
-           op.mut_tp().set_flag(types::UNSIGNED_FLAG as u32);
-
-           let got = op.eval(&mut ctx, &[]).unwrap_err();
-
-           assert!(check_overflow(got).is_ok());
-
-       }
-
-   }
-
+    for (left, right) in cases {
+        let lhs = datum_expr(left);
+        let rhs = datum_expr(right);
+        let mut op = Expression::build(
+            &mut ctx,
+            scalar_func_expr(ScalarFuncSig::MultiplyIntUnsigned, &[lhs, rhs]),
+        ).unwrap();
+        op.mut_tp().set_flag(types::UNSIGNED_FLAG as u32);
+        let got = op.eval(&mut ctx, &[]).unwrap_err();
+        assert!(check_overflow(got).is_ok());
+    }
+}
 ```
 
 ### Step 8: Run the test

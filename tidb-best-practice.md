@@ -53,18 +53,18 @@ TiDB provides complete distributed transactions and the model has some optimizat
 
 + Optimistic Lock
 
- TiDB's transaction model uses the optimistic lock and will not detect conflicts until the commit phase. If there are conflicts, retry the transaction. But this model is inefficient if the conflict is severe because operations before retry are invalid and need to repeat. Assume that the database is used as a counter. High access concurrency might lead to severe conflicts, resulting in multiple retries or even timeouts. Therefore, in the scenario of severe conflicts, it is recommended to solve problems at the system architecture level, such as placing counter in Redis. Nonetheless, the optimistic lock model is efficient if the access conflict is not very severe.
+    TiDB's transaction model uses the optimistic lock and will not detect conflicts until the commit phase. If there are conflicts, retry the transaction. But this model is inefficient if the conflict is severe because operations before retry are invalid and need to repeat. Assume that the database is used as a counter. High access concurrency might lead to severe conflicts, resulting in multiple retries or even timeouts. Therefore, in the scenario of severe conflicts, it is recommended to solve problems at the system architecture level, such as placing counter in Redis. Nonetheless, the optimistic lock model is efficient if the access conflict is not very severe.
 
 + Transaction Size Limits
 
- As distributed transactions need to conduct two-phase commit and the bottom layer performs Raft replication, if a transaction is very large, the commit process would be quite slow and the following Raft replication flow is thus struck. To avoid this problem, we limit the transaction size:
+    As distributed transactions need to conduct two-phase commit and the bottom layer performs Raft replication, if a transaction is very large, the commit process would be quite slow and the following Raft replication flow is thus struck. To avoid this problem, we limit the transaction size:
 
-- A transaction is limited to 5000 SQL statements (by default)
-- Each Key-Value entry is no more than 6MB
-- The total number of Key-Value entry is no more than 300,000 rows
-- The total size of Key-Value entry is no more than 100MB
+    - A transaction is limited to 5000 SQL statements (by default)
+    - Each Key-Value entry is no more than 6MB
+    - The total number of Key-Value entry is no more than 300,000 rows
+    - The total size of Key-Value entry is no more than 100MB
 
- There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Google Cloud Spanner.
+    There are [similar limits](https://cloud.google.com/spanner/docs/limits) on Google Cloud Spanner.
 
 ### Data Sharding
 
@@ -90,55 +90,57 @@ TiDB supports the complete secondary indexes which are also global indexes. Many
 
 + The more secondary indexes, the better?
 
- Secondary indexes can speed up query, but adding an index has side effects. In the last section, we've introduced the storage model of index. For each additional index, there will be one more Key-Value when inserting a piece of data. Therefore, the more indexes, the slower the writing speed and the more space it takes up. In addition, too many indexes will influence the runtime of the optimizer. And inappropriate index will mislead the optimizer. Thus, the more secondary indexes is not necessarily the better.
+    Secondary indexes can speed up query, but adding an index has side effects. In the last section, we've introduced the storage model of index. For each additional index, there will be one more Key-Value when inserting a piece of data. Therefore, the more indexes, the slower the writing speed and the more space it takes up. In addition, too many indexes will influence the runtime of the optimizer. And inappropriate index will mislead the optimizer. Thus, the more secondary indexes is not necessarily the better.
 
 + Which columns should create indexes?
 
- As mentioned before, index is important but the number of indexes should be proper. We need to create appropriate indexes according to the characteristics of business. In principle, we need to create indexes for the columns needed in the query, the purpose of which is to improve the performance. Below are the conditions that need to create indexes:
+    As mentioned before, index is important but the number of indexes should be proper. We need to create appropriate indexes according to the characteristics of business. In principle, we need to create indexes for the columns needed in the query, the purpose of which is to improve the performance. Below are the conditions that need to create indexes:
 
-- For columns with a high degree of differentiation, the number of filtered rows is remarkably reduced though index.
-- If there are multiple query criteria, you can choose composite indexes. Note to put the columns with equivalent condition before composite index.
+    - For columns with a high degree of differentiation, the number of filtered rows is remarkably reduced though index.
+    - If there are multiple query criteria, you can choose composite indexes. Note to put the columns with equivalent condition before composite index.
 
-  For example, for a commonly-used query is `select * from t where c1 = 10 and c2 = 100 and c3 > 10`, you can create a composite index `Index cidx (c1, c2, c3)`. In this way, you can use the query criterion to create an index prefix and then Scan.
+    For example, for a commonly-used query is `select * from t where c1 = 10 and c2 = 100 and c3 > 10`, you can create a composite index `Index cidx (c1, c2, c3)`. In this way, you can use the query criterion to create an index prefix and then Scan.
 
 - The difference between query through indexes and directly scan Table
 
-TiDB has implemented global indexes, so indexes and data of the Table are not necessarily on data sharding. When querying through indexes, it should firstly scan indexes to get the corresponding row ID and then use the row ID to get the data. Thus, this method involves two network requests and has a certain performance overhead.
+    TiDB has implemented global indexes, so indexes and data of the Table are not necessarily on data sharding. When querying through indexes, it should firstly scan indexes to get the corresponding row ID and then use the row ID to get the data. Thus, this method involves two network requests and has a certain performance overhead.
 
-If the query involves lots of rows, scanning index proceeds concurrently. When the first batch of results is returned, getting the data of Table can then proceed. Therefore, this is a parallel + Pipeline model. Though the two accesses create overhead, the latency is not high.
+    If the query involves lots of rows, scanning index proceeds concurrently. When the first batch of results is returned, getting the data of Table can then proceed. Therefore, this is a parallel + Pipeline model. Though the two accesses create overhead, the latency is not high.
+
+    The following two conditions don't have the problem of two accesses:
+
+    + Columns of the index have already met the query requirement. Assume that the `c` Column on the `t` Table has an index and the query is: `select c from t where c > 10;`. At this time, all needed data can be obtained if accessing the index. We call this condition Covering Index. But if you focus more on the query performance, you can put a portion of columns that don't need to be filtered but need to be returned in the query result into index, creating composite index. Take `select c1, c2 from t where c1 > 10;` as an example. You can optimize this query by creating composite index `Index c12 (c1, c2)`.
+
+    + The Primary Key of table is integer. In this case, TiDB will use the value of Primary Key as row ID. Thus, if the query criterion is on PK, you can directly construct the range of the row ID, scan Table data, and get the result.
+
++ Query concurrency
+
+    As data is distributed across many Regions, TiDB makes query concurrently. But the concurrency by default is not high in case it consumes lots of system resources. Besides, as for the OLTP query, it doesn't involve a large amount of data and the low concurrency is enough. But for the OLAP Query, the concurrency is high and TiDB modifies the query concurrency through System Variable.
+
+    - [tidb\_distsql\_scan\_concurrency](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-distsql-scan-concurrency)
+
+        The concurrency of scanning data, including scanning the Table and index data.
+
+    - [tidb\_index\_lookup\_size](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-index-lookup-size)
+
+        If it needs to access the index to get row IDs before accessing Table data, it uses a batch of row IDs as a single request to access Table data. This parameter can set the size of Batch. The larger Batch increases latency while the smaller one may lead to more queries. The proper size of this parameter is related to the amount of data that the query involves. Generally, no modification is required.
+
+    - [tidb\_index\_lookup\_concurrency](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-index-lookup-concurrency)
+
+        If it needs to access the index to get row IDs before accessing Table data, the concurrency of getting data through row IDs every time is modified through this parameter.
+
++ Ensure the order of results through index
+
+    Index cannot only be used to filter data, but also to sort data. Firstly, get row IDs according to the index order. Then return the row content according to the return order of row IDs. In this way, the return results are ordered according to the index column. I've mentioned that the model of scanning index and getting Row is parallel + Pipeline. If Row is returned according to the index order, a high concurrency between two queries will not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [tidb\_index\_serial\_scan\_concurrency](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-index-serial-scan-concurrency) variable.
+
++ Reverse index scan
+
+    As in MySQL 5.7, all indexes in TiDB are in ascending order. TiDB supports the ability to read an ascending index in reverse order, at a performance overhead of about 23%. Earlier versions of TiDB had a higher performance penalty, and thus reverse index scans were not recommended.
 
 <div class="trackable-btns">
     <a href="/download" onclick="trackViews('TiDB Best Practices', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
     <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Best Practices', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
-
-The following two conditions don't have the problem of two accesses:
-
-+ Columns of the index have already met the query requirement. Assume that the `c` Column on the `t` Table has an index and the query is: `select c from t where c > 10;`. At this time, all needed data can be obtained if accessing the index. We call this condition Covering Index. But if you focus more on the query performance, you can put a portion of columns that don't need to be filtered but need to be returned in the query result into index, creating composite index. Take `select c1, c2 from t where c1 > 10;` as an example. You can optimize this query by creating composite index `Index c12 (c1, c2)`.
-
-+ The Primary Key of table is integer. In this case, TiDB will use the value of Primary Key as row ID. Thus, if the query criterion is on PK, you can directly construct the range of the row ID, scan Table data, and get the result.
-
-+ Query concurrency
-
- As data is distributed across many Regions, TiDB makes query concurrently. But the concurrency by default is not high in case it consumes lots of system resources. Besides, as for the OLTP query, it doesn't involve a large amount of data and the low concurrency is enough. But for the OLAP Query, the concurrency is high and TiDB modifies the query concurrency through System Variable.
-
-- [tidb\_distsql\_scan\_concurrency](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-distsql-scan-concurrency):
-
-    The concurrency of scanning data, including scanning the Table and index data.
-
-- [tidb\_index\_lookup\_size](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-index-lookup-size):
-
-    If it needs to access the index to get row IDs before accessing Table data, it uses a batch of row IDs as a single request to access Table data. This parameter can set the size of Batch. The larger Batch increases latency while the smaller one may lead to more queries. The proper size of this parameter is related to the amount of data that the query involves. Generally, no modification is required.
-
-- [tidb\_index\_lookup\_concurrency](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-index-lookup-concurrency): If it needs to access the index to get row IDs before accessing Table data, the concurrency of getting data through row IDs every time is modified through this parameter.
-
-+ Ensure the order of results through index
-
- Index cannot only be used to filter data, but also to sort data. Firstly, get row IDs according to the index order. Then return the row content according to the return order of row IDs. In this way, the return results are ordered according to the index column. I've mentioned that the model of scanning index and getting Row is parallel + Pipeline. If Row is returned according to the index order, a high concurrency between two queries will not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [tidb\_index\_serial\_scan\_concurrency](https://pingcap.com/docs/v3.0/reference/configuration/tidb-server/tidb-specific-variables/#tidb-index-serial-scan-concurrency) variable.
-
-+ Reverse index scan
-
- As in MySQL 5.7, all indexes in TiDB are in ascending order. TiDB supports the ability to read an ascending index in reverse order, at a performance overhead of about 23%. Earlier versions of TiDB had a higher performance penalty, and thus reverse index scans were not recommended.
 
 ## Scenarios and Practices
 
@@ -183,13 +185,9 @@ When deleting a large amount of data, it is recommended to use `Delete * from t 
 
 ```
 for i from 0 to 23:
-
- while affected_rows > 0:
-
-         delete * from t where insert_time >= i:00:00 and insert_time < (i+1):00:00 limit 5000;
-
-         affected_rows = select affected_rows()
-
+    while affected_rows > 0:
+        delete * from t where insert_time >= i:00:00 and insert_time < (i+1):00:00 limit 5000;
+        affected_rows = select affected_rows()
 ```
 
 This pseudocode means to split huge chunks of data into small ones and then delete, so that the following `Delete` statement will not be influenced.

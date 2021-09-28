@@ -224,7 +224,7 @@ Like RocksDB, Titan uses `rocksdb::Status` as the default return value for most 
 
 ```
 rocksdb::Status s = ...;
- if (!s.ok()) cerr << s.ToString() << endl;
+if (!s.ok()) cerr << s.ToString() << endl;
 ```
 
 ### Destroy a database

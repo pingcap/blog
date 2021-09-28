@@ -92,15 +92,15 @@ With well-defined actions such as `pod-kill`, PodChaos can help us pinpoint thes
 
 ```yml
 spec:
- action: pod-kill
- mode: one
- selector:
-   namespaces:
-     - tidb-cluster-demo
-   labelSelectors:
-     "app.kubernetes.io/component": "tikv"
+  action: pod-kill
+  mode: one
+  selector:
+    namespaces:
+      - tidb-cluster-demo
+    labelSelectors:
+      "app.kubernetes.io/component": "tikv"
   scheduler:
-   cron: "@every 2m"
+    cron: "@every 2m"
 ```
 
 This code does the following:

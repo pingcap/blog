@@ -41,18 +41,18 @@ I want to categorize and sort out the previously listed questions. In general, t
 
 + A distributed and highly available storage system must meet the following requirements:
 
-  - The right number of replicas.
-  - Replicas should be distributed on different machines.
-  - Replicas on other nodes can be migrated after adding nodes.
-  - When a node is offline, data on this node should be migrated.
+    - The right number of replicas.
+    - Replicas should be distributed on different machines.
+    - Replicas on other nodes can be migrated after adding nodes.
+    - When a node is offline, data on this node should be migrated.
 
 + A good distributed system needs to have the following optimizations:
 
-  - A balanced distribution of Leaders in the cluster.
-  - A balanced storage capacity in each node.
-  - A balanced distribution of hotspot accessing.
-  - Control the speed of balancing in order not to impact the online service.
-  - Manage the node state, including manually online/offline nodes and automatically offline faulty nodes.
+    - A balanced distribution of Leaders in the cluster.
+    - A balanced storage capacity in each node.
+    - A balanced distribution of hotspot accessing.
+    - Control the speed of balancing in order not to impact the online service.
+    - Manage the node state, including manually online/offline nodes and automatically offline faulty nodes.
 
 If the first type of requirements are met, the system supports multi-replica disaster recovery, dynamic scalability, tolerance of node failure and automatic disaster recovery.
 
@@ -83,24 +83,24 @@ Schedule depends on the information gathering of the whole cluster. Simply put, 
 
 + Each TiKV node regularly reports the overall information of nodes to PD
 
- There are heartbeats between TiKV Store and PD. On the one hand, PD checks whether each Store is active or if there are newly-added Stores through heartbeats. On the other hand, heartbeats carry the state information of this Store, mainly including:
+    There are heartbeats between TiKV Store and PD. On the one hand, PD checks whether each Store is active or if there are newly-added Stores through heartbeats. On the other hand, heartbeats carry the state information of this Store, mainly including:
 
-- total disk capacity
-- free disk capacity
-- the number of Regions
-- data writing speed
-- the number of sent/received Snapshot (Replicas synchronize data through Snapshots)
-- whether it is overloaded
-- label information (Label is a series of Tags that has hierarchical relationship)
+    - total disk capacity
+    - free disk capacity
+    - the number of Regions
+    - data writing speed
+    - the number of sent/received Snapshot (Replicas synchronize data through Snapshots)
+    - whether it is overloaded
+    - label information (Label is a series of Tags that has hierarchical relationship)
 
 + Leader of each Raft Group reports to PD regularly
 
- Leader of each Raft Group and PD are connected with heartbeats, which report the state of this Region, including:
+    Leader of each Raft Group and PD are connected with heartbeats, which report the state of this Region, including:
 
-- the position of Leader
-- the position of Followers
-- the number of offline Replicas
-- data reading/writing speed
+    - the position of Leader
+    - the position of Followers
+    - the number of offline Replicas
+    - data reading/writing speed
 
 Through these two kinds of heartbeats, PD gathers the information of the whole cluster and then makes decisions. What's more, PD makes more accurate decisions by getting extra information through the management interface. For example, when the heartbeat of a Store is interrupted, PD has no idea whether it is temporarily or permanently. PD can only waits for a period of time (30 minutes by default); if there is still no heartbeat, PD considers that the Store has been offline and it needs to move all Regions on the Store away. However, if an Operations staff manually offline a machine, he needs to tell PD through its management interface that the Store is unavailable. In this case, PD will immediately move all Regions on the Store away.
 

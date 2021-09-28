@@ -177,9 +177,9 @@ TiDB abstracts the expression through the Expression interface (defined in the [
 
 ```go
 type Expression interface{
-   ...
-   eval(row []types.Datum) (types.Datum, error)
-   ...
+    ...
+    eval(row []types.Datum) (types.Datum, error)
+    ...
 }
 ```
 
@@ -193,9 +193,9 @@ The case below shows the framework of expression evaluation before refactoring:
 
 ```sql
 create table t (
-   c1 int,
-   c2 varchar(20),
-   c3 double
+    c1 int,
+    c2 varchar(20),
+    c3 double
 )
 select * from t where c1 + CONCAT( c2, c3 < "1.1" )
 ```
@@ -237,13 +237,13 @@ In this way, in the **executing phase**, for every `ScalarFunction`, it is guara
 - For referring rules of more complicated return value type, you can refer to the implementation and test of the `CONCAT` function. You can use the `MySQLWorkbench` tool to run the query `select funcName (arg0, arg1, ...)` to observe the field type of the return value in MySQL's built-in functions when inputting different parameters.
 - In the evaluation process of TiDB expression, only the following six evaluation types (currently we are implementing the JSON type) are supported:
 
- 1. int (int64)
- 2. real (float64)
- 3. decimal
- 4. string
- 5. Time
- 6. Duration
+    1. int (int64)
+    2. real (float64)
+    3. decimal
+    4. string
+    5. Time
+    6. Duration
 
- The `WrapWithCastAsXX ()` method can convert an expression to the corresponding type.
+    The `WrapWithCastAsXX ()` method can convert an expression to the corresponding type.
 
 - For a function signature, its return value type has been determined, so when defining, you need to combine it with the corresponding `baseXXBuiltinFunc` and implement the `evalXX ()` method. Note that XX should only be one of the six types listed above.

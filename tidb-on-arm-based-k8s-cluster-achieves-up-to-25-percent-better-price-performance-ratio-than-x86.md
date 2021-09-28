@@ -954,7 +954,7 @@ This table summarizes the workloads we used, both in terms of the number of ware
 2. Create warehouses. You should specify the hostname as the load balancer's DNS name since we deployed the TiDB in EKS and exposed the database service as the LoadBalancer type:
 
     ```shell
-   tiup bench tpcc --warehouses 10000 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com prepare
+    tiup bench tpcc --warehouses 10000 --host xxxxxxxxxxx.elb.us-west-2.amazonaws.com prepare
     ```
 
 3. Run the TPC-C test for different threads. (We used 150, 300, 500, 800, and 1000). Each test runs for 30 minutes.

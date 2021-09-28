@@ -227,12 +227,12 @@ TiKV is a distributed KV store. On top of it companies are building databases th
 
 ```sql
 CREATE TABLE t1 {
- id BIGINT PRIMARY KEY,
- name VARCHAR (1024),
- age BIGINT,
- content BLOB,
- UNIQUE (name),
- INDEX (age),
+  id BIGINT PRIMARY KEY,
+  name VARCHAR (1024),
+  age BIGINT,
+  content BLOB,
+  UNIQUE (name),
+  INDEX (age),
 }
 ```
 

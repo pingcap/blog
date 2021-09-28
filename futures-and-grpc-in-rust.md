@@ -79,11 +79,11 @@ There is no blocking in Async programming, so we don't have to wait the slow I/O
 ```rust
 auto r = make_shared<int>();
 do_async_foo() {
- do_foo_a(|| {
- do_finish(|| {
-  *r = 10;
+  do_foo_a(|| {
+  do_finish(|| {
+    *r = 10;
+      })
     })
-  })
 })
 ```
 
@@ -129,12 +129,12 @@ Future is a trait and the main function is poll.
 
 ```rust
 pub trait Future {
- type Item;
- type Error;
- // check the future is resolved, return Ready or NotReady
- fn poll(&mut self) -> Poll<Self::Item, Self::Error>;
- // wait until the future is resolved
- fn wait() -> result::Result<Self::Item, Self::Error>;
+  type Item;
+  type Error;
+  // check the future is resolved, return Ready or NotReady
+  fn poll(&mut self) -> Poll<Self::Item, Self::Error>;
+  // wait until the future is resolved
+  fn wait() -> result::Result<Self::Item, Self::Error>;
 }
 
 pub type Poll<T, E> = Result<Async<T>, E>;
@@ -191,12 +191,12 @@ Stream is like Future, and you can resolve the value one by one until the stream
 
 ```rust
 pub trait Stream {
- type Item;
- type Error;
- // check the future is resolved, return Ready or NotReady
- // Ready(Some) means next value is on the stream
- // Ready(None) means the stream is finished
- fn poll(&mut self) -> Poll<Option<Self::Item>, Self::Error>;
+  type Item;
+  type Error;
+  // check the future is resolved, return Ready or NotReady
+  // Ready(Some) means next value is on the stream
+  // Ready(None) means the stream is finished
+  fn poll(&mut self) -> Poll<Option<Self::Item>, Self::Error>;
 }
 ```
 
@@ -208,11 +208,11 @@ Sink is a way to send value asynchronously.
 
 ```rust
 pub trait Sink {
- type SinkItem;
- type SinkError;
- fn start_send(self, item: Self::SinkItem) -> StartSend<Self::SinkItem, Self::SinkError>;
- fn poll_complete(&mut self) -> Poll<(), Self::SinkError>;
- fn close(&mut self) -> Poll<(), Self::SinkError>;
+  type SinkItem;
+  type SinkError;
+  fn start_send(self, item: Self::SinkItem) -> StartSend<Self::SinkItem, Self::SinkError>;
+  fn poll_complete(&mut self) -> Poll<(), Self::SinkError>;
+  fn close(&mut self) -> Poll<(), Self::SinkError>;
 }
 ```
 
@@ -223,15 +223,14 @@ We can use `start_send` to send one value, and use `poll_complete` to flush the 
 The task is used to drive the future computation.
 
 ```rust
-# If the future is not ready?
+// If the future is not ready?
 let handle = task::current();
 
-# If the event of interest occurs?
+// If the event of interest occurs?
 handle.notify();
 
-# What to do after notify?
+// What to do after notify?
 executor.poll(f);
-
 ```
 
 If the future is not ready, we can use task `current` to get a task handle. We can use task `notify` to wake up the task when it is ready, and the `executor` should poll the future again.
@@ -311,10 +310,10 @@ Server Handler:
 
 ```rust
 fn on_unary(context, request, response_sink) {
- context.spawn(|| {
-  // do something with request
-  response_sink.send(response)
- });
+  context.spawn(|| {
+    // do something with request
+    response_sink.send(response)
+  });
 }
 ```
 
@@ -342,11 +341,11 @@ Server Handler:
 
 ```rust
 fn on_client_streaming(context, request_stream, response_sink) {
- context.spawn(||{
- request_stream.fold(|request| {
- // do something
+  context.spawn(||{
+  request_stream.fold(|request| {
+  // do something
 }.and_then() {
- response_sink.send();
+  response_sink.send();
 }})}
 ```
 
@@ -363,7 +362,7 @@ Client :
 ```rust
 let stream = server_streaming(service, method, request);
 stream.for_each(|response| {
- // do something
+  // do something
 });
 ```
 
@@ -372,9 +371,9 @@ Server Handler:
 ```rust
 Server Handler:
 fn on_server_streaming(context, request, response_sink) {
- context.spawn(||{
-  response_sink.send();
- });
+  context.spawn(||{
+    response_sink.send();
+  });
 }
 ```
 
@@ -398,10 +397,10 @@ Server Handler:
 
 ```rust
 fn on_duplex_streaming(context, request_stream, response_sink) {
- context.spawn(||{
- let resps = request_stream.map().collect().flatten();
-  response_sink.send_all(resps);
-}
+  context.spawn(||{
+  let resps = request_stream.map().collect().flatten();
+    response_sink.send_all(resps);
+  }
 }
 ```
 
@@ -430,14 +429,14 @@ The future implementation is easy. In the poll function, we first check whether 
 
 ```rust
 fn poll(&mut self) -> Poll<T, Error> {
- let guard = self.inner.lock();
- if let Some(res) = guard.result.take() {
-  let r = try!(res);
-  return Ok(Async::Ready(r));
+  let guard = self.inner.lock();
+  if let Some(res) = guard.result.take() {
+    let r = try!(res);
+    return Ok(Async::Ready(r));
 }
 // Has not been finished yet, Add notification hook
 if guard.task.is_none() || !guard.task.as_ref().unwrap().will_notify_current() {
- guard.task = task::current();
+  guard.task = task::current();
 }
 Ok(Async::NotReady)
 }

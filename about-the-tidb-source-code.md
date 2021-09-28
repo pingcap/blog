@@ -316,22 +316,22 @@ func Select(client kv.Client, req *tipb.SelectRequest, keyRanges []kv.KeyRange, 
 
 // SelectResult is an iterator of coprocessor partial results.
 type SelectResult interface {
- // Next gets the next partial result.
- Next() (PartialResult, error)
- // SetFields sets the expected result type.
- SetFields(fields []*types.FieldType)
- // Close closes the iterator.
- Close() error
-    ...
+    // Next gets the next partial result.
+    Next() (PartialResult, error)
+    // SetFields sets the expected result type.
+    SetFields(fields []*types.FieldType)
+    // Close closes the iterator.
+    Close() error
+        ...
 }
 
 // PartialResult is the result from a single region server.
 type PartialResult interface {
- // Next returns the next row of the sub result.
- // If no more row to return, data would be nil.
- Next() (handle int64, data []types.Datum, err error)
- // Close closes the partial result.
- Close() error
+    // Next returns the next row of the sub result.
+    // If no more row to return, data would be nil.
+    Next() (handle int64, data []types.Datum, err error)
+    // Close closes the partial result.
+    Close() error
 }
 ```
 

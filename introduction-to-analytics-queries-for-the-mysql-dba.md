@@ -21,19 +21,19 @@ Our sample data set includes all the flights in the U.S. and their on-time perfo
 
 One of the most common types of queries you will need to do is to show the average for one group, and compare that to the previous year. Here is the query to do that:
 
-```
+```sql
 SET tidb_enable_window_function = 1;
 SELECT
- year,
- UniqueCarrier,
- COUNT(*) AS Flights,
- AVG(ArrDelay) AS avgArrDelay,
- lag(AVG(ArrDelay), 1)
-  OVER (PARTITION BY UniqueCarrier ORDER BY year)
-  AS prevAvgArrDelay,
- lag(AVG(ArrDelay), 1)
-  OVER (PARTITION BY UniqueCarrier ORDER BY year)-AVG(ArrDelay)
-  AS improvement
+  year,
+  UniqueCarrier,
+  COUNT(*) AS Flights,
+  AVG(ArrDelay) AS avgArrDelay,
+  lag(AVG(ArrDelay), 1)
+    OVER (PARTITION BY UniqueCarrier ORDER BY year)
+    AS prevAvgArrDelay,
+  lag(AVG(ArrDelay), 1)
+    OVER (PARTITION BY UniqueCarrier ORDER BY year)-AVG(ArrDelay)
+    AS improvement
 FROM ontime
 WHERE UniqueCarrier IN ('AA', 'UA', 'DL')
 GROUP BY UniqueCarrier, year
@@ -181,14 +181,14 @@ I use this example to prove a point, but it is actually **even worse** in the ca
 
 A more statistically sound approach would be to know how many times a customer had a frustrating experience, for example how many times is the ArrDelay greater than 30 minutes? What about greater than 4 hours? Here's the query for that:
 
-```
+```sql
 SELECT
- year,
- UniqueCarrier,
- COUNT(*) AS Flights,
- COUNT(CASE WHEN ArrDelay>=30 THEN 1 END) as AtLeast30Delayed,
- COUNT(CASE WHEN ArrDelay>=30 THEN 1 END)/COUNT(*)
-  AS PctAtLeast30Delayed
+  year,
+  UniqueCarrier,
+  COUNT(*) AS Flights,
+  COUNT(CASE WHEN ArrDelay>=30 THEN 1 END) as AtLeast30Delayed,
+  COUNT(CASE WHEN ArrDelay>=30 THEN 1 END)/COUNT(*)
+    AS PctAtLeast30Delayed
 FROM ontime
 WHERE UniqueCarrier IN ('AA', 'UA', 'DL')
 GROUP BY UniqueCarrier, year
@@ -310,13 +310,13 @@ If we combine our knowledge of window functions from the first example, we can w
 - Break down the complexity by moving part of the query into a VIEW.
 - Name the WINDOW as w, and make shared use of it in all the relevant places.
 
-```
+```sql
 CREATE OR REPLACE VIEW stats AS
 SELECT
- year,
- UniqueCarrier,
- COUNT(*) AS Flights,
- COUNT(CASE WHEN ArrDelay>=30 THEN 1 END) as AtLeast30Delayed
+  year,
+  UniqueCarrier,
+  COUNT(*) AS Flights,
+  COUNT(CASE WHEN ArrDelay>=30 THEN 1 END) as AtLeast30Delayed
 FROM ontime
 WHERE UniqueCarrier IN ('AA', 'UA', 'DL')
 GROUP BY UniqueCarrier, year;

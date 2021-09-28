@@ -172,12 +172,12 @@ The following command uses the `format` subcommand provided by the JuiceFS clien
 
 ```shell
 juicefs format \
-   --storage minio \
-   --bucket[ http://127.0.0.1:9000/mystor](http://127.0.0.1:9000/mystor) \
-   --access-key minioadmin \
-   --secret-key minioadmin \
-   tikv://127.0.0.1:2379/mystor \
-   mystor
+    --storage minio \
+    --bucket[ http://127.0.0.1:9000/mystor](http://127.0.0.1:9000/mystor) \
+    --access-key minioadmin \
+    --secret-key minioadmin \
+    tikv://127.0.0.1:2379/mystor \
+    mystor
 ```
 
 Parameter Description:
