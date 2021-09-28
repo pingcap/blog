@@ -51,11 +51,11 @@ So today we will cover the following topics:
 
 ## Why another database
 
-Before we start, let&#39;s go back to the very beginning and ask yourself a question: Why another database. We all know that there are many databases, such as the traditional Relational database and NoSQL. So why another one?
+Before we start, let's go back to the very beginning and ask yourself a question: Why another database. We all know that there are many databases, such as the traditional Relational database and NoSQL. So why another one?
 
 - Relational databases like MySQL, Oracle, PostgreSQL, etcetera: they are very difficult to scale. Even though we have sharding solutions, YouTube/vitess, MySQL proxy, but none of them supports distributed transactions and cross-node join.
-- NoSQL like HBase, MongoDB, and Cassandra: They scale well, but they don&#39;t support SQL and consistent transactions.
-- NewSQL, represented by Google Spanner and F1, which is as scalable as NoSQL systems and it maintains the ACID transactions. That&#39;s exactly what we need. Inspired by Spanner and F1, we are making a NewSQL database. Of course, it&#39;s open source.
+- NoSQL like HBase, MongoDB, and Cassandra: They scale well, but they don't support SQL and consistent transactions.
+- NewSQL, represented by Google Spanner and F1, which is as scalable as NoSQL systems and it maintains the ACID transactions. That's exactly what we need. Inspired by Spanner and F1, we are making a NewSQL database. Of course, it's open source.
 
 ## What to build?
 
@@ -81,7 +81,7 @@ Before we design, we have several principles or philosophy in mind:
 - TiDB must be user-oriented.
   - It must ensure that no data is ever lost and the system can automatically recover from machine failures or even downtime of the entire datacenters.
   - It should be easy to use.
-  - It should be cross-platform and can run on any environment, no matter it&#39;s on premise, cloud or container.
+  - It should be cross-platform and can run on any environment, no matter it's on premise, cloud or container.
   - As an open source project, we are dedicated to being an important part of the big community through our active engagement, contribution and collaboration.
 - We need TiDB to be easy to maintain so we chose the loose coupling approach. We design the database to be highly layered with a SQL layer and a Key-Value layer. If there is a bug in SQL layer, we can just update the SQL layer.
 - The alternatives: Although our project is inspired by Google Spanner and F1, we are different from those projects. When we design TiDB and TiKV, we have our own practices and decisions in choosing different technologies.
@@ -100,7 +100,7 @@ The database we are building also needs to be cross-platform. The database can r
 
 ![TiDB running on a Raspberry Pi cluster with 20 nodes](https://download.pingcap.com/images/blog/how-we-build-tidb-1.png)
 
-It can also support the popular containers such as Docker. And we are making it work with Kubernetes. Of course, it can be run on any cloud platform, whether it&#39;s public, private or hybrid.
+It can also support the popular containers such as Docker. And we are making it work with Kubernetes. Of course, it can be run on any cloud platform, whether it's public, private or hybrid.
 
 ### The community and ecosystem
 
@@ -112,11 +112,11 @@ etcd is a great project. In our Key-Value store, TiKV, which I will dive deep in
 
 #### RocksDB
 
-RocksDB is also a great project. It&#39;s mature, fast, tunable, and widely used in very large scale production environments, especially in facebook . TiKV uses RocksDB as it&#39;s local storage. While we were testing it in our system, we found some bugs. The RocksDB team fixed those bugs very quickly.
+RocksDB is also a great project. It's mature, fast, tunable, and widely used in very large scale production environments, especially in facebook . TiKV uses RocksDB as it's local storage. While we were testing it in our system, we found some bugs. The RocksDB team fixed those bugs very quickly.
 
 #### Namazu
 
-A few months ago, we need a tool to simulate slow, unstable disk, and the team member found Namazu. But at that time, Namazu didn&#39;t support hooking fsync. When the team member raised this request to their team, they responded immediately and implement the feature in just a few hours and they are very open to implement other features as well. We are deeply impressed by their responsiveness and their efficiency.
+A few months ago, we need a tool to simulate slow, unstable disk, and the team member found Namazu. But at that time, Namazu didn't support hooking fsync. When the team member raised this request to their team, they responded immediately and implement the feature in just a few hours and they are very open to implement other features as well. We are deeply impressed by their responsiveness and their efficiency.
 
 #### Rust community
 
@@ -128,7 +128,7 @@ We are so glad to be a part of this great family. So many thanks to the Rust tea
 
 We are using the Spark connector in TiDB. TiDB is great for small or medium queries and Spark is better for complex queries with lots of data. We believe we can learn a lot from the Spark community too, and of course we would like to contribute as much as possible.
 
-So overall, we&#39;d like to be a part of the big open source community and would like to engage, contribute and collaborate to build great things together.
+So overall, we'd like to be a part of the big open source community and would like to engage, contribute and collaborate to build great things together.
 
 ## Loose coupling – the logical architecture
 
@@ -140,7 +140,7 @@ As I mentioned earlier about our design principle, we are adopting the loose cou
 
 For TiKV, we are using Raft to ensure the data consistency and the horizontal scalability. Raft is a consensus algorithm that equals to Paxos in fault-tolerance and performance. Our implementation is ported from etcd, which is widely used, very well tested and highly stable. I will cover the technical details later.
 
-From the architecture, you can also see that we don&#39;t have a distributed file system. We are using RocksDB as the local store.
+From the architecture, you can also see that we don't have a distributed file system. We are using RocksDB as the local store.
 
 ## The alternatives
 
@@ -148,29 +148,29 @@ In the next few slides, I am going to talk about design decisions about using th
 
 ### Atomic clocks / GPS clocks VS TimeStamp Allocator
 
-If you&#39;ve read the Spanner paper, you might know that Spanner has TrueTime API, which uses the atomic clocks and GPS receivers to keep the time consistent between different data centers.
+If you've read the Spanner paper, you might know that Spanner has TrueTime API, which uses the atomic clocks and GPS receivers to keep the time consistent between different data centers.
 
 The first alternative technology we chose is to replace the TrueTime API with the TimeStamp Allocator. It goes without any doubt that time is important and that Real time is vital in distributed systems. But can we get real time? What about clock drift?
 
-The sad truth is that we can&#39;t get real time precisely because of clock drift, even if we use GPS or Atomic Clocks.
+The sad truth is that we can't get real time precisely because of clock drift, even if we use GPS or Atomic Clocks.
 
-In TiDB, we don&#39;t have Atomic clocks and GPS clocks. We are using the Timestamp Allocator introduced in Percolator, a paper published by Google in 2006.
+In TiDB, we don't have Atomic clocks and GPS clocks. We are using the Timestamp Allocator introduced in Percolator, a paper published by Google in 2006.
 
 The pros of using the Timestamp Allocator are its easy implementation and no dependency on any hardware. The disadvantage lies in that if there are multiple datacenters, especially if these DCs are geologically distributed, the latency is really high.
 
 ### Distributed file system VS RocksDB
 
-Spanner uses Colossus File System, the successor to the Google File System (GFS), as its distributed file system. But in TiKV, we don&#39;t depend on any distributed file system. We use RocksDB. RocksDB is an embeddable persistent key-value store for fast storage. The primary design point for RocksDB is its great performance for server workloads. It&#39;s easy for tuning Read, Write and Space Amplification. The pros lie in that it&#39;s very simple, very fast and easy to tune. However, it&#39;s not easy to work with Kubernetes properly.
+Spanner uses Colossus File System, the successor to the Google File System (GFS), as its distributed file system. But in TiKV, we don't depend on any distributed file system. We use RocksDB. RocksDB is an embeddable persistent key-value store for fast storage. The primary design point for RocksDB is its great performance for server workloads. It's easy for tuning Read, Write and Space Amplification. The pros lie in that it's very simple, very fast and easy to tune. However, it's not easy to work with Kubernetes properly.
 
 ### Paxos VS Raft
 
-The next choice we have made is to use the Raft consensus algorithm instead of Paxos. The key features of Raft are: Strong leader, leader election and membership changes. Our Raft implementation is ported from etcd. The pros are that it&#39;s easy to understand and implement, widely used and very well tested. As for Cons, I didn&#39;t see any real cons.
+The next choice we have made is to use the Raft consensus algorithm instead of Paxos. The key features of Raft are: Strong leader, leader election and membership changes. Our Raft implementation is ported from etcd. The pros are that it's easy to understand and implement, widely used and very well tested. As for Cons, I didn't see any real cons.
 
 ### C++ VS Go &amp; Rust
 
-As for the programming languages, we are using Go for TiDB and Rust for TiKV. We chose Go because it&#39;s very good for fast development and concurrency, and Rust for high quality and performance. As for the Cons, there are not as many third-party libraries.
+As for the programming languages, we are using Go for TiDB and Rust for TiKV. We chose Go because it's very good for fast development and concurrency, and Rust for high quality and performance. As for the Cons, there are not as many third-party libraries.
 
-That&#39;s all about how we design TiDB. I have introduced the principles, the architecture, and design decisions about using the alternative technologies. The next step is to develop TiDB.
+That's all about how we design TiDB. I have introduced the principles, the architecture, and design decisions about using the alternative technologies. The next step is to develop TiDB.
 
 ## How to develop
 
@@ -180,14 +180,14 @@ In this section, I will introduce the architecture and the core technologies for
 
 ![TiKV architecture](https://download.pingcap.com/images/blog/how-we-build-tidb-3.png)
 
-About TiKV architecture: Let&#39;s take a look from the bottom.
+About TiKV architecture: Let's take a look from the bottom.
 
 - The bottom layer, RocksDB.
-- The next layer, Raft KV, it&#39;s a distributed layer.
+- The next layer, Raft KV, it's a distributed layer.
 - MVCC, Multiversion concurrency control. I believe many of you are pretty familiar with MVCC. TiKV is a multi-versioned database. MVCC enables us to support lock-free reads and ACID transactions.
-- Transaction: The transaction model is inspired by Google&#39;s Percolator. It&#39;s mainly a two-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign monotone increasing timestamp for each transaction, so the conflicts can be detected.  I will cover the details later.
-- KV API: it&#39;s a set of programming interfaces and allows developers to put or get data.
-- Placement Driver: Placement driver is a very important part, and it helps to achieve geo-replication, horizontal scalability and consistent distributed transactions. It&#39;s kind-of the brain of the cluster.
+- Transaction: The transaction model is inspired by Google's Percolator. It's mainly a two-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign monotone increasing timestamp for each transaction, so the conflicts can be detected.  I will cover the details later.
+- KV API: it's a set of programming interfaces and allows developers to put or get data.
+- Placement Driver: Placement driver is a very important part, and it helps to achieve geo-replication, horizontal scalability and consistent distributed transactions. It's kind-of the brain of the cluster.
 
 ![TiDB architecture](https://download.pingcap.com/images/blog/how-we-build-tidb-4.png)
 
@@ -195,26 +195,26 @@ About the TiDB architecture:
 
 - MySQL clients: The top layer is a set of MySQL clients. These clients send requests to the next layer. You can still use any MySQL driver that you are already familiar with.
 - Load Balancer: This is an optional layer. Such as HAProxy or LVS.
-- TiDB Server: It&#39;s stateless, and a client may connect to any TiDB server. Within the TiDB server, the top layer is MySQL Protocol, it provides MySQL protocol support; the next layer is SQL optimizer, which is used to translate MySQL requests to TiDB SQL plan.
+- TiDB Server: It's stateless, and a client may connect to any TiDB server. Within the TiDB server, the top layer is MySQL Protocol, it provides MySQL protocol support; the next layer is SQL optimizer, which is used to translate MySQL requests to TiDB SQL plan.
 - The bottom layer is KV API and Distributed SQL API. If the lower level storage engine supports coprocessor, TiDB SQL Layer will use DistSQL API, which is much more efficient than KV API. TiDB supports pluggable storage engines. We recommend TiKV as the default storage engine.
 
 ## TiKV core technologies
 
-Let&#39;s take a look at the TiKV core technologies.
+Let's take a look at the TiKV core technologies.
 
 We build TiKV to be a distributed key-value layer to store data.
 
 ### TiKV software stack
 
-Let&#39;s take a look at the software stack.
+Let's take a look at the software stack.
 
 ![TiKV software stack](https://download.pingcap.com/images/blog/how-we-build-tidb-5.png)
 
- First, we can see that there is a client connecting to TiKV. We also have several nodes. And within each node, we have stores, one per physical disk. Within each store, we have many regions. Region is the basic unit of data movement and is replicated by Raft. Each region is replicated to several nodes.  A Raft group consists of the replicas of one Region. And region is more like a logical concept, in a single store, many regions may share the same Rocksdb instance.
+First, we can see that there is a client connecting to TiKV. We also have several nodes. And within each node, we have stores, one per physical disk. Within each store, we have many regions. Region is the basic unit of data movement and is replicated by Raft. Each region is replicated to several nodes.  A Raft group consists of the replicas of one Region. And region is more like a logical concept, in a single store, many regions may share the same RocksDB instance.
 
 ### Placement Driver
 
-About Placement Driver, this concept comes from the original paper of Google Spanner. It provides the God&#39;s view of the entire cluster. It has the following responsibilities:
+About Placement Driver, this concept comes from the original paper of Google Spanner. It provides the God's view of the entire cluster. It has the following responsibilities:
 
 - Stores the metadata: Clients have cache of the placement information of each region.
 - Maintains the replication constraint, 3 replicas by default.
@@ -253,7 +253,7 @@ Step 3, remove the replica of Region 1 from Node A.
 
 Now the data is balanced and the cluster scales out from 4 nodes to 5 nodes.
 
-This is how TiKV scales out. Let&#39;s see how it handles auto-failover.
+This is how TiKV scales out. Let's see how it handles auto-failover.
 
 ### MVCC
 
@@ -279,41 +279,41 @@ txn.Rollback()
 
 }
 
-Speak of Transaction, It&#39;s mainly a two-phase commit protocol with some practical optimizations. In the transaction model, there are 3 column families, namely, cf:lock, cf:write and cf:data.
+Speak of Transaction, It's mainly a two-phase commit protocol with some practical optimizations. In the transaction model, there are 3 column families, namely, cf:lock, cf:write and cf:data.
 
 - cf: lock:  An uncommitted transaction is writing this cell and contains the location/pointer of primary lock. For each transaction, we choose a primary lock to indicate the state of the transaction.
 - cf: write: It stores the commit timestamp of the data
 - cf: data: Stores the data itself
 
-Let&#39;s see an example: If Bob wants transfer 7 dollars to Joe.
+Let's see an example: If Bob wants transfer 7 dollars to Joe.
 
 1. Initial state: Joe has 2 dollars in his account, Bob has 10 dollars.
 
-   ![Transaction example 1](https://download.pingcap.com/images/blog/how-we-build-tidb-10.png)
+    ![Transaction example 1](https://download.pingcap.com/images/blog/how-we-build-tidb-10.png)
 
-2. The transfer transaction begins by locking Bob&#39;s account by writing the lock column. This lock is the primary for the transaction. The transaction also writes data at its start timestamp, 7.
+2. The transfer transaction begins by locking Bob's account by writing the lock column. This lock is the primary for the transaction. The transaction also writes data at its start timestamp, 7.
 
-   ![Transaction example 2](https://download.pingcap.com/images/blog/how-we-build-tidb-11.png)
+    ![Transaction example 2](https://download.pingcap.com/images/blog/how-we-build-tidb-11.png)
 
-3. The transaction now locks Joe&#39;s account and writes Joe&#39;s new balance. The lock is secondary for the transaction and contains a reference to the primary lock; So we can use this secondary lock to find the primary lock.
+3. The transaction now locks Joe's account and writes Joe's new balance. The lock is secondary for the transaction and contains a reference to the primary lock; So we can use this secondary lock to find the primary lock.
 
-   ![Transaction example 3](https://download.pingcap.com/images/blog/how-we-build-tidb-12.png)
+    ![Transaction example 3](https://download.pingcap.com/images/blog/how-we-build-tidb-12.png)
 
 4. The transaction has now reached the commit point: it erases the primary lock and replaces it with a write record at a new timestamp (called the commit timestamp): 8. The write record contains a pointer to the timestamp where the data is stored. Future readers of the column &quot;bal&quot; in row &quot;Bob&quot; will see the value $3.
 
-   ![Transaction example 4](https://download.pingcap.com/images/blog/how-we-build-tidb-13.png)
+    ![Transaction example 4](https://download.pingcap.com/images/blog/how-we-build-tidb-13.png)
 
 5. The transaction completes by adding write records and deleting locks at the secondary cells. In this case, there is only one secondary: Joe.
 
-   ![Transaction example 5](https://download.pingcap.com/images/blog/how-we-build-tidb-14.png)
+    ![Transaction example 5](https://download.pingcap.com/images/blog/how-we-build-tidb-14.png)
 
-   So this is how it looks like when the transaction is done.
+    So this is how it looks like when the transaction is done.
 
-   ![Transaction example 6](https://download.pingcap.com/images/blog/how-we-build-tidb-15.png)
+    ![Transaction example 6](https://download.pingcap.com/images/blog/how-we-build-tidb-15.png)
 
 ## TiDB core technologies
 
-That&#39;s it about the TiKV core technologies. Let&#39;s move on to TiDB.
+That's it about the TiKV core technologies. Let's move on to TiDB.
 
 TiDB has a protocol layer that is compatible with MySQL. And it will do the following things:
 
@@ -323,19 +323,20 @@ TiDB has a protocol layer that is compatible with MySQL. And it will do the foll
 
 ### Mapping table data to Key-Value store
 
-Let&#39;s use an example to show how a SQL table is mapped to Key-Value pairs.
+Let's use an example to show how a SQL table is mapped to Key-Value pairs.
 
 If we have a simple user table in database. It has 2 rows and 3 columns: user id, name and email. And user id is the primary key.
 
-INSERT INTO user VALUES (1, &quot;bob&quot;, &quot;huang@pingcap.com&quot;);
-
-INSERT INTO user VALUES (2, &quot;tom&quot;, &quot;tom@pingcap.com&quot;);
+```sql
+INSERT INTO user VALUES (1, "bob", "huang@pingcap.com");
+INSERT INTO user VALUES (2, "tom", "tom@pingcap.com");
+```
 
 If we map this table to key-value pairs, it should be put in the following way.
 
 ![Mapping table data to Key-Value pairs](https://download.pingcap.com/images/blog/how-we-build-tidb-16.png)
 
-Of course, TiDB supports secondary index. It&#39;s a global index. TiDB puts data and index updates into the same transaction, so all the indexes in TiDB are transactional and fully consistent. And it&#39;s transparent to the users.
+Of course, TiDB supports secondary index. It's a global index. TiDB puts data and index updates into the same transaction, so all the indexes in TiDB are transactional and fully consistent. And it's transparent to the users.
 
 Indexes are just key-value pairs that the values point to the row key. After we create indexes for the user name, the key-value storage looks like this:
 
@@ -351,7 +352,7 @@ For some operations like count some columns in a table, TiDB pushes down these o
 
 ### Schema changes
 
-This slide is about schema changes. Why online schema change is a must-have feature? It&#39;s because we need the full data availability all the time and minimal performance impact so that the ops people can have a good-night&#39;s sleep.
+This slide is about schema changes. Why online schema change is a must-have feature? It's because we need the full data availability all the time and minimal performance impact so that the ops people can have a good-night's sleep.
 
 #### Something the same as Google F1
 
@@ -377,7 +378,7 @@ But TiDB is also different from Google F1 at the following aspects:
 
 #### One more thing before schema change
 
-One more thing before schema change. Let&#39;s take a look at the big picture of SQL in TiDB:
+One more thing before schema change. Let's take a look at the big picture of SQL in TiDB:
 
 ![SQL in TiDB](https://download.pingcap.com/images/blog/how-we-build-tidb-19.png)
 
@@ -387,7 +388,7 @@ Here is an overview of a TiDB instance during a schema change:
 
 #### Schema change: Adding index
 
-So let&#39;s see how the schema changes when it comes to adding an index.
+So let's see how the schema changes when it comes to adding an index.
 
 Servers using different schema versions may corrupt the database if we are not careful.
 
@@ -461,4 +462,4 @@ Here is our future plan:
 - We are planning to support pushing down more aggregation and built-in functions.
 - In the future, we will replace the customized RPC implementation with gRPC.
 
-So that&#39;s all. Thank you! Any questions?
+So that's all. Thank you! Any questions?

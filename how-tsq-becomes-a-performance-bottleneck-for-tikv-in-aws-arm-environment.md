@@ -118,8 +118,8 @@ It can be noted that the NIC driver responds to the transmit completion interrup
 
 ```
 struct tsq_tasklet {
- struct tasklet_struct tasklet;
- struct list_head head; /* queue of tcp sockets */
+  struct tasklet_struct tasklet;
+  struct list_head head; /* queue of tcp sockets */
 };
 static DEFINE_PER_CPU(struct tsq_tasklet, tsq_tasklet);
 
@@ -138,13 +138,13 @@ Then the TSQ tasklet is scheduled, and the data packets in the sock are sent in 
  */
 void tcp_wfree(struct sk_buff *skb)
 {
- struct sock *sk = skb->sk;
- struct tcp_sock *tp = tcp_sk(sk);
+  struct sock *sk = skb->sk;
+   struct tcp_sock *tp = tcp_sk(sk);
 
- if (test_and_clear_bit(TSQ_THROTTLED, &tp->tsq_flags) &&
-     !test_and_set_bit(TSQ_QUEUED, &tp->tsq_flags)) {
-      unsigned long flags;
-      struct tsq_tasklet *tsq;
+  if (test_and_clear_bit(TSQ_THROTTLED, &tp->tsq_flags) &&
+      !test_and_set_bit(TSQ_QUEUED, &tp->tsq_flags)) {
+        unsigned long flags;
+        struct tsq_tasklet *tsq;
 
       /* Keep a ref on socket.
        * This last ref will be released in tcp_tasklet_func()
@@ -157,7 +157,7 @@ void tcp_wfree(struct sk_buff *skb)
       list_add(&tp->tsq_node, &tsq->head);
       tasklet_schedule(&tsq->tasklet);
       local_irq_restore(flags);
- } else {
+  } else {
       sock_wfree(skb);
  }
 }
@@ -179,18 +179,18 @@ Now we can view the `tsq_tasklet_func` definition:
  */
 static void tcp_tasklet_func(unsigned long data)
 {
- struct tsq_tasklet *tsq = (struct tsq_tasklet *)data;
- LIST_HEAD(list);
- unsigned long flags;
- struct list_head *q, *n;
- struct tcp_sock *tp;
- struct sock *sk;
+  struct tsq_tasklet *tsq = (struct tsq_tasklet *)data;
+  LIST_HEAD(list);
+  unsigned long flags;
+  struct list_head *q, *n;
+  struct tcp_sock *tp;
+  struct sock *sk;
 
- local_irq_save(flags);
- list_splice_init(&tsq->head, &list);
- local_irq_restore(flags);
+  local_irq_save(flags);
+  list_splice_init(&tsq->head, &list);
+  local_irq_restore(flags);
 
- list_for_each_safe(q, n, &list) {
+  list_for_each_safe(q, n, &list) {
       tp = list_entry(q, struct tcp_sock, tsq_node);
       list_del(&tp->tsq_node);
 
@@ -198,16 +198,16 @@ static void tcp_tasklet_func(unsigned long data)
       bh_lock_sock(sk);
 
       if (!sock_owned_by_user(sk)) {
-           tcp_tsq_handler(sk);
+          tcp_tsq_handler(sk);
       } else {
-           /* defer the work to tcp_release_cb() */
-           set_bit(TCP_TSQ_DEFERRED, &tp->tsq_flags);
+          /* defer the work to tcp_release_cb() */
+          set_bit(TCP_TSQ_DEFERRED, &tp->tsq_flags);
       }
       bh_unlock_sock(sk);
 
       clear_bit(TSQ_QUEUED, &tp->tsq_flags);
       sk_free(sk);
- }
+  }
 }
 ```
 
@@ -215,10 +215,10 @@ The core logic is:
 
 ```
 if (!sock_owned_by_user(sk)) {
-     tcp_tsq_handler(sk);
+    tcp_tsq_handler(sk);
 } else {
-        /* defer the work to tcp_release_cb() */
-     set_bit(TCP_TSQ_DEFERRED, &tp->tsq_flags);
+    /* defer the work to tcp_release_cb() */
+    set_bit(TCP_TSQ_DEFERRED, &tp->tsq_flags);
 }
 ```
 
@@ -227,12 +227,12 @@ Sock processing is delayed if the sock is held by another user process; when the
 ```
 void tcp_release_cb(struct sock *sk)
 {
-     struct tcp_sock *tp = tcp_sk(sk);
-     unsigned long flags, nflags;
+    struct tcp_sock *tp = tcp_sk(sk);
+    unsigned long flags, nflags;
 
-     ... ...
-     if (flags & (1UL << TCP_TSQ_DEFERRED))
-          tcp_tsq_handler(sk);
+    ... ...
+    if (flags & (1UL << TCP_TSQ_DEFERRED))
+        tcp_tsq_handler(sk);
     ... ...
 }
 ```

@@ -79,37 +79,34 @@ A popular fault injection tool is the Fault Injection Framework that's included 
 
 2. Use the kernel fault injection as follow:
 
- echo 1 > /sys/block/vdb/vdb1/make-it-fail
-
- mount debugfs /debug -t debugfs
-
- cd /debug/fail_make_request
-
- echo 10 > interval # interval
-
- echo 100 > probability # 100% probability
-
- echo -1 > times # how many times: -1 means no limit
+    ```shell
+    echo 1 > /sys/block/vdb/vdb1/make-it-fail
+    mount debugfs /debug -t debugfs
+    cd /debug/fail_make_request
+    echo 10 > interval # interval
+    echo 100 > probability # 100% probability
+    echo -1 > times # how many times: -1 means no limit
+    ```
 
 3. When we access the file, we may get following errors:
 
- > Buffer I/O error on device vdb1, logical block 32538624
- > lost page write due to I/O error on vdb1
+    ```
+    > Buffer I/O error on device vdb1, logical block 32538624
+    > lost page write due to I/O error on vdb1
+    ```
 
 4. We can inject fault to the allocation as follow:
 
- echo 1 > cache-filter
+    ```shell
+    echo 1 > cache-filter
+    echo 1 > /sys/kernel/slab/ext4_inode_cache/failslab
+    echo N > ignore-gfp-wait
+    echo -1 > times
+    echo 100 > probability
 
- echo 1 > /sys/kernel/slab/ext4_inode_cache/failslab
-
- echo N > ignore-gfp-wait
-
- echo -1 > times
-
- echo 100 > probability
-
- > cp linux-3.10.1.tar.xz linux-3.10.1.tar.xz.6
- > cp: cannot create regular file 'linux-3.10.1.tar.xz.6': Cannot allocate memory
+    > cp linux-3.10.1.tar.xz linux-3.10.1.tar.xz.6
+    > cp: cannot create regular file 'linux-3.10.1.tar.xz.6': Cannot allocate memory
+    ```
 
 Although the Linux kernel's Fault Injection Framework is powerful, we have to rebuild the kernel because some users won't enable it in their production environment.
 
@@ -117,43 +114,33 @@ Although the Linux kernel's Fault Injection Framework is powerful, we have to re
 
 Another way to inject fault is ['SystemTap'](https://sourceware.org/systemtap/), a scripting language and tool which can assist diagnosis of a performance or functional problem. We use `SystemTap` to probe the kernel function and do accurate fault injection. For example, we can delay the I/O operation in the read/write return by doing the following:
 
- probe vfs.read.return {
-
+```
+probe vfs.read.return {
   if (target() != pid()) next
-
   udelay(300)
+}
 
- }
-
- probe vfs.write.return {
-
+probe vfs.write.return {
   if (target() != pid()) next
-
   udelay(300)
-
- }
+}
+```
 
 We can also change the I/O return value. Below we inject an `EINTR` for read and `ENOSPC` for write:
 
- probe vfs.read.return {
-
+```
+probe vfs.read.return {
   if (target() != pid()) next
-
   // Interrupted by a signal
-
   $return = -4
-
  }
 
- probe vfs.write.return {
-
+probe vfs.write.return {
   if (target() != pid()) next
-
   // No space
-
   $return = -28
-
- }
+}
+```
 
 ### Fail
 

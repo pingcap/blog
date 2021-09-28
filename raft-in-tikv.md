@@ -92,21 +92,14 @@ pub struct RaftState {
 
 ```
 message HardState {
-
- optional unit64 term    = 1;
-
-optional unit64 vote    = 2;
-
-optional unit64 commit  = 3;
-
+  optional unit64 term    = 1;
+  optional unit64 vote    = 2;
+  optional unit64 commit  = 3;
 }
 
 message ConfState {
-
- repeated unit64 nodes   = 1;
-
+  repeated unit64 nodes   = 1;
 }
-
 ```
 
 `HardState` stores the following information:
@@ -140,19 +133,12 @@ Before using Raft, we need to know some relevant configuration of Raft. Below ar
 
 ```
 pub struct Config {
-
- pub id: u64,
-
- pub election_tick: usize,
-
- pub heartbeat_tick: usize,
-
- pub applied: u64,
-
- pub max_size_per_msg: u64,
-
- pub max_inflight_msgs: usize,
-
+  pub id: u64,
+  pub election_tick: usize,
+  pub heartbeat_tick: usize,
+  pub applied: u64,
+  pub max_size_per_msg: u64,
+  pub max_inflight_msgs: usize,
 }
 ```
 
@@ -200,19 +186,12 @@ As for `RawNode`, we should emphasize the `ready` concept and below is its defin
 
 ```
 pub struct Ready  {
-
- pub ss: Option<SoftState>,
-
- pub hs: Option<HardState>,
-
- pub entries: Vec<Entry>,
-
- pub snapshot: Snapshot,
-
- pub committed_entries: Vec<Entry>,
-
- pub messages: Vec<Message>,
-
+  pub ss: Option<SoftState>,
+  pub hs: Option<HardState>,
+  pub entries: Vec<Entry>,
+  pub snapshot: Snapshot,
+  pub committed_entries: Vec<Entry>,
+  pub messages: Vec<Message>,
 }
 ```
 
