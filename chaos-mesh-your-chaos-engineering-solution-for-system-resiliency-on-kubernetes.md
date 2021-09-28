@@ -99,8 +99,8 @@ spec:
       - tidb-cluster-demo
     labelSelectors:
       "app.kubernetes.io/component": "tikv"
-    scheduler:
-      cron: "@every 2m"
+  scheduler:
+    cron: "@every 2m"
 ```
 
 This code does the following:
