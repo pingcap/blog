@@ -131,6 +131,11 @@ SELECT @@hostname, @@port
 
 When you use `mysql -h localhost...`, `mysql` will try to connect over a UNIX socket even if a TCP port is provided. Depending on your configuration, this might not work. Instead, use `mysql -h 127.0.0.1...` to ensure the connection uses TCP.
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('Best Practices for TiDB Load Balancing', 'download-tidb-btn-middle')"><button>Get TiDB Now</button></a>
+    <a href="/contact-us" onclick="trackViews('Best Practices for TiDB Load Balancing', 'contact-us-middle')"><button>Request a Demo</button></a>
+</div>
+
 ## Configuration examples
 
 This section includes configuration examples for some of the most popular load balancing solutions with TiDB.
