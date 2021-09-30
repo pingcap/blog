@@ -50,6 +50,11 @@ Some other companies simply use their row store to process both transactional an
 
 TiDB solves this problem by [writing the data to both a row and column store](https://pingcap.com/blog/how-we-build-an-htap-database-that-simplifies-your-data-platform) before committing the transaction. You get the speed of the row store for transaction processing and access to the data in an efficient column store for real-time analytics. If there is an issue with writing the transaction, it does not appear in either store, keeping your data in sync.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('The Benefits of a Hybrid Transactional and Analytical Processing Database', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('The Benefits of a Hybrid Transactional and Analytical Processing Database', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Sample use cases
 
 This can be important in a variety of situations. Let's consider purchases made with a credit card. In this example, the first transaction is a purchase made at a store in California. It may seem that the only requirement for this transaction is the recording of the transaction, but there is more that takes place in the background to validate the transaction before processing it. When the purchase request is made, there is also a validation of the transaction: does this fit your purchase patterns, does the purchase location make sense, and more. If, for example, you normally make small purchases of under $1000 and you are now purchasing a $15000 piece of jewelry, that may seem a little suspicious. That part of the transaction requires analysis of patterns and past usage and must be responded to quickly. If everything seems to be OK with the purchase, then it will be submitted as a sales transaction.
