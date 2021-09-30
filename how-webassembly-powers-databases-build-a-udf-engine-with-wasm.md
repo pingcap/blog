@@ -1,5 +1,5 @@
 ---
-title: 'How WebAssembly Powers Databases: Build a UDF engine with WASM'
+title: 'How WebAssembly Powers Databases: Build a UDF Engine with WASM'
 author: ['Tenny Zhuang']
 date: 2021-10-04
 summary: WebAssembly is a binary instruction format designed for secure and near-native execution in the sandboxed environment. This post shares how we use WebAssembly to build a user-defined function engine for TiDB.
