@@ -1,7 +1,7 @@
 ---
 title: Power Up Your Rails Apps with a NewSQL Database
 author: ['Matt Wang']
-date: 2020-09-30
+date: 2021-09-30
 summary: This post helps Ruby on Rails developers get started with TiDB and use it as the backend storage layer of Rails applications.
 tags: ['Tutorial']
 categories: ['Community']
@@ -10,11 +10,11 @@ image: /images/blog/build-rails-apps-with-a-newsql-database.png
 
 **Author:** [Matt Wang](https://github.com/hooopo) (Engineer at PingCAP, moderator of Ruby-China community)
 
-**Editor:** [Fendy Feng](https://github.com/septemberfd), Tom Dewan
+**Editors:** [Fendy Feng](https://github.com/septemberfd), Tom Dewan
 
 ![Build a Rails App with a NewSQL Database](media/build-rails-apps-with-a-newsql-database.png)
 
-If you are a Ruby on Rails developer, I think you'll really enjoy this article. It aims to help you get started with [TiDB](https://github.com/pingcap/tidb), an open-source NewSQL database, and use it to power up your Rails applications.
+If you are a Ruby on Rails developer, I think you'll really enjoy this article. It aims to help you get started with [TiDB](https://docs.pingcap.com/tidb/stable), an open-source NewSQL database, and use it to power up your Rails applications.
 
 ## Use TiDB to build up your Ruby on Rails applications
 
@@ -34,66 +34,66 @@ Deploy a TiDB cluster on your local machine.
 
 1. Install TiUP.
 
-TiDB provides a smooth deployment experience using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview), a package manager for you to manage different cluster components easily in the TiDB ecosystem.
+    TiDB provides a smooth deployment experience using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview), a package manager for you to manage different cluster components easily in the TiDB ecosystem.
 
-```shell
-$ curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
-```
+    ```shell
+    $ curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
+    ```
 
 2. Start TiDB playground.
 
-Start a TiDB nightly instance by running the `tiup playground` command:
+    Start a TiDB nightly instance by running the `tiup playground` command:
 
-```shell
-$ tiup playground  nightly
-```
+    ```shell
+    $ tiup playground nightly
+    ```
 
 3. Connect to the TiDB instance in a similar way as you connect to MySQL.
 
-```
-mysql --host 127.0.0.1 --port 4000 -u root -p
-```
+    ```
+    mysql --host 127.0.0.1 --port 4000 -u root -p
+    ```
 
 ### Step 2: Initialize the Rails application
 
 1. Make sure that you have Ruby and Rails installed, and  initiate a Rails app named `tidb-rails`; also be sure to set the database as `mysql` because TiDB speaks the MySQL protocol.
 
-```
-$ ruby -v
-ruby 2.7.0
+    ```
+    $ ruby -v
+    ruby 2.7.0
 
-$ rails -v
-Rails 6.1.4
+    $ rails -v
+    Rails 6.1.4
 
-$ rails new tidb-rails --database=mysql --api
-```
+    $ rails new tidb-rails --database=mysql --api
+    ```
 
 2. Add [activerecord-tidb-adapter](https://github.com/pingcap/activerecord-tidb-adapter) to Gemfile. Activerecord-tidb-adapter allows you to use TiDB as a backend for ActiveRecord and Rails apps.
 
-```
-$ bundle add activerecord-tidb-adapter --version "~> 6.1.0"
-```
+    ```
+    $ bundle add activerecord-tidb-adapter --version "~> 6.1.0"
+    ```
 
 3. After you create a new app, edit `config/database.yml` to configure the connection setting to TiDB.
 
-```yaml
-default: &default
- adapter: tidb
- encoding: utf8mb4
- collation: utf8mb4_general_ci
- pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
- host: 127.0.0.1
- port: 4000
- variables:
-   tidb_enable_noop_functions: ON
- username: root
- password:
-development:
- <<: *default
- database: tidb_rails_development
-```
+    ```yaml
+    default: &default
+     adapter: tidb
+     encoding: utf8mb4
+     collation: utf8mb4_general_ci
+     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+     host: 127.0.0.1
+     port: 4000
+     variables:
+       tidb_enable_noop_functions: ON
+     username: root
+     password:
+    development:
+     <<: *default
+     database: tidb_rails_development
+    ```
 
-Now, TiDB is already set up and ready to use with your Rails app. You don't have to configure anything else.
+    Now, TiDB is already set up and ready to use with your Rails app. You don't have to configure anything else.
 
 ### Step 3: Create a database
 
@@ -111,58 +111,58 @@ Before you play with your app with TiDB, you need to define the model and migrat
 
 1. Define the model by executing `rails g` command.
 
-```
-$ bundle exec rails g model user email:string name:string gender:integer
-...
-$ vim ./db/migrate/20210826174523_create_users.rb # edit
-```
+    ```
+    $ bundle exec rails g model user email:string name:string gender:integer
+    ...
+    $ vim ./db/migrate/20210826174523_create_users.rb # edit
+    ```
 
 2. Edit the `db/migrate/20210826174523_create_users.rb` file:
 
-```
-class CreateUsers &lt; ActiveRecord::Migration[6.1]
- def change
-   create_table :users do |t|
-     t.string :email, index: {unique: true}
-     t.string :name
-     t.integer :gender
-     t.timestamps
-   end
- end
-end
-```
+    ```
+    class CreateUsers < ActiveRecord::Migration[6.1]
+     def change
+       create_table :users do |t|
+         t.string :email, index: {unique: true}
+          t.string :name
+         t.integer :gender
+         t.timestamps
+       end
+     end
+    end
+    ```
 
 3. Migrate your database.
 
-```
-$ bundle exec rails db:migrate
-== 20210826174523 CreateUsers: migrating ======================================
--- create_table(:users)
-  -> 0.1717s
-== 20210826174523 CreateUsers: migrated (0.1717s) =============================
-```
+    ```
+    $ bundle exec rails db:migrate
+    == 20210826174523 CreateUsers: migrating ======================================
+    -- create_table(:users)
+      -> 0.1717s
+    == 20210826174523 CreateUsers: migrated (0.1717s) =============================
+    ```
 
 4. Launch the Rails console to play with the app.
 
-```
-$ bundle exec rails c
-Running via Spring preloader in process 13378
-Loading development environment (Rails 6.1.4.1)
-irb(main):001:0> 30.times.each { |i| User.create!(email: "user-#{i}@example.com", name: "user-#{i}", gender: i % 3) }
-  (1.2ms)  select version()
- TRANSACTION (0.8ms)  BEGIN
- User Create (93.5ms)  INSERT INTO `users` (`email`, `name`, `gender`, `created_at`, `updated_at`) VALUES ('user-0@example.com', 'user-0', 0, '2021-08-26 17:50:40.661945', '2021-08-26 17:50:40.661945')
- TRANSACTION (14.9ms)  COMMIT
-...
+    ```
+    $ bundle exec rails c
+    Running via Spring preloader in process 13378
+    Loading development environment (Rails 6.1.4.1)
+    irb(main):001:0> 30.times.each { |i| User.create!(email: "user-#{i}@example.com", name: "user-#{i}", gender: i % 3) }
+      (1.2ms)  select version()
+     TRANSACTION (0.8ms)  BEGIN
+     User Create (93.5ms)  INSERT INTO `users` (`email`, `name`, `gender`, `created_at`, `updated_at`) VALUES ('user-0@example.com', 'user-0', 0, '2021-08-26 17:50:40.661945', '2021-08-26 17:50:40.661945')
+     TRANSACTION (14.9ms)  COMMIT
+    ...
 
-=> 30
-irb(main):002:0> User.count
-  (8.9ms)  SELECT COUNT(*) FROM `users`
-=> 30
-irb(main):003:0> User.first
- User Load (5.8ms)  SELECT `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1
-=> #<User id: 1, email: "user-0@example.com", name: "user-0", gender: 0, created_at: "2021-08-26 17:50:40.661945000 +0000", updated_at: "2021-08-26 17:50:40.661945000 +0000">
-```
+    => 30
+    irb(main):002:0> User.count
+      (8.9ms)  SELECT COUNT(*) FROM `users`
+    => 30
+    irb(main):003:0> User.first
+     User Load (5.8ms)  SELECT `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1
+    => #<User id: 1, email: "user-0@example.com", name: "user-0", gender: 0, created_at: "2021-08-26 17:50:40.661945000 +0000", updated_at: "2021-08-26 17:50:40.661945000 +0000">
+    ```
 
 ## Try us out!
 
