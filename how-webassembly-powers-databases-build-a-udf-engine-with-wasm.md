@@ -56,6 +56,10 @@ We also chose **[Wasmer](https://docs.wasmer.io/)** as a server-side runtime for
 
 **It's easy to create and run a UDF.** Simply write the function in your favorite programming language and compile it to Wasm bytecode using [emscripten](https://emscripten.org/). Then you can pass the bytecode into TiDB using `CREATE FUNCTION` and run it like a built-in function. The machine code is stored in a system table. The first time the function is executed, TiDB compiles the code and caches it on the current node.
 
+<div class="trackable-btns">
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How WebAssembly Powers Databases: Build a UDF engine with WASM', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## UDF and beyond
 
 Besides the features we've already mentioned, Wasm-based UDF opens up more possibilities for TiDB.
