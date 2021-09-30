@@ -120,7 +120,7 @@ Before you play with your app with TiDB, you need to define the model and migrat
 2. Edit the `db/migrate/20210826174523_create_users.rb` file:
 
 ```
-    class CreateUsers &lt; ActiveRecord::Migration[6.1]
+    class CreateUsers < ActiveRecord::Migration[6.1]
      def change
        create_table :users do |t|
          t.string :email, index: {unique: true}
