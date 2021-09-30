@@ -2,7 +2,7 @@
 title: The Benefits of a Hybrid Transactional and Analytical Processing Database
 author: ['Rick Golba']
 date: 2021-10-04
-summary:
+summary: Hybrid Transactional and Analytical Processing, or HTAP, is a defining feature of TiDB. It means that you can run both transactional and analytical queries from within the same database. TiDB provides HTAP, ensuring that your queries are always running against the most current data available.
 tags: ['HTAP']
 categories: ['Product']
 image: /images/blog/benefits-of-a-htap-database.png
