@@ -15,7 +15,7 @@ notShowOnLogoWall: true
 
 **Author:** Min Zhou (Staff engineer at Databricks)
 
-**Editor:** [Yajing Wang](https://github.com/anotherrachel), Tom Dewan
+**Editors:** [Yajing Wang](https://github.com/anotherrachel), Tom Dewan
 
 ![How Databricks Tackles the Scalability Limit with a MySQL Alternative](media/how-databricks-tackles-the-scalability-limit-with-a-mysql-alternative.png)
 
@@ -115,7 +115,7 @@ Cloud providers usually offer both local storage physically attached to the mach
 
 To reduce the overhead of remote disks, we propose a cost-effective solution. This also improves the throughput of the remote disk and lowers the latency to an acceptable level.
 
-### Service Isolation
+### Service isolation
 
 Data sharing comes with penalties. The queries of one service may affect the queries of another. In other words, a bad query may occupy the resource of a certain node, thereby slowing down other services on it. To avoid this situation, we propose:
 
