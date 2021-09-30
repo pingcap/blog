@@ -10,7 +10,7 @@ image: /images/blog/build-rails-apps-with-a-newsql-database.png
 
 **Author:** [Matt Wang](https://github.com/hooopo) (Engineer at PingCAP, moderator of Ruby-China community)
 
-**Editor:** [Fendy Feng](https://github.com/septemberfd), Tom Dewan
+**Editors:** [Fendy Feng](https://github.com/septemberfd), Tom Dewan
 
 ![Build a Rails App with a NewSQL Database](media/build-rails-apps-with-a-newsql-database.png)
 
@@ -99,11 +99,11 @@ Deploy a TiDB cluster on your local machine.
 
 Create the local database for your rails application.
 
-    ```
-    $ bundle exec rails db:create
-    Created database 'tidb_rails_development'
-    Created database 'tidb_rails_test'
-    ```
+```
+$ bundle exec rails db:create
+Created database 'tidb_rails_development'
+Created database 'tidb_rails_test'
+```
 
 ### Step 4: Manipulate TiDB data through your Rails app
 
