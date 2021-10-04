@@ -1,7 +1,7 @@
 ---
 title: How Databricks Tackles the Scalability Limit with a MySQL Alternative
 author: ['Min Zhou']
-date: 2021-10-07
+date: 2021-10-04
 summary: Databricks is an enterprise software company that helps data teams solve some of the world's toughest problems. This article describes why they chose TiDB as their database and shares some TiDB best practices.
 tags: ['Scalability', 'Backup and restore', 'MySQL']
 customer: Databricks
