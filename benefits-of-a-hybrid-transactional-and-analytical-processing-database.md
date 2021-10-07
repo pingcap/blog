@@ -1,7 +1,7 @@
 ---
 title: The Benefits of a Hybrid Transactional and Analytical Processing Database
 author: ['Rick Golba']
-date: 2021-10-04
+date: 2021-10-07
 summary: Hybrid Transactional and Analytical Processing, or HTAP, is a defining feature of TiDB. It means that you can run both transactional and analytical queries from within the same database. TiDB provides HTAP, ensuring that your queries are always running against the most current data available.
 tags: ['HTAP', 'Real-time analytics']
 categories: ['Product']
@@ -10,7 +10,7 @@ image: /images/blog/benefits-of-a-htap-database.png
 
 **Author:** Rick Golba (Product Marketing Manager at PingCAP)
 
-**Editors:** [Calvin Weng](https://github.com/dcalvin), [Ran Huang](https://github.com/ran-huang)
+**Editors:** Fadi Azhari, [Ran Huang](https://github.com/ran-huang), [Calvin Weng](https://github.com/dcalvin), Tina Yang
 
 ![The Benefits of a Hybrid Transactional and Analytical Processing Database](media/benefits-of-a-htap-database.png)
 
@@ -75,4 +75,4 @@ TiDB provides HTAP, ensuring that your queries are always running against the mo
 
 Review our [documentation](https://docs.pingcap.com/tidb/stable/quick-start-with-htap) for more detailed information about how TiDB enables a Hybrid Transactional and Analytical Processing environment. You can also read a recent [blog post](https://pingcap.com/blog/empower-your-business-with-big-data-real-time-analytics-in-tidb) about real-time analytics.
 
-PingCAP is hosting a webinar discussing HTAP on October 19, 2021. Tim Tadeo, one of our Solutions Architects, will discuss the importance of an HTAP database, present some of the challenges that it helps to overcome, and show how TiDB solves those issues. There will also be a demo of TiDB to illustrate how queries are processed and run faster in a hybrid environment. Click here to register.
+PingCAP is hosting [a webinar discussing HTAP](https://bit.ly/HTAP_PingCAP) on October 19, 2021. Tim Tadeo, one of our Solutions Architects, will discuss the importance of an HTAP database, present some of the challenges that it helps to overcome, and show how TiDB solves those issues. There will also be a demo of TiDB to illustrate how queries are processed and run faster in a hybrid environment. Click [here](https://bit.ly/HTAP_PingCAP) to register.
