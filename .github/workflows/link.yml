@@ -15,7 +15,7 @@ jobs:
       - name: Link Checker
         uses: lycheeverse/lychee-action@v1.0.8
         with:
-          args: -E --exclude-mail -v -i -n -a 429 -t 45 --exclude .*.rpm --exclude .*host:port.* --exclude .*\.js --exclude http://34.83.139.90 --exclude https://pkg.go.dev/ --exclude https://charts.pingcap.org/ --exclude https://451research.com/ --exclude http://localhost --exclude https://www.crunchbase.com/ --exclude http://www.sunline-i.com/ --exclude https://angel.co/ -- *.md
+          args: -E --exclude-mail -v -i -n -a 429 -t 45 --exclude .*.rpm --exclude .*host:port.* --exclude .*\.js --exclude http://34.83.139.90 --exclude https://pkg.go.dev/ --exclude https://charts.pingcap.org/ --exclude https://451research.com/ --exclude http://localhost --exclude https://www.crunchbase.com/ --exclude http://www.sunline-i.com/ --exclude https://angel.co/ --exclude .*127\.0\.0\.1.* -- *.md
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 

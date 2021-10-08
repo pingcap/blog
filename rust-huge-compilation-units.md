@@ -113,7 +113,7 @@ and enables phases that need to traverse a complete definition, like typecheckin
 
 > graydon: I cannot make a simple argument about this because I'm still not smart enough about module systems — the full thing is laid out in [dreyer's thesis] and discussed in shorter [slide-deck form here][sdfh] — but suffice to say that recursive modules make it possible to see the "same" opaque type through two paths that should probably be considered equal but aren't easily determined to be so, I think in part due to the mix of opacity that modules provide and the fact that you have to partly look through that opacity to resolve recursion. so anyway I decided this was probably getting into "research" and I should just avoid the problem space, go with acyclic modules.
 
-[dreyer's thesis]: https://www.cs.cmu.edu/~rwh/theses/dreyer.pdf
+[dreyer's thesis]: https://people.mpi-sws.org/~dreyer/thesis/main.pdf
 [sdfh]: http://macqueenfest.cs.uchicago.edu/slides/dreyer.pdf
 
 Although driven by fundamental constraints, the hard daggishness of crates is useful for a number of reasons: it enforces careful abstractions, defines units of _parallel_ compilation, defines basically sensible codegen units, and dramatically reduces language and compiler complexity (even as the compiler likely moves toward whole-program, demand-driven, compilation in the future).
