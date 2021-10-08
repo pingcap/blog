@@ -113,7 +113,7 @@ and enables phases that need to traverse a complete definition, like typecheckin
 
 > graydon: I cannot make a simple argument about this because I'm still not smart enough about module systems — the full thing is laid out in [dreyer's thesis] and discussed in shorter [slide-deck form here][sdfh] — but suffice to say that recursive modules make it possible to see the "same" opaque type through two paths that should probably be considered equal but aren't easily determined to be so, I think in part due to the mix of opacity that modules provide and the fact that you have to partly look through that opacity to resolve recursion. so anyway I decided this was probably getting into "research" and I should just avoid the problem space, go with acyclic modules.
 
-[dreyer's thesis]: https://www.cs.cmu.edu/~rwh/theses/dreyer.pdf
+[dreyer's thesis]: https://people.mpi-sws.org/~dreyer/thesis/main.pdf
 [sdfh]: http://macqueenfest.cs.uchicago.edu/slides/dreyer.pdf
 
 Although driven by fundamental constraints, the hard daggishness of crates is useful for a number of reasons: it enforces careful abstractions, defines units of _parallel_ compilation, defines basically sensible codegen units, and dramatically reduces language and compiler complexity (even as the compiler likely moves toward whole-program, demand-driven, compilation in the future).
@@ -124,8 +124,7 @@ So it's quite desirable for Rust code to be broken into crates that form a _wide
 
 In my experience though projects tend to start in a single crate, without great attention to their internal dependency graph, and once compilation time becomes an issue, they have already created a spaghetti dependency graph that is difficult to refactor into smaller crates.
 
-It happened to Servo, and it has also been my experience on TiKV, where I have made multiple aborted attempts to extract various modules from the main program, in long sequences of commits that untangle internal dependencies. I suspect that avoiding problematic monoliths is something
-that Rust devs learn with experience, but it is a repeating phenomenon in large Rust projects.
+It happened to Servo, and it has also been my experience on TiKV, where I have made multiple aborted attempts to extract various modules from the main program, in long sequences of commits that untangle internal dependencies. I suspect that avoiding problematic monoliths is something that Rust devs learn with experience, but it is a repeating phenomenon in large Rust projects.
 
 ## Trait coherence and the orphan rule
 
@@ -141,8 +140,7 @@ This can create a tight coupling between abstractions in Rust, discouraging deco
 
 This results in large crates which increase partial rebuild time.
 
-This subject deserves more examples and a stronger argument,
-but I haven't the enthusiasm for it now.
+This subject deserves more examples and a stronger argument, but I haven't the enthusiasm for it now.
 
 Haskell's type classes, on which Rust's traits are based, do not have an orphan rule. I do not know the extent of problems this causes in practice for Haskell. At the time of Rust's design, it was thought to be problematic enough to correct.
 
@@ -151,15 +149,11 @@ Haskell's type classes, on which Rust's traits are based, do not have an orphan 
 
 ## Internal parallelism
 
-As crates are the main unit of parallelism in compilation pipeline,
-in theory it is desirable to have a wide crate DAG with roughly
-equally-complex crates, such that the compiler can be using all
-the machines cores all the time. In practice though there are almost always bottlenecks where there is only one compiler instance running, working on a single crate.
+As crates are the main unit of parallelism in compilation pipeline, in theory it is desirable to have a wide crate DAG with roughly equally-complex crates, such that the compiler can be using all the machines cores all the time. In practice though there are almost always bottlenecks where there is only one compiler instance running, working on a single crate.
 
 So in addition to `cargo`s parallel crate compilation, `rustc` itself is parallel over a single crate. It wasn't designed to be parallel though, so its parallelism is limited and hard-won.
 
-Today the only real internal parallelism in `rustc` is the use of [_codegen units_], by which `rustc` automatically divides a crate into multiple LLVM modules during translation. By doing this it can perform code generation in parallel. Like a crate, a Rust codegen-unit
-is also a compilation unit, but it is an LLVM compilation unit.
+Today the only real internal parallelism in `rustc` is the use of [_codegen units_], by which `rustc` automatically divides a crate into multiple LLVM modules during translation. By doing this it can perform code generation in parallel. Like a crate, a Rust codegen-unit is also a compilation unit, but it is an LLVM compilation unit.
 
 Combined with [_incremental compilation_], it can avoid re-translating codegen units which have not changed from run to run, decreasing partial rebuild time. Unfortunately, the impact of codegen units and incremental compilation on both compile-time and run-time performance is hard to predict: improving rebuild time depends on `rustc` successfully dividing a crate into independent units that are unlikely to force each other to recompile when changed, and it's not obvious how humans should write their code to help `rustc` in this task; and arbitrarily dividing up a crate into codegen units creates arbitrary barriers to inlining, causing unexpected de-optimizations.
 
@@ -199,8 +193,7 @@ Unfortunately, because of all these variables, it's not at all obvious for any g
 In the next episode of this series we'll wrap up this exploration of
 the reason's for Rust's slow compile times with a few smaller slow-compilation tidbits.
 
-Then maybe we'll move on to something new, like techniques for
-speeding up Rust builds.
+Then maybe we'll move on to something new, like techniques for speeding up Rust builds.
 
 Stay Rusty, friends.
 
