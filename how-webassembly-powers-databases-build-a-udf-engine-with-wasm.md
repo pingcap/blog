@@ -1,7 +1,7 @@
 ---
 title: 'How WebAssembly Powers Databases: Build a UDF Engine with WASM'
 author: ['Tenny Zhuang']
-date: 2021-10-07
+date: 2021-10-11
 summary: WebAssembly is a binary instruction format designed for secure and near-native execution in the sandboxed environment. This post shares how we use WebAssembly to build a user-defined function engine for TiDB.
 tags: ['Hackathon']
 categories: ['Engineering']
@@ -57,7 +57,8 @@ We also chose **[Wasmer](https://docs.wasmer.io/)** as a server-side runtime for
 **It's easy to create and run a UDF.** Simply write the function in your favorite programming language and compile it to Wasm bytecode using [emscripten](https://emscripten.org/). Then you can pass the bytecode into TiDB using `CREATE FUNCTION` and run it like a built-in function. The machine code is stored in a system table. The first time the function is executed, TiDB compiles the code and caches it on the current node.
 
 <div class="trackable-btns">
-  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How WebAssembly Powers Databases: Build a UDF engine with WASM', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  <a href="/download" onclick="trackViews('How WebAssembly Powers Databases: Build a UDF Engine with WASM', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How WebAssembly Powers Databases: Build a UDF Engine with WASM', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
 ## UDF and beyond
