@@ -46,10 +46,7 @@ LLVM being poor at quickly generating code (even if the resulting code is slow) 
 
 In addition to being integrated into `rustc` Cranelift is also being integrated into SpiderMonkey as its WebAssembly code generator.
 
-It's not fair to blame all the code generation slowness on LLVM though. `rustc` isn't doing LLVM any favors by
-the way it generates LLVM IR.
-
-`rustc` is notorious for throwing huge gobs of unoptimized LLVM IR at LLVM and expecting LLVM to optimize it all away. This is (probably) the main reason Rust debug binaries are so slow.
+It's not fair to blame all the code generation slowness on LLVM though. `rustc` isn't doing  LLVM any favors by the way it generates LLVM IR. `rustc` is notorious for throwing huge gobs of unoptimized LLVM IR at LLVM and expecting LLVM to optimize it all away. This is (probably) the main reason Rust debug binaries are so slow.
 
 So LLVM is doing a lot of work to make Rust as fast as it is.
 
