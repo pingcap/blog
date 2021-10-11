@@ -155,8 +155,7 @@ fn main() {
 }
 ```
 
-Notice that the only difference between these two cases is that the first
-`print`'s argument is type `&impl ToString`, and the second's is `&dyn ToString`. The first is using static dispatch, and the second dynamic.
+Notice that the only difference between these two cases is that the first `print`'s argument is type `&impl ToString`, and the second's is `&dyn ToString`. The first is using static dispatch, and the second dynamic.
 
 In Rust `&impl ToString` is essentially shorthand for a type parameter argument that is only used once, like in the earlier example `fn print<T: ToString>(v: T)`.
 

@@ -21,11 +21,9 @@ In this series we explore Rust's compile times within the context of [TiKV](ttps
 
 ## Rust Compile-time Adventures with TiKV: Episode 3
 
-Lately we're exploring how Rust's designs discourage fast compilation. In [the previous post in the series][prev] we discussed the difficult compile-time tradeoffs required to implement generics.
+Lately we're exploring how Rust's designs discourage fast compilation. In [the previous post in the series](https://pingcap.com/blog/generics-and-compile-time-in-rust/) we discussed the difficult compile-time tradeoffs required to implement generics.
 
 This time we're going to talk about compilation units.
-
-[prev]: https://pingcap.com/blog/generics-and-compile-time-in-rust/
 
 - [Compilation units](#compilation-units)
 - [Dependency graphs and unstirring spaghetti](#dependency-graphs-and-unstirring-spaghetti)
@@ -87,9 +85,7 @@ And that is because _dependencies between crates must form a directed acyclic gr
 
 Rust crates being daggish are mostly due to fundamental reasons of type checking and architectural complexity. If crates allowed for mutual dependencies then they would no longer be self-contained compilation units.
 
-In preparation for this blog I asked a few people if they could recall the reasons why Rust crates must form a DAG, and [Graydon] gave a typically thorough and authoritative answer:
-
-[Graydon]: https://github.com/graydon
+In preparation for this blog I asked a few people if they could recall the reasons why Rust crates must form a DAG, and [Graydon](https://github.com/graydon) gave a typically thorough and authoritative answer:
 
 > graydon: Prohibits mutual recursion between definitions across crates, allowing both an obvious deterministic bottom-up build schedule without needing to do some fixpoint iteration or separate declarations from definitions
 and enables phases that need to traverse a complete definition, like typechecking, to happen crate-at-a-time (enabling _some_ degree of incrementality / parallelism).
