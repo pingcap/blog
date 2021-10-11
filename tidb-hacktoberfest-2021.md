@@ -30,7 +30,7 @@ Hacktoberfest is your golden opportunity to learn something new, practice your s
 
 ## Quick start
 
-Here’s a quick run-through of how to be part of Hacktoberfest 2021, and you can check out a detailed how to be part of Hacktoberfest on the [official website](https://hacktoberfest.digitalocean.com/resources/participation):
+Here's a quick run-through of how to be part of Hacktoberfest 2021, and you can check out a detailed how to be part of Hacktoberfest on the [official website](https://hacktoberfest.digitalocean.com/resources/participation):
 
 1. Sign up for [Hacktoberfest](https://hacktoberfest.digitalocean.com/) anytime between Oct 1 and Oct 31.
 2. Join the [TiDB community](https://join.slack.com/t/tidbcommunity/shared_invite/zt-9vpzdqh2-8LsybcK0US_nqwvfAjSU5A) Slack, just in case you have any questions, or need help.
@@ -40,8 +40,8 @@ Here’s a quick run-through of how to be part of Hacktoberfest 2021, and you ca
 
 ## Some notes
 
-* To get a shirt, you must make 4 approved PRs on opted-in projects between October 1-31 in any time zone. If a repository has no “Hacktoberfest” topic set, please reach out to us or mention Hacktoberfest in your PR so we can set repository topics.
-* No spams please (e.g. creating a PR just for the sake of it and not adding any value in any way)! Our maintainer will mark a PR as invalid if it’s determined to be spam, which does NOT count towards your PR total.
-* Note that if our maintainer reports behavior that’s not in line with the [code of conduct](https://github.com/pingcap/tidb/blob/master/CODE_OF_CONDUCT.md), you will be ineligible to participate.
+* To get a shirt, you must make 4 approved PRs on opted-in projects between October 1-31 in any time zone. If a repository has no "Hacktoberfest" topic set, please reach out to us or mention Hacktoberfest in your PR so we can set repository topics.
+* No spams please (e.g. creating a PR just for the sake of it and not adding any value in any way)! Our maintainer will mark a PR as invalid if it's determined to be spam, which does NOT count towards your PR total.
+* Note that if our maintainer reports behavior that's not in line with the [code of conduct](https://github.com/pingcap/tidb/blob/master/CODE_OF_CONDUCT.md), you will be ineligible to participate.
 
 Good luck and hack away! 
