@@ -44,7 +44,7 @@ This time, we're talking about monomorphization.
 After the [previous][prev] episode of this series, people made a lot of great comments on [HackerNews], [Reddit], and [Lobste.rs].
 
 [HackerNews](https://news.ycombinator.com/item?id=22197082)
-[Reddit]:(https://www.reddit.com/r/rust/comments/ew5wnz/the_rust_compilation_model_calamity/)
+[Reddit](https://www.reddit.com/r/rust/comments/ew5wnz/the_rust_compilation_model_calamity/)
 [Lobste.rs](https://lobste.rs/s/xup5lo/rust_compilation_model_calamity)
 
 Some common comments:
