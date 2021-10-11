@@ -1,5 +1,6 @@
 ---
 title: TiDB Community joins Hacktoberfest 2021!
+author: [TiDB community]
 date: 2021-10-11
 summary: TiDB is proud to be back at Hacktoberfest, a global celebration of open-source and technology. Join us and make contributions, whoever you are, whatever your experience, to the ever-growing TiDB community!
 tags: ['Community news']
