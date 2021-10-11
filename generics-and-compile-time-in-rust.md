@@ -18,8 +18,8 @@ The Rust programming language compiles fast software slowly.
 
 In this series we explore Rust's compile times within the context of [TiKV], the key-value store behind the [TiDB] database.
 
-[TiKV]: https://github.com/tikv/tikv
-[TiDB]: https://github.com/pingcap/tidb
+[TiKV](https://github.com/tikv/tikv)
+[TiDB](https://github.com/pingcap/tidb)
 
 &nbsp;
 
@@ -43,26 +43,23 @@ This time, we're talking about monomorphization.
 
 After the [previous][prev] episode of this series, people made a lot of great comments on [HackerNews], [Reddit], and [Lobste.rs].
 
-[HackerNews]: https://news.ycombinator.com/item?id=22197082
-[Reddit]: https://www.reddit.com/r/rust/comments/ew5wnz/the_rust_compilation_model_calamity/
-[Lobste.rs]: https://lobste.rs/s/xup5lo/rust_compilation_model_calamity
+[HackerNews](https://news.ycombinator.com/item?id=22197082)
+[Reddit]:(https://www.reddit.com/r/rust/comments/ew5wnz/the_rust_compilation_model_calamity/)
+[Lobste.rs](https://lobste.rs/s/xup5lo/rust_compilation_model_calamity)
 
 Some common comments:
 
-- The compile times we see for TiKV aren't so terrible, and are comparable to
-  C++.
+- The compile times we see for TiKV aren't so terrible, and are comparable to C++.
 - What often matters is partial rebuilds since that is what developers experience most in their build-test cycle.
 
 Some subjects I hadn't considered:
 
 - [WalterBright pointed out][wb] that data flow analysis (DFA) is expensive
-  (quadratic). Rust depends on data flow analysis. I don't know how this
-  impacts Rust compile times, but it's good to be aware of.
-- [kibwen reminded us][kb] that faster linkers have an impact on build times,
-  and that LLD may be faster than the system linker eventually.
+  (quadratic). Rust depends on data flow analysis. I don't know how this impacts Rust compile times, but it's good to be aware of.
+- [kibwen reminded us][kb] that faster linkers have an impact on build times, and that LLD may be faster than the system linker eventually.
 
-[wb]: https://news.ycombinator.com/item?id=22199471
-[kb]: https://www.reddit.com/r/rust/comments/ew5wnz/the_rust_compilation_model_calamity/fg07hvv/
+[wb](https://news.ycombinator.com/item?id=22199471)
+[kb](https://www.reddit.com/r/rust/comments/ew5wnz/the_rust_compilation_model_calamity/fg07hvv/)
 
 ## A brief aside about compile-time scenarios
 
@@ -145,15 +142,11 @@ The first results in _static_ method dispatch, the second in _dynamic_ (or "virt
 
 ### An example in Rust
 
-The previous example uses Rust's type parameters (`<T: ToString>`) to define a
-statically-dispatched `print` function. In this section we present two more Rust
-examples, the first with static dispatch, using references to `impl` trait
-instances, and the second with dynamic dispatch, with references to `dyn` trait
-instances.
+The previous example uses Rust's type parameters (`<T: ToString>`) to define a statically-dispatched `print` function. In this section we present two more Rust examples, the first with static dispatch, using references to `impl` trait instances, and the second with dynamic dispatch, with references to `dyn` trait instances.
 
 Static ([playground link][pl1]):
 
-[pl1]: https://play.rust-lang.org/?version=stable&mode=release&edition=2018&gist=066e72731fbdbf212f68c25b5a4e3b72
+[pl1](https://play.rust-lang.org/?version=stable&mode=release&edition=2018&gist=066e72731fbdbf212f68c25b5a4e3b72)
 
 ```rust
 use std::string::ToString;
@@ -172,7 +165,7 @@ fn main() {
 
 Dynamic ([playground link][pl2]):
 
-[pl2]: https://play.rust-lang.org/?version=stable&mode=release&edition=2018&gist=d359d0440acaeed1d25020955979b9ce
+[pl2](https://play.rust-lang.org/?version=stable&mode=release&edition=2018&gist=d359d0440acaeed1d25020955979b9ce)
 
 ```rust
 use std::string::ToString;
