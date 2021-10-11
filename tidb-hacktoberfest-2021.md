@@ -35,8 +35,8 @@ Here's a quick run-through of how to be part of Hacktoberfest 2021, and you can 
 1. Sign up for [Hacktoberfest](https://hacktoberfest.digitalocean.com/) anytime between Oct 1 and Oct 31.
 2. Join the [TiDB community](https://join.slack.com/t/tidbcommunity/shared_invite/zt-9vpzdqh2-8LsybcK0US_nqwvfAjSU5A) Slack, just in case you have any questions, or need help.
 3. Start creating and submitting your PRs! Here are some top tips: 
-    1. Check out the [TiDB Contribution Guide](https://github.com/pingcap/community/blob/master/contributors/README.md) before making contributions.
-    2. Have a go at any [issue](https://github.com/pingcap) labeled with `Good first issue`, note that these are the ones that we think might be good for those new to open source or TiDB, so it only serves as a starting point!
+    a. Check out the [TiDB Contribution Guide](https://github.com/pingcap/community/blob/master/contributors/README.md) before making contributions.
+    b. Have a go at any [issue](https://github.com/pingcap) labeled with `Good first issue`. Note that these are the ones that we think might be good for those new to open source or TiDB, so it only serves as a starting point!
 
 ## Some notes
 
