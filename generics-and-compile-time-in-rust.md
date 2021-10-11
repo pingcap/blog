@@ -18,8 +18,6 @@ The Rust programming language compiles fast software slowly.
 
 In this series we explore Rust's compile times within the context of [TiKV](https://github.com/tikv/tikv), the key-value store behind the [TiDB](https://github.com/pingcap/tidb) database.
 
-&nbsp;
-
 ## Rust Compile-time Adventures with TiKV: Episode 2
 
 In [the previous post in the series](https://pingcap.com/blog/rust-compilation-model-calamity/) we covered Rust's early development history, and how it led to a series of decisions that resulted in a high-performance language that compiles slowly. Over the next few we'll describe in more detail some of the designs in Rust that make compile time slow.
@@ -45,8 +43,7 @@ Some common comments:
 
 Some subjects I hadn't considered:
 
-- [WalterBright pointed out](https://news.ycombinator.com/item?id=22199471) that data flow analysis (DFA) is expensive
-  (quadratic). Rust depends on data flow analysis. I don't know how this impacts Rust compile times, but it's good to be aware of.
+- [WalterBright pointed out](https://news.ycombinator.com/item?id=22199471) that data flow analysis (DFA) is expensive (quadratic). Rust depends on data flow analysis. I don't know how this impacts Rust compile times, but it's good to be aware of.
 - [kibwen reminded us](https://www.reddit.com/r/rust/comments/ew5wnz/the_rust_compilation_model_calamity/fg07hvv/) that faster linkers have an impact on build times, and that LLD may be faster than the system linker eventually.
 
 ## A brief aside about compile-time scenarios
@@ -159,21 +156,13 @@ fn main() {
 ```
 
 Notice that the only difference between these two cases is that the first
-`print`'s argument is type `&impl ToString`, and the second's is `&dyn
-ToString`. The first is using static dispatch, and the second dynamic.
+`print`'s argument is type `&impl ToString`, and the second's is `&dyn ToString`. The first is using static dispatch, and the second dynamic.
 
-In Rust `&impl ToString` is essentially shorthand for a type parameter argument
-that is only used once, like in the earlier example `fn print<T: ToString>(v:
-T)`.
+In Rust `&impl ToString` is essentially shorthand for a type parameter argument that is only used once, like in the earlier example `fn print<T: ToString>(v: T)`.
 
-Note that in these examples we have to use `inline(never)` to defeat the
-optimizer. Without this it would turn these simple examples into the exact same
-machine code. I'll explore this phenomenon further in a future episode of this
-series.
+Note that in these examples we have to use `inline(never)` to defeat the optimizer. Without this it would turn these simple examples into the exact same machine code. I'll explore this phenomenon further in a future episode of this series.
 
-Below is an extremely simplified and sanitized version of the assembly
-for these two examples. If you want to see the real thing, the playground
-links above can generate them by clicking the buttons labeled `... -> ASM`.
+Below is an extremely simplified and sanitized version of the assembly for these two examples. If you want to see the real thing, the playground links above can generate them by clicking the buttons labeled `... -> ASM`.
 
 ```
 print::hffa7359fe88f0de2:
@@ -208,12 +197,7 @@ main::h6b41e7a408fe6876:
     callq   print::h796a2cdf500a8987
 ```
 
-The important thing to note here is the duplication of functions or lack
-thereof, depending on the strategy. In the static case there are two `print`
-functions, distinguished by a hash value in their names, and `main` calls both
-of them. In the dynamic case, there is a single `print` function that `main`
-calls twice. The details of how these two strategies actually handle their
-arguments at the machine level are too intricate to go into here.
+The important thing to note here is the duplication of functions or lack thereof, depending on the strategy. In the static case there are two `print` functions, distinguished by a hash value in their names, and `main` calls both of them. In the dynamic case, there is a single `print` function that `main` calls twice. The details of how these two strategies actually handle their arguments at the machine level are too intricate to go into here.
 
 ### More about the tradeoff
 
@@ -221,14 +205,9 @@ These two strategies represent a notoriously difficult tradeoff: the first creat
 
 It is often thought that the static dispatch strategy results in faster machine code, though I have not seen any research into the matter (we'll do an experiment on this subject in a future edition of this series). Intuitively, it makes sense &mdash; if the CPU knows the address of all the functions it is calling it should be able to call them faster than if it has to first load the address of the function, then load the instruction code into the instruction cache. There are though factors that make this intuition suspect:
 
-- first, modern CPUs have invested a lot of silicon into branch prediction, so
-  if a function pointer has been called recently it will likely be predicted
-  correctly the next time and called quickly;
-- second, monomorphization results in huge quantities of machine instructions, a
-  phenomenon commonly referred to as "code bloat", which could put great
-  pressure on the CPU's instruction cache;
-- third, the LLVM optimizer is surprisingly smart, and with enough visibility
-  into the code can sometimes turn virtual calls into static calls.
+- first, modern CPUs have invested a lot of silicon into branch prediction, so if a function pointer has been called recently it will likely be predicted correctly the next time and called quickly;
+- second, monomorphization results in huge quantities of machine instructions, a phenomenon commonly referred to as "code bloat", which could put great pressure on the CPU's instruction cache;
+- third, the LLVM optimizer is surprisingly smart, and with enough visibility into the code can sometimes turn virtual calls into static calls.
 
 C++ and Rust both strongly encourage monomorphization, both generate some of the fastest machine code of any programming language, and both have problems with code bloat. This seems to be evidence that the monomorphization strategy is indeed the faster of the two. There is though a curious counter-example: C. C has no generics at all, and C programs are often both the slimmest _and_ fastest in their class. Reproducing the monomorphization strategy in C requires using ugly C macro preprocessor techniques, and modern object-orientation patterns in C are often vtable-based.
 
@@ -286,9 +265,7 @@ All that is only touching on the surface of the tradeoffs involved in monomorphi
 
 ## In the next episode of Rust Compile-time Adventures with TiKV
 
-In the next episode of this series we'll discuss compilation units -- the
-bundles of code that a compiler processes at a single time -- and how selecting
-compilation units affects compile time.
+In the next episode of this series we'll discuss compilation units -- the bundles of code that a compiler processes at a single time -- and how selecting compilation units affects compile time.
 
 Stay Rusty, friends.
 
