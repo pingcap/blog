@@ -64,6 +64,11 @@ Pravega uses Apache BookKeeper to write concurrent, real-time data with low late
 
 In other words, Pravega does not use BookKeeper as a data buffer layer, but provides an HDFS or S3-based storage layer. This storage layer supports abstractions for both **low-latency tailing read and write** **and** **high-throughput catchup read**. Systems that use BookKeeper as a separate layer might perform poorly when data moves between BookKeeper and HDFS or S3. Pravega, by contrast, ensures satisfactory performance.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('Building a Real-Time Data Warehouse with TiDB and Pravega', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Building a Real-Time Data Warehouse with TiDB and Pravega', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Benefits of Pravega
 
 Usually, DBAs have three main concerns: **data accuracy, system stability, and system usability**.

@@ -81,6 +81,11 @@ Remember a few episodes ago when we discussed how monomorphization works? How it
 
 `rustc` is slowly being modified such that it can perform its own optimizations on its own MIR (mid-level IR), and crucially, the MIR representation is pre-monomorphization. That means that MIR-level optimizations only need to be done once per generic function, and in turn produce smaller monomorphized LLVM IR, that LLVM can (in theory) translate faster than it does with its unoptimized functions today.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('A Few More Reasons Rust Compiles Slowly', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('A Few More Reasons Rust Compiles Slowly', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## Batch compilation
 
 It turns out that the entire architecture of `rustc` is "wrong", and so is the architecture of most compilers ever written.

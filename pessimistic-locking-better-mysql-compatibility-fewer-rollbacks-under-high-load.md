@@ -146,6 +146,11 @@ We can see in the pessimistic locking model:
 * When Session B tries to execute a data manipulation language (DML) statement, it finds that Session A has locked the same row. After Session A commits its update, Session B executes the DML statement.
 * When Session B successfully executes the DML statement, the final commit also succeeds.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('Pessimistic Locking: Better MySQL Compatibility, Fewer Rollbacks Under High Load', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Pessimistic Locking: Better MySQL Compatibility, Fewer Rollbacks Under High Load', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Isolation
 
 Let's look at the following table to see the transaction isolation:
@@ -281,6 +286,7 @@ Here, I'll briefly discuss these differences:
 
 * MySQL supports gap locking while TiDB does not.
 * MySQL and TiDB have different behaviors for embedded `SELECT` statements.
+
 
 ### No gap lock in TiDB
 

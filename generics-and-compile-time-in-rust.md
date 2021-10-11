@@ -139,6 +139,11 @@ In general, for programming languages, there are two ways to translate a generic
 
 The first results in _static_ method dispatch, the second in _dynamic_ (or "virtual") method dispatch. The first is sometimes called "monomorphization", particularly in the context of C++ and Rust, a confusingly complex word for a simple idea.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('Generics and Compile-Time in Rust', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Generics and Compile-Time in Rust', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### An example in Rust
 
 The previous example uses Rust's type parameters (`<T: ToString>`) to define a
