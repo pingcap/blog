@@ -24,7 +24,7 @@ As a dedicated and firm advocate and practitioner of open source, TiDB is proud 
 
 ## Why Hacktoberfest?
 
-If you find distributed databases, cloud-native, real-time analytics fascinating, or are trying to get more involved in the tech world, think no more, this one's for you!
+If you find distributed databases, cloud-native, real-time analytics fascinating, or are trying to get more involved in the open-source world, think no more. This one's for you!
 
 Hacktoberfest is your golden opportunity to learn something new, practice your skills, contribute a change, and make new friends - whether you are trying to come up with a project for school, or looking into a potential career path. The open-source communities are packed with tools, resources, and any additional assistance you might need.
 
