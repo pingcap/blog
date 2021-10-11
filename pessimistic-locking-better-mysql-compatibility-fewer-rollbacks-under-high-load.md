@@ -287,7 +287,6 @@ Here, I'll briefly discuss these differences:
 * MySQL supports gap locking while TiDB does not.
 * MySQL and TiDB have different behaviors for embedded `SELECT` statements.
 
-
 ### No gap lock in TiDB
 
 A [gap lock](https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html#innodb-gap-locks) is a lock on a gap between index records, or a lock on the gap before the first or after the last index record. MySQL supports gap locking while TiDB does not.
