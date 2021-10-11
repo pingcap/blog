@@ -51,8 +51,7 @@ Some common comments:
 
 - The compile times we see for TiKV aren't so terrible, and are comparable to
   C++.
-- What often matters is partial rebuilds since that is what developers
-  experience most in their build-test cycle.
+- What often matters is partial rebuilds since that is what developers experience most in their build-test cycle.
 
 Some subjects I hadn't considered:
 
