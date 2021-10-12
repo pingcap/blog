@@ -17,7 +17,7 @@ aliases: ['/blog/Rust-s-Huge-Compilation-Units/']
 
 The Rust programming language compiles fast software slowly.
 
-In this series we explore Rust's compile times within the context of [TiKV](ttps://github.com/tikv/tikv), the key-value store behind the [TiDB](https://docs.pingcap.com/tidb/stable/overview) database.
+In this series we explore Rust's compile times within the context of [TiKV](https://github.com/tikv/tikv), the key-value store behind the [TiDB](https://docs.pingcap.com/tidb/stable/overview) database.
 
 ## Rust Compile-time Adventures with TiKV: Episode 3
 
