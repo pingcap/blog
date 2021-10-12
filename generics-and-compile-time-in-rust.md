@@ -248,7 +248,7 @@ All that is only touching on the surface of the tradeoffs involved in monomorphi
 
 > niko: e.g., `fn foo<T>() { bar::<Vec<T>>(); } fn bar<U>() { .. }`
 
-> niko: here, you have a type descriptor for T that was given to you dynamically, but you have to build the type descriptor for `Vec<T>`;
+> niko: here, you have a type descriptor for T that was given to you dynamically, but you have to build the type descriptor for `Vec<T>`
 
 > niko: and then we can make it even worse
 
