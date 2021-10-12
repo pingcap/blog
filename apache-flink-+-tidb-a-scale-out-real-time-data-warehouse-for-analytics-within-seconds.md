@@ -105,7 +105,8 @@ In [TiDB 4.0.8](https://docs.pingcap.com/tidb/stable/release-4.0.7), you can con
 
 <div class="trackable-btns">
   <a href="/download" onclick="trackViews('Apache Flink + TiDB: A Scale-Out Real-Time Data Warehouse for Analytics Within Seconds', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
-  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Apache Flink + TiDB: A Scale-Out Real-Time Data Warehouse for Analytics Within Seconds', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  <a href="/contact-us" onclick="trackViews('Apache Flink + TiDB: A Scale-Out Real-Time Data Warehouse for Analytics Within Seconds', 'contact-us-middle')"><button>Request a Demo</button></a>
+
 </div>
 
 ## Case studies
