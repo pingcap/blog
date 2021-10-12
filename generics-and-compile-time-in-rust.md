@@ -248,7 +248,7 @@ All that is only touching on the surface of the tradeoffs involved in monomorphi
 
 > niko: e.g., `fn foo<T>() { bar::<Vec<T>>(); } fn bar<U>() { .. }`
 
-> niko: here, you have a type descriptor for T that was given to you dynamically, but you have to build the type descriptor for `Vec<T>`;
+> niko: here, you have a type descriptor for T that was given to you dynamically, but you have to build the type descriptor for `Vec<T>`
 
 > niko: and then we can make it even worse
 
@@ -260,7 +260,7 @@ All that is only touching on the surface of the tradeoffs involved in monomorphi
 
 > niko: because we have to be able to figure out `Vec<T>: Debug`, and all we know is `T: Debug`
 
-> niko: we might be able to handle that by bubbling up the `Vec<T>`; to our callers...
+> niko: we might be able to handle that by bubbling up the `Vec<T>` to our callers...
 
 ## In the next episode of Rust Compile-time Adventures with TiKV
 
