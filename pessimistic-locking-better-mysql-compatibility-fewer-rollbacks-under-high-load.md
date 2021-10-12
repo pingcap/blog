@@ -332,7 +332,7 @@ Query OK, 0 rows affected (0.00 sec)
 <br/>
 
 <br/>
-> SELECT * FROM t WHERE id>=10 AND id<;11 FOR UPDATE;
+> SELECT * FROM t WHERE id>=10 AND id<11 FOR UPDATE;
 <br/>
 <span style="color: red;">// block</span>
    </td>
