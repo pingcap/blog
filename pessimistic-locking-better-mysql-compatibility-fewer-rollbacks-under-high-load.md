@@ -314,7 +314,7 @@ Query OK, 0 rows affected (0.00 sec)
 <br/>
 
 <br/>
-mysql> SELECT * FROM t WHERE id>=10 AND id<;11 FOR UPDATE;
+mysql> SELECT * FROM t WHERE id>=10 AND id<11 FOR UPDATE;
 <br/>
 <span style="color: red;">Empty set (0.00 sec)</span>
    </td>
