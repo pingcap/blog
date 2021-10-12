@@ -5,10 +5,11 @@ date: 2021-10-12
 summary: We are proud to announce that TiDB Cloud now holds the highest level of data privacy with full GDPR certification.
 tags: ['Announcement', 'TiDB Cloud']
 categories: ['Product']
-image: /images/blog/pingcaps-tidb-cloud-attains-gdpr-certification.png
+image: /images/blog/pingcaps-tidb-cloud-attains-gdpr-certification1.png
 press_release: true
 ---
-![PingCAP's TiDB Cloud Attains GDPR Certification, Solidifying its Position as a Trusted Global Database Provider](media/pingcaps-tidb-cloud-attains-gdpr-certification.png)
+
+![PingCAP's TiDB Cloud Attains GDPR Certification, Solidifying its Position as a Trusted Global Database Provider](media/pingcaps-tidb-cloud-attains-gdpr-certification1.png)
 
 <div class="caption-center">PingCAP continues to make headway in data security and privacy compliance. The recent certification highlights the company's continued commitment to providing the gold standard for enterprise databases</div> 
 
