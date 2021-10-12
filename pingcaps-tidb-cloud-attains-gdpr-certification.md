@@ -1,5 +1,5 @@
 ---
-title: PingCAP's TiDB Cloud Attains GDPR Certification, Solidifying its Position as a Trusted Global Database Provider
+title: PingCAP's TiDB Cloud Attains GDPR Certification, Solidifying Its Position as a Trusted Global Database Provider
 author: ['PingCAP']
 date: 2021-10-12
 summary: We are proud to announce that TiDB Cloud now holds the highest level of data privacy with full GDPR certification.
