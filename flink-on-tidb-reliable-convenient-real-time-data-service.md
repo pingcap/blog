@@ -102,6 +102,11 @@ If other operators fail to commit, Flink needs to roll back the transaction and 
 
 However, not every sink supports 2PC. TiDB uses the 2PC protocol to manage its distributed transactions internally, but it doesn't allow users to manually control the protocol.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('Flink on TiDB: Reliable, Convenient Real-Time Data Service', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Flink on TiDB: Reliable, Convenient Real-Time Data Service', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Idempotent operation
 
 Then how does Flink ensure the application data is persisted in TiDB exactly once? **The solution is _at least once_ semantics plus the unique key, namely the idempotent operation.**

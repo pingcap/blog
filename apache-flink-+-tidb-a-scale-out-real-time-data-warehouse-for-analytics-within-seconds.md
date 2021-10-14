@@ -103,6 +103,11 @@ If you want to store MySQL change logs or other data sources in Kafka for Flink 
 
 In [TiDB 4.0.8](https://docs.pingcap.com/tidb/stable/release-4.0.7), you can connect TiDB to Flink through the [TiCDC Open Protocol](https://docs.pingcap.com/zh/tidb/stable/ticdc-open-protocol). In later versions, TiCDC will support the canal-json output format for Flink's use.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('Apache Flink + TiDB: A Scale-Out Real-Time Data Warehouse for Analytics Within Seconds', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="/contact-us" onclick="trackViews('Apache Flink + TiDB: A Scale-Out Real-Time Data Warehouse for Analytics Within Seconds', 'contact-us-middle')"><button>Request a Demo</button></a>
+</div>
+
 ## Case studies
 
 Now that we've got a basic understanding of the Flink + TiDB architecture, let's look at some real-world case studies. You might find them inspiring for your own work.

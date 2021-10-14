@@ -17,20 +17,13 @@ aliases: ['/blog/Rust-s-Huge-Compilation-Units/']
 
 The Rust programming language compiles fast software slowly.
 
-In this series we explore Rust's compile times within the context of [TiKV], the key-value store behind the [TiDB] database.
-
-[TiKV]: https://github.com/tikv/tikv
-[TiDB]: https://docs.pingcap.com/tidb/v4.0/overview
-
-&nbsp;
+In this series we explore Rust's compile times within the context of [TiKV](https://github.com/tikv/tikv), the key-value store behind the [TiDB](https://docs.pingcap.com/tidb/stable/overview) database.
 
 ## Rust Compile-time Adventures with TiKV: Episode 3
 
-Lately we're exploring how Rust's designs discourage fast compilation. In [the previous post in the series][prev] we discussed the difficult compile-time tradeoffs required to implement generics.
+Lately we're exploring how Rust's designs discourage fast compilation. In [the previous post in the series](https://pingcap.com/blog/generics-and-compile-time-in-rust/) we discussed the difficult compile-time tradeoffs required to implement generics.
 
 This time we're going to talk about compilation units.
-
-[prev]: https://pingcap.com/blog/generics-and-compile-time-in-rust/
 
 - [Compilation units](#compilation-units)
 - [Dependency graphs and unstirring spaghetti](#dependency-graphs-and-unstirring-spaghetti)
@@ -92,9 +85,7 @@ And that is because _dependencies between crates must form a directed acyclic gr
 
 Rust crates being daggish are mostly due to fundamental reasons of type checking and architectural complexity. If crates allowed for mutual dependencies then they would no longer be self-contained compilation units.
 
-In preparation for this blog I asked a few people if they could recall the reasons why Rust crates must form a DAG, and [Graydon] gave a typically thorough and authoritative answer:
-
-[Graydon]: https://github.com/graydon
+In preparation for this blog I asked a few people if they could recall the reasons why Rust crates must form a DAG, and [Graydon](https://github.com/graydon) gave a typically thorough and authoritative answer:
 
 > graydon: Prohibits mutual recursion between definitions across crates, allowing both an obvious deterministic bottom-up build schedule without needing to do some fixpoint iteration or separate declarations from definitions
 and enables phases that need to traverse a complete definition, like typechecking, to happen crate-at-a-time (enabling _some_ degree of incrementality / parallelism).
@@ -111,10 +102,7 @@ and enables phases that need to traverse a complete definition, like typecheckin
 
 > graydon: I'm not sure which if any of these was the dominant concern. If I had to guess I'd say avoiding problems with separate compilation of recursive definitions and managing code versioning. recall the language in the manual / the rationale for crates: "units of compilation and versioning". Those were the consideration for their existence as separate from modules. Modules get to be recursive. Crates, no. Because of things to do with "compilation and versioning".
 
-> graydon: I cannot make a simple argument about this because I'm still not smart enough about module systems — the full thing is laid out in [dreyer's thesis] and discussed in shorter [slide-deck form here][sdfh] — but suffice to say that recursive modules make it possible to see the "same" opaque type through two paths that should probably be considered equal but aren't easily determined to be so, I think in part due to the mix of opacity that modules provide and the fact that you have to partly look through that opacity to resolve recursion. so anyway I decided this was probably getting into "research" and I should just avoid the problem space, go with acyclic modules.
-
-[dreyer's thesis]: https://people.mpi-sws.org/~dreyer/thesis/main.pdf
-[sdfh]: http://macqueenfest.cs.uchicago.edu/slides/dreyer.pdf
+> graydon: I cannot make a simple argument about this because I'm still not smart enough about module systems — the full thing is laid out in [dreyer's thesis](https://people.mpi-sws.org/~dreyer/thesis/main.pdf) and discussed in shorter [slide-deck form here](http://macqueenfest.cs.uchicago.edu/slides/dreyer.pdf) — but suffice to say that recursive modules make it possible to see the "same" opaque type through two paths that should probably be considered equal but aren't easily determined to be so, I think in part due to the mix of opacity that modules provide and the fact that you have to partly look through that opacity to resolve recursion. so anyway I decided this was probably getting into "research" and I should just avoid the problem space, go with acyclic modules.
 
 Although driven by fundamental constraints, the hard daggishness of crates is useful for a number of reasons: it enforces careful abstractions, defines units of _parallel_ compilation, defines basically sensible codegen units, and dramatically reduces language and compiler complexity (even as the compiler likely moves toward whole-program, demand-driven, compilation in the future).
 
@@ -126,13 +114,17 @@ In my experience though projects tend to start in a single crate, without great 
 
 It happened to Servo, and it has also been my experience on TiKV, where I have made multiple aborted attempts to extract various modules from the main program, in long sequences of commits that untangle internal dependencies. I suspect that avoiding problematic monoliths is something that Rust devs learn with experience, but it is a repeating phenomenon in large Rust projects.
 
+<div class="trackable-btns">
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Rust's Huge Compilation Units', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## Trait coherence and the orphan rule
 
 Rust's trait system further makes it challenging to use crates as abstraction boundaries because of a thing call the _orphan rule_.
 
 Traits are the most common tool for creating abstractions in Rust. They are powerful, but like much of Rust's power, it comes with a tradeoff.
 
-The [orphan rule][or] helps maintain [trait coherence], and exists to ensure that the Rust compiler never encounters two implementations of a trait for the same type. If it were to encounter two such implementations then it would need to resolve the conflict while ensuring that the result is sound.
+The [orphan rule](https://smallcultfollowing.com/babysteps/blog/2015/01/14/little-orphan-impls/) helps maintain [trait coherence](https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence), and exists to ensure that the Rust compiler never encounters two implementations of a trait for the same type. If it were to encounter two such implementations then it would need to resolve the conflict while ensuring that the result is sound.
 
 What the orphan rule says, essentially, is that for any `impl`, either the _trait_ must be defined in the current crate, or the _type_ must be defined in the current crate.
 
@@ -144,25 +136,17 @@ This subject deserves more examples and a stronger argument, but I haven't the e
 
 Haskell's type classes, on which Rust's traits are based, do not have an orphan rule. I do not know the extent of problems this causes in practice for Haskell. At the time of Rust's design, it was thought to be problematic enough to correct.
 
-[or]: https://smallcultfollowing.com/babysteps/blog/2015/01/14/little-orphan-impls/
-[trait coherence]: https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence
-
 ## Internal parallelism
 
 As crates are the main unit of parallelism in compilation pipeline, in theory it is desirable to have a wide crate DAG with roughly equally-complex crates, such that the compiler can be using all the machines cores all the time. In practice though there are almost always bottlenecks where there is only one compiler instance running, working on a single crate.
 
 So in addition to `cargo`s parallel crate compilation, `rustc` itself is parallel over a single crate. It wasn't designed to be parallel though, so its parallelism is limited and hard-won.
 
-Today the only real internal parallelism in `rustc` is the use of [_codegen units_], by which `rustc` automatically divides a crate into multiple LLVM modules during translation. By doing this it can perform code generation in parallel. Like a crate, a Rust codegen-unit is also a compilation unit, but it is an LLVM compilation unit.
+Today the only real internal parallelism in `rustc` is the use of [_codegen units_](https://doc.rust-lang.org/rustc/codegen-options/index.html), by which `rustc` automatically divides a crate into multiple LLVM modules during translation. By doing this it can perform code generation in parallel. Like a crate, a Rust codegen-unit is also a compilation unit, but it is an LLVM compilation unit.
 
-Combined with [_incremental compilation_], it can avoid re-translating codegen units which have not changed from run to run, decreasing partial rebuild time. Unfortunately, the impact of codegen units and incremental compilation on both compile-time and run-time performance is hard to predict: improving rebuild time depends on `rustc` successfully dividing a crate into independent units that are unlikely to force each other to recompile when changed, and it's not obvious how humans should write their code to help `rustc` in this task; and arbitrarily dividing up a crate into codegen units creates arbitrary barriers to inlining, causing unexpected de-optimizations.
+Combined with [_incremental compilation_](https://rust-lang.github.io/rustc-guide/queries/incremental-compilation.html), it can avoid re-translating codegen units which have not changed from run to run, decreasing partial rebuild time. Unfortunately, the impact of codegen units and incremental compilation on both compile-time and run-time performance is hard to predict: improving rebuild time depends on `rustc` successfully dividing a crate into independent units that are unlikely to force each other to recompile when changed, and it's not obvious how humans should write their code to help `rustc` in this task; and arbitrarily dividing up a crate into codegen units creates arbitrary barriers to inlining, causing unexpected de-optimizations.
 
-[_codegen units_]: https://doc.rust-lang.org/rustc/codegen-options/index.html
-[_incremental compilation_]: https://rust-lang.github.io/rustc-guide/queries/incremental-compilation.html
-
-The rest of the compiler's work is completely serial, though soon it should [perform some analysis in parallel][parc].
-
-[parc]: https://internals.rust-lang.org/t/help-test-parallel-rustc/11503/14
+The rest of the compiler's work is completely serial, though soon it should [perform some analysis in parallel](https://internals.rust-lang.org/t/help-test-parallel-rustc/11503/14).
 
 ### Large vs. small crates
 
@@ -190,8 +174,7 @@ Unfortunately, because of all these variables, it's not at all obvious for any g
 
 ## In the next episode of Rust Compile-time Adventures with TiKV
 
-In the next episode of this series we'll wrap up this exploration of
-the reason's for Rust's slow compile times with a few smaller slow-compilation tidbits.
+In the next episode of this series we'll wrap up this exploration of the reason's for Rust's slow compile times with a few smaller slow-compilation tidbits.
 
 Then maybe we'll move on to something new, like techniques for speeding up Rust builds.
 

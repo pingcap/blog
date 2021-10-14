@@ -16,20 +16,13 @@ image: /images/blog/rust-compile-time-adventures.png
 
 The Rust programming language compiles fast software slowly.
 
-In this series we explore Rust's compile times within the context of [TiKV], the key-value store behind the [TiDB] database.
-
-[TiKV]: https://github.com/tikv/tikv
-[TiDB]: https://github.com/pingcap/tidb
-
-&nbsp;
+In this series we explore Rust's compile times within the context of [TiKV](https://github.com/tikv/tikv), the key-value store behind the [TiDB](https://github.com/pingcap/tidb) database.
 
 ## Rust Compile-time Adventures with TiKV: Episode 2
 
-In [the previous post in the series][prev] we covered Rust's early development history, and how it led to a series of decisions that resulted in a high-performance language that compiles slowly. Over the next few we'll describe in more detail some of the designs in Rust that make compile time slow.
+In [the previous post in the series](https://pingcap.com/blog/rust-compilation-model-calamity/) we covered Rust's early development history, and how it led to a series of decisions that resulted in a high-performance language that compiles slowly. Over the next few we'll describe in more detail some of the designs in Rust that make compile time slow.
 
 This time, we're talking about monomorphization.
-
-[prev]: https://pingcap.com/blog/rust-compilation-model-calamity/
 
 - [Comments on the last episode](#comments-on-the-last-episode)
 - [A brief aside about compile-time scenarios](#a-brief-aside-about-compile-time-scenarios)
@@ -41,29 +34,17 @@ This time, we're talking about monomorphization.
 
 ## Comments on the last episode
 
-After the [previous][prev] episode of this series, people made a lot of great comments on [HackerNews], [Reddit], and [Lobste.rs].
-
-[HackerNews]: https://news.ycombinator.com/item?id=22197082
-[Reddit]: https://www.reddit.com/r/rust/comments/ew5wnz/the_rust_compilation_model_calamity/
-[Lobste.rs]: https://lobste.rs/s/xup5lo/rust_compilation_model_calamity
+After the [previous](https://pingcap.com/blog/rust-compilation-model-calamity/) episode of this series, people made a lot of great comments on [HackerNews](https://news.ycombinator.com/item?id=22197082), [Reddit](https://www.reddit.com/r/rust/comments/ew5wnz/the_rust_compilation_model_calamity/), and [Lobste.rs](https://lobste.rs/s/xup5lo/rust_compilation_model_calamity).
 
 Some common comments:
 
-- The compile times we see for TiKV aren't so terrible, and are comparable to
-  C++.
-- What often matters is partial rebuilds since that is what developers
-  experience most in their build-test cycle.
+- The compile times we see for TiKV aren't so terrible, and are comparable to C++.
+- What often matters is partial rebuilds since that is what developers experience most in their build-test cycle.
 
 Some subjects I hadn't considered:
 
-- [WalterBright pointed out][wb] that data flow analysis (DFA) is expensive
-  (quadratic). Rust depends on data flow analysis. I don't know how this
-  impacts Rust compile times, but it's good to be aware of.
-- [kibwen reminded us][kb] that faster linkers have an impact on build times,
-  and that LLD may be faster than the system linker eventually.
-
-[wb]: https://news.ycombinator.com/item?id=22199471
-[kb]: https://www.reddit.com/r/rust/comments/ew5wnz/the_rust_compilation_model_calamity/fg07hvv/
+- [WalterBright pointed out](https://news.ycombinator.com/item?id=22199471) that data flow analysis (DFA) is expensive (quadratic). Rust depends on data flow analysis. I don't know how this impacts Rust compile times, but it's good to be aware of.
+- [kibwen reminded us](https://www.reddit.com/r/rust/comments/ew5wnz/the_rust_compilation_model_calamity/fg07hvv/) that faster linkers have an impact on build times, and that LLD may be faster than the system linker eventually.
 
 ## A brief aside about compile-time scenarios
 
@@ -76,9 +57,7 @@ It's tempting to talk about "compile-time" broadly, without any further clarific
 
 The "development profile" entails compiler settings designed for fast compile times, slow run times, and maximum debuggability. The "release profile" entails compiler settings designed for fast run times, slow compile times, and, usually, minimum debuggability. In Rust, these are invoked with `cargo build` and `cargo build --release` respectively, and are indicative of the compile-time/run-time tradeoff.
 
-A full rebuild is building the entire project from scratch, and a partial rebuild happens after modifying code in a previously built project. Partial rebuilds can notably benefit from [incremental compilation][ic].
-
-[ic]: https://rust-lang.github.io/rustc-guide/queries/incremental-compilation.html
+A full rebuild is building the entire project from scratch, and a partial rebuild happens after modifying code in a previously built project. Partial rebuilds can notably benefit from [incremental compilation](https://rust-lang.github.io/rustc-guide/queries/incremental-compilation.html).
 
 In addition to those there are also
 
@@ -89,10 +68,7 @@ In addition to those there are also
 
 These are mostly similar to development mode and release mode respectively, though the interactions in cargo between development / test and release / bench can be subtle and surprising. There may be other profiles (TiKV has more), but those are the obvious ones for Rust, as built-in to cargo. Beyond that there are other scenarios, like typechecking only (`cargo check`), building just a single project (`cargo build -p`), single-core vs. multi-core, local vs. distributed, local vs. CI.
 
-Compile time is also affected by human perception &mdash; it's possible for compile time to feel bad when it's actually decent, and to feel decent when it's actually not so great. This is one of the premises behind the [Rust Language Server][RLS] (RLS) and [rust-analyzer] &mdash; if developers are getting constant, real-time feedback in their IDE then it doesn't matter as much how long a full compile takes.
-
-[RLS]: https://github.com/rust-lang/rls
-[rust-analyzer]: https://github.com/rust-analyzer/rust-analyzer
+Compile time is also affected by human perception &mdash; it's possible for compile time to feel bad when it's actually decent, and to feel decent when it's actually not so great. This is one of the premises behind the [Rust Language Server](https://github.com/rust-lang/rls) (RLS) and [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer) &mdash; if developers are getting constant, real-time feedback in their IDE then it doesn't matter as much how long a full compile takes.
 
 So it's important to keep in mind through this series that there is a spectrum of tunable possibilities from "fast compile / slow run" to "fast run / slow compile", there are different scenarios that affect compile time in different ways, and in which compile time affects perception in different ways.
 
@@ -133,23 +109,20 @@ In general, for programming languages, there are two ways to translate a generic
 
 1) translate the generic function for each set of instantiated type parameters, calling each trait method directly, but duplicating most of the generic function's machine instructions, or
 
-2) translate the generic function just once, calling each trait method through a function pointer (via a ["vtable"]).
-
-["vtable"]: https://en.wikipedia.org/wiki/Virtual_method_table
+2) translate the generic function just once, calling each trait method through a function pointer (via a ["vtable"](https://en.wikipedia.org/wiki/Virtual_method_table)).
 
 The first results in _static_ method dispatch, the second in _dynamic_ (or "virtual") method dispatch. The first is sometimes called "monomorphization", particularly in the context of C++ and Rust, a confusingly complex word for a simple idea.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('Generics and Compile-Time in Rust', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Generics and Compile-Time in Rust', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### An example in Rust
 
-The previous example uses Rust's type parameters (`<T: ToString>`) to define a
-statically-dispatched `print` function. In this section we present two more Rust
-examples, the first with static dispatch, using references to `impl` trait
-instances, and the second with dynamic dispatch, with references to `dyn` trait
-instances.
+The previous example uses Rust's type parameters (`<T: ToString>`) to define a statically-dispatched `print` function. In this section we present two more Rust examples, the first with static dispatch, using references to `impl` trait instances, and the second with dynamic dispatch, with references to `dyn` trait instances.
 
-Static ([playground link][pl1]):
-
-[pl1]: https://play.rust-lang.org/?version=stable&mode=release&edition=2018&gist=066e72731fbdbf212f68c25b5a4e3b72
+Static ([playground link](https://play.rust-lang.org/?version=stable&mode=release&edition=2018&gist=066e72731fbdbf212f68c25b5a4e3b72)):
 
 ```rust
 use std::string::ToString;
@@ -166,9 +139,7 @@ fn main() {
 
 ```
 
-Dynamic ([playground link][pl2]):
-
-[pl2]: https://play.rust-lang.org/?version=stable&mode=release&edition=2018&gist=d359d0440acaeed1d25020955979b9ce
+Dynamic ([playground link](https://play.rust-lang.org/?version=stable&mode=release&edition=2018&gist=d359d0440acaeed1d25020955979b9ce)):
 
 ```rust
 use std::string::ToString;
@@ -184,22 +155,13 @@ fn main() {
 }
 ```
 
-Notice that the only difference between these two cases is that the first
-`print`'s argument is type `&impl ToString`, and the second's is `&dyn
-ToString`. The first is using static dispatch, and the second dynamic.
+Notice that the only difference between these two cases is that the first `print`'s argument is type `&impl ToString`, and the second's is `&dyn ToString`. The first is using static dispatch, and the second dynamic.
 
-In Rust `&impl ToString` is essentially shorthand for a type parameter argument
-that is only used once, like in the earlier example `fn print<T: ToString>(v:
-T)`.
+In Rust `&impl ToString` is essentially shorthand for a type parameter argument that is only used once, like in the earlier example `fn print<T: ToString>(v: T)`.
 
-Note that in these examples we have to use `inline(never)` to defeat the
-optimizer. Without this it would turn these simple examples into the exact same
-machine code. I'll explore this phenomenon further in a future episode of this
-series.
+Note that in these examples we have to use `inline(never)` to defeat the optimizer. Without this it would turn these simple examples into the exact same machine code. I'll explore this phenomenon further in a future episode of this series.
 
-Below is an extremely simplified and sanitized version of the assembly
-for these two examples. If you want to see the real thing, the playground
-links above can generate them by clicking the buttons labeled `... -> ASM`.
+Below is an extremely simplified and sanitized version of the assembly for these two examples. If you want to see the real thing, the playground links above can generate them by clicking the buttons labeled `... -> ASM`.
 
 ```
 print::hffa7359fe88f0de2:
@@ -234,12 +196,7 @@ main::h6b41e7a408fe6876:
     callq   print::h796a2cdf500a8987
 ```
 
-The important thing to note here is the duplication of functions or lack
-thereof, depending on the strategy. In the static case there are two `print`
-functions, distinguished by a hash value in their names, and `main` calls both
-of them. In the dynamic case, there is a single `print` function that `main`
-calls twice. The details of how these two strategies actually handle their
-arguments at the machine level are too intricate to go into here.
+The important thing to note here is the duplication of functions or lack thereof, depending on the strategy. In the static case there are two `print` functions, distinguished by a hash value in their names, and `main` calls both of them. In the dynamic case, there is a single `print` function that `main` calls twice. The details of how these two strategies actually handle their arguments at the machine level are too intricate to go into here.
 
 ### More about the tradeoff
 
@@ -247,28 +204,17 @@ These two strategies represent a notoriously difficult tradeoff: the first creat
 
 It is often thought that the static dispatch strategy results in faster machine code, though I have not seen any research into the matter (we'll do an experiment on this subject in a future edition of this series). Intuitively, it makes sense &mdash; if the CPU knows the address of all the functions it is calling it should be able to call them faster than if it has to first load the address of the function, then load the instruction code into the instruction cache. There are though factors that make this intuition suspect:
 
-- first, modern CPUs have invested a lot of silicon into branch prediction, so
-  if a function pointer has been called recently it will likely be predicted
-  correctly the next time and called quickly;
-- second, monomorphization results in huge quantities of machine instructions, a
-  phenomenon commonly referred to as "code bloat", which could put great
-  pressure on the CPU's instruction cache;
-- third, the LLVM optimizer is surprisingly smart, and with enough visibility
-  into the code can sometimes turn virtual calls into static calls.
+- first, modern CPUs have invested a lot of silicon into branch prediction, so if a function pointer has been called recently it will likely be predicted correctly the next time and called quickly;
+- second, monomorphization results in huge quantities of machine instructions, a phenomenon commonly referred to as "code bloat", which could put great pressure on the CPU's instruction cache;
+- third, the LLVM optimizer is surprisingly smart, and with enough visibility into the code can sometimes turn virtual calls into static calls.
 
 C++ and Rust both strongly encourage monomorphization, both generate some of the fastest machine code of any programming language, and both have problems with code bloat. This seems to be evidence that the monomorphization strategy is indeed the faster of the two. There is though a curious counter-example: C. C has no generics at all, and C programs are often both the slimmest _and_ fastest in their class. Reproducing the monomorphization strategy in C requires using ugly C macro preprocessor techniques, and modern object-orientation patterns in C are often vtable-based.
 
 _Takeaway: it is a broadly thought by compiler engineers that monomorphiation results in somewhat faster generic code while taking somewhat longer to compile._
 
-Note that the monomorphization-compile-time problem is compounded in Rust because Rust translates generic functions in every crate (generally, "compilation unit") that instantiates them. That means that if, given our `print` example, crate `a` calls `print("hello, world")`, and crate `b` also calls `print("hello, world, or whatever")`, then both crate `a` and `b` will contain the monomorphized `print_str` function &mdash; the compiler does all the type-checking and translation work twice. This is partially mitigated today at lower optimization levels by [shared generics], though there are still duplicated generics [in sibling dependencies][sib],
-and at higher optimization levels.
+Note that the monomorphization-compile-time problem is compounded in Rust because Rust translates generic functions in every crate (generally, "compilation unit") that instantiates them. That means that if, given our `print` example, crate `a` calls `print("hello, world")`, and crate `b` also calls `print("hello, world, or whatever")`, then both crate `a` and `b` will contain the monomorphized `print_str` function &mdash; the compiler does all the type-checking and translation work twice. This is partially mitigated today at lower optimization levels by [shared generics](https://github.com/rust-lang/rust/issues/47317#issuecomment-478894318), though there are still duplicated generics [in sibling dependencies](https://github.com/rust-lang/rust/pull/48779), and at higher optimization levels.
 
-[shared generics]: https://github.com/rust-lang/rust/issues/47317#issuecomment-478894318
-[sib]: https://github.com/rust-lang/rust/pull/48779
-
-All that is only touching on the surface of the tradeoffs involved in monomorphization. I passed this draft by [Niko], the primary type theorist behind Rust, and he had some words to say about it:
-
-[Niko]: https://github.com/nikomatsakis
+All that is only touching on the surface of the tradeoffs involved in monomorphization. I passed this draft by [Niko](https://github.com/nikomatsakis), the primary type theorist behind Rust, and he had some words to say about it:
 
 > niko: so far, everything looks pretty accurate, except that I think the monomorphization area leaves out a lot of the complexity. It's definitely not just about virtual function calls.
 
@@ -302,7 +248,7 @@ All that is only touching on the surface of the tradeoffs involved in monomorphi
 
 > niko: e.g., `fn foo<T>() { bar::<Vec<T>>(); } fn bar<U>() { .. }`
 
-> niko: here, you have a type descriptor for T that was given to you dynamically, but you have to build the type descriptor for Vec&lt;T&gt;
+> niko: here, you have a type descriptor for T that was given to you dynamically, but you have to build the type descriptor for `Vec<T>`
 
 > niko: and then we can make it even worse
 
@@ -314,13 +260,11 @@ All that is only touching on the surface of the tradeoffs involved in monomorphi
 
 > niko: because we have to be able to figure out `Vec<T>: Debug`, and all we know is `T: Debug`
 
-> niko: we might be able to handle that by bubbling up the Vec&lt;T&gt; to our callers...
+> niko: we might be able to handle that by bubbling up the `Vec<T>` to our callers...
 
 ## In the next episode of Rust Compile-time Adventures with TiKV
 
-In the next episode of this series we'll discuss compilation units -- the
-bundles of code that a compiler processes at a single time -- and how selecting
-compilation units affects compile time.
+In the next episode of this series we'll discuss compilation units -- the bundles of code that a compiler processes at a single time -- and how selecting compilation units affects compile time.
 
 Stay Rusty, friends.
 

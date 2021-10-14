@@ -146,6 +146,11 @@ We can see in the pessimistic locking model:
 * When Session B tries to execute a data manipulation language (DML) statement, it finds that Session A has locked the same row. After Session A commits its update, Session B executes the DML statement.
 * When Session B successfully executes the DML statement, the final commit also succeeds.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('Pessimistic Locking: Better MySQL Compatibility, Fewer Rollbacks Under High Load', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Pessimistic Locking: Better MySQL Compatibility, Fewer Rollbacks Under High Load', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Isolation
 
 Let's look at the following table to see the transaction isolation:
@@ -309,7 +314,7 @@ Query OK, 0 rows affected (0.00 sec)
 <br/>
 
 <br/>
-mysql> SELECT * FROM t WHERE id>=10 AND id&lt;11 FOR UPDATE;
+mysql> SELECT * FROM t WHERE id>=10 AND id<11 FOR UPDATE;
 <br/>
 <span style="color: red;">Empty set (0.00 sec)</span>
    </td>
@@ -327,7 +332,7 @@ Query OK, 0 rows affected (0.00 sec)
 <br/>
 
 <br/>
-> SELECT * FROM t WHERE id>=10 AND id&lt;11 FOR UPDATE;
+> SELECT * FROM t WHERE id>=10 AND id<11 FOR UPDATE;
 <br/>
 <span style="color: red;">// block</span>
    </td>
@@ -337,7 +342,7 @@ Query OK, 0 rows affected (0.00 sec)
 <br/>
 
 <br/>
-> SELECT * FROM t WHERE id>=10 AND id&lt;11 FOR UPDATE;
+> SELECT * FROM t WHERE id>=10 AND id<11 FOR UPDATE;
 <br/>
 <span style="color: red;">Empty set (0.00 sec)</span>
    </td>
