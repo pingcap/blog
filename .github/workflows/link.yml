@@ -25,4 +25,4 @@ jobs:
           title: Broken Link Detected
           content-filepath: ./lychee/out.md
           labels: bug
-          assignees: ran-huang
+          assignees: septemberfd
