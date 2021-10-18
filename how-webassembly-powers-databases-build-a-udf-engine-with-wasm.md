@@ -1,14 +1,14 @@
 ---
 title: 'How WebAssembly Powers Databases: Build a UDF Engine with WASM'
 author: ['Tenny Zhuang']
-date: 2021-10-11
+date: 2021-10-18
 summary: WebAssembly is a binary instruction format designed for secure and near-native execution in the sandboxed environment. This post shares how we use WebAssembly to build a user-defined function engine for TiDB.
 tags: ['Hackathon']
 categories: ['Engineering']
 image: /images/blog/how-webassembly-powers-databases-build-a-udf-engine-with-wasm.png
 ---
 
-**Author:** Tenny Zhuang (TiKV committer)
+**Author:** [Tenny Zhuang](https://github.com/TennyZhuang) (TiKV committer)
 
 **Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
 
@@ -76,3 +76,5 @@ Besides the features we've already mentioned, Wasm-based UDF opens up more possi
 **Cloud-based UDFs can connect the database with other systems over the cloud.** A UDF can read data from object storage to achieve heterogeneous storage, or call machine learning models to perform face recognition and then join the recognition results with other tables. With UDFs, you can perform all these operations inside TiDB.
 
 When we implemented this UDF engine using Wasm, we actually realized the tremendous potential Wasm has in server-side applications. If Wasm gains traction in more systems, it will bring users powerful and flexible customizability while ensuring data security. Solomon Hykes, the founder of Docker, once [said](https://twitter.com/solomonstre/status/1111004913222324225) that **WebAssembly on the server is the future of computing**. We, too, believe in that future, and we hope that our small project will give more people a peek into it.
+
+*This article was originally published on [VMblog](https://vmblog.com/archive/2021/09/20/how-webassembly-powers-database-build-a-udf-engine-with-wasm.aspx#.YVUGBWYzb0p).*
