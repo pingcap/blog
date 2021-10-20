@@ -22,7 +22,7 @@ def metadata_is_complete(metadata, filename):
     if blog <= meta or case_study <= meta:
         return 0
     else:
-        print(filename + " misses frontmatters. Please check again.\n")
+        print("\n" + filename + " misses frontmatters. Please check again.\n")
         return 1
 
 
@@ -70,5 +70,5 @@ if __name__ == "__main__":
                 count += 1
 
     if count:
-        print("\nThe above issues will cause website build failure. Please fix them.")
+        print("The above issues will cause website build failure. Please fix them.\n")
         exit(1)
