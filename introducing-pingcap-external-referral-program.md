@@ -1,8 +1,8 @@
 ---
-title: Introducing the  PingCAP External Referral Program 
+title: Introducing the PingCAP External Referral Program 
 author: [PingCAP]
 date: 2021-10-20
-summary: At PingCAP, we are always looking for talented people who want to help us build the database of the future. Do you know someone like that? Tell us about them, and if we hire them, you’ll get a referral bonus in the form of an eGift card.
+summary: At PingCAP, we are always looking for talented people who want to help us build the database of the future. Do you know someone like that? Tell us about them, and if we hire them, you'll get a referral bonus in the form of an eGift card.
 tags: ['Careers']
 categories: ['Company']
 image: /images/blog/pingcap-external-referral-program.png
@@ -19,29 +19,29 @@ At PingCAP, we are always looking for talented people who want to help us build 
 The amount of your bonus depends on your location:
 
 <table>
- <tr>
-  <td><strong>Region</strong>
-  </td>
-  <td><strong>Bonus</strong>
-  </td>
+  <tr>
+   <td><strong>Region</strong>
+   </td>
+   <td><strong>Bonus</strong>
+   </td>
   </tr>
- <tr>
-  <td>North America
-  </td>
-  <td>1,000 USD
-  </td>
+  <tr>
+   <td>North America
+   </td>
+   <td>1,000 USD
+   </td>
   </tr>
- <tr>
-  <td>Singapore
-  </td>
-  <td>1,000 SGD
-  </td>
+  <tr>
+   <td>Singapore
+   </td>
+   <td>1,000 SGD
+   </td>
   </tr>
- <tr>
-  <td>Japan
-  </td>
-  <td>100,000 JPY
-  </td>
+  <tr>
+   <td>Japan
+   </td>
+   <td>100,000 JPY
+   </td>
   </tr>
 </table>
 
