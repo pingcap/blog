@@ -5,6 +5,7 @@ summary: The target audience of this document is the contributors in the TiDB co
 tags: ['Architecture', 'Query execution']
 aliases: ['/blog/2017/01/06/about-the-tidb-source-code/', '/blog/2017-01-06-about-the-tidb-source-code']
 categories: ['Engineerng']
+image: /images/a_fake_path.png
 ---
 
 The distributed executor is mainly about distributing tasks and collecting results. The `Select` interface returns a data structure, which is called `SelectResult`. The structure can be considered to be an iterator. Because there are many region servers at the bottom layer, the results returned from each node is `PartialResult`. On top of these results is an encapsulated `SelectResult` which is an iterator of `PartialResult`. The next `PartialResult` can be obtained by using the `next` method.
