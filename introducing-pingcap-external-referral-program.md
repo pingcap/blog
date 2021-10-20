@@ -69,4 +69,4 @@ Your referral is valid for 6 months from the date we receive it.
 
 ## Tell us about your friend!
 
-Go to https://pingcap.com/careers to find a position that your referral may fit. Even if you don't find a specific target in the list, don't hesitate to share the referral's info with us. To finish the referral, email us careers@pingcap.com. In the body of the email, please attach the referral's CV if you have it, and include the referrer's name, email address, phone number, and why you think the candidate is a good fit for us.
+Go to [https://pingcap.com/careers](https://pingcap.com/careers) to find a position that your referral may fit. Even if you don't find a specific target in the list, don't hesitate to share the referral's info with us. To finish the referral, email us careers@pingcap.com. In the body of the email, please attach the referral's CV if you have it, and include the referrer's name, email address, phone number, and why you think the candidate is a good fit for us.
