@@ -20,6 +20,7 @@ jobs:
         python3 check-file-encoding.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*')
     - name: "Check front matters"
       run:
+        pip3 install python-frontmatter;
         python3 ./hack/check-front-matters.py $(git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*')
     - name: Markdown lint
       uses: avto-dev/markdown-lint@v1
