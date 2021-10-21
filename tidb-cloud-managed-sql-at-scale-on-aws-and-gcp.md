@@ -42,7 +42,7 @@ With TiDB Cloud's UI, you can deploy a cluster with only a few clicks. Simply pi
 
 In this demo video, we create a cluster in just one minute:
 
-<iframe id="youtube-video" title="Create a Cluster in TiDB Cloud" src="https://www.youtube.com/embed/uGRoKiETSUU?rel=0" frameborder="0" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+<iframe id="youtube-video" title="Create a Cluster in TiDB Cloud" src="https://www.youtube.com/embed/C1Ec1Yfp-EU?rel=0" frameborder="0" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
 
 After your cluster is set, you can leave the rest to us. As your database service provider, we take care of day-to-day operations, including monitoring alerts, tuning, upgrades, and backups. **Your team can focus on developing business applications, rather than doing tedious, boring database operations.**
 
