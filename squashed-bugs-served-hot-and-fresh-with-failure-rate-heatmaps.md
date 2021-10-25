@@ -46,12 +46,12 @@ We also provide **a simple demo** on [fuzz_debug_platform - TiSqlDebug](https://
 
 ### Getting inspired
 
-This project was initially inspired by [APOLLO: Automatic Detection and Diagnosis of Performance Regressions in Database Systems](http://www.vldb.org/pvldb/vol13/p57-jung.pdf), a VLDB paper written by researchers from Georgia Institute of Technology (GT) and eBay Inc. We really appreciate their great work. The paper presents a design of the [Apollo](https://github.com/sslab-gatech/apollo) toolchain which detects, reports, and diagnoses performance regressions in database management systems (DBMSs).
+This project was initially inspired by [APOLLO: Automatic Detection and Diagnosis of Performance Regressions in Database Systems](https://www.vldb.org/pvldb/vol13/p57-jung.pdf), a VLDB paper written by researchers from Georgia Institute of Technology (GT) and eBay Inc. We really appreciate their great work. The paper presents a design of the [Apollo](https://github.com/sslab-gatech/apollo) toolchain which detects, reports, and diagnoses performance regressions in database management systems (DBMSs).
 
 This approach can be also applied to finding bugs, so let's understand some of Apollo's basics first.
 
 ![Apollo system architecture](media/apollo-system-architecture.png)
-<div class="caption-center"><a href="http://www.vldb.org/pvldb/vol13/p57-jung.pdf" target="_blank">Apollo system architecture</a></div>
+<div class="caption-center"><a href="https://www.vldb.org/pvldb/vol13/p57-jung.pdf" target="_blank">Apollo system architecture</a></div>
 
 The Apollo system consists of three modules: SQLFuzz, SQLMin, and SQLDebug.
 
@@ -90,7 +90,7 @@ Here are our answers.
 
 To do an accurate and effective statistical diagnosis, we need to feed the bot a fair amount of test cases. Thus, we need a SQL fuzzing tool that randomly constructs valid SQL queries for testing the TiDB database.
 
-Projects such as [RAGS](http://vldb.org/conf/2007/papers/industrial/p1243-bati.pdf) and [SQLSmith](https://github.com/anse1/sqlsmith) provide a popular SQL fuzzing framework in the DBMS community. For our scenario, we used an open-source stochastic testing framework, [go-randgen](https://github.com/pingcap/go-randgen), to implement SQL fuzzing.
+Projects such as [RAGS](https://vldb.org/conf/2007/papers/industrial/p1243-bati.pdf) and [SQLSmith](https://github.com/anse1/sqlsmith) provide a popular SQL fuzzing framework in the DBMS community. For our scenario, we used an open-source stochastic testing framework, [go-randgen](https://github.com/pingcap/go-randgen), to implement SQL fuzzing.
 
 Users first define a grammar file that contains some Backus–Naur form ([BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)) grammars for SQL. go-randgen then starts from the "query" statement and randomly traverses the "SQL grammar tree" in the file to generate a SQL query. This process is shown below as a red line path.
 

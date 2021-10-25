@@ -101,6 +101,6 @@ In a word, this is a question about isolating resources in the storage layer and
 
 ## Conclusion
 
-PingCAP's implementation of an HTAP database has elegantly solved a decades-long conflict: how to process two types of queries in a single database. [Their paper](http://www.vldb.org/pvldb/vol13/p3072-huang.pdf) does more than lay out a theoretical case; it shows exactly how they implemented the database, and it backs up their claims with solid testing.
+PingCAP's implementation of an HTAP database has elegantly solved a decades-long conflict: how to process two types of queries in a single database. [Their paper](https://www.vldb.org/pvldb/vol13/p3072-huang.pdf) does more than lay out a theoretical case; it shows exactly how they implemented the database, and it backs up their claims with solid testing.
 
 As the first paper in the industry to describe the Raft-based implementation of a distributed HTAP database, TiDB's paper proved that a distributed, Raft-based HTAP database is achievable. It may speed up the development and adoption of distributed HTAP databases. In this regard, it marks a milestone.
