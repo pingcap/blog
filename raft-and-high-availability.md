@@ -49,5 +49,5 @@ The Raft protocol is one of several options for designing a high availability en
 Additional blog posts:
 
 * [How TiKV Reads and Writes](https://pingcap.com/blog/how-tikv-reads-and-writes) describes the use of Raft in more detail.
-* [TiDB: A Raft-based HTAP Database](http://www.vldb.org/pvldb/vol13/p3072-huang.pdf) explores how TiDB benefits from the application of Raft.
+* [TiDB: A Raft-based HTAP Database](https://www.vldb.org/pvldb/vol13/p3072-huang.pdf) explores how TiDB benefits from the application of Raft.
 * [Building a Large Scale Distributed Storage System Based on Raft](https://pingcap.com/blog/building-a-large-scale-distributed-storage-system-based-on-raft) covers the rationale behind the use of Raft with TiDB.

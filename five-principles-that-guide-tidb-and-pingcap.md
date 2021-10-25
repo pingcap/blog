@@ -147,7 +147,7 @@ We provided a Raft-based solution. The Raft consensus algorithm has a Learner ro
 * The log is replicated from the Leader to the Learner via streaming. The latency is low, so users can **read the data in real time**.
 * OLAP requests access data from the Learner replica, and OLTP requests access data from the Leader and Follower replicas. **The resources are isolated**, and the two types of workloads rarely affect each other.
 
-With just one well-designed stone, we killed more than two birds. This solution was later named [TiFlash](https://docs.pingcap.com/tidb/dev/tiflash-overview/), a columnar store extension for TiDB. We also published [a paper on VLDB](http://www.vldb.org/pvldb/vol13/p3072-huang.pdf), which explained in detail how we implemented the Raft-based HTAP database.
+With just one well-designed stone, we killed more than two birds. This solution was later named [TiFlash](https://docs.pingcap.com/tidb/dev/tiflash-overview/), a columnar store extension for TiDB. We also published [a paper on VLDB](https://www.vldb.org/pvldb/vol13/p3072-huang.pdf), which explained in detail how we implemented the Raft-based HTAP database.
 
 ## What's next
 

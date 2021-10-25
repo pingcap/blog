@@ -209,6 +209,6 @@ If you are interested in the Flink + TiDB real-time data warehouse or have any q
 
     This post describes HTAP and how TiDB makes the most of the HTAP architecture.
 
-* [TiDB: A Raft-based HTAP Database](http://www.vldb.org/pvldb/vol13/p3072-huang.pdf)
+* [TiDB: A Raft-based HTAP Database](https://www.vldb.org/pvldb/vol13/p3072-huang.pdf)
 
     This is the first paper in the industry on the implementation of a distributed real-time HTAP database.

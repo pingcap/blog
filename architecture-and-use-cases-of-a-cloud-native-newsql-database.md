@@ -90,7 +90,7 @@ Simplifying your infrastructure stack presents a huge value-add to any company's
 
 ## Multi-Cloud TiDB-as-a-service and TiDB Academy
 
-Since PingCAP began building TiDB more than three years ago, the database has been battle-tested in many scenarios. Today, more than 300 companies are relying on TiDB in production to meet their OLTP/OLAP, database scalability, real-time analytics, and unified storage needs. However, there are still many to-do's on the [TiDB roadmap](https://pingcap.com/docs/roadmap/).
+Since PingCAP began building TiDB more than three years ago, the database has been battle-tested in many scenarios. Today, more than 300 companies are relying on TiDB in production to meet their OLTP/OLAP, database scalability, real-time analytics, and unified storage needs. However, there are still many to-do's on the [TiDB roadmap](https://github.com/pingcap/tidb/projects/63).
 
 One of those items is a fully-managed TiDB-as-a-service offering that can be used in any cloud setting—public, private, or hybrid. PingCAP has been working on an enterprise-grade, fully-managed TiDB offering based on Kubernetes, and the first version was recently released. You can sign up for it [HERE](https://pingcap.com/products/tidbcloud).
 
