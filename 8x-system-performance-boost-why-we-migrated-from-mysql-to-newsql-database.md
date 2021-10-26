@@ -311,7 +311,7 @@ After we migrated to TiDB, TiDB showed good performance:
       <tr>
        <td>MySQL
        </td>
-       <td>4 * (16-core 64 GB 3 TB) * 2
+       <td>4 \* (16-core 64 GB 3 TB) \* 2
     <br/>
     Active-standby
        </td>
