@@ -2,7 +2,7 @@
 title: Why SHAREit Selects TiKV for Data Storage for Its 2.4-Billion-User Business
 author: ['Linlin Yan']
 date: 2021-11-09
-summary: This post talks about why SHAREit Group embraces TiKV as its storage infrastructure and how TiKV fixes SHAREit’s pain points. 
+summary: This post talks about why SHAREit Group embraces TiKV, an open-source distributed and transactional KV database, as its storage infrastructure and how TiKV fixes SHAREit’s pain points. 
 tags: ['TiKV']
 customer: SHAREit Group
 customerCategory: Internet
@@ -26,7 +26,7 @@ Then, we encountered [TiKV](https://docs.pingcap.com/tidb/stable/tikv-overview#t
 
 In this post, I will talk about the challenges we faced with our previous storage solution, why we selected TiKV, and how TiKV fixes our pain points. I hope you find our experience useful for your future choice of database. 
 
-## Challenges we faced with our previous solution
+## Challenges we faced with our previous distributed database
 
 Our business generates massive amounts of data every day, up to terabytes per hour, so we need a strong KV storage that supports: 
 
@@ -61,6 +61,11 @@ TiKV is exactly what we’ve been looking for:
 * TiKV separates storage from computing. We can leverage that feature to build our own KV product. 
 * TiKV creates SSTables inside itself, so we can remove Spark-related code as much as possible. 
 * TiKV is an open-source product with a vibrant community, and we can leverage the power of the community to further polish TiKV together. 
+
+<div class="trackable-btns">
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Why SHAREit Selects TiKV for Data Storage for Its 2.4-Billion-User Business', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  <a href="/contact-us" onclick="trackViews('Why SHAREit Selects TiKV for Data Storage for Its 2.4-Billion-User Business', 'contact-us-middle')"><button>Request a Demo</button></a>
+</div>
 
 The image below shows our new architecture built on TiKV. The structure on the left explains the process of real-time data write, that is, first from SDK to online storage, then to data computing, and finally to TiKV storage engine. 
 
@@ -98,7 +103,6 @@ On a single server with a 40-vCore, Xeon E5 CPU and an NVMe disk, this architect
 We also tested its online reading performance under bulk load. We can see from Table 2 that the read latency is stable in most cases.
 
 These tests were performed against our demo. With further performance tuning, we believe we will get even better results. 
-
 
 ## Believe in the power of openness
 
