@@ -234,6 +234,11 @@ We also compared TiDB with other distributed databases. In the following table, 
   </tr>
 </table>
 
+<div class="trackable-btns">
+    <a href="/download" onclick="trackViews('An 8x System Performance Boost: Why We Migrated from MySQL to a NewSQL Database', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+    <a href="/contact-us" onclick="trackViews('An 8x System Performance Boost: Why We Migrated from MySQL to a NewSQL Database', 'contact-us-middle')"><button>Request a Demo</button></a>
+</div>
+
 ## How we use Cloud-TiDB in mission-critical applications
 
 ### TiDB replaces MySQL sharding in our logistics billing system
