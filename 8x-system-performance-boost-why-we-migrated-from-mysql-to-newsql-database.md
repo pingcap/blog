@@ -311,7 +311,7 @@ After we migrated to TiDB, TiDB showed good performance:
       <tr>
        <td>MySQL
        </td>
-       <td>4 &ast; (16-core 64 GB 3 TB) &ast; 2
+       <td>4 * (16-core 64 GB 3 TB) * 2
     <br/>
     Active-standby
        </td>
@@ -334,7 +334,7 @@ After we migrated to TiDB, TiDB showed good performance:
 
     * MySQL will have 32 nodes while TiDB will have only 14.
     * MySQL will use 512 CPU cores while TiDB will use only 224, less than half of MySQL.
-    * MySQL will use 48 TB of storage space while TiDB will use 16, only 1/3 of MySQL. 
+    * MySQL will use 48 TB of storage space while TiDB will use 16, only 1/3 of MySQL.
 
     ![MySQL nodes vs. TiDB nodes](media/mysql-nodes-vs-tidb-nodes-jd.jpg)
     <div class="caption-center"> MySQL nodes vs. TiDB nodes </div>
