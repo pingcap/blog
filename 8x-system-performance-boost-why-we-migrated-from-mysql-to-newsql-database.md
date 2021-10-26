@@ -20,7 +20,7 @@ logo: /images/blog/customers/jd.com-logo.png
 
 [JD.com](https://en.wikipedia.org/wiki/JD.com) is China's leading one-stop e-commerce platform and a member of the Global Fortune 500. It provides 500 million+ active customers with an unrivalled range of authentic, high-quality products. The vast majority of orders placed on JD can be delivered right to the customer's doorstep on the same day or the day after the order is placed.
 
-​​As our business developed and data size boomed, we faced severe database challenges. **Stand-alone MySQL had limited storage capacity, complex queries took a long time to execute, and the database was hard to maintain.** We tried sharding, Elasticsearch, and ClickHouse®, but they were not ideal.
+As our business developed and data size boomed, we faced severe database challenges. **Stand-alone MySQL had limited storage capacity, complex queries took a long time to execute, and the database was hard to maintain.** We tried sharding, Elasticsearch, and ClickHouse®, but they were not ideal.
 
 Finally, we found our optimal solution: [TiDB](https://docs.pingcap.com/tidb/stable), an open-source, NewSQL database. **TiDB helps** **scale out our databases** and **increases our large parcel sorting system's performance by 8x**. We estimate that in the next two years it can **reduce our IT costs of our logistics billing system by 67%**.
 
@@ -311,7 +311,7 @@ After we migrated to TiDB, TiDB showed good performance:
       <tr>
        <td>MySQL
        </td>
-       <td>4 \* (16-core 64 GB 3 TB) \* 2
+       <td>4 * (16-core 64 GB 3 TB) * 2
     <br/>
     Active-standby
        </td>
