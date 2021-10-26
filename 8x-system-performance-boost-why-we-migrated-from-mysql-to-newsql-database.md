@@ -144,7 +144,7 @@ We also compared TiDB with other distributed databases. In the following table, 
    <td>Node read and write
    </td>
    <td><strong>Multi-active</strong>
-<br>
+<br/>
 <strong>All nodes that provide external services can both read and write.</strong>
    </td>
    <td>Only the primary node can write.
