@@ -2,7 +2,7 @@
 title: Why SHAREit Selects TiKV for Data Storage for Its 2.4-Billion-User Business
 author: ['Linlin Yan']
 date: 2021-11-09
-summary: This post talks about why SHAREit Group embraces TiKV, an open-source distributed and transactional KV database, as its storage infrastructure and how TiKV fixes SHAREit’s pain points. 
+summary: This post talks about why SHAREit Group embraces TiKV, an open-source distributed and transactional KV database, as its storage infrastructure and how TiKV fixes SHAREit's pain points. 
 tags: ['TiKV']
 customer: SHAREit Group
 customerCategory: Internet
@@ -20,7 +20,7 @@ logo: /images/blog/customers/shareit-logo.png
 
 [SHAREit Group](https://www.ushareit.com/) is a global internet technology company, dedicated to mobile application research and development, global mobile advertising solutions, and cross-border payment solutions. Our core app, [SHAREit](https://play.google.com/store/apps/details?id=com.lenovo.anyshare.gps&hl=en&gl=US), has seen nearly 2.4 billion downloads worldwide. Our business network has reached over 200 countries and regions, especially Southeast Asia, South Asia, the Middle East and Africa. 
 
-With billions of users, our products generate tremendous amounts of data every second. This requires a strong storage infrastructure to hold our application data. We tried to build our own distributed key-value (KV) database based on RocksDB, but it had drawbacks and couldn’t fix all of our pain points. 
+With billions of users, our products generate tremendous amounts of data every second. This requires a strong storage infrastructure to hold our application data. We tried to build our own distributed key-value (KV) database based on RocksDB, but it had drawbacks and couldn't fix all of our pain points. 
 
 Then, we encountered [TiKV](https://docs.pingcap.com/tidb/stable/tikv-overview#tikv-overview), an open-source distributed and transactional KV database, which exactly meets our requirements and relieves our headaches. 
 
@@ -38,23 +38,23 @@ To meet these two requirements, we developed our own distributed KV database bas
 ![Architecture of the RocksDB-based distributed KV databse](media/architecture-of-rocksdb-based-distributed-kv-database.png)
 <div class="caption-center"> Architecture of the RocksDB-based distributed KV databse </div>
 
-The structure on the left shows the process of real-time data write. This system doesn’t allow real-time data write in TB/h because: 
+The structure on the left shows the process of real-time data write. This system doesn't allow real-time data write in TB/h because: 
 
 * The write amplification in RocksDB is severe, especially in large-key scenarios.
-* A single hard disk has limited network bandwidth, so a single machine can’t process or hold too much data. 
+* A single hard disk has limited network bandwidth, so a single machine can't process or hold too much data. 
 
-Therefore, the structure on the right implements bulk load in MB/s.  It uses Spark to parse and pre-shard Parquet files and generate SSTables. Then, it uploads SSTables to RocksDB’s storage nodes and ingests and compacts them to the KV layer. 
+Therefore, the structure on the right implements bulk load in MB/s.  It uses Spark to parse and pre-shard Parquet files and generate SSTables. Then, it uploads SSTables to RocksDB's storage nodes and ingests and compacts them to the KV layer. 
 
 This home-brew KV store works, but it still has some drawbacks:
 
-* It fares poorly in auto scaling and strong consistency, and isn’t good at distributed transactions or dealing with large-key scenarios. All these require heavy and consistent R&D investment. 
-* We don’t have enough database professionals for further development and maintenance, and hiring a team of those experts would cost a fortune. 
+* It fares poorly in auto scaling and strong consistency, and isn't good at distributed transactions or dealing with large-key scenarios. All these require heavy and consistent R&D investment. 
+* We don't have enough database professionals for further development and maintenance, and hiring a team of those experts would cost a fortune. 
 
 ## Why TiKV prevails
 
 We searched for a better KV storage solution, and we found TiKV. [TiKV](https://tikv.org/) is a highly scalable, low-latency key-value database that delivers performance of less than 10 ms at any scale. It is built on top of RocksDB and inherits many of its great features. 
 
-TiKV is exactly what we’ve been looking for:
+TiKV is exactly what we've been looking for:
 
 * It scales. With the Placement Driver and carefully designed Raft groups, TiKV excels in horizontal scalability and can easily scale to 100+ terabytes of data. 
 * It supports consistent distributed transactions. 
@@ -88,7 +88,7 @@ The two tables below display the test results of the bulk load capability of our
 
 <div class="caption-center"> Table 1: Single-server bulk load tests (CPU: Xeon E5; vCore: 40; disk: NVMe) </div>
 
-On a single server with a 40-vCore, Xeon E5 CPU and an NVMe disk, this architecture’s throughput reaches a maximum of 256 MB/s. 
+On a single server with a 40-vCore, Xeon E5 CPU and an NVMe disk, this architecture's throughput reaches a maximum of 256 MB/s. 
 
 | Spark concurreny | P99 (ms) | P99.9 (ms) | P99.99 (ms) | Average latency (ms)) |
 | :----: | :----: | :----: | :----: | :----: | 
