@@ -18,7 +18,7 @@ logo: /images/blog/customers/shareit-logo.png
 
 ![Why SHAREit selects TiKV for data storage for its 2.4-billion-user business](media/why-shareit-selects-tikv-for-data-storage-for-its-2.4-billion-user-business.png)
 
-[SHAREit Group](https://www.ushareit.com/) is a global internet technology company, dedicated to mobile application research and development, global mobile advertising solutions, and cross-border payment solutions. Our core app, [SHAREit](https://play.google.com/store/apps/details?id=com.lenovo.anyshare.gps&hl=en&gl=US), has seen nearly 2.4 billion downloads worldwide. Our business network has reached over 200 countries and regions, especially Southeast Asia, South Asia, the Middle East and Africa. 
+[SHAREit Group](https://www.ushareit.com/) is a global internet technology company, dedicated to mobile application research and development, global mobile advertising solutions, and cross-border payment solutions. Our core app, [SHAREit](https://play.google.com/store/apps/details?id=com.lenovo.anyshare.gps&hl=en&gl=US), has seen nearly 2.4 billion downloads worldwide. Our business network has reached more than 200 countries and regions, especially Southeast Asia, South Asia, the Middle East and Africa. 
 
 With billions of users, our products generate tremendous amounts of data every second. This requires a strong storage infrastructure to hold our application data. We tried to build our own distributed key-value (KV) database based on RocksDB, but it had drawbacks and couldn't fix all of our pain points. 
 
