@@ -312,7 +312,7 @@ After we migrated to TiDB, TiDB showed good performance:
        <td>MySQL
        </td>
        <td>4 &ast; (16-core 64 GB 3 TB) &ast; 2
-    <br>
+    <br/>
     Active-standby
        </td>
        <td>Add four sets of active-standby instances every six months
