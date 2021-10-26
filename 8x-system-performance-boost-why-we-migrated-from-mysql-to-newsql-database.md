@@ -322,7 +322,7 @@ After we migrated to TiDB, TiDB showed good performance:
        <td>TiDB
        </td>
        <td>2 TiDB nodes, 7 TiKV nodes, 3 PD nodes, and 1 monitor node
-    <br>
+    <br/>
     Each node has 16 cores.
        </td>
        <td>Add nodes based on actual needs
