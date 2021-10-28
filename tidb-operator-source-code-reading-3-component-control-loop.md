@@ -207,6 +207,6 @@ By now, you have learned the design of TiDB components' control loop, including:
 * How the reconcile functions follow their corresponding procedures to check the component resources
 * How the reconcile functions turn the user's desired state into the actual component state
 
-Almost all control loops in TiDB Operator conform to the design logic described in this article. In future posts, I'll further explain how this logic is applied to each component to manage the component lifecycle.
+Almost all control loops in TiDB Operator conform to the design logic described in this article. In future posts, I'll further explain [how this logic is applied to each component to manage the component lifecycle](https://pingcap.com/blog/tidb-operator-source-code-reading-4-implement-component-control-loop).
 
 If you have any questions or ideas about TiDB Operator, feel free to [join our Slack channel](https://slack.tidb.io/invite?team=tidb-community&channel=sig-k8s&ref=pingcap-blog) or join our discussions at [pingcap/tidb-operator](https://github.com/pingcap/tidb-operator)!

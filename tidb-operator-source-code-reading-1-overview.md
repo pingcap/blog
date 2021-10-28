@@ -78,6 +78,6 @@ This blog series will also **benefit your Kubernetes learning**. When you study 
 
 ## Sum up
 
-In this article, we discussed the basics of TiDB Operator and the problems it solves. As our series continues, we'll dive deep into TiDB Operator code and share our experience in developing this Kubernetes Operator.
+In this article, we discussed the basics of TiDB Operator and the problems it solves. As our series continues, we'll dive deep into TiDB Operator code and share our experience in developing this Kubernetes Operator. In the next article, I'll share [how we implement Kubernetes' Operator pattern in TiDB Operator](https://pingcap.com/blog/tidb-operator-source-code-reading-2-operator-pattern).
 
 If you have any questions or would like to know more, feel free to join our Slack channel [#sig-k8s](https://slack.tidb.io/invite?team=tidb-community&channel=sig-k8s&ref=pingcap-blog) or open an issue at [pingcap/tidb-operator](https://github.com/pingcap/tidb-operator). Stay tuned!
