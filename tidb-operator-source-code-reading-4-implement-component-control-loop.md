@@ -270,6 +270,11 @@ Before TiDB Operator scales out the PD cluster, it needs to delete deferred PVCs
 
 Whether you scale in or scale out the PD cluster, the operation is performed by configuring the number of StatefulSet replicas. Therefore, when TiDB Operator supports the [advanced StatefulSet](https://docs.pingcap.com/tidb-in-kubernetes/stable/advanced-statefulset), it must take into account the empty slots when counting the replicas.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('TiDB Operator Source Code Reading (IV): Implementing a Component Control Loop', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Operator Source Code Reading (IV): Implementing a Component Control Loop', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Rolling upgrade
 
 The upgrade logic is implemented in `pkg/manager/member/pd_upgrader.go`. The `UpdateStrategy` in the StatefulSet performs the rolling upgrade on PD. To mitigate the impact of upgrade on the PD cluster, `pd_upgrader.go` performs some preliminary operations when it updates `UpdateStrategy` in the StatefulSet. For details on how to control `UpdateStrategy`, refer to [our last article](https://pingcap.com/blog/tidb-operator-source-code-reading-3-component-control-loop#rolling-update).
@@ -453,7 +458,7 @@ Before performing failover, TiDB Operator also carries out health checks. If the
         }
     ```
 
-Delete the PVC.
+    Delete the PVC.
 
     ```go
     for _, pvc := range pvcs {
