@@ -26,7 +26,7 @@ jobs:
       uses: avto-dev/markdown-lint@v1
       with:
         config: './.github/markdownlint.yml'
-        args: '.'
+        args: "git diff-tree --name-only --no-commit-id -r upstream/master..HEAD -- '*.md' ':(exclude).github/*'"
     - name: "Check control characters"
       run:
         wget https://raw.githubusercontent.com/pingcap/docs/master/scripts/check-control-char.py;
