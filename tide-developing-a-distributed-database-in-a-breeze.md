@@ -55,6 +55,11 @@ To fix a bug or add a new feature, you no longer need to compile the code and up
 ![Deploy a testing cluster in TiDE](media/tide-deploy-a-testing-cluster.jpg)
 <div class="caption-center"> Deploy a testing cluster in TiDE </div>
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('TiDE: Developing a Distributed Database in a Breeze', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDE: Developing a Distributed Database in a Breeze', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 #### In-production cluster
 
 In a production environment, TiDB is deployed to multiple physical or virtual machines via `tiup cluster`. Previously, you needed to transfer binary files to remote machines via `scp` commands and restart the corresponding processes.

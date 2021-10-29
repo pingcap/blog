@@ -100,6 +100,11 @@ The chart above is the process of **TimeChaos**, an implementation of clock skew
 
 If you are interested in the details, see the [Chaos Mesh GitHub repository](https://github.com/chaos-mesh/chaos-mesh).
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('Simulating Clock Skew in K8s Without Affecting Other Containers on the Node', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Simulating Clock Skew in K8s Without Affecting Other Containers on the Node', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## Simulating clock skew on a distributed SQL database
 
 Statistics speak volumes. Here we're going to try TimeChaos on [TiDB](https://docs.pingcap.com/tidb/v4.0/overview), an open source, [NewSQL](https://en.wikipedia.org/wiki/NewSQL), distributed SQL database that supports [Hybrid Transactional/Analytical Processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) (HTAP) workloads, to see if the chaos testing can really work.

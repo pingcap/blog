@@ -80,6 +80,11 @@ This architecture provided a high-performance storage system, but it lacked the 
 
 In TiDB 5.0, things are different. With its new MPP architecture, TiFlash is now more than a TiDB storage node: it's a fully-functioning analytical engine. TiDB still acts as a single SQL entrance, and the optimizer chooses the most efficient query execution plan based on cost, but now it has one more option: the MPP engine.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('TiDB 5.0: A One-Stop HTAP Database Solution', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB 5.0: A One-Stop HTAP Database Solution', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### Dive into TiDB 5.0
 
 As shown in the TiDB 5.0 architecture below, the storage cluster is the storage engine for the whole TiDB cluster, including TiKV and TiFlash.
