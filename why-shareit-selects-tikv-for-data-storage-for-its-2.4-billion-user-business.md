@@ -14,7 +14,7 @@ logo: /images/blog/customers/shareit-logo.png
 
 **Author:** Linlin Yan (Database Engineer at SHAREit Group)
 
-**Transcreator:** [Fendy Feng](https://github.com/septemberfd); **Editor:** Tom Dewan, [Ran Huang](https://github.com/ran-huang)
+**Transcreator:** [Fendy Feng](https://github.com/septemberfd); **Editors:** Tom Dewan, [Ran Huang](https://github.com/ran-huang)
 
 ![Why SHAREit selects TiKV for data storage for its 2.4-billion-user business](media/why-shareit-selects-tikv-for-data-storage-for-its-2.4-billion-user-business.png)
 
