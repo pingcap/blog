@@ -22,7 +22,7 @@ logo: /images/blog/customers/shareit-logo.png
 
 With billions of users, our products generate tremendous amounts of data every second. This requires a strong storage infrastructure to hold our application data. We tried to build our own distributed key-value (KV) database based on RocksDB, but it had drawbacks and couldn't fix all of our pain points. 
 
-Then, we encountered [TiKV](https://docs.pingcap.com/tidb/stable/tikv-overview#tikv-overview), an open-source distributed and transactional KV database, which exactly meets our requirements and relieves our headaches. 
+Then, we encountered [TiKV](https://docs.pingcap.com/tidb/stable/tikv-overview), an open-source distributed and transactional KV database, which exactly meets our requirements and relieves our headaches. 
 
 In this post, I will talk about the challenges we faced with our previous storage solution, why we selected TiKV, and how TiKV fixes our pain points. I hope you find our experience useful for your future choice of database. 
 
