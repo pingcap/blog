@@ -1,5 +1,5 @@
 ---
-title: Why SHAREit Selects TiKV for Data Storage for Its 2.4-Billion-User Business
+title: Why SHAREit Selects TiKV as Data Storage for Its 2.4-Billion-User Business
 author: ['Linlin Yan']
 date: 2021-11-04
 summary: This post talks about why SHAREit Group embraces TiKV, an open-source distributed and transactional KV database, as its storage infrastructure and how TiKV fixes SHAREit's pain points. 
