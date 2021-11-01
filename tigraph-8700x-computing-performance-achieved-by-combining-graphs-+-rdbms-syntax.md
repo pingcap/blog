@@ -144,7 +144,6 @@ Comparing the two examples above, we can see that:
 <div class="trackable-btns">
   <a href="/download" onclick="trackViews('TiGraph: 8,700x Computing Performance Achieved by Combining Graphs + the RDBMS Syntax', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
   <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiGraph: 8,700x Computing Performance Achieved by Combining Graphs + the RDBMS Syntax', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
-  <a href="/contact-us" onclick="trackViews('TiGraph: 8,700x Computing Performance Achieved by Combining Graphs + the RDBMS Syntax', 'contact-us-middle')"><button>Request a Demo</button></a>
 </div>
 
 ## TiGraph's three innovations
