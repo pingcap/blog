@@ -1,11 +1,11 @@
 ---
-title: Why We Disable Linux's THP Feature for Databases
+title: 'Transparent Huge Pages: Why We Disable It for Databases'
 author: ['Wenbo Zhang']
 date: 2020-12-10
-summary: This post dives deep into how transparent huge pages (THP) slow down the system and explains why you should disable THP to improve your database performance.
+summary: This post dives deep into how transparent huge pages (THP) slow down the system. You'll learn why you should disable THP to improve your database performance and how to disable it in Linux.
 tags: ['Performance tuning', 'Linux']
 categories: ['Engineering']
-aliases: ['/blog/how-thp-slows-down-your-database-performance-and-what-to-do-about-it']
+aliases: ['/blog/how-thp-slows-down-your-database-performance-and-what-to-do-about-it', '/blog/why-we-disable-linux-thp-feature-for-databases']
 image: /images/blog/how-thp-slows-down-your-database-performance-banner.jpg
 ---
 
@@ -13,13 +13,13 @@ image: /images/blog/how-thp-slows-down-your-database-performance-banner.jpg
 
 **Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
 
-![Disabling THP to improve database performance](media/how-thp-slows-down-your-database-performance-banner.jpg)
+![Disable transparent huge pages to improve database performance](media/how-thp-slows-down-your-database-performance-banner.jpg)
 
 Linux's memory management system is transparent to the user. However, if you're not familiar with its working principles, you might meet unexpected performance issues. That's especially true for sophisticated software like databases. When databases are running in Linux, even small system variations might impact performance.
 
-After an in-depth investigation, we found that [Transparent Huge Page](https://www.kernel.org/doc/html/latest/admin-guide/mm/transhuge.html) (THP), a Linux memory management feature, often slows down database performance. In this post, I'll describe how THP causes performance to fluctuate, the typical symptoms, and our recommended solutions.
+After an in-depth investigation, we found that [Transparent Huge Page](https://www.kernel.org/doc/html/latest/admin-guide/mm/transhuge.html) (THP), a Linux memory management feature, often slows down database performance. In this post, I'll describe how THP causes performance to fluctuate, the typical symptoms, and how to disable transparent huge pages in your Linux system.
 
-## What is THP
+## What are transparent huge pages
 
 THP is an important feature of the Linux kernel. It maps page table entries to larger page sizes to reduce page faults. This improves the [translation lookaside buffer](https://en.wikipedia.org/wiki/Translation_lookaside_buffer) (TLB) hit ratio. TLB is a memory cache used by the memory management unit to improve the translation speed from virtual memory addresses to physical memory addresses.
 
