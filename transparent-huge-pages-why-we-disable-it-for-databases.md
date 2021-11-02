@@ -121,4 +121,4 @@ Note that if you restart the server, THP might be turned on again. You can write
 
 ## Join our community
 
-If you have any other questions about database performance tuning, or would like to share your expertise, feel free to join the [TiDB Community Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) workspace.
+If you have any other questions about database performance tuning, or would like to share your expertise, feel free to join the [TiDB Community Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) workspace for further discussions.
