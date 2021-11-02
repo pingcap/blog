@@ -1,9 +1,10 @@
 ---
-title: 'No Sharding, No ETL: Use a Scale-Out MySQL Alternative to Store 160+ TB of Data'
+title: 'Goodbye, MySQL Sharding: Use a Scale-Out MySQL Alternative to Store 160+ TB of Data'
 author: ['Chunlei Liu', 'Kai Xuan']
 date: 2021-01-14
-summary: As 58.com's business quickly grew, they encountered a database bottleneck. To scale out their databases and simplify database maintenance, they migrated from MySQL to TiDB, a highly available MySQL alternative.
+summary: This post talks about how TiDB, a highly available MySQL alternative, helps 58.com avoid MySQL sharding, scale out their databases, and simplify their database maintenance.
 tags: ['MySQL', 'No sharding', 'Scalability', 'High availability', 'HTAP', 'Real-time analytics']
+aliases: ['/case-studies/no-sharding-no-etl-use-scale-out-mysql-alternative-to-store-160-tb-of-data']
 image: /images/blog/no-mysql-sharding-no-etl-scale-out-mysql-alternative.jpg
 customer: 58.com
 customerCategory: Internet
@@ -23,7 +24,7 @@ logo: /images/blog/customers/58-logo.png
 
 [58.com](https://www.crunchbase.com/organization/58-com) is China's leading online marketplace for classifieds covering various categories, such as jobs, real estate, automotive, financing, used goods, and local services. Merchants and consumers can publish their advertisements on our online platform so that they can connect, share information, and conduct business. By the end of 2018, we had more than 500 million users, and our total revenue in 2019 was nearly US $2.23 billion.
 
-As our businesses grew, large amounts of data flooded into our databases. But **standalone MySQL databases couldn't store so much data,** and sharding was an undesirable solution. To achieve MySQL high availability, we needed an external tool. **To perform Online Analytical Processing (OLAP), we had to use complicated and tedious extract, transform, load (ETL) jobs.** We looked for a scalable, easy-to-maintain, highly available database to solve these issues.
+As our businesses grew, large amounts of data flooded into our databases. But **standalone MySQL databases couldn't store so much data,** and MySQL sharding was an undesirable solution. To achieve MySQL high availability, we needed an external tool. **To perform Online Analytical Processing (OLAP), we had to use complicated and tedious extract, transform, load (ETL) jobs.** We looked for a scalable, easy-to-maintain, highly available database to solve these issues.
 
 After an investigation, we adopted [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source, distributed, Hybrid Transactional/Analytical Processing (HTAP) database. Now, our production environment has **52 TiDB clusters** that **store 160+ TB of data**, with **320+ servers** running in **15 applications**. To maintain such large-scale clusters, we **only need two DBAs**.
 
