@@ -131,7 +131,7 @@ In TiDB 5.0, the only thing you need to do is write your SQL. The nit-picky deta
 
 When faced with hybrid workloads, TiDB can efficiently handle both OLTP and OLAP requests. From a user perspective, all your data go to one place. The app server receives all types of requests and sends them to the TiDB server, which dispatches the requests to different storage engines. The architecture is simple and elegant:
 
-![TiDB in the hybrid workload scenario](media/tidb-5.0-htap-hybrid-workload-scenario.jpg)
+![TiDB in the hybrid workload scenario](media/htap-use-tidb-for-hybrid-workloads.jpg)
 <div class="caption-center">TiDB in the hybrid workload scenario</div>
 
 ### Stream computing scenario
@@ -142,7 +142,7 @@ First, TiDB is a true HTAP distributed database. You can connect it to Oracle as
 
 Second, TiDB is also an OLTP database that responds to creates, reads, updates, and deletes (CRUD) in real time. With its hybrid storage engines, TiDB can process both point queries and aggregation queries.
 
-![TiDB in the stream computing scenario](media/tidb-5.0-htap-stream-computing-scenario.jpg)
+![TiDB in the stream computing scenario](media/htap-use-tidb-for-stream-computing.png)
 <div class="caption-center">TiDB in the stream computing scenario</div>
 
 ### Data hub scenario
@@ -151,7 +151,7 @@ If your company has more than one data source in the foreground—financing, ERP
 
 A data hub is a layer between the application and the data warehouse. It stores data in only a period of time, while a data warehouse stores all historical data. A data hub tends to store hot data for real-time queries or processes highly-concurrent requests, while offline data warehouses and data lakes often provide less fresh data for reporting and BI queries.
 
-![TiDB in the data hub scenario](media/tidb-5.0-htap-data-hub-scenario.jpg)
+![TiDB in the data hub scenario](media/htap-use-tidb-for-data-hub.png)
 <div class="caption-center">TiDB in the data hub scenario</div>
 
 After you integrate TiDB into your data platform, it acts as a central hub for all your data. Despite an existing offline data warehouse or a Hadoop platform, you can position TiDB among the application layer, Hadoop layer, and data warehouses, to store and manage real-time data. As your business becomes more complicated and you enforce stricter data security standards, TiDB will also become a unified data central hub for data relations and lifecycle management to support your long-term growth.
