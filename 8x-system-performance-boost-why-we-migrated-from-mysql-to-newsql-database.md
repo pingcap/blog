@@ -299,36 +299,10 @@ After we migrated to TiDB, TiDB showed good performance:
 
     Before we switched to TiDB, our architecture was a four-shard MySQL cluster. According to the data growth rate, we needed to scale out our database every six months, and each time we needed to add four sets of active-standby instances. But after we switched to TiDB, we can scale out the database based on our actual needs.
 
-    <table>
-      <tr>
-       <td><strong>Cluster</strong>
-       </td>
-       <td><strong>Scale</strong>
-       </td>
-       <td><strong>Scaling scheme</strong>
-       </td>
-      </tr>
-      <tr>
-       <td>MySQL
-       </td>
-       <td>4 * (16-core 64 GB 3 TB) * 2
-    <br/>
-    Active-standby
-       </td>
-       <td>Add four sets of active-standby instances every six months
-       </td>
-      </tr>
-      <tr>
-       <td>TiDB
-       </td>
-       <td>2 TiDB nodes, 7 TiKV nodes, 3 PD nodes, and 1 monitor node
-    <br/>
-    Each node has 16 cores.
-       </td>
-       <td>Add nodes based on actual needs
-       </td>
-      </tr>
-    </table>
+    | Cluster | Scale | Scaling scheme |
+    | ---------|:-----|:---------------|
+    | MySQL    | 4 \* (16-core 64 GB 3 TB) \* 2 <br/> Active-standby | Add four sets of active-standby instances every six months |
+    | TiDB    | 2 TiDB nodes, 7 TiKV nodes, 3 PD nodes, and 1 monitor node <br/> Each node has 16 cores. | Add nodes based on actual needs |
 
     The following figure shows that in the 24th month:
 
