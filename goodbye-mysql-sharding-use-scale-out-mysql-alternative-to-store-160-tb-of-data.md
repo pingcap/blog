@@ -2,7 +2,7 @@
 title: 'Goodbye, MySQL Sharding: Use a Scale-Out MySQL Alternative to Store 160+ TB of Data'
 author: ['Chunlei Liu', 'Kai Xuan']
 date: 2021-01-14
-summary: This post talks about how TiDB, a NewSQL database, helps 58.com avoid MySQL sharding, scale out its databases, and simplify its database maintenance.
+summary: This post talks about how TiDB, a highly available MySQL alternative, helps 58.com avoid MySQL sharding, scale out their databases, and simplify their database maintenance.
 tags: ['MySQL', 'No sharding', 'Scalability', 'High availability', 'HTAP', 'Real-time analytics']
 aliases: ['/case-studies/no-sharding-no-etl-use-scale-out-mysql-alternative-to-store-160-tb-of-data']
 image: /images/blog/no-mysql-sharding-no-etl-scale-out-mysql-alternative.jpg
