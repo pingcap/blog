@@ -301,7 +301,7 @@ After we migrated to TiDB, TiDB showed good performance:
 
     | Cluster | Scale | Scaling scheme |
     | ---------|:-----|:---------------|
-    | MySQL    | 4 \* (16-core 64 GB 3 TB) \* 2 Active-standby | Add four sets of active-standby instances every six months |
+    | MySQL    | 4 \* (16-core 64 GB 3 TB) \* 2 <br/> Active-standby | Add four sets of active-standby instances every six months |
     | TiDB    | 2 TiDB nodes, 7 TiKV nodes, 3 PD nodes, and 1 monitor node <br/> Each node has 16 cores. | Add nodes based on actual needs |
 
     The following figure shows that in the 24th month:
