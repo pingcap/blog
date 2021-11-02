@@ -58,6 +58,10 @@ Based on our customer support experience, the most typical symptom of THP-caused
 
 In such cases, if you create an on-cpu flame graph using [perf](https://en.wikipedia.org/wiki/Perf_(Linux)), you'll see that all the service threads that are in the runnable state are performing memory compaction. In addition, the page fault exception handler is `do_huge_pmd_anonymous_page`. This means that the current system doesn't have 2 MB of contiguous physical memory and that triggers the direct memory compaction. The direct memory compaction is time-consuming, so it leads to high system CPU utilization.
 
+<div class="trackable-btns">
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Why We Disable Linux's THP Feature for Databases', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ### The indirect symptom: `sys load` rises
 
 Many memory issues are not as obvious as those described above. When the system allocates or other high-level memory, it doesn't perform memory compaction directly and leave you an obvious trace. Instead, it often mixes the compaction with other tasks, such as direct memory reclaim.
@@ -117,4 +121,4 @@ Note that if you restart the server, THP might be turned on again. You can write
 
 ## Join our community
 
-If you have any other questions about database performance tuning, or would like to share your expertise, feel free to join the [TiDB Community Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) workspace.
+If you have any other questions about database performance tuning, or would like to share your expertise, feel free to join the [TiDB Community Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) workspace for further discussions.

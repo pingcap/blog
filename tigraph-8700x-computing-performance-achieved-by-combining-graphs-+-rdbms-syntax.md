@@ -141,6 +141,11 @@ Comparing the two examples above, we can see that:
 
     Because TiDB operators rely on a strong schema design, to reuse these operators, TiGraph's `TAG` and `EDGE` must also have a strong schema. Therefore, the schema output by the graph calculation related operators can be highly compatible with relational operators' schema. TiDB's upper-layer operators don't need to know whether the bottom-layer is graph data or relational data. As long as the previous `TableScan` operator is replaced with `GraphScan` at the bottom layer, all capabilities can be reused for the upper layer.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('TiGraph: 8,700x Computing Performance Achieved by Combining Graphs + the RDBMS Syntax', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiGraph: 8,700x Computing Performance Achieved by Combining Graphs + the RDBMS Syntax', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## TiGraph's three innovations
 
 [Researchers](https://arxiv.org/abs/1905.12133) affiliated with Cornell University also tried to combine graphs and the RDBMS syntax at the SQL level. They tried to use SQL statements to combine `Stream` and `Batch`. However, no one in the academic community has combined graphs and the RDBMS syntax the way TiGraph does. The TiGraph project has achieved three innovations.

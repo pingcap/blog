@@ -71,6 +71,11 @@ Additional tips for working with playgrounds:
 * The `tiup playground` command has options to set the number of instances per component. This can be used to set the number of TiFlash instances to 0 in case you for example don't intend to use the HTAP functionality.
 * You can add `--monitor=false` if you don't want to use monitoring tools like Grafana and Prometheus. This is useful if you want to save resources on your local machine.
 
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('Easy Local Development with TiDB', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Easy Local Development with TiDB', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 ## TiDE: a Visual Studio Code extension for TiDB
 
 If you use Visual Studio Code, our [TiDE](https://marketplace.visualstudio.com/items?itemName=dragonly.ticode) extension lets you work with TiUP Playground, TiUP clusters, and Kubernetes clusters right from your IDE.

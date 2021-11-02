@@ -85,6 +85,10 @@ As a best practice, we often replace ptrace `POKE_TEXT` writes with `process_vm_
 
 Using ptrace, we are able to make a process to replace its own FD. Now we only need a method to make that replacement happen. This method is the `dup2` system call.
 
+<div class="trackable-btns">
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How to Simulate I/O Faults at Runtime', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
+
 #### Use `dup2` to replace file descriptor
 
 The signature of the `dup2` function is `int dup2(int oldfd, int newfd);`. It is used to create a copy of the old FD (`oldfd`). This copy has an FD number of `newfd`. If `newfd` already corresponds to the FD of an opened file, the FD on the file that's already opened is automatically closed.
