@@ -2,7 +2,7 @@
 title: 9 Why's to Ask When Evaluating a Distributed Database
 author: ['Ed Huang']
 date: 2018-08-17
-summary: Since PingCAP started building TiDB, it has encountered countless challenges, pitfalls, and critical design choices. Over the past three years, the PingCAP team has answered many questions from the users. Ed Huang, the CTO of PingCAP, has summarized these questions into "9 why's" that every engineer may ask when looking at a distributed database and gives his answers to these questions in this post to help make decision-making of engineers a bit easier.
+summary: Ed Huang, the CTO of PingCAP, has summarized into "9 why's" the most frequently asked questions by engineers when they look at a distributed database; he also gives his answers to these questions in this post to help make decision-making of engineers a bit easier.
 tags: ['Distributed system', 'HTAP', 'MySQL', 'RocksDB', 'Scalability']
 aliases: ["/blog/9-why's-to-ask-when-evaluating-a-distributed-database/"]
 categories: ['Engineering']
