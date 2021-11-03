@@ -17,7 +17,7 @@ image: /images/blog/how-to-trace-linux-syscalls.jpg
 
 If you need to dynamically trace Linux process system calls, you might first consider strace. strace is simple to use and works well for issues such as "Why can't the software run on this machine?" However, if you're running a trace in a production environment, strace is NOT a good choice. It introduces a substantial amount of overhead. According to [a performance test](http://vger.kernel.org/~acme/perf/linuxdev-br-2018-perf-trace-eBPF/#/4/2) conducted by Arnaldo Carvalho de Melo, a senior software engineer at Red Hat, **the process traced using strace ran 173 times slower, which is disastrous for a production environment**.
 
-So are there any tools that excel at tracing system calls in a production environment? The answer is YES. This blog post introduces perf and traceloop, two commonly used command-line tools, to help you trace system calls in a production environment.
+So are there any tools that excel at tracing system calls in a production environment? The answer is YES. **This blog post introduces perf and traceloop, two commonly used command-line tools, to help you trace system calls in a production environment.**
 
 ## perf, a performance profiler for Linux
 
