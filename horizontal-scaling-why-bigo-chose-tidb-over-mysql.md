@@ -1,17 +1,17 @@
 ---
-title: Why We Chose an HTAP Database over MySQL for Horizontal Scaling and Complex Queries
+title: 'Horizontal Scaling: Why BIGO chose TiDB over MySQL'
 author: ['Jiaqing Xu']
 date: 2020-09-10
-summary: After trying out different database solutions, BIGO chose TiDB. In this post, a BIGO DBA talks about TiDB 4.0's new features, how they benefit BIGO's business, and BIGO's plan to use TiDB 4.0 even more in the future.
+summary: After trying out different database solutions, BIGO chose TiDB for its horizontal scalability. In this post, a BIGO DBA talks about why MySQL, among other solutions, failed to meet their scalability requirements. You'll also learn about TiDB's impressive features, how they benefit BIGO's business, and BIGO's plan to deepen TiDB usage in the future.
 image: /images/blog/htap-database-bigo.jpg
 tags: ['TiFlash', 'HTAP', 'Real-time analytics', 'Scalability', 'Big data']
-url: /success-stories/why-we-chose-an-htap-database-over-mysql-for-horizontal-scaling-and-complex-queries/
+aliases: ['/success-stories/why-we-chose-an-htap-database-over-mysql-for-horizontal-scaling-and-complex-queries/', '/case-studies/why-we-chose-an-htap-database-over-mysql-for-horizontal-scaling-and-complex-queries']
 customer: BIGO
 customerCategory: Internet
 logo: /images/blog/customers/bigo-logo.png
 ---
 
-**Industry:** Live Streaming
+**Industry:** Live Streaming 
 
 **Author:** Jiaqing Xu (DBA at BIGO)
 
