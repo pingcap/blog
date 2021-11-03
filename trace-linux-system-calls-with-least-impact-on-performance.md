@@ -1,10 +1,11 @@
 ---
-title: How to Trace Linux System Calls in Production with Minimal Impact on Performance
+title: Trace Linux System Calls with least Impact on Performance
 author: ['Wenbo Zhang']
 date: 2020-12-24
 summary: To trace system calls in Linux effectively, you can use perf to analyze system calls that have latency in general scenarios. For containers or Kubernetes that use cgroup v2, traceloop is more convenient.
 tags: ['Linux', 'Performance tuning']
 categories: ['Engineering']
+aliases: ['/blog/how-to-trace-linux-system-calls-in-production-with-minimal-impact-on-performance']
 image: /images/blog/how-to-trace-linux-syscalls.jpg
 ---
 
