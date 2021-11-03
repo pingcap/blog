@@ -1,14 +1,14 @@
 ---
-title: Choosing a MySQL Alternative over Vitess and CRDB to Scale Out Our Databases on K8s
+title: Why This MySQL Alternative Beats Vitess and CRDB in Scaling Out Our Databases on K8s
 author: ['Shaun Chong', 'Mengnan Gong']
 date: 2021-03-18
-summary: Ninja Van is a leading logistics company in Southeast Asia. They chose TiDB over Vitess and CockroachDB to scale out their databases on Kubernetes.
+summary: Ninja Van, a leading logistics company in Southeast Asia, chose TiDB as a MySQL alternative over Vitess and CockroachDB to scale out their databases on Kubernetes. Learn how this MySQL alternative helps Ninji Van fix their pain points. 
 image: /images/blog/mysql-alternative-database-on-k8s-ninja-van.jpg
 tags: ['NewSQL', 'Kubernetes', 'Scalability']
 customer: Ninja Van
 customerCategory: Internet
 logo: /images/blog/customers/ninja-van-logo.png
-aliases: ['/blog/choose-a-mysql-alternative-over-vitess-and-crdb-to-scale-out-our-databases-on-k8s/']
+aliases: ['/blog/choose-a-mysql-alternative-over-vitess-and-crdb-to-scale-out-our-databases-on-k8s/', '/case-studies/choose-a-mysql-alternative-over-vitess-and-crdb-to-scale-out-our-databases-on-k8s']
 ---
 
 **Industry:** Logistics
