@@ -11,7 +11,7 @@ customerCategory: Internet
 logo: /images/blog/customers/bigo-logo.png
 ---
 
-**Industry:** Live Streaming
+**Industry:** Live Streaming 
 
 **Author:** Jiaqing Xu (DBA at BIGO)
 
