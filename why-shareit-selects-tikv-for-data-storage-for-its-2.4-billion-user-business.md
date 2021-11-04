@@ -106,6 +106,6 @@ These tests were performed against our demo. With further performance tuning, we
 
 ## Believe in the power of openness
 
-The bulk load capability of our TiKV-based KV database was developed jointly by SHAREit and TiKV engineers at PingCAP. Thank you, PingCAP, for delivering a powerful open-source product and technical support!
+The bulk load capability of our TiKV-based KV database was developed jointly by SHAREit and TiKV engineers at PingCAP. Thank you, PingCAP, for delivering such a powerful open-source product and for providing us strong technical support!
 
 If you want to know more about our story or have any questions about TiKV, you can [follow TiKV on GitHub](https://github.com/tikv/tikv) or join our community discussion [on Slack](https://slack.tidb.io/invite?team=tikv-wg&channel=general&ref=pingcap-blog). You can also [request a demo](https://en.pingcap.com/contact-us) from PingCAP right now. 
