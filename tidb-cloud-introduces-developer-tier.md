@@ -5,7 +5,6 @@ date: 2021-11-09
 summary: We are excited to announce the Developer Tier of TiDB Cloud, the fully-managed TiDB service by PingCAP.
 tags: ['TiDB Cloud', 'Announcement']
 categories: ['Product']
-press_release: true
 image: /images/blog/tidb-cloud-introduces-developer-tier.jpg
 ---
 
