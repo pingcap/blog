@@ -26,8 +26,8 @@ TiDB Cloud also simplifies deployment, scaling, and recovering from outages thro
 
 TiDB is the leading open-source, MySQL compatible, distributed NewSQL database in the industry that supports Hybrid Transactional and Analytical Processing (HTAP), which allows business to run real-time analytical queries. It also features horizontal scalability, strong consistency, and high availability. TiDB lets you:
 
-* Control scaling: Scale the performance or storage separately to best suit your needs.
-* Ensure business continuity -High availability and reliability for your mission critical applications through ACID-compliant cluster deployment.
+* Control scaling - Scale the performance or storage separately to best suit your needs.
+* Ensure business continuity - High availability and reliability for your mission critical applications through ACID-compliant cluster deployment.
 * Remove bottlenecks - Scalable multi-master that scales without restrictions with read and write capability on every node.
 * Query without losing performance - Our high concurrency allows thousands of users to query data at the same time without losing performance.
 * Eliminate complex data migration - No data migration between transactional and analytical workloads by storing all data in a single database.
