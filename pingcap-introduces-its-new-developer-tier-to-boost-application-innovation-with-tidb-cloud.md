@@ -6,10 +6,10 @@ summary: PingCAP, the leading distributed SQL provider, announced today the avai
 tags: ['TiDB Cloud', 'Announcement']
 categories: ['Product']
 press_release: true
-image: /images/blog/tidb-cloud-introduces-developer-tier.jpg
+image: /images/blog/tidb-cloud-introduces-developer-tier1.jpg
 ---
 
-![TiDB Cloud Introduces Developer Tier](media/tidb-cloud-introduces-developer-tier.jpg)
+![TiDB Cloud Introduces Developer Tier](media/tidb-cloud-introduces-developer-tier1.jpg)
 
 _Through this new Developer Tier offering, PingCAP provides customers with real-world environment testing by offering free, streamlined experience of TiDB Cloud_
 
