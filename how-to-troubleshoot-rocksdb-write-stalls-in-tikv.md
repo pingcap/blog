@@ -2,7 +2,7 @@
 title: How to Troubleshoot RocksDB Write Stalls in TiKV
 author: ['Mike Barlow']
 date: 2021-11-12
-summary: This troubleshooting guide discusses write performance degradation in TiKV related to the Rocks DB built-in write stall feature.
+summary: This troubleshooting guide discusses write performance degradation in TiKV related to the RocksDB built-in write stall feature.
 tags: ['TiKV','Tutorial']
 categories: ['Engineering']
 image: /images/blog/troubleshoot-rocksdb-write-stalls-in-tikv.png
