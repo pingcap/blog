@@ -3,14 +3,14 @@ title: How to Troubleshoot RocksDB Write Stalls in TiKV
 author: ['Mike Barlow']
 date: 2021-11-12
 summary: This troubleshooting guide discusses write performance degradation in TiKV related to the Rocks DB built-in write stall feature.
-tags: ['TiKV']
+tags: ['TiKV','Tutorial']
 categories: ['Engineering']
 image: /images/blog/troubleshoot-rocksdb-write-stalls-in-tikv.png
 ---
 
 **Author:** Mike Barlow (Solutions Architect at PingCAP)
 
-**Editor:** Jose Espinoza, Tina Yang, Tom Dewan
+**Editors:** Jose Espinoza, Tina Yang, Tom Dewan
 
 ![How to Troubleshoot RocksDB Write Stalls in TiKV](media/troubleshoot-rocksdb-write-stalls-in-tikv.png)
 
@@ -73,7 +73,7 @@ There are background tasks (jobs) that are specifically responsible for flushing
 
 There can be many memtables. Remember TiDB has a minimum of one memtable for each column family (default, write, lock, and raft). As mentioned before, when the memtable reaches the `write-buffer-size` limit it becomes read-only and is flagged to be flushed to disk as an SST file. There are a limited number of tasks that flush memtables to disk, which can be identified with `max-background-flushes` limit. The default is 2 or max-background-jobs / 4, whichever is bigger. 
 
-> **NOTE**
+> **NOTE:**
 >
 >Prior to TiKV v4.0.9, `max-background-flushes` is not available, and the number of background flush tasks is set to `max-background-jobs` / 4. 
 
@@ -97,7 +97,7 @@ Configuration parameters:
 Grafana graphs:
 
 ![Immutable memtable number](media/immutable-memtable-number.png)
-<div class="caption-center">Immutable memtable number</div> _
+<div class="caption-center">Immutable memtable number</div>
 
 ![Memtable size](media/memtable-size.png)
 <div class="caption-center">Memtable size</div>
@@ -108,7 +108,7 @@ The size and count of level 0 SST files can directly affect query read performan
 
 In general, SST files exist for each column family (default, write, lock, and raft). RocksDB level 0 SST files are different from other levels. Memtables are flushed to disk as level 0 SST files. The data in a level 0 SST file are arranged in the order of generation as the memtable, and data from the same regions can be spread across different files. Also, data with the same key can be in multiple SST files. Therefore, when a read occurs, each level 0 SST file must be read in order. The more level 0 SST files, the more likely query read performance will be impacted negatively. When there are too many files in level 0, write stalls are triggered.
 
-> **Note:**
+> **NOTE:**
 >
 > It’s normal for level 0 and level 1 SST files to not be compressed, which is in contrast to other levels that do compress SST files.
 
