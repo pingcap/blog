@@ -121,7 +121,7 @@ Configuration parameters:
 * `[rocksdb|raftdb].[defaultcf|writecf|lockcf].level0-file-num-compaction-trigger` 
 
     The default is 4.
-* `[rocksdb|raftdb].[defaultcf|writecf|lockcf].level0-slowdown-writes-trigger`**` 
+* `[rocksdb|raftdb].[defaultcf|writecf|lockcf].level0-slowdown-writes-trigger`
 
     The default is 20.
 * `[rocksdb|raftdb].[defaultcf|writecf|lockcf].level0-stop-writes-trigger` 
