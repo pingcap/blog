@@ -18,7 +18,7 @@ image: /images/blog/troubleshoot-rocksdb-write-stalls-in-tikv.png
 
 We will also discuss how to resolve this issue in [TiKV](https://tikv.org/), a highly scalable, low latency, and easy to use key-value database that [uses RocksDB as its storage engine](https://pingcap.com/blog/rocksdb-in-tikv).
 
-When RocksDB can’t flush and compact data promptly, it uses a feature called “stalls” to try and slow the amount of data coming into the engine.  Write stalls include pausing all writes and limiting the number of writes.
+When RocksDB can't flush and compact data promptly, it uses a feature called "stalls" to try and slow the amount of data coming into the engine.  Write stalls include pausing all writes and limiting the number of writes.
 
 From [Github](https://github.com/facebook/rocksdb/wiki/Write-Stalls):
 
@@ -35,7 +35,7 @@ TiKV has two instances of RocksDB (RaftDB and KVdb). RaftDB has only one column 
 
 Because TiKV depends on RocksDB, when the application or process does a large number of writes, TiDB response time (latency) can degrade significantly. This latency seems to affect all writes and not just writes to a specific table.
 
-There are a couple of Grafana graphs that can help identify whether RocksDB’s write stall is the cause and needs additional investigation. 
+There are a couple of Grafana graphs that can help identify whether RocksDB's write stall is the cause and needs additional investigation. 
 
 We can use the following Grafana charts located in the section 
 
@@ -67,7 +67,7 @@ Each of the metrics below is associated with slowdown or stop. Slowdown indicate
 
 If too many large memtables are created, there is a greater possibility of out-of-memory (OOM) exceptions; therefore, RocksDB will limit the number and size of memtables created.
 
-For each column family (default, write, lock, and raft), RocksDB first writes the record in the write-ahead logging (WAL) log that’s on disk. (This is not important for write stalls.) Then, it inserts the data into a memtable (write buffer). When the memtable reaches the `write-buffer-size` limit, the memtable becomes read-only and a new memtable is created to receive new write operations. The default `write-buffer-size` limit for CF (column families) write is 128 MB and for lock it is 32 MB. There is a maximum number of memtables that you can create; the default is 5. This is set by `max-write-buffer-number`. Once the limit is reached, RocksDB will not create more memtables and will stall all new write operations until the memtables count is reduced below the `max-write-buffer-number` limit.
+For each column family (default, write, lock, and raft), RocksDB first writes the record in the write-ahead logging (WAL) log that's on disk. (This is not important for write stalls.) Then, it inserts the data into a memtable (write buffer). When the memtable reaches the `write-buffer-size` limit, the memtable becomes read-only and a new memtable is created to receive new write operations. The default `write-buffer-size` limit for CF (column families) write is 128 MB and for lock it is 32 MB. There is a maximum number of memtables that you can create; the default is 5. This is set by `max-write-buffer-number`. Once the limit is reached, RocksDB will not create more memtables and will stall all new write operations until the memtables count is reduced below the `max-write-buffer-number` limit.
 
 There are background tasks (jobs) that are specifically responsible for flushing memtables to disk and compacting SST files. By default `max-background-jobs` is set to 8 or CPU cores to -1, whichever is smaller. 
 
@@ -110,7 +110,7 @@ In general, SST files exist for each column family (default, write, lock, and ra
 
 > **NOTE:**
 >
-> It’s normal for level 0 and level 1 SST files to not be compressed, which is in contrast to other levels that do compress SST files.
+> It's normal for level 0 and level 1 SST files to not be compressed, which is in contrast to other levels that do compress SST files.
 
 By default, when the count of level 0 SST files reaches 20, RocksDB will slow writes for the entire database. If the count of level 0 SST files reaches 36, RocksDB will stall writes for the entire database.
 
@@ -135,9 +135,9 @@ Grafana graphs:
 
 ### Too many pending compaction bytes
 
-A Log-Structured Merge-Tree (LSM) consists of multiple levels. Each level can include zero or more SST files. Level 0 is identified as a “higher hevel” and each incrementing level (level 1, level 2, etc.) is identified as a lower level. (See the diagram below.)
+A Log-Structured Merge-Tree (LSM) consists of multiple levels. Each level can include zero or more SST files. Level 0 is identified as a "higher hevel" and each incrementing level (level 1, level 2, etc.) is identified as a lower level. (See the diagram below.)
 
-Since level 0 is treated differently than the lower levels, level 0 does not apply to pending compaction bytes, but it’s included in the diagram below to provide a more complete picture of the levels.
+Since level 0 is treated differently than the lower levels, level 0 does not apply to pending compaction bytes, but it's included in the diagram below to provide a more complete picture of the levels.
 
 RocksDB uses level compaction for levels 1 and lower. By default, level 1 has a target size compaction at 512 MB for write and default column families (CFs), and the lock CF has a default of 128 MB. Each lower level has a target size 10 times greater than the previous higher level.  For example, if the level 1 target size is 512 MB, the level 2 target size is 5 GB, the level 3 target Size is 50 GB, and so on.  
 
@@ -174,4 +174,4 @@ There are multiple reasons for RocksDB write stall. Without going deeply into ea
 
 ## Conclusion
 
-For systems that need very high write performance, RocksDB write stall can become an issue. We can only balance the write, read, and space configurations under specific scenarios. To resolve performance issues and to get the most out of TiDB, it’s important to understand the different aspects of RocksDB and the available configuration options for tuning it. 
+For systems that need very high write performance, RocksDB write stall can become an issue. We can only balance the write, read, and space configurations under specific scenarios. To resolve performance issues and to get the most out of TiDB, it's important to understand the different aspects of RocksDB and the available configuration options for tuning it. 
