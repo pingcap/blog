@@ -20,7 +20,7 @@ We will also discuss how to resolve this issue in [TiKV](https://tikv.org/), a h
 
 When RocksDB can’t flush and compact data promptly, it uses a feature called "stalls" to try and slow the amount of data coming into the engine.  Write stalls include pausing all writes and limiting the number of writes.
 
-From [Github](https://github.com/facebook/rocksdb/wiki/Write-Stalls):
+From [GitHub](https://github.com/facebook/rocksdb/wiki/Write-Stalls):
 
 > RocksDB has an extensive system to slow down writes when flush or compaction can't keep up with the incoming write rate. Without such a system, if users keep writing more than the hardware can handle, the database will:
 >
@@ -37,7 +37,7 @@ Because TiKV depends on RocksDB, when the application or process does a large nu
 
 There are a couple of Grafana graphs that can help identify whether RocksDB’s write stall is the cause and needs additional investigation. 
 
-We can use the following Grafana charts located in the section 
+We can use the following Grafana charts located in the section:
 
 `[Cluster name] / TiKV-Details / [RocksDB - raft | RocksDB -kv]`  
 
@@ -50,9 +50,9 @@ With this knowledge, we can dig deeper into write stalls.
 
 RocksDB will trigger write stalls if there are too many:
 
-* [Memtables](#bookmark=id.hlmn1aylq4qf)
-* [Level 0 SST (Sorted String Table) files](#bookmark=id.cye5mbth2h5x) 
-* [Pending compaction bytes](#bookmark=id.j7eeqy4rw57t)
+* [Memtables](#too-many-memtables)
+* [Level 0 SST (Sorted String Table) files](#too-many-level-0-sst-files) 
+* [Pending compaction bytes](#too-many-pending-compaction-bytes)
 
 You can directly map these reasons to the **Write Stall Reason** diagram below.
 
@@ -75,7 +75,7 @@ There can be many memtables. Remember TiDB has a minimum of one memtable for eac
 
 > **NOTE:**
 >
->Prior to TiKV v4.0.9, `max-background-flushes` is not available, and the number of background flush tasks is set to `max-background-jobs` / 4. 
+> Prior to TiKV v4.0.9, `max-background-flushes` is not available, and the number of background flush tasks is set to `max-background-jobs` / 4. 
 
 If the number of memtables reaches the `max-write-buffer-number` for a column family, RocksDB stalls all writes for that column family on that instance.
 
@@ -124,10 +124,12 @@ Configuration parameters:
 * `[rocksdb|raftdb].[defaultcf|writecf|lockcf].level0-file-num-compaction-trigger` 
 
     The default is 4.
+    
 
 * `[rocksdb|raftdb].[defaultcf|writecf|lockcf].level0-slowdown-writes-trigger`
 
     The default is 20.
+    
 
 * `[rocksdb|raftdb].[defaultcf|writecf|lockcf].level0-stop-writes-trigger` 
 
@@ -158,6 +160,7 @@ Configuration parameters:
 * `[rocksdb|raftdb].soft-pending-compaction-bytes-limit` 
 
     The default is 64 GB.
+    
 
 * `[rocksdb|raftdb].hard-pending-compaction-bytes-limit` 
 
