@@ -142,7 +142,7 @@ Grafana graphs:
 
 ### Too many pending compaction bytes
 
-A Log-Structured Merge-Tree (LSM) consists of multiple levels. Each level can include zero or more SST files. Level 0 is identified as a "higher hevel" and each incrementing level (level 1, level 2, etc.) is identified as a lower level. (See the diagram below.)
+A Log-Structured Merge-Tree (LSM) consists of multiple levels. Each level can include zero or more SST files. Level 0 is identified as a "higher level" and each incrementing level (level 1, level 2, etc.) is identified as a lower level. (See the diagram below.)
 
 Since level 0 is treated differently than the lower levels, level 0 does not apply to pending compaction bytes, but it’s included in the diagram below to provide a more complete picture of the levels.
 
