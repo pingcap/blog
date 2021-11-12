@@ -22,14 +22,12 @@ When RocksDB canâ€™t flush and compact data promptly, it uses a feature called â
 
 From [Github](https://github.com/facebook/rocksdb/wiki/Write-Stalls):
 
-
 > RocksDB has an extensive system to slow down writes when flush or compaction can't keep up with the incoming write rate. Without such a system, if users keep writing more than the hardware can handle, the database will:
 >
 > * Increase space amplification, which could lead to running out of disk space;
 > * Increase read amplification, significantly degrading read performance.
 >
 > The idea is to slow down incoming writes to the speed that the database can handle. However, sometimes the database can be too sensitive to a temporary write burst, or underestimate what the hardware can handle, so that you may get unexpected slowness or query timeouts.
-
 
 TiKV has two instances of RocksDB (RaftDB and KVdb). RaftDB has only one column family. KVDB has three column families (default, write, and lock).
 
@@ -65,7 +63,6 @@ Each of the metrics below is associated with slowdown or stop. Slowdown indicate
 
 ## Reasons why RocksDB triggers write stalls
 
-
 ### Too many memtables
 
 If too many large memtables are created, there is a greater possibility of out-of-memory (OOM) exceptions; therefore, RocksDB will limit the number and size of memtables created.
@@ -75,7 +72,6 @@ For each column family (default, write, lock, and raft), RocksDB first writes th
 There are background tasks (jobs) that are specifically responsible for flushing memtables to disk and compacting SST files. By default `max-background-jobs` is set to 8 or CPU cores to -1, whichever is smaller. 
 
 There can be many memtables. Remember TiDB has a minimum of one memtable for each column family (default, write, lock, and raft). As mentioned before, when the memtable reaches the `write-buffer-size` limit it becomes read-only and is flagged to be flushed to disk as an SST file. There are a limited number of tasks that flush memtables to disk, which can be identified with `max-background-flushes` limit. The default is 2 or max-background-jobs / 4, whichever is bigger. 
-
 
 > **NOTE**
 >
@@ -169,11 +165,12 @@ Configuration parameters:
 ## Possible root causes
 
 There are multiple reasons for RocksDB write stall. Without going deeply into each, the most common ones are:
+
 * A hotspot
 * The application workload has changes, and there are many more writes
 * Infrastructure storage IOPs are not adequate 
 * The cascading effect of memtables being full, too many level 0 SST files, or pending compaction bytes too high
-* Not enough compaction threads 
+* Not enough compaction threads
 
 ## Conclusion
 
