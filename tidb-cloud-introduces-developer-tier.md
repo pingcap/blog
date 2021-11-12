@@ -5,10 +5,10 @@ date: 2021-11-09
 summary: We are excited to announce the Developer Tier of TiDB Cloud, the fully-managed TiDB service by PingCAP.
 tags: ['TiDB Cloud', 'Announcement']
 categories: ['Product']
-image: /images/blog/tidb-cloud-introduces-developer-tier2.jpg
+image: /images/blog/tidb-cloud-introduces-developer-tier3.jpg
 ---
 
-![TiDB Cloud Introduces Developer Tier](media/tidb-cloud-introduces-developer-tier2.jpg)
+![TiDB Cloud Introduces Developer Tier](media/tidb-cloud-introduces-developer-tier3.jpg)
 
 We are excited to announce the Developer Tier of TiDB Cloud, a fully-managed TiDB service by PingCAP. With the TiDB Cloud Developer Tier, users can run a TiDB cluster for free for one year on Amazon Web Services. This gives developers time to build and test applications on TiDB Cloud, and properly evaluate what TiDB has to offer. TiDB Cloud handles all the behind-the-scenes database management such as infrastructure management, cluster deployment, and backup management, so developers can focus on creating great applications.
 
