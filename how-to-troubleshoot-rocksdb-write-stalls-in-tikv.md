@@ -54,7 +54,7 @@ RocksDB will trigger write stalls if there are too many:
 * [Level 0 SST (Sorted String Table) files](#bookmark=id.cye5mbth2h5x) 
 * [Pending compaction bytes](#bookmark=id.j7eeqy4rw57t)
 
-You can directly map these reasons to the **Write Stall Reason **diagram below.
+You can directly map these reasons to the **Write Stall Reason** diagram below.
 
 Each of the metrics below is associated with slowdown or stop. Slowdown indicates that RocksDB has limited the number of writes specific to the metric. Stop indicates that RocksDB has stopped writes related to the metric.
 
