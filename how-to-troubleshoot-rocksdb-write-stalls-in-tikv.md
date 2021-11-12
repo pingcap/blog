@@ -14,7 +14,7 @@ image: /images/blog/troubleshoot-rocksdb-write-stalls-in-tikv.png
 
 ![How to Troubleshoot RocksDB Write Stalls in TiKV](media/troubleshoot-rocksdb-write-stalls-in-tikv.png)
 
-[TiDB](https://pingcap.com/products/tidb), an open-source, distributed NewSQL database, can experience write performance degradation for several reasons. This troubleshooting guide discusses write performance degradation related to the [Rocks DB](https://docs.pingcap.com/tidb/stable/rocksdb-overview) built-in write stall feature. RocksDB is an open source, mature, and high performance key-value store. It is optimized for fast, low latency storage such as flash drives and high-speed disk drives.
+[TiDB](https://pingcap.com/products/tidb), an open-source, distributed NewSQL database, can experience write performance degradation for several reasons. This troubleshooting guide discusses write performance degradation related to the [RocksDB](https://docs.pingcap.com/tidb/stable/rocksdb-overview) built-in write stall feature. RocksDB is an open-source, mature, and high-performance key-value store. It is optimized for fast, low latency storage such as flash drives and high-speed disk drives.
 
 We will also discuss how to resolve this issue in [TiKV](https://tikv.org/), a highly scalable, low latency, and easy to use key-value database that [uses RocksDB as its storage engine](https://pingcap.com/blog/rocksdb-in-tikv).
 
