@@ -23,7 +23,6 @@ After extensive investigation and diagnosis, we've identified ways to handle the
 
 - <https://github.com/kubernetes/kubernetes/issues/61937>
 - <https://github.com/opencontainers/runc/issues/1725>
-- <https://support.mesosphere.com/s/article/Critical-Issue-KMEM-MSPH-2018-0006>
 
 ### Issue description
 

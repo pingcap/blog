@@ -33,7 +33,7 @@ TiDB is the leading open-source, MySQL compatible, distributed NewSQL database i
 * Eliminate complex data migration - No data migration between transactional and analytical workloads by storing all data in a single database.
 * Run real-time analytical queries - Run real-time operational analytics queries with our hybrid transactional-analytical processing (HTAP) capabilities.
 
-As an open source project from day one, TiDB has been growing for the past six years and is now deployed in production by over 1,500 companies worldwide. TiDB currently has almost 700 contributors to its [Github repository](https://github.com/pingcap/tidb), with two of its sibling projects, [TiKV](https://tikv.org) and [Chaos Mesh](https://https://chaos-mesh.org/), donated to the Cloud Native Computing Fundation (CNCF).
+As an open source project from day one, TiDB has been growing for the past six years and is now deployed in production by over 1,500 companies worldwide. TiDB currently has almost 700 contributors to its [Github repository](https://github.com/pingcap/tidb), with two of its sibling projects, [TiKV](https://tikv.org) and [Chaos Mesh](https://chaos-mesh.org/), donated to the Cloud Native Computing Fundation (CNCF).
 
 ## Get Started Today
 
