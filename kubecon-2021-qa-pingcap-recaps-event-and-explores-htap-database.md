@@ -1,7 +1,7 @@
 ---
 title: 'KubeCon 2021 Q&A: PingCAP Recaps the Event and Explores Its HTAP Database'
 author: ['David Marshall']
-date: 2021-11-15
+date: 2021-11-16
 summary: VMblog followed up with Liming Deng, PingCAP's database engineer, on his recent presentation on KubeCon 2021.
 tags: ['Community news', 'TiKV']
 categories: ['Community']
@@ -9,11 +9,12 @@ image: /images/blog/kubecon-2021-recap.jpg
 ---
 
 ![KubeCon 2021 Q&A: PingCAP Recaps the Event and Explores Its HTAP Database](media/kubecon-2021-recap.jpg)
+
 *This post was originally published on [VMblog](https://vmblog.com/archive/2021/10/28/kubecon-2021-q-a-pingcap-recaps-the-event-and-explores-its-hybrid-transactional-and-analytical-processing-htap-database.aspx#.YZHrab1Bz0r).*
 
 **KubeCon + CloudNativeCon 2021 - Another Successful Event. Were you in attendance? Did you meet with PingCAP?**
 
-With the conclusion of another very successful KubeCon | CloudNativeCon event, VMblog had the pleasure to follow up with Liming Deng, [PingCAP](https://pingcap.com/)’s database engineer.
+With the conclusion of another very successful KubeCon | CloudNativeCon event, VMblog had the pleasure to follow up with Liming Deng, [PingCAP](https://pingcap.com/)'s database engineer.
 
 **VMblog: As a presenter at KubeCon, can you give VMblog readers a quick overview of your session?**
 
