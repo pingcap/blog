@@ -20,7 +20,7 @@ In this series we explore Rust's compile times within the context of [TiKV](http
 
 ## Rust Compile-time Adventures with TiKV: Episode 4
 
-Lately we're exploring how Rust's designs discourage fast compilation. In [the previous post in the series](https://pingcap.com/blog/rust-huge-compilation-units) we discussed compilation units, why Rust's are so big, and how that affects compile times.
+Lately we're exploring how Rust's designs discourage fast compilation. In [Rust's Huge Compilation Units](https://pingcap.com/blog/rust-huge-compilation-units) we discussed compilation units, why Rust's are so big, and how that affects compile times.
 
 This time we're going to wrap up discussing _why_ Rust is slow with a few more subjects: LLVM, compiler architecture, and linking.
 
@@ -93,7 +93,7 @@ Taken to the limit, a responsive compiler architecture naturally lends itself to
 
 There are though tradeoffs in the quality of machine code generated via incremental compilation &mdash; due to the mysterious challenges of inlining, incrementally-recompiled code is unlikely to ever be as fast as highly-optimized, batch-compiled machine code. In other words, you probably won't ever want to use incremental compilation for your production releases, but it can drastically speed up the development experience, while producing relatively fast code.
 
-Niko spoke about this architecture in his ["Responsive compilers" talk at PLISS 2019](https://www.youtube.com/watch?v=N6b44kMS6OM). In that talk he also provided some examples of how the Rust language was accidentally mis-designed for responsive compilation. It is an entirely watchable talk about compiler engineering and I recommend checking it out. 
+Niko spoke about this architecture in his ["Responsive compilers" talk at PLISS 2019](https://www.youtube.com/watch?v=N6b44kMS6OM). In that talk he also provided some examples of how the Rust language was accidentally mis-designed for responsive compilation. It is an entirely watchable talk about compiler engineering and I recommend checking it out.
 
 ## Build scripts and procedural macros
 

@@ -260,7 +260,7 @@ I apologize to any person or project I didn't credit.
 
 So Rust dug itself deep into a corner over the years and will probably be digging itself back out until the end of time (or the end of Rust — same thing, really). Can Rust compile-time be saved from Rust's own run-time success? Will TiKV ever build fast enough to satisfy my managers?
 
-In the next episode, we'll deep-dive into the specifics of Rust's language design that cause it to compile slowly.
+In the next episode, we'll deep-dive into [the specifics of Rust's language design that cause it to compile slowly](https://pingcap.com/blog/rust-compilation-model-calamity).
 
 Stay Rusty, friends.
 

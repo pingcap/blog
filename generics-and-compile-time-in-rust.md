@@ -2,7 +2,7 @@
 title: Generics and Compile-Time in Rust
 author: ['Brian Anderson']
 date: 2020-06-15
-summary: This is the second episode of the Rust Compile Time series. Brian Anderson, one of Rust's original authors, talks about monomorphization, using the TiKV project as a case study.
+summary: This is the second episode of the Rust Compile Time series. Brian Anderson, one of Rust's original authors, talks about monomorphization and generics in Rust, using the TiKV project as a case study.
 tags: ['TiKV', 'Rust']
 categories: ['Engineering']
 image: /images/blog/rust-compile-time-adventures.png
@@ -20,7 +20,7 @@ In this series we explore Rust's compile times within the context of [TiKV](http
 
 ## Rust Compile-time Adventures with TiKV: Episode 2
 
-In [the previous post in the series](https://pingcap.com/blog/rust-compilation-model-calamity/) we covered Rust's early development history, and how it led to a series of decisions that resulted in a high-performance language that compiles slowly. Over the next few we'll describe in more detail some of the designs in Rust that make compile time slow.
+In [The Rust Compilation Model Calamity](https://pingcap.com/blog/rust-compilation-model-calamity/) we covered Rust's early development history, and how it led to a series of decisions that resulted in a high-performance language that compiles slowly. Over the next few we'll describe in more detail some of the designs in Rust that make compile time slow.
 
 This time, we're talking about monomorphization.
 
@@ -264,7 +264,7 @@ All that is only touching on the surface of the tradeoffs involved in monomorphi
 
 ## In the next episode of Rust Compile-time Adventures with TiKV
 
-In the next episode of this series we'll discuss compilation units -- the bundles of code that a compiler processes at a single time -- and how selecting compilation units affects compile time.
+In the next episode of this series we'll discuss [compilation units](https://pingcap.com/blog/rust-huge-compilation-units) -- the bundles of code that a compiler processes at a single time -- and how selecting compilation units affects compile time.
 
 Stay Rusty, friends.
 
