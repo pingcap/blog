@@ -21,7 +21,7 @@ In this series we explore Rust's compile times within the context of [TiKV](http
 
 ## Rust Compile-time Adventures with TiKV: Episode 3
 
-Lately we're exploring how Rust's designs discourage fast compilation. In [the previous post in the series](https://pingcap.com/blog/generics-and-compile-time-in-rust/) we discussed the difficult compile-time tradeoffs required to implement generics.
+Lately we're exploring how Rust's designs discourage fast compilation. In [Generics and Compile-Time in Rust](https://pingcap.com/blog/generics-and-compile-time-in-rust/) we discussed the difficult compile-time tradeoffs required to implement generics.
 
 This time we're going to talk about compilation units.
 
@@ -174,7 +174,7 @@ Unfortunately, because of all these variables, it's not at all obvious for any g
 
 ## In the next episode of Rust Compile-time Adventures with TiKV
 
-In the next episode of this series we'll wrap up this exploration of the reason's for Rust's slow compile times with a few smaller slow-compilation tidbits.
+In the next episode of this series we'll wrap up this exploration of the reason's for Rust's slow compile times with [a few smaller slow-compilation tidbits](https://pingcap.com/blog/reasons-rust-compiles-slowly).
 
 Then maybe we'll move on to something new, like techniques for speeding up Rust builds.
 
