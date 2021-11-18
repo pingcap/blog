@@ -3,7 +3,7 @@ title: 'Using a NewSQL DBMS to Improve Data Freshness and Execute Analytical Que
 author: ['Youzhi Zhu']
 date: 2021-11-18
 summary: For several years, ZTO Express has used TiDB to scale out their database and perform multi-dimensional analytics in real time. Now, they also use TiDB in the HTAP scenario to improve data freshness and execute analytical queries in minutes.
-image: /images/blog/mysql-alternative-database-logistics-industry-jd.jpg
+image: /images/blog/use-newsql-dbms-to-improve-data-freshness-and-execute-analytical-queries-in-minutes.jpg
 tags: ['Scalability', 'HTAP', 'Real-time analytics']
 customer: ZTO Express
 customerCategory: Internet
