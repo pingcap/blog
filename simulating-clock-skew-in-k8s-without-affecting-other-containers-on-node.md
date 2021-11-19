@@ -20,7 +20,7 @@ In this post, I'll describe what is clock skew, how we hacked through different 
 
 ## What is clock skew and why simulate it?
 
-Before moving on the detailed implementation, let's first make clear what clock skew is.
+Before moving on to the detailed implementation, let's first make clear what clock skew is.
 
 Clock skew refers to the time difference between clocks on nodes within a network. It might cause reliability problems in a distributed system, and it's a concern for designers and developers of complex distributed systems. For example, in a distributed SQL database, it's vital to maintain a synchronized local clock across nodes to achieve a consistent global snapshot and ensure the ACID properties for transactions.
 
