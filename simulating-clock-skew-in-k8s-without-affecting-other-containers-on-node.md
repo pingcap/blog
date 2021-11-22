@@ -16,9 +16,11 @@ image: /images/blog/clock-sync-chaos-engineering-k8s.jpg
 
 [Chaos Mesh™](https://github.com/chaos-mesh), an easy-to-use, open-source, cloud-native chaos engineering platform for Kubernetes (K8s), has a new feature, TimeChaos, which simulates the [clock skew](https://en.wikipedia.org/wiki/Clock_skew#On_a_network) phenomenon. Usually, when we modify clocks in a container, we want a [minimized blast radius](https://learning.oreilly.com/library/view/chaos-engineering/9781491988459/ch07.html), and we don't want the change to affect the other containers on the node. In reality, however, implementing this can be harder than you think. How does Chaos Mesh solve this problem?
 
-In this post, I'll describe how we hacked through different approaches of clock skew and how TimeChaos in Chaos Mesh enables time to swing freely in containers.
+In this post, I'll describe what is clock skew, how we hacked through different approaches of simulating clock skew, and how [TimeChaos](https://chaos-mesh.org/docs/simulate-time-chaos-on-kubernetes/) in Chaos Mesh enables time to swing freely in containers.
 
-## Simulating clock skew without affecting other containers on the node
+## What is clock skew and why simulate it?
+
+Before moving on to the detailed implementation, let's first make clear what clock skew is.
 
 Clock skew refers to the time difference between clocks on nodes within a network. It might cause reliability problems in a distributed system, and it's a concern for designers and developers of complex distributed systems. For example, in a distributed SQL database, it's vital to maintain a synchronized local clock across nodes to achieve a consistent global snapshot and ensure the ACID properties for transactions.
 

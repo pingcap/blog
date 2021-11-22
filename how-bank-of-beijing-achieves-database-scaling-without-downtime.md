@@ -1,5 +1,5 @@
 ---
-title: How We Use a Distributed Database to Achieve Horizontal Scaling Without Downtime
+title: How Bank of Beijing Achieves Database Scaling Without Downtime
 author: ['Zhendong Chen']
 date: 2020-10-08
 summary: Bank of Beijing sought an open-source, horizontally scalable database to scale out their database. Learn how they use TiDB to achieve database scaling with zero downtime.
@@ -9,7 +9,7 @@ url: /success-stories/how-we-use-a-distributed-database-to-achieve-horizontal-sc
 customer: Bank of Beijing
 customerCategory: Financial Services
 logo: /images/blog/customers/bank-of-beijing-logo.png
-aliases: ['/blog/how-we-use-a-distributed-database-to-achieve-horizontal-scaling-without-downtime/']
+aliases: ['/blog/how-we-use-a-distributed-database-to-achieve-horizontal-scaling-without-downtime/', '/case-studies/how-we-use-a-distributed-database-to-achieve-horizontal-scaling-without-downtime']
 ---
 
 **Industry:** Banking
@@ -18,7 +18,7 @@ aliases: ['/blog/how-we-use-a-distributed-database-to-achieve-horizontal-scaling
 
 **Transcreator:** [Caitin Chen](https://github.com/CaitinChen); **Editor:** Tom Dewan
 
-![A horizontal scaling database as a MySQL alternative](media/horizontal-scaling-database-in-bob.jpg)
+![Achieve database scaling without downtime](media/horizontal-scaling-database-in-bob.jpg)
 
 [Bank of Beijing](https://en.wikipedia.org/wiki/Bank_of_Beijing) (BOB) is an urban commercial bank based in Beijing, China. As of June 30, 2020, our total assets amounted to 2.88 trillion Yuan, and we hold a brand value of 59.7 billion Yuan. On the World Top 1000 Banks list, we rank No. 62 in terms of Tier-1 capital and have been in the World Top 100 for seven years in a row.
 
