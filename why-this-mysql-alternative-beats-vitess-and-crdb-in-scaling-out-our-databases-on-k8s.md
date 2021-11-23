@@ -2,8 +2,8 @@
 title: Why This MySQL Alternative Beats Vitess and CRDB in Scaling Out Our Databases on K8s
 author: ['Shaun Chong', 'Mengnan Gong']
 date: 2021-03-18
-summary: Ninja Van, a leading logistics company in Southeast Asia, chose TiDB as a MySQL alternative over Vitess and CockroachDB to scale out their databases on Kubernetes. Learn how this MySQL alternative helps Ninji Van fix their pain points. 
-image: /images/blog/mysql-alternative-database-on-k8s-ninja-van.jpg
+summary: Ninja Van, a Southeast Asia logistics giant, chose TiDB as a MySQL alternative over Vitess and CockroachDB to scale out their databases on Kubernetes. Learn how this MySQL alternative helps Ninji Van fix their pain points. 
+image: /images/blog/mysql-alternative-beats-vitess-and-crdb-in-scaling-out-our-databases-on-k8s.jpg
 tags: ['NewSQL', 'Kubernetes', 'Scalability']
 customer: Ninja Van
 customerCategory: Internet
@@ -20,7 +20,7 @@ aliases: ['/blog/choose-a-mysql-alternative-over-vitess-and-crdb-to-scale-out-ou
 
 **Editors:** Tom Dewan, [Caitin Chen](https://github.com/CaitinChen)
 
-![MySQL alternative database on Kubernetes](media/mysql-alternative-database-on-k8s-ninja-van.jpg)
+![Why this MySQL alternative beats Vitess and CRDB in scaling out databases on K8s](media/mysql-alternative-beats-vitess-and-crdb-in-scaling-out-our-databases-on-k8s.jpg)
 
 [Ninja Van](https://www.crunchbase.com/organization/ninja-van-2) is Southeast Asia's fastest growing last-mile logistics company. We are now in six countries in Southeast Asia. Our customers include Amazon, Shopee, Lazada, Lineman, GradExpress, Zilingo, Tokopedia, and Sendo.
 

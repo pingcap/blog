@@ -1,10 +1,11 @@
 ---
-title: 'tidb-lite: A go-sqlmock Alternative for Easily Unit Testing Golang Database-Related Code'
+title: 'tidb-lite: A Simpler Way to Unit Test Golang Database Code'
 author: ['Xiang Wang']
 date: 2021-03-04
 summary: If your Golang app uses a MySQL-compatible database, you will have a lot of database-related code to unit test. Unlike go-sqlmock, tidb-lite lets you test your code easily without the need to start a database instance in the external environment.
 tags: ['MySQL', 'Go']
 categories: ['Community']
+aliases: ['/blog/tidb-lite-go-sqlmock-alternative-for-easily-unit-testing-golang-database-related-code']
 image: /images/blog/golang-database-unit-test-go-sqlmock-alternative.jpg
 --- 
 
@@ -19,7 +20,7 @@ If your Golang application uses a MySQL-compatible database, such as MySQL, [TiD
 * Start a database instance on which to perform the unit test. However, this approach is not very elegant: you need to rely on an external environment, which increases your testing cost.
 * Simulate or "mock" SQL services. This provides a test environment without having to use an actual database. 
 
-    ![Golang unit test](media/golang-unit-test.jpg)
+    ![Golang database unit test](media/golang-unit-test.jpg)
     <div class="caption-center"><a href="https://draveness.me/golang-101/" target="_blank"> Golang unit test </a></div>
 
     [go-sqlmock](https://github.com/DATA-DOG/go-sqlmock) is a commonly used tool for simulating services written in Golang. However, as we shall see, go-sqlmock also has its drawbacks.
@@ -170,7 +171,7 @@ If the operations of the function or the structure of the database table are com
 
 In contrast, when we use tidb-lite for our unit testing, we only need to focus on whether the return result of the function is correct—not the order of execution of each operation of the function.
 
-## tidb-lite: a simpler alternative
+## tidb-lite: a simpler alternative to unit test Golang database-related code
 
 **One of the most important advantages of tidb-lite over go-sqlmock is simplicity.** You can run a TiDB instance directly in the code instead of starting a MySQL or TiDB instance before running the unit test. This ensures that the unit test does not depend on the external environment. And, in contrast to go-sqlmock, we don't need to write a lot of complex or redundant test code. We can focus on the correctness of the function.
 
