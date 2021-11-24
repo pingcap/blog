@@ -48,7 +48,7 @@ In this 15-minute tutorial, you will learn how to connect TiDB Cloud to [Metabas
 
 1. Start the Metabase application and click **Let’s get started**.
 
-    ![Click Let’s get started](media/click-lets-get-started.jpg)
+    ![Click Let's get started](media/click-lets-get-started.jpg)
 
 2. Select your preferred language in step 1 and click **Next**.
 
