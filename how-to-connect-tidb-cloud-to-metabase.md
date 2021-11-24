@@ -23,7 +23,7 @@ In this 15-minute tutorial, you will learn how to connect TiDB Cloud to [Metabas
 ## Before you begin
 
 * Create a TiDB Cloud cluster and import the Capital Bikeshare sample data following the [TiDB Cloud Quick Start Guide](https://docs.pingcap.com/tidbcloud/public-preview/tidb-cloud-quickstart).
-* Install Metabase by following these [instructions](https://www.metabase.com/docs/latest/operations-guide/installing-metabase.html). You’ll have the option of installing it on premise or in the cloud.
+* Install Metabase by following these [instructions](https://www.metabase.com/docs/latest/operations-guide/installing-metabase.html). You'll have the option of installing it on premise or in the cloud.
 
 ## Get TiDB Cluster IP address
 
