@@ -35,12 +35,12 @@ In this 15-minute tutorial, you will learn how to connect TiDB Cloud to [Metabas
 
 3. Create the traffic filter for the cluster.
 
-    3.1 Depending on how you use Metabase, select a traffic filter from the following options:
+    - Depending on how you use Metabase, select a traffic filter from the following options:
 
         * If you are using an on-prem version of Metabase, click **Add Your Current IP Address**. Your IP Address will be automatically populated.
         * If you are using Metabase on a cloud platform, click **Allow Access from Anywhere.**
 
-    3.2 Click **Create Filter**.
+    - Click **Create Filter**.
 
 4. Take note of the TiDB Cloud IP address, listed between the **-h** parameter and **-P** parameter, as you will use it at a later step. For example: `mysql -u root -h tidb.xxx.xxxxx.us-west-2.prod.aws.tidbcloud.com -P 4000 -p`
 
