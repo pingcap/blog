@@ -11,7 +11,7 @@ image: /images/blog/believe-in-the-multiplicative-power-of-openness.png
 
 **Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
 
-![Believe in the Multiplicative Power of Openness](media/believe-in-the-multiplicative-power-of-openness.png)
+![How Open Source Community Benefits PingCAP and Vice Versa](media/believe-in-the-multiplicative-power-of-openness.png)
 
 *This article is based on the keynote speech given by Max Liu at PingCAP DevCon 2021.*
 
