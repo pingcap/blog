@@ -29,7 +29,7 @@ Six years ago, we started PingCAP with a simple idea: to create a database that'
 
 A database like that wouldn't be built by a handful of engineers behind closed doors. If you ask me, **a great database is never _designed_ beforehand**. It is formed, evolved, constantly improved, and battle-tested through innumerable real-world use cases in a consistent, long-term effort. 
 
-But how can a startup database company get the real-world use cases it needs? We gained our customers and test cases one at a time. People believed in us **because our [TiDB](pingcap.com/products/tidb) database was an open-source database and they—just like us—believed in the power of open source.** 
+But how can a startup database company get the real-world use cases it needs? We gained our customers and test cases one at a time. People believed in us **because our [TiDB](https://en.pingcap.com/products/tidb/) database was an open-source database and they—just like us—believed in the power of open source.** 
 
 As our project grew, it gained traction among open-source enthusiasts and formed a vibrant community. The community fed us with feature requests, bug reports, product feedback, and code contributions. **We were no longer a handful of engineers.** The community connected us with thousands of database professionals and brought us first-hand, invaluable voices that helped TiDB grow faster. [Some](https://github.com/tikv/tikv/pull/9637) helped us build new features; [some](https://github.com/pingcap/tidb/issues/20971) put forward important requirements that leveled up our product competitiveness. Again, the open-source community did us right.
 
