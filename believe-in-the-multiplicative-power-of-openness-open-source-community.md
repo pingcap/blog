@@ -7,12 +7,11 @@ tags: ['DevCon', 'Open source']
 categories: ['Company']
 image: /images/blog/believe-in-the-multiplicative-power-of-openness.png
 ---
-**Author:** [Max Liu ](https://github.com/ngaut) (CEO and co-founder of PingCAP)
+**Author:** [Max Liu](https://github.com/ngaut) (CEO and co-founder of PingCAP)
 
 **Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
 
 ![Believe in the Multiplicative Power of Openness](media/believe-in-the-multiplicative-power-of-openness.png)
-
 
 *This article is based on the keynote speech given by Max Liu at PingCAP DevCon 2021.*
 
@@ -23,7 +22,6 @@ This connection caught us by surprise. We never dreamed of contributing to publi
 If you think about it, Sergio and his project best exemplify how the open-source community grows and changes the world. Its power is not restricted by the borders on a map. An idea goes where it’s needed; it expands itself to other parts of the world and connects thousands of people. At PingCAP, we affectionately call this “the power of openness.”
 
 **The open-source community has formed a virtuous cycle.** Pick an open-source project in the wild, and you may see that it’s built from several other open-source projects; if you’re lucky, you may find it also spawns several other projects. An individual who _benefits_ from the open-source community also _contributes_ to the community, and the benefits pass on to even more people.
-
 
 ## The power of openness
 
