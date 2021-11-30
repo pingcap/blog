@@ -5,13 +5,13 @@ date: 2021-11-30
 summary: Max Liu, PingCAP CEO, talks about the power of open source. Learn how the open source community helps PingCAP grow and how PingCAP gives back to the community. 
 tags: ['DevCon', 'Open source']
 categories: ['Company']
-image: /images/blog/believe-in-the-multiplicative-power-of-openness.png
+image: /images/blog/how-open-source-community-benefits-pingcap-and-vice-versa.png
 ---
 **Author:** [Max Liu](https://github.com/ngaut) (CEO and co-founder of PingCAP)
 
 **Transcreator:** [Ran Huang](https://github.com/ran-huang); **Editor:** Tom Dewan
 
-![How Open Source Community Benefits PingCAP and Vice Versa](media/believe-in-the-multiplicative-power-of-openness.png)
+![How Open Source Community Benefits PingCAP and Vice Versa](media/how-open-source-community-benefits-pingcap-and-vice-versa.png)
 
 *This article is based on the keynote speech given by Max Liu at PingCAP DevCon 2021.*
 
