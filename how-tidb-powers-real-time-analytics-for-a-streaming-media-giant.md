@@ -142,7 +142,7 @@ The tagged data is originally written into and stored in TiDB in real time. By p
 
 The image below shows how we deploy TiDB clusters in our entire risk control system. A TiSpark SQL helps us replicate the tagging data from TiDB to Hive. Then, Hive supports the offline OLAP queries, while TiDB responds to the OLTP queries.  
 
-![The deployment architecture of TiDB clusters](images/deployment-architecture-of-tidb-clusters.jpg)
+![The deployment architecture of TiDB clusters](media/deployment-architecture-of-tidb-clusters.jpg)
 <div class="caption-center"> The deployment architecture of TiDB clusters </div>
 
 ### TiDB in the BI system 
@@ -151,7 +151,7 @@ The Business Intelligence (BI) system helps BI operators analyze the performance
 
 All data in the BI system originates from our internal data warehouses and user portraits. After being processed through Spark and Hive in the computing layer, the data goes to the storage layer and is stored in TiDB, ClickHouse, and Kylin. TiDB supports responses to landing page queries, for example, the real-time, daily, or accumulated views or clicks of a certain TV episode or album.
 
-![The BI system architecture](images/bi-system-architecture.jpg)
+![The BI system architecture](media/bi-system-architecture.jpg)
 <div class="caption-center"> The BI system architecture </div>
 
 The data size in our BI system is enormous; it can be up to dozens of terabytes. Nevertheless, we are thrilled to see that TiDB not only can deal with such massive amounts of data, but it can also respond to OLAP and OLTP queries at the same time without interfering with either of them.  
