@@ -122,6 +122,7 @@ TiDB uses a [Delta architecture](https://www.thedigitaltalk.com/blog/2019-9-intr
 * Uses intermediate hops to improve reliability and troubleshooting
 * Makes the cost and latency trade off based on your needs
 * Incrementally improves the quality of your data
+
 This means that TiDB with a Delta architecture can reduce your maintenance burden, ensure your data quality and consistency, and improve the processing efficiency.
 
 Let's see how TiDB comes into play in iQIYI's real-time analytics scenarios. 
