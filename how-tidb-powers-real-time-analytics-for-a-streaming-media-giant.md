@@ -7,6 +7,7 @@ tags: ['HTAP', 'Real-time analytics']
 customer: iQIYI
 customerCategory: Media and Entertainment 
 image: /images/blog/how-tidb-powers-real-time-analytics-for-a-streaming-media-giant.png
+logo: /images/blog/customers/iqiyi-logo.png
 notShowOnLogoWall: true
 ---
 
@@ -125,6 +126,11 @@ This means that TiDB with a Delta architecture can reduce your maintenance burde
 
 Let’s see how TiDB comes into play in iQIYI’s real-time analytics scenarios. 
 
+<div class="trackable-btns">
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How TiDB Powers Real-Time Analytics for a Streaming Media Giant', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  <a href="/contact-us" onclick="trackViews('How TiDB Powers Real-Time Analytics for a Streaming Media Giant', 'contact-us-middle')"><button>Request a Demo</button></a>
+</div>
+
 ### TiDB in the risk control system
 
 Our risk control system includes a data service system. It is similar to a data warehouse and provides a unified tagging service and supports both Online Transactional Processing (OLTP) and Online Analytical Processing (OLAP) queries. 
@@ -132,14 +138,12 @@ Our risk control system includes a data service system. It is similar to a data 
 The tagged data is originally written into and stored in TiDB in real time. By parsing the binlog files or manual trigger, TiDB can load data with specified tagging to the cache in the service layer so that the risk control engine can perform real-time queries. The extract, transform, load (ETL) module replicates data stored in TiDB to Hive by running a Spark job to ensure that both TiDB and Hive store the full amount of data. 
 
 ![The architecture of the data service system](media/architecture-of-data-service-system.jpg)
-
-The architecture of the data service system
+<div class="caption-center"> The architecture of the data service system </div>
 
 The image below shows how we deploy TiDB clusters in our entire risk control system. A TiSpark SQL helps us replicate the tagging data from TiDB to Hive. Then, Hive supports the offline OLAP queries, while TiDB responds to the OLTP queries.  
 
 ![The deployment architecture of TiDB clusters](images/deployment-architecture-of-tidb-clusters.jpg)
-
-The deployment architecture of TiDB clusters
+<div class="caption-center"> The deployment architecture of TiDB clusters </div>
 
 ### TiDB in the BI system 
 
@@ -148,8 +152,7 @@ The Business Intelligence (BI) system helps BI operators analyze the performance
 All data in the BI system originates from our internal data warehouses and user portraits. After being processed through Spark and Hive in the computing layer, the data goes to the storage layer and is stored in TiDB, ClickHouse, and Kylin. TiDB supports responses to landing page queries, for example, the real-time, daily, or accumulated views or clicks of a certain TV episode or album.
 
 ![The BI system architecture](images/bi-system-architecture.jpg)
-
-The BI system architecture
+<div class="caption-center"> The BI system architecture </div>
 
 The data size in our BI system is enormous; it can be up to dozens of terabytes. Nevertheless, we are thrilled to see that TiDB not only can deal with such massive amounts of data, but it can also respond to OLAP and OLTP queries at the same time without interfering with either of them.  
 
