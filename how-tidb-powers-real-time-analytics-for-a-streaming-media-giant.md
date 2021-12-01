@@ -19,13 +19,13 @@ notShowOnLogoWall: true
 
 ![How TiDB Powers Real-Time Analytics for a Streaming Media Giant](media/how-tidb-powers-real-time-analytics-for-a-streaming-media-giant.png)
 
-Launched on April 22, 2010, iQIYI is known for its high standards for its productions, as well as its youthful and stylish branding. Until now, iQIYI has achieved worldwide popularity, built up a massive user base, and has been considered as the leading power in China’s online video industry.
+Launched on April 22, 2010, iQIYI is known for its high standards for its productions, as well as its youthful and stylish branding. Until now, iQIYI has achieved worldwide popularity, built up a massive user base, and has been considered as the leading power in China's online video industry.
 
 ## Our five-year relationship with TiDB
 
 We discovered PingCAP's TiDB database five years ago, and since then it's been one of our most stable and productive tools. 
 
-In 2017, we were in urgent search of a distributed database compatible with the MySQL protocol to hold iQIYI’s soaring data size. Our first encounter with [TiDB](https://docs.pingcap.com/tidb/stable), a distributed, highly scalable and MySQL-compatible NewSQL database, showed us the light at the end of the tunnel and made us believe it was exactly what we had been looking for. 
+In 2017, we were in urgent search of a distributed database compatible with the MySQL protocol to hold iQIYI's soaring data size. Our first encounter with [TiDB](https://docs.pingcap.com/tidb/stable), a distributed, highly scalable and MySQL-compatible NewSQL database, showed us the light at the end of the tunnel and made us believe it was exactly what we had been looking for. 
 
 Five years have passed, and we have now deployed over 100 TiDB clusters with more than 500 servers supporting over 30 business lines. 
 
@@ -33,7 +33,7 @@ In 2018, we shared [how TiDB helped us succeed](https://pingcap.com/case-studies
 
 ## Bottlenecks in traditional real-time analytics architectures
 
-Before we met TiDB, like many other companies, we followed two popular architectures to process iQIYI’s massive data: Lambda and Kappa. 
+Before we met TiDB, like many other companies, we followed two popular architectures to process iQIYI's massive data: Lambda and Kappa. 
 
 The table below summarizes these two architectures and their downsides.
 
@@ -114,7 +114,7 @@ To replace batch processing, data is simply fed through the streaming system qui
 
 ## How does TiDB stand out?
 
-Now that we understand the bottlenecks of traditional Lambda and Kappa architectures, let’s see TiDB’s data architecture and its strengths. 
+Now that we understand the bottlenecks of traditional Lambda and Kappa architectures, let's see TiDB's data architecture and its strengths. 
 
 TiDB uses a [Delta architecture](https://www.thedigitaltalk.com/blog/2019-9-introduction-to-delta-architecture/) to process massive real-time data. The Delta architecture can be seen as a further evolution of the Lambda and Kappa architectures, which processes data continuously and incrementally without having to choose between batching and streaming. This new architecture:
 
@@ -124,7 +124,7 @@ TiDB uses a [Delta architecture](https://www.thedigitaltalk.com/blog/2019-9-intr
 * Incrementally improves the quality of your data
 This means that TiDB with a Delta architecture can reduce your maintenance burden, ensure your data quality and consistency, and improve the processing efficiency.
 
-Let’s see how TiDB comes into play in iQIYI’s real-time analytics scenarios. 
+Let's see how TiDB comes into play in iQIYI's real-time analytics scenarios. 
 
 <div class="trackable-btns">
   <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How TiDB Powers Real-Time Analytics for a Streaming Media Giant', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
