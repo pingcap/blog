@@ -8,6 +8,7 @@ url: /success-stories/tidb-in-iqiyi/
 customer: iQiyi
 customerCategory: Internet
 logo: /images/blog/customers/iqiyi-logo.png
+notShowOnLogoWall: true
 ---
 
 **Industry:** Media and Entertainment
