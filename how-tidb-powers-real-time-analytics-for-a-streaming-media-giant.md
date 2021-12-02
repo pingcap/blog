@@ -8,7 +8,6 @@ customer: iQIYI
 customerCategory: Media and Entertainment 
 image: /images/blog/how-tidb-powers-real-time-analytics-for-a-streaming-media-giant.png
 logo: /images/blog/customers/iqiyi-logo.png
-notShowOnLogoWall: true
 ---
 
 **Industry:** Media and Entertainment
