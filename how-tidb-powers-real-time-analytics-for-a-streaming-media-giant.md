@@ -5,7 +5,7 @@ date: 2021-12-02
 summary: This post talks about the bottlenecks of traditional real-time analytics architectures and how TiDB helps iQIYI succeed in real-time analytics scenarios. 
 tags: ['HTAP', 'Real-time analytics']
 customer: iQIYI
-customerCategory: Media and Entertainment 
+customerCategory: Internet
 image: /images/blog/how-tidb-powers-real-time-analytics-for-a-streaming-media-giant.png
 logo: /images/blog/customers/iqiyi-logo.png
 ---
