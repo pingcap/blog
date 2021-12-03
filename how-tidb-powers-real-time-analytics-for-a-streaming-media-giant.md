@@ -5,7 +5,7 @@ date: 2021-12-02
 summary: This post talks about the bottlenecks of traditional real-time analytics architectures and how TiDB helps iQIYI succeed in real-time analytics scenarios. 
 tags: ['HTAP', 'Real-time analytics']
 customer: iQIYI
-customerCategory: Media and Entertainment 
+customerCategory: Internet
 image: /images/blog/how-tidb-powers-real-time-analytics-for-a-streaming-media-giant.png
 logo: /images/blog/customers/iqiyi-logo.png
 ---
@@ -53,10 +53,10 @@ The table below summarizes these two architectures and their downsides.
 
 <li>
 A way of processing massive quantities of data that provides access to batch-processing and stream-processing methods with a hybrid approach. 
-<ul>
 
 <li>
 Consists of three layers: the batch layer processes offline data, the speed layer processes real-time data, and the serving layer responds to queries. 
+<ul>
 </li>
 </ul>
 </li>
@@ -67,10 +67,10 @@ Consists of three layers: the batch layer processes offline data, the speed laye
 
 <li>
 It has both batch and streaming systems, which is <strong>too tough and complicated for developers to establish and maintain.</strong>
-<ul>
 
 <li>
 The offline and real-time <strong>data</strong> <strong>cannot always remain consistent</strong>. 
+<ul>
 </li>
 </ul>
 </li>
@@ -85,10 +85,10 @@ The offline and real-time <strong>data</strong> <strong>cannot always remain con
 
 <li>
 A simplification of the Lambda architecture and can be seen as a Lambda architecture with the batch processing system removed. 
-<ul>
 
 <li>
 To replace batch processing, data is simply fed through the streaming system quickly. 
+<ul>
 </li>
 </ul>
 </li>
@@ -99,10 +99,10 @@ To replace batch processing, data is simply fed through the streaming system qui
 
 <li>
 <strong>Too reliant on message middlewares</strong>, which is destined to have flaws in its performance. 
-<ul>
 
 <li>
 <strong>Data loss happens</strong> <strong>occasionally</strong> under this architecture.
+<ul>
 </li>
 </ul>
 </li>
@@ -167,4 +167,4 @@ After five years of hands-on experience with TiDB and over 100 TiDB clusters dep
 
 Thanks to the PingCAP team for continuing to surprise us and help us succeed by delivering stronger products year by year. Each TiDB release brings us leaps in performance and efficiency. 
 
-If you are also interested in TiDB, you can[request a demo](https://en.pingcap.com/contact-us/?_ga=2.26006143.375886924.1636296970-365976877.1630559498) from PingCAP right now. You can also [follow TiDB on GitHub](https://github.com/pingcap/tidb) or [join our community discussions on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) for further information. 
+If you are also interested in TiDB, you can [request a demo](https://en.pingcap.com/contact-us/?_ga=2.26006143.375886924.1636296970-365976877.1630559498) from PingCAP right now. You can also [follow TiDB on GitHub](https://github.com/pingcap/tidb) or [join our community discussions on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) for further information. 
