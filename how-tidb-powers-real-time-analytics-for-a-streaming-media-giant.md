@@ -53,12 +53,9 @@ The table below summarizes these two architectures and their downsides.
 
 <li>
 A way of processing massive quantities of data that provides access to batch-processing and stream-processing methods with a hybrid approach. 
-
+</li>
 <li>
 Consists of three layers: the batch layer processes offline data, the speed layer processes real-time data, and the serving layer responds to queries. 
-<ul>
-</li>
-</ul>
 </li>
 </ul>
    </td>
@@ -67,12 +64,9 @@ Consists of three layers: the batch layer processes offline data, the speed laye
 
 <li>
 It has both batch and streaming systems, which is <strong>too tough and complicated for developers to establish and maintain.</strong>
-
+</li>
 <li>
 The offline and real-time <strong>data</strong> <strong>cannot always remain consistent</strong>. 
-<ul>
-</li>
-</ul>
 </li>
 </ul>
    </td>
@@ -85,12 +79,9 @@ The offline and real-time <strong>data</strong> <strong>cannot always remain con
 
 <li>
 A simplification of the Lambda architecture and can be seen as a Lambda architecture with the batch processing system removed. 
-
+</li>
 <li>
 To replace batch processing, data is simply fed through the streaming system quickly. 
-<ul>
-</li>
-</ul>
 </li>
 </ul>
    </td>
@@ -99,12 +90,9 @@ To replace batch processing, data is simply fed through the streaming system qui
 
 <li>
 <strong>Too reliant on message middlewares</strong>, which is destined to have flaws in its performance. 
-
+</li>
 <li>
 <strong>Data loss happens</strong> <strong>occasionally</strong> under this architecture.
-<ul>
-</li>
-</ul>
 </li>
 </ul>
    </td>
