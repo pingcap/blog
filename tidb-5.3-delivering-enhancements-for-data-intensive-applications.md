@@ -29,7 +29,7 @@ This post only highlights a few of the features in TiDB 5.3. For a full list of 
 
 <div class="trackable-btns">
   <a href="/download" onclick="trackViews('TiDB 5.3: Delivering Enhancements for Data Intensive Applications', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
-  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('iDB 5.3: Delivering Enhancements for Data Intensive Applications', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB 5.3: Delivering Enhancements for Data Intensive Applications', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
 ### Strengthened Timestamp Oracle for more scalable OLTP
