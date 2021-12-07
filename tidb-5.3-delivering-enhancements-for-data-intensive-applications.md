@@ -120,8 +120,6 @@ This release also introduces temporary tables to manage transient, intermediate 
 
 You can use TiDB temporary tables to simplify your business logic. For example, you can:
 
-
-
 * Cache an application’s temporary data. When calculation completes, the data is dumped to the ordinary table, and the temporary table is automatically released.
 * Perform multiple data manipulation language (DML) operations on the same temporary data in a short period of time.
 * Import and update intermediate temporary data in batches.
