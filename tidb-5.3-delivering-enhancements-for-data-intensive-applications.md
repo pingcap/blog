@@ -20,16 +20,16 @@ This post only highlights a few of the features in TiDB 5.3. For a full list of 
 
 ## TiDB 5.3 highlights
 
-* **More scalable Online Transactional Processing (OLTP**) enabled by optimized  Timestamp Oracle service (TSO) allocation. This reduces the latency of transactions and improves the scalability of the Placement Driver (PD) service.  
+* **More scalable Online Transactional Processing (OLTP**) enabled by optimized Timestamp Oracle service (TSO) allocation. This reduces the latency of transactions and improves the scalability of the Placement Driver (PD) service.  
 * **Increased efficiency and faster HTAP** with TiFlash improvements, allowing TiDB to handle high traffic events more efficiently.
-* **Easier and faster data migration** with improvements toTiDB Data Migration (DM) and TiDB Lightning.
+* **Easier and faster data migration** with improvements to TiDB Data Migration (DM) and TiDB Lightning.
 * **Easier to operate at a massive scale with:**
     * Experimental support for Continuous Profiling. With this feature, developers can inspect flame graphs to dive deeper into performance anomalies.
     * Support for creating local or global temporary tables to simplify business logic and reduce operational costs.
 
 <div class="trackable-btns">
-  <a href="/download" onclick="trackViews('iDB 5.3: Delivering Enhancements for Data Intensive Applications', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
-  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('iDB 5.3: Delivering Enhancements for Data Intensive Applications', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  <a href="/download" onclick="trackViews('TiDB 5.3: Delivering Enhancements for Data Intensive Applications', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB 5.3: Delivering Enhancements for Data Intensive Applications', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
 </div>
 
 ### Strengthened Timestamp Oracle for more scalable OLTP
