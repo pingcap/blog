@@ -46,7 +46,7 @@ These new items are especially helpful if you have:
 * Large-scale clusters with over 100 TB of data or over 1 million queries per second (QPS)
 * Medium-sized clusters that require unlimited scalability as your business rapidly grows and the data volume surges
 
-We tested these features with sysbench. We found that at 512 threads, the cluster’s overall QPS throughput doubled after optimization. 
+We tested these features with sysbench. We found that at 512 threads, the cluster's overall QPS throughput doubled after optimization. 
 
 ### Transactional and analytical processing at scale
 
@@ -99,7 +99,7 @@ Test results showed that a total of 20 TB MySQL sharded tables can be imported t
 
 ### Get performance analysis at a glance
 
-For complex, distributed systems, developers frequently need to investigate performance bottlenecks and quickly identify the root cause of the problem. Profiling gives developers a fuller understanding of the application’s performance over time, allowing them to identify issues and make optimizations that will improve user experiences and system stability and reduce operational costs.
+For complex, distributed systems, developers frequently need to investigate performance bottlenecks and quickly identify the root cause of the problem. Profiling gives developers a fuller understanding of the application's performance over time, allowing them to identify issues and make optimizations that will improve user experiences and system stability and reduce operational costs.
 
 Continuous Profiling is an advanced method that takes snapshots of the internal running state of the database with negligible performance loss. Think of it as a CT scan for your database.  
 
@@ -108,10 +108,10 @@ Continuous Profiling returns the results to developers for closer and deeper ana
 ![Flame graph showing resource overhead](media/flame-graph-resource-overhead.png)
 <div class="caption-center">Flame graph showing resource overhead</div>
 
-TiDB’s Continuous Profiling:
+TiDB's Continuous Profiling:
 
 * Reduces fault diagnosis time by at least 50% when the database goes down unexpectedly
-* Provides daily cluster inspection and performance analysis to identify potential risks and ensure the clusters’ stability
+* Provides daily cluster inspection and performance analysis to identify potential risks and ensure the clusters' stability
 * Helps locate performance bottlenecks more intuitively, making fault diagnosis easier for customers of all skill levels
 
 ### Easier maintenance with temporary tables
@@ -120,7 +120,7 @@ This release also introduces temporary tables to manage transient, intermediate 
 
 You can use TiDB temporary tables to simplify your business logic. For example, you can:
 
-* Cache an application’s temporary data. When calculation completes, the data is dumped to the ordinary table, and the temporary table is automatically released.
+* Cache an application's temporary data. When calculation completes, the data is dumped to the ordinary table, and the temporary table is automatically released.
 * Perform multiple data manipulation language (DML) operations on the same temporary data in a short period of time.
 * Import and update intermediate temporary data in batches.
 
@@ -140,9 +140,9 @@ TiDB 5.3 offers local temporary tables and global temporary tables.
 
 TiDB 5.3 enhances the observability of the system, extends the scalability of the distributed database, ensures low latency of data replication, greatly improves the efficiency of full data import, and optimizes the stability of real-time analysis. This release is a significant step forward in making TiDB the standard for enterprise-level HTAP databases.
 
-As Tang Liu, Chief Architect of PingCAP, comments: “The quest for an HTAP database is not about revolutionizing traditional databases or advancing transactional and analytical capabilities. For TiDB, the end of this quest is to build an open ecosystem that will support the consumption of data services and unify data management in real-time. We want to help users achieve digital transformation with innovative yet practical insights.”
+As Tang Liu, Chief Architect of PingCAP, comments: "The quest for an HTAP database is not about revolutionizing traditional databases or advancing transactional and analytical capabilities. For TiDB, the end of this quest is to build an open ecosystem that will support the consumption of data services and unify data management in real-time. We want to help users achieve digital transformation with innovative yet practical insights."
 
-This release would not be possible without the commitment and support of our contributors and users. We’d like to thank everyone who helped us along the way. Thank you for your feedback: you motivate us to make TiDB more stable and more accessible with each iteration. We are confident that TiDB will continue to excel and become a basic software that everyone loves. 
+This release would not be possible without the commitment and support of our contributors and users. We'd like to thank everyone who helped us along the way. Thank you for your feedback: you motivate us to make TiDB more stable and more accessible with each iteration. We are confident that TiDB will continue to excel and become a basic software that everyone loves. 
 
 ## Try it out!
 
