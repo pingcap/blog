@@ -108,8 +108,6 @@ Continuous Profiling returns the results to developers for closer and deeper ana
 ![Flame graph showing resource overhead](media/flame-graph-resource-overhead.png)
 <div class="caption-center">Flame graph showing resource overhead</div>
 
-Flame graph showing resource overhead
-
 TiDB’s Continuous Profiling:
 
 * Reduces fault diagnosis time by at least 50% when the database goes down unexpectedly
