@@ -755,7 +755,7 @@ func (r *Reconciler) Apply(ctx context.Context, req ctrl.Request, chaos v1alpha1
 ```
 
 <div class="trackable-btns">
-  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('How to Efficiently Choose the Right Database for Your Applications', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('Implementing Chaos Engineering in K8s: Chaos Mesh Principle Analysis and Control Plane Development', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
   </div>
 
 In the controller of the PodIoChaos resource, Controller Manager encapsulates the resource into parameters and calls the Chaos Daemon interface to process the parameters.
