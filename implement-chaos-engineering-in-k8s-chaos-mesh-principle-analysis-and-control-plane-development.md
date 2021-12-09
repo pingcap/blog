@@ -92,7 +92,7 @@ According to [pull request #1109](https://github.com/chaos-mesh/chaos-mesh/pull/
 
 ```go
 
-// #include &lt;sys/sysmacros.h>
+// #include <sys/sysmacros.h>
 
 // #include &lt;sys/types.h>
 
