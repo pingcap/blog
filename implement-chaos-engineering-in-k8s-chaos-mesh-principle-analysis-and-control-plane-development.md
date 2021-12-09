@@ -1091,7 +1091,7 @@ Name:         podkillvjn77
 
 Namespace:    dev
 
-Labels:       &lt;none>
+Labels:       <none>
 
 Annotations:  &lt;none>
 
