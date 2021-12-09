@@ -1093,7 +1093,7 @@ Namespace:    dev
 
 Labels:       <none>
 
-Annotations:  &lt;none>
+Annotations:  <none>
 
 API Version:  chaos-mesh.org/v1alpha1
 
