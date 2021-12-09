@@ -94,7 +94,7 @@ According to [pull request #1109](https://github.com/chaos-mesh/chaos-mesh/pull/
 
 // #include <sys/sysmacros.h>
 
-// #include &lt;sys/types.h>
+// #include <sys/types.h>
 
 // // makedev is a macro, so a wrapper is needed
 
