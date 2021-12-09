@@ -6,13 +6,14 @@ summary: We are proud to announce the release of TiDB 5.3. This release makes si
 tags: ['Announcement', 'Release']
 categories: ['Product']
 image: /images/blog/tidb-5.3-delivering-enhancements-for-data-intensive-applications.png
+press_release: true
 ---
 
 **Author:** PingCAP
 
-**Transcreators:** [Yajing Wang](https://github.com/anotherrachel) **Editors:** Tom Dewan, [Calvin Weng](https://github.com/dcalvin)
+**Transcreator:** [Yajing Wang](https://github.com/anotherrachel); **Editors:** Tom Dewan, [Calvin Weng](https://github.com/dcalvin)
 
-![TiDB 5.1: TiDB 5.3: Delivering Enhancements for Data Intensive Applications](media/tidb-5.3-delivering-enhancements-for-data-intensive-applications.png)
+![TiDB 5.3: Delivering Enhancements for Data Intensive Applications](media/tidb-5.3-delivering-enhancements-for-data-intensive-applications.png)
 
 TiDB 5.3 is now generally available. TiDB 5.3 makes significant advances in real-time Hybrid Transactional and Analytical Processing (HTAP) capabilities and overall system stability, with improvements in data migration, high availability, and ease of use.  
 
