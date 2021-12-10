@@ -484,7 +484,7 @@ func (s *DaemonServer) ApplyIOChaos(ctx context.Context, in *pb.ApplyIOChaosRequ
 		processBuilder = processBuilder.SetNS(pid, bpm.MountNS).SetNS(pid, bpm.PidNS)
 	}
     ...
-    // JSON RPC 调用
+    // Calls JSON RPC
 	client, err := jrpc.DialIO(ctx, receiver, caller)
 	if err != nil {
 		return nil, err
