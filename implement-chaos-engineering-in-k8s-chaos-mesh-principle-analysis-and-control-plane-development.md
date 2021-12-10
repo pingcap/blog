@@ -72,11 +72,11 @@ According to [pull request #1109](https://github.com/chaos-mesh/chaos-mesh/pull/
 // }
 // EnsureFuseDev ensures /dev/fuse exists. If not, it will create one
 func EnsureFuseDev() {
-	if _, err := os.Open("/dev/fuse"); os.IsNotExist(err) {
-		// 10, 229 according to https://www.kernel.org/doc/Documentation/admin-guide/devices.txt
-		fuse := C.Makedev(10, 229)
-		syscall.Mknod("/dev/fuse", 0o666|syscall.S_IFCHR, int(fuse))
-	}
+    if _, err := os.Open("/dev/fuse"); os.IsNotExist(err) {
+        // 10, 229 according to https://www.kernel.org/doc/Documentation/admin-guide/devices.txt
+        fuse := C.Makedev(10, 229)
+        syscall.Mknod("/dev/fuse", 0o666|syscall.S_IFCHR, int(fuse))
+    }
 }
 ```
 
@@ -88,25 +88,25 @@ In [pull request #1453](https://github.com/chaos-mesh/chaos-mesh/pull/1453), Cha
 
 ```go
 import (
-	"context"
-	v1 "k8s.io/api/core/v1"
-	"sigs.k8s.io/controller-runtime/pkg/client"
+    "context"
+    v1 "k8s.io/api/core/v1"
+    "sigs.k8s.io/controller-runtime/pkg/client"
 )
 type Impl struct {
-	client.Client
+    client.Client
 }
 func (impl *Impl) Apply(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
-	...
-	err = impl.Get(ctx, namespacedName, &pod)
-	if err != nil {
-		// TODO: handle this error
-		return v1alpha1.NotInjected, err
-	}
-	err = impl.Delete(ctx, &pod, &client.DeleteOptions{
-		GracePeriodSeconds: &podchaos.Spec.GracePeriod, // PeriodSeconds has to be set specifically
-	})
-	...
-	return v1alpha1.Injected, nil
+    ...
+    err = impl.Get(ctx, namespacedName, &pod)
+    if err != nil {
+        // TODO: handle this error
+        return v1alpha1.NotInjected, err
+    }
+    err = impl.Delete(ctx, &pod, &client.DeleteOptions{
+        GracePeriodSeconds: &podchaos.Spec.GracePeriod, // PeriodSeconds has to be set specifically
+    })
+    ...
+    return v1alpha1.Injected, nil
 }
 ```
 
@@ -116,42 +116,42 @@ The `GracePeriodSeconds` parameter lets Kubernetes [forcibly terminate a Pod](ht
 
 ```go
 func (impl *Impl) Apply(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
-	...
-	pod := origin.DeepCopy()
-	for index := range pod.Spec.Containers {
-		originImage := pod.Spec.Containers[index].Image
-		name := pod.Spec.Containers[index].Name
-		key := annotation.GenKeyForImage(podchaos, name, false)
-		if pod.Annotations == nil {
-			pod.Annotations = make(map[string]string)
-		}
-		// If the annotation is already existed, we could skip the reconcile for this container
-		if _, ok := pod.Annotations[key]; ok {
-			continue
-		}
-		pod.Annotations[key] = originImage
-		pod.Spec.Containers[index].Image = config.ControllerCfg.PodFailurePauseImage
-	}
-	for index := range pod.Spec.InitContainers {
-		originImage := pod.Spec.InitContainers[index].Image
-		name := pod.Spec.InitContainers[index].Name
-		key := annotation.GenKeyForImage(podchaos, name, true)
-		if pod.Annotations == nil {
-			pod.Annotations = make(map[string]string)
-		}
-		// If the annotation is already existed, we could skip the reconcile for this container
-		if _, ok := pod.Annotations[key]; ok {
-			continue
-		}
-		pod.Annotations[key] = originImage
-		pod.Spec.InitContainers[index].Image = config.ControllerCfg.PodFailurePauseImage
-	}
-	err = impl.Patch(ctx, pod, client.MergeFrom(&origin))
-	if err != nil {
-		// TODO: handle this error
-		return v1alpha1.NotInjected, err
-	}
-	return v1alpha1.Injected, nil
+    ...
+    pod := origin.DeepCopy()
+    for index := range pod.Spec.Containers {
+        originImage := pod.Spec.Containers[index].Image
+        name := pod.Spec.Containers[index].Name
+        key := annotation.GenKeyForImage(podchaos, name, false)
+        if pod.Annotations == nil {
+            pod.Annotations = make(map[string]string)
+        }
+        // If the annotation is already existed, we could skip the reconcile for this container
+        if _, ok := pod.Annotations[key]; ok {
+            continue
+        }
+        pod.Annotations[key] = originImage
+        pod.Spec.Containers[index].Image = config.ControllerCfg.PodFailurePauseImage
+    }
+    for index := range pod.Spec.InitContainers {
+        originImage := pod.Spec.InitContainers[index].Image
+        name := pod.Spec.InitContainers[index].Name
+        key := annotation.GenKeyForImage(podchaos, name, true)
+        if pod.Annotations == nil {
+            pod.Annotations = make(map[string]string)
+        }
+        // If the annotation is already existed, we could skip the reconcile for this container
+        if _, ok := pod.Annotations[key]; ok {
+            continue
+        }
+        pod.Annotations[key] = originImage
+        pod.Spec.InitContainers[index].Image = config.ControllerCfg.PodFailurePauseImage
+    }
+    err = impl.Patch(ctx, pod, client.MergeFrom(&origin))
+    if err != nil {
+        // TODO: handle this error
+        return v1alpha1.NotInjected, err
+    }
+    return v1alpha1.Injected, nil
 }
 ```
 
@@ -161,22 +161,22 @@ The default container image that causes failures is `gcr.io/google-containers/pa
 
 ```go
 func (b *ChaosDaemonClientBuilder) Build(ctx context.Context, pod *v1.Pod) (chaosdaemonclient.ChaosDaemonClientInterface, error) {
-	...
-	daemonIP, err := b.FindDaemonIP(ctx, pod)
-	if err != nil {
-		return nil, err
-	}
-	builder := grpcUtils.Builder(daemonIP, config.ControllerCfg.ChaosDaemonPort).WithDefaultTimeout()
-	if config.ControllerCfg.TLSConfig.ChaosMeshCACert != "" {
-		builder.TLSFromFile(config.ControllerCfg.TLSConfig.ChaosMeshCACert, config.ControllerCfg.TLSConfig.ChaosDaemonClientCert, config.ControllerCfg.TLSConfig.ChaosDaemonClientKey)
-	} else {
-		builder.Insecure()
-	}
-	cc, err := builder.Build()
-	if err != nil {
-		return nil, err
-	}
-	return chaosdaemonclient.New(cc), nil
+    ...
+    daemonIP, err := b.FindDaemonIP(ctx, pod)
+    if err != nil {
+        return nil, err
+    }
+    builder := grpcUtils.Builder(daemonIP, config.ControllerCfg.ChaosDaemonPort).WithDefaultTimeout()
+    if config.ControllerCfg.TLSConfig.ChaosMeshCACert != "" {
+        builder.TLSFromFile(config.ControllerCfg.TLSConfig.ChaosMeshCACert, config.ControllerCfg.TLSConfig.ChaosDaemonClientCert, config.ControllerCfg.TLSConfig.ChaosDaemonClientKey)
+    } else {
+        builder.Insecure()
+    }
+    cc, err := builder.Build()
+    if err != nil {
+        return nil, err
+    }
+    return chaosdaemonclient.New(cc), nil
 }
 ```
 
@@ -186,30 +186,30 @@ When Chaos Daemon starts, if it has a TLS certificate it attaches the certificat
 
 ```go
 func newGRPCServer(containerRuntime string, reg prometheus.Registerer, tlsConf tlsConfig) (*grpc.Server, error) {
-	...
-	if tlsConf != (tlsConfig{}) {
-		caCert, err := ioutil.ReadFile(tlsConf.CaCert)
-		if err != nil {
-			return nil, err
-		}
-		caCertPool := x509.NewCertPool()
-		caCertPool.AppendCertsFromPEM(caCert)
-		serverCert, err := tls.LoadX509KeyPair(tlsConf.Cert, tlsConf.Key)
-		if err != nil {
-			return nil, err
-		}
-		creds := credentials.NewTLS(&tls.Config{
-			Certificates: []tls.Certificate{serverCert},
-			ClientCAs:    caCertPool,
-			ClientAuth:   tls.RequireAndVerifyClientCert,
-		})
-		grpcOpts = append(grpcOpts, grpc.Creds(creds))
-	}
-	s := grpc.NewServer(grpcOpts...)
-	grpcMetrics.InitializeMetrics(s)
-	pb.RegisterChaosDaemonServer(s, ds)
-	reflection.Register(s)
-	return s, nil
+    ...
+    if tlsConf != (tlsConfig{}) {
+        caCert, err := ioutil.ReadFile(tlsConf.CaCert)
+        if err != nil {
+            return nil, err
+        }
+        caCertPool := x509.NewCertPool()
+        caCertPool.AppendCertsFromPEM(caCert)
+        serverCert, err := tls.LoadX509KeyPair(tlsConf.Cert, tlsConf.Key)
+        if err != nil {
+            return nil, err
+        }
+        creds := credentials.NewTLS(&tls.Config{
+            Certificates: []tls.Certificate{serverCert},
+            ClientCAs:    caCertPool,
+            ClientAuth:   tls.RequireAndVerifyClientCert,
+        })
+        grpcOpts = append(grpcOpts, grpc.Creds(creds))
+    }
+    s := grpc.NewServer(grpcOpts...)
+    grpcMetrics.InitializeMetrics(s)
+    pb.RegisterChaosDaemonServer(s, ds)
+    reflection.Register(s)
+    return s, nil
 }
 ```
 
@@ -220,18 +220,18 @@ Chaos Daemon provides the following gRPC interfaces to call:
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ChaosDaemonClient interface {
-	SetTcs(ctx context.Context, in *TcsRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	FlushIPSets(ctx context.Context, in *IPSetsRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	SetIptablesChains(ctx context.Context, in *IptablesChainsRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	SetTimeOffset(ctx context.Context, in *TimeRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	RecoverTimeOffset(ctx context.Context, in *TimeRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	ContainerKill(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	ContainerGetPid(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*ContainerResponse, error)
-	ExecStressors(ctx context.Context, in *ExecStressRequest, opts ...grpc.CallOption) (*ExecStressResponse, error)
-	CancelStressors(ctx context.Context, in *CancelStressRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	ApplyIOChaos(ctx context.Context, in *ApplyIOChaosRequest, opts ...grpc.CallOption) (*ApplyIOChaosResponse, error)
-	ApplyHttpChaos(ctx context.Context, in *ApplyHttpChaosRequest, opts ...grpc.CallOption) (*ApplyHttpChaosResponse, error)
-	SetDNSServer(ctx context.Context, in *SetDNSServerRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+    SetTcs(ctx context.Context, in *TcsRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+    FlushIPSets(ctx context.Context, in *IPSetsRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+    SetIptablesChains(ctx context.Context, in *IptablesChainsRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+    SetTimeOffset(ctx context.Context, in *TimeRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+    RecoverTimeOffset(ctx context.Context, in *TimeRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+    ContainerKill(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+    ContainerGetPid(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*ContainerResponse, error)
+    ExecStressors(ctx context.Context, in *ExecStressRequest, opts ...grpc.CallOption) (*ExecStressResponse, error)
+    CancelStressors(ctx context.Context, in *CancelStressRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+    ApplyIOChaos(ctx context.Context, in *ApplyIOChaosRequest, opts ...grpc.CallOption) (*ApplyIOChaosResponse, error)
+    ApplyHttpChaos(ctx context.Context, in *ApplyHttpChaosRequest, opts ...grpc.CallOption) (*ApplyHttpChaosResponse, error)
+    SetDNSServer(ctx context.Context, in *SetDNSServerRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 ```
 
@@ -243,18 +243,18 @@ The network failure injection code is shown below as it appeared in 2019. As the
 
 ```go
 func (r *Reconciler) applyPod(ctx context.Context, pod *v1.Pod, networkchaos *v1alpha1.NetworkChaos) error {
-	...
-	pbClient := pb.NewChaosDaemonClient(c)
-	containerId := pod.Status.ContainerStatuses[0].ContainerID
-	netem, err := spec.ToNetem()
-	if err != nil {
-		return err
-	}
-	_, err = pbClient.SetNetem(ctx, &pb.NetemRequest{
-		ContainerId: containerId,
-		Netem:       netem,
-	})
-	return err
+    ...
+    pbClient := pb.NewChaosDaemonClient(c)
+    containerId := pod.Status.ContainerStatuses[0].ContainerID
+    netem, err := spec.ToNetem()
+    if err != nil {
+        return err
+    }
+    _, err = pbClient.SetNetem(ctx, &pb.NetemRequest{
+        ContainerId: containerId,
+        Netem:       netem,
+    })
+    return err
 }
 ```
 
@@ -262,47 +262,47 @@ In the `pkg/chaosdaemon` package, we can see how Chaos Daemon processes requests
 
 ```go
 func (s *Server) SetNetem(ctx context.Context, in *pb.NetemRequest) (*empty.Empty, error) {
-	log.Info("Set netem", "Request", in)
-	pid, err := s.crClient.GetPidFromContainerID(ctx, in.ContainerId)
-	if err != nil {
-		return nil, status.Errorf(codes.Internal, "get pid from containerID error: %v", err)
-	}
-	if err := Apply(in.Netem, pid); err != nil {
-		return nil, status.Errorf(codes.Internal, "netem apply error: %v", err)
-	}
-	return &empty.Empty{}, nil
+    log.Info("Set netem", "Request", in)
+    pid, err := s.crClient.GetPidFromContainerID(ctx, in.ContainerId)
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "get pid from containerID error: %v", err)
+    }
+    if err := Apply(in.Netem, pid); err != nil {
+        return nil, status.Errorf(codes.Internal, "netem apply error: %v", err)
+    }
+    return &empty.Empty{}, nil
 }
 // Apply applies a netem on eth0 in pid related namespace
 func Apply(netem *pb.Netem, pid uint32) error {
-	log.Info("Apply netem on PID", "pid", pid)
-	ns, err := netns.GetFromPath(GenNetnsPath(pid))
-	if err != nil {
-		log.Error(err, "failed to find network namespace", "pid", pid)
-		return errors.Trace(err)
-	}
-	defer ns.Close()
-	handle, err := netlink.NewHandleAt(ns)
-	if err != nil {
-		log.Error(err, "failed to get handle at network namespace", "network namespace", ns)
-		return err
-	}
-	link, err := handle.LinkByName("eth0") // TODO: check whether interface name is eth0
-	if err != nil {
-		log.Error(err, "failed to find eth0 interface")
-		return errors.Trace(err)
-	}
-	netemQdisc := netlink.NewNetem(netlink.QdiscAttrs{
-		LinkIndex: link.Attrs().Index,
-		Handle:    netlink.MakeHandle(1, 0),
-		Parent:    netlink.HANDLE_ROOT,
-	}, ToNetlinkNetemAttrs(netem))
-	if err = handle.QdiscAdd(netemQdisc); err != nil {
-		if !strings.Contains(err.Error(), "file exists") {
-			log.Error(err, "failed to add Qdisc")
-			return errors.Trace(err)
-		}
-	}
-	return nil
+    log.Info("Apply netem on PID", "pid", pid)
+    ns, err := netns.GetFromPath(GenNetnsPath(pid))
+    if err != nil {
+        log.Error(err, "failed to find network namespace", "pid", pid)
+        return errors.Trace(err)
+    }
+    defer ns.Close()
+    handle, err := netlink.NewHandleAt(ns)
+    if err != nil {
+        log.Error(err, "failed to get handle at network namespace", "network namespace", ns)
+        return err
+    }
+    link, err := handle.LinkByName("eth0") // TODO: check whether interface name is eth0
+    if err != nil {
+        log.Error(err, "failed to find eth0 interface")
+        return errors.Trace(err)
+    }
+    netemQdisc := netlink.NewNetem(netlink.QdiscAttrs{
+        LinkIndex: link.Attrs().Index,
+        Handle:    netlink.MakeHandle(1, 0),
+        Parent:    netlink.HANDLE_ROOT,
+    }, ToNetlinkNetemAttrs(netem))
+    if err = handle.QdiscAdd(netemQdisc); err != nil {
+        if !strings.Contains(err.Error(), "file exists") {
+            log.Error(err, "failed to add Qdisc")
+            return errors.Trace(err)
+        }
+    }
+    return nil
 }
 ```
 
@@ -325,40 +325,40 @@ Chaos Daemon also implements `StressChaos`. After the Controller Manager calcula
 ```go
 // Normalize the stressors to comply with stress-ng
 func (in *Stressors) Normalize() (string, error) {
-	stressors := ""
-	if in.MemoryStressor != nil && in.MemoryStressor.Workers != 0 {
-		stressors += fmt.Sprintf(" --vm %d --vm-keep", in.MemoryStressor.Workers)
-		if len(in.MemoryStressor.Size) != 0 {
-			if in.MemoryStressor.Size[len(in.MemoryStressor.Size)-1] != '%' {
-				size, err := units.FromHumanSize(string(in.MemoryStressor.Size))
-				if err != nil {
-					return "", err
-				}
-				stressors += fmt.Sprintf(" --vm-bytes %d", size)
-			} else {
-				stressors += fmt.Sprintf(" --vm-bytes %s",
-					in.MemoryStressor.Size)
-			}
-		}
-		if in.MemoryStressor.Options != nil {
-			for _, v := range in.MemoryStressor.Options {
-				stressors += fmt.Sprintf(" %v ", v)
-			}
-		}
-	}
-	if in.CPUStressor != nil && in.CPUStressor.Workers != 0 {
-		stressors += fmt.Sprintf(" --cpu %d", in.CPUStressor.Workers)
-		if in.CPUStressor.Load != nil {
-			stressors += fmt.Sprintf(" --cpu-load %d",
-				*in.CPUStressor.Load)
-		}
-		if in.CPUStressor.Options != nil {
-			for _, v := range in.CPUStressor.Options {
-				stressors += fmt.Sprintf(" %v ", v)
-			}
-		}
-	}
-	return stressors, nil
+    stressors := ""
+    if in.MemoryStressor != nil && in.MemoryStressor.Workers != 0 {
+        stressors += fmt.Sprintf(" --vm %d --vm-keep", in.MemoryStressor.Workers)
+        if len(in.MemoryStressor.Size) != 0 {
+            if in.MemoryStressor.Size[len(in.MemoryStressor.Size)-1] != '%' {
+                size, err := units.FromHumanSize(string(in.MemoryStressor.Size))
+                if err != nil {
+                    return "", err
+                }
+                stressors += fmt.Sprintf(" --vm-bytes %d", size)
+            } else {
+                stressors += fmt.Sprintf(" --vm-bytes %s",
+                    in.MemoryStressor.Size)
+            }
+        }
+        if in.MemoryStressor.Options != nil {
+            for _, v := range in.MemoryStressor.Options {
+                stressors += fmt.Sprintf(" %v ", v)
+            }
+        }
+    }
+    if in.CPUStressor != nil && in.CPUStressor.Workers != 0 {
+        stressors += fmt.Sprintf(" --cpu %d", in.CPUStressor.Workers)
+        if in.CPUStressor.Load != nil {
+            stressors += fmt.Sprintf(" --cpu-load %d",
+                *in.CPUStressor.Load)
+        }
+        if in.CPUStressor.Options != nil {
+            for _, v := range in.CPUStressor.Options {
+                stressors += fmt.Sprintf(" %v ", v)
+            }
+        }
+    }
+    return stressors, nil
 }
 ```
 
@@ -375,58 +375,58 @@ The new IOChaos implementation doesn't modify the Pod resources. When you define
 ```go
 // Apply implements the reconciler.InnerReconciler.Apply
 func (r *Reconciler) Apply(ctx context.Context, req ctrl.Request, chaos v1alpha1.InnerObject) error {
-	iochaos, ok := chaos.(*v1alpha1.IoChaos)
-	if !ok {
-		err := errors.New("chaos is not IoChaos")
-		r.Log.Error(err, "chaos is not IoChaos", "chaos", chaos)
-		return err
-	}
-	source := iochaos.Namespace + "/" + iochaos.Name
-	m := podiochaosmanager.New(source, r.Log, r.Client)
-	pods, err := utils.SelectAndFilterPods(ctx, r.Client, r.Reader, &iochaos.Spec)
-	if err != nil {
-		r.Log.Error(err, "failed to select and filter pods")
-		return err
-	}
-	r.Log.Info("applying iochaos", "iochaos", iochaos)
-	for _, pod := range pods {
-		t := m.WithInit(types.NamespacedName{
-			Name:      pod.Name,
-			Namespace: pod.Namespace,
-		})
-		// TODO: support chaos on multiple volume
-		t.SetVolumePath(iochaos.Spec.VolumePath)
-		t.Append(v1alpha1.IoChaosAction{
-			Type: iochaos.Spec.Action,
-			Filter: v1alpha1.Filter{
-				Path:    iochaos.Spec.Path,
-				Percent: iochaos.Spec.Percent,
-				Methods: iochaos.Spec.Methods,
-			},
-			Faults: []v1alpha1.IoFault{
-				{
-					Errno:  iochaos.Spec.Errno,
-					Weight: 1,
-				},
-			},
-			Latency:          iochaos.Spec.Delay,
-			AttrOverrideSpec: iochaos.Spec.Attr,
-			Source:           m.Source,
-		})
-		key, err := cache.MetaNamespaceKeyFunc(&pod)
-		if err != nil {
-			return err
-		}
-		iochaos.Finalizers = utils.InsertFinalizer(iochaos.Finalizers, key)
-	}
-	r.Log.Info("commiting updates of podiochaos")
-	err = m.Commit(ctx)
-	if err != nil {
-		r.Log.Error(err, "fail to commit")
-		return err
-	}
-	r.Event(iochaos, v1.EventTypeNormal, utils.EventChaosInjected, "")
-	return nil
+    iochaos, ok := chaos.(*v1alpha1.IoChaos)
+    if !ok {
+        err := errors.New("chaos is not IoChaos")
+        r.Log.Error(err, "chaos is not IoChaos", "chaos", chaos)
+        return err
+    }
+    source := iochaos.Namespace + "/" + iochaos.Name
+    m := podiochaosmanager.New(source, r.Log, r.Client)
+    pods, err := utils.SelectAndFilterPods(ctx, r.Client, r.Reader, &iochaos.Spec)
+    if err != nil {
+        r.Log.Error(err, "failed to select and filter pods")
+        return err
+    }
+    r.Log.Info("applying iochaos", "iochaos", iochaos)
+    for _, pod := range pods {
+        t := m.WithInit(types.NamespacedName{
+            Name:      pod.Name,
+            Namespace: pod.Namespace,
+        })
+        // TODO: support chaos on multiple volume
+        t.SetVolumePath(iochaos.Spec.VolumePath)
+        t.Append(v1alpha1.IoChaosAction{
+            Type: iochaos.Spec.Action,
+            Filter: v1alpha1.Filter{
+                Path:    iochaos.Spec.Path,
+                Percent: iochaos.Spec.Percent,
+                Methods: iochaos.Spec.Methods,
+            },
+            Faults: []v1alpha1.IoFault{
+                {
+                    Errno:  iochaos.Spec.Errno,
+                    Weight: 1,
+                },
+            },
+            Latency:          iochaos.Spec.Delay,
+            AttrOverrideSpec: iochaos.Spec.Attr,
+            Source:           m.Source,
+        })
+        key, err := cache.MetaNamespaceKeyFunc(&pod)
+        if err != nil {
+            return err
+        }
+        iochaos.Finalizers = utils.InsertFinalizer(iochaos.Finalizers, key)
+    }
+    r.Log.Info("commiting updates of podiochaos")
+    err = m.Commit(ctx)
+    if err != nil {
+        r.Log.Error(err, "fail to commit")
+        return err
+    }
+    r.Event(iochaos, v1.EventTypeNormal, utils.EventChaosInjected, "")
+    return nil
 }
 ```
 
@@ -439,29 +439,29 @@ In the controller of the PodIoChaos resource, Controller Manager encapsulates th
 ```go
 // Apply flushes io configuration on pod
 func (h *Handler) Apply(ctx context.Context, chaos *v1alpha1.PodIoChaos) error {
-	h.Log.Info("updating io chaos", "pod", chaos.Namespace+"/"+chaos.Name, "spec", chaos.Spec)
+    h.Log.Info("updating io chaos", "pod", chaos.Namespace+"/"+chaos.Name, "spec", chaos.Spec)
     ...
-	res, err := pbClient.ApplyIoChaos(ctx, &pb.ApplyIoChaosRequest{
-		Actions:     input,
-		Volume:      chaos.Spec.VolumeMountPath,
-		ContainerId: containerID,
-		Instance:  chaos.Spec.Pid,
-		StartTime: chaos.Spec.StartTime,
-	})
-	if err != nil {
-		return err
-	}
-	chaos.Spec.Pid = res.Instance
-	chaos.Spec.StartTime = res.StartTime
-	chaos.OwnerReferences = []metav1.OwnerReference{
-		{
-			APIVersion: pod.APIVersion,
-			Kind:       pod.Kind,
-			Name:       pod.Name,
-			UID:        pod.UID,
-		},
-	}
-	return nil
+    res, err := pbClient.ApplyIoChaos(ctx, &pb.ApplyIoChaosRequest{
+        Actions:     input,
+        Volume:      chaos.Spec.VolumeMountPath,
+        ContainerId: containerID,
+        Instance:  chaos.Spec.Pid,
+        StartTime: chaos.Spec.StartTime,
+    })
+    if err != nil {
+        return err
+    }
+    chaos.Spec.Pid = res.Instance
+    chaos.Spec.StartTime = res.StartTime
+    chaos.OwnerReferences = []metav1.OwnerReference{
+        {
+            APIVersion: pod.APIVersion,
+            Kind:       pod.Kind,
+            Name:       pod.Name,
+            UID:        pod.UID,
+        },
+    }
+    return nil
 }
 ```
 
@@ -469,32 +469,32 @@ The `pkg/chaosdaemon/iochaos_server.go` file processes IOChaos. ​​In this fi
 
 ```go
 func (s *DaemonServer) ApplyIOChaos(ctx context.Context, in *pb.ApplyIOChaosRequest) (*pb.ApplyIOChaosResponse, error) {
-	...
-	pid, err := s.crClient.GetPidFromContainerID(ctx, in.ContainerId)
-	if err != nil {
-		log.Error(err, "error while getting PID")
-		return nil, err
-	}
-	args := fmt.Sprintf("--path %s --verbose info", in.Volume)
-	log.Info("executing", "cmd", todaBin+" "+args)
-	processBuilder := bpm.DefaultProcessBuilder(todaBin, strings.Split(args, " ")...).
-		EnableLocalMnt().
-		SetIdentifier(in.ContainerId)
-	if in.EnterNS {
-		processBuilder = processBuilder.SetNS(pid, bpm.MountNS).SetNS(pid, bpm.PidNS)
-	}
+    ...
+    pid, err := s.crClient.GetPidFromContainerID(ctx, in.ContainerId)
+    if err != nil {
+        log.Error(err, "error while getting PID")
+        return nil, err
+    }
+    args := fmt.Sprintf("--path %s --verbose info", in.Volume)
+    log.Info("executing", "cmd", todaBin+" "+args)
+    processBuilder := bpm.DefaultProcessBuilder(todaBin, strings.Split(args, " ")...).
+        EnableLocalMnt().
+        SetIdentifier(in.ContainerId)
+    if in.EnterNS {
+        processBuilder = processBuilder.SetNS(pid, bpm.MountNS).SetNS(pid, bpm.PidNS)
+    }
     ...
     // Calls JSON RPC
-	client, err := jrpc.DialIO(ctx, receiver, caller)
-	if err != nil {
-		return nil, err
-	}
-	cmd := processBuilder.Build()
+    client, err := jrpc.DialIO(ctx, receiver, caller)
+    if err != nil {
+        return nil, err
+    }
+    cmd := processBuilder.Build()
     procState, err := s.backgroundProcessManager.StartProcess(cmd)
-	if err != nil {
-		return nil, err
-	}
-	...
+    if err != nil {
+        return nil, err
+    }
+    ...
 }
 ```
 
@@ -503,29 +503,29 @@ The following code sample builds the running commands. These commands are the un
 ```go
 // GetNsPath returns corresponding namespace path
 func GetNsPath(pid uint32, typ NsType) string {
-	return fmt.Sprintf("%s/%d/ns/%s", DefaultProcPrefix, pid, string(typ))
+    return fmt.Sprintf("%s/%d/ns/%s", DefaultProcPrefix, pid, string(typ))
 }
 // SetNS sets the namespace of the process
 func (b *ProcessBuilder) SetNS(pid uint32, typ NsType) *ProcessBuilder {
-	return b.SetNSOpt([]nsOption{{
-		Typ:  typ,
-		Path: GetNsPath(pid, typ),
-	}})
+    return b.SetNSOpt([]nsOption{{
+        Typ:  typ,
+        Path: GetNsPath(pid, typ),
+    }})
 }
 // Build builds the process
 func (b *ProcessBuilder) Build() *ManagedProcess {
-	args := b.args
-	cmd := b.cmd
-	if len(b.nsOptions) > 0 {
-		args = append([]string{"--", cmd}, args...)
-		for _, option := range b.nsOptions {
-			args = append([]string{"-" + nsArgMap[option.Typ], option.Path}, args...)
-		}
-		if b.localMnt {
-			args = append([]string{"-l"}, args...)
-		}
-		cmd = nsexecPath
-	}
+    args := b.args
+    cmd := b.cmd
+    if len(b.nsOptions) > 0 {
+        args = append([]string{"--", cmd}, args...)
+        for _, option := range b.nsOptions {
+            args = append([]string{"-" + nsArgMap[option.Typ], option.Path}, args...)
+        }
+        if b.localMnt {
+            args = append([]string{"-l"}, args...)
+        }
+        cmd = nsexecPath
+    }
     ...
 }
 ```
@@ -573,40 +573,40 @@ Suppose we want to create a `PodKill` resource by calling a program. After the r
 ```go
 package main
 import (
-	"context"
-	"controlpanel"
-	"log"
-	"github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
-	"github.com/pkg/errors"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+    "context"
+    "controlpanel"
+    "log"
+    "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
+    "github.com/pkg/errors"
+    metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 func applyPodKill(name, namespace string, labels map[string]string) error {
-	cli, err := controlpanel.NewClient()
-	if err != nil {
-		return errors.Wrap(err, "create client")
-	}
-	cr := &v1alpha1.PodChaos{
-		ObjectMeta: metav1.ObjectMeta{
-			GenerateName: name,
-			Namespace:    namespace,
-		},
-		Spec: v1alpha1.PodChaosSpec{
-			Action: v1alpha1.PodKillAction,
-			ContainerSelector: v1alpha1.ContainerSelector{
-				PodSelector: v1alpha1.PodSelector{
-					Mode: v1alpha1.OnePodMode,
-					Selector: v1alpha1.PodSelectorSpec{
-						Namespaces:     []string{namespace},
-						LabelSelectors: labels,
-					},
-				},
-			},
-		},
-	}
-	if err := cli.Create(context.Background(), cr); err != nil {
-		return errors.Wrap(err, "create podkill")
-	}
-	return nil
+    cli, err := controlpanel.NewClient()
+    if err != nil {
+        return errors.Wrap(err, "create client")
+    }
+    cr := &v1alpha1.PodChaos{
+        ObjectMeta: metav1.ObjectMeta{
+            GenerateName: name,
+            Namespace:    namespace,
+        },
+        Spec: v1alpha1.PodChaosSpec{
+            Action: v1alpha1.PodKillAction,
+            ContainerSelector: v1alpha1.ContainerSelector{
+                PodSelector: v1alpha1.PodSelector{
+                    Mode: v1alpha1.OnePodMode,
+                    Selector: v1alpha1.PodSelectorSpec{
+                        Namespaces:     []string{namespace},
+                        LabelSelectors: labels,
+                    },
+                },
+            },
+        },
+    }
+    if err := cli.Create(context.Background(), cr); err != nil {
+        return errors.Wrap(err, "create podkill")
+    }
+    return nil
 }
 ```
 
@@ -685,26 +685,26 @@ Here are examples of `Get` and `List` requests:
 ```go
 package controlpanel
 import (
-	"context"
-	"github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
-	"github.com/pkg/errors"
-	"sigs.k8s.io/controller-runtime/pkg/client"
+    "context"
+    "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
+    "github.com/pkg/errors"
+    "sigs.k8s.io/controller-runtime/pkg/client"
 )
 func GetPodChaos(name, namespace string) (*v1alpha1.PodChaos, error) {
-	cli := mgr.GetClient()
-	item := new(v1alpha1.PodChaos)
-	if err := cli.Get(context.Background(), client.ObjectKey{Name: name, Namespace: namespace}, item); err != nil {
-		return nil, errors.Wrap(err, "get cr")
-	}
-	return item, nil
+    cli := mgr.GetClient()
+    item := new(v1alpha1.PodChaos)
+    if err := cli.Get(context.Background(), client.ObjectKey{Name: name, Namespace: namespace}, item); err != nil {
+        return nil, errors.Wrap(err, "get cr")
+    }
+    return item, nil
 }
 func ListPodChaos(namespace string, labels map[string]string) ([]v1alpha1.PodChaos, error) {
-	cli := mgr.GetClient()
-	list := new(v1alpha1.PodChaosList)
-	if err := cli.List(context.Background(), list, client.InNamespace(namespace), client.MatchingLabels(labels)); err != nil {
-		return nil, err
-	}
-	return list.Items, nil
+    cli := mgr.GetClient()
+    list := new(v1alpha1.PodChaosList)
+    if err := cli.List(context.Background(), list, client.InNamespace(namespace), client.MatchingLabels(labels)); err != nil {
+        return nil, err
+    }
+    return list.Items, nil
 }
 ```
 
