@@ -73,22 +73,22 @@ In this section, I’ll skip the generic control loop logic and focus on the cor
 The core logic of the backup controller is implemented in the `syncBackupJob` function in the `pkg/backup/backup/backup_manager.go` file. The actual code processes many corner cases; to facilitate understanding, we removed the unimportant details, so you may see some function signatures are inconsistent. The core logic code is as follows: 
 
 ```
-   backuputil.ValidateBackup(backup)
-    if err := JobLister.Jobs(ns).Get(backupJobName); err == nil {
-        return nil
-    } else if !errors.IsNotFound(err) {
-        return err
-    }
-    if backup.Spec.BR == nil {
-        // create Job Spec which will use Dumpling to do the work
-        job = bm.makeExportJob(backup)
-    } else {
-        // create Job Spec which will use BR to do the work
-        job = bm.makeBackupJob(backup)
-    }
-    if err := bm.deps.JobControl.CreateJob(backup, job); err != nil {
-        // update Backup.Status with error message
-    }
+backuputil.ValidateBackup(backup)
+if err := JobLister.Jobs(ns).Get(backupJobName); err == nil {
+    return nil
+} else if !errors.IsNotFound(err) {
+    return err
+}
+if backup.Spec.BR == nil {
+    // create Job Spec which will use Dumpling to do the work
+    job = bm.makeExportJob(backup)
+} else {
+    // create Job Spec which will use BR to do the work
+    job = bm.makeBackupJob(backup)
+}
+if err := bm.deps.JobControl.CreateJob(backup, job); err != nil {
+    // update Backup.Status with error message
+}
 ```
 
 In the code block above, `backup` is the Go struct converted from the `Backup` YAML created by the user. We use a `ValidateBackup` function to check the validity of the fields in `backup`. 
@@ -141,6 +141,11 @@ In the code above, the controller:
 4. Executes the [backup-manager](#heading=h.g8pxm2t1s6sp) logic after the job is created.
 
 The `makeExportJob` function takes similar steps, except that it uses Dumpling rather than BR. 
+
+<div class="trackable-btns">
+  <a href="/download" onclick="trackViews('TiDB Operator Source Code Reading (V): Backup and Restore', 'download-tidb-btn-middle')"><button>Download TiDB</button></a>
+  <a href="https://share.hsforms.com/1e2W03wLJQQKPd1d9rCbj_Q2npzm" onclick="trackViews('TiDB Operator Source Code Reading (V): Backup and Restore', 'subscribe-blog-btn-middle')"><button>Subscribe to Blog</button></a>
+</div>
 
 #### Clean backup files
 
