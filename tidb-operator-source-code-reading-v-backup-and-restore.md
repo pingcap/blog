@@ -205,7 +205,7 @@ To adapt TiDB Operator to the Kubernetes execution environment, we abstracted a 
 
 ### Backup/restore using BR
 
-This section explains how the backup-manager implements the main logic of backup and restore. When the backup controller calls the `makeBackupJob` function to create a backup job, the Job controller starts a Pod to run the task, using the backup-manager as the image. The first container start parameter passed to `makeBackupJob` is `backup`; the `backup` processing logic is located in `**cmd/backup-manager/app/cmd/backup.go**`.
+This section explains how the backup-manager implements the main logic of backup and restore. When the backup controller calls the `makeBackupJob` function to create a backup job, the Job controller starts a Pod to run the task, using the backup-manager as the image. The first container start parameter passed to `makeBackupJob` is `backup`; the `backup` processing logic is located in **`cmd/backup-manager/app/cmd/backup.go`**.
 
 Similar to controllers, when the Pod is started, the backup-manager constructs a series of common Kubernetes client objects, such as Informer, Lister, and Updater. Then it calls the `ProcessBackup` function and performs the backup. The simplified main logic is as follows:
 
