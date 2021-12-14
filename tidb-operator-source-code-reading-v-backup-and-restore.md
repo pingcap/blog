@@ -21,7 +21,7 @@ _Previous articles in this series:_
 * _[TiDB Operator Source Code Reading (III): The Component Control Loop](https://pingcap.com/blog/tidb-operator-source-code-reading-3-component-control-loop)_
 * _[TiDB Operator Source Code Reading (IV): Implementing a Component Control Loop](https://pingcap.com/blog/tidb-operator-source-code-reading-4-implement-component-control-loop)_
 
-In our last article, we learned how to [implement a component control loop](https://pingcap.com/blog/tidb-operator-source-code-reading-4-implement-component-control-loop) in TiDB Operator. This time, I’ll move on to a new but important topic: backup and restore.
+In our last article, we learned how to [implement a component control loop](https://pingcap.com/blog/tidb-operator-source-code-reading-4-implement-component-control-loop) in TiDB Operator. This time, I'll move on to a new but important topic: backup and restore.
 
 Backup and restore are two of the most important and frequently used operations when you maintain a database. To ensure data safety, database maintainers usually need a set of scripts that automatically back up the data and recover the dataset when data is corrupted. A well-designed backup and restore platform should allow you to:
 
@@ -30,7 +30,7 @@ Backup and restore are two of the most important and frequently used operations 
 * Maintain the backup and restore history for auditing.
 * Clean up obsolete backup files to save storage space.
 
-TiDB Operator provides CustomResourceDefinitions (CRDs) for all these requirements. In this post, **I’ll walk you through the core design logic of TiDB Operator’s backup and restore features**, leaving out the trivial implementation details. Let’s get started.
+TiDB Operator provides CustomResourceDefinitions (CRDs) for all these requirements. In this post, **I'll walk you through the core design logic of TiDB Operator's backup and restore features**, leaving out the trivial implementation details. Let's get started.
 
 ## Controllers
 
@@ -58,7 +58,7 @@ spec:
 
 When the backup controller receives an event that creates the `Backup` resource, it creates a job to do the configured backup operation. In the case above, it backs up data in the `mycluster` database in the `test1` namespace and stores the data in the GCP storage specified in the `gcs` field.
 
-In the following sections, I’ll explain the internal logic of the three controllers. 
+In the following sections, I'll explain the internal logic of the three controllers. 
 
 ### The backup controller
 
@@ -66,7 +66,7 @@ The backup controller manages the `Backup` CR. Based on the configuration in the
 
 Similar to that of other controllers, **the core of the backup controller is a control loop**, which listens to the `Backup` CR events (create, update, and delete) and runs the required operations.  
 
-In this section, I’ll skip the generic control loop logic and focus on the core backup logic.
+In this section, I'll skip the generic control loop logic and focus on the core backup logic.
 
 #### Core logic
 
@@ -93,7 +93,7 @@ if err := bm.deps.JobControl.CreateJob(backup, job); err != nil {
 
 In the code block above, `backup` is the Go struct converted from the `Backup` YAML created by the user. We use a `ValidateBackup` function to check the validity of the fields in `backup`. 
 
-Because the backup task is executed as a Kubernetes-native job and because the controller must ensure idempotency—duplicated executions don’t affect the end result—it is possible that a job already exists. Therefore, we try to find if there is an existing backup job in the same namespace:
+Because the backup task is executed as a Kubernetes-native job and because the controller must ensure idempotency—duplicated executions don't affect the end result—it is possible that a job already exists. Therefore, we try to find if there is an existing backup job in the same namespace:
 
 * If a job is found, the `if` statement returns `nil` and stops processing the current backup object. 
 * If a job is not found, the controller proceeds to the next step.
@@ -104,7 +104,7 @@ Finally, the controller uses `CreateJob` to create the job object and executes t
 
 #### Create Job
 
-The actual backup job is created by two functions: `makeExportJob` and `makeBackupJob`. I’ll take `makeBackupJob` as an example and explain its core code (which is simplified below):
+The actual backup job is created by two functions: `makeExportJob` and `makeBackupJob`. I'll take `makeBackupJob` as an example and explain its core code (which is simplified below):
 
 ```
 tc := bm.deps.TiDBClusterLister.TidbClusters(backupNamespace).Get(backup.Spec.BR.Cluster)
@@ -151,7 +151,7 @@ The `makeExportJob` function takes similar steps, except that it uses Dumpling r
 
 After a user deletes the `Backup` resource, the backup controller deletes the backup files and releases the storage space.
 
-As mentioned in the previous section, the backup controller creates a job when it receives the create event. Meanwhile, the controller adds a string (`tidb.pingcap.com/backup-protection`) to `finalizers` of the `Backup` resource, which signals that the resource needs special treatment when deleted. When a user deletes the `Backup` resource, the API server sets a value for the `metadata.deletionTimestamp` field. The backup controller then checks the clean policy of the `Backup` resource. If the clean policy isn’t `Retain`, the controller creates a clean job to delete the backup files and reclaim the storage space. 
+As mentioned in the previous section, the backup controller creates a job when it receives the create event. Meanwhile, the controller adds a string (`tidb.pingcap.com/backup-protection`) to `finalizers` of the `Backup` resource, which signals that the resource needs special treatment when deleted. When a user deletes the `Backup` resource, the API server sets a value for the `metadata.deletionTimestamp` field. The backup controller then checks the clean policy of the `Backup` resource. If the clean policy isn't `Retain`, the controller creates a clean job to delete the backup files and reclaim the storage space. 
 
 ### The restore controller
 
@@ -195,7 +195,7 @@ func (bm *backupScheduleManager) Sync(bs *v1alpha1.BackupSchedule) error {
 
 The code first calls the `canPerformNextBackup` function to determine if a new `Backup` resource should be created to perform a new backup task. If the previous backup has completed or the previous backup has failed, the function agrees to execute the next backup; otherwise, the request is rejected.
 
-After deciding to execute the backup task, the controller call `getLastScheduledTime` to get the next backup execution time. `getLastScheduledTime` calculates the last Cron time just before the current time, based on the current time and the Cron settings. `getLastScheduledTime` also handles a lot of boundary conditions; you can check the source code if you’re interested to know more.
+After deciding to execute the backup task, the controller call `getLastScheduledTime` to get the next backup execution time. `getLastScheduledTime` calculates the last Cron time just before the current time, based on the current time and the Cron settings. `getLastScheduledTime` also handles a lot of boundary conditions; you can check the source code if you're interested to know more.
 
 When the controller gets the backup time, it calls the `createBackup` function to create the `Backup` resource, thus leaving the actual backup operation to the backup controller. 
 
@@ -255,6 +255,6 @@ After a series of checks, the controller calls `cleanBRRemoteBackupData` or `cle
 
 ## Summary
 
-In this post, we talked about the design and implementation of TiDB Operator’s backup and restore features. When a user creates a backup or restore task, the corresponding backup, restore, or backupschedule controller calls the backup-manager to run the actual operations. The backupschedule controller encapsulates the timing task logic based on the backup controller, while the backup-manager encapsulates the specific tools into a unified portal for each controller to call. 
+In this post, we talked about the design and implementation of TiDB Operator's backup and restore features. When a user creates a backup or restore task, the corresponding backup, restore, or backupschedule controller calls the backup-manager to run the actual operations. The backupschedule controller encapsulates the timing task logic based on the backup controller, while the backup-manager encapsulates the specific tools into a unified portal for each controller to call. 
 
 If you are interested in learning more about TiDB Operator, feel free to [join our Slack channel](https://slack.tidb.io/invite?team=tidb-community&channel=sig-k8s&ref=pingcap-blog) or join our discussions at [pingcap/tidb-operator](https://github.com/pingcap/tidb-operator).
