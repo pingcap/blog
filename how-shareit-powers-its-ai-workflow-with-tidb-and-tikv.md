@@ -150,7 +150,7 @@ Let's move to the online and offline skew, we use the same Git repository to wri
 
  At SHAREit, our main scenario is the recommendation system. The following diagram shows our recommendation system architecture.
 
-![Recommendation system on TiKV](media/recommendation-system-on-TiKV.png)
+![Recommendation system on TiKV](media/recommendation-system-on-tikv.png)
 <div class="caption-center">Recommendation system on TiKV</div>
 
 The recommendation architecture has a very mature paradigm, from recall, coarse ranking, re-ranking, to tuning. Here, we will focus more on the intersection of FeatureStore and the recommendation system. This is also where we face more challenges and where TiKV/TiDB help us.
