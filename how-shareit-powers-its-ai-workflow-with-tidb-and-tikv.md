@@ -12,7 +12,7 @@ logo: /images/blog/customers/shareit-logo.png
 
 **Industry:** Internet
 **Author:** Marshall Zhu (Big Data Director at SHAREit)
-**Editors:** Tom Dewan, Calvin Weng
+**Editors:** Tom Dewan, [Calvin Weng](https://github.com/dcalvin)
 
 ![How SHAREit Powers Its AI Workflow with TiDB and TiKV](media/how-shareit-powers-its-ai-workflow-with-tidb-and-tikv.png)
 
