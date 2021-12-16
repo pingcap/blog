@@ -2,7 +2,7 @@
 title: How SHAREit Powers Its AI Workflow with TiDB and TiKV
 author: ['Marshall Zhu']
 date: 2021-12-16
-summary: In this article, Marshall Zhu from SHAREit shares their AI workflow, the challenges they faced, and how two TiDB and TiKV power their AI platform and recommendation system.
+summary: In this article, Marshall Zhu from SHAREit shares their AI workflow, the challenges they faced, and how TiDB and TiKV power their AI platform and recommendation system.
 image: /images/blog/how-shareit-powers-its-ai-workflow-with-tidb-and-tikv.png
 tags: ['AI', 'Feature Store', 'TiKV']
 customer: SHAREit Group
