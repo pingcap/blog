@@ -79,7 +79,7 @@ The feature engineering and sampling step now includes three processes: feature 
 
 Features are the attributes or properties models used during training and inference to make predictions. For example, when we recommend a video list, useful features include video categories and the user's age. Generating a feature includes selecting the original fields, the operator, and the target feature name. 
 
-Our operator registration is equivalent to writing a unified method. Feature registration combines original fields with a mathematical operator to complete a feature. For example, a feature called “Average Time on Page” might consist of user input from the screen and an average time operator.
+Our operator registration is equivalent to writing a unified method. Feature registration combines original fields with a mathematical operator to complete a feature. For example, a feature called "Average Time on Page" might consist of user input from the screen and an average time operator.
 
 The operator registration is currently being developed by the system engineer, because it is written in C++. The feature registration is developed by the data engineer, because it involves the complex modification of extract, transform, load (ETL) code.
 
