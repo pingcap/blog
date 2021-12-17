@@ -195,6 +195,6 @@ As shown in the following figure, we stand on TiKV's shoulders. There are two ty
 
 Recall that before our AI workflow improvement effort, algorithm engineers spent 50% of their time on feature engineering and sampling. Now they spend 25% time (or less) on this task. Needless to say, they are a lot happier.
 
-Today, when the big data paradigm is clear, users are often affected by the empirical thinking of the scenario. However, after we divided the scenario into several demand points based on different quantity needs, we came up with our own new solutions. Now the usage of DB brings us some new angles. Single link latency is very important, and hopefully the interface can lay the foundation for subsequent modularization and automation..
+Today, when the big data paradigm is clear, users are often affected by the empirical thinking of the scenario. However, after we divided the scenario into several demand points based on different quantity needs, we came up with our own new solutions. Now the usage of DB brings us some new angles. Single link latency is very important, and hopefully the interface can lay the foundation for subsequent modularization and automation.
 
 I hope you found this information helpful. If you face issues similar to ours, please consider investigating TiKV and TiDB. If you want to know more details about our story or have any questions, you're welcome to join the [TiDB community on Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-blog) and send your feedback.
