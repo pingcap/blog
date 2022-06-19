@@ -85,10 +85,6 @@ See the following list for all the packages and their main functions:
 
     This is the core of the entire SQL layer. After a SQL statement is parsed to an abstract syntax tree (AST), the query plan is generated and optimized (including logical optimization and physical optimization) in this package.
 
-    This is the core of the entire SQL layer. After a SQL statement is parsed to an abstract syntax tree (AST), the query plan is generated and optimized (including logical optimization and physical optimization) in this package.
-
-    This is the core of the entire SQL layer. After a SQL statement is parsed to an abstract syntax tree (AST), the query plan is generated and optimized (including logical optimization and physical optimization) in this package.
-
     The following functions are also included in this package:
 
     + [`validator.go`](https://github.com/pingcap/tidb/blob/rc2.3/plan/validator.go): Validates the AST.
